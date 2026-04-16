@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { C, isNewExperiment } from "../theme.js";
-import { FadeIn, Expandable, useAudio, SectionLabel, SectionTitle, Subtitle, Narrow, PageContainer, NewBadge, BodyText } from "../components/shared.jsx";
+import { FadeIn, Expandable, useAudio, SectionLabel, SectionTitle, Subtitle, Narrow, PageContainer, NewBadge, BodyText, QuoteBlock, ResearchCallout, Divider } from "../components/shared.jsx";
 
 // ─── Learning Pill Interactive Experiment ───
 function LearningPillExperiment() {
@@ -314,7 +314,108 @@ export default function ThoughtExperiments({ navigate }) {
           <FadeIn delay={0.15}>
             <OtherExperiments navigate={navigate} />
           </FadeIn>
+
+          <Divider label="The Philosophical Canon" />
+
+          <FadeIn delay={0.06}>
+            <BodyText>Each of the following thought experiments illuminates a different dimension of the same question: <strong>can the process of learning be separated from its value?</strong> Together, they form a converging argument that knowledge is not separable from the process of acquiring it.</BodyText>
+          </FadeIn>
+
+          <FadeIn delay={0.08}>
+            <Expandable title="Nozick's Experience Machine (1974)" color={C.teal} tag="Authenticity">
+              <p>Robert Nozick's thought experiment (<em>Anarchy, State, and Utopia</em>, pp. 42–45): Imagine a machine that gives you any experience you desire — it simulates a perfect life while you float in a tank. Would you plug in permanently?</p>
+              <p style={{ marginTop: 12 }}>Most people refuse, suggesting we value <strong>authentic engagement with reality</strong> beyond mere subjective experience. Nozick identified three reasons: we want to <em>do</em> things, not just experience doing them; we want to <em>be</em> certain kinds of people; and we want contact with a reality deeper than human construction.</p>
+              <ResearchCallout year="2024" title="Re-Examining the Experience Machine for AI Companions" finding="A paper in Annals of the University of Bucharest modifies the original scenario for shorter durations and preserved memory, finding what matters is not what people say they would choose but what they actually choose — highlighting the gap between stated preferences and revealed behavior. AI companion relationships may constitute a modern version of the Experience Machine." citation="Annals of the University of Bucharest (2024)" color={C.teal} />
+              <ResearchCallout year="2019" title="Empirical Testing Challenges Nozick" finding="Hindriks and Douven (Philosophical Psychology 32(2)) empirically tested multiple variations, finding the less invasive the intervention, the more willing people were to accept it. De Brigard (2010) and Weijers (2014) showed responses are confounded by status quo bias — people may reject the machine not because they prefer reality, but because they prefer their current state." color={C.gold} />
+              <p style={{ marginTop: 12 }}><strong>For AI in education:</strong> If AI tutoring systems provide simulated mastery experiences — the student <em>feels</em> they understand, scores well on assessments, but hasn't undergone the transformative process of genuine struggle — are we offering an educational Experience Machine? The distinction between authentic mastery and simulated mastery may be the central question of the next decade in education.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <Expandable title="Jackson's Mary's Room (1982)" color={C.ocean} tag="Experience vs. Knowledge">
+              <p>Frank Jackson's Knowledge Argument: Mary is a brilliant scientist who knows every physical fact about color vision but has lived her entire life in a black-and-white room. When she finally sees red, does she learn something new?</p>
+              <p style={{ marginTop: 12 }}>Jackson argued yes — proving that <strong>phenomenal experience delivers knowledge that no amount of propositional information can provide</strong>. Even complete theoretical understanding cannot substitute for lived experience.</p>
+              <ResearchCallout year="2019" title="Brock & Hay Apply Mary's Room to Education" finding="In 'Keeping Students Out of Mary's (Class)room' (Science & Education 28, 985–1000, Springer Open Access), Brock and Hay argue students learning scientific concepts without direct experience are like Mary — possessing propositional knowledge but lacking phenomenal understanding. They advocate a 'phenomenological curriculum' ensuring direct sensory experience alongside theoretical knowledge." citation="Brock, R. & Hay, S. (2019)" color={C.ocean} />
+              <p style={{ marginTop: 12 }}><strong>For AI in education:</strong> An AI tutor can explain photosynthesis perfectly. It can provide diagrams, analogies, and quiz the student to mastery on every testable fact. But has the student who never grew a plant, watched it die, and tried again learned what photosynthesis <em>means</em>? Mary's Room suggests the AI-tutored student has propositional knowledge but may lack the phenomenal understanding that comes from direct engagement with the subject matter.</p>
+              <p style={{ marginTop: 12 }}>On the AI side, LessWrong analyses have drawn parallels between Mary and reinforcement learning agents: an AI may process all physical information about color yet lack experiential understanding — raising questions about whether AI tutors can teach what they themselves cannot experience.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.12}>
+            <Expandable title="Plato's Allegory of the Cave (c. 380 BCE)" color={C.gold} tag="Liberation">
+              <p>In <em>Republic</em> Book VII (514a–520a), prisoners chained in a cave see only shadows on a wall and mistake them for reality. When one prisoner is freed and sees the sun, the journey is painful and disorienting — but ultimately liberating. Plato's point: <strong>education is the process of "turning the soul"</strong> from shadows toward truth. The turning cannot be done for you.</p>
+              <ResearchCallout year="2025" title="Waitzman's Framework for Critical AI Literacy" finding="In 'Beyond Shadows: Plato's Cave, Artificial Intelligence, and the Challenge of Critical Thinking in Schools' (SSRN), Rotem Waitzman positions teachers as philosophical guides helping learners interrogate AI-generated 'shadows.' She develops a four-stage pedagogical cycle: Exposure → Interrogation → Comparison → Reflection." citation="Waitzman, R. SSRN (2025)" color={C.gold} />
+              <p style={{ marginTop: 12 }}><strong>Waitzman's four stages applied to AI:</strong></p>
+              <p style={{ marginTop: 8 }}><strong>1. Exposure</strong> — Students encounter AI-generated content (the shadows on the wall).</p>
+              <p><strong>2. Interrogation</strong> — Students question: Who made this? What's missing? What biases are embedded?</p>
+              <p><strong>3. Comparison</strong> — Students compare AI outputs to primary sources, expert analysis, their own research.</p>
+              <p><strong>4. Reflection</strong> — Students reflect on what they've learned about both the content and their own epistemic process.</p>
+              <p style={{ marginTop: 12 }}>The allegory insists that liberation is a <em>process</em> — the prisoner must walk out of the cave themselves. No one can carry them into sunlight. This directly challenges any model of education that treats knowledge as something to be transmitted rather than discovered through struggle.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.14}>
+            <Expandable title="Searle's Chinese Room (1980)" color={C.coral} tag="Understanding">
+              <p>John Searle imagines a person in a room who receives Chinese characters, follows English instructions to manipulate them, and produces Chinese outputs. To outside observers, the room "understands" Chinese — but the person inside understands nothing. Searle's conclusion: <strong>syntax (symbol manipulation) is not sufficient for semantics (understanding)</strong>.</p>
+              <ResearchCallout year="Jan 2025" title="LLMs Revive the Chinese Room Debate" finding="A paper in Inquiry ('LLMs, Turing Tests and Chinese Rooms: The Prospects for Meaning in Large Language Models') argued LLM outputs should be viewed as 'genuinely meaningful' even without original intentionality — distinguishing meaning per se from conscious understanding. This is a significant philosophical challenge to Searle's original argument." citation="Inquiry (2025)" color={C.coral} />
+              <p style={{ marginTop: 12 }}>The Stanford Encyclopedia of Philosophy <strong>substantially revised</strong> its Chinese Room entry in October 2024, reflecting the new urgency these questions have acquired.</p>
+              <p style={{ marginTop: 12 }}><strong>For AI in education:</strong> If an AI tutor manipulates symbols without understanding — producing perfectly structured explanations, adapting to student confusion, generating practice problems — can it genuinely <em>teach</em>? The distinction between syntactic processing and semantic understanding parallels the distinction between surface learning and deep comprehension. When Khanmigo explains algebra, it processes patterns; it doesn't understand what algebra <em>means</em> in the way a teacher who struggled through it themselves does.</p>
+              <p style={{ marginTop: 12 }}>The counterargument: does it matter? If the student learns algebra equally well from either source, the Chinese Room might be practically irrelevant. But Biesta's notion of subjectification — becoming an autonomous thinker through encounter with another <em>thinking being</em> — suggests it matters profoundly.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.16}>
+            <Expandable title="The Matrix: 'I Know Kung Fu' (1999)" color={C.ocean} tag="Download ≠ Mastery">
+              <p>In <em>The Matrix</em>, Neo receives instant martial arts downloads directly into his brain. He opens his eyes and announces: "I know kung fu." But the scene doesn't end there — <strong>he still needs to train with Morpheus</strong>. The download gave him techniques; the sparring gave him judgment, timing, and belief.</p>
+              <p style={{ marginTop: 12 }}>This is the most culturally resonant version of the Learning Pill. The film's genius is showing that even with perfect knowledge transfer, <strong>practice, mentorship, and real-world testing remain essential</strong>. Neo's downloads are necessary but not sufficient.</p>
+              <p style={{ marginTop: 12 }}>The British Educational Research Association (BERA) used this scene explicitly to argue that "the true potential of the Metaverse lies not in accelerated efficiency of knowledge transfer but in revitalising what education can be" — transformative experiences that reshape how a learner sees themselves and the world.</p>
+              <p style={{ marginTop: 12 }}><strong>For AI in education:</strong> When a student asks ChatGPT to explain the French Revolution and receives a comprehensive, perfectly structured answer — they've had the download. But they haven't sparred. They haven't debated with peers, struggled with conflicting primary sources, or felt the moral weight of revolutionary violence. The download is the beginning of learning, not the end.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.18}>
+            <Expandable title="Brave New World: Hypnopaedia (1932)" color={C.gold} tag="Conditioning ≠ Education">
+              <p>In Huxley's <em>Brave New World</em>, children receive "hypnopaedia" — lessons played during sleep. But Huxley is precise about its limits: <strong>hypnopaedia works only for conditioning attitudes, not for teaching factual knowledge</strong>. The Director of Hatcheries explains that sleep-teaching moral values works because values are about emotional associations, not understanding.</p>
+              <p style={{ marginTop: 12 }}>This is a crucial distinction for AI in education. If AI systems are primarily reinforcing attitudes (engagement, confidence, positive associations with learning) rather than developing understanding, they may be closer to Huxley's hypnopaedia than to genuine teaching. The student who uses AI to produce high-quality work may develop confidence without competence — precisely the conditioning-without-education that Huxley warned about.</p>
+              <p style={{ marginTop: 12 }}>Huxley's dystopia makes an implicit argument: <strong>the process of genuinely understanding something — struggling with it, questioning it, making it your own — is what distinguishes education from indoctrination.</strong> Any technology that bypasses this process, however benignly intended, risks producing subjects rather than agents.</p>
+            </Expandable>
+          </FadeIn>
+
           <FadeIn delay={0.2}>
+            <Expandable title="Dewey: Education as Life Itself (1916/1938)" color={C.teal} tag="Process">
+              <p>John Dewey (<em>Democracy and Education</em>, 1916; <em>Experience and Education</em>, 1938) argued that <strong>education is not preparation for life but life itself</strong>. His two key principles cannot be compressed or automated:</p>
+              <p style={{ marginTop: 12 }}><strong>Continuity:</strong> Each experience builds on the last, connecting past, present, and future. Learning is sequential and developmental — you can't skip stages. A student who uses AI to produce a polished essay without writing drafts, receiving feedback, and revising has broken the continuity of the writing process. The product exists, but the developmental trajectory doesn't.</p>
+              <p style={{ marginTop: 12 }}><strong>Interaction:</strong> Learning requires active engagement between learner and environment. The learner must act on the world and be acted upon by it. Passive reception — whether from a lecture or from an AI — is not education in Dewey's sense.</p>
+              <QuoteBlock quote="There is an intimate and necessary relation between the process of actual experience and education." attribution="John Dewey" source="Experience and Education (1938)" color={C.teal} />
+              <p>The teacher in Dewey's framework is a guide, not a transmitter. If AI tutoring systems merely transmit information — however efficiently, however personalized — they reproduce the "traditional" model Dewey spent his career critiquing. Daniel Lemire's 2025 blog post "We see something that works, and then we understand it" reinforces this: Lemire argues against "thinkism" — the belief that understanding must precede practice — noting that in reality, doing and understanding are intertwined.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.22}>
+            <Expandable title="Aristotle: Virtue Through Habituation (c. 340 BCE)" color={C.gold} tag="Character">
+              <p>In the <em>Nicomachean Ethics</em> (Book II, 1103a–1105b), Aristotle argues that virtue arises through habituation (<em>ethos</em>):</p>
+              <QuoteBlock quote="For the things we have to learn before we can do them, we learn by doing them — men become builders by building and lyre players by playing the lyre." attribution="Aristotle" source="Nicomachean Ethics, Book II" color={C.gold} />
+              <p>His concept of <em>hexis</em> (active disposition) is not passive habit but an <strong>active condition requiring ongoing engagement</strong>. You don't become courageous by reading about courage — you become courageous by acting courageously, repeatedly, in circumstances that test you.</p>
+              <p style={{ marginTop: 12 }}>Crucially, Aristotle critiqued those who "take refuge in arguments, thinking they are doing philosophy" — a direct rejection of the idea that knowing the good is sufficient for being good. This is perhaps the most devastating philosophical objection to the Learning Pill: even if the pill grants perfect <em>knowledge</em> of ethics, the person who takes it has not become <em>virtuous</em>. Virtue requires practice, not information.</p>
+              <p style={{ marginTop: 12 }}><strong>For AI in education:</strong> Character cannot be downloaded. The student who uses AI to produce ethical analysis has not developed ethical judgment. The student who uses AI to write about resilience has not become resilient. If education aims at character formation — not just competence — then bypassing the process of struggle, practice, and habituation defeats the purpose entirely. As Shannon Vallor argues in <em>The AI Mirror</em> (2024), AI lacks Aristotelian <em>phrónēsis</em> — the practical wisdom that comes from lived experience and cannot be formalized into rules.</p>
+            </Expandable>
+          </FadeIn>
+
+          <Divider label="Convergence" />
+
+          <FadeIn delay={0.06}>
+            <Expandable title="What All Eight Thought Experiments Prove" color={C.gold} tag="Synthesis" defaultOpen>
+              <p>Across two and a half millennia of philosophical inquiry, from Plato to Nozick, a single insight recurs:</p>
+              <p style={{ marginTop: 12, padding: "16px 20px", background: `linear-gradient(135deg, rgba(200,152,48,0.08), rgba(26,138,122,0.06))`, borderRadius: 12, border: `1px solid rgba(200,152,48,0.15)`, fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.02rem", lineHeight: 1.7 }}>
+                <strong>The process of learning is constitutive of its value, not merely instrumental to it.</strong>
+              </p>
+              <p style={{ marginTop: 14 }}>Nozick showed we want to <em>do</em> things, not just experience doing them. Mary's Room demonstrated propositional knowledge cannot capture experiential understanding. Plato insisted the prisoner must walk out of the cave themselves. Searle showed syntax without semantics is not understanding. Neo needed to spar after the download. Huxley distinguished conditioning from education. Dewey proved learning requires continuity and interaction. Aristotle demonstrated virtue demands practice.</p>
+              <p style={{ marginTop: 12 }}>The convergence is remarkable because these thinkers worked independently, across vastly different traditions and time periods, yet arrived at compatible conclusions. This suggests the insight is not culturally contingent but reflects something deep about the nature of knowledge, learning, and human development.</p>
+              <p style={{ marginTop: 12 }}>The most important implication for AI policy: <strong>the debate is not about whether AI is useful in education</strong> (it demonstrably is, in specific contexts) <strong>but about whether the efficiency gains it offers are worth the developmental losses it risks.</strong> Sparrow and Flenady's warning that economic pressures will push automation regardless of normative arguments makes this philosophical case not merely academic but urgently practical.</p>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.24}>
             <Expandable title="Why Thought Experiments Matter for AI Policy" color={C.gold}>
               <p>Thought experiments have been central to philosophy since Plato's Cave and have driven breakthroughs in physics (Einstein's elevator, Galileo's balls), ethics (Thomson's violinist, Foot's trolley), and political philosophy (Rawls's veil of ignorance). As the Stanford Encyclopedia of Philosophy notes, they allow us to "learn about reality by virtue of merely thinking" — tapping into what Ernst Mach called "instinctive knowledge" acquired from experience.</p>
               <p style={{ marginTop: 12 }}>For AI in education, thought experiments serve a specific function: they <strong>force explicit engagement with values</strong>. When a school leader says "we uphold the highest ethical standards," thought experiments reveal what that commitment actually entails by presenting concrete scenarios where values compete. They move policy discussions from vague aspiration to principled decision-making.</p>

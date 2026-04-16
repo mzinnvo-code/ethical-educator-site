@@ -19,9 +19,17 @@ export default function Resources() {
                 { title: "The Anxious Generation", author: "Jonathan Haidt (2024)", desc: "#1 NYT bestseller arguing smartphones and social media have 'rewired' childhood. Catalyzed legislation across multiple countries." },
                 { title: "AI for Educators", author: "Matt Miller (2023)", desc: "Practical guide to using AI in the classroom, including remixing student work and building engagement." },
                 { title: "Productive Failure", author: "Manu Kapur (2024)", desc: "The science of learning from struggle. Demonstrates why carefully designed failure produces deeper understanding." },
-                { title: "Should Robots Replace Teachers?", author: "Neil Selwyn (2019)", desc: "The template for distinguishing descriptive from normative claims about AI in education." },
+                { title: "Should Robots Replace Teachers?", author: "Neil Selwyn (2019)", desc: "The template for distinguishing descriptive from normative claims about AI in education. Praised by Frank Pasquale." },
+                { title: "The Ethics of Artificial Intelligence", author: "Luciano Floridi (2023)", desc: "Frames AI as a new form of agency, not intelligence. Education cultivates human agency — AI cannot replace it." },
+                { title: "AI Ethics", author: "Mark Coeckelbergh (2020)", desc: "Accessible introduction to AI ethics covering bias, responsibility, and governance. MIT Press Essential Knowledge series." },
+                { title: "Why AI Undermines Democracy", author: "Mark Coeckelbergh (2024)", desc: "Addresses power and governance dimensions of AI in democratic societies. Relevant to educational governance debates." },
                 { title: "Experience and Education", author: "John Dewey (1938)", desc: "Foundational work arguing education is life itself, not preparation for it. Essential context for the Learning Pill." },
-                { title: "Anarchy, State, and Utopia", author: "Robert Nozick (1974)", desc: "Contains the Experience Machine thought experiment — a key philosophical parallel to questions about AI and authentic experience." },
+                { title: "Democracy and Education", author: "John Dewey (1916)", desc: "The comprehensive vision: education as a social process, growth as the aim, learning through active engagement." },
+                { title: "Anarchy, State, and Utopia", author: "Robert Nozick (1974)", desc: "Contains the Experience Machine thought experiment — would you plug into a machine simulating a perfect life?" },
+                { title: "Nicomachean Ethics", author: "Aristotle (c. 340 BCE)", desc: "Book II on habituation and virtue. 'We learn by doing them — men become builders by building and lyre players by playing the lyre.'" },
+                { title: "Moral Tribes", author: "Joshua D. Greene (2013)", desc: "The definitive book on dual-process moral psychology. Greene's vision of utilitarianism as 'deep pragmatism' for a diverse world." },
+                { title: "Technology and the Virtues", author: "Shannon Vallor (2016)", desc: "Applies Aristotelian, Confucian, and Buddhist virtue traditions to technology ethics. Predecessor to The AI Mirror." },
+                { title: "The Life You Can Save", author: "Peter Singer (2009)", desc: "Effective altruism and utilitarian ethics — the philosophical framework Greene draws on for his normative conclusions." },
               ].map((b, i) => (
                 <div key={i} style={{ padding: "12px 0", borderBottom: `1px solid ${C.border}` }}>
                   <h4 style={{ color: C.textPrimary, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "0.95rem" }}>{b.title}</h4>
@@ -54,26 +62,66 @@ export default function Resources() {
               <RefItem>Millière, R. "Normative conflicts and shallow AI alignment." Philosophical Studies (2025).</RefItem>
               <RefItem>Fair, F. & Fasko, D. "Intelligence and Moral Development." Journal of Intelligence 13.7 (2025).</RefItem>
 
-              <p style={{ color: C.gold, fontSize: "0.82rem", fontWeight: 600, marginTop: 20, marginBottom: 8 }}>AI Ethics & Education</p>
-              <RefItem>UNESCO. "Recommendation on the Ethics of Artificial Intelligence." (2021).</RefItem>
+              <p style={{ color: C.gold, fontSize: "0.82rem", fontWeight: 600, marginTop: 20, marginBottom: 8 }}>AI Ethics & Education Policy</p>
+              <RefItem>UNESCO. "Recommendation on the Ethics of Artificial Intelligence." Adopted by 193 member states (2021).</RefItem>
               <RefItem>UNESCO. "Guidance for Generative AI in Education and Research." (2023).</RefItem>
-              <RefItem>UNESCO. "AI Competency Framework for Teachers." (2024).</RefItem>
-              <RefItem>UNESCO. "AI and Education: Protecting the Rights of Learners." (2025).</RefItem>
-              <RefItem>UNESCO. "AI and the Future of Education: Disruptions, Dilemmas and Directions." (2025).</RefItem>
-              <RefItem>EU AI Act, Regulation (EU) 2024/1689. Annex III: High-Risk AI Systems in Education.</RefItem>
-              <RefItem>Liang, W. et al. "GPT Detectors Are Biased Against Non-Native English Writers." Patterns (2023).</RefItem>
-              <RefItem>Sparrow, R. & Flenady, T. "Bullshit Universities: The Future of Automated Education." AI & Society 40 (2025).</RefItem>
-              <RefItem>Hasan, N. "How AI Quietly Undermines the Joy and Effort of Learning." Annals of Medicine and Surgery 87.8 (2025).</RefItem>
-              <RefItem>Walker, L. & Vorvoreanu, M. "GenAI and Learning Outcomes." Microsoft Research (Oct 2025).</RefItem>
+              <RefItem>UNESCO. "AI Competency Framework for Teachers." Miao, F. & Cukurova, M. (UCL). UNESDOC: ark:/48223/pf0000391104 (Sept 2024).</RefItem>
+              <RefItem>UNESCO. "AI Competency Framework for Students." UNESDOC: ark:/48223/pf0000391105 (Sept 2024).</RefItem>
+              <RefItem>UNESCO. "AI and Education: Protecting the Rights of Learners." UNESDOC: ark:/48223/pf0000395373 (Sept 2025).</RefItem>
+              <RefItem>UNESCO. "AI and the Future of Education: Disruptions, Dilemmas and Directions." 160+ pages (Sept 2025).</RefItem>
+              <RefItem>EU AI Act, Regulation (EU) 2024/1689. Annex III: High-Risk AI Systems in Education. In force Aug 1, 2024.</RefItem>
+              <RefItem>Saarela, M., Gunaserka, R. & Karimov, F. "The EU AI Act: Implications for Ethical AI in Education." DESRIST 2025, Springer LNCS, pp. 36–50.</RefItem>
+              <RefItem>NYC Public Schools. "Guidance on Artificial Intelligence (AI)." Traffic light framework (March 2026).</RefItem>
+              <RefItem>Ohio House Bill 96. Mandating formal AI policies for every public district by July 1, 2026 (Aug 2025).</RefItem>
+              <RefItem>U.S. Executive Order. "Advancing Artificial Intelligence Education for American Youth." (April 2025).</RefItem>
+              <RefItem>Liang, W. et al. "GPT Detectors Are Biased Against Non-Native English Writers." Patterns 4.7 (2023).</RefItem>
+              <RefItem>Sparrow, R. & Flenady, T. "Bullshit Universities: The Future of Automated Education." AI & Society 40, 5285–5296, Open Access (2025).</RefItem>
+              <RefItem>Hasan, N. "How AI Quietly Undermines the Joy and Effort of Learning." Annals of Medicine and Surgery 87.8, 4693–4694 (2025).</RefItem>
+              <RefItem>Walker, L. & Vorvoreanu, M. "GenAI and Learning Outcomes." Microsoft Research Report (Oct 2025).</RefItem>
+              <RefItem>Bastani, H. et al. "Generative AI Can Harm Learning." High school math students scored 17% lower. Working paper (2024).</RefItem>
+              <RefItem>Hon, K.K.L. "Generative AI in Higher Education: A Systematic Review." Journal of Educational Technology Systems, SAGE (2026).</RefItem>
+              <RefItem>Meta-analysis: "The impact of GenAI on learning outcomes." Educational Research Review 68 studies, 337 effect sizes. SMD = 0.45 (2025).</RefItem>
+              <RefItem>Coelho, M.P. et al. "Operationalizing Biesta's educational purposes for GenAI." British Educational Research Journal (2025).</RefItem>
+              <RefItem>HEPI. "Student Generative AI Survey 2025." 92% of UK undergraduates use AI tools.</RefItem>
+              <RefItem>Digital Education Council. "Global Student AI Survey." 86% globally use AI in studies (2024).</RefItem>
+              <RefItem>RAND Corporation. "More Students Use AI for Homework." 62% homework use, 60% concerned about critical thinking (Dec 2025).</RefItem>
+              <RefItem>Inside Higher Ed / Generation Lab. "College Students' Views on AI." 1,047 students, 166 institutions (July 2025).</RefItem>
+              <RefItem>Center for Democracy & Technology. Laird, E. Teacher and student AI use survey (Oct 2025).</RefItem>
+              <RefItem>American Psychological Association. "Health Advisory on AI Companion Software." (June 2025).</RefItem>
+              <RefItem>Brookings Institution. "AI's future for students is in our hands." Risks outweigh benefits (2026).</RefItem>
+              <RefItem>Bellwether Education Partners. "Productive Struggle: How AI Is Changing Learning, Effort, and Youth Development." (2025).</RefItem>
+              <RefItem>Pondiscio, R. "The Illusion of Learning: The Danger of AI to Education." American Enterprise Institute (2025).</RefItem>
+              <RefItem>Suleyman, M. "Towards Humanist Superintelligence." microsoft.ai (Nov 6, 2025).</RefItem>
+              <RefItem>Mollick, E. "AI Agents and Education: Simulated Practice at Scale." Working paper, Wharton (2025).</RefItem>
+              <RefItem>OECD. "AI Literacy Framework." Draft released May 2025. AI literacy assessment in 2029 PISA (MAIL test).</RefItem>
 
-              <p style={{ color: C.gold, fontSize: "0.82rem", fontWeight: 600, marginTop: 20, marginBottom: 8 }}>Philosophy of Education</p>
-              <RefItem>Jackson, F. "Epiphenomenal Qualia." Philosophical Quarterly 32 (1982).</RefItem>
-              <RefItem>Nozick, R. Anarchy, State, and Utopia, pp. 42–45 (1974).</RefItem>
-              <RefItem>Searle, J. "Minds, Brains, and Programs." BBS 3.3 (1980).</RefItem>
-              <RefItem>Biesta, G. "Risking Ourselves in Education: Qualification, Socialization, and Subjectification." Educational Theory (2020).</RefItem>
-              <RefItem>Brock, R. & Hay, S. "Keeping Students Out of Mary's (Class)room." Science & Education 28 (2019).</RefItem>
-              <RefItem>Waitzman, R. "Beyond Shadows: Plato's Cave, AI, and Critical Thinking in Schools." SSRN (2025).</RefItem>
+              <p style={{ color: C.gold, fontSize: "0.82rem", fontWeight: 600, marginTop: 20, marginBottom: 8 }}>Philosophy of Education & Thought Experiments</p>
+              <RefItem>Plato. Republic, Book VII (514a–520a). The Allegory of the Cave. (c. 380 BCE).</RefItem>
+              <RefItem>Aristotle. Nicomachean Ethics, Book II (1103a–1105b). Habituation and virtue. (c. 340 BCE).</RefItem>
+              <RefItem>Dewey, J. Democracy and Education. Macmillan (1916).</RefItem>
+              <RefItem>Dewey, J. Experience and Education. Kappa Delta Pi (1938).</RefItem>
+              <RefItem>Nozick, R. Anarchy, State, and Utopia, pp. 42–45. Basic Books (1974). The Experience Machine.</RefItem>
+              <RefItem>Searle, J. "Minds, Brains, and Programs." BBS 3.3, 417–424 (1980). The Chinese Room.</RefItem>
+              <RefItem>Jackson, F. "Epiphenomenal Qualia." Philosophical Quarterly 32 (1982). Mary's Room / The Knowledge Argument.</RefItem>
+              <RefItem>Jackson, F. "What Mary Didn't Know." Journal of Philosophy 83.5 (1986).</RefItem>
               <RefItem>Slote, M. "Satisficing Consequentialism." Proceedings of the Aristotelian Society 58 (1984).</RefItem>
+              <RefItem>Bjork, R.A. & Bjork, E.L. "Making Things Hard on Yourself, But in a Good Way." Psychology and the Real World (2011). Desirable difficulties.</RefItem>
+              <RefItem>Lemire, D. "The learning pill." lemire.me/blog (Nov 16, 2012).</RefItem>
+              <RefItem>Biesta, G. "Risking Ourselves in Education: Qualification, Socialization, and Subjectification." Educational Theory (2020).</RefItem>
+              <RefItem>Hindriks, F. & Douven, I. "The Experience Machine Revisited." Philosophical Psychology 32.2 (2019).</RefItem>
+              <RefItem>De Brigard, F. "If You Like It, Does It Matter If It's Real?" Philosophical Psychology 23.1 (2010). Status quo bias and Nozick.</RefItem>
+              <RefItem>Brock, R. & Hay, S. "Keeping Students Out of Mary's (Class)room." Science & Education 28, 985–1000, Open Access (2019).</RefItem>
+              <RefItem>"Re-Examining Nozick's Experience Machine in View of Emerging AI Companions." Annals of the University of Bucharest (2024).</RefItem>
+              <RefItem>Kapur, M. Productive Failure: Unlocking Deeper Learning Through the Science of Failing. Wiley (2024). The 4 As framework.</RefItem>
+              <RefItem>"LLMs, Turing Tests and Chinese Rooms: The Prospects for Meaning in LLMs." Inquiry (Jan 2025).</RefItem>
+              <RefItem>Stanford Encyclopedia of Philosophy. "The Chinese Room Argument." Substantially revised Oct 2024.</RefItem>
+              <RefItem>Waitzman, R. "Beyond Shadows: Plato's Cave, AI, and Critical Thinking in Schools." SSRN (2025). 4-stage framework.</RefItem>
+              <RefItem>Lemire, D. "We see something that works, and then we understand it." lemire.me/blog (2025). Against "thinkism."</RefItem>
+              <RefItem>Vallor, S. The AI Mirror: How to Reclaim Our Humanity in an Age of Machine Thinking. Oxford UP (2024). Phrónēsis and AI.</RefItem>
+              <RefItem>Floridi, L. The Ethics of Artificial Intelligence. Oxford UP (2023). AI as agency, not intelligence.</RefItem>
+              <RefItem>Coeckelbergh, M. AI Ethics. MIT Press (2020).</RefItem>
+              <RefItem>Coeckelbergh, M. Why AI Undermines Democracy. Polity (2024). Power and governance dimensions.</RefItem>
+              <RefItem>Selwyn, N. Should Robots Replace Teachers? AI and the Future of Education. Polity (2019).</RefItem>
             </Expandable>
           </FadeIn>
 
@@ -82,6 +130,7 @@ export default function Resources() {
               <div className="grid-2" style={{ gap: 10 }}>
                 {[
                   { name: "UNESCO AI Ethics", url: "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" },
+                  { name: "EU AI Act Portal", url: "https://artificialintelligenceact.eu" },
                   { name: "Center for AI Safety", url: "https://www.safe.ai" },
                   { name: "IEEE Ethics of AI", url: "https://standards.ieee.org" },
                   { name: "MIT AI + Ethics Curriculum", url: "https://www.media.mit.edu" },
@@ -89,6 +138,13 @@ export default function Resources() {
                   { name: "MagicSchool AI", url: "https://app.magicschool.ai" },
                   { name: "AI for Education (State Guidance)", url: "https://www.aiforeducation.io/ai-resources/state-ai-guidance" },
                   { name: "OECD AI in Education", url: "https://www.ai.gov/initiatives/education" },
+                  { name: "Center for Democracy & Technology", url: "https://cdt.org" },
+                  { name: "Educate Ventures (Rose Luckin)", url: "https://www.educateventures.com" },
+                  { name: "Stanford HAI", url: "https://hai.stanford.edu" },
+                  { name: "Institute for Ethical AI in Education", url: "https://www.buckingham.ac.uk/research/research-in-education/ieaied" },
+                  { name: "Ethan Mollick — One Useful Thing", url: "https://www.oneusefulthing.org" },
+                  { name: "NYC Schools AI Guidance", url: "https://www.schools.nyc.gov/about-us/vision-and-mission/guidance-on-artificial-intelligence" },
+                  { name: "Bellwether Education Partners", url: "https://bellwether.org" },
                 ].map((org, i) => (
                   <a key={i} href={org.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", padding: "10px 14px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, color: C.textSecondary, fontSize: "0.84rem", transition: "all 0.2s" }}
                     onMouseOver={e => { e.currentTarget.style.borderColor = C.teal; e.currentTarget.style.color = C.textPrimary; }}
