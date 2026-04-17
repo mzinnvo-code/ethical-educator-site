@@ -20,7 +20,7 @@ export default function Home({ navigate }) {
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
             {hasNew && (
               <button onClick={() => navigate("thought-experiments")} style={{ padding: "13px 30px", background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", fontWeight: 600, cursor: "pointer", fontSize: "0.9rem", boxShadow: `0 4px 20px rgba(26,138,122,0.25)`, animation: "newPulse 2s ease-in-out infinite" }}>
-                ✦ New: The Learning Pill
+                ✦ New: Thought Experiments
               </button>
             )}
             <button onClick={() => navigate("moral-psych")} style={{ padding: "13px 30px", background: "transparent", border: `1px solid ${C.borderHover}`, borderRadius: 8, color: C.gold, cursor: "pointer", fontSize: "0.9rem" }}>Explore the Research →</button>

@@ -253,7 +253,7 @@ export default function MoralPsychology({ navigate }) {
                 <StatCounter value={4} label="Proposed norms: no smartphones before 14, no social media before 16, phone-free schools, more real-world independence" color={C.gold} />
               </div>
               <p>The book catalyzed legislation including Australia's Online Safety Amendment (2025). Critics including Candice Odgers (<em>Nature</em>, 2024) argued the causal evidence is insufficient. Haidt's Moral Foundations Theory continues to develop through collaborators, but his public focus has shifted.</p>
-              <p style={{ marginTop: 12 }}><strong>For this site's themes:</strong> Haidt's pivot matters because it connects moral psychology to education policy and technology in children's lives — exactly the junction where the Learning Pill thought experiment lives. A follow-up book, <em>Life After Babel</em>, was due in early 2025.</p>
+              <p style={{ marginTop: 12 }}><strong>For this site's themes:</strong> Haidt's pivot matters because it connects moral psychology to education policy and technology in children's lives — exactly the junction where The Shortcut thought experiment lives. A follow-up book, <em>Life After Babel</em>, was due in early 2025.</p>
             </Expandable>
           </FadeIn>
 

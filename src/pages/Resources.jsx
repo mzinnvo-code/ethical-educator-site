@@ -23,7 +23,7 @@ export default function Resources() {
                 { title: "The Ethics of Artificial Intelligence", author: "Luciano Floridi (2023)", desc: "Frames AI as a new form of agency, not intelligence. Education cultivates human agency — AI cannot replace it." },
                 { title: "AI Ethics", author: "Mark Coeckelbergh (2020)", desc: "Accessible introduction to AI ethics covering bias, responsibility, and governance. MIT Press Essential Knowledge series." },
                 { title: "Why AI Undermines Democracy", author: "Mark Coeckelbergh (2024)", desc: "Addresses power and governance dimensions of AI in democratic societies. Relevant to educational governance debates." },
-                { title: "Experience and Education", author: "John Dewey (1938)", desc: "Foundational work arguing education is life itself, not preparation for it. Essential context for the Learning Pill." },
+                { title: "Experience and Education", author: "John Dewey (1938)", desc: "Foundational work arguing education is life itself, not preparation for it. Essential context for The Shortcut thought experiment." },
                 { title: "Democracy and Education", author: "John Dewey (1916)", desc: "The comprehensive vision: education as a social process, growth as the aim, learning through active engagement." },
                 { title: "Anarchy, State, and Utopia", author: "Robert Nozick (1974)", desc: "Contains the Experience Machine thought experiment — would you plug into a machine simulating a perfect life?" },
                 { title: "Nicomachean Ethics", author: "Aristotle (c. 340 BCE)", desc: "Book II on habituation and virtue. 'We learn by doing them — men become builders by building and lyre players by playing the lyre.'" },
