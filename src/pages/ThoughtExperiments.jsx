@@ -1,173 +1,137 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { C, isNewExperiment } from "../theme.js";
-import { FadeIn, Expandable, useAudio, SectionLabel, SectionTitle, Subtitle, Narrow, PageContainer, NewBadge, BodyText, QuoteBlock, ResearchCallout, Divider } from "../components/shared.jsx";
+import { FadeIn, Expandable, SectionTitle, Subtitle, Narrow, PageContainer, NewBadge, BodyText, Divider } from "../components/shared.jsx";
+import { PhiloRef } from "../experiments/ExperimentShared.jsx";
+import TheShortcutExperiment from "../experiments/TheShortcut.jsx";
+import AuthorshipExperiment from "../experiments/Authorship.jsx";
+import ReluctantEducatorExperiment from "../experiments/ReluctantEducator.jsx";
+import DoppelgangerExperiment from "../experiments/Doppelganger.jsx";
 
-function StageHeader({ num, title, color, gradient }) {
-  return (<div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:16 }}><div style={{ width:30,height:30,borderRadius:"50%",background:gradient?`linear-gradient(135deg,${C.teal},${C.gold})`:color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:"0.8rem",flexShrink:0 }}>{num}</div><h4 style={{ fontFamily:"'Source Serif 4',Georgia,serif",color:color||C.textPrimary,fontSize:"1.1rem" }}>{title}</h4></div>);
-}
-function InfoBox({ children, color, gradient }) {
-  const bg = gradient ? `linear-gradient(135deg,rgba(26,138,122,0.06),rgba(200,152,48,0.06))` : `${color}0a`;
-  return <div style={{ background:bg,border:`1px solid ${color}20`,borderRadius:12,padding:22,marginBottom:16,color:C.textPrimary,lineHeight:1.8,fontSize:"0.95rem" }}>{children}</div>;
-}
-function ChoiceBtn({ children, onClick, color=C.teal }) {
-  const [h,setH]=useState(false);
-  return <button onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ padding:"11px 24px",background:h?`${color}18`:`${color}08`,border:`1px solid ${h?color+"50":color+"25"}`,borderRadius:8,color:C.textPrimary,cursor:"pointer",fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"0.91rem",transition:"all 0.25s",transform:h?"translateY(-1px)":"none" }}>{children}</button>;
-}
-function Shell({ children, animating, color=C.teal }) {
-  return <div style={{ background:`linear-gradient(180deg,${C.bgAlt},${C.bg})`,border:`1px solid ${color}18`,borderRadius:18,padding:"28px 24px",opacity:animating?0.4:1,transform:animating?"scale(0.98)":"scale(1)",transition:"all 0.3s ease" }}>{children}</div>;
-}
-function ResultBox({ children, color=C.gold }) {
-  return <div style={{ background:`${color}08`,border:`1px solid ${color}15`,borderRadius:10,padding:16,marginBottom:12,color:C.sand,lineHeight:1.7,fontSize:"0.9rem",fontStyle:"italic" }}>{children}</div>;
-}
-function ExperimentCard({ icon,title,tagline,color,gradientFrom,gradientTo,isNew,onClick,animDelay="0s" }) {
-  const [h,setH]=useState(false);
-  return (<div onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ background:`linear-gradient(145deg,${gradientFrom||color+"12"},${gradientTo||color+"06"})`,border:`1px solid ${h?color+"40":color+"18"}`,borderRadius:16,padding:"32px 22px",cursor:"pointer",transition:"all 0.35s cubic-bezier(0.4,0,0.2,1)",position:"relative",overflow:"hidden",transform:h?"translateY(-6px) scale(1.02)":"translateY(0) scale(1)",boxShadow:h?`0 16px 48px ${color}15, 0 0 0 1px ${color}20`:"none",height:"100%" }}>
-    <div style={{ position:"absolute",top:-30,right:-30,width:120,height:120,borderRadius:"50%",background:`radial-gradient(circle,${color}12,transparent 70%)`,filter:"blur(20px)",transition:"all 0.5s",opacity:h?0.8:0.3 }}/>
-    <div style={{ position:"relative",zIndex:1 }}>
-      <div style={{ fontSize:"2.4rem",marginBottom:14,animation:`cardFloat 3s ease-in-out infinite`,animationDelay:animDelay }}>{icon}</div>
-      {isNew && <div style={{ position:"absolute",top:0,right:0 }}><NewBadge /></div>}
-      <h3 style={{ fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.05rem",fontWeight:700,marginBottom:6 }}>{title}</h3>
-      <p style={{ color:C.textMuted,fontSize:"0.82rem",lineHeight:1.55,marginBottom:14 }}>{tagline}</p>
-      <div style={{ display:"flex",alignItems:"center",gap:6 }}>
-        <span style={{ padding:"3px 10px",background:`${color}15`,border:`1px solid ${color}25`,borderRadius:12,fontSize:"0.65rem",fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color }}>Interactive</span>
-        <span style={{ color:h?color:C.textMuted,fontSize:"0.82rem",transition:"all 0.3s",transform:h?"translateX(4px)":"none",display:"inline-block" }}>→</span>
+function ExperimentCard({ icon, title, tagline, color, gradientFrom, gradientTo, isNew, onClick, animDelay = "0s" }) {
+  const [h, setH] = useState(false);
+  return (
+    <div onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} style={{
+      background: `linear-gradient(145deg, ${gradientFrom || color + "12"}, ${gradientTo || color + "06"})`,
+      border: `1px solid ${h ? color + "40" : color + "18"}`, borderRadius: 16, padding: "32px 22px",
+      cursor: "pointer", transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)", position: "relative", overflow: "hidden",
+      transform: h ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
+      boxShadow: h ? `0 16px 48px ${color}15, 0 0 0 1px ${color}20` : "none", height: "100%",
+    }}>
+      <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", background: `radial-gradient(circle, ${color}12, transparent 70%)`, filter: "blur(20px)", transition: "all 0.5s", opacity: h ? 0.8 : 0.3 }} />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div style={{ fontSize: "2.4rem", marginBottom: 14, animation: `cardFloat 3s ease-in-out infinite`, animationDelay: animDelay }}>{icon}</div>
+        {isNew && <div style={{ position: "absolute", top: 0, right: 0 }}><NewBadge /></div>}
+        <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.05rem", fontWeight: 700, marginBottom: 6 }}>{title}</h3>
+        <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.55, marginBottom: 14 }}>{tagline}</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ padding: "3px 10px", background: `${color}15`, border: `1px solid ${color}25`, borderRadius: 12, fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color }}>Interactive</span>
+          <span style={{ color: h ? color : C.textMuted, fontSize: "0.82rem", transition: "all 0.3s", transform: h ? "translateX(4px)" : "none", display: "inline-block" }}>→</span>
+        </div>
       </div>
     </div>
-  </div>);
+  );
 }
 
-// ═══════════════════════════════════════
-// 1. THE SHORTCUT
-// ═══════════════════════════════════════
-function TheShortcutExperiment() {
-  const [stage,setStage]=useState(0);
-  const [choices,setChoices]=useState({});
-  const [anim,setAnim]=useState(false);
-  const audio=useAudio();
-  const go=(k,v)=>{audio.playChime();setAnim(true);setChoices({...choices,[k]:v});setTimeout(()=>{setStage(stage+1);setAnim(false);},500);};
-  useEffect(()=>()=>audio.stopAll(),[audio]);
-  const stages=[
-    ()=>(<div style={{textAlign:"center",padding:"32px 0"}}><div style={{width:90,height:40,borderRadius:20,margin:"0 auto 28px",background:`linear-gradient(135deg,${C.teal},${C.sky})`,boxShadow:`0 0 40px rgba(26,138,122,0.3)`,animation:"pillFloat 3s ease-in-out infinite"}}/><h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.5rem",marginBottom:10}}>The Shortcut</h3><p style={{color:C.textSecondary,fontSize:"0.93rem",lineHeight:1.7,maxWidth:520,margin:"0 auto 24px"}}>A thought experiment for the age of AI. If you could bypass the entire process of learning and arrive at mastery instantly — should you?</p><button onClick={()=>{audio.playDeep();setStage(1);}} style={{padding:"14px 36px",background:`linear-gradient(135deg,${C.teal},${C.ocean})`,border:"none",borderRadius:8,color:"#fff",cursor:"pointer",fontWeight:600,fontSize:"0.93rem",boxShadow:`0 4px 20px rgba(26,138,122,0.25)`}}>Begin the Experiment</button></div>),
-    ()=>(<div><StageHeader num="1" title="The Premise" color={C.teal}/><InfoBox color={C.teal}><p>Imagine a shortcut — a pill, a neural implant, a technology — that grants <strong style={{color:C.teal}}>instant, complete mastery</strong> of any subject. No studying, no practice, no late nights. The understanding is genuine and deep. A physicist could advance the field. A musician could compose as a virtuoso. Free, painless, no side effects.</p></InfoBox><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.02rem",margin:"20px 0 16px"}}>Should you take the shortcut?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>go("basic","yes")}>Yes — take it</ChoiceBtn><ChoiceBtn onClick={()=>go("basic","no")}>No — refuse it</ChoiceBtn><ChoiceBtn onClick={()=>go("basic","depends")}>It depends</ChoiceBtn></div></div>),
-    ()=>(<div><StageHeader num="2" title="The Scarcity Condition" color={C.ocean}/><ResultBox>You chose to {choices.basic==="yes"?"take":choices.basic==="no"?"refuse":"consider"} the shortcut. Now the conditions change.</ResultBox><InfoBox color={C.sky}><p>Now the shortcut is <strong style={{color:C.sky}}>available only to some</strong>. Your child could take it — most children cannot. The gap could be enormous. This is not hypothetical: access to quality AI tutoring already varies dramatically by socioeconomic status.</p></InfoBox><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.02rem",margin:"20px 0 16px"}}>Would you give your child the shortcut?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>go("scarcity","yes")} color={C.ocean}>Yes — I can't let them fall behind</ChoiceBtn><ChoiceBtn onClick={()=>go("scarcity","no")} color={C.ocean}>No — even at the cost</ChoiceBtn></div></div>),
-    ()=>(<div><StageHeader num="3" title="Universal Availability" color={C.gold}/><InfoBox color={C.gold}><p>Now it's <strong style={{color:C.gold}}>free and universal</strong>. Knowledge is no longer scarce. What happens to schools? Universities? Years of study?</p></InfoBox><p style={{color:C.textSecondary,lineHeight:1.7,fontSize:"0.93rem",margin:"16px 0"}}>Biesta identifies three purposes of education: <em>qualification</em>, <em>socialization</em>, and <em>subjectification</em>. The shortcut delivers qualification — but can it deliver the other two?</p><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.02rem",margin:"20px 0 16px"}}>Should schools still exist?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>go("universal","yes")} color={C.gold}>Yes — education is more than knowledge</ChoiceBtn><ChoiceBtn onClick={()=>go("universal","no")} color={C.gold}>No — main purpose gone</ChoiceBtn><ChoiceBtn onClick={()=>go("universal","different")} color={C.gold}>They'd need to transform</ChoiceBtn></div></div>),
-    ()=>(<div><StageHeader num="4" title="The Developmental Question" color={C.coral}/><InfoBox color={C.coral}><p>Should a toddler be permitted to take the shortcut? Would instant mastery deprive a child of something essential?</p></InfoBox><p style={{color:C.textSecondary,lineHeight:1.7,fontSize:"0.93rem",margin:"16px 0"}}>Aristotle: "We learn by doing them." Kapur's research on productive failure (2024) shows carefully designed struggle produces deeper understanding. Character cannot be downloaded.</p><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.02rem",margin:"20px 0 16px"}}>Should there be an age limit?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>go("age","yes")} color={C.coral}>Yes — development matters</ChoiceBtn><ChoiceBtn onClick={()=>go("age","no")} color={C.coral}>No — why withhold knowledge?</ChoiceBtn></div></div>),
-    ()=>(<div><StageHeader num="✦" title="The Point" color={C.gold} gradient/><InfoBox color={C.gold} gradient><p><strong style={{color:C.gold}}>The shortcut is not hypothetical.</strong> It stands in for any technology that radically compresses learning. When ChatGPT explains quantum mechanics, when Khanmigo adapts to a student's pace — we are already partway there.</p><p style={{marginTop:12}}>The question: <strong style={{color:C.teal}}>Is education valuable because of what it produces, or because of the process it requires?</strong></p></InfoBox><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,margin:"20px 0"}}>{[{l:"Take the shortcut?",v:choices.basic},{l:"Give to your child?",v:choices.scarcity},{l:"Schools still exist?",v:choices.universal},{l:"Age limit?",v:choices.age}].map((c,i)=>(<div key={i} style={{background:C.surface,border:`1px solid ${C.border}`,borderRadius:10,padding:"10px 14px"}}><p style={{color:C.textMuted,fontSize:"0.75rem",marginBottom:3}}>{c.l}</p><p style={{color:C.gold,fontSize:"0.88rem",fontWeight:600,textTransform:"capitalize"}}>{c.v||"—"}</p></div>))}</div><Expandable title="What This Reveals" color={C.teal}><p>By removing cost, risk, and inefficiency, The Shortcut forces a clearer account of what education is for. If schools should still exist with universal shortcuts, you're asserting education's value transcends knowledge transfer.</p><p style={{marginTop:12}}>Hasan (2025): AI tools that offer immediate solutions bypass the brain's effort-reward cycle. Pondiscio (AEI, 2025): "Education is not a product to be delivered; it's a transformation that occurs through effort."</p></Expandable><Expandable title="Philosophical Parallels" color={C.ocean}><p><strong>Nozick's Experience Machine:</strong> Most refuse to plug in — we value authenticity over mere experience.</p><p style={{marginTop:10}}><strong>Jackson's Mary's Room:</strong> Propositional knowledge can't capture experiential understanding.</p><p style={{marginTop:10}}><strong>Plato's Cave:</strong> The prisoner must walk out themselves.</p><p style={{marginTop:10}}><strong>The Matrix:</strong> Neo gets the download but still needs to train with Morpheus.</p><p style={{marginTop:10}}><strong>Aristotle:</strong> "Men become builders by building." Character cannot be downloaded.</p></Expandable><div style={{textAlign:"center",marginTop:20}}><button onClick={()=>{setStage(0);setChoices({});}} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div></div>),
-  ];
-  return <Shell animating={anim}>{stages[stage]()}<style>{`@keyframes pillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}`}</style></Shell>;
-}
+const experiments = [
+  { id: "the-shortcut", icon: "⚡", title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you? Four escalating scenarios. No right answers.", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
+  { id: "ai-authorship", icon: "📝", title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths. Choose a role and navigate the fallout.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
+  { id: "reluctant-educator", icon: "📊", title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — watch the data diverge, then make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
+  { id: "digital-doppelganger", icon: "👤", title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. An exam that exposes everything. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
+];
 
-// ═══════════════════════════════════════
-// 2. AI AUTHORSHIP QUANDARY — Role-play
-// ═══════════════════════════════════════
-function AuthorshipExperiment() {
-  const [stage,setStage]=useState(0);
-  const [role,setRole]=useState(null);
-  const [decisions,setDecisions]=useState([]);
-  const [anim,setAnim]=useState(false);
-  const audio=useAudio();
-  const go=(v)=>{audio.playClick();setAnim(true);setDecisions([...decisions,v]);setTimeout(()=>{setStage(stage+1);setAnim(false);},400);};
-  useEffect(()=>()=>audio.stopAll(),[audio]);
-  const roles={
-    student:{icon:"🎒",brief:"You used ChatGPT to help write your essay. You prompted it, reviewed the output, and edited it into your own voice. You learned a lot — the AI helped you understand the topic better. But you didn't disclose AI use because the syllabus didn't mention it.",color:C.teal},
-    teacher:{icon:"📚",brief:"You suspected AI involvement — the essay was unusually polished for this student. You care about integrity, but this student has been struggling. The essay shows genuine understanding of the material.",color:C.gold},
-    parent:{icon:"👨‍👩‍👧",brief:"Your child told you they used AI. You think it's smart — it's how the real world works. The syllabus never prohibited AI use. Why is your child being punished for being resourceful?",color:C.ocean},
-    admin:{icon:"🏫",brief:"The teacher, parent, and student are in your office. The teacher wants a redo. The parent is threatening to escalate. The student is confused. Your school has no AI policy. You need to resolve this today.",color:C.coral},
-  };
-  const stages=[
-    ()=>(<div style={{textAlign:"center",padding:"24px 0"}}><div style={{fontSize:"3rem",marginBottom:16}}>📝</div><h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.4rem",marginBottom:10}}>The AI Authorship Quandary</h3><p style={{color:C.textSecondary,fontSize:"0.93rem",lineHeight:1.7,maxWidth:480,margin:"0 auto 24px"}}>A student submits an AI-assisted essay. The teacher flags it. The parent defends it. Navigate this conflict from one perspective — and discover how the same situation looks entirely different depending on where you stand.</p><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1rem",marginBottom:16}}>Choose your role:</p><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(130px, 1fr))",gap:10}}>{Object.entries(roles).map(([k,r])=>(<button key={k} onClick={()=>{setRole(k);audio.playChime();setStage(1);}} style={{padding:"16px 12px",background:`${r.color}0a`,border:`1px solid ${r.color}25`,borderRadius:12,cursor:"pointer",transition:"all 0.25s",textAlign:"center"}} onMouseOver={e=>{e.currentTarget.style.borderColor=r.color;e.currentTarget.style.transform="translateY(-2px)";}} onMouseOut={e=>{e.currentTarget.style.borderColor=r.color+"25";e.currentTarget.style.transform="none";}}><div style={{fontSize:"1.8rem",marginBottom:6}}>{r.icon}</div><div style={{color:r.color,fontSize:"0.82rem",fontWeight:600,textTransform:"capitalize"}}>{k}</div></button>))}</div></div>),
-    ()=>{const r=roles[role];const qs={student:["Redo the essay from scratch","Explain how I actually used the AI","Argue the rules weren't clear"],teacher:["Give a zero — integrity matters","Allow a redo with clear guidelines","Accept it — the learning happened"],parent:["Escalate to the principal","Ask for a meeting with the teacher","Support the teacher's judgment"],admin:["Focus on creating policy first","Resolve this case, then policy","Handle both simultaneously"]};const prompts={student:"The teacher asks you to redo the essay. What do you do?",teacher:"The parent demands you accept the essay as-is. What do you do?",parent:"The teacher insists your child redo the work. What's your next move?",admin:"Everyone is looking at you. What do you do first?"};return(<div><StageHeader num="1" title={`Your Perspective: ${role.charAt(0).toUpperCase()+role.slice(1)}`} color={r.color}/><InfoBox color={r.color}><p>{r.brief}</p></InfoBox><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1rem",margin:"16px 0"}}>{prompts[role]}</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}>{qs[role].map((q,i)=>(<ChoiceBtn key={i} onClick={()=>go(i)} color={r.color}>{q}</ChoiceBtn>))}</div></div>);},
-    ()=>{const r=roles[role];const cons={student:["You redo the essay. It takes three times as long without AI. The result isn't as good. But every word is yours.","You walk the teacher through your process. She's impressed by your transparency but still concerned — where does 'your' thinking end and the AI's begin?","The teacher escalates. Your parents get called in. Now it's a bigger conflict than it needed to be."],teacher:["The parent is furious. The syllabus never mentioned AI. Your colleagues are split — some agree, others think you overreacted.","The student accepts. But other students ask: 'So we CAN use AI if we redo it?' You've set a precedent.","Your integrity concerns nag at you. Other teachers say you've undermined standards. But the student thrived."],parent:["The principal listens but can't overturn the teacher without policy. Your child feels caught in the middle.","The teacher explains her reasoning. You begin to understand: it's not about punishment, it's about what your child actually learned.","Your child is disappointed but respects your decision. The teacher is grateful. The relationship strengthens."],admin:["The teacher is frustrated — she needs resolution now, not a committee. The parent sees delay as avoidance.","You resolve the immediate conflict, but three more AI cases surface next week. You're playing whack-a-mole.","It's exhausting but effective. You bring all parties together to resolve the case AND draft initial guidelines."]};return(<div><StageHeader num="2" title="The Consequence" color={r.color}/><ResultBox color={r.color}>{cons[role][decisions[0]]}</ResultBox><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1rem",margin:"16px 0"}}>What value should guide AI policy going forward?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>go("transparency")} color={C.teal}>Transparency — always disclose</ChoiceBtn><ChoiceBtn onClick={()=>go("outcomes")} color={C.gold}>Outcomes — did learning occur?</ChoiceBtn><ChoiceBtn onClick={()=>go("process")} color={C.coral}>Process — the journey matters most</ChoiceBtn></div></div>);},
-    ()=>{const vm={transparency:"deontological (duty-based)",outcomes:"consequentialist (outcome-based)",process:"virtue ethics (character-based)"};return(<div><StageHeader num="✦" title="What Your Choices Reveal" color={C.gold} gradient/><InfoBox color={C.gold} gradient><p>You prioritized <strong style={{color:C.gold}}>{decisions[1]}</strong> — a {vm[decisions[1]]} framework. Every AI policy implicitly adopts one of these, whether or not the authors realize it.</p><p style={{marginTop:12}}>The Authorship Quandary works because <strong style={{color:C.teal}}>the same facts look entirely different depending on your role and values</strong>.</p></InfoBox><Expandable title="The Other Perspectives" color={C.ocean}>{Object.entries(roles).filter(([k])=>k!==role).map(([k,r])=>(<div key={k} style={{padding:"10px 14px",background:C.surface,borderRadius:10,marginBottom:8,borderLeft:`3px solid ${r.color}`}}><strong style={{color:r.color,textTransform:"capitalize"}}>{r.icon} {k}:</strong><p style={{marginTop:4,fontSize:"0.88rem"}}>{r.brief}</p></div>))}</Expandable><Expandable title="Research Connections" color={C.teal}><p>Based on Matthew's blog post <a href="https://ethicalaiedu.wordpress.com/2024/02/14/the-ai-authorship-quandary/" target="_blank" rel="noopener noreferrer">"The AI Authorship Quandary."</a> NYC's 2026 AI policy addresses AI-generated content through a traffic-light framework. The RAND 2025 study found 37% of students violate AI policies due to grade pressure.</p></Expandable><div style={{textAlign:"center",marginTop:16}}><button onClick={()=>{setStage(0);setRole(null);setDecisions([]);}} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Try a Different Role</button></div></div>);},
-  ];
-  return <Shell animating={anim} color={role?roles[role].color:C.gold}>{stages[stage]()}</Shell>;
-}
-
-// ═══════════════════════════════════════
-// 3. RELUCTANT EDUCATOR — Dashboard
-// ═══════════════════════════════════════
-function ReluctantEducatorExperiment() {
-  const [stage,setStage]=useState(0);
-  const [week,setWeek]=useState(0);
-  const [decision,setDecision]=useState(null);
-  const [anim,setAnim]=useState(false);
-  const audio=useAudio();
-  useEffect(()=>()=>audio.stopAll(),[audio]);
-  const data=[
-    {wk:1,j:{test:72,think:85,engage:90,create:88},c:{test:74,think:82,engage:78,create:75}},
-    {wk:4,j:{test:74,think:87,engage:88,create:90},c:{test:82,think:78,engage:72,create:70}},
-    {wk:8,j:{test:76,think:89,engage:86,create:92},c:{test:88,think:72,engage:68,create:65}},
-    {wk:12,j:{test:78,think:91,engage:85,create:94},c:{test:92,think:65,engage:62,create:58}},
-  ];
-  const narr=["Both classrooms start similarly. Ms. Chen's students are excited by new tools. Mr. Jennings' students are engaged by his energy and Socratic questioning.","Ms. Chen's test scores pull ahead — AI-optimized practice is working. But her students' critical thinking has started to decline. They're getting answers faster but asking fewer questions.","The gap widens. Ms. Chen scores higher on standardized tests. But Mr. Jennings' students write more original essays, ask deeper questions, show more persistence. Microsoft Research echoes: 'productivity gains ≠ learning gains.'","Ms. Chen's test scores are 14 points higher. But Mr. Jennings' students score 26 points higher on critical thinking, 23 on engagement, and 36 on creative output. The principal must decide."];
-  function Bar({label,j,c,jColor=C.teal,cColor=C.coral}){return(<div style={{marginBottom:10}}><div style={{display:"flex",justifyContent:"space-between",fontSize:"0.75rem",color:C.textMuted,marginBottom:4}}><span>{label}</span><span style={{fontFamily:"'JetBrains Mono',monospace"}}>{j} vs {c}</span></div><div style={{display:"flex",gap:2,height:20,background:"rgba(255,255,255,0.02)",borderRadius:4}}><div style={{width:`${j}%`,background:jColor,borderRadius:"4px 0 0 4px",transition:"width 0.6s ease",display:"flex",alignItems:"center",justifyContent:"flex-end",paddingRight:4}}><span style={{fontSize:"0.58rem",color:"#fff",fontWeight:700}}>J</span></div><div style={{width:`${c}%`,background:cColor,borderRadius:"0 4px 4px 0",transition:"width 0.6s ease",display:"flex",alignItems:"center",justifyContent:"flex-end",paddingRight:4}}><span style={{fontSize:"0.58rem",color:"#fff",fontWeight:700}}>C</span></div></div></div>);}
-  const stages=[
-    ()=>(<div style={{textAlign:"center",padding:"24px 0"}}><div style={{fontSize:"3rem",marginBottom:16}}>📊</div><h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.4rem",marginBottom:10}}>The Reluctant Educator</h3><p style={{color:C.textSecondary,fontSize:"0.93rem",lineHeight:1.7,maxWidth:520,margin:"0 auto 24px"}}>Mr. Jennings refuses AI tools on principle. Ms. Chen embraces them fully. Watch their classrooms diverge over 12 weeks — then decide what the principal should do.</p><button onClick={()=>{audio.playDeep();setStage(1);}} style={{padding:"14px 36px",background:`linear-gradient(135deg,${C.gold},${C.coral})`,border:"none",borderRadius:8,color:"#fff",cursor:"pointer",fontWeight:600,fontSize:"0.93rem"}}>Open the Dashboard</button></div>),
-    ()=>{const d=data[week];return(<div><StageHeader num="📊" title="Classroom Comparison" color={C.gold}/><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:16}}><div style={{background:`${C.teal}0a`,border:`1px solid ${C.teal}20`,borderRadius:12,padding:14,textAlign:"center"}}><div style={{fontSize:"1.4rem",marginBottom:4}}>📖</div><strong style={{color:C.teal,fontSize:"0.85rem"}}>Mr. Jennings</strong><p style={{fontSize:"0.72rem",color:C.textMuted,marginTop:4}}>Socratic dialogue, handwritten drafts, peer review, office hours.</p></div><div style={{background:`${C.coral}0a`,border:`1px solid ${C.coral}20`,borderRadius:12,padding:14,textAlign:"center"}}><div style={{fontSize:"1.4rem",marginBottom:4}}>🤖</div><strong style={{color:C.coral,fontSize:"0.85rem"}}>Ms. Chen</strong><p style={{fontSize:"0.72rem",color:C.textMuted,marginTop:4}}>AI grading, personalized practice, chatbot tutoring, automated feedback.</p></div></div><div style={{display:"flex",gap:6,marginBottom:16,justifyContent:"center"}}>{data.map((m,i)=>(<button key={i} onClick={()=>{setWeek(i);audio.playClick();}} style={{padding:"8px 16px",background:week===i?C.gold:"transparent",border:`1px solid ${week===i?C.gold:C.border}`,borderRadius:6,color:week===i?C.midnight:C.textMuted,cursor:"pointer",fontSize:"0.78rem",fontWeight:600}}>Wk {m.wk}</button>))}</div><div style={{background:C.surface,borderRadius:12,padding:16,marginBottom:16}}><p style={{fontSize:"0.72rem",color:C.textMuted,marginBottom:10,textTransform:"uppercase",letterSpacing:"0.1em"}}>Week {d.wk}</p><Bar label="Test Scores" j={d.j.test} c={d.c.test}/><Bar label="Critical Thinking" j={d.j.think} c={d.c.think} cColor={C.gold}/><Bar label="Student Engagement" j={d.j.engage} c={d.c.engage} cColor={C.ocean}/><Bar label="Creative Output" j={d.j.create} c={d.c.create} cColor={C.green}/></div><p style={{color:C.textSecondary,fontSize:"0.88rem",lineHeight:1.7,marginBottom:16}}>{narr[week]}</p>{week===3?(<div><p style={{color:C.gold,fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1rem",margin:"16px 0"}}>You're the principal. What do you do?</p><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><ChoiceBtn onClick={()=>{setDecision("mandate");setStage(2);audio.playChime();}} color={C.coral}>Mandate AI for all</ChoiceBtn><ChoiceBtn onClick={()=>{setDecision("jennings");setStage(2);audio.playChime();}} color={C.teal}>Back Mr. Jennings</ChoiceBtn><ChoiceBtn onClick={()=>{setDecision("hybrid");setStage(2);audio.playChime();}} color={C.gold}>Require hybrid</ChoiceBtn><ChoiceBtn onClick={()=>{setDecision("autonomy");setStage(2);audio.playChime();}} color={C.ocean}>Let teachers choose</ChoiceBtn></div></div>):(<p style={{textAlign:"center",color:C.textMuted,fontSize:"0.8rem"}}>Click through each week to see the data evolve →</p>)}</div>);},
-    ()=>{const ref={mandate:"You prioritized measurable outcomes — a consequentialist calculation. But AI-optimized test scores came at the cost of critical thinking and creativity.",jennings:"You prioritized unmeasurable qualities. But parents may object when test scores lag. Can you defend this to a metrics-focused school board?",hybrid:"You sought balance — but who defines the hybrid? If Jennings must use tools he believes are harmful, is that respecting professional judgment?",autonomy:"You respected teacher autonomy. But some students get AI optimization and others don't. Is that equitable?"};return(<div><StageHeader num="✦" title="The Tradeoff" color={C.gold} gradient/><InfoBox color={C.gold} gradient><p>{ref[decision]}</p></InfoBox><p style={{color:C.textSecondary,fontSize:"0.9rem",lineHeight:1.7,marginTop:14}}>A 2025 meta-analysis found moderate positive AI effects (SMD = 0.45), but Microsoft Research warned "productivity gains ≠ learning gains." High school math students scored 17% lower after using GenAI without scaffolding (Bastani et al., 2024). The question isn't whether AI works — it's <strong>what we're measuring and what we're missing</strong>.</p><div style={{textAlign:"center",marginTop:16}}><button onClick={()=>{setStage(0);setWeek(0);setDecision(null);}} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div></div>);},
-  ];
-  return <Shell animating={anim} color={C.gold}>{stages[stage]()}</Shell>;
-}
-
-// ═══════════════════════════════════════
-// 4. DIGITAL DOPPELGÄNGER — Turing Test
-// ═══════════════════════════════════════
-function DoppelgangerExperiment() {
-  const [stage,setStage]=useState(0);
-  const [guess,setGuess]=useState(null);
-  const [anim,setAnim]=useState(false);
-  const audio=useAudio();
-  useEffect(()=>()=>audio.stopAll(),[audio]);
-  const responses=[
-    {name:"Alex",text:"I think the author is trying to show how isolation changes identity. When the narrator says the walls feel closer each day — that's not literal, it's about how loneliness shrinks your world.",av:"🟦"},
-    {name:"Jordan",text:"The metaphor of the walls closing in connects to the broader theme of confinement. The author uses spatial imagery throughout — the 'narrowing corridor' in chapter 3, the 'windowless room' in chapter 7 — to externalize the narrator's psychological state.",av:"🟪"},
-    {name:"Sam",text:"Honestly this part confused me at first but then I reread it and I think it's about how when you're alone too long you lose track of what's real? Like the narrator can't tell if the walls are actually moving or if it's just in their head.",av:"🟩"},
-    {name:"Riley",text:"Building on what Alex said — the spatial compression mirrors temporal compression later in the novel. Time and space both collapse, which is classic existentialist technique. Sartre does something similar in No Exit.",av:"🟧"},
-    {name:"Casey",text:"What strikes me is this passage works on both literal and symbolic levels. The walls could represent social pressure, institutional control, or internal anxiety. The author deliberately leaves it ambiguous.",av:"🟥"},
-  ];
-  const AI_IDX=1;
-  const stages=[
-    ()=>(<div style={{textAlign:"center",padding:"24px 0"}}><div style={{fontSize:"3rem",marginBottom:16,animation:"glitch 4s ease-in-out infinite"}}>👤</div><h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.4rem",marginBottom:10}}>The Digital Doppelgänger</h3><p style={{color:C.textSecondary,fontSize:"0.93rem",lineHeight:1.7,maxWidth:520,margin:"0 auto 24px"}}>A student sent an AI avatar to participate in today's literature discussion. Five students responded. <strong style={{color:C.coral}}>One is the AI.</strong> Can you identify it?</p><button onClick={()=>{audio.playDeep();setStage(1);}} style={{padding:"14px 36px",background:`linear-gradient(135deg,${C.coral},${C.ocean})`,border:"none",borderRadius:8,color:"#fff",cursor:"pointer",fontWeight:600,fontSize:"0.93rem"}}>Enter the Discussion</button><style>{`@keyframes glitch{0%,90%,100%{opacity:1;transform:none}92%{opacity:0.8;transform:translateX(2px)}94%{opacity:1;transform:translateX(-2px)}96%{opacity:0.6;transform:translateX(1px)}}`}</style></div>),
-    ()=>(<div><StageHeader num="📖" title="Literature Discussion: Chapter 12" color={C.coral}/><p style={{color:C.textMuted,fontSize:"0.82rem",marginBottom:16,fontStyle:"italic"}}>Prompt: "How does the author use spatial imagery in the isolation sequence?"</p>{responses.map((r,i)=>(<div key={i} style={{background:guess===i?(i===AI_IDX?`${C.coral}15`:`${C.teal}15`):C.surface,border:`1px solid ${guess===i?(i===AI_IDX?C.coral:C.teal):C.border}`,borderRadius:12,padding:"14px 18px",marginBottom:10,cursor:guess===null?"pointer":"default",transition:"all 0.3s",opacity:guess!==null&&guess!==i?0.5:1}} onClick={()=>{if(guess===null){setGuess(i);audio.playClick();setTimeout(()=>setStage(2),1500);}}} onMouseOver={e=>{if(guess===null)e.currentTarget.style.borderColor=C.gold+"40";}} onMouseOut={e=>{if(guess===null)e.currentTarget.style.borderColor=C.border;}}><div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}><span style={{fontSize:"1.1rem"}}>{r.av}</span><strong style={{color:C.textPrimary,fontSize:"0.88rem"}}>{r.name}</strong>{guess===i&&<span style={{fontSize:"0.7rem",padding:"2px 8px",borderRadius:4,background:i===AI_IDX?C.coral:`${C.teal}30`,color:i===AI_IDX?"#fff":C.teal,fontWeight:700}}>{i===AI_IDX?"✓ CORRECT":"✗ HUMAN"}</span>}</div><p style={{color:C.textSecondary,fontSize:"0.88rem",lineHeight:1.65}}>{r.text}</p></div>))}{guess===null&&<p style={{textAlign:"center",color:C.gold,fontSize:"0.85rem",marginTop:8}}>Click the response you think is from the AI ↑</p>}</div>),
-    ()=>(<div><StageHeader num="✦" title={guess===AI_IDX?"You Spotted the Doppelgänger":"The AI Fooled You"} color={guess===AI_IDX?C.teal:C.coral} gradient/><InfoBox color={C.ocean}><p><strong style={{color:C.ocean}}>The AI was {responses[AI_IDX].name}.</strong> {guess===AI_IDX?"You noticed:":"Here's what you missed:"} The response was comprehensive but <em>too</em> polished — perfectly structured, referencing specific chapters, making sophisticated literary connections. Real students are messier: Sam's confusion, Alex's casual tone, Casey's uncertainty.</p></InfoBox><p style={{color:C.textSecondary,fontSize:"0.9rem",lineHeight:1.7,marginBottom:16}}>The deeper question: <strong style={{color:C.gold}}>Does it matter?</strong></p><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}><div style={{background:`${C.teal}0a`,border:`1px solid ${C.teal}20`,borderRadius:10,padding:14}}><strong style={{color:C.teal,fontSize:"0.82rem"}}>If it doesn't matter:</strong><p style={{fontSize:"0.82rem",marginTop:6}}>The discussion was enriched. Other students engaged with the ideas. Learning happened for everyone else.</p></div><div style={{background:`${C.coral}0a`,border:`1px solid ${C.coral}20`,borderRadius:10,padding:14}}><strong style={{color:C.coral,fontSize:"0.82rem"}}>If it matters deeply:</strong><p style={{fontSize:"0.82rem",marginTop:6}}>Education requires authentic presence — vulnerability, the risk of being wrong, social bonds formed through shared struggle. An AI proxy provides none of this.</p></div></div><Expandable title="What This Reveals About Presence" color={C.gold}><p>NYC's 2026 AI policy places AI proxies in the "Red" zone. Biesta's subjectification requires authentic encounter — the student must be genuinely present, capable of surprising themselves and others. An AI avatar cannot be genuinely wrong or grow through correction.</p><p style={{marginTop:10}}>The APA's June 2025 health advisory warned AI companion software may "displace or interfere with development of healthy real-world relationships."</p></Expandable><div style={{textAlign:"center",marginTop:16}}><button onClick={()=>{setStage(0);setGuess(null);}} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div></div>),
-  ];
-  return <Shell animating={anim} color={C.coral}>{stages[stage]()}</Shell>;
-}
-
-// ═══════════════════════════════════════
-// MAIN PAGE
-// ═══════════════════════════════════════
 export default function ThoughtExperiments({ navigate }) {
-  const [active,setActive]=useState(null);
-  const experiments=[
-    {id:"the-shortcut",icon:"⚡",title:"The Shortcut",tagline:"If you could bypass the entire process of learning — should you?",color:C.teal,gf:"rgba(26,138,122,0.12)",gt:"rgba(26,90,138,0.06)",Comp:TheShortcutExperiment},
-    {id:"ai-authorship",icon:"📝",title:"The AI Authorship Quandary",tagline:"Same essay. Same AI. Four people. Four completely different truths.",color:C.gold,gf:"rgba(200,152,48,0.12)",gt:"rgba(192,112,64,0.06)",Comp:AuthorshipExperiment},
-    {id:"reluctant-educator",icon:"📊",title:"The Reluctant Educator",tagline:"When test scores and critical thinking pull in opposite directions — what do you measure?",color:C.coral,gf:"rgba(192,112,64,0.12)",gt:"rgba(200,152,48,0.06)",Comp:ReluctantEducatorExperiment},
-    {id:"digital-doppelganger",icon:"👤",title:"The Digital Doppelgänger",tagline:"One of these students is an AI. Can you tell? Does it matter?",color:C.ocean,gf:"rgba(26,90,138,0.12)",gt:"rgba(26,138,122,0.06)",Comp:DoppelgangerExperiment},
-  ];
+  const [active, setActive] = useState(null);
+
   return (
-    <div style={{padding:"80px 0",background:C.bg}}>
+    <div style={{ padding: "80px 0", background: C.bg }}>
       <style>{`@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}`}</style>
       <PageContainer>
         <FadeIn>
-          <div style={{textAlign:"center",marginBottom:10}}><span style={{display:"inline-block",padding:"4px 14px",background:`linear-gradient(135deg,rgba(26,138,122,0.12),rgba(26,90,138,0.12))`,border:`1px solid rgba(26,138,122,0.2)`,borderRadius:16,fontSize:"0.7rem",fontWeight:600,letterSpacing:"0.1em",textTransform:"uppercase",color:C.teal}}>Interactive Thought Experiments</span></div>
+          <div style={{ textAlign: "center", marginBottom: 10 }}>
+            <span style={{ display: "inline-block", padding: "4px 14px", background: `linear-gradient(135deg, rgba(26,138,122,0.12), rgba(26,90,138,0.12))`, border: `1px solid rgba(26,138,122,0.2)`, borderRadius: 16, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.teal }}>
+              Interactive Thought Experiments
+            </span>
+          </div>
           <SectionTitle>Thought Experiments</SectionTitle>
-          <Subtitle>Hypothetical scenarios designed to isolate philosophical questions about education, morality, and AI. Each is interactive — your choices shape the philosophical landscape. No right answers, only clearer questions.</Subtitle>
+          <Subtitle>Hypothetical scenarios designed to isolate philosophical questions about education, morality, and AI. Each is fully interactive — your choices shape the philosophical landscape, counter-arguments challenge your reasoning, and discussion guides help you bring these conversations to your school. Written for philosophical rigor. Built for engagement.</Subtitle>
         </FadeIn>
 
-        {!active&&(<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(240px, 1fr))",gap:18,marginTop:36}}>{experiments.map((e,i)=>(<FadeIn key={e.id} delay={i*0.08}><ExperimentCard icon={e.icon} title={e.title} tagline={e.tagline} color={e.color} gradientFrom={e.gf} gradientTo={e.gt} isNew={isNewExperiment(e.id)} animDelay={`${i*0.5}s`} onClick={()=>{setActive(e.id);window.scrollTo({top:300,behavior:"smooth"});}}/></FadeIn>))}</div>)}
+        {/* CARD GRID */}
+        {!active && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18, marginTop: 36 }}>
+            {experiments.map((e, i) => (
+              <FadeIn key={e.id} delay={i * 0.08}>
+                <ExperimentCard icon={e.icon} title={e.title} tagline={e.tagline} color={e.color} gradientFrom={e.gf} gradientTo={e.gt} isNew={isNewExperiment(e.id)} animDelay={`${i * 0.5}s`}
+                  onClick={() => { setActive(e.id); window.scrollTo({ top: 300, behavior: "smooth" }); }} />
+              </FadeIn>
+            ))}
+          </div>
+        )}
 
-        {active&&(<Narrow><div style={{marginTop:32}}><button onClick={()=>setActive(null)} style={{display:"flex",alignItems:"center",gap:6,marginBottom:16,background:"none",border:"none",color:C.textMuted,cursor:"pointer",fontSize:"0.84rem",padding:0,transition:"color 0.2s"}} onMouseOver={e=>e.currentTarget.style.color=C.gold} onMouseOut={e=>e.currentTarget.style.color=C.textMuted}>← Back to all experiments</button>{experiments.map(e=>active===e.id?<e.Comp key={e.id}/>:null)}</div></Narrow>)}
+        {/* ACTIVE EXPERIMENT */}
+        {active && (
+          <Narrow>
+            <div style={{ marginTop: 32 }}>
+              <button onClick={() => setActive(null)} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 16, background: "none", border: "none", color: C.textMuted, cursor: "pointer", fontSize: "0.84rem", padding: 0, transition: "color 0.2s" }}
+                onMouseOver={e => e.currentTarget.style.color = C.gold} onMouseOut={e => e.currentTarget.style.color = C.textMuted}>
+                ← Back to all experiments
+              </button>
+              {experiments.map(e => active === e.id ? <e.Comp key={e.id} /> : null)}
+            </div>
+          </Narrow>
+        )}
 
-        {!active&&(<Narrow>
-          <Divider label="The Philosophical Canon"/>
-          <FadeIn delay={0.06}><BodyText>Each thought experiment below illuminates a different dimension of the same question: <strong>can the process of learning be separated from its value?</strong></BodyText></FadeIn>
-          <FadeIn delay={0.08}><Expandable title="Nozick's Experience Machine (1974)" color={C.teal} tag="Authenticity"><p>Would you plug into a machine simulating a perfect life? Most refuse — suggesting we value authentic engagement with reality. A 2024 paper re-examined this for AI companions, finding what matters is not what people say but what they actually choose.</p><p style={{marginTop:10}}><strong>For AI in education:</strong> If AI provides simulated mastery, are we offering an educational Experience Machine?</p></Expandable></FadeIn>
-          <FadeIn delay={0.1}><Expandable title="Jackson's Mary's Room (1982)" color={C.ocean} tag="Experience"><p>Mary knows every fact about color but has never seen it. Brock & Hay (2019) applied this to classrooms: students without direct experience possess propositional but not phenomenal understanding.</p></Expandable></FadeIn>
-          <FadeIn delay={0.12}><Expandable title="Plato's Cave · Searle's Chinese Room · The Matrix" color={C.gold} tag="Liberation"><p><strong>Plato:</strong> The prisoner must walk out themselves. Waitzman (2025) developed a 4-stage AI literacy framework from this.</p><p style={{marginTop:10}}><strong>Searle:</strong> Syntax ≠ semantics. If an AI tutor manipulates symbols without understanding, can it genuinely teach?</p><p style={{marginTop:10}}><strong>The Matrix:</strong> Neo gets the download but still needs to train. The download is the beginning, not the end.</p></Expandable></FadeIn>
-          <FadeIn delay={0.14}><Expandable title="Dewey & Aristotle: Process as Value" color={C.coral} tag="Foundation"><p><strong>Dewey:</strong> Education is life itself, not preparation for it. Continuity and interaction require temporal process.</p><p style={{marginTop:10}}><strong>Aristotle:</strong> "We learn by doing them — men become builders by building." Virtue requires practice. Character cannot be downloaded.</p></Expandable></FadeIn>
-          <FadeIn delay={0.16}><Expandable title="The Convergence" color={C.gold} tag="Synthesis" defaultOpen><p style={{padding:"14px 18px",background:`linear-gradient(135deg,rgba(200,152,48,0.08),rgba(26,138,122,0.06))`,borderRadius:12,border:`1px solid rgba(200,152,48,0.15)`,fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.02rem",lineHeight:1.7}}><strong>The process of learning is constitutive of its value, not merely instrumental to it.</strong></p><p style={{marginTop:14}}>Eight thinkers across 2,400 years arrived at compatible conclusions. The convergence suggests this insight is not culturally contingent but reflects something deep about knowledge, learning, and human development.</p></Expandable></FadeIn>
-        </Narrow>)}
+        {/* PHILOSOPHICAL CANON */}
+        {!active && (
+          <Narrow>
+            <Divider label="The Philosophical Canon" />
+            <FadeIn delay={0.06}><BodyText>The four interactive experiments above are original scenarios. But they draw on a rich tradition of philosophical thought experiments — each illuminating a different dimension of the same question: <strong>can the process of learning be separated from its value?</strong></BodyText></FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="Nozick's Experience Machine (1974)" color={C.teal} tag="Authenticity">
+                <p>Would you plug into a machine simulating a perfect life? Most refuse — suggesting we value <strong>authentic engagement with reality</strong> beyond subjective experience. <PhiloRef text="A 2024 paper" url="https://annalsphilosophy-ub.org/2024/10/re-examining-nozicks-experience-machine-in-view-of-emerging-ai-companions/" /> re-examined this for AI companions, finding what matters is not what people <em>say</em> they'd choose but what they actually choose. <PhiloRef text="Hindriks & Douven (2019)" /> showed the less invasive the intervention, the more willing people are to accept — and <PhiloRef text="De Brigard (2010)" /> demonstrated responses are confounded by status quo bias.</p>
+                <p style={{ marginTop: 10 }}><strong>For AI in education:</strong> If AI provides simulated mastery experiences — the student <em>feels</em> they understand but hasn't struggled — are we offering an educational Experience Machine?</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <Expandable title="Jackson's Mary's Room (1982)" color={C.ocean} tag="Experience">
+                <p>Mary knows every physical fact about color but has never seen it. When she sees red, she learns something new — proving phenomenal experience delivers knowledge that propositional information cannot. <PhiloRef text="Brock & Hay (2019)" url="https://link.springer.com/article/10.1007/s11191-019-00060-2" /> applied this directly to science education in <em>Science & Education</em>, arguing students without direct experience possess "Mary's knowledge" — complete in theory, incomplete in understanding.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.12}>
+              <Expandable title="Plato's Cave · Searle's Chinese Room · The Matrix" color={C.gold} tag="Process">
+                <p><strong><PhiloRef text="Plato" url="https://en.wikipedia.org/wiki/Allegory_of_the_cave" /> (c. 380 BCE):</strong> The prisoner must walk out of the cave themselves. <PhiloRef text="Waitzman (2025)" url="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5707094" /> developed a four-stage AI literacy framework from this: Exposure → Interrogation → Comparison → Reflection.</p>
+                <p style={{ marginTop: 10 }}><strong><PhiloRef text="Searle (1980)" url="https://plato.stanford.edu/entries/chinese-room/" />:</strong> Syntax without semantics is not understanding. A <PhiloRef text="January 2025 paper in Inquiry" url="https://www.tandfonline.com/doi/full/10.1080/0020174X.2024.2446241" /> challenged this, arguing LLM outputs should be viewed as "genuinely meaningful" even without original intentionality.</p>
+                <p style={{ marginTop: 10 }}><strong>The Matrix (1999):</strong> Neo gets kung fu downloaded — but still needs to spar with Morpheus. The <PhiloRef text="British Educational Research Association" url="https://www.bera.ac.uk/blog/i-know-kung-fu-rethinking-education-in-the-metaverse" /> used this to argue education's value lies in transformation, not transfer.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.14}>
+              <Expandable title="Dewey & Aristotle: Process as Value" color={C.coral} tag="Foundation">
+                <p><strong><PhiloRef text="Dewey" url="https://en.wikipedia.org/wiki/Experience_and_Education_(book)" /> (1938):</strong> Education is life itself, not preparation for it. His principles of continuity and interaction require temporal process that cannot be compressed. <PhiloRef text="Lemire (2025)" url="https://lemire.me/blog/" /> reinforces this: practice and understanding are intertwined, not sequential.</p>
+                <p style={{ marginTop: 10 }}><strong><PhiloRef text="Aristotle" url="https://iep.utm.edu/aristotle-ethics/" /> (c. 340 BCE):</strong> "For the things we have to learn before we can do them, we learn by doing them — men become builders by building and lyre players by playing the lyre" (<em>NE</em> II, 1103a). Virtue requires habituation through practice. As <PhiloRef text="Shannon Vallor" url="https://www.shannonvallor.net/books.html" /> argues in <em>The AI Mirror</em> (2024), AI lacks Aristotelian <em>phrónēsis</em> — practical wisdom that can only develop through lived experience.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.16}>
+              <Expandable title="The Convergence" color={C.gold} tag="Synthesis" defaultOpen>
+                <p style={{ padding: "16px 20px", background: `linear-gradient(135deg, rgba(200,152,48,0.08), rgba(26,138,122,0.06))`, borderRadius: 12, border: `1px solid rgba(200,152,48,0.15)`, fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.02rem", lineHeight: 1.7 }}>
+                  <strong>The process of learning is constitutive of its value, not merely instrumental to it.</strong>
+                </p>
+                <p style={{ marginTop: 14 }}>Eight thinkers across 2,400 years — Plato, Aristotle, Dewey, Nozick, Jackson, Searle, Huxley, Lemire — working independently across vastly different traditions, arrived at compatible conclusions. The convergence suggests this insight reflects something deep about the nature of knowledge, learning, and human development. The debate about AI in education is not about whether AI is useful (it demonstrably is). It's about whether the efficiency gains it offers are worth the developmental losses it risks.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.18}>
+              <Expandable title="Why Thought Experiments Matter for AI Policy" color={C.teal}>
+                <p>Thought experiments <strong>force explicit engagement with values</strong>. When a school leader says "we uphold the highest ethical standards," thought experiments reveal what that commitment actually entails by presenting concrete scenarios where values compete. They are not abstract philosophical exercises — they are the most powerful tool available for moving AI policy discussions from vague aspiration to principled decision-making.</p>
+                <p style={{ marginTop: 12 }}>As Matthew argues in <PhiloRef text="'From Ambiguity to Action'" url="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" />, creating thought experiments based on your specific school context is one of the most powerful steps toward developing AI policies that are genuinely meaningful. The four interactive experiments above can be used directly in professional development — each includes a discussion guide designed for school-level conversations.</p>
+              </Expandable>
+            </FadeIn>
+          </Narrow>
+        )}
       </PageContainer>
     </div>
   );
