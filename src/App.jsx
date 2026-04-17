@@ -7,6 +7,7 @@ import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
+import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 
 const PAGE_MAP = {
@@ -15,6 +16,7 @@ const PAGE_MAP = {
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
   "ai-education": AIEducation,
+  "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "resources": Resources,
 };
