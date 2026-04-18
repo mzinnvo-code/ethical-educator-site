@@ -1,7 +1,7 @@
 import { C } from "../theme.js";
-import { FadeIn, Expandable, SectionLabel, SectionTitle, Narrow, PageContainer, RefItem } from "../components/shared.jsx";
+import { FadeIn, Expandable, SectionLabel, SectionTitle, Narrow, PageContainer, RefItem, ContinueExploring } from "../components/shared.jsx";
 
-export default function Resources() {
+export default function Resources({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
@@ -164,6 +164,12 @@ export default function Resources() {
               <p style={{ marginTop: 8 }}><strong>The Ethical Educator Blog</strong> (<a href="https://ethicalaiedu.wordpress.com" target="_blank" rel="noopener noreferrer">ethicalaiedu.wordpress.com</a>) — Matthew's blog exploring ethics, philosophy, and AI in education.</p>
             </Expandable>
           </FadeIn>
+
+          <ContinueExploring navigate={navigate} links={[
+            { id: "moral-psych", icon: "🧠", title: "Moral Psychology", desc: "The thesis research with 2023–2026 updates", color: C.teal },
+            { id: "thought-experiments", icon: "💡", title: "Thought Experiments", desc: "Interactive scenarios for AI ethics", color: C.gold },
+            { id: "phil-education", icon: "🏛️", title: "Philosophy in K–12", desc: "Curriculum proposal with research evidence", color: C.coral },
+          ]} />
         </Narrow>
       </PageContainer>
     </div>

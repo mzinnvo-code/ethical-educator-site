@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import {
   FadeIn, Expandable, VideoEmbed, useAudio, SectionLabel, SectionTitle, Subtitle,
   Narrow, PageContainer, BodyText, RefItem, ResearchCallout, QuoteBlock, StatCounter,
-  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading
+  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring
 } from "../components/shared.jsx";
 
 // ─── Interactive Trolley Experiment ───
@@ -382,6 +382,12 @@ export default function MoralPsychology({ navigate }) {
               <RefItem>Voelkel, J.G. et al. "Megastudy testing 25 treatments to reduce anti-democratic attitudes." Science 386, 290 (2024).</RefItem>
             </Expandable>
           </FadeIn>
+
+          <ContinueExploring navigate={navigate} links={[
+            { id: "ai-ethics", icon: "⚖️", title: "AI Ethics in Education", desc: "From is/ought to policy frameworks", color: C.gold },
+            { id: "thought-experiments", icon: "💡", title: "Thought Experiments", desc: "Test your moral intuitions interactively", color: C.teal },
+            { id: "phil-education", icon: "🏛️", title: "Philosophy in K–12", desc: "Research evidence for teaching philosophy", color: C.coral },
+          ]} />
         </Narrow>
       </PageContainer>
     </div>
