@@ -7,6 +7,7 @@ import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
+import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 
 const PAGE_MAP = {
@@ -15,6 +16,7 @@ const PAGE_MAP = {
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
   "ai-education": AIEducation,
+  "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "resources": Resources,
 };
@@ -112,13 +114,35 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ padding: "48px 24px", background: C.midnight, borderTop: `1px solid ${C.border}`, textAlign: "center" }}>
-        <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1rem", marginBottom: 10 }}>Let's Continue the Conversation</p>
-        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 24 }}>
-          <a href="https://ethicalaiedu.wordpress.com" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 24px", background: C.teal, borderRadius: 8, color: "#fff", fontWeight: 600, fontSize: "0.85rem" }}>Read the Blog</a>
-          <a href="https://innovateedai.com" target="_blank" rel="noopener noreferrer" style={{ padding: "10px 24px", border: `1px solid ${C.borderHover}`, borderRadius: 8, color: C.gold, fontSize: "0.85rem" }}>AI in Education Resource</a>
+      <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 28, marginBottom: 32 }}>
+            <div>
+              <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Explore</p>
+              {PAGES.filter(p => p.id !== "home").map(p => (
+                <a key={p.id} href={`#${p.id}`} onClick={e => { e.preventDefault(); navigate(p.id); }} style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0", transition: "color 0.2s" }}
+                  onMouseOver={e => e.currentTarget.style.color = C.gold} onMouseOut={e => e.currentTarget.style.color = C.textMuted}>{p.label}</a>
+              ))}
+            </div>
+            <div>
+              <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Writing</p>
+              <a href="https://ethicalaiedu.wordpress.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>The Ethical Educator Blog</a>
+              <a href="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>From Ambiguity to Action</a>
+              <a href="https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>The Paradox of AI in Education</a>
+              <a href="https://innovateedai.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>InnovateEdAI Presentation</a>
+            </div>
+            <div>
+              <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Key Resources</p>
+              <a href="https://www.plato-philosophy.org/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>PLATO</a>
+              <a href="https://ai4k12.org/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>AI4K12</a>
+              <a href="https://philosophy.mit.edu/ethicsandai/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>MIT Ethics & AI</a>
+              <a href="https://raise.mit.edu/day-of-ai/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>MIT Day of AI</a>
+            </div>
+          </div>
+          <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, textAlign: "center" }}>
+            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>
+          </div>
         </div>
-        <p style={{ color: C.textMuted, fontSize: "0.75rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>
       </footer>
     </>
   );

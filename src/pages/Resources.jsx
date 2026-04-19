@@ -1,7 +1,7 @@
 import { C } from "../theme.js";
-import { FadeIn, Expandable, SectionLabel, SectionTitle, Narrow, PageContainer, RefItem } from "../components/shared.jsx";
+import { FadeIn, Expandable, SectionLabel, SectionTitle, Narrow, PageContainer, RefItem, ContinueExploring } from "../components/shared.jsx";
 
-export default function Resources() {
+export default function Resources({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
@@ -23,7 +23,7 @@ export default function Resources() {
                 { title: "The Ethics of Artificial Intelligence", author: "Luciano Floridi (2023)", desc: "Frames AI as a new form of agency, not intelligence. Education cultivates human agency — AI cannot replace it." },
                 { title: "AI Ethics", author: "Mark Coeckelbergh (2020)", desc: "Accessible introduction to AI ethics covering bias, responsibility, and governance. MIT Press Essential Knowledge series." },
                 { title: "Why AI Undermines Democracy", author: "Mark Coeckelbergh (2024)", desc: "Addresses power and governance dimensions of AI in democratic societies. Relevant to educational governance debates." },
-                { title: "Experience and Education", author: "John Dewey (1938)", desc: "Foundational work arguing education is life itself, not preparation for it. Essential context for the Learning Pill." },
+                { title: "Experience and Education", author: "John Dewey (1938)", desc: "Foundational work arguing education is life itself, not preparation for it. Essential context for The Shortcut thought experiment." },
                 { title: "Democracy and Education", author: "John Dewey (1916)", desc: "The comprehensive vision: education as a social process, growth as the aim, learning through active engagement." },
                 { title: "Anarchy, State, and Utopia", author: "Robert Nozick (1974)", desc: "Contains the Experience Machine thought experiment — would you plug into a machine simulating a perfect life?" },
                 { title: "Nicomachean Ethics", author: "Aristotle (c. 340 BCE)", desc: "Book II on habituation and virtue. 'We learn by doing them — men become builders by building and lyre players by playing the lyre.'" },
@@ -164,6 +164,12 @@ export default function Resources() {
               <p style={{ marginTop: 8 }}><strong>The Ethical Educator Blog</strong> (<a href="https://ethicalaiedu.wordpress.com" target="_blank" rel="noopener noreferrer">ethicalaiedu.wordpress.com</a>) — Matthew's blog exploring ethics, philosophy, and AI in education.</p>
             </Expandable>
           </FadeIn>
+
+          <ContinueExploring navigate={navigate} links={[
+            { id: "moral-psych", icon: "🧠", title: "Moral Psychology", desc: "The thesis research with 2023–2026 updates", color: C.teal },
+            { id: "thought-experiments", icon: "💡", title: "Thought Experiments", desc: "Interactive scenarios for AI ethics", color: C.gold },
+            { id: "phil-education", icon: "🏛️", title: "Philosophy in K–12", desc: "Curriculum proposal with research evidence", color: C.coral },
+          ]} />
         </Narrow>
       </PageContainer>
     </div>
