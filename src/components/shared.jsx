@@ -298,34 +298,3 @@ export function NewBadge() {
     }}>NEW</span>
   );
 }
-
-export function ContinueExploring({ links, navigate }) {
-  return (
-    <div style={{ marginTop: 48, paddingTop: 32, borderTop: `1px solid ${C.border}` }}>
-      <p style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: C.gold, marginBottom: 14, textAlign: "center" }}>Continue Exploring</p>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
-        {links.map((link, i) => {
-          const [hover, setHover] = useState(false);
-          return (
-            <div key={i} onClick={() => navigate(link.id)}
-              onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
-              style={{
-                background: hover ? `${link.color}0c` : C.surface,
-                border: `1px solid ${hover ? link.color + "30" : C.border}`,
-                borderRadius: 12, padding: "14px 16px", cursor: "pointer",
-                transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
-              }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: "1rem" }}>{link.icon}</span>
-                <div>
-                  <p style={{ color: C.textPrimary, fontSize: "0.85rem", fontWeight: 600 }}>{link.title}</p>
-                  <p style={{ color: C.textMuted, fontSize: "0.72rem", marginTop: 2 }}>{link.desc}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}

@@ -30,18 +30,17 @@ export const PAGES = [
   { id: "moral-psych", label: "Moral Psychology" },
   { id: "ai-ethics", label: "AI & Ethics" },
   { id: "ai-education", label: "AI in Education" },
-  { id: "phil-education", label: "Philosophy in K–12" },
   { id: "thought-experiments", label: "Thought Experiments" },
   { id: "resources", label: "Resources" },
 ];
 
-// Date each thought experiment was added — used for "NEW" badge calculation
+// Date the Learning Pill was added — used for "NEW" badge calculation
 export const THOUGHT_EXPERIMENT_DATES = {
-  "the-shortcut": new Date("2026-04-15"),
+  "learning-pill": new Date("2026-04-15"),
   "trolley-problem": new Date("2026-03-01"),
-  "ai-authorship": new Date("2026-04-15"),
-  "reluctant-educator": new Date("2026-04-15"),
-  "digital-doppelganger": new Date("2026-04-15"),
+  "ai-authorship": new Date("2024-02-14"),
+  "reluctant-educator": new Date("2024-07-12"),
+  "digital-doppelganger": new Date("2024-07-12"),
 };
 
 export function isNewExperiment(id) {
