@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
-import { NewBadge } from "./components/shared.jsx";
+import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import MoralPsychology from "./pages/MoralPsychology.jsx";
@@ -9,6 +9,25 @@ import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
+
+function NotFound({ navigate }) {
+  return (
+    <div style={{ padding: "80px 0 120px", background: C.bg, minHeight: "60vh" }}>
+      <PageContainer>
+        <Narrow>
+          <SectionLabel>404</SectionLabel>
+          <SectionTitle>Page Not Found</SectionTitle>
+          <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, marginBottom: 28, maxWidth: 480 }}>
+            The page you're looking for doesn't exist or has moved.
+          </p>
+          <button onClick={() => navigate("home")} style={{ padding: "12px 28px", background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", fontWeight: 600, cursor: "pointer", fontSize: "0.92rem", boxShadow: `0 4px 20px rgba(26,138,122,0.25)` }}>
+            Return Home
+          </button>
+        </Narrow>
+      </PageContainer>
+    </div>
+  );
+}
 
 const PAGE_MAP = {
   "home": Home,
@@ -67,10 +86,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Handle browser back/forward
+  // Handle browser back/forward and direct URL entry
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
-    if (hash && PAGE_MAP[hash]) setCurrentPage(hash);
+    if (hash) setCurrentPage(hash); // set even for unknown pages so NotFound renders
   }, []);
 
   useEffect(() => {
@@ -79,6 +98,17 @@ export default function App() {
 
   // Dynamic title, meta description, and Article schema per page
   useEffect(() => {
+    const isNotFoundPage = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
+
+    // Always remove stale article schema first
+    const existing = document.getElementById("article-schema");
+    if (existing) existing.remove();
+
+    if (isNotFoundPage) {
+      document.title = "Page Not Found — The Ethical Educator";
+      return;
+    }
+
     const meta = PAGE_META[currentPage] || PAGE_META["home"];
 
     // Title
@@ -94,9 +124,6 @@ export default function App() {
     descEl.setAttribute("content", meta.description);
 
     // Article schema for content pages (not home)
-    const existing = document.getElementById("article-schema");
-    if (existing) existing.remove();
-
     if (currentPage !== "home") {
       const script = document.createElement("script");
       script.type = "application/ld+json";
@@ -121,12 +148,12 @@ export default function App() {
     }
   }, [currentPage]);
 
-  const PageComponent = PAGE_MAP[currentPage] || Home;
+  const isNotFound = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
+  const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || Home);
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
         :root{--motion-duration:0.3s}
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
@@ -197,7 +224,9 @@ export default function App() {
 
       {/* PAGE CONTENT */}
       <main style={{ paddingTop: 56 }} className="page-enter" key={currentPage}>
-        <PageComponent navigate={navigate} />
+        {isNotFound
+          ? <NotFound navigate={navigate} />
+          : <PageComponent navigate={navigate} />}
       </main>
 
       {/* FOOTER */}

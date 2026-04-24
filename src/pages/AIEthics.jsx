@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import {
   FadeIn, Expandable, TopicCard, useAudio, SectionLabel, SectionTitle, Subtitle,
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
-  Timeline, ComparisonCard, Divider
+  Timeline, ComparisonCard, Divider, ReadingTime
 } from "../components/shared.jsx";
 
 function EthicsQuiz() {
@@ -74,6 +74,7 @@ export default function AIEthics({ navigate }) {
           <SectionLabel>Policy · Philosophy · Evidence</SectionLabel>
           <SectionTitle>AI Ethics in Education</SectionTitle>
           <Subtitle>Moving from vague ethical aspirations to actionable philosophical frameworks. The landscape has shifted dramatically since 2024 — with UNESCO's first global competency framework, the EU AI Act classifying education as high-risk, NYC's traffic-light policy, and mounting evidence that both automation and detection tools have significant limits.</Subtitle>
+          <ReadingTime minutes={12} />
         </FadeIn>
 
         {/* Key stats */}

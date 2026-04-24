@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import {
   FadeIn, Expandable, VideoEmbed, useAudio, SectionLabel, SectionTitle, Subtitle,
   Narrow, PageContainer, BodyText, RefItem, ResearchCallout, QuoteBlock, StatCounter,
-  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring
+  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring, ReadingTime
 } from "../components/shared.jsx";
 
 // ─── Interactive Trolley Experiment ───
@@ -82,6 +82,7 @@ export default function MoralPsychology({ navigate }) {
           <SectionLabel>Thesis Research · Updated with 2023–2026 Developments</SectionLabel>
           <SectionTitle>Moral Psychology & Normative Ethics</SectionTitle>
           <Subtitle>Can neuroscience tell us what's morally right? My thesis on Joshua Greene's dual-process theory and F.M. Kamm's objections — now expanded with the BBS exchange, Bammel's modularity critique, the Cosmides compromise-judgments challenge, the 2024 meta-analysis, and the new frontier where moral psychology meets AI alignment.</Subtitle>
+          <ReadingTime minutes={18} />
         </FadeIn>
 
         <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><TrolleyExperiment /></FadeIn></div>

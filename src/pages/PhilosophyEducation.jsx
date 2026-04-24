@@ -2,7 +2,7 @@ import { useState } from "react";
 import { C } from "../theme.js";
 import {
   FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle, Narrow, PageContainer,
-  BodyText, ResearchCallout, QuoteBlock, StatCounter, ComparisonCard, Divider, FigureCard, RefItem
+  BodyText, ResearchCallout, QuoteBlock, StatCounter, ComparisonCard, Divider, FigureCard, RefItem, ReadingTime
 } from "../components/shared.jsx";
 
 // ─── Interactive Schedule Viewer ───
@@ -172,6 +172,7 @@ export default function PhilosophyEducation({ navigate }) {
           <SectionLabel>Research · Proposal · Curriculum</SectionLabel>
           <SectionTitle>Philosophy in K–12 Education</SectionTitle>
           <Subtitle>Philosophy is not an abstract luxury — it is a survival skill for the modern world. The research evidence is clear: teaching philosophical thinking in K–12 produces measurable gains in academic performance, critical reasoning, social-emotional development, and long-term life outcomes. In the age of AI, these skills are more urgent than ever.</Subtitle>
+          <ReadingTime minutes={18} />
         </FadeIn>
 
         {/* ─── KEY STATS ─── */}

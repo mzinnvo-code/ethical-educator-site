@@ -267,6 +267,14 @@ export function SectionLabel({ children }) {
 export function SectionTitle({ children }) {
   return <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "clamp(1.7rem, 4vw, 2.5rem)", color: C.textPrimary, fontWeight: 700, lineHeight: 1.2, marginBottom: 16 }}>{children}</h2>;
 }
+export function ReadingTime({ minutes, label }) {
+  const displayText = label || `${minutes} min read`;
+  return (
+    <span aria-label={`${minutes} minute read`} style={{ display: "inline-block", color: C.textMuted, fontSize: "0.75rem", letterSpacing: "0.05em", marginBottom: 20 }}>
+      <span aria-hidden="true">⏱</span>{" "}{displayText}
+    </span>
+  );
+}
 export function Subtitle({ children }) {
   return <p style={{ color: C.textMuted, fontSize: "1.02rem", lineHeight: 1.7, maxWidth: 640 }}>{children}</p>;
 }

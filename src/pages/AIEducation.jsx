@@ -2,7 +2,7 @@ import { C } from "../theme.js";
 import {
   FadeIn, Expandable, TopicCard, VideoEmbed, SectionLabel, SectionTitle, Subtitle,
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
-  FigureCard, Divider, ComparisonCard
+  FigureCard, Divider, ComparisonCard, ReadingTime
 } from "../components/shared.jsx";
 
 export default function AIEducation({ navigate }) {
@@ -13,6 +13,7 @@ export default function AIEducation({ navigate }) {
           <SectionLabel>Practical Applications · Evidence · Voices</SectionLabel>
           <SectionTitle>AI in the Classroom</SectionTitle>
           <Subtitle>From personalized learning and IEP support to custom GPTs and lesson review tools — how AI is actually being used right now, what the evidence says works, and the voices shaping the discourse. Grounded in philosophy, connected to real classrooms.</Subtitle>
+          <ReadingTime minutes={10} />
         </FadeIn>
 
         <div className="grid-3" style={{ marginTop: 32 }}>
