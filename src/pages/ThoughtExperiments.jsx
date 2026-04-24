@@ -2,6 +2,7 @@ import { useState } from "react";
 import { C, isNewExperiment } from "../theme.js";
 import { FadeIn, Expandable, SectionTitle, Subtitle, Narrow, PageContainer, NewBadge, BodyText, Divider } from "../components/shared.jsx";
 import { PhiloRef } from "../experiments/ExperimentShared.jsx";
+import { ConvergenceDiagram } from "../components/diagrams.jsx";
 import TheShortcutExperiment from "../experiments/TheShortcut.jsx";
 import AuthorshipExperiment from "../experiments/Authorship.jsx";
 import ReluctantEducatorExperiment from "../experiments/ReluctantEducator.jsx";
@@ -116,6 +117,8 @@ export default function ThoughtExperiments({ navigate }) {
                 <p style={{ marginTop: 10 }}><strong><PhiloRef text="Aristotle" url="https://iep.utm.edu/aristotle-ethics/" /> (c. 340 BCE):</strong> "For the things we have to learn before we can do them, we learn by doing them — men become builders by building and lyre players by playing the lyre" (<em>NE</em> II, 1103a). Virtue requires habituation through practice. As <PhiloRef text="Shannon Vallor" url="https://www.shannonvallor.net/books.html" /> argues in <em>The AI Mirror</em> (2024), AI lacks Aristotelian <em>phrónēsis</em> — practical wisdom that can only develop through lived experience.</p>
               </Expandable>
             </FadeIn>
+
+            <FadeIn delay={0.14}><ConvergenceDiagram /></FadeIn>
 
             <FadeIn delay={0.16}>
               <Expandable title="The Convergence" color={C.gold} tag="Synthesis" defaultOpen>

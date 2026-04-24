@@ -91,9 +91,11 @@ export function Expandable({ title, children, color = C.gold, defaultOpen = fals
         </span>
         <span style={{ transform: open ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s", color, flexShrink: 0 }}>▾</span>
       </button>
-      <div style={{ maxHeight: open ? 50000 : 0, overflow: "hidden", transition: "max-height 0.6s ease" }}>
-        <div style={{ padding: "0 22px 18px", color: C.textSecondary, lineHeight: 1.78, fontSize: "0.93rem" }}>
-          {children}
+      <div style={{ display: "grid", gridTemplateRows: open ? "1fr" : "0fr", transition: "grid-template-rows 0.38s ease" }}>
+        <div style={{ overflow: "hidden" }}>
+          <div style={{ padding: "0 22px 18px", color: C.textSecondary, lineHeight: 1.78, fontSize: "0.93rem" }}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

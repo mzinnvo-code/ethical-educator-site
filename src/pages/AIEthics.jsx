@@ -5,6 +5,7 @@ import {
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
   Timeline, ComparisonCard, Divider, ReadingTime
 } from "../components/shared.jsx";
+import { PolicyTimelineDiagram } from "../components/diagrams.jsx";
 
 function EthicsQuiz() {
   const [current, setCurrent] = useState(0);
@@ -137,6 +138,8 @@ export default function AIEthics({ navigate }) {
             </FadeIn>
 
             <Divider label="Global Policy Frameworks (2024–2026)" />
+
+            <FadeIn delay={0.04}><PolicyTimelineDiagram /></FadeIn>
 
             <FadeIn delay={0.06}>
               <Expandable title="UNESCO's 2024–2025 Frameworks Crystallize" color={C.teal} tag="Global Standard">

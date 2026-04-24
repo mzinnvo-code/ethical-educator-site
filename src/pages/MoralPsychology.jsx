@@ -5,6 +5,7 @@ import {
   Narrow, PageContainer, BodyText, RefItem, ResearchCallout, QuoteBlock, StatCounter,
   Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring, ReadingTime
 } from "../components/shared.jsx";
+import { DualProcessDiagram } from "../components/diagrams.jsx";
 
 // ─── Interactive Trolley Experiment ───
 function TrolleyExperiment() {
@@ -85,7 +86,9 @@ export default function MoralPsychology({ navigate }) {
           <ReadingTime minutes={18} />
         </FadeIn>
 
-        <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><TrolleyExperiment /></FadeIn></div>
+        <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><DualProcessDiagram /></FadeIn></div>
+
+        <div style={{ marginTop: 8 }}><FadeIn delay={0.1}><TrolleyExperiment /></FadeIn></div>
 
         <Narrow>
           {/* ─── SYNTHESIZED OVERVIEW ─── */}
