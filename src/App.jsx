@@ -9,6 +9,8 @@ import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
+import Privacy from "./pages/Privacy.jsx";
+import Accessibility from "./pages/Accessibility.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -38,6 +40,8 @@ const PAGE_MAP = {
   "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "resources": Resources,
+  "privacy": Privacy,
+  "accessibility": Accessibility,
 };
 
 const PAGE_META = {
@@ -72,6 +76,14 @@ const PAGE_META = {
   "resources": {
     title: "Research Resources & Reading List — The Ethical Educator",
     description: "Curated books, academic papers, policy documents, organizations, and podcasts on moral psychology, AI ethics, and philosophy of education.",
+  },
+  "privacy": {
+    title: "Privacy Policy — The Ethical Educator",
+    description: "This site collects no personal data, sets no cookies, and embeds no third-party tracking. Interactive thought experiment responses stay in browser memory only.",
+  },
+  "accessibility": {
+    title: "Accessibility Statement — The Ethical Educator",
+    description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to matthew@theethicaleducator.com.",
   },
 };
 
@@ -256,6 +268,17 @@ export default function App() {
             </div>
           </div>
           <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, textAlign: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 10, flexWrap: "wrap" }}>
+              {[
+                { label: "Privacy Policy", id: "privacy" },
+                { label: "Accessibility", id: "accessibility" },
+                { label: "Contact", href: "mailto:matthew@theethicaleducator.com" },
+              ].map(link => (
+                link.href
+                  ? <a key={link.label} href={link.href} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
+                  : <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
+              ))}
+            </div>
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>
           </div>
         </div>
