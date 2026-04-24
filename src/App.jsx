@@ -21,6 +21,41 @@ const PAGE_MAP = {
   "resources": Resources,
 };
 
+const PAGE_META = {
+  "home": {
+    title: "The Ethical Educator — Matthew A. Zinn",
+    description: "Where moral philosophy meets the age of AI. Research, interactive thought experiments, and philosophical frameworks for navigating the most consequential questions of our time.",
+  },
+  "about": {
+    title: "About Matthew A. Zinn — The Ethical Educator",
+    description: "Philosopher, educator, and researcher at the intersection of moral psychology, AI ethics, and educational technology. MA Ethics & Applied Philosophy, UNC Charlotte.",
+  },
+  "moral-psych": {
+    title: "Moral Psychology & AI Alignment — The Ethical Educator",
+    description: "Joshua Greene's dual-process theory, F.M. Kamm's objections, the 2024 meta-analysis, and how moral psychology illuminates the AI alignment problem.",
+  },
+  "ai-ethics": {
+    title: "AI Ethics in Education — The Ethical Educator",
+    description: "The is/ought problem, UNESCO frameworks, the EU AI Act, NYC's traffic-light policy, and actionable ethical frameworks for educators navigating AI.",
+  },
+  "ai-education": {
+    title: "AI in the Classroom: Evidence and Ethics — The Ethical Educator",
+    description: "What the research says about AI tutors, personalization, and learning outcomes. Key voices from Mollick to Luckin, with the neuroscience of AI-assisted learning.",
+  },
+  "phil-education": {
+    title: "Philosophy in K–12 Education — The Ethical Educator",
+    description: "Why teaching philosophy correlates with student success. Research evidence, a full K–12 curriculum proposal, and interactive weekly schedules for the AI era.",
+  },
+  "thought-experiments": {
+    title: "Interactive Thought Experiments — The Ethical Educator",
+    description: "Four original scenarios exploring AI, education, and ethics. The Shortcut, The AI Authorship Quandary, The Reluctant Educator, and The Digital Doppelgänger.",
+  },
+  "resources": {
+    title: "Research Resources & Reading List — The Ethical Educator",
+    description: "Curated books, academic papers, policy documents, organizations, and podcasts on moral psychology, AI ethics, and philosophy of education.",
+  },
+};
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,6 +75,50 @@ export default function App() {
 
   useEffect(() => {
     window.location.hash = currentPage;
+  }, [currentPage]);
+
+  // Dynamic title, meta description, and Article schema per page
+  useEffect(() => {
+    const meta = PAGE_META[currentPage] || PAGE_META["home"];
+
+    // Title
+    document.title = meta.title;
+
+    // Meta description
+    let descEl = document.querySelector('meta[name="description"]');
+    if (!descEl) {
+      descEl = document.createElement("meta");
+      descEl.setAttribute("name", "description");
+      document.head.appendChild(descEl);
+    }
+    descEl.setAttribute("content", meta.description);
+
+    // Article schema for content pages (not home)
+    const existing = document.getElementById("article-schema");
+    if (existing) existing.remove();
+
+    if (currentPage !== "home") {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "article-schema";
+      script.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": meta.title,
+        "author": {
+          "@type": "Person",
+          "name": "Matthew A. Zinn",
+          "url": "https://theethicaleducator.com",
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Matthew A. Zinn",
+        },
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-04-24",
+      });
+      document.head.appendChild(script);
+    }
   }, [currentPage]);
 
   const PageComponent = PAGE_MAP[currentPage] || Home;
