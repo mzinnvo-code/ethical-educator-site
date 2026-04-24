@@ -65,22 +65,28 @@ export default function DoppelgangerExperiment() {
         <p style={{ color: C.textMuted, fontSize: "0.82rem", marginBottom: 6, fontStyle: "italic" }}>Discussion prompt: "What does Gregor Samsa's transformation reveal about the relationship between identity and the body?"</p>
 
         {responses.map((r, i) => (
-          <div key={i} style={{
-            background: guess === i ? (i === AI_IDX ? `${C.coral}12` : `${C.teal}10`) : C.surface,
-            border: `1px solid ${guess === i ? (i === AI_IDX ? C.coral : C.teal) : C.border}`,
-            borderRadius: 12, padding: "14px 18px", marginBottom: 10,
-            cursor: guess === null ? "pointer" : "default", transition: "all 0.3s",
-            opacity: guess !== null && guess !== i ? 0.45 : 1,
-          }} onClick={() => { if (guess === null) { setGuess(i); audio.playClick(); } }}
+          <button key={i}
+            onClick={() => { if (guess === null) { setGuess(i); audio.playClick(); } }}
             onMouseOver={e => { if (guess === null) { e.currentTarget.style.borderColor = C.gold + "50"; e.currentTarget.style.transform = "translateX(3px)"; } }}
-            onMouseOut={e => { if (guess === null) { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.transform = "none"; } }}>
+            onMouseOut={e => { if (guess === null) { e.currentTarget.style.borderColor = guess === i ? (i === AI_IDX ? C.coral : C.teal) : C.border; e.currentTarget.style.transform = "none"; } }}
+            disabled={guess !== null}
+            aria-label={`Select ${r.name}'s response as the AI-written one`}
+            style={{
+              display: "block", width: "100%", textAlign: "left",
+              background: guess === i ? (i === AI_IDX ? `${C.coral}12` : `${C.teal}10`) : C.surface,
+              border: `1px solid ${guess === i ? (i === AI_IDX ? C.coral : C.teal) : C.border}`,
+              borderRadius: 12, padding: "14px 18px", marginBottom: 10,
+              cursor: guess === null ? "pointer" : "default", transition: "all 0.3s",
+              opacity: guess !== null && guess !== i ? 0.45 : 1,
+              font: "inherit",
+            }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-              <span style={{ fontSize: "1.1rem" }}>{r.av}</span>
+              <span style={{ fontSize: "1.1rem" }} aria-hidden="true">{r.av}</span>
               <strong style={{ color: C.textPrimary, fontSize: "0.9rem" }}>{r.name}</strong>
               {guess === i && <span style={{ fontSize: "0.68rem", padding: "2px 10px", borderRadius: 4, background: i === AI_IDX ? C.coral : `${C.teal}30`, color: i === AI_IDX ? "#fff" : C.teal, fontWeight: 700, marginLeft: 4 }}>{i === AI_IDX ? "✓ AI AGENT" : "✗ HUMAN"}</span>}
             </div>
             <p style={{ color: C.textSecondary, fontSize: "0.9rem", lineHeight: 1.7 }}>{r.text}</p>
-          </div>
+          </button>
         ))}
         {guess === null && <p style={{ textAlign: "center", color: C.gold, fontSize: "0.84rem", marginTop: 8 }}>Click the response you believe was written by the AI agent ↑</p>}
 

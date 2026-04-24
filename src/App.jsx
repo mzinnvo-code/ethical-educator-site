@@ -48,6 +48,7 @@ export default function App() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+        :root{--motion-duration:0.3s}
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
         body{font-family:'DM Sans',sans-serif;background:${C.bg};color:${C.textSecondary};overflow-x:hidden}
@@ -77,6 +78,13 @@ export default function App() {
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}
         @media(max-width:900px){.topbar-nav{display:none}.hamburger{display:block}}
         @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr !important}}
+        @media(prefers-reduced-motion:reduce){
+          :root{--motion-duration:0.01ms}
+          *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
+          .page-enter{animation:none}
+          html{scroll-behavior:auto}
+          @keyframes newPulse{0%,100%{opacity:1}50%{opacity:1}}
+        }
       `}</style>
       <div className="grain" />
 

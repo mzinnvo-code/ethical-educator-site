@@ -109,7 +109,7 @@ export function VideoEmbed({ id, title }) {
   );
 }
 
-export function TopicCard({ icon, title, desc, delay = 0, onClick, accent = null }) {
+export function TopicCard({ icon, iconLabel, title, desc, delay = 0, onClick, accent = null }) {
   const [hover, setHover] = useState(false);
   return (
     <FadeIn delay={delay}>
@@ -125,7 +125,9 @@ export function TopicCard({ icon, title, desc, delay = 0, onClick, accent = null
           height: "100%", position: "relative",
         }}>
         {accent && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: accent, borderRadius: "14px 14px 0 0" }} />}
-        <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>{icon}</div>
+        <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>
+          {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
+        </div>
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.08rem", marginBottom: 6, fontWeight: 600 }}>{title}</h3>
         <p style={{ color: C.textMuted, fontSize: "0.85rem", lineHeight: 1.6 }}>{desc}</p>
       </div>
@@ -168,12 +170,13 @@ export function QuoteBlock({ quote, attribution, source, color = C.gold }) {
 
 export function StatCounter({ value, suffix = "", label, color = C.gold, subtitle = null }) {
   const [ref, visible] = useInView(0.3);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
   useEffect(() => {
     if (!visible) return;
     const duration = 1400, steps = 40;
     const increment = value / steps;
     let current = 0;
+    setDisplay(0);
     const timer = setInterval(() => {
       current += increment;
       if (current >= value) { setDisplay(value); clearInterval(timer); }
@@ -299,32 +302,36 @@ export function NewBadge() {
   );
 }
 
+function ContinueExploringCard({ link, navigate }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div onClick={() => navigate(link.id)}
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{
+        background: hover ? `${link.color}0c` : C.surface,
+        border: `1px solid ${hover ? link.color + "30" : C.border}`,
+        borderRadius: 12, padding: "14px 16px", cursor: "pointer",
+        transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
+      }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <span style={{ fontSize: "1rem" }} aria-hidden="true">{link.icon}</span>
+        <div>
+          <p style={{ color: C.textPrimary, fontSize: "0.85rem", fontWeight: 600 }}>{link.title}</p>
+          <p style={{ color: C.textMuted, fontSize: "0.72rem", marginTop: 2 }}>{link.desc}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ContinueExploring({ links, navigate }) {
   return (
     <div style={{ marginTop: 48, paddingTop: 32, borderTop: `1px solid ${C.border}` }}>
       <p style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: C.gold, marginBottom: 14, textAlign: "center" }}>Continue Exploring</p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
-        {links.map((link, i) => {
-          const [hover, setHover] = useState(false);
-          return (
-            <div key={i} onClick={() => navigate(link.id)}
-              onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
-              style={{
-                background: hover ? `${link.color}0c` : C.surface,
-                border: `1px solid ${hover ? link.color + "30" : C.border}`,
-                borderRadius: 12, padding: "14px 16px", cursor: "pointer",
-                transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
-              }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: "1rem" }}>{link.icon}</span>
-                <div>
-                  <p style={{ color: C.textPrimary, fontSize: "0.85rem", fontWeight: 600 }}>{link.title}</p>
-                  <p style={{ color: C.textMuted, fontSize: "0.72rem", marginTop: 2 }}>{link.desc}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {links.map((link, i) => (
+          <ContinueExploringCard key={i} link={link} navigate={navigate} />
+        ))}
       </div>
     </div>
   );

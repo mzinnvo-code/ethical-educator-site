@@ -30,7 +30,7 @@ function SectionCard({ icon, title, desc, color, onClick, delay=0 }) {
         <div style={{position:"absolute",top:0,right:0,width:60,height:60,background:`linear-gradient(135deg,transparent 50%,${color}08 100%)`,borderRadius:"0 14px 0 0"}}/>
         <div style={{position:"relative",zIndex:1}}>
           <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
-            <div style={{width:36,height:36,borderRadius:10,background:`${color}12`,border:`1px solid ${color}20`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem",flexShrink:0}}>{icon}</div>
+            <div style={{width:36,height:36,borderRadius:10,background:`${color}12`,border:`1px solid ${color}20`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem",flexShrink:0}} aria-hidden="true">{icon}</div>
             <h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"0.95rem",fontWeight:600}}>{title}</h3>
           </div>
           <p style={{color:C.textMuted,fontSize:"0.82rem",lineHeight:1.55}}>{desc}</p>
@@ -46,11 +46,12 @@ function SectionCard({ icon, title, desc, color, onClick, delay=0 }) {
 
 function HomeStat({ value, label, color, delay }) {
   const [ref,visible]=useInView(0.2);
-  const [count,setCount]=useState(0);
+  const [count,setCount]=useState(value);
   useEffect(()=>{
     if(!visible)return;
     const isDecimal=value<1; const target=isDecimal?value*100:value;
     const steps=30; const stepVal=target/steps; let cur=0;
+    setCount(isDecimal?0:0);
     const t=setInterval(()=>{cur+=stepVal;if(cur>=target){cur=target;clearInterval(t);}setCount(isDecimal?cur/100:Math.round(cur));},40);
     return()=>clearInterval(t);
   },[visible,value]);
@@ -78,7 +79,7 @@ function FeaturedCallout({ icon, tag, color, title, desc, onClick }) {
       <div style={{position:"absolute",top:-20,right:-20,width:100,height:100,borderRadius:"50%",background:`radial-gradient(circle,${color}10,transparent 70%)`,filter:"blur(15px)"}}/>
       <div style={{position:"relative",zIndex:1}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-          <span style={{fontSize:"1.3rem"}}>{icon}</span>
+          <span style={{fontSize:"1.3rem"}} aria-hidden="true">{icon}</span>
           <span style={{padding:"2px 10px",background:`${color}15`,border:`1px solid ${color}25`,borderRadius:12,fontSize:"0.62rem",fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color}}>{tag}</span>
         </div>
         <h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.15rem",fontWeight:700,marginBottom:8,lineHeight:1.3}}>{title}</h3>

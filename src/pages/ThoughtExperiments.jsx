@@ -7,7 +7,7 @@ import AuthorshipExperiment from "../experiments/Authorship.jsx";
 import ReluctantEducatorExperiment from "../experiments/ReluctantEducator.jsx";
 import DoppelgangerExperiment from "../experiments/Doppelganger.jsx";
 
-function ExperimentCard({ icon, title, tagline, color, gradientFrom, gradientTo, isNew, onClick, animDelay = "0s" }) {
+function ExperimentCard({ icon, iconLabel, title, tagline, color, gradientFrom, gradientTo, isNew, onClick, animDelay = "0s" }) {
   const [h, setH] = useState(false);
   return (
     <div onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)} style={{
@@ -19,7 +19,9 @@ function ExperimentCard({ icon, title, tagline, color, gradientFrom, gradientTo,
     }}>
       <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", background: `radial-gradient(circle, ${color}12, transparent 70%)`, filter: "blur(20px)", transition: "all 0.5s", opacity: h ? 0.8 : 0.3 }} />
       <div style={{ position: "relative", zIndex: 1 }}>
-        <div style={{ fontSize: "2.4rem", marginBottom: 14, animation: `cardFloat 3s ease-in-out infinite`, animationDelay: animDelay }}>{icon}</div>
+        <div style={{ fontSize: "2.4rem", marginBottom: 14, animation: `cardFloat 3s ease-in-out infinite`, animationDelay: animDelay }}>
+          {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
+        </div>
         {isNew && <div style={{ position: "absolute", top: 0, right: 0 }}><NewBadge /></div>}
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.05rem", fontWeight: 700, marginBottom: 6 }}>{title}</h3>
         <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.55, marginBottom: 14 }}>{tagline}</p>
@@ -33,10 +35,10 @@ function ExperimentCard({ icon, title, tagline, color, gradientFrom, gradientTo,
 }
 
 const experiments = [
-  { id: "the-shortcut", icon: "⚡", title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you? Four escalating scenarios. No right answers.", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
-  { id: "ai-authorship", icon: "📝", title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths. Choose a role and navigate the fallout.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
-  { id: "reluctant-educator", icon: "📊", title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — watch the data diverge, then make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
-  { id: "digital-doppelganger", icon: "👤", title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. An exam that exposes everything. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
+  { id: "the-shortcut", icon: "⚡", iconLabel: "Lightning bolt", title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you? Four escalating scenarios. No right answers.", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
+  { id: "ai-authorship", icon: "📝", iconLabel: "Memo", title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths. Choose a role and navigate the fallout.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
+  { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — watch the data diverge, then make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
+  { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. An exam that exposes everything. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
 ];
 
 export default function ThoughtExperiments({ navigate }) {
@@ -61,7 +63,7 @@ export default function ThoughtExperiments({ navigate }) {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18, marginTop: 36 }}>
             {experiments.map((e, i) => (
               <FadeIn key={e.id} delay={i * 0.08}>
-                <ExperimentCard icon={e.icon} title={e.title} tagline={e.tagline} color={e.color} gradientFrom={e.gf} gradientTo={e.gt} isNew={isNewExperiment(e.id)} animDelay={`${i * 0.5}s`}
+                <ExperimentCard icon={e.icon} iconLabel={e.iconLabel} title={e.title} tagline={e.tagline} color={e.color} gradientFrom={e.gf} gradientTo={e.gt} isNew={isNewExperiment(e.id)} animDelay={`${i * 0.5}s`}
                   onClick={() => { setActive(e.id); window.scrollTo({ top: 300, behavior: "smooth" }); }} />
               </FadeIn>
             ))}

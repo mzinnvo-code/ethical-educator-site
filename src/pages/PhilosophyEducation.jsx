@@ -133,7 +133,7 @@ function ScheduleViewer({ level }) {
 }
 
 // ─── Non-Negotiable Skill Card ───
-function SkillCard({ icon, title, desc, rationale, color }) {
+function SkillCard({ icon, iconLabel, title, desc, rationale, color }) {
   const [expanded, setExpanded] = useState(false);
   const [hover, setHover] = useState(false);
   return (
@@ -145,7 +145,9 @@ function SkillCard({ icon, title, desc, rationale, color }) {
         transform: hover && !expanded ? "translateY(-2px)" : "none",
       }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-        <span style={{ fontSize: "1.4rem" }}>{icon}</span>
+        <span style={{ fontSize: "1.4rem" }}>
+          {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
+        </span>
         <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.95rem", fontWeight: 600 }}>{title}</h4>
         <span style={{ marginLeft: "auto", color, fontSize: "0.8rem", transform: expanded ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s" }}>▾</span>
       </div>
@@ -301,19 +303,19 @@ export default function PhilosophyEducation({ navigate }) {
           <FadeIn delay={0.06}>
             <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.15rem", marginBottom: 16, marginTop: 8 }}>Non-Negotiable Skills for the AI Era</h3>
             <div style={{ display: "grid", gap: 12 }}>
-              <SkillCard icon="🔍" title="Critical Thinking & Truth Discernment" color={C.teal}
+              <SkillCard icon="🔍" iconLabel="Magnifying glass" title="Critical Thinking & Truth Discernment" color={C.teal}
                 desc="Question and verify information, analyze sources, use logic to separate fact from falsehood. Spot deepfakes, misleading statistics, and persuasive misinformation."
                 rationale="AI can generate fake but plausible images, text, and videos. Students must become detectives of truth — continuously asking: 'How do we know this is true? What evidence supports it?' This is not a technical skill but an epistemological one, rooted in philosophy's oldest tradition." />
-              <SkillCard icon="⚖️" title="Ethical Reasoning & Moral Decision-Making" color={C.gold}
+              <SkillCard icon="⚖️" iconLabel="Balance scales" title="Ethical Reasoning & Moral Decision-Making" color={C.gold}
                 desc="Develop a strong ethical framework grounded in normative theory. Apply utilitarianism, deontology, and virtue ethics to real technology dilemmas."
                 rationale="AI systems can inherit bias or be used harmfully. Students must make choices aligned with human rights, fairness, and well-being — becoming ethical leaders who ensure technology is developed responsibly. This requires not just knowing what's right, but understanding WHY it's right and being able to defend that reasoning under pressure." />
-              <SkillCard icon="❓" title="Philosophical Inquiry & Curiosity" color={C.ocean}
+              <SkillCard icon="❓" iconLabel="Question mark" title="Philosophical Inquiry & Curiosity" color={C.ocean}
                 desc="Nurture deep questioning and intellectual curiosity. Practice asking 'big questions' about technology, consciousness, knowledge, and identity."
                 rationale="As PLATO emphasizes, introducing philosophy nurtures young people's curiosity, critical thinking, and desire to explore big questions. These traits produce lifelong learners adaptable to change — the most valuable asset in a world where specific skills may become obsolete within a decade." />
-              <SkillCard icon="🤝" title="Collaboration & Dialogue Skills" color={C.coral}
+              <SkillCard icon="🤝" iconLabel="Handshake" title="Collaboration & Dialogue Skills" color={C.coral}
                 desc="Master Socratic discussion, active listening, constructive debate, and teamwork on complex problems. Learn to disagree civilly and seek common ground."
                 rationale="In a time of algorithm-driven echo chambers, the ability to engage with diverse viewpoints is critical. Philosophy discussions are training grounds for empathy and reasoned debate — producing students who learn to think, not what to think. These afternoon sessions are a microcosm of healthy democratic society." />
-              <SkillCard icon="🤖" title="AI Literacy & Technological Adaptability" color={C.teal}
+              <SkillCard icon="🤖" iconLabel="Robot" title="AI Literacy & Technological Adaptability" color={C.teal}
                 desc="Understand how AI works at an appropriate level. Learn key concepts (machine learning, algorithms, training data, bias) and develop strategies for using AI tools critically."
                 rationale="Following the AI4K12 'Five Big Ideas in AI' framework — from how computers perceive the world to how AI impacts society — students become savvy, adaptable users and potential creators of AI technology. They approach AI with both enthusiasm and informed caution, viewing it as a tool requiring human judgment rather than a magic oracle." />
             </div>
