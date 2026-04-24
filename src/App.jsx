@@ -272,11 +272,8 @@ export default function App() {
               {[
                 { label: "Privacy Policy", id: "privacy" },
                 { label: "Accessibility", id: "accessibility" },
-                { label: "Contact", href: "mailto:matthew@theethicaleducator.com" },
               ].map(link => (
-                link.href
-                  ? <a key={link.label} href={link.href} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
-                  : <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
+                <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>

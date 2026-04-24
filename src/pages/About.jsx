@@ -133,18 +133,6 @@ export default function About({ navigate }) {
               <p style={{ marginTop: 12 }}>That's the conversation this site is designed to advance.</p>
             </Expandable>
           </FadeIn>
-          <FadeIn delay={0.1}>
-            <Divider label="Get in Touch" />
-            <div style={{ padding: "24px 28px", background: `linear-gradient(135deg, rgba(26,138,122,0.07), rgba(200,152,48,0.04))`, border: `1px solid ${C.border}`, borderRadius: 14, marginBottom: 14 }}>
-              <p style={{ color: C.textSecondary, lineHeight: 1.75, fontSize: "0.94rem" }}>
-                Whether you're an educator developing AI policy, a researcher exploring moral psychology, or a philosopher interested in these intersections — I'd welcome the conversation.
-              </p>
-              <p style={{ marginTop: 14 }}>
-                <a href="mailto:matthew@theethicaleducator.com" style={{ color: C.gold, fontWeight: 600, fontSize: "0.96rem" }}>matthew@theethicaleducator.com</a>
-              </p>
-            </div>
-          </FadeIn>
-
         </Narrow>
       </PageContainer>
     </div>

@@ -41,7 +41,7 @@ export default function Accessibility({ navigate }) {
 
             <FadeIn delay={0.12}>
               <Divider label="Reporting Issues" />
-              <p>If you encounter an accessibility barrier on this site, please contact <a href="mailto:matthew@theethicaleducator.com">matthew@theethicaleducator.com</a> with a description of the issue and the page or feature where you encountered it. We aim to respond within five business days.</p>
+              <p>If you encounter an accessibility barrier on this site, please describe the issue and the page or feature where you found it. Contact details will be added here shortly.</p>
             </FadeIn>
 
             <FadeIn delay={0.14}>

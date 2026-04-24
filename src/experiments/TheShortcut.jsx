@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { ShortcutScene } from "../components/diagrams.jsx";
 
 export default function TheShortcutExperiment() {
   const [stage, setStage] = useState(0);
@@ -15,8 +16,8 @@ export default function TheShortcutExperiment() {
   const stages = [
     // ─── INTRO ───
     () => (
-      <div style={{ textAlign: "center", padding: "32px 0" }}>
-        <div style={{ width: 90, height: 40, borderRadius: 20, margin: "0 auto 28px", background: `linear-gradient(135deg, ${C.teal}, ${C.sky})`, boxShadow: `0 0 40px rgba(26,138,122,0.3)`, animation: "pillFloat 3s ease-in-out infinite" }} />
+      <div style={{ textAlign: "center", padding: "24px 0" }}>
+        <ShortcutScene />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 10 }}>The Shortcut</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 12px" }}>
           Computer scientist <PhiloRef text="Daniel Lemire" url="https://lemire.me/blog/2012/11/16/the-learning-pill/" /> posed a version of this question in 2012: imagine a pill granting instant expert knowledge. He predicted the pill would be made illegal, educators would insist knowledge is "just one component," and degrees would persist because they signal character. A decade later, AI is testing every one of those predictions.
@@ -25,7 +26,6 @@ export default function TheShortcutExperiment() {
           This experiment asks you to confront four escalating versions of the same question. Your answers will map onto real philosophical frameworks — and real policy positions.
         </p>
         <button onClick={() => { audio.playDeep(); setStage(1); }} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.93rem", boxShadow: `0 4px 20px rgba(26,138,122,0.25)` }}>Begin the Experiment</button>
-        <style>{`@keyframes pillFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}`}</style>
       </div>
     ),
 

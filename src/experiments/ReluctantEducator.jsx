@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { ReluctantScene } from "../components/diagrams.jsx";
 
 export default function ReluctantEducatorExperiment() {
   const [stage, setStage] = useState(0);
@@ -48,8 +49,8 @@ export default function ReluctantEducatorExperiment() {
   const stages = [
     // ─── INTRO ───
     () => (
-      <div style={{ textAlign: "center", padding: "28px 0" }}>
-        <div style={{ fontSize: "3rem", marginBottom: 16 }}>📊</div>
+      <div style={{ textAlign: "center", padding: "20px 0" }}>
+        <ReluctantScene />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.4rem", marginBottom: 10 }}>The Reluctant Educator</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 12px" }}>
           Mr. Jennings — 22 years in the classroom, National Board Certified, beloved by students — refuses all AI tools on philosophical grounds. He believes the struggle of learning is inseparable from its value, and that AI shortcuts undermine character formation.

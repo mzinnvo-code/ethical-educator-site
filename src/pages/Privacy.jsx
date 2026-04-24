@@ -40,11 +40,6 @@ export default function Privacy({ navigate }) {
             </FadeIn>
 
             <FadeIn delay={0.16}>
-              <Divider label="Contact" />
-              <p>Questions about this policy? Reach out at <a href="mailto:matthew@theethicaleducator.com">matthew@theethicaleducator.com</a>.</p>
-            </FadeIn>
-
-            <FadeIn delay={0.18}>
               <div style={{ marginTop: 36 }}>
                 <button
                   onClick={() => navigate("home")}

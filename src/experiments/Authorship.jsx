@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { AuthorshipScene } from "../components/diagrams.jsx";
 
 export default function AuthorshipExperiment() {
   const [stage, setStage] = useState(0);
@@ -31,8 +32,8 @@ export default function AuthorshipExperiment() {
   const stages = [
     // ─── INTRO ───
     () => (
-      <div style={{ textAlign: "center", padding: "28px 0" }}>
-        <div style={{ fontSize: "3rem", marginBottom: 16 }}>📝</div>
+      <div style={{ textAlign: "center", padding: "20px 0" }}>
+        <AuthorshipScene />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.4rem", marginBottom: 10 }}>The AI Authorship Quandary</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 12px" }}>
           A student submits an AI-assisted essay that shows genuine understanding of the material. The teacher flags it. The parent defends it. The syllabus is silent. This scenario — drawn from Matthew's blog post <PhiloRef text="'The AI Authorship Quandary'" url="https://ethicalaiedu.wordpress.com/2024/02/14/the-ai-authorship-quandary/" /> — has played out in thousands of schools since 2023. You'll experience it from one perspective and discover how the same facts produce entirely different moral conclusions depending on where you stand.

@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { DoppelgangerScene } from "../components/diagrams.jsx";
 
 export default function DoppelgangerExperiment() {
   const [act, setAct] = useState(0);
@@ -32,8 +33,8 @@ export default function DoppelgangerExperiment() {
   const acts = [
     // ─── ACT 0: INTRO ───
     () => (
-      <div style={{ textAlign: "center", padding: "28px 0" }}>
-        <div style={{ fontSize: "3.2rem", marginBottom: 16, animation: "glitch 4s ease-in-out infinite" }}>👤</div>
+      <div style={{ textAlign: "center", padding: "20px 0" }}>
+        <DoppelgangerScene />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 12 }}>The Digital Doppelgänger</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 12px" }}>
           You are <strong style={{ color: C.textPrimary }}>Mr. Torres</strong>, an AP Literature teacher at a suburban high school. It's September 2026. Over the course of one semester, you will confront a question that no generation of educators has ever faced:
@@ -47,7 +48,6 @@ export default function DoppelgangerExperiment() {
         <button onClick={() => { audio.playDeep(); setAct(1); }} style={{ padding: "14px 40px", background: `linear-gradient(135deg, ${C.coral}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.95rem", boxShadow: `0 4px 24px rgba(192,112,64,0.25)` }}>
           Begin the Semester
         </button>
-        <style>{`@keyframes glitch{0%,88%,100%{opacity:1;transform:none}90%{opacity:0.7;transform:translateX(3px) skewX(-2deg)}92%{opacity:1;transform:translateX(-2px)}94%{opacity:0.5;transform:translateX(1px) skewX(1deg)}}`}</style>
       </div>
     ),
 

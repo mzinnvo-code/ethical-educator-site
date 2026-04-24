@@ -86,9 +86,9 @@ export default function MoralPsychology({ navigate }) {
           <ReadingTime minutes={18} />
         </FadeIn>
 
-        <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><DualProcessDiagram /></FadeIn></div>
+        <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><TrolleyExperiment /></FadeIn></div>
 
-        <div style={{ marginTop: 8 }}><FadeIn delay={0.1}><TrolleyExperiment /></FadeIn></div>
+        <div style={{ marginTop: 8 }}><FadeIn delay={0.1}><DualProcessDiagram /></FadeIn></div>
 
         <Narrow>
           {/* ─── SYNTHESIZED OVERVIEW ─── */}
