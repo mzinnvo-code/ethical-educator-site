@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import {
   FadeIn, Expandable, TopicCard, useAudio, SectionLabel, SectionTitle, Subtitle,
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
-  Timeline, ComparisonCard, Divider, ReadingTime
+  Timeline, ComparisonCard, Divider, ReadingTime, ContinueExploring
 } from "../components/shared.jsx";
 import { PolicyTimelineDiagram } from "../components/diagrams.jsx";
 
@@ -63,6 +63,73 @@ function EthicsQuiz() {
             onMouseOut={e => { e.target.style.borderColor = C.border; e.target.style.color = C.textSecondary; }}>{opt}</button>
         ))}
       </div>
+    </div>
+  );
+}
+
+/* ─── Ethical Matrix Interactive ─── */
+function EthicalMatrix() {
+  const [cells, setCells] = useState({});
+  const stakeholders = ["Students", "Teachers", "Parents / Community"];
+  const principles = ["Wellbeing", "Autonomy", "Fairness"];
+
+  const prompts = {
+    "Students-Wellbeing": "How does this AI tool affect student mental health, engagement, and growth?",
+    "Students-Autonomy": "Can students still make independent learning choices, or does the AI decide for them?",
+    "Students-Fairness": "Does every student benefit equally, or does the tool advantage some over others?",
+    "Teachers-Wellbeing": "Does this tool reduce burnout or add to it? Does it threaten job security?",
+    "Teachers-Autonomy": "Can teachers override or customize the AI, or must they accept its outputs?",
+    "Teachers-Fairness": "Do all teachers have equal access and equal training to use the tool?",
+    "Parents / Community-Wellbeing": "Does the tool build trust between school and home, or erode it?",
+    "Parents / Community-Autonomy": "Do parents have meaningful say in whether and how AI is used?",
+    "Parents / Community-Fairness": "Are the costs and risks distributed equitably across the community?",
+  };
+
+  return (
+    <div style={{ margin: "16px 0" }}>
+      <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.6, marginBottom: 14 }}>
+        Think of a specific AI tool you're considering for your classroom. For each cell, reflect on how the tool affects that stakeholder along that ethical dimension. Tap any cell to see a guiding question.
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.84rem" }}>
+          <thead>
+            <tr>
+              <th style={{ padding: "10px 12px", borderBottom: `2px solid ${C.gold}40`, color: C.textMuted, textAlign: "left", fontWeight: 600, fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.08em" }}></th>
+              {principles.map(p => (
+                <th key={p} style={{ padding: "10px 12px", borderBottom: `2px solid ${C.gold}40`, color: C.gold, textAlign: "left", fontWeight: 600, fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>{p}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {stakeholders.map(s => (
+              <tr key={s}>
+                <td style={{ padding: "10px 12px", borderBottom: `1px solid ${C.border}`, color: C.textPrimary, fontWeight: 600, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "0.88rem" }}>{s}</td>
+                {principles.map(p => {
+                  const key = `${s}-${p}`;
+                  const isOpen = cells[key];
+                  return (
+                    <td key={p}
+                      onClick={() => setCells(prev => ({ ...prev, [key]: !prev[key] }))}
+                      style={{
+                        padding: "10px 12px", borderBottom: `1px solid ${C.border}`,
+                        cursor: "pointer", transition: "background 0.2s",
+                        background: isOpen ? `${C.teal}0c` : "transparent",
+                      }}>
+                      {isOpen
+                        ? <span style={{ color: C.textSecondary, fontSize: "0.82rem", lineHeight: 1.5 }}>{prompts[key]}</span>
+                        : <span style={{ color: C.textMuted, fontSize: "0.78rem" }}>tap to reflect ›</span>
+                      }
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style={{ color: C.textMuted, fontSize: "0.76rem", marginTop: 10, fontStyle: "italic" }}>
+        Adapted from the ethical matrix approach described in "Navigating the AI Frontier in Education" (Zinn). The original framework draws on Mepham's ethical matrix for applied ethics.
+      </p>
     </div>
   );
 }
@@ -360,6 +427,347 @@ export default function AIEthics({ navigate }) {
                   { year: "April 2026", title: "UNESCO Observatory Launched", desc: "Regional observatory for Latin America and the Caribbean begins monitoring.", color: C.teal },
                 ]} />
               </Expandable>
+            </FadeIn>
+
+            {/* ═══════════════════════════════════════════════════
+                Navigating the AI Frontier — from Gamma #5
+            ═══════════════════════════════════════════════════ */}
+
+            <Divider label="Navigating the AI Frontier" />
+
+            <FadeIn delay={0.06}>
+              <Expandable title="What Educators Are Actually Worried About" color={C.coral} tag="Educator Concerns">
+                <p>Surveys and professional development sessions surface the same concerns repeatedly. These aren't abstract anxieties — they represent genuine structural barriers to thoughtful AI adoption. Any ethical framework that ignores them is incomplete.</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10, margin: "16px 0" }}>
+                  <ComparisonCard title="Professional Identity" color={C.coral} items={[
+                    "Fear of being replaced or deskilled",
+                    "Pressure to reskill without adequate time or support",
+                    "Uncertainty about what 'good teaching' means in an AI-saturated environment",
+                  ]} />
+                  <ComparisonCard title="Data & Privacy" color={C.ocean} items={[
+                    "Student data flowing to third-party platforms",
+                    "Lack of transparency about how AI models use classroom interactions",
+                    "No clear data governance frameworks at the district level",
+                  ]} />
+                  <ComparisonCard title="Access & Equity" color={C.gold} items={[
+                    "Technology access gaps widening existing inequities",
+                    "Digital divide between well-resourced and under-resourced schools",
+                    "Students who can't afford home internet fall further behind",
+                  ]} />
+                </div>
+                <p>Two additional concerns surface persistently: <strong>over-dependence</strong> (students losing the capacity for independent thinking) and <strong>deepfakes</strong> (the erosion of trust when any image, audio, or video can be fabricated). Both are fundamentally about the same thing — the relationship between technology and human judgment.</p>
+                <p style={{ marginTop: 12 }}>The pattern across these concerns is instructive. None of them can be resolved by technical solutions alone. Each one requires a normative judgment about what education is <em>for</em> — which brings us back to ethical frameworks.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="Seven Principles for Ethical AI — Mapped to Philosophical Traditions" color={C.teal} tag="Framework">
+                <p>Rather than adopting a single ethical theory and applying it universally, a pluralistic approach maps each principle to the philosophical tradition that grounds it most naturally. This framework emerged from professional development work with K–12 educators and draws on classical and contemporary moral philosophy.</p>
+
+                <div style={{ margin: "16px 0" }}>
+                  {[
+                    { principle: "Transparency", tradition: "Kantian Ethics", color: C.teal,
+                      desc: "AI systems should be explainable and their limitations openly communicated. Kant's categorical imperative demands we treat people as ends, never merely as means — which requires honesty about what AI does with student data and how it reaches its conclusions." },
+                    { principle: "Integrity", tradition: "Aristotelian Virtue Ethics", color: C.gold,
+                      desc: "AI should be used in ways that cultivate intellectual honesty and good character. Aristotle held that virtues are developed through practice — if AI shortcuts the practice, it may shortcut the virtue. The question is whether AI use builds or erodes the habits of a well-educated person." },
+                    { principle: "Equity", tradition: "Rawlsian Justice", color: C.ocean,
+                      desc: "AI tools must not deepen existing disparities. Rawls's difference principle holds that inequalities are only justified if they benefit the least advantaged. An AI tool that helps affluent students while leaving others behind fails this test — regardless of how impressive the technology is." },
+                    { principle: "Privacy", tradition: "Lockean Rights", color: C.coral,
+                      desc: "Students have a right to control their personal data. Locke's natural rights framework — extended to the digital context — means that consent must be informed, data collection must be proportionate, and students (and parents) must understand what is being gathered and why." },
+                    { principle: "Critical Thinking", tradition: "Utilitarian Analysis", color: C.teal,
+                      desc: "AI should be deployed where it maximizes genuine learning outcomes, not just task completion. A utilitarian lens asks: does this AI tool produce the greatest educational good for the greatest number? The Bastani et al. findings — 48–127% practice boosts but performance fading on tests — suggest the calculus is not straightforward." },
+                    { principle: "Human Oversight", tradition: "Existentialist Responsibility (Sartre, de Beauvoir)", color: C.gold,
+                      desc: "Humans must retain meaningful decision-making authority over AI. Sartre's insistence that we are 'condemned to be free' — that we cannot abdicate responsibility for our choices — applies directly. Delegating educational judgment to an algorithm is a choice, and educators bear responsibility for making it." },
+                    { principle: "Environmental Responsibility", tradition: "Sustainability Ethics", color: C.green || C.teal,
+                      desc: "The computational cost of AI — energy consumption, water usage for cooling data centers, electronic waste — must be weighed against its educational benefits. Training a single large language model can emit as much carbon as five cars over their lifetimes. This is an ethical consideration that belongs in the conversation." },
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      background: `${item.color}08`, border: `1px solid ${item.color}25`,
+                      borderRadius: 12, padding: "14px 18px", marginBottom: 10,
+                    }}>
+                      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 6, flexWrap: "wrap" }}>
+                        <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: item.color, fontWeight: 700, fontSize: "0.95rem" }}>{i + 1}. {item.principle}</span>
+                        <span style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.textMuted }}>grounded in {item.tradition}</span>
+                      </div>
+                      <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.65 }}>{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <p>The value of this mapping is that it makes the philosophical commitments explicit. When a school board says "we value transparency," they are implicitly invoking Kant. When they say "we value equity," they are implicitly invoking Rawls. Making these connections visible helps educators reason more clearly about trade-offs — because different traditions sometimes pull in different directions.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <Expandable title="The Ethical Matrix — A Tool for Applied Deliberation" color={C.gold} tag="Activity">
+                <p>Abstract principles become actionable when tested against concrete stakeholder impacts. The ethical matrix — adapted from Ben Mepham's work in bioethics — provides a structured way to do this. It cross-references <strong>stakeholder groups</strong> (students, teachers, parents/community) against <strong>ethical dimensions</strong> (wellbeing, autonomy, fairness) to surface tensions that broad principles alone can't capture.</p>
+                <p style={{ marginTop: 12 }}>For example, an AI tutoring system might score well on student wellbeing (personalized pacing) but poorly on teacher autonomy (if the system prescribes what gets taught next) and ambiguously on community fairness (if only some families can access it at home).</p>
+                <EthicalMatrix />
+                <p style={{ marginTop: 10 }}>The matrix doesn't produce a single "right answer." Its purpose is to make hidden trade-offs visible so that the people making decisions — educators, administrators, families — can do so with their eyes open.</p>
+              </Expandable>
+            </FadeIn>
+
+            <Divider label="AI in the Classroom — What's Working" />
+
+            <FadeIn delay={0.06}>
+              <Expandable title="Case Studies: AI Tools Educators Should Know" color={C.ocean} tag="Practice">
+                <p>The theoretical frameworks above need grounding in real products that educators encounter. Each of these tools illustrates different ethical trade-offs — and each sits at a different point along the autonomy-versus-automation spectrum.</p>
+
+                <div style={{ margin: "16px 0" }}>
+                  {[
+                    { name: "Khan Academy / Khanmigo", color: C.teal,
+                      what: "AI-powered tutoring assistant built on GPT-4, designed to guide rather than answer. Students interact through Socratic dialogue — the system asks questions rather than providing solutions directly.",
+                      ethics: "Represents the strongest available model for AI that preserves student agency. But: access requires a subscription (equity concern), and the effectiveness data is still preliminary. Salman Khan's vision — articulated in Brave New Words — is that AI should provide every student with a personal tutor, but the question of whether a chatbot can replace the human relationship at the heart of tutoring remains open." },
+                    { name: "Duolingo Max", color: C.gold,
+                      what: "Language learning app using GPT-4 for roleplay conversations and mistake explanations. The AI adapts to individual learner pace and provides context-sensitive feedback.",
+                      ethics: "Strong on qualification (language skill building) but operates entirely outside the socialization and subjectification dimensions. Language learning involves cultural context, shared practice, and identity — dimensions AI can support but not deliver independently." },
+                    { name: "Amira Learning", color: C.coral,
+                      what: "AI-driven reading assistant for K–5 students. Listens to students read aloud, identifies specific decoding errors, and provides targeted intervention. Has demonstrated measurable reading-level gains.",
+                      ethics: "One of the clearest cases where AI augments rather than replaces human teaching. The tool handles the repetitive listening work, freeing teachers for higher-order instruction. Equity concern: requires device access and reliable audio input." },
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      background: C.surface, border: `1px solid ${C.border}`,
+                      borderLeft: `3px solid ${item.color}`, borderRadius: 10,
+                      padding: "16px 20px", marginBottom: 12,
+                    }}>
+                      <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: item.color, fontSize: "1rem", fontWeight: 600, marginBottom: 8 }}>{item.name}</h4>
+                      <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.65, marginBottom: 8 }}><strong>What it does:</strong> {item.what}</p>
+                      <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.65 }}><strong>The ethical picture:</strong> {item.ethics}</p>
+                    </div>
+                  ))}
+                </div>
+                <p>The common thread across these tools: the ones that work best ethically are the ones designed to keep the human — student or teacher — in the loop. The ones that raise the most concern are those that optimize for efficiency at the expense of agency.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="The Unrestricted-AI Problem — When More Practice Doesn't Mean More Learning" color={C.coral} tag="Evidence">
+                <p>One of the most important findings in recent AI-in-education research comes from Bastani et al., who studied high school math students given access to AI tutoring tools. The results were paradoxical:</p>
+                <ResearchCallout
+                  year="2024"
+                  title="Practice Up, Performance Down"
+                  finding="Students using unrestricted AI assistance increased their practice volume by 48–127%. But when tested without AI access, their performance dropped — suggesting the AI was doing the cognitive work, and the students were not building durable understanding."
+                  citation="Bastani et al. (2024)"
+                  color={C.coral}
+                />
+                <p style={{ marginTop: 12 }}>This finding challenges the intuition that "more practice = more learning." It matters what kind of practice. If AI removes the productive struggle — the point where genuine learning happens — then the practice is hollow. Students may <em>feel</em> more competent while actually becoming less so.</p>
+                <p style={{ marginTop: 12 }}>The implication for educators: AI tools should be designed (or configured) to scaffold thinking rather than replace it. A tutoring system that asks "what do you think the next step is?" before revealing the answer preserves struggle. One that simply shows the solution does not.</p>
+                <QuoteBlock
+                  quote="What we want is for every student to have access to a personal tutor and for every teacher to have a teaching assistant."
+                  attribution="Salman Khan"
+                  source="Brave New Words (2024)"
+                  color={C.gold}
+                />
+                <p>Khan's aspiration is the right one. The question is implementation: does the AI actually tutor (ask questions, probe understanding, hold back answers), or does it merely dispense information? The difference matters enormously.</p>
+              </Expandable>
+            </FadeIn>
+
+            <Divider label="Looking Ahead" />
+
+            <FadeIn delay={0.06}>
+              <Expandable title="Five Frontiers — Where AI in Education Is Heading" color={C.ocean} tag="Horizon">
+                <p>The trajectory of AI in education is not a single line — it is several concurrent developments, each with distinct ethical implications. Five areas deserve particular attention from educators thinking about the next three to five years.</p>
+                <div style={{ margin: "16px 0" }}>
+                  {[
+                    { area: "Predictive Analytics", icon: "📊", color: C.teal,
+                      desc: "AI systems that identify at-risk students before they fail — using attendance patterns, engagement data, and performance trends. Ethically promising (early intervention saves students) but fraught with privacy and labeling concerns. The line between helpful prediction and surveillance is thin." },
+                    { area: "Hyper-Personalization", icon: "🎯", color: C.gold,
+                      desc: "AI that adapts content, pace, and difficulty to each individual learner in real time. UNESCO has explicitly warned against excessive personalization — arguing it can isolate students from the shared experience of learning and reduce education to content delivery." },
+                    { area: "Virtual Learning Environments", icon: "🌐", color: C.ocean,
+                      desc: "AI-generated simulations, virtual labs, and immersive experiences. Enormous potential for subjects where physical resources are scarce (science labs, field trips, historical reenactments). The equity question: who gets the VR headsets?" },
+                    { area: "AI Tutoring at Scale", icon: "🤖", color: C.coral,
+                      desc: "The Khanmigo model extended to every subject and grade level. If it works as intended, it represents the most significant democratization of educational access since the public library. If it doesn't — if the tutoring is shallow or the Socratic dialogue is performative — it represents the most significant waste of educational promise." },
+                    { area: "Administrative Efficiency", icon: "⚙️", color: C.textMuted,
+                      desc: "AI handling scheduling, report generation, parent communication drafts, and compliance paperwork. Ethically the least controversial application — and possibly the most immediately valuable, because it returns time to teachers for actual teaching." },
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex", gap: 14, alignItems: "flex-start",
+                      padding: "12px 0",
+                      borderBottom: i < 4 ? `1px solid ${C.border}` : "none",
+                    }}>
+                      <span style={{ fontSize: "1.4rem", flexShrink: 0, marginTop: 2 }}>{item.icon}</span>
+                      <div>
+                        <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: item.color, fontSize: "0.95rem", fontWeight: 600, marginBottom: 4 }}>{item.area}</h4>
+                        <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.65 }}>{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="The Thought Experiments — Pressure-Testing Your Convictions" color={C.gold} tag="Practice">
+                <p>Ethical frameworks become real when they encounter hard cases. Three thought experiments from the "Navigating the AI Frontier" presentation are designed to surface disagreements within educator teams — not to resolve them, but to make the underlying values visible.</p>
+                <div style={{ margin: "16px 0" }}>
+                  <div style={{ background: C.glow, border: `1px solid ${C.border}`, borderRadius: 12, padding: "16px 18px", marginBottom: 10 }}>
+                    <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.gold, fontSize: "0.95rem", fontWeight: 600, marginBottom: 6 }}>The AI Authorship Quandary</h4>
+                    <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6 }}>A student submits an essay entirely written by AI. The parent defends it, arguing the student "directed" the AI. The essay is the best work the student has ever produced. What do you do — and more importantly, <em>why</em>?</p>
+                  </div>
+                  <div style={{ background: C.glow, border: `1px solid ${C.border}`, borderRadius: 12, padding: "16px 18px", marginBottom: 10 }}>
+                    <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.teal, fontSize: "0.95rem", fontWeight: 600, marginBottom: 6 }}>The Reluctant Educator</h4>
+                    <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6 }}>A veteran teacher with 25 years of experience refuses to use any AI tools. Student outcomes in their class are strong. The administration mandates AI adoption for all teachers. Should the veteran be exempted — and on what grounds?</p>
+                  </div>
+                  <div style={{ background: C.glow, border: `1px solid ${C.border}`, borderRadius: 12, padding: "16px 18px" }}>
+                    <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.ocean, fontSize: "0.95rem", fontWeight: 600, marginBottom: 6 }}>The Digital Doppelgänger</h4>
+                    <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6 }}>An AI is trained on a beloved retired teacher's lectures, mannerisms, and grading style. Students love the AI version. The retired teacher is uncomfortable. Who has the stronger claim — the students who benefit, or the teacher whose identity was used?</p>
+                  </div>
+                </div>
+                <p>These thought experiments are available in full on the <a href="#" onClick={(e) => { e.preventDefault(); navigate("thought-experiments"); }} style={{ color: C.teal }}>Thought Experiments page</a>, where each includes structured discussion prompts and connections to specific ethical frameworks.</p>
+              </Expandable>
+            </FadeIn>
+
+            {/* ═══════════════════════════════════════════════════
+                Foundations for Leadership Discussion — from Gamma #20 + #35
+            ═══════════════════════════════════════════════════ */}
+
+            <Divider label="Foundations for Leadership Discussion" />
+
+            <FadeIn delay={0.06}>
+              <Expandable title="Why Ethics, Not Just Compliance" color={C.teal} tag="Foundation">
+                <p>Compliance asks "Is this allowed?" Ethics asks "Is this right?" The two questions overlap, but they are not the same — and educational leaders who treat them as identical end up reactive instead of principled. Ethics goes beyond legality: something can be permitted and still corrode the educational mission.</p>
+                <p style={{ marginTop: 12 }}>Ethics provides a toolkit for evaluating AI implementation decisions. Three traditions show up most often in education debates:</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10, margin: "14px 0" }}>
+                  <ComparisonCard title="Consequentialism" color={C.teal} items={[
+                    "Evaluates outcomes — does the AI produce more good than harm?",
+                    "Useful when assessing AI grading's impact on student motivation, confidence, or growth.",
+                  ]} />
+                  <ComparisonCard title="Rights-Based Approaches" color={C.gold} items={[
+                    "Centers privacy, autonomy, and informed consent in AI interactions.",
+                    "Asks what students and parents have a right to — independent of outcomes.",
+                  ]} />
+                  <ComparisonCard title="Justice & Fairness" color={C.ocean} items={[
+                    "Addresses algorithmic bias and equity of access.",
+                    "Asks whether benefits and burdens are distributed fairly across the community.",
+                  ]} />
+                </div>
+                <p>The <strong>Jisc Ethical Framework</strong> offers guidance tailored to AI applications in education — applying these traditions to concrete deployment questions like data governance, classroom transparency, and stakeholder consultation. It is one of the more usable starting points for leaders who want a structured ethics toolkit rather than a list of slogans.</p>
+                <p style={{ marginTop: 12 }}>The practical implication: "applied tech ethics" — fairness, transparency, accountability — is not a checklist but a system of trade-offs. A tool may score well on transparency and poorly on equity. Leaders need a framework that lets them name those trade-offs honestly, not just resolve them with a rubber stamp.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="Why AI Is Different from Prior Technological Transitions" color={C.gold} tag="Context">
+                <p>One of the most common arguments for calm in the AI conversation is that prior technological transitions also looked alarming and ultimately reshaped — rather than eliminated — work. The Industrial Revolution, agricultural mechanization, and the digital transformation are all cited as evidence that adaptation is possible.</p>
+                <Timeline items={[
+                  { year: "Industrial Revolution", title: "Mechanical Looms", desc: "Replaced an estimated 98% of manual weaving work — but textile employment overall persisted in different forms.", color: C.ocean },
+                  { year: "200-Year Arc", title: "Agricultural Automation", desc: "Farming workforce shrank from roughly 83% of laborers to 2%. The economy reorganized around higher-order activities, but the transition spanned generations.", color: C.gold },
+                  { year: "Late 20th Century", title: "Digital Transformation", desc: "Word processors and spreadsheets transformed administrative roles without eliminating them — clerical work moved up the cognitive ladder.", color: C.teal },
+                ]} />
+                <p style={{ marginTop: 12 }}>The complacent reading is that AI is "just another transition." But four features distinguish it:</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10, margin: "14px 0" }}>
+                  <ComparisonCard title="Implementation Speed" color={C.coral} items={[
+                    "Months versus decades for previous technologies.",
+                    "Educators who started 2024 with no AI policy entered 2026 inside one — without time to deliberate.",
+                  ]} />
+                  <ComparisonCard title="Cognitive Automation" color={C.gold} items={[
+                    "Prior waves automated muscle and routine.",
+                    "AI affects analysis, writing, and judgment — the work education is meant to develop.",
+                  ]} />
+                  <ComparisonCard title="Democratized Access" color={C.teal} items={[
+                    "Powerful tools available to almost anyone with a browser.",
+                    "The tool is in the student's pocket; school policy applies only on paper.",
+                  ]} />
+                  <ComparisonCard title="Educational Impact" color={C.ocean} items={[
+                    "An estimated 27% of teaching tasks are potentially automatable.",
+                    "The question isn't whether AI touches teaching — it's which 27%, and who decides.",
+                  ]} />
+                </div>
+                <p>Historical parallels are useful as cautionary tales — they remind us that transitions can be managed and that doom-saying is rarely accurate. But the speed, scope, and target of the AI transition are genuinely new. Treating it as ordinary risks under-preparing for the actual shift.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <Expandable title="Discussion Prompts for Leadership Teams" color={C.ocean} tag="Practice">
+                <p>Translating principles into practice requires structured conversation. The following four prompts — designed for use in leadership PD sessions — have surfaced productive disagreement across multiple cohorts of school administrators. Used well, they reveal the values a team holds without realizing it.</p>
+                <div style={{ margin: "16px 0" }}>
+                  {[
+                    { num: "1", title: "AI's Impact on Academic Integrity", prompt: "How is AI currently being used by students in ways that might compromise academic integrity — and what should each school's first response be: prohibition, integration, or something else?", color: C.coral },
+                    { num: "2", title: "Challenges to Traditional Assessment", prompt: "What specific challenges does AI pose to traditional methods of assessing student learning and performance? Which existing assessments still produce useful evidence of learning, and which need to be rebuilt?", color: C.gold },
+                    { num: "3", title: "Detection and Prevention Strategies", prompt: "What strategies or technologies can be implemented to detect or prevent AI-assisted cheating — and given the limits of detection tools, where should the locus of effort actually sit (assessment design, classroom culture, policy, something else)?", color: C.ocean },
+                    { num: "4", title: "Balancing Benefits with Integrity", prompt: "How can educators balance the benefits of AI tools for learning with the need to maintain academic integrity? What does a policy that does both — rather than choosing one — look like in practice?", color: C.teal },
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex", gap: 14, alignItems: "flex-start",
+                      padding: "12px 0",
+                      borderBottom: i < 3 ? `1px solid ${C.border}` : "none",
+                    }}>
+                      <span style={{
+                        flexShrink: 0,
+                        width: 28, height: 28, borderRadius: "50%",
+                        background: `${item.color}20`, border: `1px solid ${item.color}`,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        color: item.color, fontWeight: 700, fontSize: "0.85rem",
+                      }}>{item.num}</span>
+                      <div>
+                        <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: item.color, fontSize: "0.95rem", fontWeight: 600, marginBottom: 4 }}>{item.title}</h4>
+                        <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.65 }}>{item.prompt}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p>A leadership group that agrees on policy language but disagrees on Prompt 3 ("where should the locus of effort actually sit") doesn't actually agree on policy. The prompts are designed to expose those disagreements before they become operational problems.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.06}>
+              <Expandable title="Case Study: Alex, Jordan, and Taylor" color={C.gold} tag="Case Study">
+                <p>The following case is designed for leadership discussion. It deliberately leaves the moral evaluation underspecified — different ethical frameworks will yield different verdicts, and that is the point. Three students each submitted excellent work, but their approaches to learning varied:</p>
+                <div style={{ margin: "16px 0" }}>
+                  {[
+                    { name: "Alex", color: C.teal,
+                      desc: "Used AI as a brainstorming partner early in the process — generating prompts, surfacing counterarguments — but did the writing and analysis themselves. Discloses AI use. Can explain every choice in the work when asked." },
+                    { name: "Jordan", color: C.gold,
+                      desc: "Used AI to draft each section, then edited and personalized the output. Discloses AI use. Cannot reliably explain key choices when asked, because the choices originated with the model." },
+                    { name: "Taylor", color: C.coral,
+                      desc: "Generated the work almost entirely by AI with minimal review. Does not disclose AI use. The submission passes detection tools." },
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      background: C.surface, border: `1px solid ${C.border}`,
+                      borderLeft: `3px solid ${item.color}`, borderRadius: 10,
+                      padding: "12px 16px", marginBottom: 10,
+                    }}>
+                      <h4 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: item.color, fontSize: "0.95rem", fontWeight: 600, marginBottom: 6 }}>{item.name}</h4>
+                      <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.65 }}>{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <p>Three structured questions for discussion:</p>
+                <ol style={{ paddingLeft: 20, marginTop: 8, color: C.textSecondary, fontSize: "0.9rem", lineHeight: 1.8 }}>
+                  <li style={{ marginBottom: 8 }}><strong>Assessing true understanding.</strong> What assessment strategies — beyond the submitted artifact — would surface the difference between Alex, Jordan, and Taylor? Oral defenses? In-class follow-ups? Process journals?</li>
+                  <li style={{ marginBottom: 8 }}><strong>Adapting policies.</strong> A single policy must be fair to all three. Is "disclosed AI use is acceptable" enough, or does the policy also need to address depth of engagement?</li>
+                  <li><strong>Building trust.</strong> What role does transparency about AI use play in building trust between students and staff — and how does the policy signal that trust, not enforcement, is the goal?</li>
+                </ol>
+                <p style={{ marginTop: 12 }}>The case has no single right answer. It is designed to make the team's actual operating values visible — including the ones the team did not realize it held.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.08}>
+              <Expandable title="The Reflection That Matters Most" color={C.gold} tag="Closing">
+                <QuoteBlock
+                  quote='What would it take to confidently say, "This student has truly learned the material"?'
+                  attribution="Closing reflection"
+                  source="Academic Integrity in the Age of AI (discussion hub)"
+                  color={C.gold}
+                />
+                <p>This is the question every other AI-in-education question eventually reduces to. Detection, policy, assessment design, professional development — all of these are means. The end is being able to say, with justification, that learning has happened.</p>
+                <p style={{ marginTop: 12 }}>The honest answer is uncomfortable: in many traditional assessments, we never could say it confidently. AI didn't break the assessment system; it exposed assessments that were always proxying for learning rather than measuring it. Multiple-choice tests, formulaic essays, and book reports were vulnerable to substitution long before generative AI existed.</p>
+                <p style={{ marginTop: 12 }}>What changes the answer:</p>
+                <ul style={{ paddingLeft: 20, marginTop: 8, color: C.textSecondary, fontSize: "0.9rem", lineHeight: 1.75 }}>
+                  <li style={{ marginBottom: 6 }}><strong>Process visible alongside product.</strong> If the only artifact is the final draft, you cannot tell who learned what.</li>
+                  <li style={{ marginBottom: 6 }}><strong>Performance under variation.</strong> A student who has truly learned can apply a concept in a new context, not just reproduce it in the original one.</li>
+                  <li style={{ marginBottom: 6 }}><strong>Conversation, not just paperwork.</strong> A two-minute exchange about the work reveals more than a dozen pages of submitted text.</li>
+                  <li><strong>Honesty about the question itself.</strong> "This student learned the material" is a value-laden judgment. AI hasn't made it harder to make — it has made it harder to avoid making.</li>
+                </ul>
+                <p style={{ marginTop: 12 }}>The action plan that follows from this reflection is unglamorous: revise policies, organize teacher training to adapt assessment practices, evaluate tools that address AI challenges. None of these are individually novel. What is novel is doing them with a coherent ethical framework underneath — so that the policies, assessments, and training all answer to the same value commitments.</p>
+              </Expandable>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <ContinueExploring navigate={navigate} links={[
+                { id: "thought-experiments", icon: "🧪", title: "Thought Experiments", desc: "Work through the ethical dilemmas", color: C.gold },
+                { id: "ai-education", icon: "🤖", title: "AI in Education", desc: "Tools, evidence, and practice", color: C.teal },
+                { id: "for-educators", icon: "📋", title: "For Educators", desc: "Professional development resources", color: C.ocean },
+              ]} />
             </FadeIn>
           </div>
         </Narrow>

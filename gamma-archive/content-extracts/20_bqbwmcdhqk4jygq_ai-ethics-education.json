@@ -1,0 +1,19 @@
+{
+  "gamma_id": "bqbwmcdhqk4jygq",
+  "title": "AI Ethics in Education",
+  "type": "presentation",
+  "last_viewed": "Viewed 10 months ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "AI Ethics in Education", "content_summary": "Title card with stats: 62% of educators report ethical concerns, AI adoption growing 34% annually"},
+    {"card": 2, "title": "What is Ethics?", "content_summary": "Pyramid layout covering applied tech ethics, ethical frameworks (consequentialism, deontology, virtue ethics), systematic approach"},
+    {"card": 3, "title": "Tools of Ethical Reasoning", "content_summary": "Three columns: consequentialism, rights-based approaches, justice & fairness. References Jisc Ethical Framework"},
+    {"card": 4, "title": "AI and Job Displacement: Historical Context", "content_summary": "Timeline from Industrial Revolution through agricultural automation to digital transformation"},
+    {"card": 5, "title": "How AI is Different", "content_summary": "Four points: implementation speed, cognitive automation, democratized access, educational impact (27% of teaching tasks automatable)"},
+    {"card": 6, "title": "AI in Education: Ethical Considerations", "content_summary": "Flower layout: data privacy, algorithmic bias, transparency, human connection. Notes digital divide"},
+    {"card": 7, "title": "Practical Applications and Guidelines", "content_summary": "Steps: review processes, policy development, AI literacy, assessment evolution. Five key principles"},
+    {"card": 8, "title": "Moving Forward: Ethical AI Integration", "content_summary": "Four boxes: balance innovation & ethics, empower educators, inclusive policy creation, future preparation"}
+  ],
+  "flags": [],
+  "notes": "Clean presentation on AI ethics in education. No embedded media or interactive elements."
+}

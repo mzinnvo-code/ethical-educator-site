@@ -1,0 +1,19 @@
+{
+  "gamma_id": "q5urcxtc894i2ql",
+  "title": "Digital Citizenship",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "Digital Citizenship", "content_summary": "Title card introducing digital citizenship concepts"},
+    {"card": 2, "title": "What is Digital Citizenship?", "content_summary": "Definition and importance of responsible technology use"},
+    {"card": 3, "title": "Digital Footprint", "content_summary": "Understanding online presence, permanence of digital actions, managing personal information"},
+    {"card": 4, "title": "Online Safety", "content_summary": "Protecting personal information, recognizing threats, safe browsing practices"},
+    {"card": 5, "title": "Cyberbullying", "content_summary": "Identifying cyberbullying, prevention strategies, reporting mechanisms"},
+    {"card": 6, "title": "Digital Literacy and Media Literacy", "content_summary": "Evaluating online sources, critical thinking about digital content, identifying misinformation"},
+    {"card": 7, "title": "Responsible Use of Technology", "content_summary": "Ethical behavior online, respecting intellectual property, appropriate communication"},
+    {"card": 8, "title": "Teaching Digital Citizenship", "content_summary": "Strategies for educators to integrate digital citizenship into curriculum"}
+  ],
+  "flags": [],
+  "notes": "Clean presentation on digital citizenship for educators. No embedded media. 8 cards, straightforward informational content."
+}

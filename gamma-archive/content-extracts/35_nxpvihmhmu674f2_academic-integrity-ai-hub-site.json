@@ -1,0 +1,20 @@
+{
+  "gamma_id": "nxpvihmhmu674f2",
+  "title": "Academic Integrity in the Age of AI: A Collaborative Discussion Hub",
+  "type": "site",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 9,
+  "cards": [
+    {"card": 1, "title": "Academic Integrity in the Age of AI", "content_summary": "Title card for Executive Directors discussion hub with button link"},
+    {"card": 2, "title": "Welcome and Overview", "content_summary": "Two columns: welcome message and collaborative exploration overview"},
+    {"card": 3, "title": "Discussion Prompts", "content_summary": "Four numbered prompts: AI's impact, challenges to assessment, detection strategies, balancing benefits"},
+    {"card": 4, "title": "Case Study Reflection", "content_summary": "Pyramid: the challenge (Alex/Jordan/Taylor), assessing understanding, adapting policies, building trust"},
+    {"card": 5, "title": "Collaboration Corner", "content_summary": "Two boxes: resources from community, share best practices"},
+    {"card": 6, "title": "Polls and Surveys", "content_summary": "Quick poll on AI's role in education with four options"},
+    {"card": 7, "title": "Interactive Features", "content_summary": "Three items: discussion forum, real-time OneNote collaboration, resource uploads"},
+    {"card": 8, "title": "Action Plan", "content_summary": "Timeline: draft policies, organize training, evaluate tools"},
+    {"card": 9, "title": "Closing Reflection", "content_summary": "Reflection question with submit button"}
+  ],
+  "flags": [],
+  "notes": "Site for Executive Directors on AI and academic integrity. Discussion hub format. No heavy embedded media - uses button links instead."
+}

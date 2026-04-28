@@ -32,6 +32,7 @@ export const PAGES = [
   { id: "ai-education", label: "AI in Education" },
   { id: "phil-education", label: "Philosophy in K–12" },
   { id: "thought-experiments", label: "Thought Experiments" },
+  { id: "for-educators", label: "For Educators" },
   { id: "resources", label: "Resources" },
 ];
 

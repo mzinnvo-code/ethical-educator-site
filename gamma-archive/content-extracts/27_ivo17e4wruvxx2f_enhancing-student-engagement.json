@@ -1,0 +1,23 @@
+{
+  "gamma_id": "ivo17e4wruvxx2f",
+  "title": "Enhancing Student Engagement",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 12,
+  "cards": [
+    {"card": 1, "title": "Enhancing Student Engagement", "content_summary": "Title card for PD session on engagement strategies"},
+    {"card": 2, "title": "What is Student Engagement?", "content_summary": "Two columns: beyond attendance (psychological investment) and multidimensional (behavioral, cognitive, emotional)"},
+    {"card": 3, "title": "Why Does Engagement Matter?", "content_summary": "Three points: improved learning, increased persistence, positive climate"},
+    {"card": 4, "title": "Theoretical Frameworks", "content_summary": "Three boxes: behavioral, cognitive, emotional dimensions"},
+    {"card": 5, "title": "Models & Concepts", "content_summary": "4 Cs: clarity, connection, challenge, control"},
+    {"card": 6, "title": "Evidence-Based Strategies – Active Learning", "content_summary": "Timeline: think-pair-share, group discussions, problem-based learning"},
+    {"card": 7, "title": "Evidence-Based Strategies – Motivation", "content_summary": "Arrows: intrinsic, extrinsic, autonomy, relevance, feedback"},
+    {"card": 8, "title": "Innovative Approaches", "content_summary": "Steps: gamification, team-based learning, digital tools"},
+    {"card": 9, "title": "Practical Implementation Strategies", "content_summary": "Pyramid: interactive activities, group work & feedback, clear goals, digital resources"},
+    {"card": 10, "title": "Interactive Activity", "content_summary": "Small group discussion prompt with table format"},
+    {"card": 11, "title": "Recap & Key Takeaways", "content_summary": "Staircase: engagement is multifaceted, active learning, motivate and empower, practical tips"},
+    {"card": 12, "title": "Q&A and Additional Resources", "content_summary": "Open floor for questions and recommended readings"}
+  ],
+  "flags": [],
+  "notes": "Clean PD presentation on student engagement. No embedded media. Related to #28 (Engaging Students) which is a variant."
+}

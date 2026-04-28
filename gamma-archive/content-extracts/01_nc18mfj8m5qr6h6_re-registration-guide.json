@@ -1,0 +1,21 @@
+{
+  "gamma_id": "nc18mfj8m5qr6h6",
+  "title": "SY26-27 Re-Registration Customer Experience Journey Guide",
+  "type": "presentation",
+  "last_viewed": "2 months ago",
+  "total_cards": 9,
+  "cards": [
+    {"card": 1, "title": "SY26-27 Re-Registration Customer Experience Journey Guide", "has_image": true, "image_url": "https://cdn.gamma.app/jrzcu5yxl1gkewr/generated-images/yVWEjv8_QV7RwVvdT_asr.png"},
+    {"card": 2, "title": "Customer-Facing Journey Timeline", "has_image": false},
+    {"card": 3, "title": "Customer States and Branching Logic", "has_image": false},
+    {"card": 4, "title": "Portal Re-Registration Flow", "has_image": false},
+    {"card": 5, "title": "Email and SMS Communication Strategy", "has_image": false},
+    {"card": 6, "title": "In-Product Intercept Strategy", "has_image": false},
+    {"card": 7, "title": "National Marketing Campaign and Toolkit", "has_image": false},
+    {"card": 8, "title": "Operational Constraints Shaping Experience", "has_image": false},
+    {"card": 9, "title": "Source Artifact Inventory and Usage", "has_image": true},
+    {"card": 10, "title": "Screenshot Update Log and Maintenance", "has_image": false}
+  ],
+  "flags": [],
+  "notes": "Business operations document about school re-registration CX. No embedded iframes, audio, or interactive elements detected."
+}

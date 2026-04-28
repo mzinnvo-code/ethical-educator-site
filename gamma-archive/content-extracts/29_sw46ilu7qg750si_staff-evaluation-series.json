@@ -1,0 +1,19 @@
+{
+  "gamma_id": "sw46ilu7qg750si",
+  "title": "Staff Evaluation Learning Series",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "Staff Evaluation Learning Series", "content_summary": "Title card for video tutorials on Education Advanced Evaluation system"},
+    {"card": 2, "title": "Personal Settings", "content_summary": "Three items: password, font size, email notification settings"},
+    {"card": 3, "title": "District Resources", "content_summary": "Three items: documents, links, rubrics"},
+    {"card": 4, "title": "My Dashboard", "content_summary": "Steps: overview, locate items, observation module, summary rubric"},
+    {"card": 5, "title": "Self-Assessment Process", "content_summary": "Arrows: access, complete, submit self-evaluation"},
+    {"card": 6, "title": "Observation Forms", "content_summary": "Two columns: pre-observation and post-observation forms"},
+    {"card": 7, "title": "Artifacts and Professional Development", "content_summary": "Cycle: create, submit, track, review evidence of growth"},
+    {"card": 8, "title": "Additional Features", "content_summary": "Three boxes: restore items, export data as PDF, support tickets"}
+  ],
+  "flags": [],
+  "notes": "Clean presentation on Education Advanced evaluation system navigation. No embedded media."
+}

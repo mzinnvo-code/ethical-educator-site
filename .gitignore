@@ -24,3 +24,8 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Gamma archive — large binaries kept locally, not tracked
+gamma-archive/raw-exports/
+gamma-archive/raw-exports.zip
+gamma-archive/content-extracts.zip

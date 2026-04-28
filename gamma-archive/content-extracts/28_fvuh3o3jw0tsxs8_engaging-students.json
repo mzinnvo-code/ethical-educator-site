@@ -1,0 +1,23 @@
+{
+  "gamma_id": "fvuh3o3jw0tsxs8",
+  "title": "Engaging Students",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 13,
+  "cards": [
+    {"card": 1, "title": "Engaging Students", "content_summary": "Title card with prompt: start by asking what you're good at and how you know"},
+    {"card": 2, "title": "Engagement Icons", "content_summary": "Five icons with descriptions: collaboration, engagement, effort, on-task, respect. Imported from PPTX."},
+    {"card": 3, "title": "Rubric Reflection", "content_summary": "Students use rubrics for self-reflection and improvement"},
+    {"card": 4, "title": "Goals", "content_summary": "Arrow layout: Today I Will / So That I Can / I Know I Have It When (timestamped snip)"},
+    {"card": 5, "title": "Prior Knowledge", "content_summary": "Three areas: self-assessment, self-reflection, engagement expectations"},
+    {"card": 6, "title": "The 'Why' of Setting Academic Expectations (1)", "content_summary": "Clear expectations provide direction and motivation"},
+    {"card": 7, "title": "The 'Why' of Setting Academic Expectations (2)", "content_summary": "Academic expectations benefit students and teachers, create structured environment"},
+    {"card": 8, "title": "Self-Assessment Guide", "content_summary": "Four boxes: reflection, goal setting, feedback, growth mindset"},
+    {"card": 9, "title": "Self-Reflection Guide", "content_summary": "Three points: think about it, write it down, take action"},
+    {"card": 10, "title": "Engagement Expectations Guide", "content_summary": "Four items: active listening, respectful communication, on-task behavior, positive attitude"},
+    {"card": 11, "title": "Collaboration Task", "content_summary": "Breakout room discussion prompt with Helen Keller quote"},
+    {"card": 12, "title": "Thank You!", "content_summary": "Closing card about Big 4 Academic Expectations"}
+  ],
+  "flags": ["imported_from_pptx"],
+  "notes": "Originally imported from PPTX (images from pptx extraction visible). Focuses on Big 4 Academic Expectations. Related to #27 (Enhancing Student Engagement) as a variant with different angle."
+}

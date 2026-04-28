@@ -1,0 +1,31 @@
+{
+  "gamma_id": "s0hj7xhn9bq0pqm",
+  "title": "Enhancing Instructional Techniques: Excelling in Domain 3",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 20,
+  "cards": [
+    {"card": 1, "title": "Enhancing Instructional Techniques: Excelling in Domain 3", "content_summary": "Title card introducing Danielson Framework Domain 3 (Instruction) with detailed overview"},
+    {"card": 2, "title": "Goals", "content_summary": "Session goals with embedded Google Form for warm-up reflection"},
+    {"card": 3, "title": "Deep Dive into Domain 3: Instruction", "content_summary": "Detailed breakdown of Domain 3 components: communication, questioning, engagement, assessment, flexibility"},
+    {"card": 4, "title": "Component Focus and Strategies", "content_summary": "Five boxes covering 3.1-3.5 components. Includes embedded Nearpod reflection board"},
+    {"card": 5, "title": "Personal Goals", "content_summary": "Embedded Microsoft Forms for personal goal setting"},
+    {"card": 6, "title": "Engaging Students: The Art of Effective Teaching", "content_summary": "Introduction to Danielson 3.3 with engagement focus"},
+    {"card": 7, "title": "Danielson 3.3 Rubric", "content_summary": "Custom image of 3.3 rubric with explanation"},
+    {"card": 8, "title": "The Importance of Student Engagement", "content_summary": "Four boxes: personalized learning, active participation, flexible instruction, mental engagement"},
+    {"card": 9, "title": "Setting Engagement Expectations", "content_summary": "Four points with expandable resources section containing Edutopia article embed, YouTube video, and embedded PDF"},
+    {"card": 10, "title": "Strategies for Enhancing Student Engagement", "content_summary": "Three boxes: technology integration, diverse learning activities, gamification"},
+    {"card": 11, "title": "Reflection", "content_summary": "Embedded Nearpod activity with four reflection boxes"},
+    {"card": 12, "title": "Engagement Expectations", "content_summary": "Custom image showing engagement expectations rubric"},
+    {"card": 13, "title": "Self-Assessment: Building Independent Learners", "content_summary": "Timeline: introduce, provide framework, encourage ownership, reflect and improve"},
+    {"card": 14, "title": "Self-Assessment Resources", "content_summary": "YouTube video, embedded live app, embedded PDF on five attributes of self-assessment"},
+    {"card": 15, "title": "Student Self-Assessment", "content_summary": "Custom image of self-assessment rubric"},
+    {"card": 16, "title": "Fostering Self-Reflection in Students", "content_summary": "Arrows with embedded links to SMARTS and Edutopia articles"},
+    {"card": 17, "title": "Implementing Effective Self-Reflection Practices", "content_summary": "Four items: reflection journals, peer discussions, learning portfolios, feedback loop. Expandable resources."},
+    {"card": 18, "title": "Student Self-Reflection", "content_summary": "Custom image of self-reflection rubric"},
+    {"card": 19, "title": "Collaboration Time", "content_summary": "Breakout room instructions with embedded Nearpod and gallery of rubric images"},
+    {"card": 20, "title": "Call to Action: Elevating Your Teaching Practice", "content_summary": "Timeline: reflect, plan, implement, share"}
+  ],
+  "flags": ["has_youtube_video", "has_embedded_google_form", "has_embedded_ms_forms", "has_embedded_nearpod", "has_embedded_pdf", "has_embedded_iframe_edutopia", "has_embedded_iframe_smarts", "has_embedded_iframe_ascd", "has_embedded_iframe_live_app"],
+  "notes": "Very rich, interactive PD presentation on Danielson Domain 3. Heavily embedded: Google Forms, MS Forms, Nearpod (x3), YouTube video, multiple embedded PDFs, Edutopia/SMARTS/ASCD article embeds, and a live web app. Many of these won't export cleanly to PDF/PPTX. Speaker notes included on most cards."
+}

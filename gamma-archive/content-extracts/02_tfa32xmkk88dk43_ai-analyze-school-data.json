@@ -1,0 +1,19 @@
+{
+  "gamma_id": "tfa32xmkk88dk43",
+  "title": "Using AI to Analyze School Performance Data",
+  "type": "presentation",
+  "last_viewed": "4 months ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "Using AI to Analyze School Performance Data"},
+    {"card": 2, "title": "Why Use AI for School Data Analysis?"},
+    {"card": 3, "title": "What is Microsoft 365 Copilot?"},
+    {"card": 4, "title": "Interactive Insights with Copilot"},
+    {"card": 5, "title": "Getting Started with Copilot"},
+    {"card": 6, "title": "YouTube Video Embed"},
+    {"card": 7, "title": "Resources & Next Steps"},
+    {"card": 8, "title": "Embracing AI for School Success"}
+  ],
+  "flags": ["youtube_video", "embedded_iframes_3"],
+  "notes": "Contains YouTube video embed and 3 embedded iframes (Microsoft support/learn pages). These won't preserve in PDF/PPTX export."
+}

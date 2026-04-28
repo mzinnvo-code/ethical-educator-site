@@ -1,0 +1,19 @@
+{
+  "gamma_id": "j8hngspinhr6ifk",
+  "title": "AI Impact Champions: Inspiring K-12 Education",
+  "type": "presentation",
+  "last_viewed": "Viewed 10 months ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "AI Impact Champions: Inspiring K-12 Education", "content_summary": "Title card introducing the initiative for K-12 educators"},
+    {"card": 2, "title": "Our Dedicated Team", "content_summary": "Team members: Matthew Zinn, Kimberly Ring, Patrick Pollifrone, Megan Eggemeier (Portfolio Academic Administrators + Training Specialist). Custom photos."},
+    {"card": 3, "title": "Mission: Spark AI Interest", "content_summary": "Three goals: inspire practical applications, empower educators, foster innovation"},
+    {"card": 4, "title": "Collaboration Norms", "content_summary": "Four norms: clear communication, be brave, forward mindset, collaborate. AI-generated illustrations."},
+    {"card": 5, "title": "Becoming AI Champions", "content_summary": "Timeline: Learn → Apply → Share → Advocate"},
+    {"card": 6, "title": "Celebrating AI Successes", "content_summary": "Four success areas: personalized learning, administrative efficiency, enhanced accessibility, data-driven insights"},
+    {"card": 7, "title": "Charting the Future of Education with AI", "content_summary": "Extensive discussion guide with 8 question sections inspired by Jensen Huang interview. Includes embedded YouTube video and philosophy expandable section."},
+    {"card": 8, "title": "Next Steps: Championing AI", "content_summary": "Three action items: host AI demo day, organize AI policy workshop, launch AI mentorship program"}
+  ],
+  "flags": ["has_youtube_video"],
+  "notes": "AI Impact Champions team meeting presentation. Contains YouTube video (Jensen Huang interview). Very content-heavy card 7 with detailed discussion guide."
+}

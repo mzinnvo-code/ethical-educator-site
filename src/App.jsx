@@ -11,6 +11,8 @@ import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Accessibility from "./pages/Accessibility.jsx";
+import ForEducators from "./pages/ForEducators.jsx";
+import TeachingFeedback from "./pages/educators/TeachingFeedback.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -42,6 +44,8 @@ const PAGE_MAP = {
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
+  "for-educators": ForEducators,
+  "teaching-feedback": TeachingFeedback,
 };
 
 const PAGE_META = {
@@ -84,6 +88,14 @@ const PAGE_META = {
   "accessibility": {
     title: "Accessibility Statement — The Ethical Educator",
     description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to matthew@theethicaleducator.com.",
+  },
+  "for-educators": {
+    title: "For Educators — Professional Development Resources — The Ethical Educator",
+    description: "Practical guidance for K–12 teachers and leaders: academic feedback, the Danielson Framework, student engagement, and school leadership.",
+  },
+  "teaching-feedback": {
+    title: "Effective Academic Feedback — The Ethical Educator",
+    description: "A practitioner's guide to personalized, instructional feedback: the Keystone Standard, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
   },
 };
 

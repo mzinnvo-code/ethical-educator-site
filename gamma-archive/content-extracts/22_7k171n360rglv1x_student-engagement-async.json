@@ -1,0 +1,22 @@
+{
+  "gamma_id": "7k171n360rglv1x",
+  "title": "Student Engagement in the Asynchronous Learning Model",
+  "type": "presentation",
+  "last_viewed": "Viewed 10 months ago",
+  "total_cards": 11,
+  "cards": [
+    {"card": 1, "title": "Student Engagement in the Asynchronous Learning Model", "content_summary": "Title card introducing asynchronous learning engagement topic"},
+    {"card": 2, "title": "Reflection", "content_summary": "Reflection prompts with expandable sections: self-assessment, self-reflection, engagement expectations"},
+    {"card": 3, "title": "Key Components of Student Engagement", "content_summary": "Pyramid: course content relevance, instructor facilitation, flexibility in participation, customizable learning pathways, dimensions of engagement"},
+    {"card": 4, "title": "Implement Clear Course Design", "content_summary": "Three numbered items: structured modules, transparent expectations, consistency in layout. Contains custom image."},
+    {"card": 5, "title": "Strategies for Enhancing Engagement", "content_summary": "Five strategies: interactive elements, peer collaboration, timely feedback, independent research, gamification. Contains embedded Microsoft Forms."},
+    {"card": 6, "title": "Challenges to Student Engagement", "content_summary": "Three challenges with expandable solutions: lack of real-time interaction, feelings of isolation, time management difficulties"},
+    {"card": 7, "title": "Encourage Reflective Practices", "content_summary": "Three practices: self-assessment, peer feedback, learning journals. Contains YouTube video and custom images."},
+    {"card": 8, "title": "Measuring Student Engagement", "content_summary": "Four points: importance of measurement, indicators, dimensions, challenges"},
+    {"card": 9, "title": "Case Studies and Examples", "content_summary": "Best practices section with embedded pdftobrainrot.org content. Question aside about audio/visual elements."},
+    {"card": 10, "title": "Future Trends in Student Engagement", "content_summary": "Timeline: AI integration, enhanced flexibility, authentic learning, data-driven decisions"},
+    {"card": 11, "title": "Key Takeaways", "content_summary": "Four boxes: multifaceted approach, proactive strategies, overcoming challenges, future-focused"}
+  ],
+  "flags": ["has_youtube_video", "has_embedded_ms_forms", "has_embedded_iframe_pdftobrainrot"],
+  "notes": "Comprehensive async learning engagement presentation. Multiple interactive embeds: Microsoft Forms survey, YouTube video, pdftobrainrot.org share link. These won't export cleanly to PDF/PPTX."
+}

@@ -1,0 +1,18 @@
+{
+  "gamma_id": "wpweywqpepjmmqm",
+  "title": "AI in Education – Resource Hub",
+  "type": "presentation",
+  "last_viewed": "7 months ago",
+  "total_cards": 7,
+  "cards": [
+    {"card": 1, "title": "AI in Education – Resource Hub"},
+    {"card": 2, "title": "Welcome to the Hub"},
+    {"card": 3, "title": "Navigating the AI Frontier in Education"},
+    {"card": 4, "title": "AI in Education"},
+    {"card": 5, "title": "Specialized GPTs for Professional Development"},
+    {"card": 6, "title": "From Concept to Classroom"},
+    {"card": 7, "title": "Afternoon Collaborative Program Proposal"}
+  ],
+  "flags": [],
+  "notes": "Meta-hub linking to other presentations. Contains buttons linking to other Gamma decks. No embedded multimedia. Acts as a navigation/index page."
+}

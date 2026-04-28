@@ -1,0 +1,19 @@
+{
+  "gamma_id": "gival5vmx773ng3",
+  "title": "Response to Intervention (RTI) in K-12 Schools",
+  "type": "presentation",
+  "last_viewed": "Viewed 1 year ago",
+  "total_cards": 8,
+  "cards": [
+    {"card": 1, "title": "Response to Intervention (RTI) in K-12 Schools", "content_summary": "Title card introducing RTI framework overview"},
+    {"card": 2, "title": "What is RTI?", "content_summary": "Definition and overview of the RTI framework as a multi-tiered approach to early identification and support"},
+    {"card": 3, "title": "The Three Tiers of RTI", "content_summary": "Tier 1: Universal screening and high-quality instruction; Tier 2: Targeted interventions; Tier 3: Intensive individualized interventions"},
+    {"card": 4, "title": "Key Components of RTI", "content_summary": "Universal screening, progress monitoring, evidence-based interventions, data-based decision making"},
+    {"card": 5, "title": "Benefits of RTI", "content_summary": "Early identification, reduced referrals to special education, improved outcomes, data-driven decisions"},
+    {"card": 6, "title": "Challenges in Implementing RTI", "content_summary": "Resource constraints, training needs, fidelity of implementation, coordination across tiers"},
+    {"card": 7, "title": "Best Practices for RTI Implementation", "content_summary": "Leadership support, professional development, collaborative teams, consistent progress monitoring"},
+    {"card": 8, "title": "Conclusion and Next Steps", "content_summary": "Summary of RTI principles and action steps for implementation"}
+  ],
+  "flags": [],
+  "notes": "Clean presentation on RTI framework. No embedded media. 8 cards, straightforward informational content."
+}
