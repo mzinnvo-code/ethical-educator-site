@@ -62,7 +62,7 @@ export default function TeachingFeedback({ navigate }) {
         <FadeIn>
           <SectionLabel>For Educators · Teaching & Feedback</SectionLabel>
           <SectionTitle>Effective Academic Feedback</SectionTitle>
-          <Subtitle>Strategies for providing personalized, actionable, and growth-oriented feedback that prompts students' thinking, addresses misconceptions, and builds toward mastery. Grounded in the Keystone teacher evaluation rubric and research from Hattie & Timperley.</Subtitle>
+          <Subtitle>Strategies for providing personalized, actionable, and growth-oriented feedback that prompts students' thinking, addresses misconceptions, and builds toward mastery. Grounded in research from Hattie & Timperley and contemporary teacher evaluation standards.</Subtitle>
         </FadeIn>
 
         <Narrow>
@@ -71,8 +71,8 @@ export default function TeachingFeedback({ navigate }) {
             <Divider label="What the Standard Expects" />
 
             <FadeIn delay={0.06}>
-              <Expandable title="The Keystone Standard for Academic Feedback" defaultOpen tag="Foundation">
-                <p>According to the Keystone teacher evaluation rubric, an accomplished teacher provides <strong>personalized growth feedback</strong> to each student and points to <strong>specific academic supports</strong> found in the course. That standard has four dimensions:</p>
+              <Expandable title="A Standard of Excellence for Academic Feedback" defaultOpen tag="Foundation">
+                <p>Across contemporary teacher evaluation rubrics, the same picture of accomplished feedback recurs: an accomplished teacher provides <strong>personalized growth feedback</strong> to each student and points to <strong>specific academic supports</strong> found in the course. That standard has four dimensions:</p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10, margin: "16px 0" }}>
                   <ComparisonCard title="Personalized Growth" color={C.teal} items={[
                     "Tailored to the individual student",

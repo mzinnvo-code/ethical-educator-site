@@ -20,7 +20,7 @@ export default function ForEducators({ navigate }) {
           <TopicCard
             icon="💬"
             title="Effective Academic Feedback"
-            desc="Personalized growth feedback, the 5 R's of action feedback, 1:1 conferencing strategies, and the Keystone evaluation standard. How to write comments that students actually use."
+            desc="Personalized growth feedback, the 5 R's of action feedback, 1:1 conferencing strategies, and a research-based evaluation standard. How to write comments that students actually use."
             delay={0.06}
             accent={C.teal}
             onClick={() => navigate("teaching-feedback")}
@@ -37,36 +37,9 @@ export default function ForEducators({ navigate }) {
           <TopicCard
             icon="🎯"
             title="More Coming Soon"
-            desc="Additional PD resources on student engagement, the Danielson Framework, school leadership, and instructional techniques are being prepared."
+            desc="Additional PD resources on student engagement, school leadership, and instructional techniques are being prepared."
             delay={0.14}
             accent={C.ocean}
-          />
-        </div>
-
-        <Divider label="The Danielson Framework" />
-
-        <div className="grid-3" style={{ marginTop: 16 }}>
-          {/* Future: #39, #34, #37, #38, #29 */}
-          <TopicCard
-            icon="🏗️"
-            title="The Danielson Framework Overview"
-            desc="History, structure, and purpose of the Framework for Teaching. The starting point for understanding how domains, components, and performance levels work together."
-            delay={0.06}
-            accent={C.teal}
-          />
-          <TopicCard
-            icon="📐"
-            title="Excelling in Domain 3"
-            desc="Deep dive into instructional techniques — questioning, discussion, engagement, and assessment strategies that move from proficient to distinguished."
-            delay={0.1}
-            accent={C.gold}
-          />
-          <TopicCard
-            icon="🌱"
-            title="Mastering Domain 2"
-            desc="Building a positive classroom environment — establishing a culture for learning, managing student behavior, and creating a climate of respect and rapport."
-            delay={0.14}
-            accent={C.coral}
           />
         </div>
 
@@ -129,7 +102,7 @@ export default function ForEducators({ navigate }) {
             <div style={{ marginTop: 48, padding: "24px 28px", background: C.glow, border: `1px solid ${C.border}`, borderRadius: 14, textAlign: "center" }}>
               <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.05rem", fontWeight: 600, marginBottom: 8 }}>This section is growing</p>
               <p style={{ color: C.textMuted, fontSize: "0.88rem", lineHeight: 1.65 }}>
-                The Teaching & Feedback page is live now. Additional pages covering the Danielson Framework, student engagement strategies, and school leadership are in development. Cards without links will become navigable as content is added.
+                The Teaching & Feedback page is live now. Additional pages covering student engagement strategies and school leadership are in development. Cards without links will become navigable as content is added.
               </p>
             </div>
           </FadeIn>

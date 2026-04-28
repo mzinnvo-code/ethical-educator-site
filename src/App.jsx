@@ -91,11 +91,11 @@ const PAGE_META = {
   },
   "for-educators": {
     title: "For Educators — Professional Development Resources — The Ethical Educator",
-    description: "Practical guidance for K–12 teachers and leaders: academic feedback, the Danielson Framework, student engagement, and school leadership.",
+    description: "Practical guidance for K–12 teachers and leaders: academic feedback, student engagement, and school leadership.",
   },
   "teaching-feedback": {
     title: "Effective Academic Feedback — The Ethical Educator",
-    description: "A practitioner's guide to personalized, instructional feedback: the Keystone Standard, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
+    description: "A practitioner's guide to personalized, instructional feedback: research-based standards, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
   },
 };
 
