@@ -13,6 +13,13 @@ import Privacy from "./pages/Privacy.jsx";
 import Accessibility from "./pages/Accessibility.jsx";
 import ForEducators from "./pages/ForEducators.jsx";
 import TeachingFeedback from "./pages/educators/TeachingFeedback.jsx";
+import EnhancingFeedback from "./pages/educators/EnhancingFeedback.jsx";
+import EnhancingEngagement from "./pages/educators/EnhancingEngagement.jsx";
+import AsyncEngagement from "./pages/educators/AsyncEngagement.jsx";
+import AVResources from "./pages/educators/AVResources.jsx";
+import QualityLeadership from "./pages/educators/QualityLeadership.jsx";
+import HighPerformingSchools from "./pages/educators/HighPerformingSchools.jsx";
+import RTI from "./pages/educators/RTI.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -46,6 +53,13 @@ const PAGE_MAP = {
   "accessibility": Accessibility,
   "for-educators": ForEducators,
   "teaching-feedback": TeachingFeedback,
+  "enhancing-feedback": EnhancingFeedback,
+  "enhancing-engagement": EnhancingEngagement,
+  "async-engagement": AsyncEngagement,
+  "av-resources": AVResources,
+  "quality-leadership": QualityLeadership,
+  "high-performing-schools": HighPerformingSchools,
+  "rti": RTI,
 };
 
 const PAGE_META = {
@@ -96,6 +110,34 @@ const PAGE_META = {
   "teaching-feedback": {
     title: "Effective Academic Feedback — The Ethical Educator",
     description: "A practitioner's guide to personalized, instructional feedback: research-based standards, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
+  },
+  "enhancing-feedback": {
+    title: "Enhancing Academic Feedback — The Ethical Educator",
+    description: "Advanced feedback strategies: the four-pillar framework, performance levels, multimodal delivery, assessment integrity, and a personal action plan.",
+  },
+  "enhancing-engagement": {
+    title: "Enhancing Student Engagement — The Ethical Educator",
+    description: "Theoretical frameworks and practical models for student engagement: behavioral, cognitive, and emotional dimensions; the 4Cs model; active learning; motivation levers.",
+  },
+  "async-engagement": {
+    title: "Asynchronous Learning Engagement — The Ethical Educator",
+    description: "Engagement strategies for online and async settings: course design principles, isolation and time-management challenges, reflective practices, and engagement metrics.",
+  },
+  "av-resources": {
+    title: "AV Resources for Online Teaching — The Ethical Educator",
+    description: "Audio and video tools for K–12 virtual classrooms: comprehension, accessibility commitments, personalized learning, collaborative AV, and the four-category toolkit.",
+  },
+  "quality-leadership": {
+    title: "Quality Leadership & Instruction — The Ethical Educator",
+    description: "Educational leadership styles, instructional pillars, school culture, change management, and five reflection scenarios drawn from real principal challenges.",
+  },
+  "high-performing-schools": {
+    title: "High-Performing K-12 Schools — The Ethical Educator",
+    description: "What separates consistently excellent K–12 schools: data-driven decisions, intensive teacher training, rigorous instruction with embedded test prep, and a supportive culture.",
+  },
+  "rti": {
+    title: "Response to Intervention (RTI) — The Ethical Educator",
+    description: "The tiered intervention framework — Tier 1, 2, and 3 — for early identification and support. Components, benefits, implementation challenges, and where to begin.",
   },
 };
 
