@@ -47,3 +47,88 @@ export function PhiloRef({ text, url }) {
 export function RestartBtn({ onClick }) {
   return <div style={{textAlign:"center",marginTop:20}}><button onClick={onClick} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div>;
 }
+
+// ─────────────────────────────────────────────────────────────────────
+// Bank-experiment building blocks (used by ScenarioCard for Tier-2 entries)
+// ─────────────────────────────────────────────────────────────────────
+
+const LENS_LABELS = {
+  utilitarian: "Utilitarian",
+  deontological: "Deontological",
+  virtue: "Virtue ethics",
+  care: "Care ethics",
+  egoism: "Self-interest",
+  fairness: "Fairness",
+  authenticity: "Authenticity",
+  hedonism: "Hedonism",
+  rawlsian: "Rawlsian",
+  libertarian: "Libertarian",
+  egalitarian: "Egalitarian",
+  communitarian: "Communitarian",
+  rationalist: "Rationalist",
+};
+
+export function EthicalLensTag({ lens, color = C.gold }) {
+  if (!lens) return null;
+  const label = LENS_LABELS[lens] || lens.replace(/-/g, " ");
+  return (
+    <span style={{
+      display: "inline-block", padding: "2px 8px",
+      background: `${color}15`, color,
+      borderRadius: 4, fontSize: "0.66rem",
+      fontWeight: 700, letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      border: `1px solid ${color}30`,
+    }}>{label}</span>
+  );
+}
+
+export function ReflectionPanel({ option, color = C.gold }) {
+  if (!option) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${color}10, ${color}04)`,
+      border: `1px solid ${color}25`,
+      borderRadius: 12, padding: "16px 20px", marginTop: 16,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+        <span style={{ color, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          You chose {option.label}
+        </span>
+        {option.lens && <EthicalLensTag lens={option.lens} color={color} />}
+      </div>
+      <p style={{ color: C.textPrimary, fontSize: "0.95rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+        {option.reflection}
+      </p>
+    </div>
+  );
+}
+
+export function FurtherReadingList({ items, color = C.teal }) {
+  if (!items?.length) return null;
+  const levelColor = (lvl) => lvl === "advanced" ? C.coral : lvl === "intermediate" ? C.gold : C.teal;
+  return (
+    <div style={{ marginTop: 14 }}>
+      <p style={{ color, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+        Read further
+      </p>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {items.map((it, i) => (
+          <li key={i} style={{ padding: "6px 0", borderBottom: i < items.length - 1 ? `1px solid ${C.border}` : "none" }}>
+            <a href={it.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textPrimary, fontSize: "0.86rem", textDecoration: "none" }}>
+              <span style={{ borderBottom: `1px solid ${C.gold}40` }}>{it.title}</span>
+              {it.level && (
+                <span style={{
+                  marginLeft: 8, padding: "1px 6px",
+                  fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: levelColor(it.level), background: `${levelColor(it.level)}15`,
+                  borderRadius: 3,
+                }}>{it.level}</span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

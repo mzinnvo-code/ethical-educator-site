@@ -7,6 +7,10 @@ import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
+import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
+import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
+import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
+import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -48,6 +52,10 @@ const PAGE_MAP = {
   "ai-education": AIEducation,
   "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
+  "thought-experiments/educators": ThoughtExperimentsForEducators,
+  "thought-experiments/k-5": ThoughtExperimentsK5,
+  "thought-experiments/6-8": ThoughtExperimentsMiddle,
+  "thought-experiments/9-12": ThoughtExperimentsHigh,
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
@@ -89,7 +97,23 @@ const PAGE_META = {
   },
   "thought-experiments": {
     title: "Interactive Thought Experiments — The Ethical Educator",
-    description: "Four original scenarios exploring AI, education, and ethics. The Shortcut, The AI Authorship Quandary, The Reluctant Educator, and The Digital Doppelgänger.",
+    description: "Forty interactive scenarios for K–12 and educators, from Plato's Cave to AI policy dilemmas. Read-aloud, philosophical citations, and discussion guides.",
+  },
+  "thought-experiments/educators": {
+    title: "Thought Experiments for Educators — The Ethical Educator",
+    description: "Adult dilemmas about AI in your classroom: surveillance, AI detectors, grading tools, admissions algorithms. Plus four flagship interactive experiments for staff PD.",
+  },
+  "thought-experiments/k-5": {
+    title: "K–5 Thought Experiments — The Ethical Educator",
+    description: "Big illustrations, short prompts, read-aloud built in. Ten experiments for early readers and the teachers who guide them.",
+  },
+  "thought-experiments/6-8": {
+    title: "Grades 6–8 Thought Experiments — The Ethical Educator",
+    description: "Story-based dilemmas connecting AI ethics, identity, and fairness to questions philosophers have wrestled with for centuries.",
+  },
+  "thought-experiments/9-12": {
+    title: "Grades 9–12 Thought Experiments — The Ethical Educator",
+    description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
   },
   "resources": {
     title: "Research Resources & Reading List — The Ethical Educator",
