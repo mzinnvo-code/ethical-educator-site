@@ -6,6 +6,7 @@ import {
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import TopicFilter from "../../components/TopicFilter.jsx";
+import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { useExperimentFilter } from "../../hooks/useExperimentFilter.js";
 import { getExperimentsByGrade, getTopicIdsForGrade } from "../../data/experiments.js";
 
@@ -49,9 +50,18 @@ export default function GradePage({
   const all = getExperimentsByGrade(band);
   const filterApi = useExperimentFilter(all);
   const [active, setActive] = useState(null);
+  const [lensChoices, setLensChoices] = useState([]); // session-only
 
-  // Reset selection when band changes
-  useEffect(() => { setActive(null); }, [band]);
+  // Reset selection AND profile when band changes
+  useEffect(() => { setActive(null); setLensChoices([]); }, [band]);
+
+  const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
+  const resetProfile = () => setLensChoices([]);
+  const suggestTopic = (topicId) => {
+    filterApi.setSelectedTopics([topicId]);
+    setActive(null);
+    window.scrollTo({ top: 200, behavior: "smooth" });
+  };
 
   const availableTopicIds = getTopicIdsForGrade(band);
 
@@ -108,9 +118,20 @@ export default function GradePage({
               >
                 ← Back to all {label} experiments
               </button>
-              <ScenarioCard experiment={active} mode={mode} onClose={() => setActive(null)} />
+              <ScenarioCard
+                experiment={active}
+                mode={mode}
+                onClose={() => setActive(null)}
+                onRecordChoice={recordChoice}
+              />
             </div>
           )}
+
+          <ReasoningProfile
+            choices={lensChoices}
+            onSuggestTopic={suggestTopic}
+            onReset={resetProfile}
+          />
 
           {!active && SIBLING_LINKS[band] && (
             <FadeIn>

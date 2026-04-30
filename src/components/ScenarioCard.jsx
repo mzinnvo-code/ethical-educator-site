@@ -2,48 +2,33 @@ import { useState, useEffect } from "react";
 import { C } from "../theme.js";
 import { useAudio } from "./shared.jsx";
 import {
-  Shell, ChoiceBtn, CounterArgument, ReflectionPanel, FurtherReadingList, EthicalLensTag,
+  Shell, ChoiceBtn, CounterArgument, ReflectionPanel, EthicalLensTag,
 } from "../experiments/ExperimentShared.jsx";
 import { TOPIC_BY_ID } from "../data/topics.js";
 import ReadAloudButton from "./ReadAloudButton.jsx";
+import StageNav from "./StageNav.jsx";
+import SynthesisPanel from "./SynthesisPanel.jsx";
 
-// Modes:
-//   "kid"     → K-5: large illustration, short prompt, big tappable choices, auto-mounted ReadAloud
-//   "story"   → 6-8: illustrated header, paragraph prompt, 4 choice buttons
-//   "canon"   → 9-12 / educators: full philosophical framing, lenses, citations, further reading
+// Resolve a stage prompt that may be a string OR a function ({chose}) => string
+function resolvePrompt(stage, chose, mode) {
+  if (typeof stage.prompt === "function") return stage.prompt({ chose, mode });
+  return stage.prompt;
+}
 
-function Illustration({ src, emoji, alt, size = 200 }) {
-  const [errored, setErrored] = useState(false);
-  if (!src || errored) {
-    return (
-      <div
-        role="img"
-        aria-label={alt || emoji}
-        style={{
-          width: size, height: size,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: size * 0.55,
-          background: `radial-gradient(circle, ${C.gold}10, transparent 70%)`,
-          borderRadius: "50%",
-          margin: "0 auto",
-          animation: "scenarioFloat 4s ease-in-out infinite",
-        }}
-      >
-        {emoji}
-      </div>
-    );
-  }
-  return (
-    <img
-      src={src} alt={alt || ""}
-      onError={() => setErrored(true)}
-      style={{
-        width: size, height: size, objectFit: "contain",
-        margin: "0 auto", display: "block",
-        animation: "scenarioFloat 4s ease-in-out infinite",
-      }}
-    />
-  );
+// If the experiment has no `stages`, synthesize a single-stage shape from
+// the legacy fields (so unstaged scenarios still work).
+function synthesizeStages(experiment) {
+  return [
+    {
+      id: "single",
+      kicker: null,
+      title: experiment.title,
+      prompt: experiment.prompt,
+      promptShort: experiment.promptShort,
+      options: experiment.options,
+      counterpoint: experiment.counterpoint,
+    },
+  ];
 }
 
 function TopicChips({ topicIds }) {
@@ -66,146 +51,167 @@ function TopicChips({ topicIds }) {
   );
 }
 
-export default function ScenarioCard({ experiment, mode = "story", onClose }) {
+export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice }) {
   const audio = useAudio();
-  const [chosen, setChosen] = useState(null);
-  const [showSource, setShowSource] = useState(false);
+  const stages = experiment.stages || synthesizeStages(experiment);
+  const [stageIdx, setStageIdx] = useState(0);
+  const [chose, setChose] = useState([]); // chosen Option per stage (sparse — synthesis stages get null)
+  const [stageChoiceIdx, setStageChoiceIdx] = useState(null); // index of currently chosen option for the active stage
 
   useEffect(() => {
-    setChosen(null);
-    setShowSource(false);
+    setStageIdx(0);
+    setChose([]);
+    setStageChoiceIdx(null);
   }, [experiment?.id]);
 
   if (!experiment) return null;
 
   const accent = TOPIC_BY_ID[experiment.topics[0]]?.color || C.gold;
-  const promptText = mode === "kid" && experiment.promptShort ? experiment.promptShort : experiment.prompt;
-  const chosenOption = chosen != null ? experiment.options[chosen] : null;
+  const stage = stages[stageIdx];
+  const isSynthesisStage = !!stage.synthesis;
+  const isLastStage = stageIdx === stages.length - 1;
+  const Scene = experiment.scene || null;
+
+  // K-5 mode prefers shorter prompt if available
+  const promptText = mode === "kid" && (stage.promptShort || experiment.promptShort)
+    ? (stage.promptShort || experiment.promptShort)
+    : resolvePrompt(stage, chose, mode);
+
+  const choiceForStage = stageChoiceIdx != null ? stage.options?.[stageChoiceIdx] : null;
 
   const handleChoose = (idx) => {
-    setChosen(idx);
-    audio.playChime();
+    if (!stage.options) return;
+    setStageChoiceIdx(idx);
+    const opt = stage.options[idx];
+    const weighty = opt?.lens === "deontological" || stage.weighty;
+    if (weighty) audio.playDeep();
+    else audio.playChime();
+  };
+
+  const handleNext = () => {
+    if (stageChoiceIdx != null) {
+      const opt = stage.options[stageChoiceIdx];
+      // Record this stage's choice
+      const newChose = [...chose, opt];
+      setChose(newChose);
+      if (opt?.lens) onRecordChoice?.(opt.lens, experiment.id);
+    } else {
+      setChose(prev => [...prev, null]);
+    }
+    setStageChoiceIdx(null);
+    audio.playReveal();
+    setStageIdx(i => Math.min(i + 1, stages.length - 1));
+  };
+
+  const handleAdvanceFromSynthesis = () => {
+    audio.playClick();
+    onClose?.();
+  };
+
+  const handleStageJump = (idx) => {
+    if (idx >= stageIdx) return; // can only jump back
+    audio.playClick();
+    setStageIdx(idx);
+    setChose(prev => prev.slice(0, idx));
+    setStageChoiceIdx(null);
   };
 
   const handleRestart = () => {
-    setChosen(null);
     audio.playClick();
+    setStageIdx(0);
+    setChose([]);
+    setStageChoiceIdx(null);
   };
+
+  // Header bar: kicker, stage indicator
+  const HeaderBar = () => (
+    <StageNav
+      stages={stages}
+      currentIdx={stageIdx}
+      onSelect={handleStageJump}
+      accent={accent}
+    />
+  );
 
   // ──────────────── KID MODE (K-5) ────────────────
   if (mode === "kid") {
     return (
       <Shell color={accent}>
-        <style>{`@keyframes scenarioFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}`}</style>
+        <HeaderBar />
 
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <Illustration src={experiment.illustration} emoji={experiment.emoji} alt={experiment.title} size={180} />
-        </div>
+        {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
-        <h2 style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
-          color: C.textPrimary, fontSize: "1.6rem", textAlign: "center",
-          marginBottom: 14, lineHeight: 1.25, fontWeight: 700,
-        }}>
-          {experiment.title}
-        </h2>
-
-        <p style={{
-          color: C.textPrimary, fontSize: "1.15rem", lineHeight: 1.6,
-          textAlign: "center", marginBottom: 18,
-          fontFamily: "'Source Serif 4', Georgia, serif",
-          maxWidth: 540, margin: "0 auto 18px",
-        }}>
-          {promptText}
-        </p>
-
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <ReadAloudButton text={`${experiment.title}. ${promptText}`} variant="primary" rate={0.85} label="Read it to me" />
-        </div>
-
-        {chosen == null ? (
-          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-            {experiment.options.map((opt, i) => (
-              <button
-                key={i}
-                onClick={() => handleChoose(i)}
-                style={{
-                  padding: "18px 18px",
-                  background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
-                  border: `2px solid ${accent}30`,
-                  borderRadius: 14,
-                  color: C.textPrimary,
-                  fontFamily: "'Source Serif 4', Georgia, serif",
-                  fontSize: "1.02rem", fontWeight: 600, lineHeight: 1.4,
-                  cursor: "pointer", textAlign: "left",
-                  transition: "all 0.2s",
-                  minHeight: 80, display: "flex", alignItems: "center", gap: 10,
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${accent}25, ${accent}10)`;
-                  e.currentTarget.style.borderColor = accent + "70";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${accent}10, ${accent}04)`;
-                  e.currentTarget.style.borderColor = accent + "30";
-                  e.currentTarget.style.transform = "none";
-                }}
-              >
-                <span style={{
-                  width: 32, height: 32, borderRadius: "50%",
-                  background: accent, color: "#fff",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "0.9rem", fontWeight: 700, flexShrink: 0,
-                }}>{opt.label}</span>
-                {opt.text}
-              </button>
-            ))}
-          </div>
-        ) : (
+        {!isSynthesisStage && (
           <>
-            <ReflectionPanel option={chosenOption} color={accent} />
-            {experiment.counterpoint && (
-              <CounterArgument color={C.coral}>
-                {experiment.counterpoint}
-              </CounterArgument>
+            {stage.title && (
+              <h2 style={{
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                color: C.textPrimary, fontSize: "1.55rem", textAlign: "center",
+                marginBottom: 14, lineHeight: 1.25, fontWeight: 700,
+              }}>
+                {stage.title}
+              </h2>
             )}
-            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", marginTop: 18 }}>
-              <button onClick={handleRestart} style={{
-                padding: "10px 22px",
-                background: `${C.gold}15`, border: `1px solid ${C.gold}40`,
-                borderRadius: 999, color: C.gold,
-                cursor: "pointer", fontSize: "0.86rem", fontWeight: 600,
-              }}>↺ Try a different choice</button>
-              {onClose && (
-                <button onClick={onClose} style={{
-                  padding: "10px 22px",
-                  background: "transparent", border: `1px solid ${C.border}`,
-                  borderRadius: 999, color: C.textMuted,
-                  cursor: "pointer", fontSize: "0.86rem",
-                }}>Pick a new experiment</button>
-              )}
+
+            <p style={{
+              color: C.textPrimary, fontSize: "1.1rem", lineHeight: 1.6,
+              textAlign: "center", marginBottom: 18,
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              maxWidth: 540, margin: "0 auto 18px",
+            }}>
+              {promptText}
+            </p>
+
+            <div style={{ textAlign: "center", marginBottom: 22 }}>
+              <ReadAloudButton text={`${stage.title || experiment.title}. ${promptText}`} variant="primary" rate={0.85} label="Read it to me" />
             </div>
-            {(experiment.reference?.url || experiment.furtherReading?.length) && (
-              <details style={{ marginTop: 24, padding: "12px 16px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10 }}>
-                <summary style={{ cursor: "pointer", color: C.textSecondary, fontSize: "0.84rem", fontWeight: 600 }}>
-                  📚 Where does this idea come from?
-                </summary>
-                <div style={{ marginTop: 10 }}>
-                  {experiment.reference && (
-                    <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.6 }}>
-                      {experiment.reference.url ? (
-                        <a href={experiment.reference.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textSecondary, borderBottom: `1px solid ${C.gold}40` }}>
-                          {experiment.reference.text}
-                        </a>
-                      ) : experiment.reference.text}
-                    </p>
-                  )}
-                  <FurtherReadingList items={experiment.furtherReading} color={accent} />
-                </div>
-              </details>
+
+            {stageChoiceIdx == null ? (
+              <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                {stage.options?.map((opt, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleChoose(i)}
+                    style={{
+                      padding: "16px 16px",
+                      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+                      border: `2px solid ${accent}30`,
+                      borderRadius: 14,
+                      color: C.textPrimary,
+                      fontFamily: "'Source Serif 4', Georgia, serif",
+                      fontSize: "1rem", fontWeight: 600, lineHeight: 1.4,
+                      cursor: "pointer", textAlign: "left",
+                      transition: "all 0.2s",
+                      minHeight: 76, display: "flex", alignItems: "center", gap: 10,
+                    }}
+                    onMouseOver={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}25, ${accent}10)`; e.currentTarget.style.borderColor = accent + "70"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                    onMouseOut={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}10, ${accent}04)`; e.currentTarget.style.borderColor = accent + "30"; e.currentTarget.style.transform = "none"; }}
+                  >
+                    <span style={{
+                      width: 30, height: 30, borderRadius: "50%",
+                      background: accent, color: "#fff",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "0.86rem", fontWeight: 700, flexShrink: 0,
+                    }}>{opt.label}</span>
+                    {opt.text}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <>
+                <ReflectionPanel option={choiceForStage} color={accent} />
+                {stage.counterpoint && (
+                  <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>
+                )}
+                <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
+              </>
             )}
           </>
+        )}
+
+        {isSynthesisStage && (
+          <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
         )}
       </Shell>
     );
@@ -215,10 +221,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose }) {
   if (mode === "story") {
     return (
       <Shell color={accent}>
-        <style>{`@keyframes scenarioFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}`}</style>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 18, flexWrap: "wrap" }}>
-          <Illustration src={experiment.illustration} emoji={experiment.emoji} alt={experiment.title} size={90} />
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
           <div style={{ flex: 1, minWidth: 220 }}>
             <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.55rem", fontWeight: 700, marginBottom: 6 }}>
               {experiment.title}
@@ -227,58 +230,49 @@ export default function ScenarioCard({ experiment, mode = "story", onClose }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 20 }}>
-          <ReadAloudButton text={`${experiment.title}. ${experiment.prompt}`} variant="icon" rate={0.95} />
-          <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
-            {experiment.prompt}
-          </p>
-        </div>
+        <HeaderBar />
 
-        {chosen == null ? (
-          <div style={{ display: "grid", gap: 10, gridTemplateColumns: "1fr" }}>
-            {experiment.options.map((opt, i) => (
-              <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
-                <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
-                {opt.text}
-              </ChoiceBtn>
-            ))}
-          </div>
-        ) : (
+        {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
+
+        {!isSynthesisStage && (
           <>
-            <ReflectionPanel option={chosenOption} color={accent} />
-            {experiment.counterpoint && (
-              <CounterArgument color={C.coral}>
-                {experiment.counterpoint}
-              </CounterArgument>
+            {stage.title && stage.title !== experiment.title && (
+              <h3 style={{
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                color: accent, fontSize: "1.1rem", fontWeight: 700,
+                marginBottom: 8,
+              }}>{stage.title}</h3>
             )}
-            <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
-              <button onClick={handleRestart} style={{
-                padding: "8px 18px", background: `${C.gold}12`,
-                border: `1px solid ${C.gold}35`, borderRadius: 6,
-                color: C.gold, cursor: "pointer", fontSize: "0.84rem",
-              }}>↺ Try another choice</button>
-              <button onClick={() => setShowSource(s => !s)} style={{
-                padding: "8px 18px", background: "transparent",
-                border: `1px solid ${C.border}`, borderRadius: 6,
-                color: C.textSecondary, cursor: "pointer", fontSize: "0.84rem",
-              }}>{showSource ? "Hide" : "Show"} sources</button>
+
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 18 }}>
+              <ReadAloudButton text={`${stage.title || experiment.title}. ${promptText}`} variant="icon" rate={0.95} />
+              <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                {promptText}
+              </p>
             </div>
-            {showSource && (
-              <div style={{ marginTop: 16, padding: 16, background: C.surface, borderRadius: 10, border: `1px solid ${C.border}` }}>
-                {experiment.reference && (
-                  <p style={{ color: C.textSecondary, fontSize: "0.85rem", lineHeight: 1.6, marginBottom: 8 }}>
-                    <strong style={{ color: C.gold }}>Where this comes from: </strong>
-                    {experiment.reference.url ? (
-                      <a href={experiment.reference.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textPrimary, borderBottom: `1px solid ${C.gold}40` }}>
-                        {experiment.reference.text}
-                      </a>
-                    ) : experiment.reference.text}
-                  </p>
-                )}
-                <FurtherReadingList items={experiment.furtherReading} color={accent} />
+
+            {stageChoiceIdx == null ? (
+              <div style={{ display: "grid", gap: 10 }}>
+                {stage.options?.map((opt, i) => (
+                  <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
+                    <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
+                    {opt.text}
+                  </ChoiceBtn>
+                ))}
               </div>
+            ) : (
+              <>
+                <ReflectionPanel option={choiceForStage} color={accent} />
+                {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
+                <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
+              </>
             )}
           </>
+        )}
+
+        {isSynthesisStage && (
+          <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
         )}
       </Shell>
     );
@@ -287,106 +281,157 @@ export default function ScenarioCard({ experiment, mode = "story", onClose }) {
   // ──────────────── CANON MODE (9-12 + educators) ────────────────
   return (
     <Shell color={accent}>
-      <style>{`@keyframes scenarioFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}`}</style>
-
-      <div style={{ marginBottom: 22 }}>
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 18, flexWrap: "wrap", marginBottom: 12 }}>
-          <Illustration src={experiment.illustration} emoji={experiment.emoji} alt={experiment.title} size={100} />
-          <div style={{ flex: 1, minWidth: 220 }}>
-            <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.7rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.2 }}>
-              {experiment.title}
-            </h2>
-            <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.5, marginBottom: 10, fontStyle: "italic" }}>
-              {experiment.tagline}
-            </p>
-            <TopicChips topicIds={experiment.topics} />
-          </div>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginTop: 18 }}>
-          <ReadAloudButton text={`${experiment.title}. ${experiment.prompt}`} variant="icon" rate={0.95} />
-          <p style={{ color: C.textPrimary, fontSize: "1.02rem", lineHeight: 1.75, fontFamily: "'Source Serif 4', Georgia, serif" }}>
-            {experiment.prompt}
-          </p>
-        </div>
+      <div style={{ marginBottom: 16 }}>
+        <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.7rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.2 }}>
+          {experiment.title}
+        </h2>
+        <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.5, marginBottom: 10, fontStyle: "italic" }}>
+          {experiment.tagline}
+        </p>
+        <TopicChips topicIds={experiment.topics} />
       </div>
 
-      {chosen == null ? (
-        <div style={{ display: "grid", gap: 12 }}>
-          {experiment.options.map((opt, i) => (
-            <button
-              key={i}
-              onClick={() => handleChoose(i)}
-              style={{
-                padding: "16px 20px",
-                background: `${accent}06`,
-                border: `1px solid ${accent}25`,
-                borderRadius: 10, textAlign: "left",
-                color: C.textPrimary,
-                fontFamily: "'Source Serif 4', Georgia, serif",
-                fontSize: "0.96rem", lineHeight: 1.6,
-                cursor: "pointer", transition: "all 0.2s",
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = `${accent}15`;
-                e.currentTarget.style.borderColor = accent + "55";
-                e.currentTarget.style.transform = "translateX(4px)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = `${accent}06`;
-                e.currentTarget.style.borderColor = accent + "25";
-                e.currentTarget.style.transform = "none";
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-                <span style={{ color: accent, fontWeight: 700 }}>{opt.label}.</span>
-                {opt.lens && <EthicalLensTag lens={opt.lens} color={accent} />}
-              </div>
-              <div style={{ paddingLeft: 22 }}>{opt.text}</div>
-            </button>
-          ))}
-        </div>
-      ) : (
+      <HeaderBar />
+
+      {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
+
+      {!isSynthesisStage && (
         <>
-          <ReflectionPanel option={chosenOption} color={accent} />
-          {experiment.counterpoint && (
-            <CounterArgument color={C.coral}>
-              {experiment.counterpoint}
-            </CounterArgument>
+          {stage.title && stage.title !== experiment.title && (
+            <h3 style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              color: accent, fontSize: "1.16rem", fontWeight: 700,
+              marginBottom: 10,
+            }}>{stage.title}</h3>
           )}
 
-          <div style={{ marginTop: 22, padding: 18, background: C.surface, borderRadius: 12, border: `1px solid ${C.border}` }}>
-            {experiment.reference && (
-              <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6, marginBottom: 10 }}>
-                <strong style={{ color: C.gold, display: "block", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>
-                  Source
-                </strong>
-                {experiment.reference.url ? (
-                  <a href={experiment.reference.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textPrimary, borderBottom: `1px solid ${C.gold}40` }}>
-                    {experiment.reference.text}
-                  </a>
-                ) : experiment.reference.text}
-              </p>
-            )}
-            <FurtherReadingList items={experiment.furtherReading} color={accent} />
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 18 }}>
+            <ReadAloudButton text={`${stage.title || experiment.title}. ${promptText}`} variant="icon" rate={0.95} />
+            <p style={{ color: C.textPrimary, fontSize: "1.02rem", lineHeight: 1.75, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+              {promptText}
+            </p>
           </div>
 
-          <div style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
-            <button onClick={handleRestart} style={{
-              padding: "9px 20px", background: `${C.gold}12`,
-              border: `1px solid ${C.gold}35`, borderRadius: 6,
-              color: C.gold, cursor: "pointer", fontSize: "0.84rem", fontWeight: 600,
-            }}>↺ Try another choice</button>
-            {onClose && (
-              <button onClick={onClose} style={{
-                padding: "9px 20px", background: "transparent",
-                border: `1px solid ${C.border}`, borderRadius: 6,
-                color: C.textMuted, cursor: "pointer", fontSize: "0.84rem",
-              }}>← Back to all</button>
-            )}
-          </div>
+          {stageChoiceIdx == null ? (
+            <div style={{ display: "grid", gap: 12 }}>
+              {stage.options?.map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleChoose(i)}
+                  style={{
+                    padding: "16px 20px",
+                    background: `${accent}06`,
+                    border: `1px solid ${accent}25`,
+                    borderRadius: 10, textAlign: "left",
+                    color: C.textPrimary,
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    fontSize: "0.96rem", lineHeight: 1.6,
+                    cursor: "pointer", transition: "all 0.2s",
+                  }}
+                  onMouseOver={(e) => { e.currentTarget.style.background = `${accent}15`; e.currentTarget.style.borderColor = accent + "55"; e.currentTarget.style.transform = "translateX(4px)"; }}
+                  onMouseOut={(e) => { e.currentTarget.style.background = `${accent}06`; e.currentTarget.style.borderColor = accent + "25"; e.currentTarget.style.transform = "none"; }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                    <span style={{ color: accent, fontWeight: 700 }}>{opt.label}.</span>
+                    {opt.lens && <EthicalLensTag lens={opt.lens} color={accent} />}
+                  </div>
+                  <div style={{ paddingLeft: 22 }}>{opt.text}</div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <>
+              <ReflectionPanel option={choiceForStage} color={accent} />
+              {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
+              <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
+            </>
+          )}
         </>
       )}
+
+      {isSynthesisStage && (
+        <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+      )}
     </Shell>
+  );
+}
+
+function NextOrFinish({ isLast, accent, onNext, onRestart }) {
+  return (
+    <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
+      <button
+        onClick={onNext}
+        style={{
+          padding: "10px 22px",
+          background: `linear-gradient(135deg, ${accent}, ${accent}dd)`,
+          color: "#fff", border: "none", borderRadius: 8,
+          cursor: "pointer", fontSize: "0.88rem", fontWeight: 600,
+          boxShadow: `0 4px 14px ${accent}40`,
+        }}
+      >
+        {isLast ? "See reflection →" : "Continue →"}
+      </button>
+      <button
+        onClick={onRestart}
+        style={{
+          padding: "10px 18px",
+          background: "transparent",
+          border: `1px solid ${C.border}`,
+          borderRadius: 8, color: C.textMuted,
+          cursor: "pointer", fontSize: "0.84rem",
+        }}
+      >
+        ↺ Restart
+      </button>
+    </div>
+  );
+}
+
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode }) {
+  const customSynthesis = typeof stage.synthesis === "function"
+    ? stage.synthesis({ chose, experiment, accent, mode })
+    : null;
+
+  return (
+    <div>
+      {stage.title && (
+        <h3 style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          color: accent, fontSize: "1.2rem", fontWeight: 700,
+          marginBottom: 12,
+        }}>{stage.title}</h3>
+      )}
+
+      {customSynthesis || (
+        <SynthesisPanel
+          chose={chose}
+          experiment={experiment}
+          accent={accent}
+          positions={stage.positions || []}
+        />
+      )}
+
+      <div style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
+        <button
+          onClick={onRestart}
+          style={{
+            padding: "10px 20px", background: `${C.gold}15`,
+            border: `1px solid ${C.gold}40`, borderRadius: 8,
+            color: C.gold, cursor: "pointer", fontSize: "0.86rem", fontWeight: 600,
+          }}
+        >↺ Run it again</button>
+        {onClose && (
+          <button
+            onClick={onClose}
+            style={{
+              padding: "10px 20px", background: "transparent",
+              border: `1px solid ${C.border}`, borderRadius: 8,
+              color: C.textMuted, cursor: "pointer", fontSize: "0.86rem",
+            }}
+          >← Pick a new experiment</button>
+        )}
+      </div>
+    </div>
   );
 }
