@@ -56,6 +56,8 @@ import AIGradingScene from "../scenes/AIGradingScene.jsx";
 import BiasedAdmissionsScene from "../scenes/BiasedAdmissionsScene.jsx";
 import AIFriendScene from "../scenes/AIFriendScene.jsx";
 
+import { TEACHER_KITS } from "./teacherKits.js";
+
 // Helper for synthesis stages using default panel behavior
 const synthesis = ({ kicker = "Reflection", title = "What you said, what it means", positions } = {}) => ({
   id: "synthesis", kicker, title,
@@ -1362,6 +1364,11 @@ export const EXPERIMENTS = [
     emoji: "💬", added: "2026-04-30", estimatedMinutes: 9,
   },
 ];
+
+// Attach teacher kits by id (kept in a separate module for editorial focus)
+EXPERIMENTS.forEach(e => {
+  if (TEACHER_KITS[e.id]) e.teacherKit = TEACHER_KITS[e.id];
+});
 
 // Helpers ─────────────────────────────────────────────────────────────
 
