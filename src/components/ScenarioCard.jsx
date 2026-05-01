@@ -8,6 +8,7 @@ import { TOPIC_BY_ID } from "../data/topics.js";
 import ReadAloudButton from "./ReadAloudButton.jsx";
 import StageNav from "./StageNav.jsx";
 import SynthesisPanel from "./SynthesisPanel.jsx";
+import TeacherKit from "./TeacherKit.jsx";
 
 // Resolve a stage prompt that may be a string OR a function ({chose}) => string
 function resolvePrompt(stage, chose, mode) {
@@ -51,17 +52,42 @@ function TopicChips({ topicIds }) {
   );
 }
 
+function TeacherToggle({ active, onToggle, accent }) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-pressed={active}
+      aria-label={active ? "Hide teacher lesson plan" : "Show teacher lesson plan"}
+      style={{
+        display: "inline-flex", alignItems: "center", gap: 6,
+        padding: "5px 12px", borderRadius: 999,
+        background: active ? `${accent}25` : "transparent",
+        border: `1px solid ${active ? accent + "60" : C.border}`,
+        color: active ? accent : C.textMuted,
+        cursor: "pointer", fontSize: "0.74rem", fontWeight: 600,
+        letterSpacing: "0.04em",
+        transition: "all 0.2s",
+      }}
+    >
+      <span aria-hidden="true">🍎</span>
+      {active ? "Hide teacher kit" : "For teachers"}
+    </button>
+  );
+}
+
 export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice }) {
   const audio = useAudio();
   const stages = experiment.stages || synthesizeStages(experiment);
   const [stageIdx, setStageIdx] = useState(0);
   const [chose, setChose] = useState([]); // chosen Option per stage (sparse — synthesis stages get null)
   const [stageChoiceIdx, setStageChoiceIdx] = useState(null); // index of currently chosen option for the active stage
+  const [showTeacherKit, setShowTeacherKit] = useState(false);
 
   useEffect(() => {
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
+    setShowTeacherKit(false);
   }, [experiment?.id]);
 
   if (!experiment) return null;
@@ -123,19 +149,36 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
     setStageChoiceIdx(null);
   };
 
-  // Header bar: kicker, stage indicator
+  // Header bar: kicker, stage indicator + teacher kit toggle
   const HeaderBar = () => (
-    <StageNav
-      stages={stages}
-      currentIdx={stageIdx}
-      onSelect={handleStageJump}
-      accent={accent}
-    />
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 12, justifyContent: "space-between", flexWrap: "wrap" }}>
+      <StageNav
+        stages={stages}
+        currentIdx={stageIdx}
+        onSelect={handleStageJump}
+        accent={accent}
+      />
+      {experiment.teacherKit && (
+        <TeacherToggle
+          active={showTeacherKit}
+          onToggle={() => setShowTeacherKit(s => !s)}
+          accent={accent}
+        />
+      )}
+    </div>
+  );
+
+  // Teacher kit (rendered below the Shell in every mode)
+  const TeacherKitBelow = () => (
+    showTeacherKit && experiment.teacherKit
+      ? <TeacherKit kit={experiment.teacherKit} experiment={experiment} accent={accent} />
+      : null
   );
 
   // ──────────────── KID MODE (K-5) ────────────────
   if (mode === "kid") {
     return (
+      <>
       <Shell color={accent}>
         <HeaderBar />
 
@@ -214,12 +257,15 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
         )}
       </Shell>
+      <TeacherKitBelow />
+      </>
     );
   }
 
   // ──────────────── STORY MODE (6-8) ────────────────
   if (mode === "story") {
     return (
+      <>
       <Shell color={accent}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
           <div style={{ flex: 1, minWidth: 220 }}>
@@ -275,11 +321,14 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
         )}
       </Shell>
+      <TeacherKitBelow />
+      </>
     );
   }
 
   // ──────────────── CANON MODE (9-12 + educators) ────────────────
   return (
+    <>
     <Shell color={accent}>
       <div style={{ marginBottom: 16 }}>
         <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.7rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.2 }}>
@@ -354,6 +403,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
           onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
       )}
     </Shell>
+    <TeacherKitBelow />
+    </>
   );
 }
 
