@@ -11,6 +11,7 @@ import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEduca
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
 import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
 import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
+import ThoughtExperimentsToolkit from "./pages/thought-experiments/Toolkit.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -56,6 +57,7 @@ const PAGE_MAP = {
   "thought-experiments/k-5": ThoughtExperimentsK5,
   "thought-experiments/6-8": ThoughtExperimentsMiddle,
   "thought-experiments/9-12": ThoughtExperimentsHigh,
+  "thought-experiments/toolkit": ThoughtExperimentsToolkit,
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
@@ -114,6 +116,10 @@ const PAGE_META = {
   "thought-experiments/9-12": {
     title: "Grades 9–12 Thought Experiments — The Ethical Educator",
     description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
+  },
+  "thought-experiments/toolkit": {
+    title: "Dialogue Toolkit — The Ethical Educator",
+    description: "Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students who want to run philosophy well.",
   },
   "resources": {
     title: "Research Resources & Reading List — The Ethical Educator",

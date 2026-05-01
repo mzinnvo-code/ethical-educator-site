@@ -10,30 +10,36 @@ import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { useExperimentFilter } from "../../hooks/useExperimentFilter.js";
 import { getExperimentsByGrade, getTopicIdsForGrade } from "../../data/experiments.js";
 
+const TOOLKIT_LINK = { id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, decision tree", color: C.teal };
+
 const SIBLING_LINKS = {
   "educators": [
     { id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are, why they matter", color: C.teal },
     { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
     { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based dilemmas", color: C.gold },
     { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean },
+    TOOLKIT_LINK,
   ],
   "k-5": [
     { id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are", color: C.teal },
     { id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Adult AI dilemmas", color: C.gold },
     { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based dilemmas", color: C.gold },
     { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The canon", color: C.ocean },
+    TOOLKIT_LINK,
   ],
   "6-8": [
     { id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are", color: C.teal },
     { id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Adult AI dilemmas", color: C.gold },
     { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
     { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The canon", color: C.ocean },
+    TOOLKIT_LINK,
   ],
   "9-12": [
     { id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are", color: C.teal },
     { id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Adult AI dilemmas", color: C.gold },
     { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
     { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based dilemmas", color: C.gold },
+    TOOLKIT_LINK,
   ],
 };
 
