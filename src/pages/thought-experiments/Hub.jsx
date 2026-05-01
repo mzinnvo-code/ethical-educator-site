@@ -70,7 +70,7 @@ export default function Hub({ navigate }) {
               accent={C.coral} delay={0.05}
             />
           </div>
-          <div className="grid-2" style={{ marginBottom: 28 }}>
+          <div className="grid-2" style={{ marginBottom: 18 }}>
             <TopicCard
               icon="🚋" iconLabel="Trolley"
               title="Grades 6–8"
@@ -84,6 +84,15 @@ export default function Hub({ navigate }) {
               desc="The philosophical canon — Plato's Cave, Mary's Room, Chinese Room — alongside the AI questions of our age."
               onClick={() => navigate("thought-experiments/9-12")}
               accent={C.ocean} delay={0.15}
+            />
+          </div>
+          <div style={{ marginBottom: 28 }}>
+            <TopicCard
+              icon="🛠" iconLabel="Toolkit"
+              title="Dialogue Toolkit"
+              desc="Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students."
+              onClick={() => navigate("thought-experiments/toolkit")}
+              accent={C.teal} delay={0.2}
             />
           </div>
         </Narrow>
@@ -159,6 +168,38 @@ export default function Hub({ navigate }) {
               experiments under <em>For Educators</em> are designed for adult professional dialogue — your AI policy depends on
               decisions it's better to make through scenario than through abstraction.</p>
             </Expandable>
+
+            <div style={{
+              marginTop: 18,
+              padding: "16px 20px",
+              background: `linear-gradient(135deg, ${C.teal}10, ${C.bgAlt})`,
+              border: `1px solid ${C.teal}30`,
+              borderRadius: 12,
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              gap: 14, flexWrap: "wrap",
+            }}>
+              <div style={{ flex: 1, minWidth: 240 }}>
+                <p style={{
+                  fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em",
+                  textTransform: "uppercase", color: C.teal, marginBottom: 6,
+                }}>Want more?</p>
+                <p style={{ color: C.textPrimary, fontSize: "0.94rem", fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.55 }}>
+                  The full <strong>Dialogue Toolkit</strong> includes twelve protocols with step-by-step
+                  scripts, a "what do I do when…" decision tree, and a parallel canon across East Asian,
+                  African, South Asian, and Indigenous traditions.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate("thought-experiments/toolkit")}
+                style={{
+                  padding: "10px 20px",
+                  background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`,
+                  color: "#fff", border: "none", borderRadius: 8,
+                  cursor: "pointer", fontWeight: 600, fontSize: "0.86rem",
+                  whiteSpace: "nowrap",
+                }}
+              >Open the Toolkit →</button>
+            </div>
           </FadeIn>
 
           {/* FEATURED THIS WEEK */}
@@ -249,6 +290,7 @@ export default function Hub({ navigate }) {
                 { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
                 { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based AI ethics", color: C.gold },
                 { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean },
+                { id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, global canon", color: C.teal },
               ]}
             />
           </FadeIn>

@@ -1,6 +1,33 @@
 import { useState } from "react";
 import { C } from "../theme.js";
 
+// Map a free-text protocol name in a TeacherKit to a protocol id in the
+// Dialogue Toolkit library, so we can deep-link.
+const KNOWN_PROTOCOLS = {
+  "talking circle": "talking-circle",
+  "socratic seminar": "socratic-seminar",
+  "fishbowl": "fishbowl",
+  "four corners": "four-corners-debate",
+  "structured academic": "structured-academic-controversy",
+  "harkness": "harkness",
+  "world café": "world-cafe",
+  "world cafe": "world-cafe",
+  "stakeholder roundtable": "stakeholder-roundtable",
+  "continuum line": "continuum-line",
+  "think-pair-share": "think-pair-share",
+  "think pair share": "think-pair-share",
+  "gallery walk": "gallery-walk",
+  "silent conversation": "silent-conversation",
+};
+function findProtocolId(name) {
+  if (!name) return null;
+  const lower = name.toLowerCase();
+  for (const [key, id] of Object.entries(KNOWN_PROTOCOLS)) {
+    if (lower.includes(key)) return id;
+  }
+  return null;
+}
+
 /**
  * @typedef {Object} TeacherKit
  * @property {string} bigQuestion - The single guiding question of the lesson
@@ -166,12 +193,28 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
           <p style={{ color: C.textPrimary, marginBottom: 8 }}>
             <strong style={{ color: C.gold }}>Warm-up (3–5 min):</strong> {kit.warmUp}
           </p>
-          {kit.protocol && (
-            <p style={{ marginBottom: 8 }}>
-              <strong style={{ color: C.gold }}>Protocol:</strong> {kit.protocol.name}
-              <span style={{ color: C.textMuted, fontStyle: "italic" }}> — {kit.protocol.why}</span>
-            </p>
-          )}
+          {kit.protocol && (() => {
+            const pid = findProtocolId(kit.protocol.name);
+            const NameEl = pid ? (
+              <a
+                href={`#thought-experiments/toolkit?protocol=${pid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: C.gold,
+                  borderBottom: `1px solid ${C.gold}60`,
+                  textDecoration: "none",
+                }}
+                title="Open this protocol in the Dialogue Toolkit (new tab)"
+              >{kit.protocol.name} ↗</a>
+            ) : kit.protocol.name;
+            return (
+              <p style={{ marginBottom: 8 }}>
+                <strong style={{ color: C.gold }}>Protocol:</strong> {NameEl}
+                <span style={{ color: C.textMuted, fontStyle: "italic" }}> — {kit.protocol.why}</span>
+              </p>
+            );
+          })()}
           {kit.extension && (
             <p style={{ marginTop: 10, padding: "8px 12px", background: `${C.gold}08`, borderLeft: `2px solid ${C.gold}`, borderRadius: "0 6px 6px 0" }}>
               <strong style={{ color: C.gold }}>If time:</strong> {kit.extension}
