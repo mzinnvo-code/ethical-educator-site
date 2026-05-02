@@ -1,13 +1,13 @@
 # Thought Experiment Illustrations
 
-Each scenario in `src/data/experiments.js` references an illustration at `/illustrations/<slug>.png`.
-If the file is missing, `ScenarioCard` falls back to the experiment's `emoji` field — so the site
-works fine without images. These are placeholders to be filled in over time.
+Each scenario in `src/data/experiments.js` can display a generated illustration from this folder.
+If a file is missing or fails to load, the card components fall back to the experiment's `emoji`
+field so the site still works.
 
 ## Style guide
 
-- **Aspect:** 1:1 (square). Sized 800×800 or larger.
-- **Format:** PNG with transparent background (preferred) or SVG.
+- **Aspect:** 1:1 (square) for card art; wide landscape for hero art.
+- **Format:** PNG.
 - **Palette:** Warm, painterly. Match the impressionist beach palette in `src/theme.js`:
   midnight blues (#0b1622, #1a5a8a), teal (#1a8a7a), gold (#c89830), coral (#c07040),
   sand (#d4b868). Avoid harsh whites — use the off-white #e0dcd0.

@@ -1,5 +1,6 @@
 import { C } from "../theme.js";
 import { FadeIn } from "../components/shared.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
 const pathways = [
   {
@@ -10,6 +11,7 @@ const pathways = [
     action: "Explore scenarios",
     page: "thought-experiments",
     color: C.teal,
+    image: getFeatureIllustration("thought-experiments"),
   },
   {
     number: "02",
@@ -19,6 +21,7 @@ const pathways = [
     action: "Browse educator resources",
     page: "for-educators",
     color: C.gold,
+    image: getFeatureIllustration("for-educators"),
   },
   {
     number: "03",
@@ -28,6 +31,7 @@ const pathways = [
     action: "Read research foundations",
     page: "phil-education",
     color: C.coral,
+    image: getFeatureIllustration("research-foundations"),
   },
 ];
 
@@ -40,6 +44,7 @@ const practicalResources = [
     action: "Open the hub",
     page: "thought-experiments",
     color: C.teal,
+    image: getFeatureIllustration("dialogue-toolkit"),
   },
   {
     label: "Professional practice",
@@ -49,6 +54,7 @@ const practicalResources = [
     action: "Browse resources",
     page: "for-educators",
     color: C.gold,
+    image: getFeatureIllustration("educator-resources"),
   },
   {
     label: "AI in schools",
@@ -58,6 +64,7 @@ const practicalResources = [
     action: "Read the guide",
     page: "ai-education",
     color: C.ocean,
+    image: getFeatureIllustration("ai-in-education"),
   },
 ];
 
@@ -67,18 +74,21 @@ const researchFoundations = [
     desc: "Research evidence, curriculum possibilities, and the case for philosophy as a practical way to strengthen reasoning in the AI era.",
     page: "phil-education",
     color: C.coral,
+    image: getFeatureIllustration("phil-education"),
   },
   {
     title: "AI & Ethics",
     desc: "Normative ethics translated into school-facing decisions: policy, transparency, fairness, privacy, and what it means to use AI responsibly.",
     page: "ai-ethics",
     color: C.gold,
+    image: getFeatureIllustration("ai-ethics"),
   },
   {
     title: "Moral Psychology",
     desc: "The deeper research spine: dual-process theory, moral judgment, the is/ought gap, and what those debates reveal about AI alignment.",
     page: "moral-psych",
     color: C.teal,
+    image: getFeatureIllustration("moral-psych"),
   },
 ];
 
@@ -88,16 +98,16 @@ function HomeStyles() {
       .home-page{background:${C.bg};overflow:hidden}
       .home-hero{
         min-height:clamp(640px,calc(100svh - 220px),760px);
-        display:grid;
-        grid-template-columns:minmax(0,1.04fr) minmax(320px,0.96fr);
-        gap:clamp(28px,5vw,76px);
+        display:flex;
         align-items:center;
         padding:clamp(72px,8vw,112px) 24px clamp(56px,7vw,88px);
         position:relative;
         background:
-          linear-gradient(115deg,rgba(8,18,32,0.98) 0%,rgba(11,22,34,0.92) 42%,rgba(16,34,46,0.82) 100%),
-          radial-gradient(circle at 78% 20%,rgba(200,152,48,0.2),transparent 34%),
-          radial-gradient(circle at 74% 84%,rgba(192,112,64,0.16),transparent 32%);
+          linear-gradient(115deg,rgba(8,18,32,0.98) 0%,rgba(11,22,34,0.94) 44%,rgba(11,22,34,0.58) 100%),
+          linear-gradient(0deg,rgba(8,18,32,0.72),rgba(8,18,32,0.08)),
+          url('/illustrations/home-hero.png');
+        background-size:cover;
+        background-position:center right;
       }
       .home-hero::before{
         content:"";
@@ -110,7 +120,7 @@ function HomeStyles() {
         mask-image:linear-gradient(90deg,transparent 0%,black 38%,black 100%);
         pointer-events:none;
       }
-      .home-hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto;display:contents}
+      .home-hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto}
       .home-eyebrow{
         color:${C.sand};
         font-size:0.72rem;
@@ -335,7 +345,17 @@ function HomeStyles() {
         background:linear-gradient(135deg,var(--accent-soft),rgba(18,37,61,0.96));
         box-shadow:0 18px 44px rgba(0,0,0,0.18);
       }
-      .pathway-card{padding:24px 22px;min-height:260px;display:flex;flex-direction:column}
+      .pathway-card{padding:18px;min-height:340px;display:flex;flex-direction:column}
+      .home-card-visual{
+        width:100%;
+        aspect-ratio:1.62;
+        border-radius:8px;
+        overflow:hidden;
+        border:1px solid rgba(224,220,208,0.08);
+        background:rgba(224,220,208,0.04);
+        margin-bottom:18px;
+      }
+      .home-card-visual img{width:100%;height:100%;object-fit:cover;display:block}
       .pathway-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:22px}
       .pathway-number{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:0.78rem;font-weight:700}
       .pathway-eyebrow{color:${C.textMuted};font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;line-height:1.4;text-align:right}
@@ -343,12 +363,12 @@ function HomeStyles() {
       .card-desc{color:${C.textSecondary};font-size:0.9rem;line-height:1.64}
       .card-action{margin-top:auto;padding-top:22px;color:var(--accent);font-size:0.84rem;font-weight:700;display:inline-flex;align-items:center;gap:6px}
       .feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
-      .feature-card{padding:26px 24px;min-height:390px;display:flex;flex-direction:column}
+      .feature-card{padding:18px;min-height:510px;display:flex;flex-direction:column}
       .feature-label{color:var(--accent);font-size:0.68rem;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;margin-bottom:12px}
       .feature-card ul{list-style:none;padding:0;margin:20px 0 0}
       .feature-card li{color:${C.textMuted};font-size:0.83rem;line-height:1.55;padding:9px 0;border-top:1px solid rgba(224,220,208,0.06)}
       .research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}
-      .research-card{padding:22px 20px;min-height:230px;display:flex;flex-direction:column}
+      .research-card{padding:18px;min-height:360px;display:flex;flex-direction:column}
       .research-card .card-title{font-size:1.08rem}
       .research-note{
         margin-top:34px;
@@ -372,6 +392,17 @@ function HomeStyles() {
         padding:28px;
         margin-top:28px;
       }
+      .resource-main{
+        display:grid;
+        grid-template-columns:minmax(0,220px) minmax(0,1fr);
+        gap:20px;
+        align-items:center;
+      }
+      .resource-card .home-card-visual{
+        width:min(220px,100%);
+        aspect-ratio:1.32;
+        margin-bottom:0;
+      }
       .resource-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
       .resource-pill{
         color:${C.textSecondary};
@@ -391,16 +422,16 @@ function HomeStyles() {
       .about-mark{
         width:54px;
         height:54px;
-        border-radius:50%;
+        border-radius:14px;
         display:flex;
         align-items:center;
         justify-content:center;
         flex-shrink:0;
+        overflow:hidden;
         background:linear-gradient(135deg,${C.teal},${C.ocean});
-        color:#fff;
-        font-family:'Source Serif 4',Georgia,serif;
-        font-weight:800;
+        border:1px solid rgba(224,220,208,0.1);
       }
+      .about-mark img{width:100%;height:100%;object-fit:cover;display:block}
       .about-band h3{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:1.08rem;margin-bottom:4px}
       .about-band p{color:${C.textMuted};font-size:0.88rem;line-height:1.62}
       @media(max-width:980px){
@@ -428,6 +459,8 @@ function HomeStyles() {
         .hero-scene{right:-34%;bottom:-18%;width:96vw;min-height:250px}
         .resource-card,.about-band{grid-template-columns:1fr}
         .resource-card{padding:22px}
+        .resource-main{grid-template-columns:1fr}
+        .resource-card .home-card-visual{margin-bottom:2px}
         .about-band{align-items:start}
       }
     `}</style>
@@ -443,26 +476,26 @@ function HomeButton({ children, onClick, variant = "primary" }) {
   );
 }
 
+function CardVisual({ image }) {
+  if (!image) return null;
+  return (
+    <div className="home-card-visual" aria-hidden="true">
+      <img
+        src={image.src}
+        alt=""
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.parentElement.style.display = "none";
+        }}
+      />
+    </div>
+  );
+}
+
 function handleCardKeyDown(event, onActivate) {
   if (event.key !== "Enter" && event.key !== " ") return;
   event.preventDefault();
   onActivate();
-}
-
-function HeroVisual() {
-  return (
-    <div className="hero-scene" aria-hidden="true">
-      <div className="scene-orbit" />
-      <div className="scene-board" />
-      <div className="scene-desk" />
-      <div className="scene-note one" />
-      <div className="scene-note two" />
-      <div className="scene-laptop" />
-      <div className="scene-dot a" />
-      <div className="scene-dot b" />
-      <div className="scene-dot c" />
-    </div>
-  );
 }
 
 function SectionIntro({ kicker, title, children, centered = false }) {
@@ -489,6 +522,7 @@ function PathwayCard({ item, delay, navigate }) {
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
+        <CardVisual image={item.image} />
         <div className="pathway-top">
           <span className="pathway-number">{item.number}</span>
           <span className="pathway-eyebrow">{item.eyebrow}</span>
@@ -513,6 +547,7 @@ function FeatureCard({ item, delay, navigate }) {
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
+        <CardVisual image={item.image} />
         <p className="feature-label">{item.label}</p>
         <h3 className="card-title">{item.title}</h3>
         <p className="card-desc">{item.desc}</p>
@@ -537,6 +572,7 @@ function ResearchCard({ item, delay, navigate }) {
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
+        <CardVisual image={item.image} />
         <h3 className="card-title">{item.title}</h3>
         <p className="card-desc">{item.desc}</p>
         <span className="card-action">Read this section <span aria-hidden="true">-&gt;</span></span>
@@ -570,9 +606,6 @@ export default function Home({ navigate }) {
                 <HomeButton variant="ghost" onClick={() => navigate("phil-education")}>Read Research</HomeButton>
               </div>
             </div>
-          </FadeIn>
-          <FadeIn delay={0.12}>
-            <HeroVisual />
           </FadeIn>
         </div>
       </section>
@@ -655,17 +688,20 @@ export default function Home({ navigate }) {
               onClick={() => navigate("resources")}
               onKeyDown={event => handleCardKeyDown(event, () => navigate("resources"))}
             >
-              <div>
-                <h3 className="card-title">Resources & Reading List</h3>
-                <p className="card-desc">
-                  A curated trail through moral psychology, AI ethics, education research, classroom philosophy,
-                  and policy guidance for educators who want more than a quick answer.
-                </p>
-                <div className="resource-meta" aria-hidden="true">
-                  <span className="resource-pill">Books</span>
-                  <span className="resource-pill">Academic papers</span>
-                  <span className="resource-pill">Policy frameworks</span>
-                  <span className="resource-pill">Organizations</span>
+              <div className="resource-main">
+                <CardVisual image={getFeatureIllustration("resources")} />
+                <div>
+                  <h3 className="card-title">Resources & Reading List</h3>
+                  <p className="card-desc">
+                    A curated trail through moral psychology, AI ethics, education research, classroom philosophy,
+                    and policy guidance for educators who want more than a quick answer.
+                  </p>
+                  <div className="resource-meta" aria-hidden="true">
+                    <span className="resource-pill">Books</span>
+                    <span className="resource-pill">Academic papers</span>
+                    <span className="resource-pill">Policy frameworks</span>
+                    <span className="resource-pill">Organizations</span>
+                  </div>
                 </div>
               </div>
               <span className="card-action">Open resources <span aria-hidden="true">-&gt;</span></span>
@@ -678,7 +714,9 @@ export default function Home({ navigate }) {
         <div className="home-container">
           <FadeIn>
             <div className="about-band">
-              <div className="about-mark" aria-hidden="true">MZ</div>
+              <div className="about-mark" aria-hidden="true">
+                <img src={getFeatureIllustration("site-symbol").src} alt="" loading="lazy" />
+              </div>
               <div>
                 <h3>Built by Matthew A. Zinn</h3>
                 <p>

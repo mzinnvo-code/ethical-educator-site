@@ -9,6 +9,7 @@ import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import { EXPERIMENTS } from "../../data/experiments.js";
+import { getFeatureIllustration } from "../../data/illustrations.js";
 
 // Pick three "featured this week" — rotates by ISO week, deterministic.
 function featuredThisWeek() {
@@ -22,6 +23,8 @@ function featuredThisWeek() {
   }
   return out;
 }
+
+const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
@@ -57,6 +60,7 @@ export default function Hub({ navigate }) {
           <div className="grid-2" style={{ marginTop: 18, marginBottom: 18 }}>
             <TopicCard
               icon="🍎" iconLabel="Apple"
+              image={getFeatureIllustration("thought-experiments/educators")}
               title="For Educators"
               desc="Adult dilemmas about AI in your classroom — flagship experiments and decision tools."
               onClick={() => navigate("thought-experiments/educators")}
@@ -64,6 +68,7 @@ export default function Hub({ navigate }) {
             />
             <TopicCard
               icon="🧸" iconLabel="Teddy bear"
+              image={getFeatureIllustration("thought-experiments/k-5")}
               title="K–5"
               desc="Big illustrations, short prompts, read-aloud built in. For early readers and the teachers who guide them."
               onClick={() => navigate("thought-experiments/k-5")}
@@ -73,6 +78,7 @@ export default function Hub({ navigate }) {
           <div className="grid-2" style={{ marginBottom: 18 }}>
             <TopicCard
               icon="🚋" iconLabel="Trolley"
+              image={getFeatureIllustration("thought-experiments/6-8")}
               title="Grades 6–8"
               desc="Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions."
               onClick={() => navigate("thought-experiments/6-8")}
@@ -80,6 +86,7 @@ export default function Hub({ navigate }) {
             />
             <TopicCard
               icon="🕳️" iconLabel="Cave"
+              image={getFeatureIllustration("thought-experiments/9-12")}
               title="Grades 9–12"
               desc="The philosophical canon — Plato's Cave, Mary's Room, Chinese Room — alongside the AI questions of our age."
               onClick={() => navigate("thought-experiments/9-12")}
@@ -89,6 +96,7 @@ export default function Hub({ navigate }) {
           <div style={{ marginBottom: 28 }}>
             <TopicCard
               icon="🛠" iconLabel="Toolkit"
+              image={getFeatureIllustration("thought-experiments/toolkit")}
               title="Dialogue Toolkit"
               desc="Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students."
               onClick={() => navigate("thought-experiments/toolkit")}
@@ -286,11 +294,11 @@ export default function Hub({ navigate }) {
             <ContinueExploring
               navigate={navigate}
               links={[
-                { id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Flagship dilemmas for adults", color: C.teal },
-                { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
-                { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based AI ethics", color: C.gold },
-                { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean },
-                { id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, global canon", color: C.teal },
+                withImage({ id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Flagship dilemmas for adults", color: C.teal }),
+                withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral }),
+                withImage({ id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based AI ethics", color: C.gold }),
+                withImage({ id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean }),
+                withImage({ id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, global canon", color: C.teal }),
               ]}
             />
           </FadeIn>

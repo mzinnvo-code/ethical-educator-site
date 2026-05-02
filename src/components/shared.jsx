@@ -111,8 +111,9 @@ export function VideoEmbed({ id, title }) {
   );
 }
 
-export function TopicCard({ icon, iconLabel, title, desc, delay = 0, onClick, accent = null }) {
+export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 0, onClick, accent = null }) {
   const [hover, setHover] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   return (
     <FadeIn delay={delay}>
       <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick}
@@ -127,9 +128,29 @@ export function TopicCard({ icon, iconLabel, title, desc, delay = 0, onClick, ac
           height: "100%", position: "relative",
         }}>
         {accent && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: accent, borderRadius: "14px 14px 0 0" }} />}
-        <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>
-          {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
-        </div>
+        {image && !imageFailed ? (
+          <div style={{
+            width: "100%",
+            aspectRatio: "1.8",
+            borderRadius: 10,
+            overflow: "hidden",
+            marginBottom: 14,
+            border: `1px solid ${(accent || C.gold)}24`,
+            background: `${(accent || C.gold)}10`,
+          }}>
+            <img
+              src={image.src}
+              alt=""
+              loading="lazy"
+              onError={() => setImageFailed(true)}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+          </div>
+        ) : (
+          <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>
+            {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
+          </div>
+        )}
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.08rem", marginBottom: 6, fontWeight: 600 }}>{title}</h3>
         <p style={{ color: C.textMuted, fontSize: "0.85rem", lineHeight: 1.6 }}>{desc}</p>
       </div>
@@ -314,6 +335,7 @@ export function NewBadge() {
 
 function ContinueExploringCard({ link, navigate }) {
   const [hover, setHover] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   return (
     <div onClick={() => navigate(link.id)}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
@@ -324,7 +346,27 @@ function ContinueExploringCard({ link, navigate }) {
         transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
       }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: "1rem" }} aria-hidden="true">{link.icon}</span>
+        {link.image && !imageFailed ? (
+          <span style={{
+            width: 44,
+            height: 44,
+            borderRadius: 10,
+            overflow: "hidden",
+            flexShrink: 0,
+            border: `1px solid ${link.color}24`,
+            background: `${link.color}10`,
+          }} aria-hidden="true">
+            <img
+              src={link.image.src}
+              alt=""
+              loading="lazy"
+              onError={() => setImageFailed(true)}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
+          </span>
+        ) : (
+          <span style={{ fontSize: "1rem" }} aria-hidden="true">{link.icon}</span>
+        )}
         <div>
           <p style={{ color: C.textPrimary, fontSize: "0.85rem", fontWeight: 600 }}>{link.title}</p>
           <p style={{ color: C.textMuted, fontSize: "0.72rem", marginTop: 2 }}>{link.desc}</p>

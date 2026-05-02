@@ -74,7 +74,7 @@ const PAGE_MAP = {
 
 const PAGE_META = {
   "home": {
-    title: "The Ethical Educator — Matthew A. Zinn",
+    title: "The Ethical Educator",
     description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
   },
   "about": {
@@ -234,8 +234,9 @@ export default function App() {
           "url": "https://theethicaleducator.com",
         },
         "publisher": {
-          "@type": "Person",
-          "name": "Matthew A. Zinn",
+          "@type": "Organization",
+          "name": "The Ethical Educator",
+          "url": "https://theethicaleducator.com",
         },
         "datePublished": "2024-01-01",
         "dateModified": "2026-04-24",
@@ -261,7 +262,9 @@ export default function App() {
         em{color:${C.sand};font-style:italic}
         .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
         .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
-        .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap}
+        .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
+        .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
+        .brand-mark img{width:20px;height:20px;display:block}
         .topbar-nav{display:flex;gap:4px;list-style:none;flex-wrap:nowrap}
         .topbar-nav li a{font-size:0.74rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 8px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
         .topbar-nav li a:hover{color:${C.gold};background:rgba(200,152,48,0.06)}
@@ -292,7 +295,12 @@ export default function App() {
 
       {/* NAV */}
       <header className="topbar">
-        <div className="topbar-logo" onClick={() => navigate("home")}>Matthew A. Zinn</div>
+        <div className="topbar-logo" onClick={() => navigate("home")}>
+          <span className="brand-mark" aria-hidden="true">
+            <img src="/favicon.svg" alt="" />
+          </span>
+          <span>The Ethical Educator</span>
+        </div>
         <ul className="topbar-nav">
           {PAGES.map(p => (
             <li key={p.id}>
@@ -360,7 +368,7 @@ export default function App() {
                 <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
-            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>
+            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · All Rights Reserved</p>
           </div>
         </div>
       </footer>
