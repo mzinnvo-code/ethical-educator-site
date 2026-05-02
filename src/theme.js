@@ -26,14 +26,14 @@ export const C = {
 
 export const PAGES = [
   { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "moral-psych", label: "Moral Psychology" },
-  { id: "ai-ethics", label: "AI & Ethics" },
-  { id: "ai-education", label: "AI in Education" },
-  { id: "phil-education", label: "Philosophy in K–12" },
   { id: "thought-experiments", label: "Thought Experiments" },
   { id: "for-educators", label: "For Educators" },
+  { id: "ai-education", label: "AI in Education" },
+  { id: "phil-education", label: "Philosophy in K–12" },
+  { id: "ai-ethics", label: "AI & Ethics" },
+  { id: "moral-psych", label: "Moral Psychology" },
   { id: "resources", label: "Resources" },
+  { id: "about", label: "About" },
 ];
 
 // Date each thought experiment was added — used for "NEW" badge calculation

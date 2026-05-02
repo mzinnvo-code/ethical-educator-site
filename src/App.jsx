@@ -75,7 +75,7 @@ const PAGE_MAP = {
 const PAGE_META = {
   "home": {
     title: "The Ethical Educator — Matthew A. Zinn",
-    description: "Where moral philosophy meets the age of AI. Research, interactive thought experiments, and philosophical frameworks for navigating the most consequential questions of our time.",
+    description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
   },
   "about": {
     title: "About Matthew A. Zinn — The Ethical Educator",
@@ -262,8 +262,8 @@ export default function App() {
         .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
         .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
         .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap}
-        .topbar-nav{display:flex;gap:6px;list-style:none;flex-wrap:nowrap}
-        .topbar-nav li a{font-size:0.76rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 10px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+        .topbar-nav{display:flex;gap:4px;list-style:none;flex-wrap:nowrap}
+        .topbar-nav li a{font-size:0.74rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 8px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
         .topbar-nav li a:hover{color:${C.gold};background:rgba(200,152,48,0.06)}
         .topbar-nav li a.active{color:${C.gold};background:rgba(200,152,48,0.1)}
         .hamburger{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative;flex-shrink:0}
@@ -278,7 +278,7 @@ export default function App() {
         .page-enter{animation:pageIn 0.4s ease}
         @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}
-        @media(max-width:900px){.topbar-nav{display:none}.hamburger{display:block}}
+        @media(max-width:1120px){.topbar-nav{display:none}.hamburger{display:block}}
         @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr !important}}
         @media(prefers-reduced-motion:reduce){
           :root{--motion-duration:0.01ms}
