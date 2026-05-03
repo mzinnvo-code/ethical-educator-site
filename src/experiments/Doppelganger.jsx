@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
-import { DoppelgangerScene } from "../components/diagrams.jsx";
+import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function DoppelgangerExperiment() {
   const [act, setAct] = useState(0);
@@ -34,7 +34,7 @@ export default function DoppelgangerExperiment() {
     // ─── ACT 0: INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "20px 0" }}>
-        <DoppelgangerScene />
+        <IllustratedScene experimentId="digital-doppelganger" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 12 }}>The Digital Doppelgänger</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 12px" }}>
           You are <strong style={{ color: C.textPrimary }}>Mr. Torres</strong>, an AP Literature teacher at a suburban high school. It's September 2026. Over the course of one semester, you will confront a question that no generation of educators has ever faced:

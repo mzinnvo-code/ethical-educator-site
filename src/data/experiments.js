@@ -19,44 +19,45 @@
  * @property {boolean} [weighty]
  */
 
-import MagicToyScene from "../scenes/MagicToyScene.jsx";
-import InvisibleRingScene from "../scenes/InvisibleRingScene.jsx";
-import RobotFriendTurnScene from "../scenes/RobotFriendTurnScene.jsx";
-import HonestyScene from "../scenes/HonestyScene.jsx";
-import RobotPetScene from "../scenes/RobotPetScene.jsx";
-import AIArtScene from "../scenes/AIArtScene.jsx";
-import MessyRobotScene from "../scenes/MessyRobotScene.jsx";
-import RudeToyScene from "../scenes/RudeToyScene.jsx";
-import RulesVsHelpingScene from "../scenes/RulesVsHelpingScene.jsx";
-import WinningGameScene from "../scenes/WinningGameScene.jsx";
-import TrolleyScene from "../scenes/TrolleyScene.jsx";
-import ShipOfTheseusScene from "../scenes/ShipOfTheseusScene.jsx";
-import BrainInVatScene from "../scenes/BrainInVatScene.jsx";
-import SoritesScene from "../scenes/SoritesScene.jsx";
-import TragedyCommonsScene from "../scenes/TragedyCommonsScene.jsx";
-import LiarParadoxScene from "../scenes/LiarParadoxScene.jsx";
-import DeepfakeScene from "../scenes/DeepfakeScene.jsx";
-import BiasedResumeScene from "../scenes/BiasedResumeScene.jsx";
-import AutonomousCarScene from "../scenes/AutonomousCarScene.jsx";
-import VeilOfIgnoranceScene from "../scenes/VeilOfIgnoranceScene.jsx";
-import PlatosCaveScene from "../scenes/PlatosCaveScene.jsx";
-import MarysRoomScene from "../scenes/MarysRoomScene.jsx";
-import ChineseRoomScene from "../scenes/ChineseRoomScene.jsx";
-import ExperienceMachineScene from "../scenes/ExperienceMachineScene.jsx";
-import RingOfGygesScene from "../scenes/RingOfGygesScene.jsx";
-import OmelasScene from "../scenes/OmelasScene.jsx";
-import DrowningChildScene from "../scenes/DrowningChildScene.jsx";
-import PaperclipScene from "../scenes/PaperclipScene.jsx";
-import AIInBoxScene from "../scenes/AIInBoxScene.jsx";
-import SimulationScene from "../scenes/SimulationScene.jsx";
-import SchoolSurveillanceScene from "../scenes/SchoolSurveillanceScene.jsx";
-import AIDetectorScene from "../scenes/AIDetectorScene.jsx";
-import AIPolicyScene from "../scenes/AIPolicyScene.jsx";
-import AIGradingScene from "../scenes/AIGradingScene.jsx";
-import BiasedAdmissionsScene from "../scenes/BiasedAdmissionsScene.jsx";
-import AIFriendScene from "../scenes/AIFriendScene.jsx";
-
+import { createIllustratedScene } from "../scenes/IllustratedScene.jsx";
 import { TEACHER_KITS } from "./teacherKits.js";
+
+const MagicToyScene = createIllustratedScene("magic-toy");
+const InvisibleRingScene = createIllustratedScene("invisible-ring");
+const RobotFriendTurnScene = createIllustratedScene("robot-friend-turn");
+const HonestyScene = createIllustratedScene("honesty-protection");
+const RobotPetScene = createIllustratedScene("robot-pet-goodbye");
+const AIArtScene = createIllustratedScene("ai-art-help");
+const MessyRobotScene = createIllustratedScene("messy-robot");
+const RudeToyScene = createIllustratedScene("rude-toy");
+const RulesVsHelpingScene = createIllustratedScene("rules-vs-helping");
+const WinningGameScene = createIllustratedScene("winning-game");
+const TrolleyScene = createIllustratedScene("trolley-self-driving");
+const ShipOfTheseusScene = createIllustratedScene("ship-of-theseus-robot");
+const BrainInVatScene = createIllustratedScene("brain-in-vat");
+const SoritesScene = createIllustratedScene("sorites-heap");
+const TragedyCommonsScene = createIllustratedScene("tragedy-commons");
+const LiarParadoxScene = createIllustratedScene("liar-paradox");
+const DeepfakeScene = createIllustratedScene("deepfake-election");
+const BiasedResumeScene = createIllustratedScene("biased-resume-ai");
+const AutonomousCarScene = createIllustratedScene("autonomous-car-rider");
+const VeilOfIgnoranceScene = createIllustratedScene("veil-of-ignorance");
+const PlatosCaveScene = createIllustratedScene("platos-cave");
+const MarysRoomScene = createIllustratedScene("marys-room");
+const ChineseRoomScene = createIllustratedScene("chinese-room");
+const ExperienceMachineScene = createIllustratedScene("experience-machine");
+const RingOfGygesScene = createIllustratedScene("ring-of-gyges");
+const OmelasScene = createIllustratedScene("omelas");
+const DrowningChildScene = createIllustratedScene("drowning-child");
+const PaperclipScene = createIllustratedScene("paperclip-maximizer");
+const AIInBoxScene = createIllustratedScene("ai-in-the-box");
+const SimulationScene = createIllustratedScene("simulation-argument");
+const SchoolSurveillanceScene = createIllustratedScene("school-surveillance");
+const AIDetectorScene = createIllustratedScene("ai-detector-false-positive");
+const AIPolicyScene = createIllustratedScene("ai-policy-design");
+const AIGradingScene = createIllustratedScene("ai-grading-companion");
+const BiasedAdmissionsScene = createIllustratedScene("biased-admissions");
+const AIFriendScene = createIllustratedScene("ai-friend-feelings");
 
 // Helper for synthesis stages using default panel behavior
 const synthesis = ({ kicker = "Reflection", title = "What you said, what it means", positions } = {}) => ({
