@@ -2,12 +2,13 @@ import { useState } from "react";
 import { C } from "../theme.js";
 import { TOPIC_BY_ID } from "../data/topics.js";
 import { getExperimentIllustration } from "../data/illustrations.js";
+import { getSceneIllustration } from "../data/sceneIllustrations.js";
 import { FadeIn, NewBadge } from "./shared.jsx";
 import { isNewExperiment } from "../theme.js";
 
 function PreviewArtwork({ experiment, accent }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const image = getExperimentIllustration(experiment);
+  const image = getExperimentIllustration(experiment) || getSceneIllustration(experiment);
 
   if (!image || imageFailed) {
     return (

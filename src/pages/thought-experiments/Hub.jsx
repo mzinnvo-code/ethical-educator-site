@@ -48,8 +48,8 @@ export default function Hub({ navigate }) {
           </div>
           <SectionTitle>Thought Experiments</SectionTitle>
           <Subtitle>
-            Forty interactive scenarios — for kindergartners, eighth-graders, AP Philosophy students,
-            and the educators teaching them all. Some are 2,400 years old. Some are about your classroom.
+            A growing library of interactive scenarios — for kindergartners, eighth-graders, AP Philosophy
+            students, and the educators teaching them all. Some are 2,400 years old. Some are about your classroom.
             None have right answers. All of them help us think.
           </Subtitle>
         </FadeIn>
@@ -70,7 +70,7 @@ export default function Hub({ navigate }) {
               icon="🧸" iconLabel="Teddy bear"
               image={getFeatureIllustration("thought-experiments/k-5")}
               title="K–5"
-              desc="Big illustrations, short prompts, read-aloud built in. For early readers and the teachers who guide them."
+              desc="A grade-by-grade elementary hub with 24 storylike dilemmas, read-aloud support, and teacher kits."
               onClick={() => navigate("thought-experiments/k-5")}
               accent={C.coral} delay={0.05}
             />
@@ -166,8 +166,8 @@ export default function Hub({ navigate }) {
               <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
             </Expandable>
             <Expandable title="By age band" color={C.coral}>
-              <p><strong>K–5:</strong> One scenario, ten minutes, lots of "why?" Expect drawings, role-play, and getting up out of chairs.
-              The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
+              <p><strong>K–5:</strong> Choose the grade page first. Kindergarten stories are short and concrete; Grade 5 stories are longer,
+              more layered, and ready for competing values. The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
               <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students
               defend the option they didn't pick. Magic happens when they realize they can.</p>
               <p style={{ marginTop: 10 }}><strong>9–12 / AP Philosophy:</strong> One scenario in depth. Read the original source. Compare ethical

@@ -114,9 +114,22 @@ export function VideoEmbed({ id, title }) {
 export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 0, onClick, accent = null }) {
   const [hover, setHover] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const handleKeyDown = (event) => {
+    if (!onClick || (event.key !== "Enter" && event.key !== " ")) return;
+    event.preventDefault();
+    onClick(event);
+  };
+
   return (
     <FadeIn delay={delay}>
-      <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={onClick}
+      <div
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onClick={onClick}
+        onKeyDown={handleKeyDown}
+        role={onClick ? "button" : undefined}
+        tabIndex={onClick ? 0 : undefined}
+        aria-label={onClick ? title : undefined}
         style={{
           background: hover ? C.surfaceHover : C.surface,
           border: `1px solid ${hover ? C.borderHover : C.border}`,

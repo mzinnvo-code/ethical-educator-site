@@ -68,6 +68,90 @@ export const SCENE_ILLUSTRATIONS = {
     "subtle",
     "young"
   ),
+  "always-agreeable-ai-friend": scene(
+    "/experiment-scenes/always-agreeable-ai-friend.webp",
+    "A student sits with a glowing AI chat companion that always agrees while considering whether real friendship sometimes requires kind disagreement.",
+    "glow",
+    "young"
+  ),
+  "same-toy-or-not": scene(
+    "/experiment-scenes/same-toy-or-not.webp",
+    "A student compares a repaired robot toy with its old parts rebuilt nearby, wondering which one is truly the same beloved toy.",
+    "subtle",
+    "young"
+  ),
+  "ai-written-story": scene(
+    "/experiment-scenes/ai-written-story.webp",
+    "A student looks from their rough story notes to a polished AI-generated version, weighing authorship, credit, and learning.",
+    "spotlight",
+    "young"
+  ),
+  "gps-shortcut": scene(
+    "/experiment-scenes/gps-shortcut.webp",
+    "Students on a walking field trip compare a glowing GPS shortcut with a teacher's safer route, deciding what kind of guidance to trust.",
+    "reveal",
+    "young"
+  ),
+  "ai-photo-art": scene(
+    "/experiment-scenes/ai-photo-art.webp",
+    "A student pauses before sharing AI art made from a friend's photo, weighing creativity against consent and privacy.",
+    "subtle",
+    "young"
+  ),
+  "adaptive-learning-fairness": scene(
+    "/experiment-scenes/adaptive-learning-fairness.webp",
+    "Two students see different math app levels on neighboring screens and wonder whether fairness means the same work or the right support.",
+    "subtle",
+    "young"
+  ),
+  "conflicting-ai-answers": scene(
+    "/experiment-scenes/conflicting-ai-answers.webp",
+    "Students compare two confident AI answers about a science question and decide how to verify knowledge before presenting it.",
+    "split",
+    "middle"
+  ),
+  "robot-rules-real-life": scene(
+    "/experiment-scenes/robot-rules-real-life.webp",
+    "A hallway robot blocks a student who needs care, forcing the class to weigh strict rules against human judgment.",
+    "warning",
+    "middle"
+  ),
+  "elementary-trolley": scene(
+    "/experiment-scenes/elementary-trolley.webp",
+    "Students study a self-driving school shuttle on branching tracks and weigh how an automated system should choose among harms.",
+    "switch",
+    "middle"
+  ),
+  "ai-science-fair": scene(
+    "/experiment-scenes/ai-science-fair.webp",
+    "A student stands beside a dazzling AI-polished science fair board while wondering whether the display shows real understanding.",
+    "spotlight",
+    "middle"
+  ),
+  "online-friend-or-ai": scene(
+    "/experiment-scenes/online-friend-or-ai.webp",
+    "A student looks at a glowing online game friend profile and weighs comfort, truth, privacy, and whether the friend might be AI.",
+    "glow",
+    "middle"
+  ),
+  "ai-homework-help": scene(
+    "/experiment-scenes/ai-homework-help.webp",
+    "A student stuck on homework chooses between an AI hint, a full solution, and the harder path of learning the idea.",
+    "subtle",
+    "middle"
+  ),
+  "biased-classroom-robot": scene(
+    "/experiment-scenes/biased-classroom-robot.webp",
+    "Students watch a classroom robot call on the same voices again and again while hidden bias leaves others unseen.",
+    "spotlight",
+    "middle"
+  ),
+  "ai-grading-mistake": scene(
+    "/experiment-scenes/ai-grading-mistake.webp",
+    "A student and teacher compare a personal essay with an AI grading warning, deciding how to challenge a mistaken automated judgment.",
+    "warning",
+    "middle"
+  ),
   "trolley-self-driving": scene(
     "/experiment-scenes/trolley-self-driving.webp",
     "A student watches a self-driving trolley approach a branching track, weighing lives and responsibility before a forced choice.",

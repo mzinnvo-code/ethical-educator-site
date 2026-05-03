@@ -9,6 +9,14 @@ import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
+import {
+  Kindergarten as ThoughtExperimentsKindergarten,
+  Grade1 as ThoughtExperimentsGrade1,
+  Grade2 as ThoughtExperimentsGrade2,
+  Grade3 as ThoughtExperimentsGrade3,
+  Grade4 as ThoughtExperimentsGrade4,
+  Grade5 as ThoughtExperimentsGrade5,
+} from "./pages/thought-experiments/ElementaryGrade.jsx";
 import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
 import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
 import ThoughtExperimentsToolkit from "./pages/thought-experiments/Toolkit.jsx";
@@ -55,6 +63,12 @@ const PAGE_MAP = {
   "thought-experiments": ThoughtExperiments,
   "thought-experiments/educators": ThoughtExperimentsForEducators,
   "thought-experiments/k-5": ThoughtExperimentsK5,
+  "thought-experiments/kindergarten": ThoughtExperimentsKindergarten,
+  "thought-experiments/grade-1": ThoughtExperimentsGrade1,
+  "thought-experiments/grade-2": ThoughtExperimentsGrade2,
+  "thought-experiments/grade-3": ThoughtExperimentsGrade3,
+  "thought-experiments/grade-4": ThoughtExperimentsGrade4,
+  "thought-experiments/grade-5": ThoughtExperimentsGrade5,
   "thought-experiments/6-8": ThoughtExperimentsMiddle,
   "thought-experiments/9-12": ThoughtExperimentsHigh,
   "thought-experiments/toolkit": ThoughtExperimentsToolkit,
@@ -107,7 +121,31 @@ const PAGE_META = {
   },
   "thought-experiments/k-5": {
     title: "K–5 Thought Experiments — The Ethical Educator",
-    description: "Big illustrations, short prompts, read-aloud built in. Ten experiments for early readers and the teachers who guide them.",
+    description: "A grade-by-grade elementary hub with 24 storylike thought experiments, read-aloud support, and teacher kits for K–5 ethics and AI discussions.",
+  },
+  "thought-experiments/kindergarten": {
+    title: "Kindergarten Thought Experiments — The Ethical Educator",
+    description: "Four gentle read-aloud dilemmas about toys, robots, sharing, care, and the first language of ethical reflection.",
+  },
+  "thought-experiments/grade-1": {
+    title: "Grade 1 Thought Experiments — The Ethical Educator",
+    description: "Four simple classroom dilemmas about honesty, loyalty, fairness, invisible choices, and becoming the kind of person students want to be.",
+  },
+  "thought-experiments/grade-2": {
+    title: "Grade 2 Thought Experiments — The Ethical Educator",
+    description: "Four cause-and-effect stories about AI help, friendship, identity, rules, and age-appropriate perspective taking.",
+  },
+  "thought-experiments/grade-3": {
+    title: "Grade 3 Thought Experiments — The Ethical Educator",
+    description: "Four storylike dilemmas about AI authorship, GPS shortcuts, privacy, adaptive learning, fairness, and trust.",
+  },
+  "thought-experiments/grade-4": {
+    title: "Grade 4 Thought Experiments — The Ethical Educator",
+    description: "Four richer elementary dilemmas about conflicting AI answers, robot rules, self-driving choices, and AI-assisted science projects.",
+  },
+  "thought-experiments/grade-5": {
+    title: "Grade 5 Thought Experiments — The Ethical Educator",
+    description: "Four mature elementary scenarios about AI friendship, homework help, classroom bias, grading mistakes, fairness, and human judgment.",
   },
   "thought-experiments/6-8": {
     title: "Grades 6–8 Thought Experiments — The Ethical Educator",

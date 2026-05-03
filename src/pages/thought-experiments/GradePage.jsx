@@ -18,7 +18,7 @@ const TOOLKIT_LINK = withImage({ id: "thought-experiments/toolkit", icon: "🛠"
 const SIBLING_LINKS = {
   "educators": [
     withImage({ id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are, why they matter", color: C.teal }),
-    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral }),
+    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Grade-by-grade stories", color: C.coral }),
     withImage({ id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based dilemmas", color: C.gold }),
     withImage({ id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean }),
     TOOLKIT_LINK,
@@ -33,14 +33,14 @@ const SIBLING_LINKS = {
   "6-8": [
     withImage({ id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are", color: C.teal }),
     withImage({ id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Adult AI dilemmas", color: C.gold }),
-    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral }),
+    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Grade-by-grade stories", color: C.coral }),
     withImage({ id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The canon", color: C.ocean }),
     TOOLKIT_LINK,
   ],
   "9-12": [
     withImage({ id: "thought-experiments", icon: "📚", title: "Hub & explainer", desc: "What thought experiments are", color: C.teal }),
     withImage({ id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Adult AI dilemmas", color: C.gold }),
-    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral }),
+    withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Grade-by-grade stories", color: C.coral }),
     withImage({ id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based dilemmas", color: C.gold }),
     TOOLKIT_LINK,
   ],
