@@ -8,7 +8,7 @@ import { PhiloRef } from "../../experiments/ExperimentShared.jsx";
 import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
-import { EXPERIMENTS } from "../../data/experiments.js";
+import { EXPERIMENTS, getExperimentsByGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 
 // Pick three "featured this week" — rotates by ISO week, deterministic.
@@ -28,7 +28,10 @@ const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) }
 
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
-  const featured = featuredThisWeek();
+  const middleSchoolById = new Map(getExperimentsByGrade("6-8").map(experiment => [experiment.id, experiment]));
+  const featured = featuredThisWeek().map(experiment =>
+    experiment.gradeBands.includes("6-8") ? middleSchoolById.get(experiment.id) || experiment : experiment
+  );
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>

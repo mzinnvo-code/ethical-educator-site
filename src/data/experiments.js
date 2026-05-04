@@ -23,6 +23,7 @@
 import { createIllustratedScene } from "../scenes/IllustratedScene.jsx";
 import { TEACHER_KITS } from "./teacherKits.js";
 import { applyK5ScenarioCopy, applyK5TeacherKitCopy } from "./k5ScenarioCopy.js";
+import { getMiddleSchoolExperiments } from "./middleSchoolScenarioCopy.js";
 
 const MagicToyScene = createIllustratedScene("magic-toy");
 const InvisibleRingScene = createIllustratedScene("invisible-ring");
@@ -2068,6 +2069,7 @@ EXPERIMENTS.forEach(e => {
 // Helpers ─────────────────────────────────────────────────────────────
 
 export function getExperimentsByGrade(band) {
+  if (band === "6-8") return getMiddleSchoolExperiments(EXPERIMENTS);
   return EXPERIMENTS.filter(e => e.gradeBands.includes(band));
 }
 

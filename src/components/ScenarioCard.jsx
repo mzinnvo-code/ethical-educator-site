@@ -402,11 +402,37 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
               }}>{stage.title}</h3>
             )}
 
+            <StorySections sections={storySections} accent={accent} />
+
             <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 18 }}>
-              <ReadAloudButton text={`${stage.title || experiment.title}. ${promptText}`} variant="icon" rate={0.95} />
-              <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                {promptText}
-              </p>
+              <ReadAloudButton text={readAloudText} variant="icon" rate={0.95} />
+              {storySections.length ? (
+                <div style={{
+                  flex: 1,
+                  padding: "13px 15px",
+                  borderRadius: 12,
+                  background: `${accent}10`,
+                  border: `1px solid ${accent}28`,
+                }}>
+                  <p style={{
+                    color: accent,
+                    fontSize: "0.62rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.13em",
+                    textTransform: "uppercase",
+                    marginBottom: 5,
+                  }}>
+                    The question
+                  </p>
+                  <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif", margin: 0 }}>
+                    {promptText}
+                  </p>
+                </div>
+              ) : (
+                <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  {promptText}
+                </p>
+              )}
             </div>
 
             {stageChoiceIdx == null ? (
