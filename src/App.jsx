@@ -209,8 +209,13 @@ const PAGE_META = {
   },
 };
 
+function getPageFromHash() {
+  if (typeof window === "undefined") return "home";
+  return window.location.hash.replace("#", "") || "home";
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  const [currentPage, setCurrentPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
   const hasNew = hasAnyNewExperiments();
 
@@ -222,12 +227,16 @@ export default function App() {
 
   // Handle browser back/forward and direct URL entry
   useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-    if (hash) setCurrentPage(hash); // set even for unknown pages so NotFound renders
+    const syncPageFromHash = () => setCurrentPage(getPageFromHash()); // set even for unknown pages so NotFound renders
+
+    window.addEventListener("hashchange", syncPageFromHash);
+    return () => window.removeEventListener("hashchange", syncPageFromHash);
   }, []);
 
   useEffect(() => {
-    window.location.hash = currentPage;
+    if (window.location.hash.replace("#", "") !== currentPage) {
+      window.location.hash = currentPage;
+    }
   }, [currentPage]);
 
   // Dynamic title, meta description, and Article schema per page

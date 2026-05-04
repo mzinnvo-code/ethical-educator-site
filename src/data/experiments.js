@@ -12,6 +12,7 @@
  * @property {string} [title]
  * @property {string|((ctx:{chose:Option[]})=>string)} [prompt]
  * @property {string} [promptShort]
+ * @property {{label?:string, text:string}[]|((ctx:{chose:Option[]})=>{label?:string, text:string}[])} [storySections]
  * @property {Option[]} [options]
  * @property {string} [counterpoint]
  * @property {Function} [synthesis]
@@ -21,6 +22,7 @@
 
 import { createIllustratedScene } from "../scenes/IllustratedScene.jsx";
 import { TEACHER_KITS } from "./teacherKits.js";
+import { applyK5ScenarioCopy, applyK5TeacherKitCopy } from "./k5ScenarioCopy.js";
 
 const MagicToyScene = createIllustratedScene("magic-toy");
 const InvisibleRingScene = createIllustratedScene("invisible-ring");
@@ -2057,6 +2059,8 @@ export const EXPERIMENTS = [
 ];
 
 // Attach teacher kits by id (kept in a separate module for editorial focus)
+applyK5ScenarioCopy(EXPERIMENTS);
+applyK5TeacherKitCopy(TEACHER_KITS);
 EXPERIMENTS.forEach(e => {
   if (TEACHER_KITS[e.id]) e.teacherKit = TEACHER_KITS[e.id];
 });

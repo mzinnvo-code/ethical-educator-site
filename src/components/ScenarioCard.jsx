@@ -16,6 +16,78 @@ function resolvePrompt(stage, chose, mode) {
   return stage.prompt;
 }
 
+function resolveStorySections(stage, chose, mode) {
+  const sections = typeof stage.storySections === "function"
+    ? stage.storySections({ chose, mode })
+    : stage.storySections;
+  return Array.isArray(sections) ? sections.filter(section => section?.text) : [];
+}
+
+function sectionsToSpeech(sections) {
+  return sections
+    .map(section => `${section.label ? `${section.label}. ` : ""}${section.text}`)
+    .join(" ");
+}
+
+function cleanSpeechPart(part) {
+  return String(part)
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[.?!]+$/g, "");
+}
+
+function buildReadAloudText(parts) {
+  return parts
+    .filter(Boolean)
+    .map(cleanSpeechPart)
+    .filter(Boolean)
+    .join(". ");
+}
+
+function StorySections({ sections, accent }) {
+  if (!sections.length) return null;
+  return (
+    <div style={{
+      display: "grid", gap: 10, margin: "0 auto 18px",
+      maxWidth: 680, textAlign: "left",
+    }}>
+      {sections.map((section, index) => (
+        <section
+          key={`${section.label || "section"}-${index}`}
+          style={{
+            background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+            border: `1px solid ${accent}25`,
+            borderRadius: 12,
+            padding: "13px 15px",
+          }}
+        >
+          {section.label && (
+            <p style={{
+              color: accent,
+              fontSize: "0.64rem",
+              fontWeight: 800,
+              letterSpacing: "0.13em",
+              textTransform: "uppercase",
+              marginBottom: 5,
+            }}>
+              {section.label}
+            </p>
+          )}
+          <p style={{
+            color: C.textPrimary,
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontSize: "1.02rem",
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            {section.text}
+          </p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 // If the experiment has no `stages`, synthesize a single-stage shape from
 // the legacy fields (so unstaged scenarios still work).
 function synthesizeStages(experiment) {
@@ -97,11 +169,20 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
   const isSynthesisStage = !!stage.synthesis;
   const isLastStage = stageIdx === stages.length - 1;
   const Scene = experiment.scene || null;
+  const elementaryGrade = experiment.gradeLevels?.[0];
+  const useShortKidPrompt = mode === "kid" && (elementaryGrade === "k" || elementaryGrade === "1");
+  const storySections = resolveStorySections(stage, chose, mode);
 
-  // K-5 mode prefers shorter prompt if available
-  const promptText = mode === "kid" && (stage.promptShort || experiment.promptShort)
+  // K-1 keeps very short read-aloud prompts. Older elementary students see
+  // the fuller scenario copy, with optional sectioned story beats.
+  const promptText = useShortKidPrompt && (stage.promptShort || experiment.promptShort)
     ? (stage.promptShort || experiment.promptShort)
     : resolvePrompt(stage, chose, mode);
+  const readAloudText = buildReadAloudText([
+    stage.title || experiment.title,
+    sectionsToSpeech(storySections),
+    promptText,
+  ]);
 
   const choiceForStage = stageChoiceIdx != null ? stage.options?.[stageChoiceIdx] : null;
 
@@ -196,17 +277,48 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
               </h2>
             )}
 
-            <p style={{
-              color: C.textPrimary, fontSize: "1.1rem", lineHeight: 1.6,
-              textAlign: "center", marginBottom: 18,
-              fontFamily: "'Source Serif 4', Georgia, serif",
-              maxWidth: 540, margin: "0 auto 18px",
-            }}>
-              {promptText}
-            </p>
+            <StorySections sections={storySections} accent={accent} />
+
+            {storySections.length ? (
+              <div style={{
+                maxWidth: 640,
+                margin: "0 auto 18px",
+                padding: "14px 16px",
+                borderRadius: 12,
+                background: `${accent}12`,
+                border: `1px solid ${accent}30`,
+                textAlign: "center",
+              }}>
+                <p style={{
+                  color: accent,
+                  fontSize: "0.66rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.13em",
+                  textTransform: "uppercase",
+                  marginBottom: 6,
+                }}>
+                  The question
+                </p>
+                <p style={{
+                  color: C.textPrimary, fontSize: "1.06rem", lineHeight: 1.6,
+                  fontFamily: "'Source Serif 4', Georgia, serif", margin: 0,
+                }}>
+                  {promptText}
+                </p>
+              </div>
+            ) : (
+              <p style={{
+                color: C.textPrimary, fontSize: "1.1rem", lineHeight: 1.6,
+                textAlign: "center", marginBottom: 18,
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                maxWidth: 540, margin: "0 auto 18px",
+              }}>
+                {promptText}
+              </p>
+            )}
 
             <div style={{ textAlign: "center", marginBottom: 22 }}>
-              <ReadAloudButton text={`${stage.title || experiment.title}. ${promptText}`} variant="primary" rate={0.85} label="Read it to me" />
+              <ReadAloudButton text={readAloudText} variant="primary" rate={0.85} label="Read it to me" />
             </div>
 
             {stageChoiceIdx == null ? (
