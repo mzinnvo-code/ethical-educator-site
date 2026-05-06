@@ -480,6 +480,26 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
       <HeaderBar />
 
+      {experiment.id === "marys-room" && (
+        <div style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "16 / 9",
+          marginBottom: 16,
+          borderRadius: 10,
+          overflow: "hidden",
+          background: "#060a12",
+          border: "1px solid rgba(200,152,48,0.18)",
+        }}>
+          <iframe
+            src="/animations/marys-room/index.html"
+            title="Mary's Room — animated thought experiment"
+            loading="lazy"
+            allow="autoplay; fullscreen"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+          />
+        </div>
+      )}
       {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
       {!isSynthesisStage && (
