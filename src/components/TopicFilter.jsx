@@ -11,9 +11,10 @@ export default function TopicFilter({
   onClear,
   resultCount,
   totalCount,
+  extraActiveCount = 0,
 }) {
   const [searchFocus, setSearchFocus] = useState(false);
-  const active = selectedTopics.length + (query.trim() ? 1 : 0) > 0;
+  const active = selectedTopics.length + extraActiveCount + (query.trim() ? 1 : 0) > 0;
 
   return (
     <div style={{ marginBottom: 28 }}>

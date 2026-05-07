@@ -73,6 +73,9 @@ export default function GradePage({
   };
 
   const availableTopicIds = getTopicIdsForGrade(band);
+  const preExperimentContent = typeof preExperiments === "function"
+    ? preExperiments({ experiments: all, filterApi })
+    : preExperiments;
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -90,7 +93,7 @@ export default function GradePage({
 
         <Narrow>
           {/* Optional pre-content (e.g. flagships block) */}
-          {!active && preExperiments}
+          {!active && preExperimentContent}
 
           {!active && (
             <>
@@ -104,6 +107,7 @@ export default function GradePage({
                 onClear={filterApi.clearFilters}
                 resultCount={filterApi.filtered.length}
                 totalCount={all.length}
+                extraActiveCount={filterApi.selectedThemes?.length || 0}
               />
               <ExperimentGrid
                 experiments={filterApi.filtered}

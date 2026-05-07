@@ -156,6 +156,18 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
           background: C.surface, border: `1px solid ${C.border}`,
           borderRadius: 10, padding: "12px 16px", marginBottom: 14,
         }}>
+          {kit.philosophicalTheme && (
+            <p style={{
+              color: accent,
+              fontSize: "0.66rem",
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}>
+              Theme: {kit.philosophicalTheme}
+            </p>
+          )}
           <p style={{ fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>
             The big question
           </p>
@@ -229,6 +241,31 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
           </p>
           <StringList items={kit.discussionPrompts} marker="?" />
         </Section>
+
+        {(kit.reasoningExercise || kit.relatedExperiments?.length > 0) && (
+          <Section title="Reasoning exercise" color={C.teal}>
+            {kit.reasoningExercise?.fallacy && (
+              <p style={{ marginBottom: 8 }}>
+                <strong style={{ color: C.teal }}>Fallacy to spot:</strong> {kit.reasoningExercise.fallacy}
+              </p>
+            )}
+            {kit.reasoningExercise?.repair && (
+              <p style={{ marginBottom: 8 }}>
+                <strong style={{ color: C.teal }}>Argument repair:</strong> {kit.reasoningExercise.repair}
+              </p>
+            )}
+            {kit.reasoningExercise?.variation && (
+              <p style={{ marginBottom: 8 }}>
+                <strong style={{ color: C.teal }}>Student variation:</strong> {kit.reasoningExercise.variation}
+              </p>
+            )}
+            {kit.relatedExperiments?.length > 0 && (
+              <p style={{ color: C.textMuted, fontSize: "0.82rem", marginTop: 10 }}>
+                Related experiments: {kit.relatedExperiments.join(", ")}
+              </p>
+            )}
+          </Section>
+        )}
 
         {/* Safety & derailers */}
         <Section title="Common derailers & how to redirect" color={C.coral}>

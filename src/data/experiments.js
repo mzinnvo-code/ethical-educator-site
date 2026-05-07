@@ -18,12 +18,16 @@
  * @property {Function} [synthesis]
  * @property {{name:string, school?:string, view:string}[]} [positions]
  * @property {boolean} [weighty]
+ * @property {"values"|"knowledge"|"reality"|"reasoning"} [philosophyTheme]
+ * @property {string[]} [secondaryThemes]
+ * @property {{discussion:string, fallacySpotting:string, argumentRepair:string, variationPrompt:string, related:string[]}} [philosophyLab]
  */
 
 import { createIllustratedScene } from "../scenes/IllustratedScene.jsx";
 import { TEACHER_KITS } from "./teacherKits.js";
 import { applyK5ScenarioCopy, applyK5TeacherKitCopy } from "./k5ScenarioCopy.js";
 import { getMiddleSchoolExperiments } from "./middleSchoolScenarioCopy.js";
+import { getHighSchoolExperiments } from "./highSchoolScenarioCopy.js";
 
 const MagicToyScene = createIllustratedScene("magic-toy");
 const InvisibleRingScene = createIllustratedScene("invisible-ring");
@@ -2070,6 +2074,7 @@ EXPERIMENTS.forEach(e => {
 
 export function getExperimentsByGrade(band) {
   if (band === "6-8") return getMiddleSchoolExperiments(EXPERIMENTS);
+  if (band === "9-12") return getHighSchoolExperiments(EXPERIMENTS);
   return EXPERIMENTS.filter(e => e.gradeBands.includes(band));
 }
 
