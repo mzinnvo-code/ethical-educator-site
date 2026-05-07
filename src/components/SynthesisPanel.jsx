@@ -166,7 +166,42 @@ function PhilosophyLab({ lab, accent }) {
 //   - the contrasted lens(es)
 //   - the source + further reading
 //   - optional positions panel (3 named philosophers / schools — provided by stage author)
-export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null }) {
+// Visual marker for the deeper sections in K-5 scenarios. The "Wonder more"
+// block is for the child; the philosopher positions and the source/concept
+// block are pitched at an adult — parent, guardian, or teacher — who can use
+// them to extend the conversation. We render an explicit cue so neither
+// audience misreads which section is for them.
+function AdultCornerIntro({ accent }) {
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${C.gold}10, ${C.teal}08)`,
+      border: `1px dashed ${C.gold}50`,
+      borderRadius: 12,
+      padding: "14px 16px",
+      marginBottom: 14,
+    }}>
+      <p style={{
+        color: C.gold, fontSize: "0.7rem", fontWeight: 800,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 6,
+      }}>
+        For a trusted adult
+      </p>
+      <p style={{
+        color: C.textPrimary, fontSize: "0.9rem", lineHeight: 1.6,
+        fontFamily: "'Source Serif 4', Georgia, serif",
+        marginBottom: 4,
+      }}>
+        The next two sections are written for the parent, teacher, or guardian exploring this scenario with the child.
+      </p>
+      <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.6 }}>
+        Use them to keep the conversation going at home or in class — name the philosopher who first asked this question, follow a thread further, or invite the child to ask a follow-up of their own.
+      </p>
+    </div>
+  );
+}
+
+export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null, mode = "story" }) {
   const lensCounts = chose.reduce((acc, opt) => {
     if (opt?.lens) acc[opt.lens] = (acc[opt.lens] || 0) + 1;
     return acc;
@@ -226,6 +261,11 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
           </p>
         )}
       </div>
+
+      {/* Adult-corner cue: in K-5, label the deeper sections clearly. */}
+      {mode === "kid" && (positions.length > 0 || experiment?.reference) && (
+        <AdultCornerIntro accent={accent} />
+      )}
 
       {/* Three named positions (if provided by the experiment) */}
       {positions.length > 0 && (

@@ -55,8 +55,9 @@ export const K5_SCENARIO_COPY = {
         counterpoint: "The toy may not feel sad. But the way you treat it can still show what kind of person you are practicing to be.",
       },
       reflection("Kindness, pretending, and real feelings", [
-        { name: "René Descartes", school: "Mind, 1641", view: "Asked what really makes a thing a thinking, feeling being. The same question we ask the toy." },
-        { name: "Care ethics", school: "Modern philosophy", view: "How we treat what looks like it feels still shapes who we are practicing to be." },
+        { name: "René Descartes", school: "Meditations on First Philosophy, 1641", view: "Descartes's cogito — 'I think, therefore I am' — gave him certainty about his own mind but no way to verify that anyone or anything else had one. The talking toy puts the *other-minds problem* in your child's hands: how do we ever really know whether something else is experiencing anything at all?" },
+        { name: "Alan Turing", school: "'Computing Machinery and Intelligence,' 1950", view: "Turing argued that if a system's behavior is indistinguishable from a thinking being, the question of whether it 'really' thinks may be one we cannot answer from the outside. The toy is a kid-scale Turing test — and the same logic now drives debates about chatbots." },
+        { name: "Care ethics", school: "Carol Gilligan, Nel Noddings, 1980s", view: "How we treat what *appears* to feel can shape moral character even when the inner life of the thing is uncertain. Practicing tenderness toward apparent suffering is part of becoming a person who notices real suffering." },
       ]),
     ],
     studentLab: studentLab({
@@ -64,14 +65,16 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Wondering whether a thing really feels something is a kind of question philosophers call the *mind question*.",
     }),
     reference: ref({
-      concept: "When does something really have feelings? — the philosophy of mind question.",
-      philosopher: "René Descartes",
-      year: "1641",
-      text: "René Descartes, Meditations on First Philosophy (1641)",
-      url: "https://en.wikipedia.org/wiki/Meditations_on_First_Philosophy",
+      concept: "The other-minds problem and the philosophy of mind — when, and how, can we be confident that anything besides ourselves really has experience?",
+      philosopher: "René Descartes (and Alan Turing for the modern AI version)",
+      year: "1641 / 1950",
+      text: "René Descartes, Meditations on First Philosophy (1641); Alan Turing, 'Computing Machinery and Intelligence,' Mind 49: 433–460 (1950)",
+      url: "https://plato.stanford.edu/entries/other-minds/",
     }),
     furtherReading: [
+      reading("Other minds (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/other-minds/", "intermediate"),
       reading("Philosophy of mind (Wikipedia)", "https://en.wikipedia.org/wiki/Philosophy_of_mind", "intro"),
+      reading("Turing test (Wikipedia)", "https://en.wikipedia.org/wiki/Turing_test", "intro"),
     ],
   },
 
@@ -104,8 +107,9 @@ export const K5_SCENARIO_COPY = {
         ],
       },
       reflection("Fair can mean equal, needed, or shared", [
-        { name: "John Rawls", school: "Justice, 1971", view: "Asked us to design rules everyone could accept — even before knowing whose turn comes first." },
-        { name: "Care ethics", school: "Modern philosophy", view: "Sometimes the fair plan listens to friendship and need, not only to a clock." },
+        { name: "John Rawls", school: "A Theory of Justice, 1971", view: "Rawls's 'justice as fairness' asks us to design rules from behind a *veil of ignorance* about our own position — including, here, whose hand reaches the robot first. Fair rules are the ones every child could accept before they knew which child they would be." },
+        { name: "Aristotle", school: "Nicomachean Ethics V, c. 350 BCE", view: "Aristotle distinguished *distributive justice* (giving each their proper share) from *corrective justice*. Sometimes the proper share is equal; sometimes it tracks relevant differences. The robot rule asks the child to figure out which kind of fairness this moment calls for." },
+        { name: "Care ethics", school: "Carol Gilligan, In a Different Voice, 1982", view: "Gilligan argued that a strict-equality answer can miss the moral weight of relationship and need. Letting Sam go first today because Sam was sad yesterday is not unfair if it is part of a pattern of mutual care." },
       ]),
     ],
     studentLab: studentLab({
@@ -113,14 +117,16 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "When many people want one thing, philosophers ask about *fairness* — and there is more than one good answer.",
     }),
     reference: ref({
-      concept: "Fairness — what is the just way for many people to share one thing?",
-      philosopher: "John Rawls",
+      concept: "Distributive justice — when many want one thing, what counts as a fair share, and is fairness always the same as equality?",
+      philosopher: "John Rawls (with Aristotle and the care-ethics tradition)",
       year: "1971",
-      text: "John Rawls, A Theory of Justice (1971)",
-      url: "https://en.wikipedia.org/wiki/A_Theory_of_Justice",
+      text: "John Rawls, A Theory of Justice (1971); Aristotle, Nicomachean Ethics, Book V (c. 350 BCE); Carol Gilligan, In a Different Voice (1982)",
+      url: "https://plato.stanford.edu/entries/justice-distributive/",
     }),
     furtherReading: [
+      reading("Distributive justice (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/justice-distributive/", "intermediate"),
       reading("Justice as fairness (Wikipedia)", "https://en.wikipedia.org/wiki/Justice_as_Fairness", "intro"),
+      reading("Ethics of care (Wikipedia)", "https://en.wikipedia.org/wiki/Ethics_of_care", "intro"),
     ],
   },
 
@@ -153,8 +159,9 @@ export const K5_SCENARIO_COPY = {
         ],
       },
       reflection("A helper is not an excuse", [
-        { name: "Aristotle", school: "Virtue, c. 350 BCE", view: "Said we become what we keep choosing — a kind person becomes one by practicing kindness in small moments." },
-        { name: "Repair ethics", school: "Contemporary", view: "Helping fix what we helped break is part of being responsible for it." },
+        { name: "Aristotle", school: "Nicomachean Ethics II, c. 350 BCE", view: "For Aristotle, virtue is a *hexis* — a settled disposition built by repeated choices. A child who cleans up most of the time is not 'being good' on each occasion so much as becoming the kind of person for whom care is automatic. Each small choice in front of the robot writes that habit." },
+        { name: "Hannah Arendt", school: "The Human Condition, 1958", view: "Arendt distinguished retrospective responsibility ('who caused this?') from forward-looking responsibility ('who repairs it now?'). The two are different, and the second is often where character is visible. Sharing in the cleanup is owning the second kind." },
+        { name: "Repair ethics", school: "Contemporary moral philosophy", view: "A growing tradition (Margaret Urban Walker, María Puig de la Bellacasa) argues that *repair* — not just non-harm — is at the heart of moral life. Helping fix what we helped mess is one of its first lessons, and a tool that 'will handle it' does not erase that obligation." },
       ]),
     ],
     studentLab: studentLab({
@@ -162,14 +169,16 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "When a tool helps with a job, philosophers ask who is still *responsible* for the choices behind it.",
     }),
     reference: ref({
-      concept: "Responsibility — when a tool helps with a job, who is still responsible for the choices behind it?",
-      philosopher: "Aristotle",
-      year: "c. 350 BCE",
-      text: "Aristotle, Nicomachean Ethics (c. 350 BCE)",
-      url: "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
+      concept: "Virtue, habit, and responsibility — how character is built one small choice at a time, and what tools do and don't change about that.",
+      philosopher: "Aristotle (with Hannah Arendt and contemporary repair ethics)",
+      year: "c. 350 BCE / 1958",
+      text: "Aristotle, Nicomachean Ethics, Book II (c. 350 BCE); Hannah Arendt, The Human Condition (1958); Margaret Urban Walker, Moral Repair (2006)",
+      url: "https://plato.stanford.edu/entries/ethics-virtue/",
     }),
     furtherReading: [
+      reading("Virtue ethics (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/ethics-virtue/", "intermediate"),
       reading("Virtue ethics (Wikipedia)", "https://en.wikipedia.org/wiki/Virtue_ethics", "intro"),
+      reading("Moral responsibility (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/moral-responsibility/", "advanced"),
     ],
   },
 
@@ -202,8 +211,9 @@ export const K5_SCENARIO_COPY = {
         ],
       },
       reflection("What makes something the same?", [
-        { name: "John Locke", school: "Identity, 1689", view: "Argued personal identity is tied to continuous memory — not to having all the same parts." },
-        { name: "Care ethics", school: "Modern philosophy", view: "What we miss when something stops is often the part of ourselves shaped by being with it." },
+        { name: "John Locke", school: "Essay Concerning Human Understanding, 1689", view: "Locke argued personal identity is constituted by continuity of *consciousness* and memory — not by sameness of substance. The robot's parts can be replaced, lost, or end; what persists in the child is the relationship and the memory of being with it. That, for Locke, is most of what 'identity' is doing for us." },
+        { name: "Derek Parfit", school: "Reasons and Persons, 1984", view: "Parfit pushed Locke further: what *matters* in survival, he argued, is psychological continuity — the overlapping connections that make a future person 'you.' For a child losing a companion, Parfit reframes the loss: what mattered about being with this thing is partly what continues in you." },
+        { name: "Care ethics", school: "Carol Gilligan, Nel Noddings, 1980s", view: "Mourning small losses is part of the curriculum of love. The classroom moment when a robot pet stops working is not a side note to moral education — it is moral education, in a register a five-year-old can carry." },
       ]),
     ],
     studentLab: studentLab({
@@ -211,14 +221,16 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Philosophers ask what makes a thing the same one over time — and what we miss when it stops.",
     }),
     reference: ref({
-      concept: "Personal identity through change — what continues, and what makes a thing 'the same one'?",
-      philosopher: "John Locke",
-      year: "1689",
-      text: "John Locke, An Essay Concerning Human Understanding (1689)",
-      url: "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
+      concept: "Personal identity through change — what *continues*, what counts as 'the same thing,' and what mourning small losses teaches about love.",
+      philosopher: "John Locke (with Derek Parfit on what matters in survival)",
+      year: "1689 / 1984",
+      text: "John Locke, An Essay Concerning Human Understanding, II.xxvii (1689); Derek Parfit, Reasons and Persons, Part III (1984)",
+      url: "https://plato.stanford.edu/entries/identity-personal/",
     }),
     furtherReading: [
+      reading("Personal identity (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/identity-personal/", "intermediate"),
       reading("Personal identity (Wikipedia)", "https://en.wikipedia.org/wiki/Personal_identity", "intro"),
+      reading("Derek Parfit (Wikipedia)", "https://en.wikipedia.org/wiki/Derek_Parfit", "intermediate"),
     ],
   },
 
