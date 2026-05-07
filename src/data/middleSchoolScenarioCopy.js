@@ -8,6 +8,12 @@ const reflection = (title, positions = []) => ({
   positions,
 });
 
+const ref = ({ text, philosopher, concept, year, url }) => ({
+  text, philosopher, concept, year, url,
+});
+
+const reading = (title, url, level = "intro") => ({ title, url, level });
+
 export const MIDDLE_SCHOOL_ORDER = [
   "deepfake-election",
   "trolley-self-driving",
@@ -99,6 +105,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Three-column evidence check: Claim / Evidence we have / Evidence we still need. Bottom: write one sharing rule you would accept even when it hurts your side.",
       exitTicket: "Name one action you can take in the first five minutes after seeing a suspicious viral video, and explain what value that action protects.",
     },
+    reference: ref({
+      concept: "Truth in politics — what civic responsibility requires when emotion moves faster than verification.",
+      philosopher: "Hannah Arendt",
+      year: "1967",
+      text: "Hannah Arendt, Truth and Politics (The New Yorker, 1967)",
+      url: "https://en.wikipedia.org/wiki/Hannah_Arendt",
+    }),
+    furtherReading: [
+      reading("Deepfake (Wikipedia)", "https://en.wikipedia.org/wiki/Deepfake", "intro"),
+      reading("Truth and Politics (overview)", "https://en.wikipedia.org/wiki/Hannah_Arendt#Political_theory", "intermediate"),
+    ],
   },
 
   "trolley-self-driving": {
@@ -179,6 +196,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Two-case comparison chart: action, outcome, intention, person used as means, strongest objection. End with a draft safety rule.",
       exitTicket: "Write one rule for an autonomous system and one objection that would make you revise it.",
     },
+    reference: ref({
+      concept: "Doing harm vs. allowing harm — and the moral weight of using a person's body to stop a worse outcome.",
+      philosopher: "Philippa Foot and Judith Jarvis Thomson",
+      year: "1967 / 1985",
+      text: "Philippa Foot, The Problem of Abortion and the Doctrine of Double Effect (1967); Judith Jarvis Thomson, The Trolley Problem (1985)",
+      url: "https://en.wikipedia.org/wiki/Trolley_problem",
+    }),
+    furtherReading: [
+      reading("Trolley Problem (Wikipedia)", "https://en.wikipedia.org/wiki/Trolley_problem", "intro"),
+      reading("MIT Moral Machine results", "https://www.theverge.com/2018/10/24/18013392/self-driving-car-ethics-dilemma-mit-study-moral-machine-results", "intermediate"),
+    ],
   },
 
   "biased-resume-ai": {
@@ -258,6 +286,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Bias audit map: Data used / Criteria rewarded / Who benefits / Who is missed / Repair plan.",
       exitTicket: "Name one question you would ask before trusting an AI ranking system, and explain why that question matters.",
     },
+    reference: ref({
+      concept: "Algorithmic bias and structural injustice — when a system that looks neutral can repeat unfair history.",
+      philosopher: "Cathy O'Neil and Iris Marion Young",
+      year: "2016 / 1990",
+      text: "Cathy O'Neil, Weapons of Math Destruction (2016); Iris Marion Young, Justice and the Politics of Difference (1990)",
+      url: "https://en.wikipedia.org/wiki/Algorithmic_bias",
+    }),
+    furtherReading: [
+      reading("Algorithmic bias (Wikipedia)", "https://en.wikipedia.org/wiki/Algorithmic_bias", "intro"),
+      reading("Weapons of Math Destruction (overview)", "https://en.wikipedia.org/wiki/Weapons_of_Math_Destruction", "intermediate"),
+    ],
   },
 
   "ship-of-theseus-robot": {
@@ -337,6 +376,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Identity threads chart: parts, memory, behavior, name, relationships, responsibility. Students rank which thread matters most in each stage.",
       exitTicket: "Complete the sentence: something stays the same when ___, unless ___.",
     },
+    reference: ref({
+      concept: "Personal identity through change — Ship of Theseus, Locke's memory criterion, and Parfit's continuity.",
+      philosopher: "Plutarch, John Locke, and Derek Parfit",
+      year: "c. 75 CE / 1689 / 1984",
+      text: "Plutarch, Life of Theseus (c. 75 CE); John Locke, An Essay Concerning Human Understanding (1689); Derek Parfit, Reasons and Persons (1984)",
+      url: "https://en.wikipedia.org/wiki/Ship_of_Theseus",
+    }),
+    furtherReading: [
+      reading("Ship of Theseus (Wikipedia)", "https://en.wikipedia.org/wiki/Ship_of_Theseus", "intro"),
+      reading("Personal identity (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/identity-personal/", "advanced"),
+    ],
   },
 
   "autonomous-car-rider": {
@@ -416,6 +466,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Stakeholder grid: passenger, pedestrian, company, city, programmer. For each, list what they value and what risk they carry.",
       exitTicket: "Write one public rule for self-driving cars and identify who might object to it.",
     },
+    reference: ref({
+      concept: "Trolley reasoning meets public design — programming machines that share roads with people.",
+      philosopher: "Philippa Foot and the MIT Moral Machine project",
+      year: "1967 / 2018",
+      text: "Philippa Foot, Trolley Problem (1967); Awad et al., 'The Moral Machine experiment' (Nature, 2018)",
+      url: "https://www.theverge.com/2018/10/24/18013392/self-driving-car-ethics-dilemma-mit-study-moral-machine-results",
+    }),
+    furtherReading: [
+      reading("Trolley Problem (Wikipedia)", "https://en.wikipedia.org/wiki/Trolley_problem", "intro"),
+      reading("MIT Moral Machine results", "https://www.theverge.com/2018/10/24/18013392/self-driving-car-ethics-dilemma-mit-study-moral-machine-results", "intermediate"),
+    ],
   },
 
   "brain-in-vat": {
@@ -495,6 +556,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Certainty ladder: impossible to doubt / reasonable to trust / possible but unsupported / not worth acting on. Students place claims from the scenario.",
       exitTicket: "Name one thing you cannot prove with certainty but still reasonably trust. Why is that trust reasonable?",
     },
+    reference: ref({
+      concept: "Skepticism and the limits of certainty — Descartes' demon and Putnam's brain in a vat.",
+      philosopher: "René Descartes and Hilary Putnam",
+      year: "1641 / 1981",
+      text: "René Descartes, Meditations on First Philosophy (1641); Hilary Putnam, Reason, Truth and History (1981)",
+      url: "https://en.wikipedia.org/wiki/Brain_in_a_vat",
+    }),
+    furtherReading: [
+      reading("Brain in a vat (Wikipedia)", "https://en.wikipedia.org/wiki/Brain_in_a_vat", "intro"),
+      reading("Cartesian doubt (Wikipedia)", "https://en.wikipedia.org/wiki/Cartesian_doubt", "intro"),
+    ],
   },
 
   "veil-of-ignorance": {
@@ -575,6 +647,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Behind-the-veil rule sheet with limited budget choices. After roles open, students annotate which rules they would defend, revise, or reject.",
       exitTicket: "Write one rule you would choose before knowing your role and explain why it is fair from more than one position.",
     },
+    reference: ref({
+      concept: "Justice as fairness — design rules from behind a veil of ignorance about your own position.",
+      philosopher: "John Rawls",
+      year: "1971",
+      text: "John Rawls, A Theory of Justice (1971) — the original position and the veil of ignorance",
+      url: "https://en.wikipedia.org/wiki/Veil_of_ignorance",
+    }),
+    furtherReading: [
+      reading("Veil of ignorance (Wikipedia)", "https://en.wikipedia.org/wiki/Veil_of_ignorance", "intro"),
+      reading("A Theory of Justice (Wikipedia)", "https://en.wikipedia.org/wiki/A_Theory_of_Justice", "intermediate"),
+    ],
   },
 
   "tragedy-commons": {
@@ -654,6 +737,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Commons design worksheet: resource / users / temptations / harms / rule / support for high-need users / review plan.",
       exitTicket: "Name one commons and propose one rule that protects it without ignoring people who need it most.",
     },
+    reference: ref({
+      concept: "The tragedy of the commons — and the alternative: how communities can govern shared resources well.",
+      philosopher: "Garrett Hardin and Elinor Ostrom",
+      year: "1968 / 1990",
+      text: "Garrett Hardin, 'The Tragedy of the Commons' (Science, 1968); Elinor Ostrom, Governing the Commons (1990)",
+      url: "https://en.wikipedia.org/wiki/Tragedy_of_the_commons",
+    }),
+    furtherReading: [
+      reading("Tragedy of the commons (Wikipedia)", "https://en.wikipedia.org/wiki/Tragedy_of_the_commons", "intro"),
+      reading("Elinor Ostrom (Wikipedia)", "https://en.wikipedia.org/wiki/Elinor_Ostrom", "intermediate"),
+    ],
   },
 
   "liar-paradox": {
@@ -733,6 +827,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Truth loop diagram: If true, then ___. If false, then ___. My best response is ___ because ___.",
       exitTicket: "Write one sentence about itself and explain whether it creates a loop or avoids one.",
     },
+    reference: ref({
+      concept: "Self-reference and the limits of language — the Liar paradox, from ancient logic to formal systems.",
+      philosopher: "Eubulides, Alfred Tarski, and Kurt Gödel",
+      year: "c. 4th c. BCE / 1933 / 1931",
+      text: "Eubulides of Miletus (c. 4th c. BCE); Alfred Tarski, The Concept of Truth in Formalized Languages (1933); Kurt Gödel, On Formally Undecidable Propositions (1931)",
+      url: "https://en.wikipedia.org/wiki/Liar_paradox",
+    }),
+    furtherReading: [
+      reading("Liar paradox (Wikipedia)", "https://en.wikipedia.org/wiki/Liar_paradox", "intro"),
+      reading("Gödel's incompleteness theorems (Wikipedia)", "https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems", "advanced"),
+    ],
   },
 
   "sorites-heap": {
@@ -812,6 +917,17 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Boundary map: term / clear yes case / clear no case / fuzzy middle / who is affected by the label.",
       exitTicket: "Name one fuzzy word that matters in school and propose a fair way to use it.",
     },
+    reference: ref({
+      concept: "Vagueness and the Sorites paradox — when categories have fuzzy edges and decisions still have to be made.",
+      philosopher: "Eubulides and Timothy Williamson",
+      year: "c. 4th c. BCE / 1994",
+      text: "Eubulides of Miletus (c. 4th c. BCE); Timothy Williamson, Vagueness (1994)",
+      url: "https://en.wikipedia.org/wiki/Sorites_paradox",
+    }),
+    furtherReading: [
+      reading("Sorites paradox (Wikipedia)", "https://en.wikipedia.org/wiki/Sorites_paradox", "intro"),
+      reading("Vagueness (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/vagueness/", "advanced"),
+    ],
   },
 };
 

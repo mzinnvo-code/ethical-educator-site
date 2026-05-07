@@ -179,16 +179,41 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
           borderRadius: 12, padding: "16px 18px",
         }}>
           {experiment?.reference && (
-            <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6, marginBottom: 8 }}>
-              <strong style={{ color: C.gold, display: "block", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>
-                Source
-              </strong>
-              {experiment.reference.url ? (
-                <a href={experiment.reference.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textPrimary, borderBottom: `1px solid ${C.gold}40` }}>
-                  {experiment.reference.text}
-                </a>
-              ) : experiment.reference.text}
-            </p>
+            <div style={{ marginBottom: 8 }}>
+              <p style={{
+                color: C.gold, fontSize: "0.7rem", fontWeight: 700,
+                letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6,
+              }}>
+                Where this idea comes from
+              </p>
+              {experiment.reference.concept && (
+                <p style={{
+                  color: C.textPrimary, fontSize: "0.96rem", lineHeight: 1.55,
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  marginBottom: 6,
+                }}>
+                  {experiment.reference.concept}
+                </p>
+              )}
+              {experiment.reference.philosopher && (
+                <p style={{
+                  color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.55,
+                  marginBottom: 4,
+                }}>
+                  <strong style={{ color: C.textPrimary }}>{experiment.reference.philosopher}</strong>
+                  {experiment.reference.year ? ` · ${experiment.reference.year}` : ""}
+                </p>
+              )}
+              {experiment.reference.text && (
+                <p style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.55 }}>
+                  {experiment.reference.url ? (
+                    <a href={experiment.reference.url} target="_blank" rel="noopener noreferrer" style={{ color: C.textSecondary, borderBottom: `1px solid ${C.gold}40` }}>
+                      {experiment.reference.text}
+                    </a>
+                  ) : experiment.reference.text}
+                </p>
+              )}
+            </div>
           )}
           <FurtherReadingList items={experiment?.furtherReading} color={accent} />
         </div>

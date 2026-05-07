@@ -1,11 +1,18 @@
-const reflection = (title) => ({
+const reflection = (title, positions = []) => ({
   id: "synthesis",
   kicker: "Reflection",
   title,
   synthesis: () => null,
+  positions,
 });
 
 const section = (label, text) => ({ label, text });
+
+const ref = ({ text, philosopher, concept, year, url }) => ({
+  text, philosopher, concept, year, url,
+});
+
+const reading = (title, url, level = "intro") => ({ title, url, level });
 
 export const K5_SCENARIO_COPY = {
   "magic-toy": {
@@ -37,7 +44,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "The toy may not feel sad. But the way you treat it can still show what kind of person you are practicing to be.",
       },
-      reflection("Kindness, pretending, and real feelings"),
+      reflection("Kindness, pretending, and real feelings", [
+        { name: "René Descartes", school: "Mind, 1641", view: "Asked what really makes a thing a thinking, feeling being. The same question we ask the toy." },
+        { name: "Care ethics", school: "Modern philosophy", view: "How we treat what looks like it feels still shapes who we are practicing to be." },
+      ]),
+    ],
+    reference: ref({
+      concept: "When does something really have feelings? — the philosophy of mind question.",
+      philosopher: "René Descartes",
+      year: "1641",
+      text: "René Descartes, Meditations on First Philosophy (1641)",
+      url: "https://en.wikipedia.org/wiki/Meditations_on_First_Philosophy",
+    }),
+    furtherReading: [
+      reading("Philosophy of mind (Wikipedia)", "https://en.wikipedia.org/wiki/Philosophy_of_mind", "intro"),
     ],
   },
 
@@ -69,7 +89,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "Use the robot only for partner projects.", reflection: "Shared tools can teach cooperation when the rule invites cooperation.", lens: "creative" },
         ],
       },
-      reflection("Fair can mean equal, needed, or shared"),
+      reflection("Fair can mean equal, needed, or shared", [
+        { name: "John Rawls", school: "Justice, 1971", view: "Asked us to design rules everyone could accept — even before knowing whose turn comes first." },
+        { name: "Care ethics", school: "Modern philosophy", view: "Sometimes the fair plan listens to friendship and need, not only to a clock." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Fairness — what is the just way for many people to share one thing?",
+      philosopher: "John Rawls",
+      year: "1971",
+      text: "John Rawls, A Theory of Justice (1971)",
+      url: "https://en.wikipedia.org/wiki/A_Theory_of_Justice",
+    }),
+    furtherReading: [
+      reading("Justice as fairness (Wikipedia)", "https://en.wikipedia.org/wiki/Justice_as_Fairness", "intro"),
     ],
   },
 
@@ -101,7 +134,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "Ask the teacher how to fix the robot safely.", reflection: "Getting help can protect people and tools from more harm.", lens: "inquiry" },
         ],
       },
-      reflection("A helper is not an excuse"),
+      reflection("A helper is not an excuse", [
+        { name: "Aristotle", school: "Virtue, c. 350 BCE", view: "Said we become what we keep choosing — a kind person becomes one by practicing kindness in small moments." },
+        { name: "Repair ethics", school: "Contemporary", view: "Helping fix what we helped break is part of being responsible for it." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Responsibility — when a tool helps with a job, who is still responsible for the choices behind it?",
+      philosopher: "Aristotle",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics (c. 350 BCE)",
+      url: "https://en.wikipedia.org/wiki/Nicomachean_Ethics",
+    }),
+    furtherReading: [
+      reading("Virtue ethics (Wikipedia)", "https://en.wikipedia.org/wiki/Virtue_ethics", "intro"),
     ],
   },
 
@@ -133,7 +179,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "It is both old and new.", reflection: "Some hard questions do not fit neatly into yes or no.", lens: "pluralist" },
         ],
       },
-      reflection("What makes something the same?"),
+      reflection("What makes something the same?", [
+        { name: "John Locke", school: "Identity, 1689", view: "Argued personal identity is tied to continuous memory — not to having all the same parts." },
+        { name: "Care ethics", school: "Modern philosophy", view: "What we miss when something stops is often the part of ourselves shaped by being with it." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Personal identity through change — what continues, and what makes a thing 'the same one'?",
+      philosopher: "John Locke",
+      year: "1689",
+      text: "John Locke, An Essay Concerning Human Understanding (1689)",
+      url: "https://en.wikipedia.org/wiki/An_Essay_Concerning_Human_Understanding",
+    }),
+    furtherReading: [
+      reading("Personal identity (Wikipedia)", "https://en.wikipedia.org/wiki/Personal_identity", "intro"),
     ],
   },
 
@@ -166,7 +225,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Plato's old question still stings: are we good, or only careful when someone is watching?",
       },
-      reflection("What the invisible choice reveals"),
+      reflection("What the invisible choice reveals", [
+        { name: "Plato", school: "Republic II, c. 380 BCE", view: "Told the story of Gyges to ask whether anyone would stay just if they could never be caught." },
+        { name: "Glaucon", school: "Plato's brother, in dialogue", view: "Pressed the harder claim — that most people are good only because someone is watching." },
+      ]),
+    ],
+    reference: ref({
+      concept: "If you could never be caught, would you still try to be just? — the Ring of Gyges.",
+      philosopher: "Plato",
+      year: "c. 380 BCE",
+      text: "Plato, Republic, Book II — The Ring of Gyges (c. 380 BCE)",
+      url: "https://en.wikipedia.org/wiki/Ring_of_Gyges",
+    }),
+    furtherReading: [
+      reading("Ring of Gyges (Wikipedia)", "https://en.wikipedia.org/wiki/Ring_of_Gyges", "intro"),
     ],
   },
 
@@ -198,7 +270,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "Yes. Friends keep secrets.", reflection: "That protects Lena today, but it may not protect her character tomorrow.", lens: "loyalty" },
         ],
       },
-      reflection("Friendship, truth, and courage"),
+      reflection("Friendship, truth, and courage", [
+        { name: "Aristotle", school: "Virtue, c. 350 BCE", view: "Called courage the virtue of doing the hard right thing — including honesty when it costs us." },
+        { name: "Carol Gilligan", school: "Care ethics, 1982", view: "Said real friendship cares about who the other person is becoming, not only how they feel right now." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Courage and care — when honesty costs something, what kind of friend are we trying to be?",
+      philosopher: "Aristotle and Carol Gilligan",
+      year: "c. 350 BCE / 1982",
+      text: "Aristotle, Nicomachean Ethics (c. 350 BCE); Carol Gilligan, In a Different Voice (1982)",
+      url: "https://en.wikipedia.org/wiki/Ethics_of_care",
+    }),
+    furtherReading: [
+      reading("Ethics of care (Wikipedia)", "https://en.wikipedia.org/wiki/Ethics_of_care", "intro"),
     ],
   },
 
@@ -230,7 +315,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "No. Everyone knows toys are pretend.", reflection: "Pretend things can still influence real behavior.", lens: "realism" },
         ],
       },
-      reflection("Words can matter before feelings are real"),
+      reflection("Words can matter before feelings are real", [
+        { name: "Aristotle", school: "Virtue, c. 350 BCE", view: "Said character is shaped by what we keep listening to and repeating." },
+        { name: "Speech act theory", school: "J. L. Austin, 1962", view: "Words can do harm even when no one chose to mean them — the saying is part of the doing." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Words shape character — what counts as harm when the speaker is a machine?",
+      philosopher: "Aristotle and J. L. Austin",
+      year: "c. 350 BCE / 1962",
+      text: "Aristotle, Nicomachean Ethics (c. 350 BCE); J. L. Austin, How to Do Things with Words (1962)",
+      url: "https://en.wikipedia.org/wiki/Speech_act",
+    }),
+    furtherReading: [
+      reading("Speech act (Wikipedia)", "https://en.wikipedia.org/wiki/Speech_act", "intro"),
     ],
   },
 
@@ -262,7 +360,20 @@ export const K5_SCENARIO_COPY = {
           { label: "C", text: "No. I still played.", reflection: "Playing is not always the same as earning the result.", lens: "authenticity" },
         ],
       },
-      reflection("Winning, practice, and hidden help"),
+      reflection("Winning, practice, and hidden help", [
+        { name: "Robert Nozick", school: "Experience Machine, 1974", view: "Imagined a machine that could give you any feeling — and asked whether felt success is the same as earned success." },
+        { name: "Aristotle", school: "Virtue, c. 350 BCE", view: "Said growing as a person comes from real practice, not only from the feeling of having succeeded." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Felt experience vs. earned experience — Nozick's Experience Machine.",
+      philosopher: "Robert Nozick",
+      year: "1974",
+      text: "Robert Nozick, Anarchy, State, and Utopia (1974) — the Experience Machine",
+      url: "https://en.wikipedia.org/wiki/Experience_machine",
+    }),
+    furtherReading: [
+      reading("The Experience Machine (Wikipedia)", "https://en.wikipedia.org/wiki/Experience_machine", "intro"),
     ],
   },
 
@@ -319,7 +430,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Artists have always used tools. The harder question is when a tool becomes part of the authorship story.",
       },
-      reflection("Tools, credit, and creative pride"),
+      reflection("Tools, credit, and creative pride", [
+        { name: "Aristotle", school: "Techne, c. 350 BCE", view: "Called craft a virtue — the skill of making well, which only makes sense when we know what we did and what the tool did." },
+        { name: "Honesty in attribution", school: "Contemporary craft ethics", view: "Saying how you made something is part of making well, not a tax on it." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Craft and credit — when a tool helps with making, whose work is it?",
+      philosopher: "Aristotle",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics (c. 350 BCE) — on techne (craft) as a kind of virtue",
+      url: "https://en.wikipedia.org/wiki/Techne",
+    }),
+    furtherReading: [
+      reading("Techne (Wikipedia)", "https://en.wikipedia.org/wiki/Techne", "intro"),
     ],
   },
 
@@ -376,7 +500,21 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Sometimes the best moral answer is not breaking a rule or obeying it. It is redesigning the rule.",
       },
-      reflection("Rules that remember why they exist"),
+      reflection("Rules that remember why they exist", [
+        { name: "Immanuel Kant", school: "Duty, 1785", view: "Believed good rules are ones every person could agree to, applied without playing favorites." },
+        { name: "Carol Gilligan", school: "Care ethics, 1982", view: "Care for the person right in front of you is also a moral demand — sometimes the strongest one." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Rules and care — when a good rule meets a real person who needs something different.",
+      philosopher: "Immanuel Kant and Carol Gilligan",
+      year: "1785 / 1982",
+      text: "Kant, Groundwork of the Metaphysics of Morals (1785); Gilligan, In a Different Voice (1982)",
+      url: "https://en.wikipedia.org/wiki/Ethics_of_care",
+    }),
+    furtherReading: [
+      reading("Categorical imperative (Wikipedia)", "https://en.wikipedia.org/wiki/Categorical_imperative", "intro"),
+      reading("Ethics of care (Wikipedia)", "https://en.wikipedia.org/wiki/Ethics_of_care", "intro"),
     ],
   },
 
@@ -433,7 +571,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A friend who never disagrees may be easy to like, but hard to learn from.",
       },
-      reflection("Kind agreement and honest friendship"),
+      reflection("Kind agreement and honest friendship", [
+        { name: "Aristotle", school: "Friendship, c. 350 BCE", view: "Described three kinds of friendship — for use, for pleasure, and the deepest kind, where we help each other become better." },
+        { name: "Authenticity", school: "Modern philosophy", view: "Always agreeing with someone is not the same as caring about them — sometimes care says the harder thing." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Three kinds of friendship — utility, pleasure, and the friendship that helps us grow.",
+      philosopher: "Aristotle",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics, Book VIII — On Friendship (c. 350 BCE)",
+      url: "https://en.wikipedia.org/wiki/Friendship#Aristotle",
+    }),
+    furtherReading: [
+      reading("Friendship (Wikipedia: Aristotle's three kinds)", "https://en.wikipedia.org/wiki/Friendship#Aristotle", "intro"),
     ],
   },
 
@@ -490,7 +641,21 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "If there are two good answers, maybe 'same toy' was never a simple yes-or-no idea.",
       },
-      reflection("Parts, stories, and sameness"),
+      reflection("Parts, stories, and sameness", [
+        { name: "Plutarch", school: "Ship of Theseus, c. 75 CE", view: "Asked whether a ship is still the same ship after every plank has been replaced — the question parents and grandparents have asked for two thousand years." },
+        { name: "John Locke", school: "Identity, 1689", view: "Argued personal identity is tied to continuous memory, not to the same parts staying put." },
+        { name: "Derek Parfit", school: "Continuity, 1984", view: "What matters may not be perfect identity, but the connections that survive change." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Ship of Theseus — if every part is replaced, is it still the same thing?",
+      philosopher: "Plutarch (and later, John Locke)",
+      year: "c. 75 CE",
+      text: "Plutarch, Life of Theseus (c. 75 CE); John Locke, An Essay Concerning Human Understanding (1689)",
+      url: "https://en.wikipedia.org/wiki/Ship_of_Theseus",
+    }),
+    furtherReading: [
+      reading("Ship of Theseus (Wikipedia)", "https://en.wikipedia.org/wiki/Ship_of_Theseus", "intro"),
     ],
   },
 
@@ -547,7 +712,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A story can begin as a shortcut and become learning, but only if the student steps back into the writing.",
       },
-      reflection("Ideas, drafts, and voice"),
+      reflection("Ideas, drafts, and voice", [
+        { name: "Aristotle", school: "Intellectual virtue, c. 350 BCE", view: "Said careful thinking is a virtue — a habit you build by doing the work yourself, not just by getting an answer." },
+        { name: "Honesty in attribution", school: "Contemporary writing ethics", view: "Saying what helped you write something is part of telling the whole story." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Authorship — what makes a story really yours when a tool helped write it?",
+      philosopher: "Aristotle (intellectual virtues) and contemporary attribution norms",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics, Book VI — on intellectual virtues (c. 350 BCE)",
+      url: "https://en.wikipedia.org/wiki/Intellectual_virtue",
+    }),
+    furtherReading: [
+      reading("Intellectual virtue (Wikipedia)", "https://en.wikipedia.org/wiki/Intellectual_virtue", "intro"),
     ],
   },
 
@@ -604,7 +782,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A shortcut is only better if it takes you toward what matters.",
       },
-      reflection("Trusting tools without turning off judgment"),
+      reflection("Trusting tools without turning off judgment", [
+        { name: "Aristotle", school: "Phronesis, c. 350 BCE", view: "Called practical wisdom the skill of knowing when a rule fits the situation in front of you." },
+        { name: "Epistemic humility", school: "Modern philosophy", view: "Tools can be powerful and still miss what a careful human notices — knowing when to trust them is part of using them." },
+      ]),
+    ],
+    reference: ref({
+      concept: "When to trust a tool — practical wisdom (phronesis) and the limits of automation.",
+      philosopher: "Aristotle",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics, Book VI — on phronesis (practical wisdom) (c. 350 BCE)",
+      url: "https://en.wikipedia.org/wiki/Phronesis",
+    }),
+    furtherReading: [
+      reading("Phronesis (Wikipedia)", "https://en.wikipedia.org/wiki/Phronesis", "intro"),
     ],
   },
 
@@ -661,7 +852,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A face is not just art material. It belongs to a person who has feelings, privacy, and a story.",
       },
-      reflection("Creative freedom and permission"),
+      reflection("Creative freedom and permission", [
+        { name: "Immanuel Kant", school: "Persons and dignity, 1785", view: "Insisted we treat people as ends in themselves — never only as material for what we want to make." },
+        { name: "Care ethics", school: "Modern philosophy", view: "A friend asks before using what is theirs — including their face, their words, and their story." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Consent and dignity — using someone's image as material for something new.",
+      philosopher: "Immanuel Kant",
+      year: "1785",
+      text: "Kant, Groundwork of the Metaphysics of Morals (1785) — on persons as ends, not only means",
+      url: "https://en.wikipedia.org/wiki/Categorical_imperative",
+    }),
+    furtherReading: [
+      reading("Kantian ethics (Wikipedia)", "https://en.wikipedia.org/wiki/Kantian_ethics", "intro"),
     ],
   },
 
@@ -718,7 +922,21 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Personalized learning can become unfair when private support turns into public ranking.",
       },
-      reflection("Same work, right support, and dignity"),
+      reflection("Same work, right support, and dignity", [
+        { name: "John Rawls", school: "Justice as fairness, 1971", view: "Argued differences in treatment can be fair when they help the people who are worst off." },
+        { name: "Amartya Sen", school: "Capabilities, 1979", view: "Said fairness includes giving each person what they need to actually do and be the things that matter to them." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Fairness can mean treating people the same — or treating people differently to meet different needs.",
+      philosopher: "John Rawls and Amartya Sen",
+      year: "1971 / 1979",
+      text: "John Rawls, A Theory of Justice (1971); Amartya Sen, Equality of What? (1979)",
+      url: "https://en.wikipedia.org/wiki/Capability_approach",
+    }),
+    furtherReading: [
+      reading("Capability approach (Wikipedia)", "https://en.wikipedia.org/wiki/Capability_approach", "intro"),
+      reading("Difference principle (Wikipedia)", "https://en.wikipedia.org/wiki/Difference_principle", "intro"),
     ],
   },
 
@@ -778,7 +996,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A confident answer is not the same as knowledge. Knowledge asks to be checked.",
       },
-      reflection("Confidence, evidence, and honest research"),
+      reflection("Confidence, evidence, and honest research", [
+        { name: "Plato", school: "Theaetetus, c. 369 BCE", view: "Asked what makes an answer count as knowledge, not just a confident opinion — a question philosophers still debate." },
+        { name: "Testimony ethics", school: "Contemporary epistemology", view: "Trusting an answer depends on tracking how the source has done before, and on what it can or cannot know." },
+      ]),
+    ],
+    reference: ref({
+      concept: "When two confident answers disagree — what turns an answer into knowledge?",
+      philosopher: "Plato",
+      year: "c. 369 BCE",
+      text: "Plato, Theaetetus (c. 369 BCE) — on knowledge as more than confident opinion",
+      url: "https://en.wikipedia.org/wiki/Theaetetus_(dialogue)",
+    }),
+    furtherReading: [
+      reading("Epistemology (Wikipedia)", "https://en.wikipedia.org/wiki/Epistemology", "intro"),
     ],
   },
 
@@ -838,7 +1069,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Rules are not wise because they never bend. They are wise when they bend for the right reasons.",
       },
-      reflection("Rigid rules and human judgment"),
+      reflection("Rigid rules and human judgment", [
+        { name: "Aristotle", school: "Phronesis, c. 350 BCE", view: "Practical wisdom adjusts the rule to the situation — a wise person knows when a rule helps and when it hurts." },
+        { name: "Care ethics", school: "Modern philosophy", view: "Rules that ignore the person in front of you can become rules that harm — care is part of fairness." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Rules can be wise, and rules can also miss the person in front of you.",
+      philosopher: "Aristotle",
+      year: "c. 350 BCE",
+      text: "Aristotle, Nicomachean Ethics, Book VI — on phronesis (practical wisdom) (c. 350 BCE)",
+      url: "https://en.wikipedia.org/wiki/Phronesis",
+    }),
+    furtherReading: [
+      reading("Phronesis (Wikipedia)", "https://en.wikipedia.org/wiki/Phronesis", "intro"),
     ],
   },
 
@@ -898,7 +1142,22 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "The goal of design is not to make terrible choices dramatic. It is to make terrible choices less likely.",
       },
-      reflection("Designing before the emergency"),
+      reflection("Designing before the emergency", [
+        { name: "Philippa Foot", school: "Trolley Problem, Oxford 1967", view: "Posed the original case to test the difference between doing harm and allowing it." },
+        { name: "Utilitarian thinking", school: "Modern ethics", view: "Saving more lives may matter most — but the math alone does not settle who counts." },
+        { name: "Design ethics", school: "Contemporary AI ethics", view: "The harder question is who gets to decide before the emergency, not only what to do once it arrives." },
+      ]),
+    ],
+    reference: ref({
+      concept: "When two harms cannot both be avoided — how should a designer or driver choose?",
+      philosopher: "Philippa Foot",
+      year: "1967",
+      text: "Philippa Foot, The Problem of Abortion and the Doctrine of Double Effect (1967) — the Trolley Problem",
+      url: "https://en.wikipedia.org/wiki/Trolley_problem",
+    }),
+    furtherReading: [
+      reading("Trolley Problem (Wikipedia)", "https://en.wikipedia.org/wiki/Trolley_problem", "intro"),
+      reading("MIT Moral Machine results", "https://www.theverge.com/2018/10/24/18013392/self-driving-car-ethics-dilemma-mit-study-moral-machine-results", "intermediate"),
     ],
   },
 
@@ -958,7 +1217,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A science fair project is not only what visitors see. It is what the student can explain when the poster is silent.",
       },
-      reflection("Impressive work and real understanding"),
+      reflection("Impressive work and real understanding", [
+        { name: "Aristotle", school: "Intellectual virtue, c. 350 BCE", view: "Said real learning shows up in being able to explain — not only in producing a polished result." },
+        { name: "Linda Zagzebski", school: "Virtue epistemology, 1996", view: "Honest inquiry is itself a virtue — caring about whether your understanding is real, not only whether it looks real." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Real understanding vs. polished display — what counts as learning?",
+      philosopher: "Aristotle (and Linda Zagzebski for the contemporary version)",
+      year: "c. 350 BCE / 1996",
+      text: "Aristotle, Nicomachean Ethics, Book VI (c. 350 BCE); Linda Zagzebski, Virtues of the Mind (1996)",
+      url: "https://en.wikipedia.org/wiki/Virtue_epistemology",
+    }),
+    furtherReading: [
+      reading("Virtue epistemology (Wikipedia)", "https://en.wikipedia.org/wiki/Virtue_epistemology", "intro"),
     ],
   },
 
@@ -1018,7 +1290,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A relationship can feel real to one person and still fail to be mutual. Naming that difference is a kind of care.",
       },
-      reflection("Connection, privacy, and mutual friendship"),
+      reflection("Connection, privacy, and mutual friendship", [
+        { name: "Aristotle", school: "Friendship, c. 350 BCE", view: "Said the deepest friendship is one in which both people are challenged and changed by being known." },
+        { name: "Sherry Turkle", school: "Alone Together, 2011", view: "Warned that always-agreeable connection can crowd out the harder kind that grows us." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Real friendship vs. perfect listening — what is friendship for?",
+      philosopher: "Aristotle (and Sherry Turkle for the contemporary version)",
+      year: "c. 350 BCE / 2011",
+      text: "Aristotle, Nicomachean Ethics, Book VIII (c. 350 BCE); Sherry Turkle, Alone Together (2011)",
+      url: "https://en.wikipedia.org/wiki/Alone_Together_(Turkle_book)",
+    }),
+    furtherReading: [
+      reading("Friendship (Wikipedia: Aristotle's three kinds)", "https://en.wikipedia.org/wiki/Friendship#Aristotle", "intro"),
     ],
   },
 
@@ -1078,7 +1363,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "The line is not simply AI or no AI. The line is whether the student is still doing the learning.",
       },
-      reflection("Help that teaches and help that replaces"),
+      reflection("Help that teaches and help that replaces", [
+        { name: "Aristotle", school: "Virtue and learning, c. 350 BCE", view: "Said a virtue — including learning — is built by practice. The struggle is not the obstacle to growth; it is the growth." },
+        { name: "Hannah Arendt", school: "Thinking, 1971", view: "Called thinking what we do when we slow down to make sense of things — a habit a fast answer can quietly skip." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Learning as practice — what is the difference between getting an answer and growing through one?",
+      philosopher: "Aristotle (and Hannah Arendt for the modern version)",
+      year: "c. 350 BCE / 1971",
+      text: "Aristotle, Nicomachean Ethics (c. 350 BCE); Hannah Arendt, Thinking and Moral Considerations (1971)",
+      url: "https://en.wikipedia.org/wiki/Virtue_ethics",
+    }),
+    furtherReading: [
+      reading("Virtue ethics (Wikipedia)", "https://en.wikipedia.org/wiki/Virtue_ethics", "intro"),
     ],
   },
 
@@ -1138,7 +1436,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "A tool can be neutral in code and unfair in a classroom. Fairness is something people have to keep checking.",
       },
-      reflection("Fairness, patterns, and student voice"),
+      reflection("Fairness, patterns, and student voice", [
+        { name: "Iris Marion Young", school: "Structural injustice, 1990", view: "Showed that some unfairness is the kind no single person caused — but that everyone in the system is part of." },
+        { name: "Cathy O'Neil", school: "Weapons of Math Destruction, 2016", view: "Warned that algorithms can quietly repeat past unfairness while looking neutral and modern." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Patterns of unfairness can hide inside systems that look neutral.",
+      philosopher: "Iris Marion Young (and Cathy O'Neil for the contemporary AI version)",
+      year: "1990 / 2016",
+      text: "Iris Marion Young, Justice and the Politics of Difference (1990); Cathy O'Neil, Weapons of Math Destruction (2016)",
+      url: "https://en.wikipedia.org/wiki/Algorithmic_bias",
+    }),
+    furtherReading: [
+      reading("Algorithmic bias (Wikipedia)", "https://en.wikipedia.org/wiki/Algorithmic_bias", "intro"),
     ],
   },
 
@@ -1198,7 +1509,20 @@ export const K5_SCENARIO_COPY = {
         ],
         counterpoint: "Feedback should help a writer grow. When a score makes the writer disappear, the tool has missed the point.",
       },
-      reflection("Fast feedback and fair judgment"),
+      reflection("Fast feedback and fair judgment", [
+        { name: "John Rawls", school: "Justice as fairness, 1971", view: "Argued a fair process gives reasons that can be questioned, not only an answer that has to be accepted." },
+        { name: "Cathy O'Neil", school: "Weapons of Math Destruction, 2016", view: "A score is only as fair as the data behind it — and the appeal it allows when something looks wrong." },
+      ]),
+    ],
+    reference: ref({
+      concept: "Procedural justice — when a system can be wrong, what does fairness require?",
+      philosopher: "John Rawls (and Cathy O'Neil for the AI version)",
+      year: "1971 / 2016",
+      text: "John Rawls, A Theory of Justice (1971); Cathy O'Neil, Weapons of Math Destruction (2016)",
+      url: "https://en.wikipedia.org/wiki/Procedural_justice",
+    }),
+    furtherReading: [
+      reading("Procedural justice (Wikipedia)", "https://en.wikipedia.org/wiki/Procedural_justice", "intro"),
     ],
   },
 };
