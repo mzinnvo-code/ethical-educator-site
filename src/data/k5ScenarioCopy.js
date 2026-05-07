@@ -14,6 +14,16 @@ const ref = ({ text, philosopher, concept, year, url }) => ({
 
 const reading = (title, url, level = "intro") => ({ title, url, level });
 
+// Age-tiered "lab" content for K-5 scenarios. Renders in the synthesis panel
+// alongside the philosopher positions and the source block. Each scenario
+// includes only the fields that fit its grade band:
+//   K     — wonder + bigIdea
+//   1-3   — wonder + bigIdea + tryThis
+//   4-5   — wonder + bigIdea + tryThis + spotTheSlip + related
+const studentLab = ({ wonder, tryThis, spotTheSlip, bigIdea, related }) => ({
+  wonder, tryThis, spotTheSlip, bigIdea, related,
+});
+
 export const K5_SCENARIO_COPY = {
   "magic-toy": {
     tagline: "A talking toy says it feels sad. Does it really?",
@@ -49,6 +59,10 @@ export const K5_SCENARIO_COPY = {
         { name: "Care ethics", school: "Modern philosophy", view: "How we treat what looks like it feels still shapes who we are practicing to be." },
       ]),
     ],
+    studentLab: studentLab({
+      wonder: "Can a toy be sad? What would it take for you to know — for sure?",
+      bigIdea: "Wondering whether a thing really feels something is a kind of question philosophers call the *mind question*.",
+    }),
     reference: ref({
       concept: "When does something really have feelings? — the philosophy of mind question.",
       philosopher: "René Descartes",
@@ -94,6 +108,10 @@ export const K5_SCENARIO_COPY = {
         { name: "Care ethics", school: "Modern philosophy", view: "Sometimes the fair plan listens to friendship and need, not only to a clock." },
       ]),
     ],
+    studentLab: studentLab({
+      wonder: "What is the fairest way you have ever shared something with a friend?",
+      bigIdea: "When many people want one thing, philosophers ask about *fairness* — and there is more than one good answer.",
+    }),
     reference: ref({
       concept: "Fairness — what is the just way for many people to share one thing?",
       philosopher: "John Rawls",
@@ -139,6 +157,10 @@ export const K5_SCENARIO_COPY = {
         { name: "Repair ethics", school: "Contemporary", view: "Helping fix what we helped break is part of being responsible for it." },
       ]),
     ],
+    studentLab: studentLab({
+      wonder: "If a robot can clean it, who should be careful in the first place?",
+      bigIdea: "When a tool helps with a job, philosophers ask who is still *responsible* for the choices behind it.",
+    }),
     reference: ref({
       concept: "Responsibility — when a tool helps with a job, who is still responsible for the choices behind it?",
       philosopher: "Aristotle",
@@ -184,6 +206,10 @@ export const K5_SCENARIO_COPY = {
         { name: "Care ethics", school: "Modern philosophy", view: "What we miss when something stops is often the part of ourselves shaped by being with it." },
       ]),
     ],
+    studentLab: studentLab({
+      wonder: "When something we love stops, what stays with us?",
+      bigIdea: "Philosophers ask what makes a thing the same one over time — and what we miss when it stops.",
+    }),
     reference: ref({
       concept: "Personal identity through change — what continues, and what makes a thing 'the same one'?",
       philosopher: "John Locke",
