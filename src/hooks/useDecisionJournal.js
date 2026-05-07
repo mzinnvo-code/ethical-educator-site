@@ -98,6 +98,13 @@ export default function useDecisionJournal() {
     }));
   }, [persist]);
 
+  const updateSteelman = useCallback((id, steelman) => {
+    persist(prev => ({
+      ...prev,
+      entries: prev.entries.map(e => (e.id === id ? { ...e, steelman } : e)),
+    }));
+  }, [persist]);
+
   const removeEntry = useCallback((id) => {
     persist(prev => ({
       ...prev,
@@ -116,6 +123,7 @@ export default function useDecisionJournal() {
     optOutAndClear,
     addEntry,
     updateNotes,
+    updateSteelman,
     removeEntry,
     clearEntries,
   };
@@ -149,6 +157,12 @@ export function entriesToMarkdown(entries) {
         const stage = step?.stageTitle ? `${step.stageTitle} — ` : "";
         lines.push(`${i + 1}. ${stage}${step?.optionText || "(no choice recorded)"}${lens}`);
       });
+      lines.push("");
+    }
+    if (entry.steelman?.trim()) {
+      lines.push("**Steelman of the position I didn't pick:**");
+      lines.push("");
+      lines.push(entry.steelman.trim());
       lines.push("");
     }
     if (entry.notes?.trim()) {

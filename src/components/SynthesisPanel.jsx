@@ -142,7 +142,11 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
         )}
       </div>
 
-      <SaveToJournalAction
+      {mode !== "kid" && (
+        <ComparePaths chose={chose} stages={stages} accent={accent} />
+      )}
+
+      <WriteAndSaveBlock
         chose={chose}
         experiment={experiment}
         stages={stages}
@@ -224,14 +228,153 @@ const LENS_NAMES = {
 };
 function lensName(id) { return LENS_NAMES[id] || id?.replace(/-/g, " "); }
 
-function SaveToJournalAction({ chose, experiment, stages, accent, mode }) {
+// Pulls the option text the student chose at a given stage; falls back gracefully.
+function chosenLabelFor(opt) {
+  if (!opt) return null;
+  return opt.text || opt.label || null;
+}
+
+function SteelmanTextarea({ value, onChange, onCommit, accent }) {
+  return (
+    <div style={{
+      marginBottom: 14,
+      background: `${accent}06`,
+      border: `1px solid ${accent}25`,
+      borderRadius: 12, padding: "14px 16px",
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 700,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 6,
+      }}>
+        Steelman the position you didn't pick
+      </p>
+      <p style={{ color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.6, marginBottom: 10 }}>
+        Write the strongest possible version of the option you most disagreed with.
+        No grading. The point is to argue against yourself well.
+      </p>
+      <textarea
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        onBlur={onCommit}
+        placeholder="A serious version of the position I rejected goes like this…"
+        rows={4}
+        style={{
+          width: "100%", padding: "10px 12px",
+          background: C.bg, border: `1px solid ${C.border}`,
+          borderRadius: 8, color: C.textPrimary,
+          fontSize: "0.9rem", lineHeight: 1.6,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          resize: "vertical",
+        }}
+      />
+    </div>
+  );
+}
+
+function ComparePaths({ chose, stages, accent }) {
+  const [open, setOpen] = useState(false);
+
+  if (!stages?.length) return null;
+  const interesting = stages
+    .map((stage, i) => ({ stage, i, picked: chose?.[i] }))
+    .filter(({ stage, picked }) => stage?.options?.length > 1 && picked);
+
+  if (!interesting.length) return null;
+
+  return (
+    <div style={{
+      marginBottom: 14,
+      background: C.surface, border: `1px solid ${C.border}`,
+      borderRadius: 12, padding: "14px 16px",
+    }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        style={{
+          width: "100%", display: "flex", alignItems: "center",
+          justifyContent: "space-between", gap: 10,
+          background: "none", border: "none", padding: 0,
+          color: accent, fontSize: "0.78rem", fontWeight: 700,
+          letterSpacing: "0.12em", textTransform: "uppercase",
+          cursor: "pointer",
+        }}
+      >
+        <span>Compare your path with the ones you didn't take</span>
+        <span style={{ color: C.textMuted, fontWeight: 600, fontSize: "0.86rem" }}>
+          {open ? "Hide" : "Open"}
+        </span>
+      </button>
+
+      {open && (
+        <div style={{ marginTop: 12, display: "grid", gap: 14 }}>
+          {interesting.map(({ stage, i, picked }) => {
+            const alternates = (stage.options || []).filter(opt => opt && opt.label !== picked.label);
+            return (
+              <div key={stage.id || i}>
+                <p style={{
+                  color: C.textMuted, fontSize: "0.7rem", fontWeight: 700,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  marginBottom: 6,
+                }}>
+                  Stage {i + 1}{stage.title ? ` · ${stage.title}` : ""}
+                </p>
+                <p style={{
+                  color: C.textPrimary, fontSize: "0.88rem",
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  lineHeight: 1.55, marginBottom: 10,
+                  paddingLeft: 12, borderLeft: `2px solid ${accent}`,
+                }}>
+                  <strong style={{ color: accent }}>You picked:</strong> {chosenLabelFor(picked)}
+                </p>
+                <div style={{ display: "grid", gap: 8 }}>
+                  {alternates.map(alt => (
+                    <div key={alt.label} style={{
+                      background: C.bg, border: `1px solid ${C.border}`,
+                      borderRadius: 8, padding: "10px 12px",
+                    }}>
+                      <p style={{
+                        color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.55,
+                        fontFamily: "'Source Serif 4', Georgia, serif",
+                        marginBottom: alt.reflection ? 6 : 0,
+                      }}>
+                        <strong style={{ color: C.textPrimary }}>{alt.label}.</strong> {alt.text}
+                      </p>
+                      {alt.reflection && (
+                        <p style={{
+                          color: C.textMuted, fontSize: "0.8rem", lineHeight: 1.55,
+                          fontStyle: "italic",
+                        }}>
+                          {alt.reflection}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <p style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.55, fontStyle: "italic" }}>
+            Reading the path you didn't take is half of philosophical work.
+            Which alternate do you find yourself wanting to push back on hardest?
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
   const journal = useDecisionJournal();
   const [phase, setPhase] = useState("idle"); // idle | confirming | saved
   const [savedId, setSavedId] = useState(null);
+  const [steelmanDraft, setSteelmanDraft] = useState("");
 
   if (!experiment) return null;
   const recordedChoices = (chose || []).filter(Boolean);
   if (recordedChoices.length === 0) return null;
+
+  const showSteelman = mode !== "kid";
 
   const buildEntry = () => {
     const path = (chose || []).map((opt, i) => {
@@ -250,6 +393,7 @@ function SaveToJournalAction({ chose, experiment, stages, accent, mode }) {
       gradeBand: experiment.gradeBands?.[0] || null,
       mode,
       path,
+      steelman: steelmanDraft.trim() || "",
     };
   };
 
@@ -260,11 +404,12 @@ function SaveToJournalAction({ chose, experiment, stages, accent, mode }) {
   };
 
   const handleClick = () => {
-    if (journal.optedIn) {
-      handleSave();
-    } else {
-      setPhase("confirming");
-    }
+    if (journal.optedIn) handleSave();
+    else setPhase("confirming");
+  };
+
+  const commitSteelmanIfSaved = () => {
+    if (savedId) journal.updateSteelman(savedId, steelmanDraft);
   };
 
   const goToJournal = () => {
@@ -273,84 +418,94 @@ function SaveToJournalAction({ chose, experiment, stages, accent, mode }) {
     }
   };
 
-  if (phase === "saved") {
-    return (
-      <div style={{
-        background: `${accent}10`,
-        border: `1px solid ${accent}40`,
-        borderRadius: 12, padding: "12px 16px", marginBottom: 14,
-        display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap",
-      }}>
-        <span style={{ color: accent, fontSize: "0.86rem", fontWeight: 600 }}>
-          Saved to your journal.
-        </span>
-        <button
-          onClick={goToJournal}
-          style={{
-            padding: "6px 14px", background: "transparent",
-            border: `1px solid ${accent}60`, borderRadius: 6,
-            color: accent, cursor: "pointer", fontSize: "0.78rem", fontWeight: 600,
-          }}
-        >
-          View journal →
-        </button>
-      </div>
-    );
-  }
+  return (
+    <>
+      {showSteelman && (
+        <SteelmanTextarea
+          value={steelmanDraft}
+          onChange={setSteelmanDraft}
+          onCommit={commitSteelmanIfSaved}
+          accent={accent}
+        />
+      )}
 
-  if (phase === "confirming") {
-    return (
-      <div style={{
-        background: `${accent}08`,
-        border: `1px solid ${accent}30`,
-        borderRadius: 12, padding: "14px 16px", marginBottom: 14,
-      }}>
-        <p style={{ color: C.textPrimary, fontSize: "0.88rem", lineHeight: 1.6, marginBottom: 10 }}>
-          The Decision Journal saves your reasoning to <strong>this browser only</strong>.
-          Nothing leaves your device — no servers, no accounts. You can export or clear it any time.
-        </p>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      {phase === "saved" && (
+        <div style={{
+          background: `${accent}10`,
+          border: `1px solid ${accent}40`,
+          borderRadius: 12, padding: "12px 16px", marginBottom: 14,
+          display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap",
+        }}>
+          <span style={{ color: accent, fontSize: "0.86rem", fontWeight: 600 }}>
+            Saved to your journal.
+          </span>
           <button
-            onClick={handleSave}
+            onClick={goToJournal}
             style={{
-              padding: "8px 16px",
-              background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
-              border: "none", borderRadius: 6, color: "#fff",
-              cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
+              padding: "6px 14px", background: "transparent",
+              border: `1px solid ${accent}60`, borderRadius: 6,
+              color: accent, cursor: "pointer", fontSize: "0.78rem", fontWeight: 600,
             }}
           >
-            Save & continue
-          </button>
-          <button
-            onClick={() => setPhase("idle")}
-            style={{
-              padding: "8px 16px", background: "transparent",
-              border: `1px solid ${C.border}`, borderRadius: 6,
-              color: C.textMuted, cursor: "pointer", fontSize: "0.82rem",
-            }}
-          >
-            Not now
+            View journal →
           </button>
         </div>
-      </div>
-    );
-  }
+      )}
 
-  return (
-    <div style={{ marginBottom: 14, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-      <button
-        onClick={handleClick}
-        style={{
-          padding: "8px 16px", background: "transparent",
-          border: `1px solid ${accent}60`, borderRadius: 6,
-          color: accent, cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
-        }}
-      >
-        📓 Save to journal
-      </button>
-      <span style={{ color: C.textMuted, fontSize: "0.76rem", lineHeight: 1.5 }}>
-        Keep a record of how you reasoned. Stays on your device.
-      </span>
-    </div>
+      {phase === "confirming" && (
+        <div style={{
+          background: `${accent}08`,
+          border: `1px solid ${accent}30`,
+          borderRadius: 12, padding: "14px 16px", marginBottom: 14,
+        }}>
+          <p style={{ color: C.textPrimary, fontSize: "0.88rem", lineHeight: 1.6, marginBottom: 10 }}>
+            The Decision Journal saves your reasoning to <strong>this browser only</strong>.
+            Nothing leaves your device — no servers, no accounts. You can export or clear it any time.
+          </p>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button
+              onClick={handleSave}
+              style={{
+                padding: "8px 16px",
+                background: `linear-gradient(135deg, ${accent}, ${accent}cc)`,
+                border: "none", borderRadius: 6, color: "#fff",
+                cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
+              }}
+            >
+              Save & continue
+            </button>
+            <button
+              onClick={() => setPhase("idle")}
+              style={{
+                padding: "8px 16px", background: "transparent",
+                border: `1px solid ${C.border}`, borderRadius: 6,
+                color: C.textMuted, cursor: "pointer", fontSize: "0.82rem",
+              }}
+            >
+              Not now
+            </button>
+          </div>
+        </div>
+      )}
+
+      {phase === "idle" && (
+        <div style={{ marginBottom: 14, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <button
+            onClick={handleClick}
+            style={{
+              padding: "8px 16px", background: "transparent",
+              border: `1px solid ${accent}60`, borderRadius: 6,
+              color: accent, cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
+            }}
+          >
+            📓 Save to journal
+          </button>
+          <span style={{ color: C.textMuted, fontSize: "0.76rem", lineHeight: 1.5 }}>
+            Keep a record of how you reasoned{showSteelman ? ", including the steelman above" : ""}. Stays on your device.
+          </span>
+        </div>
+      )}
+    </>
   );
 }
+
