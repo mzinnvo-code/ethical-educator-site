@@ -54,6 +54,8 @@ export default function GradePage({
   title,            // h2
   blurb,            // intro paragraph
   preExperiments = null,  // optional content before the grid (e.g. flagship cards on educators)
+  renderResults = null,   // optional ({experiments, filterApi, all, onSelect, emptyMessage}) => JSX,
+                          // used to override the default flat ExperimentGrid (e.g. themed grouping at 9-12)
   emptyMessage,
 }) {
   const all = getExperimentsByGrade(band);
@@ -109,11 +111,19 @@ export default function GradePage({
                 totalCount={all.length}
                 extraActiveCount={filterApi.selectedThemes?.length || 0}
               />
-              <ExperimentGrid
-                experiments={filterApi.filtered}
-                onSelect={(e) => { setActive(e); window.scrollTo({ top: 200, behavior: "smooth" }); }}
-                emptyMessage={emptyMessage}
-              />
+              {renderResults ? renderResults({
+                experiments: filterApi.filtered,
+                all,
+                filterApi,
+                onSelect: (e) => { setActive(e); window.scrollTo({ top: 200, behavior: "smooth" }); },
+                emptyMessage,
+              }) : (
+                <ExperimentGrid
+                  experiments={filterApi.filtered}
+                  onSelect={(e) => { setActive(e); window.scrollTo({ top: 200, behavior: "smooth" }); }}
+                  emptyMessage={emptyMessage}
+                />
+              )}
             </>
           )}
 
