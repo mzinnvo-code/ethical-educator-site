@@ -9,8 +9,17 @@ import AIEducation from "./pages/AIEducation.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
+import {
+  Kindergarten as ThoughtExperimentsKindergarten,
+  Grade1 as ThoughtExperimentsGrade1,
+  Grade2 as ThoughtExperimentsGrade2,
+  Grade3 as ThoughtExperimentsGrade3,
+  Grade4 as ThoughtExperimentsGrade4,
+  Grade5 as ThoughtExperimentsGrade5,
+} from "./pages/thought-experiments/ElementaryGrade.jsx";
 import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
 import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
+import ThoughtExperimentsToolkit from "./pages/thought-experiments/Toolkit.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -54,8 +63,15 @@ const PAGE_MAP = {
   "thought-experiments": ThoughtExperiments,
   "thought-experiments/educators": ThoughtExperimentsForEducators,
   "thought-experiments/k-5": ThoughtExperimentsK5,
+  "thought-experiments/kindergarten": ThoughtExperimentsKindergarten,
+  "thought-experiments/grade-1": ThoughtExperimentsGrade1,
+  "thought-experiments/grade-2": ThoughtExperimentsGrade2,
+  "thought-experiments/grade-3": ThoughtExperimentsGrade3,
+  "thought-experiments/grade-4": ThoughtExperimentsGrade4,
+  "thought-experiments/grade-5": ThoughtExperimentsGrade5,
   "thought-experiments/6-8": ThoughtExperimentsMiddle,
   "thought-experiments/9-12": ThoughtExperimentsHigh,
+  "thought-experiments/toolkit": ThoughtExperimentsToolkit,
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
@@ -72,8 +88,8 @@ const PAGE_MAP = {
 
 const PAGE_META = {
   "home": {
-    title: "The Ethical Educator — Matthew A. Zinn",
-    description: "Where moral philosophy meets the age of AI. Research, interactive thought experiments, and philosophical frameworks for navigating the most consequential questions of our time.",
+    title: "The Ethical Educator",
+    description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
   },
   "about": {
     title: "About Matthew A. Zinn — The Ethical Educator",
@@ -105,7 +121,31 @@ const PAGE_META = {
   },
   "thought-experiments/k-5": {
     title: "K–5 Thought Experiments — The Ethical Educator",
-    description: "Big illustrations, short prompts, read-aloud built in. Ten experiments for early readers and the teachers who guide them.",
+    description: "A grade-by-grade elementary hub with 24 storylike thought experiments, read-aloud support, and teacher kits for K–5 ethics and AI discussions.",
+  },
+  "thought-experiments/kindergarten": {
+    title: "Kindergarten Thought Experiments — The Ethical Educator",
+    description: "Four gentle read-aloud dilemmas about toys, robots, sharing, care, and the first language of ethical reflection.",
+  },
+  "thought-experiments/grade-1": {
+    title: "Grade 1 Thought Experiments — The Ethical Educator",
+    description: "Four simple classroom dilemmas about honesty, loyalty, fairness, invisible choices, and becoming the kind of person students want to be.",
+  },
+  "thought-experiments/grade-2": {
+    title: "Grade 2 Thought Experiments — The Ethical Educator",
+    description: "Four cause-and-effect stories about AI help, friendship, identity, rules, and age-appropriate perspective taking.",
+  },
+  "thought-experiments/grade-3": {
+    title: "Grade 3 Thought Experiments — The Ethical Educator",
+    description: "Four storylike dilemmas about AI authorship, GPS shortcuts, privacy, adaptive learning, fairness, and trust.",
+  },
+  "thought-experiments/grade-4": {
+    title: "Grade 4 Thought Experiments — The Ethical Educator",
+    description: "Four richer elementary dilemmas about conflicting AI answers, robot rules, self-driving choices, and AI-assisted science projects.",
+  },
+  "thought-experiments/grade-5": {
+    title: "Grade 5 Thought Experiments — The Ethical Educator",
+    description: "Four mature elementary scenarios about AI friendship, homework help, classroom bias, grading mistakes, fairness, and human judgment.",
   },
   "thought-experiments/6-8": {
     title: "Grades 6–8 Thought Experiments — The Ethical Educator",
@@ -114,6 +154,10 @@ const PAGE_META = {
   "thought-experiments/9-12": {
     title: "Grades 9–12 Thought Experiments — The Ethical Educator",
     description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
+  },
+  "thought-experiments/toolkit": {
+    title: "Dialogue Toolkit — The Ethical Educator",
+    description: "Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students who want to run philosophy well.",
   },
   "resources": {
     title: "Research Resources & Reading List — The Ethical Educator",
@@ -165,8 +209,13 @@ const PAGE_META = {
   },
 };
 
+function getPageFromHash() {
+  if (typeof window === "undefined") return "home";
+  return window.location.hash.replace("#", "") || "home";
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  const [currentPage, setCurrentPage] = useState(getPageFromHash);
   const [menuOpen, setMenuOpen] = useState(false);
   const hasNew = hasAnyNewExperiments();
 
@@ -178,12 +227,16 @@ export default function App() {
 
   // Handle browser back/forward and direct URL entry
   useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-    if (hash) setCurrentPage(hash); // set even for unknown pages so NotFound renders
+    const syncPageFromHash = () => setCurrentPage(getPageFromHash()); // set even for unknown pages so NotFound renders
+
+    window.addEventListener("hashchange", syncPageFromHash);
+    return () => window.removeEventListener("hashchange", syncPageFromHash);
   }, []);
 
   useEffect(() => {
-    window.location.hash = currentPage;
+    if (window.location.hash.replace("#", "") !== currentPage) {
+      window.location.hash = currentPage;
+    }
   }, [currentPage]);
 
   // Dynamic title, meta description, and Article schema per page
@@ -228,8 +281,9 @@ export default function App() {
           "url": "https://theethicaleducator.com",
         },
         "publisher": {
-          "@type": "Person",
-          "name": "Matthew A. Zinn",
+          "@type": "Organization",
+          "name": "The Ethical Educator",
+          "url": "https://theethicaleducator.com",
         },
         "datePublished": "2024-01-01",
         "dateModified": "2026-04-24",
@@ -255,9 +309,11 @@ export default function App() {
         em{color:${C.sand};font-style:italic}
         .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
         .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
-        .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap}
-        .topbar-nav{display:flex;gap:6px;list-style:none;flex-wrap:nowrap}
-        .topbar-nav li a{font-size:0.76rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 10px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+        .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
+        .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
+        .brand-mark img{width:20px;height:20px;display:block}
+        .topbar-nav{display:flex;gap:4px;list-style:none;flex-wrap:nowrap}
+        .topbar-nav li a{font-size:0.74rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 8px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
         .topbar-nav li a:hover{color:${C.gold};background:rgba(200,152,48,0.06)}
         .topbar-nav li a.active{color:${C.gold};background:rgba(200,152,48,0.1)}
         .hamburger{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative;flex-shrink:0}
@@ -272,7 +328,7 @@ export default function App() {
         .page-enter{animation:pageIn 0.4s ease}
         @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}
-        @media(max-width:900px){.topbar-nav{display:none}.hamburger{display:block}}
+        @media(max-width:1120px){.topbar-nav{display:none}.hamburger{display:block}}
         @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr !important}}
         @media(prefers-reduced-motion:reduce){
           :root{--motion-duration:0.01ms}
@@ -286,7 +342,12 @@ export default function App() {
 
       {/* NAV */}
       <header className="topbar">
-        <div className="topbar-logo" onClick={() => navigate("home")}>Matthew A. Zinn</div>
+        <div className="topbar-logo" onClick={() => navigate("home")}>
+          <span className="brand-mark" aria-hidden="true">
+            <img src="/favicon.svg" alt="" />
+          </span>
+          <span>The Ethical Educator</span>
+        </div>
         <ul className="topbar-nav">
           {PAGES.map(p => (
             <li key={p.id}>
@@ -354,7 +415,7 @@ export default function App() {
                 <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
-            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} Matthew A. Zinn · All Rights Reserved</p>
+            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · All Rights Reserved</p>
           </div>
         </div>
       </footer>

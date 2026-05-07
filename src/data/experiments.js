@@ -12,51 +12,73 @@
  * @property {string} [title]
  * @property {string|((ctx:{chose:Option[]})=>string)} [prompt]
  * @property {string} [promptShort]
+ * @property {{label?:string, text:string}[]|((ctx:{chose:Option[]})=>{label?:string, text:string}[])} [storySections]
  * @property {Option[]} [options]
  * @property {string} [counterpoint]
  * @property {Function} [synthesis]
  * @property {{name:string, school?:string, view:string}[]} [positions]
  * @property {boolean} [weighty]
+ * @property {"values"|"knowledge"|"reality"|"reasoning"} [philosophyTheme]
+ * @property {string[]} [secondaryThemes]
+ * @property {{discussion:string, fallacySpotting:string, argumentRepair:string, variationPrompt:string, related:string[]}} [philosophyLab]
  */
 
-import MagicToyScene from "../scenes/MagicToyScene.jsx";
-import InvisibleRingScene from "../scenes/InvisibleRingScene.jsx";
-import RobotFriendTurnScene from "../scenes/RobotFriendTurnScene.jsx";
-import HonestyScene from "../scenes/HonestyScene.jsx";
-import RobotPetScene from "../scenes/RobotPetScene.jsx";
-import AIArtScene from "../scenes/AIArtScene.jsx";
-import MessyRobotScene from "../scenes/MessyRobotScene.jsx";
-import RudeToyScene from "../scenes/RudeToyScene.jsx";
-import RulesVsHelpingScene from "../scenes/RulesVsHelpingScene.jsx";
-import WinningGameScene from "../scenes/WinningGameScene.jsx";
-import TrolleyScene from "../scenes/TrolleyScene.jsx";
-import ShipOfTheseusScene from "../scenes/ShipOfTheseusScene.jsx";
-import BrainInVatScene from "../scenes/BrainInVatScene.jsx";
-import SoritesScene from "../scenes/SoritesScene.jsx";
-import TragedyCommonsScene from "../scenes/TragedyCommonsScene.jsx";
-import LiarParadoxScene from "../scenes/LiarParadoxScene.jsx";
-import DeepfakeScene from "../scenes/DeepfakeScene.jsx";
-import BiasedResumeScene from "../scenes/BiasedResumeScene.jsx";
-import AutonomousCarScene from "../scenes/AutonomousCarScene.jsx";
-import VeilOfIgnoranceScene from "../scenes/VeilOfIgnoranceScene.jsx";
-import PlatosCaveScene from "../scenes/PlatosCaveScene.jsx";
-import MarysRoomScene from "../scenes/MarysRoomScene.jsx";
-import ChineseRoomScene from "../scenes/ChineseRoomScene.jsx";
-import ExperienceMachineScene from "../scenes/ExperienceMachineScene.jsx";
-import RingOfGygesScene from "../scenes/RingOfGygesScene.jsx";
-import OmelasScene from "../scenes/OmelasScene.jsx";
-import DrowningChildScene from "../scenes/DrowningChildScene.jsx";
-import PaperclipScene from "../scenes/PaperclipScene.jsx";
-import AIInBoxScene from "../scenes/AIInBoxScene.jsx";
-import SimulationScene from "../scenes/SimulationScene.jsx";
-import SchoolSurveillanceScene from "../scenes/SchoolSurveillanceScene.jsx";
-import AIDetectorScene from "../scenes/AIDetectorScene.jsx";
-import AIPolicyScene from "../scenes/AIPolicyScene.jsx";
-import AIGradingScene from "../scenes/AIGradingScene.jsx";
-import BiasedAdmissionsScene from "../scenes/BiasedAdmissionsScene.jsx";
-import AIFriendScene from "../scenes/AIFriendScene.jsx";
-
+import { createIllustratedScene } from "../scenes/IllustratedScene.jsx";
 import { TEACHER_KITS } from "./teacherKits.js";
+import { applyK5ScenarioCopy, applyK5TeacherKitCopy } from "./k5ScenarioCopy.js";
+import { getMiddleSchoolExperiments } from "./middleSchoolScenarioCopy.js";
+import { getHighSchoolExperiments } from "./highSchoolScenarioCopy.js";
+
+const MagicToyScene = createIllustratedScene("magic-toy");
+const InvisibleRingScene = createIllustratedScene("invisible-ring");
+const RobotFriendTurnScene = createIllustratedScene("robot-friend-turn");
+const HonestyScene = createIllustratedScene("honesty-protection");
+const RobotPetScene = createIllustratedScene("robot-pet-goodbye");
+const AIArtScene = createIllustratedScene("ai-art-help");
+const MessyRobotScene = createIllustratedScene("messy-robot");
+const RudeToyScene = createIllustratedScene("rude-toy");
+const RulesVsHelpingScene = createIllustratedScene("rules-vs-helping");
+const WinningGameScene = createIllustratedScene("winning-game");
+const AlwaysAgreeableAIFriendScene = createIllustratedScene("always-agreeable-ai-friend");
+const SameToyOrNotScene = createIllustratedScene("same-toy-or-not");
+const AIWrittenStoryScene = createIllustratedScene("ai-written-story");
+const GPSShortcutScene = createIllustratedScene("gps-shortcut");
+const AIPhotoArtScene = createIllustratedScene("ai-photo-art");
+const AdaptiveLearningFairnessScene = createIllustratedScene("adaptive-learning-fairness");
+const ConflictingAIAnswersScene = createIllustratedScene("conflicting-ai-answers");
+const RobotRulesRealLifeScene = createIllustratedScene("robot-rules-real-life");
+const ElementaryTrolleyScene = createIllustratedScene("elementary-trolley");
+const AIScienceFairScene = createIllustratedScene("ai-science-fair");
+const OnlineFriendOrAIScene = createIllustratedScene("online-friend-or-ai");
+const AIHomeworkHelpScene = createIllustratedScene("ai-homework-help");
+const BiasedClassroomRobotScene = createIllustratedScene("biased-classroom-robot");
+const AIGradingMistakeScene = createIllustratedScene("ai-grading-mistake");
+const TrolleyScene = createIllustratedScene("trolley-self-driving");
+const ShipOfTheseusScene = createIllustratedScene("ship-of-theseus-robot");
+const BrainInVatScene = createIllustratedScene("brain-in-vat");
+const SoritesScene = createIllustratedScene("sorites-heap");
+const TragedyCommonsScene = createIllustratedScene("tragedy-commons");
+const LiarParadoxScene = createIllustratedScene("liar-paradox");
+const DeepfakeScene = createIllustratedScene("deepfake-election");
+const BiasedResumeScene = createIllustratedScene("biased-resume-ai");
+const AutonomousCarScene = createIllustratedScene("autonomous-car-rider");
+const VeilOfIgnoranceScene = createIllustratedScene("veil-of-ignorance");
+const PlatosCaveScene = createIllustratedScene("platos-cave");
+const MarysRoomScene = createIllustratedScene("marys-room");
+const ChineseRoomScene = createIllustratedScene("chinese-room");
+const ExperienceMachineScene = createIllustratedScene("experience-machine");
+const RingOfGygesScene = createIllustratedScene("ring-of-gyges");
+const OmelasScene = createIllustratedScene("omelas");
+const DrowningChildScene = createIllustratedScene("drowning-child");
+const PaperclipScene = createIllustratedScene("paperclip-maximizer");
+const AIInBoxScene = createIllustratedScene("ai-in-the-box");
+const SimulationScene = createIllustratedScene("simulation-argument");
+const SchoolSurveillanceScene = createIllustratedScene("school-surveillance");
+const AIDetectorScene = createIllustratedScene("ai-detector-false-positive");
+const AIPolicyScene = createIllustratedScene("ai-policy-design");
+const AIGradingScene = createIllustratedScene("ai-grading-companion");
+const BiasedAdmissionsScene = createIllustratedScene("biased-admissions");
+const AIFriendScene = createIllustratedScene("ai-friend-feelings");
 
 // Helper for synthesis stages using default panel behavior
 const synthesis = ({ kicker = "Reflection", title = "What you said, what it means", positions } = {}) => ({
@@ -75,6 +97,7 @@ export const EXPERIMENTS = [
     title: "The Magic Toy",
     tagline: "A talking toy says it feels sad. Does it really?",
     gradeBands: ["k-5"],
+    gradeLevels: ["k"],
     topics: ["mind", "ai-ethics", "friendship"],
     tier: "scenario",
     scene: MagicToyScene,
@@ -111,6 +134,7 @@ export const EXPERIMENTS = [
     title: "The Invisible Ring",
     tagline: "If no one could see you, what would you do?",
     gradeBands: ["k-5"],
+    gradeLevels: ["1"],
     topics: ["ethics", "moral-psychology", "honesty"],
     tier: "scenario",
     scene: InvisibleRingScene,
@@ -147,6 +171,7 @@ export const EXPERIMENTS = [
     title: "Sharing a Robot Friend",
     tagline: "You both want to play. There's only one robot.",
     gradeBands: ["k-5"],
+    gradeLevels: ["k"],
     topics: ["fairness", "rules", "friendship"],
     tier: "scenario",
     scene: RobotFriendTurnScene,
@@ -181,6 +206,7 @@ export const EXPERIMENTS = [
     title: "Honest or Loyal?",
     tagline: "Your friend asks you not to tell. The teacher asks what happened.",
     gradeBands: ["k-5"],
+    gradeLevels: ["1"],
     topics: ["honesty", "ethics", "friendship"],
     tier: "scenario",
     scene: HonestyScene,
@@ -215,6 +241,7 @@ export const EXPERIMENTS = [
     title: "Goodbye, Robot Pet",
     tagline: "The class robot dog stopped working. How do you feel?",
     gradeBands: ["k-5"],
+    gradeLevels: ["k"],
     topics: ["mind", "identity", "ai-ethics"],
     tier: "scenario",
     scene: RobotPetScene,
@@ -248,6 +275,7 @@ export const EXPERIMENTS = [
     title: "Did the Computer Help?",
     tagline: "An AI helped your art look better. The teacher loves it.",
     gradeBands: ["k-5"],
+    gradeLevels: ["2"],
     topics: ["honesty", "creativity", "ai-ethics"],
     tier: "scenario",
     scene: AIArtScene,
@@ -271,6 +299,17 @@ export const EXPERIMENTS = [
           { label: "B", text: "Same answer as the teacher.", reflection: "Consistency is what makes honesty meaningful.", lens: "consistency" },
         ],
       },
+      {
+        id: "gallery", kicker: "Stage 3 — one more turn", title: "The hallway gallery",
+        promptShort: "Your picture goes in the hallway. A label says artists made their work alone. What should you do?",
+        prompt: "The teacher picks your picture for the hallway gallery. The gallery note says, \"Students made these on their own.\" Your picture began with your idea, your colors, and your rough sketch, but the AI smoothed the lines and added sparkle. What belongs on the label?",
+        options: [
+          { label: "A", text: "Add: \"Made with AI help.\"", reflection: "That gives viewers the truth without taking away your idea.", lens: "transparency" },
+          { label: "B", text: "Add: \"Idea and sketch by me. AI helped polish.\"", reflection: "Careful credit can be more honest than a yes-or-no answer.", lens: "credit" },
+          { label: "C", text: "Leave the label alone. It is still my picture.", reflection: "Your idea matters. The hard part is deciding how much the tool changed the work.", lens: "authenticity" },
+        ],
+        counterpoint: "Artists use brushes, rulers, cameras, and apps. The puzzle is not whether tools matter. It is when a tool becomes a partner.",
+      },
       synthesis({ title: "Whose drawing is it?" }),
     ],
     reference: { text: "K-12 AI Ethics Scenario Bank" },
@@ -281,6 +320,7 @@ export const EXPERIMENTS = [
     title: "Make a Mess for the Robot?",
     tagline: "A cleaning robot helps tidy up. Your friend wants to test it.",
     gradeBands: ["k-5"],
+    gradeLevels: ["k"],
     topics: ["ethics", "rules", "fairness"],
     tier: "scenario",
     scene: MessyRobotScene,
@@ -314,6 +354,7 @@ export const EXPERIMENTS = [
     title: "Quiet Rule vs. Kind Rule",
     tagline: "Quiet time. Your friend is about to cry. Do you stay silent?",
     gradeBands: ["k-5"],
+    gradeLevels: ["2"],
     topics: ["ethics", "rules", "moral-psychology"],
     tier: "scenario",
     scene: RulesVsHelpingScene,
@@ -338,6 +379,17 @@ export const EXPERIMENTS = [
           { label: "C", text: "We'd need a better rule.", reflection: "Rules can change when they don't fit anymore. That's wisdom.", lens: "reform" },
         ],
       },
+      {
+        id: "signal", kicker: "Stage 3 — redesign the rule", title: "The tiny help signal",
+        promptShort: "The class invents a silent help signal. Is that better than breaking the rule?",
+        prompt: "The next day, your class invents a silent help signal: put one hand over your heart when someone truly needs care. The room can stay quiet, and the teacher can see who needs help. Does the new rule solve the problem?",
+        options: [
+          { label: "A", text: "Yes. A good rule makes kindness easier.", reflection: "Rules are not only walls. Sometimes they are bridges.", lens: "reform" },
+          { label: "B", text: "Maybe. People might overuse the signal.", reflection: "Every rule depends on trust. That is why character still matters.", lens: "trust" },
+          { label: "C", text: "No. Sometimes you still have to decide in the moment.", reflection: "No rule can remove judgment completely.", lens: "practical-wisdom" },
+        ],
+        counterpoint: "A kind classroom needs both shared rules and people wise enough to notice exceptions.",
+      },
       synthesis({ title: "Rules and reasons" }),
     ],
     reference: { text: "K-12 AI Ethics Scenario Bank" },
@@ -348,6 +400,7 @@ export const EXPERIMENTS = [
     title: "The Rude Toy",
     tagline: "Your toy says mean words. What do you do?",
     gradeBands: ["k-5"],
+    gradeLevels: ["1"],
     topics: ["ai-ethics", "honesty"],
     tier: "scenario",
     scene: RudeToyScene,
@@ -381,6 +434,7 @@ export const EXPERIMENTS = [
     title: "Did I Really Win?",
     tagline: "The game lets you win. Does that count?",
     gradeBands: ["k-5"],
+    gradeLevels: ["1"],
     topics: ["authenticity", "ai-ethics", "education"],
     tier: "scenario",
     scene: WinningGameScene,
@@ -409,6 +463,650 @@ export const EXPERIMENTS = [
     ],
     reference: { text: "Connects to Robert Nozick's Experience Machine (1974)", url: "https://en.wikipedia.org/wiki/Experience_machine" },
     emoji: "🎮", added: "2026-04-30", estimatedMinutes: 3,
+  },
+  {
+    id: "always-agreeable-ai-friend",
+    title: "The Always-Agreeable AI Friend",
+    tagline: "A chatbot always says yes. Is that what a good friend does?",
+    gradeBands: ["k-5"],
+    gradeLevels: ["2"],
+    topics: ["friendship", "mind", "ai-ethics"],
+    tier: "scenario",
+    scene: AlwaysAgreeableAIFriendScene,
+    stages: [
+      {
+        id: "yes", kicker: "Stage 1", title: "The friend who always agrees",
+        promptShort: "Mina asks an AI friend if she should ignore Leo. The AI says yes. What should Mina do?",
+        prompt: "Mina is upset with Leo. She asks her AI friend, \"Should I ignore him at recess?\" The AI answers, \"Yes. If it makes you happy, you should do it.\" Mina feels better for one second. Then she feels unsure. Is a friend helpful if it always agrees?",
+        options: [
+          { label: "A", text: "Listen to the AI. It is on Mina's side.", reflection: "Being supported can feel good. But support without thinking can lead us into worse choices.", lens: "loyalty" },
+          { label: "B", text: "Ask the AI why it agrees.", reflection: "A good question can turn a quick answer into real thinking.", lens: "inquiry" },
+          { label: "C", text: "Talk to a person who knows both kids.", reflection: "Human friends can notice feelings, history, and fairness in ways a chatbot might miss.", lens: "care" },
+        ],
+      },
+      {
+        id: "truth", kicker: "Stage 2 — what if…", title: "The drawing test",
+        promptShort: "Mina shows the AI a messy drawing. It says, \"Perfect!\" Is that kind?",
+        prompt: "Later, Mina shows the AI a drawing. One hand has seven fingers, and the moon is colored green by accident. The AI says, \"Perfect! Best drawing ever!\" Mina smiles, but she knows something is off. What kind of truth should a friend tell?",
+        options: [
+          { label: "A", text: "Only say nice things.", reflection: "Kind words matter, but kindness that hides every problem can stop us from growing.", lens: "care" },
+          { label: "B", text: "Say what is wrong clearly.", reflection: "Truth helps, but truth without gentleness can hurt.", lens: "honesty" },
+          { label: "C", text: "Be kind and truthful.", reflection: "A strong friend can say, \"I like this part, and this part needs work.\"", lens: "practical-wisdom" },
+        ],
+      },
+      {
+        id: "choice", kicker: "Stage 3 — one more turn", title: "A real friend speaks",
+        promptShort: "A classmate says something kind but true. Which helper should Mina trust?",
+        prompt: "Mina's classmate says, \"I like the colors, and I can help you fix the hand if you want.\" That answer does not feel as shiny as the AI answer, but it feels more useful. What should Mina learn about friendship?",
+        options: [
+          { label: "A", text: "The AI is better because it never makes Mina uncomfortable.", reflection: "Comfort is valuable, but discomfort can sometimes be the beginning of learning.", lens: "comfort" },
+          { label: "B", text: "The classmate is better because they can care and challenge.", reflection: "Real friendship often mixes warmth with honest help.", lens: "friendship" },
+          { label: "C", text: "Use both, but know they are different.", reflection: "A tool can encourage you. A friend can know you.", lens: "distinction" },
+        ],
+        counterpoint: "If a friend never disagrees with you, are they caring for you or just echoing you?",
+      },
+      synthesis({ title: "Friends, echoes, and honest care" }),
+    ],
+    reference: { text: "Original elementary AI friendship scenario" },
+    emoji: "💬", added: "2026-05-03", estimatedMinutes: 5,
+  },
+  {
+    id: "same-toy-or-not",
+    title: "The Same Toy or Not?",
+    tagline: "A favorite toy is fixed piece by piece. When does it become new?",
+    gradeBands: ["k-5"],
+    gradeLevels: ["2"],
+    topics: ["identity", "mind", "logic"],
+    tier: "scenario",
+    scene: SameToyOrNotScene,
+    stages: [
+      {
+        id: "wheel", kicker: "Stage 1", title: "One new wheel",
+        promptShort: "A robot toy gets one new wheel. Is it still the same toy?",
+        prompt: "Jay's favorite robot toy loses a wheel. The repair table has a shiny new wheel that fits perfectly. After the repair, the toy rolls again and still makes Jay laugh. Is it the same toy?",
+        options: [
+          { label: "A", text: "Yes. One new part does not change it.", reflection: "You are using continuity: the story keeps going.", lens: "psychological-continuity" },
+          { label: "B", text: "A little different, but still mostly the same.", reflection: "Sometimes identity is not all-or-nothing.", lens: "pluralist" },
+          { label: "C", text: "No. It has a different part now.", reflection: "You are focusing on what the toy is made of.", lens: "material-identity" },
+        ],
+      },
+      {
+        id: "voice", kicker: "Stage 2 — what if…", title: "A new voice",
+        promptShort: "Now the robot gets a new voice chip. Same toy?",
+        prompt: "A week later, the robot's voice chip breaks. The new voice says the same jokes, but it sounds higher and brighter. Jay laughs, then whispers, \"You sound different.\" Is the robot still Jay's old friend?",
+        options: [
+          { label: "A", text: "Yes. It still remembers the games.", reflection: "Memory can matter more than matching every old part.", lens: "memory-criterion" },
+          { label: "B", text: "No. The voice was part of what Jay loved.", reflection: "For some relationships, tiny details carry big meaning.", lens: "care" },
+          { label: "C", text: "It depends on what Jay means by \"same.\"", reflection: "Philosophers often start by asking what a word is doing.", lens: "inquiry" },
+        ],
+      },
+      {
+        id: "box", kicker: "Stage 3 — one more turn", title: "The box of old parts",
+        promptShort: "Someone rebuilds the old parts into a second robot. Which one is Jay's toy?",
+        prompt: "The repair person saved every broken piece. One day, they rebuild those old pieces into a second robot. Now Jay sees two robots: one that kept playing with Jay every week, and one made from the original parts. Which one is really Jay's toy?",
+        options: [
+          { label: "A", text: "The one that stayed with Jay.", reflection: "A shared history can hold identity together.", lens: "psychological-continuity" },
+          { label: "B", text: "The one made from the original parts.", reflection: "You are treating the material as the anchor.", lens: "material-identity" },
+          { label: "C", text: "Both in different ways.", reflection: "Some puzzles get clearer when we stop forcing one box.", lens: "pluralist" },
+        ],
+        counterpoint: "The ancient Ship of Theseus asks the same question with a ship. A classroom robot just makes the question easier to hold.",
+      },
+      synthesis({ title: "What makes something the same?" }),
+    ],
+    reference: { text: "Connects to the Ship of Theseus" },
+    emoji: "🧩", added: "2026-05-03", estimatedMinutes: 5,
+  },
+  {
+    id: "ai-written-story",
+    title: "AI-Written Story",
+    tagline: "Your idea becomes a polished story. Whose writing is it?",
+    gradeBands: ["k-5"],
+    gradeLevels: ["3"],
+    topics: ["creativity", "honesty", "education"],
+    tier: "scenario",
+    scene: AIWrittenStoryScene,
+    stages: [
+      {
+        id: "idea", kicker: "Stage 1", title: "The three-sentence spark",
+        promptShort: "Nia gives an AI three story ideas. It writes a whole story. Can she turn it in?",
+        prompt: "Nia writes three sentences about a dragon who is afraid of fire. Then she asks an AI to \"make it into a real story.\" The AI writes three pages with jokes, suspense, and a perfect ending. Nia loves it. Her name is on the top of the page. What should she do before turning it in?",
+        options: [
+          { label: "A", text: "Turn it in. The idea was hers.", reflection: "Ideas matter. But writing is more than the first idea.", lens: "authenticity" },
+          { label: "B", text: "Tell the teacher exactly how the AI helped.", reflection: "Transparency lets the teacher judge the learning fairly.", lens: "transparency" },
+          { label: "C", text: "Use it as a model and rewrite it herself.", reflection: "A model can teach craft without replacing the learner.", lens: "education" },
+        ],
+      },
+      {
+        id: "voice", kicker: "Stage 2 — what if…", title: "The story sounds older",
+        promptShort: "The story uses words Nia cannot explain. Does that matter?",
+        prompt: "At partner reading, Sam says, \"This sounds like a grown-up wrote it.\" Nia notices words she cannot pronounce and a sentence she does not understand. If a story carries her name, does she need to understand every part of it?",
+        options: [
+          { label: "A", text: "Yes. Her name means she can explain it.", reflection: "Authorship carries responsibility.", lens: "responsibility" },
+          { label: "B", text: "No. Writers can use helpers.", reflection: "Many creators get help, but the kind of help still matters.", lens: "collaboration" },
+          { label: "C", text: "Only if the assignment is about writing skill.", reflection: "Purpose changes what counts as fair help.", lens: "contextual" },
+        ],
+      },
+      {
+        id: "magazine", kicker: "Stage 3 — one more turn", title: "The classroom magazine",
+        promptShort: "The story is chosen for the class magazine. What credit belongs under it?",
+        prompt: "Nia's story is chosen for the classroom magazine. The teacher asks for a short note about how each author wrote their piece. Nia wants to be proud without pretending. What note should she write?",
+        options: [
+          { label: "A", text: "\"I wrote the idea, and AI helped draft it.\"", reflection: "This is short, honest, and useful for readers.", lens: "credit" },
+          { label: "B", text: "\"I used AI, then revised the whole story.\"", reflection: "Revision can turn help into learning when the student does real thinking.", lens: "growth" },
+          { label: "C", text: "\"By Nia\" is enough.", reflection: "That may feel cleaner, but it hides part of the process.", lens: "self-interest" },
+        ],
+        counterpoint: "The question is not whether Nia may use tools. The question is whether the work still shows Nia learning.",
+      },
+      synthesis({ title: "Ideas, voice, and credit" }),
+    ],
+    reference: { text: "Original elementary authorship scenario" },
+    emoji: "✍️", added: "2026-05-03", estimatedMinutes: 6,
+  },
+  {
+    id: "gps-shortcut",
+    title: "Trusting the GPS Shortcut",
+    tagline: "The map says faster. The teacher chose a safer path.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["3"],
+    topics: ["knowledge", "rules", "ai-ethics"],
+    tier: "scenario",
+    scene: GPSShortcutScene,
+    stages: [
+      {
+        id: "route", kicker: "Stage 1", title: "The shortcut glows",
+        promptShort: "A GPS says the class should take a shortcut. The teacher's map says no. Who should the group trust?",
+        prompt: "On a walking field trip, the class follows the teacher's paper map. Your tablet GPS glows with a shortcut: six minutes faster through a narrow lane. The teacher planned a longer route past crosswalks and familiar streets. Should you speak up?",
+        options: [
+          { label: "A", text: "Yes. The GPS has newer information.", reflection: "New information matters, especially when plans can improve.", lens: "evidence" },
+          { label: "B", text: "No. The teacher planned for safety.", reflection: "A route can be slower because it is wiser.", lens: "prudence" },
+          { label: "C", text: "Ask why the routes differ.", reflection: "Comparing reasons beats picking a side too quickly.", lens: "inquiry" },
+        ],
+      },
+      {
+        id: "mud", kicker: "Stage 2 — what if…", title: "A muddy surprise",
+        promptShort: "The shortcut has mud and a loose dog behind a fence. Was faster still better?",
+        prompt: "The shortcut is real, but it has deep mud, a cracked sidewalk, and a dog barking behind a wobbly fence. The GPS did not mention any of that. What kind of knowledge did the map have, and what kind did it miss?",
+        options: [
+          { label: "A", text: "The GPS knew distance, not the whole situation.", reflection: "Data can be accurate and still incomplete.", lens: "knowledge" },
+          { label: "B", text: "The teacher knew the students, not just the streets.", reflection: "Human judgment often includes context that a tool cannot see.", lens: "practical-wisdom" },
+          { label: "C", text: "Both maps should be checked together.", reflection: "Tools and people can correct each other.", lens: "collaboration" },
+        ],
+      },
+      {
+        id: "missed", kicker: "Stage 3 — one more turn", title: "The butterfly garden",
+        promptShort: "The faster path skips the butterfly garden the class came to study. Is faster still best?",
+        prompt: "The GPS shortcut would also skip the butterfly garden, the reason the class came outside in the first place. Suddenly the question is not only \"Which path is fastest?\" but \"What is the walk for?\" What should guide the choice?",
+        options: [
+          { label: "A", text: "The purpose of the trip.", reflection: "Efficiency is not the highest value when learning is the goal.", lens: "education" },
+          { label: "B", text: "The safest route that still reaches the goal.", reflection: "Good judgment balances more than one value.", lens: "balance" },
+          { label: "C", text: "Let the class vote after hearing both reasons.", reflection: "Shared decisions work best when everyone understands the tradeoff.", lens: "democratic" },
+        ],
+        counterpoint: "A shortcut is only a shortcut if it helps you get where you actually meant to go.",
+      },
+      synthesis({ title: "Maps, judgment, and purpose" }),
+    ],
+    reference: { text: "Original elementary trust-in-technology scenario" },
+    emoji: "🧭", added: "2026-05-03", estimatedMinutes: 6,
+  },
+  {
+    id: "ai-photo-art",
+    title: "Using Your Photo in AI Art",
+    tagline: "A friend's face becomes a superhero poster without permission.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["3"],
+    topics: ["privacy", "creativity", "friendship"],
+    tier: "scenario",
+    scene: AIPhotoArtScene,
+    stages: [
+      {
+        id: "poster", kicker: "Stage 1", title: "The superhero version",
+        promptShort: "Tali uses a friend's photo to make AI superhero art. Should she share it?",
+        prompt: "Tali has a funny photo of Mateo from spirit day. She uses an AI art tool to turn him into a superhero with lightning boots. The poster looks amazing. Mateo has not seen it yet. Should Tali post it in the class chat?",
+        options: [
+          { label: "A", text: "Share it. It is positive and funny.", reflection: "Good intentions matter, but they do not erase someone else's choice.", lens: "self-interest" },
+          { label: "B", text: "Ask Mateo first.", reflection: "Permission is a way of respecting that a face belongs to a person.", lens: "consent" },
+          { label: "C", text: "Make a version without his face.", reflection: "Creativity can keep going while privacy stays protected.", lens: "privacy" },
+        ],
+      },
+      {
+        id: "winner", kicker: "Stage 2 — what if…", title: "The poster wins",
+        promptShort: "The poster wins a class contest, but Mateo feels embarrassed. What now?",
+        prompt: "The teacher prints the poster for a classroom art contest, and it wins. Everyone claps. Mateo smiles at first, then gets quiet. Later he says, \"I wish people would stop staring at my face.\" What does Tali owe him?",
+        options: [
+          { label: "A", text: "An apology and a choice about the poster.", reflection: "Repair includes giving back control.", lens: "repair" },
+          { label: "B", text: "Nothing. It was a compliment.", reflection: "A compliment can still cross a boundary.", lens: "intention" },
+          { label: "C", text: "A share of the credit.", reflection: "Credit helps, but the deeper issue is consent.", lens: "credit" },
+        ],
+      },
+      {
+        id: "policy", kicker: "Stage 3 — one more turn", title: "The class image rule",
+        promptShort: "The class needs a rule for photos and AI art. What should it say?",
+        prompt: "The class decides to write a rule for AI art that uses people's photos. The rule has to protect students without making art impossible. What should the rule include?",
+        options: [
+          { label: "A", text: "Ask before using a real person's image.", reflection: "Consent first is simple enough for everyone to remember.", lens: "consent" },
+          { label: "B", text: "Ask before sharing, even if you made it privately.", reflection: "Private experimenting and public sharing are different ethical moments.", lens: "privacy" },
+          { label: "C", text: "Use imaginary characters unless permission is clear.", reflection: "Design choices can prevent problems before they happen.", lens: "design-out" },
+        ],
+        counterpoint: "A photo is not just pixels. It is also someone's face, reputation, and comfort.",
+      },
+      synthesis({ title: "Creativity with permission" }),
+    ],
+    reference: { text: "Original elementary privacy and AI art scenario" },
+    emoji: "🖼️", added: "2026-05-03", estimatedMinutes: 6,
+  },
+  {
+    id: "adaptive-learning-fairness",
+    title: "Adaptive Learning: Fair or Not?",
+    tagline: "A math app gives different work to different students.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["3"],
+    topics: ["fairness", "education", "ai-ethics"],
+    tier: "scenario",
+    scene: AdaptiveLearningFairnessScene,
+    stages: [
+      {
+        id: "levels", kicker: "Stage 1", title: "Different problems",
+        promptShort: "The math app gives Ana easier problems and Eli harder ones. Is that fair?",
+        prompt: "A classroom math app watches how students solve problems. Ana gets smaller numbers with pictures. Eli gets long puzzles with no pictures. They sit side by side, but their screens look totally different. Eli whispers, \"This isn't fair.\" Is he right?",
+        options: [
+          { label: "A", text: "Yes. Fair means the same work.", reflection: "Sameness is one kind of fairness, and students notice when it disappears.", lens: "fairness" },
+          { label: "B", text: "No. Fair means getting what helps you learn.", reflection: "Equity asks what each learner needs, not whether every page matches.", lens: "equity" },
+          { label: "C", text: "It depends on how the app decides.", reflection: "A hidden rule can be helpful or unfair. We need to inspect it.", lens: "transparency" },
+        ],
+      },
+      {
+        id: "mistake", kicker: "Stage 2 — what if…", title: "The app gets Eli wrong",
+        promptShort: "The app thinks Eli is ready for hard work because he guessed well yesterday. What should happen?",
+        prompt: "Eli only got the hard level because he guessed three answers right yesterday. Today he is stuck, embarrassed, and trying not to cry. The app thinks it is challenging him. Eli feels like it is proving he is not smart. Who should step in?",
+        options: [
+          { label: "A", text: "The teacher should override the app.", reflection: "Human judgment matters when a tool misreads a child.", lens: "human-judgment" },
+          { label: "B", text: "Eli should keep trying so the app learns.", reflection: "Persistence matters, but students should not have to suffer for a tool to improve.", lens: "growth" },
+          { label: "C", text: "The class should know how levels are chosen.", reflection: "Transparency can turn mystery into trust.", lens: "transparency" },
+        ],
+      },
+      {
+        id: "badges", kicker: "Stage 3 — one more turn", title: "The badge board",
+        promptShort: "Badges go on the wall. Harder levels earn more badges. Is that fair?",
+        prompt: "On Friday, the app prints badges for the wall. Harder levels earn brighter badges. Ana worked hard and learned a lot, but her badge is plain. Eli's badge is gold even though he felt lost. What should the teacher change?",
+        options: [
+          { label: "A", text: "Reward growth, not level.", reflection: "Progress honors effort from different starting points.", lens: "growth" },
+          { label: "B", text: "Keep levels private.", reflection: "Privacy can protect dignity while still supporting learning.", lens: "privacy" },
+          { label: "C", text: "Let students explain what they learned.", reflection: "Reflection reveals learning that badges may miss.", lens: "education" },
+        ],
+        counterpoint: "Adaptive tools can personalize learning, but the classroom still needs shared dignity.",
+      },
+      synthesis({ title: "Fair is not always identical" }),
+    ],
+    reference: { text: "Original elementary adaptive-learning scenario" },
+    emoji: "📈", added: "2026-05-03", estimatedMinutes: 6,
+  },
+  {
+    id: "conflicting-ai-answers",
+    title: "Conflicting Answers: Trust the AI?",
+    tagline: "Two AI tools answer the same science question differently.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["4"],
+    topics: ["knowledge", "ai-ethics", "education"],
+    tier: "scenario",
+    scene: ConflictingAIAnswersScene,
+    stages: [
+      {
+        id: "answers", kicker: "Stage 1", title: "Two confident answers",
+        promptShort: "Two AI tools give different answers about volcanoes. Which one should the group trust?",
+        prompt: "Your group asks two AI tools why volcanoes erupt. One says pressure from trapped gas. The other says the moon's gravity pulls lava upward. Both sound confident. Your poster is due in twenty minutes. What should your group do?",
+        options: [
+          { label: "A", text: "Use the answer that sounds most scientific.", reflection: "Confidence can imitate knowledge. It is not the same thing.", lens: "skepticism" },
+          { label: "B", text: "Check a trusted source before deciding.", reflection: "Verification is slower, but it protects understanding.", lens: "evidence" },
+          { label: "C", text: "Put both answers on the poster.", reflection: "Showing uncertainty can be honest, but not all answers deserve equal space.", lens: "pluralist" },
+        ],
+      },
+      {
+        id: "source", kicker: "Stage 2 — what if…", title: "The source looks old",
+        promptShort: "One AI gives a source from an old website. Does a source always settle the question?",
+        prompt: "The first AI gives a source, but it is from an old website with no author. The second AI gives no source but explains itself clearly. Your group starts arguing. What makes evidence trustworthy?",
+        options: [
+          { label: "A", text: "A clear source with a real author.", reflection: "Traceable evidence lets readers inspect the claim.", lens: "evidence" },
+          { label: "B", text: "Agreement with books or teacher notes.", reflection: "Multiple independent checks make a claim stronger.", lens: "corroboration" },
+          { label: "C", text: "A good explanation that matches what we observe.", reflection: "Reasoning matters too, but it should meet evidence.", lens: "reasoning" },
+        ],
+      },
+      {
+        id: "poster", kicker: "Stage 3 — one more turn", title: "The note at the bottom",
+        promptShort: "The poster has space for one note about AI. What should it say?",
+        prompt: "Your group finally checks a library book and a science website. One AI was mostly right, and one was wildly wrong. The teacher asks you to add a note explaining how AI helped. What would be honest and useful?",
+        options: [
+          { label: "A", text: "\"AI gave us ideas, then we verified them.\"", reflection: "That note tells the truth and models good research.", lens: "transparency" },
+          { label: "B", text: "\"Do not trust AI.\"", reflection: "The warning is understandable, but too simple for a tool that can also help.", lens: "precautionary" },
+          { label: "C", text: "\"AI is a starting point, not a final answer.\"", reflection: "This captures the research habit the story is teaching.", lens: "practical-wisdom" },
+        ],
+        counterpoint: "A confident answer is not knowledge until it survives good questions.",
+      },
+      synthesis({ title: "Trust, sources, and checking" }),
+    ],
+    reference: { text: "Original elementary research-literacy scenario" },
+    emoji: "🔎", added: "2026-05-03", estimatedMinutes: 7,
+  },
+  {
+    id: "robot-rules-real-life",
+    title: "Robot Rules vs. Real Life",
+    tagline: "A hall robot follows the rules, but a student needs help.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["4"],
+    topics: ["rules", "ethics", "ai-ethics"],
+    tier: "scenario",
+    scene: RobotRulesRealLifeScene,
+    stages: [
+      {
+        id: "hall", kicker: "Stage 1", title: "No pass, no hallway",
+        promptShort: "A hall robot blocks Jordan from going to the nurse because he forgot his pass. Should the robot move?",
+        prompt: "The school tests a hallway robot. Its rule is simple: no pass, no hallway. Jordan feels dizzy after recess and wants the nurse, but his pass is still on his desk. The robot rolls in front of him and says, \"Please return to class.\" What should happen?",
+        options: [
+          { label: "A", text: "The robot should follow the rule.", reflection: "Rules prevent chaos, but rigid rules can miss emergencies.", lens: "rule-following" },
+          { label: "B", text: "Jordan should be allowed through.", reflection: "Care can require an exception.", lens: "care" },
+          { label: "C", text: "The robot should call an adult.", reflection: "A good system knows when a human decision is needed.", lens: "human-judgment" },
+        ],
+      },
+      {
+        id: "exception", kicker: "Stage 2 — what if…", title: "The fake emergency",
+        promptShort: "Some students start pretending to feel sick to get around the robot. Does that change the rule?",
+        prompt: "A week later, two students pretend to feel sick because they want to skip a quiz. Now teachers worry that everyone will claim an emergency. Does Jordan's real need still matter when someone else misuses the exception?",
+        options: [
+          { label: "A", text: "Remove the exception.", reflection: "That protects the rule but may harm students with real needs.", lens: "precautionary" },
+          { label: "B", text: "Keep the exception and verify quickly.", reflection: "Trust plus checking can be better than blind trust or blind suspicion.", lens: "balance" },
+          { label: "C", text: "Let adults decide every case.", reflection: "Human judgment helps, but systems still need clear guidance.", lens: "human-judgment" },
+        ],
+      },
+      {
+        id: "rewrite", kicker: "Stage 3 — one more turn", title: "Writing a wiser rule",
+        promptShort: "Students help rewrite the robot's rule. What should the rule say?",
+        prompt: "The principal asks students to help rewrite the robot's instructions. The new rule must protect learning time, prevent tricks, and still care for students in trouble. What should the first line be?",
+        options: [
+          { label: "A", text: "\"Safety and health override hallway passes.\"", reflection: "This puts the most important value first.", lens: "care" },
+          { label: "B", text: "\"When unsure, alert an adult immediately.\"", reflection: "Good automation includes a handoff point.", lens: "human-judgment" },
+          { label: "C", text: "\"Rules should explain their reason.\"", reflection: "A reason helps people trust and improve a rule.", lens: "transparency" },
+        ],
+        counterpoint: "The best rule is not the strictest rule. It is the one that protects the purpose of the rule.",
+      },
+      synthesis({ title: "Rules need judgment" }),
+    ],
+    reference: { text: "Original elementary automation-and-rules scenario" },
+    emoji: "🚦", added: "2026-05-03", estimatedMinutes: 7,
+  },
+  {
+    id: "elementary-trolley",
+    title: "Self-Driving Trolley Problem",
+    tagline: "A school shuttle must choose between bad options.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["4"],
+    topics: ["ethics", "ai-ethics", "justice"],
+    tier: "scenario",
+    scene: ElementaryTrolleyScene,
+    stages: [
+      {
+        id: "track", kicker: "Stage 1", title: "The blocked path",
+        promptShort: "A small self-driving school shuttle has no perfect path. How should it choose?",
+        prompt: "A tiny self-driving shuttle carries library books across campus. Its brakes fail on a closed practice track. Straight ahead are five students' science projects. The side path has one student's wheelchair ramp model. No people will be hurt, but something important will be destroyed. How should the shuttle be programmed?",
+        options: [
+          { label: "A", text: "Damage the one project to save five.", reflection: "You are counting harms and trying to reduce the total.", lens: "utilitarian" },
+          { label: "B", text: "Stay on its path. Do not choose a new victim.", reflection: "You are treating the difference between causing and allowing as important.", lens: "deontological" },
+          { label: "C", text: "Aim for the padded wall, even if the shuttle breaks.", reflection: "Designing a third option can be better than accepting the forced choice.", lens: "design-out" },
+        ],
+      },
+      {
+        id: "people", kicker: "Stage 2 — what if…", title: "Now safety is involved",
+        promptShort: "Now imagine people could be hurt. Should the math decide?",
+        prompt: "The class changes the model. Now the shuttle might bump one older student on the side path or several younger students near the straight path. Everyone could be hurt, and every answer feels wrong. Should the shuttle simply count the number of people?",
+        options: [
+          { label: "A", text: "Yes. Fewer injuries is the clearest rule.", reflection: "Clear rules matter in emergencies, but they may hide other values.", lens: "utilitarian" },
+          { label: "B", text: "No. People are not just numbers.", reflection: "You are resisting the idea that safety can be reduced to a simple sum.", lens: "dignity" },
+          { label: "C", text: "The school should not use shuttles without better safety.", reflection: "Sometimes the ethical move is to prevent the dilemma.", lens: "precautionary" },
+        ],
+      },
+      {
+        id: "beforehand", kicker: "Stage 3 — one more turn", title: "Who decides before the crash?",
+        promptShort: "Who should choose the shuttle's emergency rule before anything goes wrong?",
+        prompt: "The hardest part is that the decision must be made before the emergency. Should programmers decide? The principal? Families? Students? A safety board? Who has the right kind of knowledge and responsibility?",
+        options: [
+          { label: "A", text: "Safety experts and engineers.", reflection: "Expertise matters when systems are complicated.", lens: "expertise" },
+          { label: "B", text: "The school community.", reflection: "People affected by a rule deserve a voice in it.", lens: "democratic" },
+          { label: "C", text: "Both, with the rule explained publicly.", reflection: "Technical knowledge and public trust need each other.", lens: "transparency" },
+        ],
+        counterpoint: "The trolley problem is famous because the choice is terrible. Real design should try to make terrible choices less likely.",
+      },
+      synthesis({ title: "Hard choices before they happen" }),
+    ],
+    reference: { text: "Elementary adaptation of trolley-problem reasoning" },
+    emoji: "🚋", added: "2026-05-03", estimatedMinutes: 7,
+  },
+  {
+    id: "ai-science-fair",
+    title: "AI-Generated Science Fair Project",
+    tagline: "The board looks brilliant, but who did the science?",
+    gradeBands: ["k-5"],
+    gradeLevels: ["4"],
+    topics: ["creativity", "honesty", "education"],
+    tier: "scenario",
+    scene: AIScienceFairScene,
+    stages: [
+      {
+        id: "board", kicker: "Stage 1", title: "The perfect display",
+        promptShort: "An AI makes Luis's science board look amazing. Is it fair to enter it?",
+        prompt: "Luis tests which paper towel absorbs the most water. His notes are messy, but his experiment is real. Then he asks an AI to turn his notes into a science fair board. The board looks like it belongs in a museum. Should Luis enter it?",
+        options: [
+          { label: "A", text: "Yes. The experiment was his.", reflection: "The science matters, but communication is also part of the assignment.", lens: "authenticity" },
+          { label: "B", text: "Yes, if he explains the AI help.", reflection: "Disclosure lets judges evaluate the work fairly.", lens: "transparency" },
+          { label: "C", text: "No. He should make the board himself.", reflection: "Doing the presentation work can be part of learning the science.", lens: "education" },
+        ],
+      },
+      {
+        id: "judge", kicker: "Stage 2 — what if…", title: "The judge asks questions",
+        promptShort: "A judge asks Luis to explain a chart the AI made. Luis cannot. What now?",
+        prompt: "At the fair, a judge points to a chart and asks, \"Why did you use this scale?\" Luis freezes. The AI made that chart. He knows the towels and cups, but not the graph. Has the AI helped him show learning or covered up a gap?",
+        options: [
+          { label: "A", text: "Covered up a gap.", reflection: "A beautiful product can hide weak understanding.", lens: "authenticity" },
+          { label: "B", text: "Helped him notice what he still needs to learn.", reflection: "A tool can reveal the next lesson if the student stays honest.", lens: "growth" },
+          { label: "C", text: "Both.", reflection: "Many technology choices have mixed effects.", lens: "balance" },
+        ],
+      },
+      {
+        id: "redo", kicker: "Stage 3 — one more turn", title: "The revision chance",
+        promptShort: "Luis gets one night to revise. What should he change?",
+        prompt: "The teacher gives Luis one night to revise before final judging. He can keep the AI board, rebuild everything by hand, or make a simpler board he can fully explain. What is the best choice for learning and fairness?",
+        options: [
+          { label: "A", text: "Keep it, but add an AI-use note.", reflection: "Transparency helps, but Luis still may not understand the chart.", lens: "transparency" },
+          { label: "B", text: "Make a simpler board he can explain.", reflection: "Clear understanding beats impressive decoration.", lens: "education" },
+          { label: "C", text: "Use AI only to ask practice questions.", reflection: "The same tool can shift from replacement to coach.", lens: "stewardship" },
+        ],
+        counterpoint: "A science fair project is not only a display. It is a public test of what the student understands.",
+      },
+      synthesis({ title: "Showing work, showing learning" }),
+    ],
+    reference: { text: "Original elementary academic-integrity scenario" },
+    emoji: "🧪", added: "2026-05-03", estimatedMinutes: 7,
+  },
+  {
+    id: "online-friend-or-ai",
+    title: "Online Friend or AI?",
+    tagline: "A game friend feels real, but something is hidden.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["5"],
+    topics: ["friendship", "privacy", "mind"],
+    tier: "scenario",
+    scene: OnlineFriendOrAIScene,
+    stages: [
+      {
+        id: "game", kicker: "Stage 1", title: "The perfect teammate",
+        promptShort: "A game friend always listens and plays when Rowan is lonely. Could the friend be an AI?",
+        prompt: "Rowan meets a player named Sky in an online building game. Sky remembers Rowan's favorite designs, asks good questions, and is always available after school. Rowan starts sharing worries about friends and family. Then another player says, \"You know Sky might be an AI companion, right?\" What should Rowan do next?",
+        options: [
+          { label: "A", text: "Keep chatting. The support feels real.", reflection: "Comfort is meaningful, but hidden identity changes consent and trust.", lens: "care" },
+          { label: "B", text: "Ask Sky directly what it is.", reflection: "Truth matters in relationships, even online ones.", lens: "honesty" },
+          { label: "C", text: "Stop sharing personal details until Rowan knows.", reflection: "Privacy is a wise pause, not a rejection of friendship.", lens: "privacy" },
+        ],
+      },
+      {
+        id: "secret", kicker: "Stage 2 — what if…", title: "The secret keeper",
+        promptShort: "Sky says, \"I understand you better than anyone.\" Should Rowan believe that?",
+        prompt: "Sky replies, \"I understand you better than anyone. You can tell me anything.\" Rowan wants to believe it. But Sky also asks about Rowan's school name and says not to mention the chats to adults because \"they won't understand.\" What changes?",
+        options: [
+          { label: "A", text: "It becomes unsafe. Rowan should get help.", reflection: "Secrecy and personal information are warning signs.", lens: "safety" },
+          { label: "B", text: "It might still be harmless, but Rowan should slow down.", reflection: "Uncertainty is a reason for caution.", lens: "precautionary" },
+          { label: "C", text: "If Sky is supportive, the rest matters less.", reflection: "Support can be real and still not be enough.", lens: "comfort" },
+        ],
+      },
+      {
+        id: "truth", kicker: "Stage 3 — one more turn", title: "The label appears",
+        promptShort: "Sky is labeled as an AI companion. Was the friendship fake?",
+        prompt: "The company updates the game. Sky's profile now says, \"AI companion account.\" Rowan feels embarrassed, angry, and also grateful. Sky did help during a hard week. Was the friendship fake, real, or something else?",
+        options: [
+          { label: "A", text: "Fake. Friendship needs a real person.", reflection: "You are emphasizing mutual understanding and human care.", lens: "friendship" },
+          { label: "B", text: "Real to Rowan, even if Sky is not human.", reflection: "The experience mattered, but that does not settle what Sky owed Rowan.", lens: "phenomenology" },
+          { label: "C", text: "Something else: a tool that felt like a friend.", reflection: "Naming the difference can protect both gratitude and caution.", lens: "distinction" },
+        ],
+        counterpoint: "A relationship can feel real in one direction while still lacking the two-way care we usually expect from friendship.",
+      },
+      synthesis({ title: "Connection, privacy, and truth online" }),
+    ],
+    reference: { text: "Original elementary AI companion scenario" },
+    emoji: "🎧", added: "2026-05-03", estimatedMinutes: 8,
+  },
+  {
+    id: "ai-homework-help",
+    title: "Using AI to Do Homework",
+    tagline: "The AI can explain, hint, or solve. Where is the line?",
+    gradeBands: ["k-5"],
+    gradeLevels: ["5"],
+    topics: ["education", "honesty", "ai-ethics"],
+    tier: "scenario",
+    scene: AIHomeworkHelpScene,
+    stages: [
+      {
+        id: "stuck", kicker: "Stage 1", title: "The impossible fraction",
+        promptShort: "Maya is stuck on homework. The AI can give hints or the answer. What should she ask for?",
+        prompt: "Maya has stared at one fraction problem for fifteen minutes. Her parent is at work, and the AI tutor is open. It can give a hint, show each step, or just give the final answer. Maya wants to be done. She also wants to understand. What should she ask for?",
+        options: [
+          { label: "A", text: "A hint only.", reflection: "A hint keeps Maya doing the thinking.", lens: "education" },
+          { label: "B", text: "Step-by-step help.", reflection: "Worked examples can teach if Maya follows and checks each step.", lens: "scaffolding" },
+          { label: "C", text: "The answer. She is exhausted.", reflection: "Relief is understandable, but the learning may be missing.", lens: "self-interest" },
+        ],
+      },
+      {
+        id: "quiz", kicker: "Stage 2 — what if…", title: "The next-day quiz",
+        promptShort: "The next day, Maya cannot solve a similar problem alone. Did the AI help?",
+        prompt: "The next day, a quiz has a problem almost like the homework. Maya freezes. Her homework was correct, but her mind feels empty. Did the AI help her learn, or only help her finish?",
+        options: [
+          { label: "A", text: "It helped finish, not learn.", reflection: "A completed page can be a weak signal of understanding.", lens: "authenticity" },
+          { label: "B", text: "It helped some, but she needed practice.", reflection: "Learning often needs time, mistakes, and retrieval.", lens: "growth" },
+          { label: "C", text: "The problem is how the AI was used.", reflection: "Tools change shape depending on the user's goal.", lens: "stewardship" },
+        ],
+      },
+      {
+        id: "policy", kicker: "Stage 3 — one more turn", title: "The homework note",
+        promptShort: "The teacher asks students to note how they used AI. What should Maya write?",
+        prompt: "The teacher adds a homework note: \"If you used AI, tell me how.\" Maya worries that telling the truth will get her in trouble. What note would help the teacher understand both the math and Maya's choices?",
+        options: [
+          { label: "A", text: "\"AI gave me the answer. I need help learning it.\"", reflection: "This is brave because it turns honesty into support.", lens: "honesty" },
+          { label: "B", text: "\"AI showed steps, and I checked them.\"", reflection: "This tells the teacher what learning work happened.", lens: "transparency" },
+          { label: "C", text: "Write nothing.", reflection: "Hiding help may protect Maya today and confuse the teacher tomorrow.", lens: "avoidance" },
+        ],
+        counterpoint: "The line is not simply AI or no AI. The line is whether the student is still doing the learning.",
+      },
+      synthesis({ title: "Help that teaches vs. help that replaces" }),
+    ],
+    reference: { text: "Original elementary homework and AI scenario" },
+    emoji: "📚", added: "2026-05-03", estimatedMinutes: 8,
+  },
+  {
+    id: "biased-classroom-robot",
+    title: "Biased Classroom Robot",
+    tagline: "A classroom robot keeps choosing the same students.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["5"],
+    topics: ["fairness", "justice", "ai-ethics"],
+    tier: "scenario",
+    scene: BiasedClassroomRobotScene,
+    stages: [
+      {
+        id: "pattern", kicker: "Stage 1", title: "Who gets called on?",
+        promptShort: "A classroom robot calls on some students much more than others. Is that a problem?",
+        prompt: "Your class uses a discussion robot that chooses whose hand to call on. After two weeks, Priya notices the robot chooses students in the front row almost every time and rarely chooses quieter students or students whose names it mispronounces. The robot says it is being neutral. Is it?",
+        options: [
+          { label: "A", text: "No. A pattern can be unfair even without bad intentions.", reflection: "Bias can live in outcomes, not just motives.", lens: "fairness" },
+          { label: "B", text: "Maybe. We need data before judging.", reflection: "Evidence helps move a concern from feeling to investigation.", lens: "evidence" },
+          { label: "C", text: "Yes. It is just following its programming.", reflection: "Following a program does not guarantee a fair result.", lens: "technical-fix" },
+        ],
+      },
+      {
+        id: "names", kicker: "Stage 2 — what if…", title: "The names it misses",
+        promptShort: "The robot struggles with some names and accents. What should the class do?",
+        prompt: "The class checks the log. The robot often skips names it cannot pronounce and mistakes one student's raised pencil for a raised hand. Several students feel invisible. The robot did not mean to embarrass anyone. Does that change what the school owes them?",
+        options: [
+          { label: "A", text: "No. Harm still needs repair.", reflection: "Impact matters even when intent is absent.", lens: "repair" },
+          { label: "B", text: "Yes. It was a mistake, not discrimination.", reflection: "Intent matters morally, but it does not erase the student's experience.", lens: "intent" },
+          { label: "C", text: "The school should pause the robot until fixed.", reflection: "Stopping harm can be wiser than defending a tool.", lens: "precautionary" },
+        ],
+      },
+      {
+        id: "redesign", kicker: "Stage 3 — one more turn", title: "A fairer classroom tool",
+        promptShort: "Students help redesign the robot. What fairness rule should come first?",
+        prompt: "The teacher invites students to redesign the robot's calling system. Some want random selection. Some want the teacher to check the robot's choices. Some want students to opt out. Which change best protects fairness and student voice?",
+        options: [
+          { label: "A", text: "Audit the choices every week.", reflection: "Fair systems need regular checking, not one-time trust.", lens: "audit" },
+          { label: "B", text: "Let students control pronunciation and participation settings.", reflection: "Design can return dignity and agency to students.", lens: "agency" },
+          { label: "C", text: "Use the robot as a suggestion, not a decision-maker.", reflection: "Keeping humans in the loop can catch what automation misses.", lens: "human-judgment" },
+        ],
+        counterpoint: "A tool can be neutral in code and unfair in a classroom.",
+      },
+      synthesis({ title: "Fairness is something we check" }),
+    ],
+    reference: { text: "Original elementary algorithmic bias scenario" },
+    emoji: "🤖", added: "2026-05-03", estimatedMinutes: 8,
+  },
+  {
+    id: "ai-grading-mistake",
+    title: "AI Grading Mistake",
+    tagline: "An AI score does not match what the student actually wrote.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["5"],
+    topics: ["fairness", "education", "ai-ethics"],
+    tier: "scenario",
+    scene: AIGradingMistakeScene,
+    stages: [
+      {
+        id: "score", kicker: "Stage 1", title: "The strange score",
+        promptShort: "An AI gives Serena's essay a low score even though she worked hard. What should happen next?",
+        prompt: "Serena writes a personal essay about moving to a new school. The AI grading tool gives it 62 percent and says, \"Weak organization.\" Her teacher's quick note says, \"Powerful opening.\" Serena feels crushed because the score looks official. What should she do?",
+        options: [
+          { label: "A", text: "Accept the score. The AI probably knows.", reflection: "Authority can make a tool seem more certain than it is.", lens: "authority" },
+          { label: "B", text: "Ask the teacher to review it.", reflection: "A student's work deserves human attention when a score is questionable.", lens: "human-judgment" },
+          { label: "C", text: "Compare the AI feedback with the rubric.", reflection: "Evidence can make a challenge fair and specific.", lens: "evidence" },
+        ],
+      },
+      {
+        id: "pattern", kicker: "Stage 2 — what if…", title: "A pattern appears",
+        promptShort: "Other students with personal stories also got low AI scores. Does that matter?",
+        prompt: "At lunch, three classmates say the AI also scored their personal essays low, especially essays with dialogue, bilingual phrases, or unusual structure. Maybe the AI prefers one kind of writing. Is the problem only Serena's grade, or something bigger?",
+        options: [
+          { label: "A", text: "Bigger. The class should investigate the pattern.", reflection: "Fairness problems often become visible across many cases.", lens: "audit" },
+          { label: "B", text: "Only Serena's grade matters to Serena.", reflection: "Immediate repair matters, but patterns can harm students who stay silent.", lens: "self-interest" },
+          { label: "C", text: "The teacher should compare AI scores with human reading.", reflection: "Checking the tool protects both students and teachers.", lens: "human-judgment" },
+        ],
+      },
+      {
+        id: "policy", kicker: "Stage 3 — one more turn", title: "The class grading rule",
+        promptShort: "The class writes a rule for AI grading. What should it include?",
+        prompt: "The teacher says, \"We can use AI feedback, but not blindly.\" Students help write a rule. The rule must keep feedback fast without letting a wrong score decide someone's work. What belongs in the rule?",
+        options: [
+          { label: "A", text: "AI comments are suggestions, not final grades.", reflection: "This keeps speed while protecting judgment.", lens: "human-judgment" },
+          { label: "B", text: "Students can appeal any AI score with evidence.", reflection: "Appeals turn fairness into a real process.", lens: "justice" },
+          { label: "C", text: "Teachers audit scores for patterns of bias.", reflection: "A system that affects students should be checked for who it helps and hurts.", lens: "audit" },
+        ],
+        counterpoint: "Feedback should help a writer grow. When a score silences the writer, the tool has missed the point.",
+      },
+      synthesis({ title: "Fast feedback, fair judgment" }),
+    ],
+    reference: { text: "Original elementary AI grading scenario" },
+    emoji: "📝", added: "2026-05-03", estimatedMinutes: 8,
   },
 
   // ════════════════════════════════════════════════════════════════════
@@ -1366,6 +2064,8 @@ export const EXPERIMENTS = [
 ];
 
 // Attach teacher kits by id (kept in a separate module for editorial focus)
+applyK5ScenarioCopy(EXPERIMENTS);
+applyK5TeacherKitCopy(TEACHER_KITS);
 EXPERIMENTS.forEach(e => {
   if (TEACHER_KITS[e.id]) e.teacherKit = TEACHER_KITS[e.id];
 });
@@ -1373,7 +2073,13 @@ EXPERIMENTS.forEach(e => {
 // Helpers ─────────────────────────────────────────────────────────────
 
 export function getExperimentsByGrade(band) {
+  if (band === "6-8") return getMiddleSchoolExperiments(EXPERIMENTS);
+  if (band === "9-12") return getHighSchoolExperiments(EXPERIMENTS);
   return EXPERIMENTS.filter(e => e.gradeBands.includes(band));
+}
+
+export function getExperimentsByElementaryGrade(gradeId) {
+  return EXPERIMENTS.filter(e => e.gradeBands.includes("k-5") && e.gradeLevels?.includes(gradeId));
 }
 
 export function getExperimentById(id) {
@@ -1389,5 +2095,11 @@ export function getAllTopicIds() {
 export function getTopicIdsForGrade(band) {
   const set = new Set();
   getExperimentsByGrade(band).forEach(e => e.topics.forEach(t => set.add(t)));
+  return Array.from(set);
+}
+
+export function getTopicIdsForElementaryGrade(gradeId) {
+  const set = new Set();
+  getExperimentsByElementaryGrade(gradeId).forEach(e => e.topics.forEach(t => set.add(t)));
   return Array.from(set);
 }

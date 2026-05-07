@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mary's Room — An Animated Thought Experiment</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #ece8dc; font-family: 'Source Serif 4', Georgia, serif; overflow: hidden; }
+    #root { position: fixed; inset: 0; }
+
+    .splash {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 60%, #14202e 0%, #060a12 70%);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .splash.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+    .splash h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(48px, 7vw, 92px); font-weight: 600;
+      letter-spacing: -0.025em; margin: 0 0 8px;
+      color: #ece8dc;
+    }
+    .splash .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: #c89830; margin-bottom: 24px;
+    }
+    .splash .sub {
+      font-family: 'Source Serif 4', serif; font-style: italic;
+      font-size: 20px; color: #8a909a; max-width: 540px; text-align: center;
+      line-height: 1.5; margin: 12px 0 40px;
+    }
+    .splash .meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: #5a616c; margin-top: 36px;
+    }
+    .splash button {
+      padding: 16px 40px; font-size: 15px; font-weight: 600;
+      font-family: 'Source Serif 4', serif;
+      background: linear-gradient(135deg, #c89830, #e0b848);
+      color: #0a0c10; border: none; border-radius: 6px; cursor: pointer;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 24px rgba(200,152,48,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .splash button:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(200,152,48,0.4); }
+    .splash .hint {
+      margin-top: 14px; font-size: 12px; color: #5a616c;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+      position: fixed;
+      left: 50%; bottom: 88px;
+      transform: translateX(-50%);
+      max-width: min(900px, 80vw);
+      padding: 14px 28px;
+      background: rgba(8, 12, 18, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(200,152,48,0.2);
+      border-radius: 6px;
+      color: #ece8dc;
+      font-family: 'Source Serif 4', serif;
+      font-size: 22px;
+      line-height: 1.45;
+      text-align: center;
+      transition: opacity 0.3s ease;
+      z-index: 50;
+      text-wrap: balance;
+    }
+    .subtitle.hidden { opacity: 0; pointer-events: none; }
+
+    .audio-toggle, .cc-toggle {
+      position: fixed;
+      top: 18px; z-index: 50;
+      padding: 8px 14px;
+      background: rgba(8, 12, 18, 0.78);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(200,152,48,0.25);
+      border-radius: 20px;
+      color: #ece8dc;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .audio-toggle { right: 18px; }
+    .cc-toggle    { right: 158px; }
+    .audio-toggle:hover, .cc-toggle:hover { border-color: rgba(200,152,48,0.5); }
+    .audio-toggle .dot { width: 8px; height: 8px; border-radius: 50%; background: #5a9854; box-shadow: 0 0 8px #8ab050; }
+    .audio-toggle.muted .dot { background: #5a616c; box-shadow: none; }
+    .cc-toggle.off { color: #5a616c; }
+
+    .credit {
+      position: fixed; top: 18px; left: 22px; z-index: 50;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(236,232,220,0.5);
+    }
+    .credit b { color: rgba(236,232,220,0.85); font-weight: 500; letter-spacing: 0.2em; }
+
+    /* Render mode (?render=1): strip all chrome and the Stage's own playback bar so MediaRecorder captures a clean frame */
+    body.render-mode { background: #060a12; }
+    body.render-mode .credit,
+    body.render-mode .audio-toggle,
+    body.render-mode .cc-toggle,
+    body.render-mode .splash,
+    body.render-mode .discuss { display: none !important; }
+    /* Hide the Stage playback bar (its outer wrapper has alignSelf: center + maxWidth 680) */
+    body.render-mode #root > div > div:last-child:not(:only-child) { display: none !important; }
+    /* Make the Stage canvas fill the iframe without letterboxing */
+    body.render-mode #root > div { background: #060a12 !important; }
+
+    /* Discussion overlay */
+    .discuss {
+      position: fixed; inset: 0; z-index: 200;
+      background: radial-gradient(ellipse at 50% 30%, #14202e 0%, #060a12 75%);
+      display: flex; flex-direction: column;
+      padding: 60px 40px 40px;
+      overflow-y: auto;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .discuss.show { opacity: 1; visibility: visible; }
+    .discuss .inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .discuss .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: #c89830; margin-bottom: 14px;
+    }
+    .discuss h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(32px, 4vw, 52px); font-weight: 600;
+      letter-spacing: -0.02em; color: #ece8dc;
+      margin: 0 0 12px;
+    }
+    .discuss .lede {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 19px; color: #8a909a; max-width: 760px;
+      line-height: 1.55; margin: 0 0 36px;
+    }
+    .discuss ol {
+      list-style: none; padding: 0; margin: 0 0 36px;
+      display: grid; gap: 14px;
+    }
+    .discuss li {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 18px 22px;
+      background: rgba(20, 32, 46, 0.5);
+      border: 1px solid rgba(200,152,48,0.15);
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+    .discuss li:hover {
+      border-color: rgba(200,152,48,0.4);
+      background: rgba(20, 32, 46, 0.7);
+      transform: translateX(4px);
+    }
+    .discuss li .num {
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: #c89830;
+      letter-spacing: 0.15em;
+      width: 28px; padding-top: 3px;
+    }
+    .discuss li .q {
+      font-family: 'Source Serif 4', serif;
+      font-size: 19px; line-height: 1.55;
+      color: #ece8dc;
+    }
+    .discuss li .q em { color: #c0432a; font-style: italic; }
+    .discuss li .q b { color: #c89830; font-weight: 500; font-style: italic; }
+    .discuss .actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      padding-top: 8px;
+    }
+    .discuss button {
+      padding: 12px 26px; font-size: 13px; font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      border-radius: 6px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .discuss .btn-primary {
+      background: linear-gradient(135deg, #c89830, #e0b848);
+      color: #0a0c10; border: none;
+      box-shadow: 0 4px 18px rgba(200,152,48,0.2);
+    }
+    .discuss .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(200,152,48,0.35); }
+    .discuss .btn-ghost {
+      background: transparent; color: #8a909a;
+      border: 1px solid rgba(138,144,154,0.3);
+    }
+    .discuss .btn-ghost:hover { color: #ece8dc; border-color: rgba(236,232,220,0.5); }
+    .discuss .footer {
+      margin-top: 30px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: #5a616c;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="#0e1e30"/>
+      <rect x="38" y="22" width="24" height="56" fill="#1a1d22" stroke="#c89830" stroke-width="0.6"/>
+      <rect x="51" y="22" width="11" height="56" fill="url(#g)"/>
+      <defs>
+        <linearGradient id="g" x1="0" x2="1">
+          <stop offset="0" stop-color="#e0b848"/>
+          <stop offset="1" stop-color="#c0432a"/>
+        </linearGradient>
+      </defs>
+      <circle cx="59" cy="46" r="2.5" fill="#c89830"/>
+    </svg>
+  </template>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="./animations.jsx"></script>
+  <script type="text/babel" src="scenes.jsx"></script>
+  <script type="text/babel" src="audio.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    function activeLine(time) {
+      const lines = window.NARRATION || [];
+      let active = null;
+      for (let i = 0; i < lines.length; i++) {
+        if (time >= lines[i].t) {
+          const next = lines[i + 1];
+          const endAt = next ? next.t : lines[i].t + 6;
+          if (time < endAt) active = lines[i];
+        }
+      }
+      return active;
+    }
+
+    function lineText(line) {
+      if (!line) return '';
+      return line.chunks.join(' ');
+    }
+
+    function Subtitles({ enabled }) {
+      const { time } = useTimeline();
+      const line = enabled ? activeLine(time) : null;
+      return (
+        <div className={`subtitle ${line ? '' : 'hidden'}`}>
+          {lineText(line) || ' '}
+        </div>
+      );
+    }
+
+    function Header() {
+      return (
+        <div className="credit">
+          <b>Mary's Room</b> &nbsp;·&nbsp; the ethical educator &nbsp;·&nbsp; grades 9–12
+        </div>
+      );
+    }
+
+    function Controls({ audioOn, setAudioOn, ccOn, setCcOn }) {
+      return (
+        <>
+          <button className={`cc-toggle ${ccOn ? '' : 'off'}`} onClick={() => setCcOn(c => !c)} title="Toggle captions">CC</button>
+          <button className={`audio-toggle ${audioOn ? '' : 'muted'}`} onClick={() => setAudioOn(a => !a)} title="Toggle audio">
+            <span className="dot" />
+            {audioOn ? 'Sound On' : 'Sound Off'}
+          </button>
+        </>
+      );
+    }
+
+    function Splash({ onStart }) {
+      const [gone, setGone] = useState(false);
+      return (
+        <div className={`splash ${gone ? 'gone' : ''}`}>
+          <div className="eyebrow">A Thought Experiment</div>
+          <h1>Mary's Room</h1>
+          <p className="sub">She knows every fact about color — but has only ever seen black and white.</p>
+          <button onClick={() => { setGone(true); setTimeout(onStart, 400); }}>
+            Begin the film &nbsp;→
+          </button>
+          <div className="hint">~ 2 min 30 sec · headphones recommended</div>
+          <div className="meta">After Frank Jackson · "Epiphenomenal Qualia" · 1982</div>
+        </div>
+      );
+    }
+
+    const QUESTIONS = [
+      { q: <>Does Mary <em>learn</em> anything new when she sees red?</> },
+      { q: <>If yes, what's the <b>nature</b> of that knowledge — propositional, experiential, or something else?</> },
+      { q: <>How is Lewis &amp; Nemirow's <b>ability hypothesis</b> different from Jackson's <em>qualia</em> view?</> },
+      { q: <>Dennett argues: if Mary <b>really</b> knew everything physical, nothing would surprise her. Is that fair to Jackson?</> },
+      { q: <>Apply this to ChatGPT — it "knows" how to describe red. Does it know <em>what red is like</em>?</> },
+    ];
+
+    function Discussion({ show, onReplay }) {
+      return (
+        <div className={`discuss ${show ? 'show' : ''}`}>
+          <div className="inner">
+            <div className="eyebrow">For Discussion · Pause and talk it through</div>
+            <h2>What Mary teaches us about understanding.</h2>
+            <p className="lede">
+              The thought experiment is the easy part — the conversation is where the philosophy lives.
+              Pick one question, or work through them in order. There is no single right answer.
+            </p>
+            <ol>
+              {QUESTIONS.map((item, i) => (
+                <li key={i}>
+                  <span className="num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="q">{item.q}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="actions">
+              <button className="btn-primary" onClick={onReplay}>↺ Replay the film</button>
+              <button className="btn-ghost" onClick={() => window.print()}>Print questions</button>
+            </div>
+            <div className="footer">theethicaleducator.com · thought experiments for grades 9–12</div>
+          </div>
+        </div>
+      );
+    }
+
+    function Film({ started, audioOn, ccOn, onEnd }) {
+      // Don't mount the Stage until the user clicks Begin —
+      // this ensures autoplay=true takes effect on first render.
+      if (!started) return null;
+      return (
+        <Stage
+          width={1600}
+          height={900}
+          duration={134}
+          background="#060a12"
+          autoplay={true}
+          loop={false}
+          persistKey="marysroom"
+        >
+          <MarysRoomScenes />
+          <AudioEngine enabled={audioOn && started} />
+          <Subtitles enabled={ccOn} />
+          <EndWatcher onEnd={onEnd} />
+        </Stage>
+      );
+    }
+
+    function EndWatcher({ onEnd }) {
+      const { time } = useTimeline();
+      const firedRef = useRef(false);
+      useEffect(() => {
+        if (time >= 130 && !firedRef.current) {
+          firedRef.current = true;
+          onEnd && onEnd();
+        }
+        if (time < 120) firedRef.current = false;
+      }, [time, onEnd]);
+      return null;
+    }
+
+    // Render mode: ?render=1 in URL — strip all chrome, auto-start, accept postMessage controls.
+    const RENDER_MODE = new URLSearchParams(window.location.search).get('render') === '1';
+    if (RENDER_MODE) {
+      document.body.classList.add('render-mode');
+    }
+
+    function App() {
+      const [started, setStarted] = useState(RENDER_MODE);
+      const [audioOn, setAudioOn] = useState(true);
+      const [ccOn, setCcOn] = useState(true);
+      const [showDiscuss, setShowDiscuss] = useState(false);
+      const [renderKey, setRenderKey] = useState(0); // bump to remount Stage
+
+      useEffect(() => {
+        if (!audioOn) {
+          try { window.speechSynthesis?.cancel(); } catch {}
+        }
+      }, [audioOn]);
+
+      // In render mode, force t=0 on load and listen for restart messages
+      useEffect(() => {
+        if (!RENDER_MODE) return;
+        try { localStorage.setItem('marysroom:t', '0'); } catch {}
+        const onMsg = (e) => {
+          if (!e.data || e.data.type !== 'render-control') return;
+          if (e.data.action === 'restart') {
+            try { localStorage.setItem('marysroom:t', '0'); } catch {}
+            setShowDiscuss(false);
+            setStarted(false);
+            setTimeout(() => {
+              setRenderKey(k => k + 1);
+              setStarted(true);
+            }, 60);
+          }
+        };
+        window.addEventListener('message', onMsg);
+        return () => window.removeEventListener('message', onMsg);
+      }, []);
+
+      const onReplay = () => {
+        setShowDiscuss(false);
+        try { localStorage.setItem('marysroom:t', '0'); } catch {}
+        window.location.reload();
+      };
+
+      return (
+        <>
+          {!RENDER_MODE && !started && <Splash onStart={() => {
+            try { localStorage.setItem('marysroom:t', '0'); } catch {}
+            setStarted(true);
+          }} />}
+          <Film key={renderKey} started={started} audioOn={audioOn} ccOn={ccOn} onEnd={() => setShowDiscuss(true)} />
+          {!RENDER_MODE && started && <Header />}
+          {!RENDER_MODE && started && <Controls audioOn={audioOn} setAudioOn={setAudioOn} ccOn={ccOn} setCcOn={setCcOn} />}
+          {!RENDER_MODE && <Discussion show={showDiscuss} onReplay={onReplay} />}
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

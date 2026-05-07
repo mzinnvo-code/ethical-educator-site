@@ -3,7 +3,7 @@ import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
-import { ShortcutScene } from "../components/diagrams.jsx";
+import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function TheShortcutExperiment() {
   const [stage, setStage] = useState(0);
@@ -17,7 +17,7 @@ export default function TheShortcutExperiment() {
     // ─── INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "24px 0" }}>
-        <ShortcutScene />
+        <IllustratedScene experimentId="the-shortcut" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 10 }}>The Shortcut</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 12px" }}>
           Computer scientist <PhiloRef text="Daniel Lemire" url="https://lemire.me/blog/2012/11/16/the-learning-pill/" /> posed a version of this question in 2012: imagine a pill granting instant expert knowledge. He predicted the pill would be made illegal, educators would insist knowledge is "just one component," and degrees would persist because they signal character. A decade later, AI is testing every one of those predictions.

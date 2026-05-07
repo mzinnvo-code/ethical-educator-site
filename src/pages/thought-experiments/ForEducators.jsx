@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { C, isNewExperiment } from "../../theme.js";
+import { getFeatureIllustration } from "../../data/illustrations.js";
 import { FadeIn, Narrow, NewBadge } from "../../components/shared.jsx";
 import GradePage from "./GradePage.jsx";
 import TheShortcutExperiment from "../../experiments/TheShortcut.jsx";
@@ -8,11 +9,43 @@ import ReluctantEducatorExperiment from "../../experiments/ReluctantEducator.jsx
 import DoppelgangerExperiment from "../../experiments/Doppelganger.jsx";
 
 const FLAGSHIPS = [
-  { id: "the-shortcut", icon: "⚡", iconLabel: "Lightning bolt", title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you?", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
-  { id: "ai-authorship", icon: "📝", iconLabel: "Memo", title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
-  { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
-  { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
+  { id: "the-shortcut", icon: "⚡", iconLabel: "Lightning bolt", image: getFeatureIllustration("the-shortcut"), title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you?", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
+  { id: "ai-authorship", icon: "📝", iconLabel: "Memo", image: getFeatureIllustration("ai-authorship"), title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
+  { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", image: getFeatureIllustration("reluctant-educator"), title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
+  { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", image: getFeatureIllustration("digital-doppelganger"), title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
 ];
+
+function FlagshipArtwork({ f, animDelay }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!f.image || failed) {
+    return (
+      <div style={{ fontSize: "2.2rem", marginBottom: 12, animation: `flagshipFloat 3s ease-in-out infinite`, animationDelay: animDelay }}>
+        <span role="img" aria-label={f.iconLabel}>{f.icon}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      aspectRatio: "1.28",
+      borderRadius: 12,
+      overflow: "hidden",
+      marginBottom: 16,
+      border: `1px solid ${f.color}24`,
+      background: `${f.color}10`,
+      boxShadow: `0 12px 34px ${f.color}12`,
+    }}>
+      <img
+        src={f.image.src}
+        alt=""
+        loading="lazy"
+        onError={() => setFailed(true)}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+    </div>
+  );
+}
 
 function FlagshipCard({ f, onClick, animDelay = "0s" }) {
   const [h, setH] = useState(false);
@@ -31,9 +64,7 @@ function FlagshipCard({ f, onClick, animDelay = "0s" }) {
       <div style={{ position: "absolute", top: -30, right: -30, width: 120, height: 120, borderRadius: "50%", background: `radial-gradient(circle, ${f.color}15, transparent 70%)`, filter: "blur(20px)", transition: "all 0.5s", opacity: h ? 0.9 : 0.4 }} />
       <div style={{ position: "relative", zIndex: 1 }}>
         {isNew && <div style={{ position: "absolute", top: -4, right: -4 }}><NewBadge /></div>}
-        <div style={{ fontSize: "2.2rem", marginBottom: 12, animation: `flagshipFloat 3s ease-in-out infinite`, animationDelay: animDelay }}>
-          <span role="img" aria-label={f.iconLabel}>{f.icon}</span>
-        </div>
+        <FlagshipArtwork f={f} animDelay={animDelay} />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.1rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>
           {f.title}
         </h3>

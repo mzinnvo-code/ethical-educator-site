@@ -8,7 +8,8 @@ import { PhiloRef } from "../../experiments/ExperimentShared.jsx";
 import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
-import { EXPERIMENTS } from "../../data/experiments.js";
+import { EXPERIMENTS, getExperimentsByGrade } from "../../data/experiments.js";
+import { getFeatureIllustration } from "../../data/illustrations.js";
 
 // Pick three "featured this week" — rotates by ISO week, deterministic.
 function featuredThisWeek() {
@@ -23,9 +24,14 @@ function featuredThisWeek() {
   return out;
 }
 
+const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
+
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
-  const featured = featuredThisWeek();
+  const middleSchoolById = new Map(getExperimentsByGrade("6-8").map(experiment => [experiment.id, experiment]));
+  const featured = featuredThisWeek().map(experiment =>
+    experiment.gradeBands.includes("6-8") ? middleSchoolById.get(experiment.id) || experiment : experiment
+  );
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -45,8 +51,8 @@ export default function Hub({ navigate }) {
           </div>
           <SectionTitle>Thought Experiments</SectionTitle>
           <Subtitle>
-            Forty interactive scenarios — for kindergartners, eighth-graders, AP Philosophy students,
-            and the educators teaching them all. Some are 2,400 years old. Some are about your classroom.
+            A growing library of interactive scenarios — for kindergartners, eighth-graders, AP Philosophy
+            students, and the educators teaching them all. Some are 2,400 years old. Some are about your classroom.
             None have right answers. All of them help us think.
           </Subtitle>
         </FadeIn>
@@ -57,6 +63,7 @@ export default function Hub({ navigate }) {
           <div className="grid-2" style={{ marginTop: 18, marginBottom: 18 }}>
             <TopicCard
               icon="🍎" iconLabel="Apple"
+              image={getFeatureIllustration("thought-experiments/educators")}
               title="For Educators"
               desc="Adult dilemmas about AI in your classroom — flagship experiments and decision tools."
               onClick={() => navigate("thought-experiments/educators")}
@@ -64,15 +71,17 @@ export default function Hub({ navigate }) {
             />
             <TopicCard
               icon="🧸" iconLabel="Teddy bear"
+              image={getFeatureIllustration("thought-experiments/k-5")}
               title="K–5"
-              desc="Big illustrations, short prompts, read-aloud built in. For early readers and the teachers who guide them."
+              desc="A grade-by-grade elementary hub with 24 storylike dilemmas, read-aloud support, and teacher kits."
               onClick={() => navigate("thought-experiments/k-5")}
               accent={C.coral} delay={0.05}
             />
           </div>
-          <div className="grid-2" style={{ marginBottom: 28 }}>
+          <div className="grid-2" style={{ marginBottom: 18 }}>
             <TopicCard
               icon="🚋" iconLabel="Trolley"
+              image={getFeatureIllustration("thought-experiments/6-8")}
               title="Grades 6–8"
               desc="Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions."
               onClick={() => navigate("thought-experiments/6-8")}
@@ -80,10 +89,21 @@ export default function Hub({ navigate }) {
             />
             <TopicCard
               icon="🕳️" iconLabel="Cave"
+              image={getFeatureIllustration("thought-experiments/9-12")}
               title="Grades 9–12"
               desc="The philosophical canon — Plato's Cave, Mary's Room, Chinese Room — alongside the AI questions of our age."
               onClick={() => navigate("thought-experiments/9-12")}
               accent={C.ocean} delay={0.15}
+            />
+          </div>
+          <div style={{ marginBottom: 28 }}>
+            <TopicCard
+              icon="🛠" iconLabel="Toolkit"
+              image={getFeatureIllustration("thought-experiments/toolkit")}
+              title="Dialogue Toolkit"
+              desc="Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students."
+              onClick={() => navigate("thought-experiments/toolkit")}
+              accent={C.teal} delay={0.2}
             />
           </div>
         </Narrow>
@@ -149,8 +169,8 @@ export default function Hub({ navigate }) {
               <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
             </Expandable>
             <Expandable title="By age band" color={C.coral} defaultOpen>
-              <p><strong>K–5:</strong> One scenario, ten minutes, lots of "why?" Expect drawings, role-play, and getting up out of chairs.
-              The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
+              <p><strong>K–5:</strong> Choose the grade page first. Kindergarten stories are short and concrete; Grade 5 stories are longer,
+              more layered, and ready for competing values. The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
               <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students
               defend the option they didn't pick. Magic happens when they realize they can.</p>
               <p style={{ marginTop: 10 }}><strong>9–12 / AP Philosophy:</strong> One scenario in depth. Read the original source. Compare ethical
@@ -159,6 +179,38 @@ export default function Hub({ navigate }) {
               experiments under <em>For Educators</em> are designed for adult professional dialogue — your AI policy depends on
               decisions it's better to make through scenario than through abstraction.</p>
             </Expandable>
+
+            <div style={{
+              marginTop: 18,
+              padding: "16px 20px",
+              background: `linear-gradient(135deg, ${C.teal}10, ${C.bgAlt})`,
+              border: `1px solid ${C.teal}30`,
+              borderRadius: 12,
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              gap: 14, flexWrap: "wrap",
+            }}>
+              <div style={{ flex: 1, minWidth: 240 }}>
+                <p style={{
+                  fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em",
+                  textTransform: "uppercase", color: C.teal, marginBottom: 6,
+                }}>Want more?</p>
+                <p style={{ color: C.textPrimary, fontSize: "0.94rem", fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.55 }}>
+                  The full <strong>Dialogue Toolkit</strong> includes twelve protocols with step-by-step
+                  scripts, a "what do I do when…" decision tree, and a parallel canon across East Asian,
+                  African, South Asian, and Indigenous traditions.
+                </p>
+              </div>
+              <button
+                onClick={() => navigate("thought-experiments/toolkit")}
+                style={{
+                  padding: "10px 20px",
+                  background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`,
+                  color: "#fff", border: "none", borderRadius: 8,
+                  cursor: "pointer", fontWeight: 600, fontSize: "0.86rem",
+                  whiteSpace: "nowrap",
+                }}
+              >Open the Toolkit →</button>
+            </div>
           </FadeIn>
 
           {/* FEATURED THIS WEEK */}
@@ -245,10 +297,11 @@ export default function Hub({ navigate }) {
             <ContinueExploring
               navigate={navigate}
               links={[
-                { id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Flagship dilemmas for adults", color: C.teal },
-                { id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral },
-                { id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based AI ethics", color: C.gold },
-                { id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean },
+                withImage({ id: "thought-experiments/educators", icon: "🍎", title: "For Educators", desc: "Flagship dilemmas for adults", color: C.teal }),
+                withImage({ id: "thought-experiments/k-5", icon: "🧸", title: "K–5", desc: "Read-aloud, illustrated", color: C.coral }),
+                withImage({ id: "thought-experiments/6-8", icon: "🚋", title: "6–8", desc: "Story-based AI ethics", color: C.gold }),
+                withImage({ id: "thought-experiments/9-12", icon: "🕳️", title: "9–12", desc: "The philosophical canon", color: C.ocean }),
+                withImage({ id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, global canon", color: C.teal }),
               ]}
             />
           </FadeIn>

@@ -2,6 +2,78 @@ import { C } from "../theme.js";
 import { EthicalLensTag, FurtherReadingList } from "../experiments/ExperimentShared.jsx";
 import { TOPIC_BY_ID } from "../data/topics.js";
 
+function PhilosophyLab({ lab, accent }) {
+  if (!lab) return null;
+  const tasks = [
+    lab.fallacySpotting && { label: "Fallacy spot", text: lab.fallacySpotting },
+    lab.argumentRepair && { label: "Repair the argument", text: lab.argumentRepair },
+    lab.variationPrompt && { label: "Make a variation", text: lab.variationPrompt },
+  ].filter(Boolean);
+
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}12, ${accent}05)`,
+      border: `1px solid ${accent}30`,
+      borderRadius: 12,
+      padding: "16px 18px",
+      marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent,
+        fontSize: "0.7rem",
+        fontWeight: 700,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        marginBottom: 10,
+      }}>
+        Philosophy Lab
+      </p>
+      {lab.discussion && (
+        <p style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "0.94rem",
+          lineHeight: 1.65,
+          marginBottom: 12,
+        }}>
+          {lab.discussion}
+        </p>
+      )}
+      {tasks.length > 0 && (
+        <div style={{ display: "grid", gap: 10 }}>
+          {tasks.map(task => (
+            <div key={task.label} style={{
+              background: C.surface,
+              border: `1px solid ${C.border}`,
+              borderRadius: 10,
+              padding: "11px 13px",
+            }}>
+              <p style={{
+                color: accent,
+                fontSize: "0.64rem",
+                fontWeight: 800,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 4,
+              }}>
+                {task.label}
+              </p>
+              <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6 }}>
+                {task.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+      {lab.related?.length > 0 && (
+        <p style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.5, marginTop: 12 }}>
+          Related experiments: {lab.related.join(", ")}
+        </p>
+      )}
+    </div>
+  );
+}
+
 // Displays at the end of a multi-stage scenario. Renders:
 //   - the "path" of choices the user took (one card per stage)
 //   - the contrasted lens(es)
@@ -95,6 +167,8 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
           ))}
         </div>
       )}
+
+      <PhilosophyLab lab={experiment?.philosophyLab} accent={accent} />
 
       {extra}
 

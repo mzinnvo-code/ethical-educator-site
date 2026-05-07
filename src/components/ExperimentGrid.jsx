@@ -1,8 +1,54 @@
 import { useState } from "react";
 import { C } from "../theme.js";
 import { TOPIC_BY_ID } from "../data/topics.js";
+import { getExperimentIllustration } from "../data/illustrations.js";
+import { getSceneIllustration } from "../data/sceneIllustrations.js";
 import { FadeIn, NewBadge } from "./shared.jsx";
 import { isNewExperiment } from "../theme.js";
+
+function PreviewArtwork({ experiment, accent }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const image = getExperimentIllustration(experiment) || getSceneIllustration(experiment);
+
+  if (!image || imageFailed) {
+    return (
+      <div style={{
+        width: 54, height: 54, borderRadius: 14,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: `${accent}12`, border: `1px solid ${accent}24`,
+        fontSize: "1.8rem", marginBottom: 14,
+      }} aria-hidden="true">
+        {experiment.emoji}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      width: "100%",
+      aspectRatio: "1.18",
+      borderRadius: 12,
+      overflow: "hidden",
+      marginBottom: 14,
+      border: `1px solid ${accent}24`,
+      background: `${accent}10`,
+      boxShadow: `inset 0 0 0 1px rgba(224,220,208,0.03)`,
+    }}>
+      <img
+        src={image.src}
+        alt=""
+        loading="lazy"
+        onError={() => setImageFailed(true)}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
+      />
+    </div>
+  );
+}
 
 // A grid of preview cards. Clicking a card triggers `onSelect(experiment)`.
 function PreviewCard({ experiment, onSelect, delay = 0 }) {
@@ -43,7 +89,7 @@ function PreviewCard({ experiment, onSelect, delay = 0 }) {
         }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           {isNew && <div style={{ position: "absolute", top: -4, right: -4 }}><NewBadge /></div>}
-          <div style={{ fontSize: "1.8rem", marginBottom: 10 }} aria-hidden="true">{experiment.emoji}</div>
+          <PreviewArtwork experiment={experiment} accent={accent} />
           <h3 style={{
             fontFamily: "'Source Serif 4', Georgia, serif",
             color: C.textPrimary, fontSize: "1.02rem", fontWeight: 700,

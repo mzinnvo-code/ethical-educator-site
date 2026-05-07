@@ -1,191 +1,734 @@
-import { useState, useEffect } from "react";
-import { C, hasAnyNewExperiments } from "../theme.js";
-import { FadeIn, useInView } from "../components/shared.jsx";
+import { C } from "../theme.js";
+import { FadeIn } from "../components/shared.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
-function HeroSVG() {
+const pathways = [
+  {
+    number: "01",
+    eyebrow: "For classroom discussion",
+    title: "Start with a dilemma students can enter.",
+    desc: "Use grade-band thought experiments about fairness, authorship, identity, AI tools, and moral choice.",
+    action: "Explore scenarios",
+    page: "thought-experiments",
+    color: C.teal,
+    image: getFeatureIllustration("thought-experiments"),
+  },
+  {
+    number: "02",
+    eyebrow: "For teaching practice",
+    title: "Find practical educator resources.",
+    desc: "Browse self-paced professional development on feedback, engagement, online teaching, leadership, and RTI.",
+    action: "Browse educator resources",
+    page: "for-educators",
+    color: C.gold,
+    image: getFeatureIllustration("for-educators"),
+  },
+  {
+    number: "03",
+    eyebrow: "For deeper grounding",
+    title: "Connect practice to research and philosophy.",
+    desc: "Read the evidence and ethical frameworks behind AI use, philosophy in K-12, and moral psychology.",
+    action: "Read research foundations",
+    page: "phil-education",
+    color: C.coral,
+    image: getFeatureIllustration("research-foundations"),
+  },
+];
+
+const practicalResources = [
+  {
+    label: "Interactive",
+    title: "Thought Experiments",
+    desc: "Classroom-ready scenarios for K-5, middle school, high school, and educator PD. Each path is built to help people reason out loud before policy or practice hardens too quickly.",
+    items: ["AI authorship and grading dilemmas", "Classic philosophy adapted for students", "Discussion guides, read-aloud support, and teacher kits"],
+    action: "Open the hub",
+    page: "thought-experiments",
+    color: C.teal,
+    image: getFeatureIllustration("dialogue-toolkit"),
+  },
+  {
+    label: "Professional practice",
+    title: "For Educators",
+    desc: "A practical library for teachers and leaders who want concrete moves they can use in coaching, planning, feedback, engagement, and school improvement work.",
+    items: ["Academic feedback and student engagement", "Online learning and AV resources", "Leadership, high-performing schools, and RTI"],
+    action: "Browse resources",
+    page: "for-educators",
+    color: C.gold,
+    image: getFeatureIllustration("educator-resources"),
+  },
+  {
+    label: "AI in schools",
+    title: "AI in Education",
+    desc: "A clear research tour of AI tutors, personalization, classroom tools, and what educators should watch carefully as automation enters the learning process.",
+    items: ["Evidence on tutoring and personalization", "Learning science and neuroscience connections", "Practical questions for classroom adoption"],
+    action: "Read the guide",
+    page: "ai-education",
+    color: C.ocean,
+    image: getFeatureIllustration("ai-in-education"),
+  },
+];
+
+const researchFoundations = [
+  {
+    title: "Philosophy in K-12",
+    desc: "Research evidence, curriculum possibilities, and the case for philosophy as a practical way to strengthen reasoning in the AI era.",
+    page: "phil-education",
+    color: C.coral,
+    image: getFeatureIllustration("phil-education"),
+  },
+  {
+    title: "AI & Ethics",
+    desc: "Normative ethics translated into school-facing decisions: policy, transparency, fairness, privacy, and what it means to use AI responsibly.",
+    page: "ai-ethics",
+    color: C.gold,
+    image: getFeatureIllustration("ai-ethics"),
+  },
+  {
+    title: "Moral Psychology",
+    desc: "The deeper research spine: dual-process theory, moral judgment, the is/ought gap, and what those debates reveal about AI alignment.",
+    page: "moral-psych",
+    color: C.teal,
+    image: getFeatureIllustration("moral-psych"),
+  },
+];
+
+function HomeStyles() {
   return (
-    <svg viewBox="0 0 600 400" style={{ width:"100%",maxWidth:520,height:"auto",opacity:0.45 }}>
-      {[[100,80,6,C.teal,"0s"],[180,140,8,C.gold,"0.3s"],[300,60,7,C.ocean,"0.6s"],[420,120,6,C.teal,"0.9s"],[500,80,5,C.coral,"1.2s"],[150,260,9,C.gold,"0.4s"],[300,200,12,C.teal,"0s"],[450,260,8,C.ocean,"0.7s"],[200,340,6,C.coral,"1s"],[400,340,7,C.gold,"0.5s"],[300,320,5,C.teal,"0.2s"]].map(([cx,cy,r,col,d],i)=>(
-        <circle key={i} cx={cx} cy={cy} r={r} fill={col} opacity="0.6"><animate attributeName="r" values={`${r};${r+3};${r}`} dur="4s" begin={d} repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.9;0.6" dur="4s" begin={d} repeatCount="indefinite"/></circle>
-      ))}
-      {[[100,80,180,140],[180,140,300,60],[300,60,420,120],[420,120,500,80],[100,80,150,260],[180,140,300,200],[300,60,300,200],[420,120,450,260],[500,80,450,260],[150,260,300,200],[300,200,450,260],[150,260,200,340],[300,200,300,320],[450,260,400,340],[200,340,300,320],[300,320,400,340]].map(([x1,y1,x2,y2],i)=>(
-        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.teal} strokeWidth="0.8" opacity="0.15"><animate attributeName="opacity" values="0.1;0.25;0.1" dur={`${3+i*0.3}s`} repeatCount="indefinite"/></line>
-      ))}
-      <ellipse cx="300" cy="200" rx="45" ry="22" fill="none" stroke={C.gold} strokeWidth="1.5" opacity="0.4"><animate attributeName="rx" values="45;48;45" dur="5s" repeatCount="indefinite"/></ellipse>
-      <circle cx="300" cy="200" r="8" fill={C.gold} opacity="0.5"><animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite"/></circle>
-    </svg>
+    <style>{`
+      .home-page{background:${C.bg};overflow:hidden}
+      .home-hero{
+        min-height:clamp(640px,calc(100svh - 220px),760px);
+        display:flex;
+        align-items:center;
+        padding:clamp(72px,8vw,112px) 24px clamp(56px,7vw,88px);
+        position:relative;
+        background:
+          linear-gradient(115deg,rgba(8,18,32,0.98) 0%,rgba(11,22,34,0.94) 44%,rgba(11,22,34,0.58) 100%),
+          linear-gradient(0deg,rgba(8,18,32,0.72),rgba(8,18,32,0.08)),
+          url('/illustrations/home-hero.png');
+        background-size:cover;
+        background-position:center right;
+      }
+      .home-hero::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          linear-gradient(90deg,rgba(224,220,208,0.035) 1px,transparent 1px),
+          linear-gradient(0deg,rgba(224,220,208,0.025) 1px,transparent 1px);
+        background-size:56px 56px;
+        mask-image:linear-gradient(90deg,transparent 0%,black 38%,black 100%);
+        pointer-events:none;
+      }
+      .home-hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto}
+      .home-eyebrow{
+        color:${C.sand};
+        font-size:0.72rem;
+        font-weight:700;
+        letter-spacing:0.16em;
+        text-transform:uppercase;
+        margin-bottom:18px;
+      }
+      .home-hero h1{
+        color:${C.textPrimary};
+        font-family:'Source Serif 4',Georgia,serif;
+        font-size:clamp(2.45rem,5.8vw,5rem);
+        line-height:1.02;
+        letter-spacing:0;
+        max-width:780px;
+        margin-bottom:22px;
+      }
+      .home-hero-copy{
+        color:${C.textSecondary};
+        font-size:clamp(1rem,1.5vw,1.18rem);
+        line-height:1.72;
+        max-width:670px;
+        margin-bottom:16px;
+      }
+      .home-hero-question{
+        color:${C.textPrimary};
+        font-family:'Source Serif 4',Georgia,serif;
+        font-size:clamp(1.05rem,1.7vw,1.3rem);
+        line-height:1.45;
+        max-width:620px;
+        margin-bottom:30px;
+      }
+      .home-cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+      .home-button{
+        min-height:48px;
+        border-radius:8px;
+        padding:13px 20px;
+        border:1px solid ${C.borderHover};
+        cursor:pointer;
+        font-weight:700;
+        font-size:0.92rem;
+        letter-spacing:0;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        transition:transform 0.24s ease,border-color 0.24s ease,background 0.24s ease,color 0.24s ease,box-shadow 0.24s ease;
+      }
+      .home-button:hover{transform:translateY(-2px)}
+      .home-button.primary{border-color:transparent;background:linear-gradient(135deg,${C.teal},${C.ocean});color:#fff;box-shadow:0 14px 34px rgba(26,138,122,0.22)}
+      .home-button.secondary{background:rgba(224,220,208,0.06);color:${C.textPrimary};border-color:rgba(224,220,208,0.14)}
+      .home-button.ghost{background:transparent;color:${C.gold};border-color:${C.borderHover}}
+      .home-button .button-mark{font-size:1rem;line-height:1;transition:transform 0.24s ease}
+      .home-button:hover .button-mark{transform:translateX(3px)}
+      .hero-scene{position:relative;z-index:1;min-height:470px}
+      .scene-board{
+        position:absolute;
+        inset:4% 0 auto 2%;
+        height:58%;
+        border-radius:8px;
+        background:
+          linear-gradient(145deg,rgba(14,42,49,0.92),rgba(8,18,32,0.86)),
+          repeating-linear-gradient(0deg,rgba(224,220,208,0.05),rgba(224,220,208,0.05) 1px,transparent 1px,transparent 28px);
+        border:1px solid rgba(212,184,104,0.22);
+        box-shadow:0 28px 80px rgba(0,0,0,0.34);
+      }
+      .scene-board::before{
+        content:"";
+        position:absolute;
+        left:8%;
+        right:22%;
+        top:28%;
+        height:2px;
+        background:linear-gradient(90deg,${C.gold},transparent);
+        box-shadow:0 46px 0 rgba(224,220,208,0.13),0 92px 0 rgba(224,220,208,0.1);
+      }
+      .scene-board::after{
+        content:"?";
+        position:absolute;
+        right:10%;
+        top:18%;
+        color:${C.gold};
+        font-family:'Source Serif 4',Georgia,serif;
+        font-size:clamp(5rem,10vw,8rem);
+        line-height:1;
+        opacity:0.5;
+      }
+      .scene-desk{
+        position:absolute;
+        left:2%;
+        right:4%;
+        bottom:8%;
+        height:24%;
+        border-radius:8px;
+        background:linear-gradient(135deg,rgba(200,152,48,0.18),rgba(192,112,64,0.16));
+        border:1px solid rgba(212,184,104,0.2);
+        box-shadow:0 24px 70px rgba(0,0,0,0.26);
+      }
+      .scene-laptop{
+        position:absolute;
+        right:9%;
+        bottom:18%;
+        width:34%;
+        height:25%;
+        border-radius:8px 8px 4px 4px;
+        background:linear-gradient(160deg,rgba(26,90,138,0.9),rgba(11,22,34,0.96));
+        border:1px solid rgba(224,220,208,0.22);
+        box-shadow:0 0 35px rgba(42,136,192,0.18);
+      }
+      .scene-laptop::before{
+        content:"AI";
+        position:absolute;
+        inset:0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:rgba(224,220,208,0.58);
+        font-family:'Source Serif 4',Georgia,serif;
+        font-weight:700;
+        font-size:2.4rem;
+      }
+      .scene-laptop::after{
+        content:"";
+        position:absolute;
+        left:-8%;
+        right:-8%;
+        bottom:-14%;
+        height:11px;
+        border-radius:999px;
+        background:rgba(224,220,208,0.18);
+      }
+      .scene-note{
+        position:absolute;
+        width:22%;
+        min-width:86px;
+        aspect-ratio:1.15;
+        border-radius:8px;
+        background:linear-gradient(145deg,rgba(224,184,72,0.96),rgba(212,184,104,0.76));
+        box-shadow:0 18px 42px rgba(0,0,0,0.22);
+        transform:rotate(-5deg);
+      }
+      .scene-note.one{left:8%;bottom:20%}
+      .scene-note.two{left:35%;bottom:16%;background:linear-gradient(145deg,rgba(26,138,122,0.8),rgba(42,136,192,0.62));transform:rotate(4deg)}
+      .scene-note::before,.scene-note::after{
+        content:"";
+        position:absolute;
+        left:16%;
+        right:16%;
+        height:2px;
+        background:rgba(8,18,32,0.28);
+        border-radius:2px;
+      }
+      .scene-note::before{top:36%}
+      .scene-note::after{top:56%}
+      .scene-orbit{
+        position:absolute;
+        left:22%;
+        top:12%;
+        width:64%;
+        aspect-ratio:1.55;
+        border:1px solid rgba(200,152,48,0.24);
+        border-radius:50%;
+        transform:rotate(-10deg);
+      }
+      .scene-dot{
+        position:absolute;
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background:${C.coral};
+        box-shadow:0 0 22px rgba(192,112,64,0.55);
+      }
+      .scene-dot.a{left:19%;top:17%}
+      .scene-dot.b{right:14%;top:37%;background:${C.teal};box-shadow:0 0 22px rgba(26,138,122,0.5)}
+      .scene-dot.c{left:48%;bottom:27%;background:${C.gold};box-shadow:0 0 22px rgba(200,152,48,0.5)}
+      .home-section{padding:clamp(56px,8vw,88px) 24px;position:relative}
+      .home-section.alt{background:linear-gradient(180deg,rgba(14,30,48,0.72),rgba(11,22,34,0))}
+      .home-container{max-width:1120px;margin:0 auto}
+      .section-kicker{
+        color:${C.gold};
+        font-size:0.7rem;
+        font-weight:700;
+        letter-spacing:0.16em;
+        text-transform:uppercase;
+        margin-bottom:10px;
+      }
+      .section-heading{
+        color:${C.textPrimary};
+        font-family:'Source Serif 4',Georgia,serif;
+        font-size:clamp(1.8rem,3.2vw,2.7rem);
+        line-height:1.14;
+        letter-spacing:0;
+        margin-bottom:12px;
+      }
+      .section-copy{
+        color:${C.textMuted};
+        font-size:1rem;
+        line-height:1.7;
+        max-width:720px;
+      }
+      .centered{text-align:center}
+      .centered .section-copy{margin:0 auto}
+      .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
+      .pathway-card,.feature-card,.research-card,.resource-card,.about-band{
+        border-radius:8px;
+        border:1px solid ${C.border};
+        background:${C.surface};
+        box-shadow:none;
+      }
+      .pathway-card,.feature-card,.research-card,.resource-card{
+        width:100%;
+        color:inherit;
+        text-align:left;
+        cursor:pointer;
+        outline:none;
+        transition:transform 0.26s ease,border-color 0.26s ease,background 0.26s ease,box-shadow 0.26s ease;
+      }
+      .pathway-card:hover,.feature-card:hover,.research-card:hover,.resource-card:hover,
+      .pathway-card:focus-visible,.feature-card:focus-visible,.research-card:focus-visible,.resource-card:focus-visible{
+        transform:translateY(-4px);
+        border-color:var(--accent);
+        background:linear-gradient(135deg,var(--accent-soft),rgba(18,37,61,0.96));
+        box-shadow:0 18px 44px rgba(0,0,0,0.18);
+      }
+      .pathway-card{padding:18px;min-height:340px;display:flex;flex-direction:column}
+      .home-card-visual{
+        width:100%;
+        aspect-ratio:1.62;
+        border-radius:8px;
+        overflow:hidden;
+        border:1px solid rgba(224,220,208,0.08);
+        background:rgba(224,220,208,0.04);
+        margin-bottom:18px;
+      }
+      .home-card-visual img{width:100%;height:100%;object-fit:cover;display:block}
+      .pathway-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:22px}
+      .pathway-number{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:0.78rem;font-weight:700}
+      .pathway-eyebrow{color:${C.textMuted};font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;line-height:1.4;text-align:right}
+      .card-title{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:1.18rem;line-height:1.28;margin-bottom:10px}
+      .card-desc{color:${C.textSecondary};font-size:0.9rem;line-height:1.64}
+      .card-action{margin-top:auto;padding-top:22px;color:var(--accent);font-size:0.84rem;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+      .feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+      .feature-card{padding:18px;min-height:510px;display:flex;flex-direction:column}
+      .feature-label{color:var(--accent);font-size:0.68rem;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;margin-bottom:12px}
+      .feature-card ul{list-style:none;padding:0;margin:20px 0 0}
+      .feature-card li{color:${C.textMuted};font-size:0.83rem;line-height:1.55;padding:9px 0;border-top:1px solid rgba(224,220,208,0.06)}
+      .research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}
+      .research-card{padding:18px;min-height:360px;display:flex;flex-direction:column}
+      .research-card .card-title{font-size:1.08rem}
+      .research-note{
+        margin-top:34px;
+        padding:24px;
+        border-radius:8px;
+        border:1px solid rgba(200,152,48,0.18);
+        background:linear-gradient(135deg,rgba(200,152,48,0.08),rgba(26,138,122,0.05));
+      }
+      .research-note p{
+        color:${C.textPrimary};
+        font-family:'Source Serif 4',Georgia,serif;
+        font-size:clamp(1.05rem,2vw,1.28rem);
+        line-height:1.58;
+        max-width:860px;
+      }
+      .resource-card{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:24px;
+        align-items:center;
+        padding:28px;
+        margin-top:28px;
+      }
+      .resource-main{
+        display:grid;
+        grid-template-columns:minmax(0,220px) minmax(0,1fr);
+        gap:20px;
+        align-items:center;
+      }
+      .resource-card .home-card-visual{
+        width:min(220px,100%);
+        aspect-ratio:1.32;
+        margin-bottom:0;
+      }
+      .resource-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+      .resource-pill{
+        color:${C.textSecondary};
+        border:1px solid rgba(224,220,208,0.12);
+        border-radius:999px;
+        padding:6px 10px;
+        font-size:0.75rem;
+      }
+      .about-band{
+        display:grid;
+        grid-template-columns:auto minmax(0,1fr) auto;
+        gap:18px;
+        align-items:center;
+        padding:24px;
+        background:linear-gradient(135deg,rgba(26,138,122,0.08),rgba(200,152,48,0.05));
+      }
+      .about-mark{
+        width:54px;
+        height:54px;
+        border-radius:14px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-shrink:0;
+        overflow:hidden;
+        background:linear-gradient(135deg,${C.teal},${C.ocean});
+        border:1px solid rgba(224,220,208,0.1);
+      }
+      .about-mark img{width:100%;height:100%;object-fit:cover;display:block}
+      .about-band h3{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:1.08rem;margin-bottom:4px}
+      .about-band p{color:${C.textMuted};font-size:0.88rem;line-height:1.62}
+      @media(max-width:980px){
+        .home-hero{
+          display:block;
+          min-height:calc(100svh - 126px);
+        }
+        .home-hero-inner{display:block;position:relative}
+        .hero-scene{
+          position:absolute;
+          right:-22%;
+          bottom:-24%;
+          width:min(520px,82vw);
+          min-height:300px;
+          opacity:0.38;
+          pointer-events:none;
+        }
+        .pathway-grid,.feature-grid,.research-grid{grid-template-columns:1fr}
+        .feature-card,.pathway-card,.research-card{min-height:auto}
+      }
+      @media(max-width:680px){
+        .home-hero{padding:60px 18px 46px}
+        .home-cta-row,.home-button{width:100%}
+        .home-section{padding:48px 18px}
+        .hero-scene{right:-34%;bottom:-18%;width:96vw;min-height:250px}
+        .resource-card,.about-band{grid-template-columns:1fr}
+        .resource-card{padding:22px}
+        .resource-main{grid-template-columns:1fr}
+        .resource-card .home-card-visual{margin-bottom:2px}
+        .about-band{align-items:start}
+      }
+    `}</style>
   );
 }
 
-function SectionCard({ icon, title, desc, color, onClick, delay=0 }) {
-  const [h,setH]=useState(false);
+function HomeButton({ children, onClick, variant = "primary" }) {
   return (
-    <FadeIn delay={delay}>
-      <div onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{
-        background:h?`${color}0c`:C.surface, border:`1px solid ${h?color+"35":C.border}`,
-        borderRadius:14, padding:"24px 20px", cursor:"pointer", transition:"all 0.35s cubic-bezier(0.4,0,0.2,1)",
-        transform:h?"translateY(-4px)":"none", boxShadow:h?`0 12px 36px ${color}10`:"none", height:"100%",
-        position:"relative", overflow:"hidden",
-      }}>
-        <div style={{position:"absolute",top:0,right:0,width:60,height:60,background:`linear-gradient(135deg,transparent 50%,${color}08 100%)`,borderRadius:"0 14px 0 0"}}/>
-        <div style={{position:"relative",zIndex:1}}>
-          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
-            <div style={{width:36,height:36,borderRadius:10,background:`${color}12`,border:`1px solid ${color}20`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.1rem",flexShrink:0}} aria-hidden="true">{icon}</div>
-            <h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"0.95rem",fontWeight:600}}>{title}</h3>
-          </div>
-          <p style={{color:C.textMuted,fontSize:"0.82rem",lineHeight:1.55}}>{desc}</p>
-          <div style={{marginTop:12,display:"flex",alignItems:"center",gap:4}}>
-            <span style={{color:h?color:C.textMuted,fontSize:"0.78rem",transition:"all 0.3s"}}>Explore</span>
-            <span style={{color:h?color:C.textMuted,fontSize:"0.82rem",transition:"all 0.3s",transform:h?"translateX(4px)":"none",display:"inline-block"}}>→</span>
-          </div>
-        </div>
-      </div>
-    </FadeIn>
+    <button type="button" className={`home-button ${variant}`} onClick={onClick}>
+      {children}
+      <span className="button-mark" aria-hidden="true">-&gt;</span>
+    </button>
   );
 }
 
-function HomeStat({ value, label, color, delay }) {
-  const [ref,visible]=useInView(0.2);
-  const [count,setCount]=useState(value);
-  useEffect(()=>{
-    if(!visible)return;
-    const isDecimal=value<1; const target=isDecimal?value*100:value;
-    const steps=30; const stepVal=target/steps; let cur=0;
-    setCount(isDecimal?0:0);
-    const t=setInterval(()=>{cur+=stepVal;if(cur>=target){cur=target;clearInterval(t);}setCount(isDecimal?cur/100:Math.round(cur));},40);
-    return()=>clearInterval(t);
-  },[visible,value]);
+function CardVisual({ image }) {
+  if (!image) return null;
   return (
-    <FadeIn delay={delay}>
-      <div ref={ref} style={{textAlign:"center",padding:"16px 8px"}}>
-        <div style={{fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"2rem",fontWeight:700,color,lineHeight:1}}>
-          {typeof value==="number"&&value<1?count.toFixed(2):count.toLocaleString()}
-        </div>
-        <p style={{color:C.textMuted,fontSize:"0.72rem",marginTop:6,lineHeight:1.4}}>{label}</p>
-      </div>
-    </FadeIn>
-  );
-}
-
-function FeaturedCallout({ icon, tag, color, title, desc, onClick }) {
-  const [h,setH]=useState(false);
-  return (
-    <div onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{
-      background:`linear-gradient(135deg,${color}0c,${color}04)`, border:`1px solid ${h?color+"40":color+"18"}`,
-      borderRadius:16, padding:"28px 24px", cursor:"pointer", transition:"all 0.3s",
-      transform:h?"translateY(-3px)":"none", boxShadow:h?`0 12px 40px ${color}12`:"none",
-      position:"relative", overflow:"hidden", height:"100%",
-    }}>
-      <div style={{position:"absolute",top:-20,right:-20,width:100,height:100,borderRadius:"50%",background:`radial-gradient(circle,${color}10,transparent 70%)`,filter:"blur(15px)"}}/>
-      <div style={{position:"relative",zIndex:1}}>
-        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-          <span style={{fontSize:"1.3rem"}} aria-hidden="true">{icon}</span>
-          <span style={{padding:"2px 10px",background:`${color}15`,border:`1px solid ${color}25`,borderRadius:12,fontSize:"0.62rem",fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color}}>{tag}</span>
-        </div>
-        <h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.15rem",fontWeight:700,marginBottom:8,lineHeight:1.3}}>{title}</h3>
-        <p style={{color:C.textSecondary,fontSize:"0.88rem",lineHeight:1.6}}>{desc}</p>
-      </div>
+    <div className="home-card-visual" aria-hidden="true">
+      <img
+        src={image.src}
+        alt=""
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.parentElement.style.display = "none";
+        }}
+      />
     </div>
+  );
+}
+
+function handleCardKeyDown(event, onActivate) {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  event.preventDefault();
+  onActivate();
+}
+
+function SectionIntro({ kicker, title, children, centered = false }) {
+  return (
+    <FadeIn>
+      <div className={centered ? "centered" : ""}>
+        <p className="section-kicker">{kicker}</p>
+        <h2 className="section-heading">{title}</h2>
+        <p className="section-copy">{children}</p>
+      </div>
+    </FadeIn>
+  );
+}
+
+function PathwayCard({ item, delay, navigate }) {
+  const openPage = () => navigate(item.page);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        role="button"
+        tabIndex={0}
+        className="pathway-card"
+        style={{ "--accent": item.color, "--accent-soft": `${item.color}14` }}
+        onClick={openPage}
+        onKeyDown={event => handleCardKeyDown(event, openPage)}
+      >
+        <CardVisual image={item.image} />
+        <div className="pathway-top">
+          <span className="pathway-number">{item.number}</span>
+          <span className="pathway-eyebrow">{item.eyebrow}</span>
+        </div>
+        <h3 className="card-title">{item.title}</h3>
+        <p className="card-desc">{item.desc}</p>
+        <span className="card-action">{item.action} <span aria-hidden="true">-&gt;</span></span>
+      </div>
+    </FadeIn>
+  );
+}
+
+function FeatureCard({ item, delay, navigate }) {
+  const openPage = () => navigate(item.page);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        role="button"
+        tabIndex={0}
+        className="feature-card"
+        style={{ "--accent": item.color, "--accent-soft": `${item.color}12` }}
+        onClick={openPage}
+        onKeyDown={event => handleCardKeyDown(event, openPage)}
+      >
+        <CardVisual image={item.image} />
+        <p className="feature-label">{item.label}</p>
+        <h3 className="card-title">{item.title}</h3>
+        <p className="card-desc">{item.desc}</p>
+        <ul>
+          {item.items.map(point => <li key={point}>{point}</li>)}
+        </ul>
+        <span className="card-action">{item.action} <span aria-hidden="true">-&gt;</span></span>
+      </div>
+    </FadeIn>
+  );
+}
+
+function ResearchCard({ item, delay, navigate }) {
+  const openPage = () => navigate(item.page);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        role="button"
+        tabIndex={0}
+        className="research-card"
+        style={{ "--accent": item.color, "--accent-soft": `${item.color}12` }}
+        onClick={openPage}
+        onKeyDown={event => handleCardKeyDown(event, openPage)}
+      >
+        <CardVisual image={item.image} />
+        <h3 className="card-title">{item.title}</h3>
+        <p className="card-desc">{item.desc}</p>
+        <span className="card-action">Read this section <span aria-hidden="true">-&gt;</span></span>
+      </div>
+    </FadeIn>
   );
 }
 
 export default function Home({ navigate }) {
   return (
-    <div style={{background:C.bg}}>
-      {/* ═══ HERO ═══ */}
-      <section style={{minHeight:"90vh",display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center",position:"relative",overflow:"hidden",background:`radial-gradient(ellipse at 50% 30%,rgba(26,90,138,0.06) 0%,transparent 70%)`}}>
-        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}><HeroSVG/></div>
-        <div style={{position:"relative",zIndex:1,padding:"0 24px",maxWidth:800}}>
+    <div className="home-page">
+      <HomeStyles />
+
+      <section className="home-hero">
+        <div className="home-hero-inner">
           <FadeIn>
-            <div style={{fontSize:"0.68rem",fontWeight:600,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,marginBottom:22}}>Philosophy · Ethics · Education · Artificial Intelligence</div>
-            <h1 style={{fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"clamp(2.4rem,6vw,4rem)",color:C.textPrimary,fontWeight:700,lineHeight:1.08,marginBottom:20}}>
-              Where Moral Philosophy<br/><span style={{color:C.gold}}>Meets the Age of AI</span>
-            </h1>
-            <p style={{fontSize:"1.08rem",color:C.textMuted,lineHeight:1.7,maxWidth:580,margin:"0 auto 14px"}}>
-              Can neuroscience tell us what's morally right? Should AI replace teachers? What does education lose when learning is automated?
-            </p>
-            <p style={{fontSize:"0.92rem",color:C.textMuted,lineHeight:1.7,maxWidth:480,margin:"0 auto 32px",opacity:0.7}}>
-              Research, interactive thought experiments, and philosophical frameworks for the most consequential questions of our time — by <strong style={{color:C.textPrimary}}>Matthew A. Zinn</strong>
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-              <button onClick={()=>navigate("thought-experiments")} style={{padding:"14px 32px",background:`linear-gradient(135deg,${C.teal},${C.ocean})`,border:"none",borderRadius:8,color:"#fff",fontWeight:600,cursor:"pointer",fontSize:"0.92rem",boxShadow:`0 4px 20px rgba(26,138,122,0.25)`}}>Explore the Experiments</button>
-              <button onClick={()=>navigate("moral-psych")} style={{padding:"14px 32px",background:"transparent",border:`1px solid ${C.borderHover}`,borderRadius:8,color:C.gold,cursor:"pointer",fontSize:"0.92rem"}}>Read the Research</button>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.4}>
-            <div style={{marginTop:48,opacity:0.4,animation:"scrollBounce 2s ease-in-out infinite"}}>
-              <div style={{width:20,height:32,border:`1.5px solid ${C.textMuted}`,borderRadius:10,margin:"0 auto",position:"relative"}}>
-                <div style={{width:3,height:8,background:C.textMuted,borderRadius:2,position:"absolute",top:6,left:"50%",transform:"translateX(-50%)",animation:"scrollDot 2s ease-in-out infinite"}}/>
+            <div>
+              <p className="home-eyebrow">For teachers, school leaders, and curious thinkers</p>
+              <h1>Make AI ethics usable in the classroom.</h1>
+              <p className="home-hero-copy">
+                AI can write, grade, tutor, and advise. This site helps educators decide what to preserve,
+                what to question, and what to redesign with classroom-ready thought experiments, practical
+                professional resources, and research-grounded philosophy.
+              </p>
+              <p className="home-hero-question">
+                Start with a dilemma, a teaching need, or the research behind better decisions.
+              </p>
+              <div className="home-cta-row">
+                <HomeButton onClick={() => navigate("thought-experiments")}>Explore Thought Experiments</HomeButton>
+                <HomeButton variant="secondary" onClick={() => navigate("for-educators")}>Browse Educator Resources</HomeButton>
+                <HomeButton variant="ghost" onClick={() => navigate("phil-education")}>Read Research</HomeButton>
               </div>
             </div>
           </FadeIn>
         </div>
-        <style>{`@keyframes scrollBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}@keyframes scrollDot{0%{top:6px;opacity:1}50%{top:18px;opacity:0.3}100%{top:6px;opacity:1}}`}</style>
       </section>
 
-      {/* ═══ THESIS STATEMENT ═══ */}
-      <FadeIn>
-        <div style={{maxWidth:700,margin:"0 auto",padding:"56px 24px 20px",textAlign:"center"}}>
-          <p style={{fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"clamp(1.1rem,2.5vw,1.35rem)",color:C.textPrimary,lineHeight:1.6,fontWeight:400}}>
-            <span style={{color:C.gold}}>"</span>The process of learning is constitutive of its value, not merely instrumental to it.<span style={{color:C.gold}}>"</span>
-          </p>
-          <p style={{color:C.textMuted,fontSize:"0.82rem",marginTop:10}}>— The convergence of eight thinkers across 2,400 years</p>
-        </div>
-      </FadeIn>
-
-      {/* ═══ KEY NUMBERS ═══ */}
-      <div style={{maxWidth:800,margin:"0 auto",padding:"20px 24px 40px"}}>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(120px,1fr))",gap:8,background:C.surface,borderRadius:16,border:`1px solid ${C.border}`,padding:"20px 12px"}}>
-          <HomeStat value={0.89} label="Effect size of philosophy on critical thinking" color={C.teal} delay={0.05}/>
-          <HomeStat value={14003} label="Participants in the moral psych meta-analysis" color={C.gold} delay={0.1}/>
-          <HomeStat value={92} label="% of UK students using AI tools" color={C.ocean} delay={0.15}/>
-          <HomeStat value={4} label="Interactive thought experiments" color={C.coral} delay={0.2}/>
-        </div>
-      </div>
-
-      {/* ═══ FEATURED ═══ */}
-      <div style={{maxWidth:900,margin:"0 auto",padding:"0 24px 48px"}}>
-        <FadeIn><p style={{fontSize:"0.68rem",fontWeight:600,letterSpacing:"0.15em",textTransform:"uppercase",color:C.gold,marginBottom:16,textAlign:"center"}}>Featured</p></FadeIn>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:16}}>
-          <FadeIn delay={0.05}><FeaturedCallout icon="⚡" tag="Interactive" color={C.teal} title="The Shortcut: A Thought Experiment" desc="If you could bypass the entire process of learning and arrive at mastery instantly — should you? Four escalating scenarios with counter-arguments to every choice." onClick={()=>navigate("thought-experiments")}/></FadeIn>
-          <FadeIn delay={0.1}><FeaturedCallout icon="📊" tag="New Research" color={C.gold} title="Philosophy in K–12: The Evidence" desc="A 2025 meta-analysis found an effect size of 0.89 on critical thinking. The EEF trial showed +4 months reading gains for disadvantaged pupils." onClick={()=>navigate("phil-education")}/></FadeIn>
-        </div>
-      </div>
-
-      {/* ═══ EXPLORE THE SITE ═══ */}
-      <div style={{maxWidth:1080,margin:"0 auto",padding:"0 24px 64px"}}>
-        <FadeIn>
-          <div style={{textAlign:"center",marginBottom:28}}>
-            <p style={{fontSize:"0.68rem",fontWeight:600,letterSpacing:"0.15em",textTransform:"uppercase",color:C.teal,marginBottom:8}}>Explore</p>
-            <h2 style={{fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.6rem",color:C.textPrimary,fontWeight:700}}>What You'll Find Here</h2>
-          </div>
-        </FadeIn>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
-          <SectionCard icon="🧠" title="Moral Psychology" color={C.teal} delay={0.04} desc="Greene's dual-process theory, Kamm's objections, the 2024 meta-analysis, and the bridge to AI alignment." onClick={()=>navigate("moral-psych")}/>
-          <SectionCard icon="⚖️" title="AI Ethics in Education" color={C.gold} delay={0.08} desc="The is/ought problem, UNESCO frameworks, the EU AI Act, NYC's traffic-light policy, and ethical frameworks for educators." onClick={()=>navigate("ai-ethics")}/>
-          <SectionCard icon="🤖" title="AI in the Classroom" color={C.ocean} delay={0.12} desc="Evidence on what works, key voices from Mollick to Luckin, and the neuroscience of AI-assisted learning." onClick={()=>navigate("ai-education")}/>
-          <SectionCard icon="🏛️" title="Philosophy in K–12" color={C.coral} delay={0.16} desc="Research evidence, a full K–12 curriculum proposal, and interactive weekly schedules." onClick={()=>navigate("phil-education")}/>
-          <SectionCard icon="💡" title="Thought Experiments" color={C.teal} delay={0.2} desc="Four interactive scenarios with counter-arguments and discussion guides. The Shortcut, AI Authorship, Reluctant Educator, Digital Doppelgänger." onClick={()=>navigate("thought-experiments")}/>
-          <SectionCard icon="📚" title="Resources & Reading" color={C.gold} delay={0.24} desc="Books, academic papers, organizations, podcasts, and frameworks — everything cited on this site." onClick={()=>navigate("resources")}/>
-        </div>
-      </div>
-
-      {/* ═══ ABOUT TEASER ═══ */}
-      <FadeIn>
-        <div style={{maxWidth:700,margin:"0 auto",padding:"0 24px 64px",textAlign:"center"}}>
-          <div style={{background:`linear-gradient(135deg,rgba(26,138,122,0.06),rgba(200,152,48,0.04))`,border:`1px solid ${C.border}`,borderRadius:16,padding:"36px 28px"}}>
-            <div style={{width:64,height:64,borderRadius:"50%",background:`linear-gradient(135deg,${C.teal},${C.ocean})`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"1.4rem",color:"#fff",fontWeight:700,margin:"0 auto 14px"}}>MZ</div>
-            <h3 style={{fontFamily:"'Source Serif 4',Georgia,serif",color:C.textPrimary,fontSize:"1.1rem",marginBottom:6}}>Matthew A. Zinn</h3>
-            <p style={{color:C.teal,fontSize:"0.78rem",marginBottom:14}}>MA Ethics & Applied Philosophy · UNC Charlotte 2013</p>
-            <p style={{color:C.textMuted,fontSize:"0.9rem",lineHeight:1.65,maxWidth:520,margin:"0 auto 18px"}}>
-              I study how humans make moral judgments — and what that means for the way we build, teach, and govern artificial intelligence. This site brings together thesis research, practical writing for educators, and philosophical frameworks for AI policy.
-            </p>
-            <button onClick={()=>navigate("about")} style={{padding:"10px 28px",background:"transparent",border:`1px solid ${C.borderHover}`,borderRadius:8,color:C.gold,cursor:"pointer",fontSize:"0.85rem"}}>More About Me & This Work →</button>
+      <section className="home-section">
+        <div className="home-container">
+          <SectionIntro
+            kicker="Start with what you need"
+            title="Three ways into the work"
+            centered
+          >
+            Whether you are planning a classroom conversation, building professional development, or looking
+            for the research behind AI policy, the site is organized around useful next steps.
+          </SectionIntro>
+          <div className="pathway-grid">
+            {pathways.map((item, index) => (
+              <PathwayCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
+            ))}
           </div>
         </div>
-      </FadeIn>
+      </section>
+
+      <section className="home-section alt">
+        <div className="home-container">
+          <SectionIntro
+            kicker="Practical resources"
+            title="Use philosophy as a classroom tool, not a wall of theory"
+          >
+            The most prominent sections are built for educators who need discussion-ready materials,
+            practical strategies, and enough ethical grounding to make confident choices about AI.
+          </SectionIntro>
+          <div className="feature-grid">
+            {practicalResources.map((item, index) => (
+              <FeatureCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section">
+        <div className="home-container">
+          <SectionIntro
+            kicker="Research foundations"
+            title="Go deeper when the practical questions get philosophical"
+          >
+            The research side of the site connects classroom decisions to philosophy of education, AI ethics,
+            and moral psychology without losing sight of the educator's everyday work.
+          </SectionIntro>
+          <div className="research-grid">
+            {researchFoundations.map((item, index) => (
+              <ResearchCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
+            ))}
+          </div>
+          <FadeIn delay={0.18}>
+            <div className="research-note">
+              <p>
+                The central question is not only what AI can make easier. It is what students become through
+                the work of learning, reasoning, revising, and explaining their choices.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="home-section alt">
+        <div className="home-container">
+          <SectionIntro
+            kicker="Reading room"
+            title="Follow the sources"
+          >
+            The resources section gathers books, papers, policy documents, organizations, podcasts, and
+            frameworks cited across the site so readers can keep building their own map.
+          </SectionIntro>
+          <FadeIn delay={0.08}>
+            <div
+              role="button"
+              tabIndex={0}
+              className="resource-card"
+              style={{ "--accent": C.gold, "--accent-soft": `${C.gold}12` }}
+              onClick={() => navigate("resources")}
+              onKeyDown={event => handleCardKeyDown(event, () => navigate("resources"))}
+            >
+              <div className="resource-main">
+                <CardVisual image={getFeatureIllustration("resources")} />
+                <div>
+                  <h3 className="card-title">Resources & Reading List</h3>
+                  <p className="card-desc">
+                    A curated trail through moral psychology, AI ethics, education research, classroom philosophy,
+                    and policy guidance for educators who want more than a quick answer.
+                  </p>
+                  <div className="resource-meta" aria-hidden="true">
+                    <span className="resource-pill">Books</span>
+                    <span className="resource-pill">Academic papers</span>
+                    <span className="resource-pill">Policy frameworks</span>
+                    <span className="resource-pill">Organizations</span>
+                  </div>
+                </div>
+              </div>
+              <span className="card-action">Open resources <span aria-hidden="true">-&gt;</span></span>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="home-section">
+        <div className="home-container">
+          <FadeIn>
+            <div className="about-band">
+              <div className="about-mark" aria-hidden="true">
+                <img src={getFeatureIllustration("site-symbol").src} alt="" loading="lazy" />
+              </div>
+              <div>
+                <h3>Built by Matthew A. Zinn</h3>
+                <p>
+                  Educator, philosopher, and AI ethics researcher. The biography is here for context, but the
+                  site is designed to move visitors toward useful materials first.
+                </p>
+              </div>
+              <HomeButton variant="ghost" onClick={() => navigate("about")}>About Matthew</HomeButton>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
     </div>
   );
 }
