@@ -191,7 +191,7 @@ export const EXPERIMENTS = [
         prompt: "Your friend accidentally broke the teacher's pencil. They beg you not to tell. The teacher asks what happened. What do you do?",
         options: [
           { label: "A", text: "Tell the truth.", reflection: "Honesty matters even when it's hard. Especially then.", lens: "duty" },
-          { label: "B", text: "Keep the secret.", reflection: "Loyalty is also a virtue. But what happens to trust over time?", lens: "loyalty" },
+          { label: "B", text: "Keep the secret.", reflection: "Loyalty is a kind of caring. So is honesty. Are they ever the same thing? Are they ever opposite?", lens: "loyalty" },
           { label: "C", text: "Tell my friend to tell the teacher themselves.", reflection: "Helping a friend do the brave thing is being a real friend.", lens: "moral-courage" },
         ],
       },
@@ -222,7 +222,7 @@ export const EXPERIMENTS = [
       {
         id: "setup", kicker: "Stage 1", title: "The robot dog won't turn on",
         promptShort: "The class robot dog stopped working. Some kids are sad. Some aren't. What do you think?",
-        prompt: "Your class robot dog won't turn on anymore. Some kids say, \"It's just a machine.\" Some kids feel really sad — like a real pet died.",
+        prompt: "Your class robot dog won't turn on anymore. The teacher is quiet. Some kids say, \"It's just a machine.\" Some kids don't say anything. What do you think is going on?",
         options: [
           { label: "A", text: "It's a machine. Get a new one.", reflection: "Telling alive from not-alive is a real skill.", lens: "realism" },
           { label: "B", text: "I'm really sad. I'll miss it.", reflection: "What we love and how we love it makes us who we are.", lens: "care" },
@@ -259,7 +259,7 @@ export const EXPERIMENTS = [
         options: [
           { label: "A", text: "Yes — be honest.", reflection: "Saying what tools you used is part of honest work.", lens: "transparency" },
           { label: "B", text: "Say I had help, but the idea was mine.", reflection: "This is honest AND fair — it credits both you and the tool.", lens: "credit" },
-          { label: "C", text: "Don't say. Let them think it was me.", reflection: "Hiding help feels easy now. But lies grow.", lens: "self-interest" },
+          { label: "C", text: "Don't say. Let them think it was me.", reflection: "What might happen the next time your teacher asks you to draw something?", lens: "self-interest" },
         ],
       },
       {
@@ -438,9 +438,9 @@ export const EXPERIMENTS = [
         options: [
           { label: "A", text: "Push. The math is the same.", reflection: "Strict utilitarian logic is consistent — most people aren't.", lens: "utilitarian" },
           { label: "B", text: "Don't push. There's a real difference.", reflection: "Doing-vs-allowing, instrumentalization — the philosophical names for what your gut is telling you.", lens: "deontological" },
-          { label: "C", text: "I'm not sure why this feels different, but it does.", reflection: "That feeling has a name: 'doctrine of double effect.' Aquinas spent a lifetime on it.", lens: "moral-intuition" },
+          { label: "C", text: "I'm not sure why this feels different, but it does.", reflection: "Trust the gut, then interrogate it. Pulling a lever lets the trolley do the killing; pushing a person uses their body as the thing that stops the trolley. Same outcome, different role for the person. Is that a real moral difference, or a trick of intuition?", lens: "moral-intuition" },
         ],
-        counterpoint: "70% of people pull the lever. 30% push the stranger. Same outcome. Different intuition. Why?",
+        counterpoint: "Most people pull the lever. Far fewer push the stranger. Same outcome. Different intuition. Why?",
       },
       synthesis({ title: "What changed between cases?", positions: [
         { name: "Philippa Foot", school: "Oxford, 1967", view: "Posed the original lever case to test the difference between doing harm and allowing it." },
@@ -952,11 +952,11 @@ export const EXPERIMENTS = [
       },
       {
         id: "remix", kicker: "Stage 2 — the modern ring", title: "Anonymous accounts and end-to-end encryption",
-        prompt: "What's the modern Ring of Gyges? Anonymous accounts. End-to-end encryption. Privacy from algorithmic surveillance. Each is a real tool that grants partial invisibility. Are these tools tests of character — or are they protective necessities?",
+        prompt: "What's the modern Ring of Gyges? Anonymous accounts. End-to-end encryption. Privacy from algorithmic surveillance. The same tools that let some people harass without consequence also let whistleblowers, survivors, and dissidents speak at all. The ring's power cuts both ways. Which reading is closer to the truth — and does the answer depend on who's wearing it?",
         options: [
-          { label: "A", text: "Tests of character. Most people fail.", reflection: "The pessimistic-empirical case. Online behavior tends to support it.", lens: "social-pressure" },
-          { label: "B", text: "Protective necessities. Privacy enables truth.", reflection: "Whistleblowers. Survivors. Dissidents. Privacy is morally essential.", lens: "civic-protection" },
-          { label: "C", text: "Both — depending on who's wielding the ring.", reflection: "The honest answer for most policy questions.", lens: "contextual" },
+          { label: "A", text: "Tests of character. Anonymity reveals what we'd do unwatched.", reflection: "Some research backs this — and yet the same anonymity has powered moral courage too. Pessimism about *most* people may still be compatible with hope about *some*.", lens: "social-pressure" },
+          { label: "B", text: "Protective necessities. Privacy enables truth.", reflection: "Whistleblowers. Survivors. Dissidents. Some of the bravest moral acts of the last century required invisibility from power. Privacy isn't only a temptation — sometimes it's a condition for justice.", lens: "civic-protection" },
+          { label: "C", text: "Both — depending on who's wielding the ring.", reflection: "The honest answer for most policy questions. Now the harder one: who decides which uses count as which?", lens: "contextual" },
         ],
       },
       synthesis({ title: "Justice, privacy, and the cost of being seen", positions: [

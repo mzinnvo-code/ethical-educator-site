@@ -148,7 +148,7 @@ export default function Hub({ navigate }) {
               <p style={{ marginTop: 8 }}><strong>Implication:</strong> "If that's true, then what else has to be true?"</p>
               <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
             </Expandable>
-            <Expandable title="By age band" color={C.coral}>
+            <Expandable title="By age band" color={C.coral} defaultOpen>
               <p><strong>K–5:</strong> One scenario, ten minutes, lots of "why?" Expect drawings, role-play, and getting up out of chairs.
               The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
               <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students

@@ -298,14 +298,17 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             </div>
 
             {stageChoiceIdx == null ? (
-              <div style={{ display: "grid", gap: 10 }}>
-                {stage.options?.map((opt, i) => (
-                  <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
-                    <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
-                    {opt.text}
-                  </ChoiceBtn>
-                ))}
-              </div>
+              <>
+                <SteelmanRule />
+                <div style={{ display: "grid", gap: 10 }}>
+                  {stage.options?.map((opt, i) => (
+                    <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
+                      <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
+                      {opt.text}
+                    </ChoiceBtn>
+                  ))}
+                </div>
+              </>
             ) : (
               <>
                 <ReflectionPanel option={choiceForStage} color={accent} />
@@ -362,6 +365,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
           </div>
 
           {stageChoiceIdx == null ? (
+            <>
+            <SteelmanRule />
             <div style={{ display: "grid", gap: 12 }}>
               {stage.options?.map((opt, i) => (
                 <button
@@ -388,6 +393,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 </button>
               ))}
             </div>
+            </>
           ) : (
             <>
               <ReflectionPanel option={choiceForStage} color={accent} />
@@ -405,6 +411,22 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
     </Shell>
     <TeacherKitBelow />
     </>
+  );
+}
+
+function SteelmanRule() {
+  return (
+    <p style={{
+      color: C.textMuted,
+      fontSize: "0.82rem",
+      fontStyle: "italic",
+      lineHeight: 1.55,
+      marginBottom: 12,
+      paddingLeft: 10,
+      borderLeft: `2px solid ${C.border}`,
+    }}>
+      Before you choose: which of these would you most want to push back on, and what's the strongest version of it you could write?
+    </p>
   );
 }
 
