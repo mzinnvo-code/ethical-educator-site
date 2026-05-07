@@ -26,7 +26,8 @@ export default function Privacy({ navigate }) {
 
             <FadeIn delay={0.1}>
               <Divider label="Interactive Features" />
-              <p>The interactive thought experiments on this site store your in-session choices in browser memory only (JavaScript variables). This data is never transmitted anywhere, is not written to localStorage or cookies, and disappears the moment you close or refresh the page.</p>
+              <p>By default, the interactive thought experiments on this site store your in-session choices in browser memory only (JavaScript variables). This data is never transmitted anywhere and disappears the moment you close or refresh the page.</p>
+              <p style={{ marginTop: 10 }}>If you opt in to the <strong>Decision Journal</strong> by clicking <em>Save to journal</em> at the end of any thought experiment, your saved entries are written to your browser's <code>localStorage</code> on this device only. Nothing is transmitted to any server, and no account is created. You can export your journal as a Markdown file or clear it at any time from the Decision Journal page. Clearing your browser's site data also erases the journal.</p>
             </FadeIn>
 
             <FadeIn delay={0.12}>

@@ -366,7 +366,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -459,7 +459,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -596,7 +596,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
       )}
     </Shell>
     <TeacherKitBelow />
@@ -651,7 +651,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   );
 }
 
-function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode }) {
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [] }) {
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
@@ -672,6 +672,8 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
           experiment={experiment}
           accent={accent}
           positions={stage.positions || []}
+          stages={stages}
+          mode={mode}
         />
       )}
 
