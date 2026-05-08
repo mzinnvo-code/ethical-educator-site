@@ -70,10 +70,17 @@ function EmptyState() {
 function Entry({ entry, journal }) {
   const [expanded, setExpanded] = useState(false);
   const [notesValue, setNotesValue] = useState(entry.notes || "");
+  const [steelmanValue, setSteelmanValue] = useState(entry.steelman || "");
 
   const handleNotesBlur = () => {
     if (notesValue !== entry.notes) {
       journal.updateNotes(entry.id, notesValue);
+    }
+  };
+
+  const handleSteelmanBlur = () => {
+    if (steelmanValue !== (entry.steelman || "")) {
+      journal.updateSteelman(entry.id, steelmanValue);
     }
   };
 
@@ -171,6 +178,28 @@ function Entry({ entry, journal }) {
               ))}
             </ol>
           )}
+
+          <label style={{
+            display: "block", color: C.textSecondary, fontSize: "0.78rem",
+            fontWeight: 600, letterSpacing: "0.04em", marginBottom: 6,
+          }}>
+            Steelman of the position I didn't pick
+          </label>
+          <textarea
+            value={steelmanValue}
+            onChange={e => setSteelmanValue(e.target.value)}
+            onBlur={handleSteelmanBlur}
+            placeholder="The strongest version of the option I rejected goes like this…"
+            rows={4}
+            style={{
+              width: "100%", padding: "10px 12px",
+              background: C.bg, border: `1px solid ${C.border}`,
+              borderRadius: 8, color: C.textPrimary,
+              fontSize: "0.88rem", lineHeight: 1.6,
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              resize: "vertical", marginBottom: 14,
+            }}
+          />
 
           <label style={{
             display: "block", color: C.textSecondary, fontSize: "0.78rem",
