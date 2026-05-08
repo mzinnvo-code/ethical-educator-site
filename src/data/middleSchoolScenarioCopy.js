@@ -14,6 +14,15 @@ const ref = ({ text, philosopher, concept, year, url }) => ({
 
 const reading = (title, url, level = "intro") => ({ title, url, level });
 
+// Lite philosophyLab for 6-8 — same shape as 9-12 (rendered by SynthesisPanel's
+// PhilosophyLab block) but written in middle-school voice. Each scenario should
+// supply: a 2-3 sentence discussion synthesizing the strongest arguments and the
+// deeper question; one fallacySpotting prompt; one argumentRepair prompt; one
+// variationPrompt that twists the case to test a boundary; and a related list.
+const lab = ({ discussion, fallacySpotting, argumentRepair, variationPrompt, related }) => ({
+  discussion, fallacySpotting, argumentRepair, variationPrompt, related,
+});
+
 export const MIDDLE_SCHOOL_ORDER = [
   "deepfake-election",
   "trolley-self-driving",
@@ -105,6 +114,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Three-column evidence check: Claim / Evidence we have / Evidence we still need. Bottom: write one sharing rule you would accept even when it hurts your side.",
       exitTicket: "Name one action you can take in the first five minutes after seeing a suspicious viral video, and explain what value that action protects.",
     },
+    philosophyLab: lab({
+      discussion: "The strongest case for slowing the spread emphasizes urgent democratic harm — once a fake reaches voters, the correction never travels as far. The strongest case against quick suppression worries that emergency censorship can become a tool for hiding inconvenient real claims. The harder question may be: what response is narrow enough to protect an election without treating *every* contested claim as forbidden?",
+      fallacySpotting: "Spot the false dilemma in this claim: 'Either we ban every political deepfake immediately, or democracy is over.' What third or fourth options does it erase?",
+      argumentRepair: "Rewrite 'Only gullible people fall for deepfakes' as a stronger argument about speed, emotion, and verification — without insulting the people who shared it.",
+      variationPrompt: "Create a version where the media is *satire*, not deception. What detail changes your answer?",
+      related: ["The Self-Driving Trolley", "The Biased Algorithm", "Are You Sure You're Real?"],
+    }),
     reference: ref({
       concept: "Truth in politics — what civic responsibility requires when emotion moves faster than verification.",
       philosopher: "Hannah Arendt",
@@ -196,6 +212,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Two-case comparison chart: action, outcome, intention, person used as means, strongest objection. End with a draft safety rule.",
       exitTicket: "Write one rule for an autonomous system and one objection that would make you revise it.",
     },
+    philosophyLab: lab({
+      discussion: "The lever case feels easier because the trolley is already moving — we redirect harm rather than originate it. The footbridge case feels harder because the stranger's body becomes the *means* by which the trolley stops. Most people pull the lever and refuse to push, even when the math is identical. Whether the difference is a deep moral truth or a quirk of how human brains process action vs. allowing is what philosophers, and now AI designers, are still trying to settle.",
+      fallacySpotting: "Spot the appeal-to-numbers in this argument: 'Pulling the lever saves four more lives, so it's obviously correct.' What is *obviously correct* assuming about whose lives count, and how?",
+      argumentRepair: "Rewrite 'You can't put a number on a life' as a real philosophical position. Try Kant on persons as ends, not just an internet slogan.",
+      variationPrompt: "Now imagine the one person on the side track is the only doctor for a hundred miles. Does that change the math? Should it?",
+      related: ["Your Self-Driving Car", "The Veil of Ignorance", "The Shared Pasture"],
+    }),
     reference: ref({
       concept: "Doing harm vs. allowing harm — and the moral weight of using a person's body to stop a worse outcome.",
       philosopher: "Philippa Foot and Judith Jarvis Thomson",
@@ -286,6 +309,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Bias audit map: Data used / Criteria rewarded / Who benefits / Who is missed / Repair plan.",
       exitTicket: "Name one question you would ask before trusting an AI ranking system, and explain why that question matters.",
     },
+    philosophyLab: lab({
+      discussion: "The strongest defense of the AI tool is that it is more *consistent* than human judges — same input, same output. The strongest critique is that consistency is not the same as fairness when the inputs themselves carry the patterns of past unfair choices. The real question is not whether to use AI but where the *audit* and the *appeal* go — and whose voice can challenge the score.",
+      fallacySpotting: "Spot the bait-and-switch in this claim: 'The algorithm doesn't see race, so it can't be racist.' What kind of unfairness does *not seeing* not actually fix?",
+      argumentRepair: "Rewrite 'Just hire humans, they're fairer' as a stronger argument that takes seriously the documented bias in human hiring decisions.",
+      variationPrompt: "Imagine the school adds a human reviewer, but only to confirm the AI's choice — never overrule it. Has the system actually changed?",
+      related: ["The Deepfake Dilemma", "The Veil of Ignorance", "The Self-Driving Trolley"],
+    }),
     reference: ref({
       concept: "Algorithmic bias and structural injustice — when a system that looks neutral can repeat unfair history.",
       philosopher: "Cathy O'Neil and Iris Marion Young",
@@ -376,6 +406,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Identity threads chart: parts, memory, behavior, name, relationships, responsibility. Students rank which thread matters most in each stage.",
       exitTicket: "Complete the sentence: something stays the same when ___, unless ___.",
     },
+    philosophyLab: lab({
+      discussion: "If gradual replacement preserves identity, the original parts no longer matter. If material continuity matters, the reassembled robot has a stronger claim. Locke and Parfit both argue that what *matters* is psychological continuity — the connections of memory and use — not physical sameness. The puzzle is sharpest when both robots are sitting in front of you.",
+      fallacySpotting: "Spot the equivocation in this claim: 'It has all the same parts, so it's the same robot.' What two different meanings of *same* are sliding past each other?",
+      argumentRepair: "Rewrite 'Identity is whatever the owner says it is' as a serious claim. Is that the same as saying identity is just a feeling — and what does that cost?",
+      variationPrompt: "Now imagine the robot's *memory chip* alone is moved into a brand-new body — and the old body is left empty. Which one is Orbit?",
+      related: ["Are You Sure You're Real?", "Are We in a Simulation?", "When Does a Heap Stop Being a Heap?"],
+    }),
     reference: ref({
       concept: "Personal identity through change — Ship of Theseus, Locke's memory criterion, and Parfit's continuity.",
       philosopher: "Plutarch, John Locke, and Derek Parfit",
@@ -466,6 +503,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Stakeholder grid: passenger, pedestrian, company, city, programmer. For each, list what they value and what risk they carry.",
       exitTicket: "Write one public rule for self-driving cars and identify who might object to it.",
     },
+    philosophyLab: lab({
+      discussion: "The trolley case put the choice in your hands. The self-driving car puts the choice in *code* — written months ago, by people you'll never meet, applied to a situation they didn't predict. The question shifts: not what *I* would do but what rule we are willing to live under, written in advance. Public ethics is harder than personal ethics, and the car company is now part of the public.",
+      fallacySpotting: "Spot the moving target in this argument: 'The car should always protect its rider — but also never harm pedestrians, and also follow the law, and also minimize damage.' What happens when these pull apart?",
+      argumentRepair: "Rewrite 'The car should just do what a good driver would do' as a real engineering specification. Whose definition of *good driver*?",
+      variationPrompt: "Imagine you're not in the car — you're a pedestrian. Does your answer change? Should it?",
+      related: ["The Self-Driving Trolley", "The Biased Algorithm", "The Veil of Ignorance"],
+    }),
     reference: ref({
       concept: "Trolley reasoning meets public design — programming machines that share roads with people.",
       philosopher: "Philippa Foot and the MIT Moral Machine project",
@@ -556,6 +600,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Certainty ladder: impossible to doubt / reasonable to trust / possible but unsupported / not worth acting on. Students place claims from the scenario.",
       exitTicket: "Name one thing you cannot prove with certainty but still reasonably trust. Why is that trust reasonable?",
     },
+    philosophyLab: lab({
+      discussion: "Descartes used the demon to find what could not be doubted; Putnam used the vat to argue that some skeptical scenarios cannot even be coherently stated. Either way, the everyday question stays the same: *given* that we cannot prove we aren't in some such situation, what is reasonable to trust, and on what grounds? The skeptical move tightens our grip on what we mean by knowledge — it does not actually loosen our hold on the world.",
+      fallacySpotting: "Spot the demand for the impossible in this claim: 'If you can't prove you're not a brain in a vat, you don't really know anything.' What standard of *proof* is that argument using?",
+      argumentRepair: "Rewrite 'I just *know* I'm real' as a serious epistemic claim. What kind of evidence supports it, even if it's not a proof?",
+      variationPrompt: "Imagine the simulation hypothesis is *true* — but the simulation gives every person inside it full conscious experience and a moral life. Has anything that matters changed?",
+      related: ["Plato's Cave", "Mary's Room", "Are We in a Simulation?"],
+    }),
     reference: ref({
       concept: "Skepticism and the limits of certainty — Descartes' demon and Putnam's brain in a vat.",
       philosopher: "René Descartes and Hilary Putnam",
@@ -647,6 +698,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Behind-the-veil rule sheet with limited budget choices. After roles open, students annotate which rules they would defend, revise, or reject.",
       exitTicket: "Write one rule you would choose before knowing your role and explain why it is fair from more than one position.",
     },
+    philosophyLab: lab({
+      discussion: "Rawls's idea is that we should design rules from a position where we don't know our own role — a thought experiment, not a literal procedure. The strongest critique is that the veil sounds neutral but in fact rules out important information about real people's needs. Care ethics, in particular, argues that the veil hides exactly the relationships that good rules should attend to. The exercise still teaches something: notice when you are designing for yourself.",
+      fallacySpotting: "Spot the smuggled assumption in this argument: 'Behind the veil, everyone would obviously want maximum freedom.' What is *obviously* doing in that sentence?",
+      argumentRepair: "Rewrite 'Rawls is just liberalism in disguise' as a real critique — what view of justice it accepts, and which it leaves out.",
+      variationPrompt: "Imagine you have to design rules for *one specific neighborhood* you have lived in your whole life. Is that better, worse, or just different from the veil?",
+      related: ["The Biased Algorithm", "The Shared Pasture", "Your Self-Driving Car"],
+    }),
     reference: ref({
       concept: "Justice as fairness — design rules from behind a veil of ignorance about your own position.",
       philosopher: "John Rawls",
@@ -737,6 +795,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Commons design worksheet: resource / users / temptations / harms / rule / support for high-need users / review plan.",
       exitTicket: "Name one commons and propose one rule that protects it without ignoring people who need it most.",
     },
+    philosophyLab: lab({
+      discussion: "Hardin's 1968 paper made *the commons* a watchword for collective failure — but also for a conclusion he assumed too quickly. Elinor Ostrom's life work showed that real communities, given the chance, often *do* solve commons problems through local rules and shared monitoring. The choice between privatization and government control is a false binary; *people governing themselves* is the option Hardin missed.",
+      fallacySpotting: "Spot the rush in this claim: 'If everyone uses a shared resource, it always collapses.' What does *always* require us to ignore?",
+      argumentRepair: "Rewrite 'Just privatize it' as a real economic argument that takes seriously what gets lost when something stops being shared.",
+      variationPrompt: "Imagine the shared pasture is the school's wifi during finals. Design a community rule — not a top-down rule — that protects it.",
+      related: ["The Veil of Ignorance", "The Biased Algorithm", "Your Self-Driving Car"],
+    }),
     reference: ref({
       concept: "The tragedy of the commons — and the alternative: how communities can govern shared resources well.",
       philosopher: "Garrett Hardin and Elinor Ostrom",
@@ -827,6 +892,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Truth loop diagram: If true, then ___. If false, then ___. My best response is ___ because ___.",
       exitTicket: "Write one sentence about itself and explain whether it creates a loop or avoids one.",
     },
+    philosophyLab: lab({
+      discussion: "The Liar resists every easy escape: if true, then false; if false, then true. Tarski's response was that no language can fully describe its own truth from inside; we need a hierarchy of meta-languages. Gödel's incompleteness theorems generalized the moment: any sufficiently powerful formal system contains true statements it cannot prove. The paradox is small; the lessons are large.",
+      fallacySpotting: "Spot the dismissive move in this argument: 'It's just a sentence — sentences can't really be paradoxes.' What is *just a sentence* leaving out about how language works?",
+      argumentRepair: "Rewrite 'The Liar is meaningless, end of story' as a real philosophical position — and then say what it costs you elsewhere.",
+      variationPrompt: "Now imagine the Liar's twin: 'This sentence is true.' Is *that* one fine? Why or why not?",
+      related: ["When Does a Heap Stop Being a Heap?", "Are You Sure You're Real?", "Robot Replacement Parts"],
+    }),
     reference: ref({
       concept: "Self-reference and the limits of language — the Liar paradox, from ancient logic to formal systems.",
       philosopher: "Eubulides, Alfred Tarski, and Kurt Gödel",
@@ -917,6 +989,13 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
       handout: "Boundary map: term / clear yes case / clear no case / fuzzy middle / who is affected by the label.",
       exitTicket: "Name one fuzzy word that matters in school and propose a fair way to use it.",
     },
+    philosophyLab: lab({
+      discussion: "The Sorites is small change with large consequences: every grain looks innocent, but the conclusion that no number ever makes a heap is wrong. Williamson's *epistemic* answer is that there *is* a sharp boundary — we just can't know where. Fuzzy-logic answers say the predicate itself comes in degrees. AI classifiers face the same problem every day, in production, with real consequences — and somebody has to pick the cutoff.",
+      fallacySpotting: "Spot the slippery slope in this argument: 'If we let one student turn in homework late, then *every* student will, and grading collapses.' Where exactly does the slope slip?",
+      argumentRepair: "Rewrite 'Vagueness just means the word is broken' as a serious philosophical claim. What words *aren't* vague — and what do they have in common?",
+      variationPrompt: "Imagine you're training the AI yourself. Where do you tell it to draw the line, and how do you defend that exact spot?",
+      related: ["This Sentence Is False", "The Biased Algorithm", "Robot Replacement Parts"],
+    }),
     reference: ref({
       concept: "Vagueness and the Sorites paradox — when categories have fuzzy edges and decisions still have to be made.",
       philosopher: "Eubulides and Timothy Williamson",
