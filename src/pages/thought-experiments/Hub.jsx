@@ -96,7 +96,7 @@ export default function Hub({ navigate }) {
               accent={C.ocean} delay={0.15}
             />
           </div>
-          <div style={{ marginBottom: 28 }}>
+          <div style={{ marginBottom: 18 }}>
             <TopicCard
               icon="🛠" iconLabel="Toolkit"
               image={getFeatureIllustration("thought-experiments/toolkit")}
@@ -105,6 +105,21 @@ export default function Hub({ navigate }) {
               onClick={() => navigate("thought-experiments/toolkit")}
               accent={C.teal} delay={0.2}
             />
+          </div>
+          <div style={{ marginBottom: 28, textAlign: "center" }}>
+            <button
+              onClick={() => navigate("thought-experiments/journal")}
+              style={{
+                background: "transparent", border: `1px solid ${C.gold}40`,
+                borderRadius: 999, padding: "8px 18px",
+                color: C.gold, cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
+              }}
+            >
+              📓 Open your Decision Journal
+            </button>
+            <p style={{ color: C.textMuted, fontSize: "0.74rem", marginTop: 8 }}>
+              Saved on this device only. Export to Markdown any time.
+            </p>
           </div>
         </Narrow>
 
@@ -168,7 +183,7 @@ export default function Hub({ navigate }) {
               <p style={{ marginTop: 8 }}><strong>Implication:</strong> "If that's true, then what else has to be true?"</p>
               <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
             </Expandable>
-            <Expandable title="By age band" color={C.coral}>
+            <Expandable title="By age band" color={C.coral} defaultOpen>
               <p><strong>K–5:</strong> Choose the grade page first. Kindergarten stories are short and concrete; Grade 5 stories are longer,
               more layered, and ready for competing values. The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
               <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students

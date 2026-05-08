@@ -366,7 +366,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -436,14 +436,17 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             </div>
 
             {stageChoiceIdx == null ? (
-              <div style={{ display: "grid", gap: 10 }}>
-                {stage.options?.map((opt, i) => (
-                  <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
-                    <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
-                    {opt.text}
-                  </ChoiceBtn>
-                ))}
-              </div>
+              <>
+                <SteelmanRule />
+                <div style={{ display: "grid", gap: 10 }}>
+                  {stage.options?.map((opt, i) => (
+                    <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
+                      <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
+                      {opt.text}
+                    </ChoiceBtn>
+                  ))}
+                </div>
+              </>
             ) : (
               <>
                 <ReflectionPanel option={choiceForStage} color={accent} />
@@ -456,7 +459,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -552,6 +555,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
           </div>
 
           {stageChoiceIdx == null ? (
+            <>
+            <SteelmanRule />
             <div style={{ display: "grid", gap: 12 }}>
               {stage.options?.map((opt, i) => (
                 <button
@@ -578,6 +583,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 </button>
               ))}
             </div>
+            </>
           ) : (
             <>
               <ReflectionPanel option={choiceForStage} color={accent} />
@@ -590,11 +596,27 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} />
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
       )}
     </Shell>
     <TeacherKitBelow />
     </>
+  );
+}
+
+function SteelmanRule() {
+  return (
+    <p style={{
+      color: C.textMuted,
+      fontSize: "0.82rem",
+      fontStyle: "italic",
+      lineHeight: 1.55,
+      marginBottom: 12,
+      paddingLeft: 10,
+      borderLeft: `2px solid ${C.border}`,
+    }}>
+      Before you choose: which of these would you most want to push back on, and what's the strongest version of it you could write?
+    </p>
   );
 }
 
@@ -629,7 +651,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   );
 }
 
-function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode }) {
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [] }) {
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
@@ -650,6 +672,7 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
           experiment={experiment}
           accent={accent}
           positions={stage.positions || []}
+          stages={stages}
           mode={mode}
         />
       )}
