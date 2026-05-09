@@ -9,6 +9,25 @@ import ReadAloudButton from "./ReadAloudButton.jsx";
 import StageNav from "./StageNav.jsx";
 import SynthesisPanel from "./SynthesisPanel.jsx";
 import TeacherKit from "./TeacherKit.jsx";
+import { sectionsToSpeech, buildSpeechText as buildReadAloudText } from "../lib/readAloudText.js";
+import audioManifest from "../data/k5AudioManifest.json";
+
+// For "Hear the choices": look up each option's audio file in the manifest.
+// If every option has an entry, return the ordered list of /audio/... URLs so
+// ReadAloudButton plays them in sequence. If any are missing, return null and
+// the button falls back to a single Web Speech utterance of the joined text.
+function collectOptionAudioSrcs(scenarioId, stage) {
+  if (!scenarioId || !stage?.options?.length) return null;
+  const slots = audioManifest?.scenarios?.[scenarioId];
+  if (!slots) return null;
+  const srcs = [];
+  for (const opt of stage.options) {
+    const entry = slots[`stage-${stage.id}-option-${opt.label}`];
+    if (!entry?.file) return null;
+    srcs.push(entry.file);
+  }
+  return srcs;
+}
 
 // Resolve a stage prompt that may be a string OR a function ({chose}) => string
 function resolvePrompt(stage, chose, mode) {
@@ -21,27 +40,6 @@ function resolveStorySections(stage, chose, mode) {
     ? stage.storySections({ chose, mode })
     : stage.storySections;
   return Array.isArray(sections) ? sections.filter(section => section?.text) : [];
-}
-
-function sectionsToSpeech(sections) {
-  return sections
-    .map(section => `${section.label ? `${section.label}. ` : ""}${section.text}`)
-    .join(" ");
-}
-
-function cleanSpeechPart(part) {
-  return String(part)
-    .replace(/\s+/g, " ")
-    .trim()
-    .replace(/[.?!]+$/g, "");
-}
-
-function buildReadAloudText(parts) {
-  return parts
-    .filter(Boolean)
-    .map(cleanSpeechPart)
-    .filter(Boolean)
-    .join(". ");
 }
 
 function StorySections({ sections, accent }) {
@@ -318,43 +316,66 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             )}
 
             <div style={{ textAlign: "center", marginBottom: 22 }}>
-              <ReadAloudButton text={readAloudText} variant="primary" rate={0.85} label="Read it to me" />
+              <ReadAloudButton
+                text={readAloudText}
+                variant="primary"
+                rate={0.85}
+                label="Read it to me"
+                audioKey={{ scenarioId: experiment.id, slot: `stage-${stage.id}-prompt` }}
+              />
             </div>
 
             {stageChoiceIdx == null ? (
-              <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-                {stage.options?.map((opt, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleChoose(i)}
-                    style={{
-                      padding: "16px 16px",
-                      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
-                      border: `2px solid ${accent}30`,
-                      borderRadius: 14,
-                      color: C.textPrimary,
-                      fontFamily: "'Source Serif 4', Georgia, serif",
-                      fontSize: "1rem", fontWeight: 600, lineHeight: 1.4,
-                      cursor: "pointer", textAlign: "left",
-                      transition: "all 0.2s",
-                      minHeight: 76, display: "flex", alignItems: "center", gap: 10,
-                    }}
-                    onMouseOver={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}25, ${accent}10)`; e.currentTarget.style.borderColor = accent + "70"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                    onMouseOut={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}10, ${accent}04)`; e.currentTarget.style.borderColor = accent + "30"; e.currentTarget.style.transform = "none"; }}
-                  >
-                    <span style={{
-                      width: 30, height: 30, borderRadius: "50%",
-                      background: accent, color: "#fff",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "0.86rem", fontWeight: 700, flexShrink: 0,
-                    }}>{opt.label}</span>
-                    {opt.text}
-                  </button>
-                ))}
-              </div>
+              <>
+                <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                  {stage.options?.map((opt, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleChoose(i)}
+                      style={{
+                        padding: "16px 16px",
+                        background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+                        border: `2px solid ${accent}30`,
+                        borderRadius: 14,
+                        color: C.textPrimary,
+                        fontFamily: "'Source Serif 4', Georgia, serif",
+                        fontSize: "1rem", fontWeight: 600, lineHeight: 1.4,
+                        cursor: "pointer", textAlign: "left",
+                        transition: "all 0.2s",
+                        minHeight: 76, display: "flex", alignItems: "center", gap: 10,
+                      }}
+                      onMouseOver={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}25, ${accent}10)`; e.currentTarget.style.borderColor = accent + "70"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                      onMouseOut={(e) => { e.currentTarget.style.background = `linear-gradient(135deg, ${accent}10, ${accent}04)`; e.currentTarget.style.borderColor = accent + "30"; e.currentTarget.style.transform = "none"; }}
+                    >
+                      <span style={{
+                        width: 30, height: 30, borderRadius: "50%",
+                        background: accent, color: "#fff",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: "0.86rem", fontWeight: 700, flexShrink: 0,
+                      }}>{opt.label}</span>
+                      {opt.text}
+                    </button>
+                  ))}
+                </div>
+                {stage.options?.length > 0 && (
+                  <div style={{ textAlign: "center", marginTop: 14 }}>
+                    <ReadAloudButton
+                      text={stage.options.map(o => `Choice ${o.label}. ${o.text}`).join(". ")}
+                      variant="primary"
+                      rate={0.85}
+                      label="Hear the choices"
+                      audioSrcs={collectOptionAudioSrcs(experiment.id, stage)}
+                    />
+                  </div>
+                )}
+              </>
             ) : (
               <>
-                <ReflectionPanel option={choiceForStage} color={accent} />
+                <ReflectionPanel
+                  option={choiceForStage}
+                  color={accent}
+                  audioKey={{ scenarioId: experiment.id, slot: `stage-${stage.id}-option-${choiceForStage.label}-reflection` }}
+                />
                 {stage.counterpoint && (
                   <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>
                 )}

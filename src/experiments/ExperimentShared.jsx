@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { C } from "../theme.js";
+import ReadAloudButton from "../components/ReadAloudButton.jsx";
 
 export function StageHeader({ num, title, color, gradient }) {
   return (<div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:16 }}><div style={{ width:32,height:32,borderRadius:"50%",background:gradient?`linear-gradient(135deg,${C.teal},${C.gold})`:color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:"0.8rem",flexShrink:0 }}>{num}</div><h4 style={{ fontFamily:"'Source Serif 4',Georgia,serif",color:color||C.textPrimary,fontSize:"1.12rem" }}>{title}</h4></div>);
@@ -83,7 +84,7 @@ export function EthicalLensTag({ lens, color = C.gold }) {
   );
 }
 
-export function ReflectionPanel({ option, color = C.gold }) {
+export function ReflectionPanel({ option, color = C.gold, audioKey = null }) {
   if (!option) return null;
   return (
     <div style={{
@@ -96,6 +97,14 @@ export function ReflectionPanel({ option, color = C.gold }) {
           You chose {option.label}
         </span>
         {option.lens && <EthicalLensTag lens={option.lens} color={color} />}
+        {audioKey && (
+          <ReadAloudButton
+            text={option.reflection}
+            audioKey={audioKey}
+            variant="icon"
+            label="Hear what this choice means"
+          />
+        )}
       </div>
       <p style={{ color: C.textPrimary, fontSize: "0.95rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
         {option.reflection}

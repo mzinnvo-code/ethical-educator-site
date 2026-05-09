@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { EthicalLensTag, FurtherReadingList } from "../experiments/ExperimentShared.jsx";
 import { TOPIC_BY_ID } from "../data/topics.js";
 import useDecisionJournal from "../hooks/useDecisionJournal.js";
+import ReadAloudButton from "./ReadAloudButton.jsx";
 
 // Age-appropriate K-5 lab. Softer label and looser tone than the 9-12
 // PhilosophyLab. Renders only the fields the scenario provides:
@@ -11,28 +12,36 @@ import useDecisionJournal from "../hooks/useDecisionJournal.js";
 //   tryThis   — a what-if variation (1-3 and up)
 //   spotTheSlip — a plain-language fallacy in story form (4-5)
 //   related   — names of related scenarios (4-5)
-function StudentLab({ lab, accent }) {
+function StudentLab({ lab, accent, scenarioId = null }) {
   if (!lab) return null;
   const { wonder, bigIdea, tryThis, spotTheSlip, related } = lab;
   if (!wonder && !bigIdea && !tryThis && !spotTheSlip && !related?.length) return null;
 
-  const card = (label, text) => (
+  const audioFor = (slot) => scenarioId ? { scenarioId, slot } : null;
+
+  const card = (label, text, slot) => (
     <div key={label} style={{
       background: C.surface,
       border: `1px solid ${C.border}`,
       borderRadius: 10,
       padding: "11px 13px",
     }}>
-      <p style={{
-        color: accent, fontSize: "0.64rem", fontWeight: 800,
-        letterSpacing: "0.12em", textTransform: "uppercase",
-        marginBottom: 4,
-      }}>
-        {label}
-      </p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 4 }}>
+        <p style={{
+          color: accent, fontSize: "0.64rem", fontWeight: 800,
+          letterSpacing: "0.12em", textTransform: "uppercase",
+          margin: 0,
+        }}>
+          {label}
+        </p>
+        {scenarioId && (
+          <ReadAloudButton text={text} audioKey={audioFor(slot)} variant="icon" label={`Read ${label} aloud`} />
+        )}
+      </div>
       <p style={{
         color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6,
         fontFamily: "'Source Serif 4', Georgia, serif",
+        margin: 0,
       }}>
         {text}
       </p>
@@ -56,29 +65,39 @@ function StudentLab({ lab, accent }) {
       </p>
 
       {wonder && (
-        <p style={{
-          color: C.textPrimary,
-          fontFamily: "'Source Serif 4', Georgia, serif",
-          fontSize: "1.04rem", lineHeight: 1.6,
-          marginBottom: bigIdea ? 8 : 12,
-        }}>
-          {wonder}
-        </p>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: bigIdea ? 8 : 12 }}>
+          <p style={{
+            color: C.textPrimary,
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontSize: "1.04rem", lineHeight: 1.6,
+            margin: 0, flex: 1,
+          }}>
+            {wonder}
+          </p>
+          {scenarioId && (
+            <ReadAloudButton text={wonder} audioKey={audioFor("lab-wonder")} variant="icon" label="Read this question aloud" />
+          )}
+        </div>
       )}
 
       {bigIdea && (
-        <p style={{
-          color: C.textMuted, fontSize: "0.84rem", lineHeight: 1.55,
-          fontStyle: "italic", marginBottom: (tryThis || spotTheSlip) ? 12 : 0,
-        }}>
-          {bigIdea}
-        </p>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: (tryThis || spotTheSlip) ? 12 : 0 }}>
+          <p style={{
+            color: C.textMuted, fontSize: "0.84rem", lineHeight: 1.55,
+            fontStyle: "italic", margin: 0, flex: 1,
+          }}>
+            {bigIdea}
+          </p>
+          {scenarioId && (
+            <ReadAloudButton text={bigIdea} audioKey={audioFor("lab-bigidea")} variant="icon" label="Read the big idea aloud" />
+          )}
+        </div>
       )}
 
       {(tryThis || spotTheSlip) && (
         <div style={{ display: "grid", gap: 10 }}>
-          {tryThis && card("Try this", tryThis)}
-          {spotTheSlip && card("Spot the slip", spotTheSlip)}
+          {tryThis && card("Try this", tryThis, "lab-trythis")}
+          {spotTheSlip && card("Spot the slip", spotTheSlip, "lab-spottheslip")}
         </div>
       )}
 
@@ -310,7 +329,11 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
         </div>
       )}
 
-      <StudentLab lab={experiment?.studentLab} accent={accent} />
+      <StudentLab
+        lab={experiment?.studentLab}
+        accent={accent}
+        scenarioId={mode === "kid" ? experiment?.id : null}
+      />
       <PhilosophyLab lab={experiment?.philosophyLab} accent={accent} />
 
       {extra}
