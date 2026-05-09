@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { useAudio } from "./shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import {
   Shell, ChoiceBtn, CounterArgument, ReflectionPanel, EthicalLensTag,
 } from "../experiments/ExperimentShared.jsx";
@@ -152,15 +153,35 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
   const [chose, setChose] = useState([]); // chosen Option per stage (sparse — synthesis stages get null)
   const [stageChoiceIdx, setStageChoiceIdx] = useState(null); // index of currently chosen option for the active stage
   const [showTeacherKit, setShowTeacherKit] = useState(false);
+  const cardTopRef = useRef(null);
+  const reflectionRef = useRef(null);
 
   useEffect(() => {
+    audioBus.stop();
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
     setShowTeacherKit(false);
   }, [experiment?.id]);
 
+  // Stop in-flight narration if the card unmounts (e.g. user backs out).
+  useEffect(() => () => audioBus.stop(), []);
+
   if (!experiment) return null;
+
+  const scrollToCardTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  // Two RAFs so the reflection block has had a chance to mount before we measure.
+  const scrollToReflection = () => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = reflectionRef.current || cardTopRef.current;
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }));
+  };
 
   const accent = TOPIC_BY_ID[experiment.topics[0]]?.color || C.gold;
   const stage = stages[stageIdx];
@@ -186,14 +207,18 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
   const handleChoose = (idx) => {
     if (!stage.options) return;
+    if (stageChoiceIdx != null) return; // debounce — already chose for this stage
+    audioBus.stop(); // stop any in-flight voice-over so the chime is alone
     setStageChoiceIdx(idx);
     const opt = stage.options[idx];
     const weighty = opt?.lens === "deontological" || stage.weighty;
     if (weighty) audio.playDeep();
     else audio.playChime();
+    scrollToReflection();
   };
 
   const handleNext = () => {
+    audioBus.stop();
     if (stageChoiceIdx != null) {
       const opt = stage.options[stageChoiceIdx];
       // Record this stage's choice
@@ -206,26 +231,32 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
     setStageChoiceIdx(null);
     audio.playReveal();
     setStageIdx(i => Math.min(i + 1, stages.length - 1));
+    scrollToCardTop();
   };
 
   const handleAdvanceFromSynthesis = () => {
+    audioBus.stop();
     audio.playClick();
     onClose?.();
   };
 
   const handleStageJump = (idx) => {
     if (idx >= stageIdx) return; // can only jump back
+    audioBus.stop();
     audio.playClick();
     setStageIdx(idx);
     setChose(prev => prev.slice(0, idx));
     setStageChoiceIdx(null);
+    scrollToCardTop();
   };
 
   const handleRestart = () => {
+    audioBus.stop();
     audio.playClick();
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
+    scrollToCardTop();
   };
 
   // Header bar: kicker, stage indicator + teacher kit toggle
@@ -257,7 +288,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
   // ──────────────── KID MODE (K-5) ────────────────
   if (mode === "kid") {
     return (
-      <>
+      <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
       <Shell color={accent}>
         <HeaderBar />
 
@@ -370,7 +401,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 )}
               </>
             ) : (
-              <>
+              <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
                 <ReflectionPanel
                   option={choiceForStage}
                   color={accent}
@@ -380,7 +411,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                   <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>
                 )}
                 <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-              </>
+              </div>
             )}
           </>
         )}
@@ -391,14 +422,14 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
         )}
       </Shell>
       <TeacherKitBelow />
-      </>
+      </div>
     );
   }
 
   // ──────────────── STORY MODE (6-8) ────────────────
   if (mode === "story") {
     return (
-      <>
+      <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
       <Shell color={accent}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
           <div style={{ flex: 1, minWidth: 220 }}>
@@ -469,11 +500,11 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 </div>
               </>
             ) : (
-              <>
+              <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
                 <ReflectionPanel option={choiceForStage} color={accent} />
                 {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
                 <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-              </>
+              </div>
             )}
           </>
         )}
@@ -484,13 +515,13 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
         )}
       </Shell>
       <TeacherKitBelow />
-      </>
+      </div>
     );
   }
 
   // ──────────────── CANON MODE (9-12 + educators) ────────────────
   return (
-    <>
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
     <Shell color={accent}>
       <div style={{ marginBottom: 16 }}>
         <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.7rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.2 }}>
@@ -606,11 +637,11 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             </div>
             </>
           ) : (
-            <>
+            <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
               <ReflectionPanel option={choiceForStage} color={accent} />
               {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
               <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-            </>
+            </div>
           )}
         </>
       )}
@@ -621,7 +652,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
       )}
     </Shell>
     <TeacherKitBelow />
-    </>
+    </div>
   );
 }
 

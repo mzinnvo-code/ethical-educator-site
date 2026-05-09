@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { C } from "../../theme.js";
 import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, ContinueExploring,
@@ -8,6 +8,7 @@ import ScenarioCard from "../../components/ScenarioCard.jsx";
 import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { audioBus } from "../../lib/audioBus.js";
 
 export const ELEMENTARY_GRADES = [
   {
@@ -87,11 +88,26 @@ export function ElementaryGradePage({ navigate, gradeId }) {
   const experiments = getExperimentsByElementaryGrade(grade.id);
   const [active, setActive] = useState(null);
   const [lensChoices, setLensChoices] = useState([]);
+  const activeWrapperRef = useRef(null);
 
   useEffect(() => {
+    audioBus.stop();
     setActive(null);
     setLensChoices([]);
   }, [grade.id]);
+
+  // Stop in-flight narration when the page unmounts (e.g. user navigates away).
+  useEffect(() => () => audioBus.stop(), []);
+
+  // Smoothly scroll the active card into view after it mounts.
+  useEffect(() => {
+    if (!active) return;
+    requestAnimationFrame(() => {
+      activeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [active]);
+
+  const closeActive = () => { audioBus.stop(); setActive(null); };
 
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   return (
@@ -114,33 +130,45 @@ export function ElementaryGradePage({ navigate, gradeId }) {
               <Divider label={`${grade.label} stories`} />
               <ExperimentGrid
                 experiments={experiments}
-                onSelect={(experiment) => {
-                  setActive(experiment);
-                  window.scrollTo({ top: 200, behavior: "smooth" });
-                }}
+                onSelect={(experiment) => setActive(experiment)}
                 emptyMessage={`No ${grade.label} experiments are ready yet.`}
               />
             </>
           )}
 
           {active && (
-            <div style={{ marginTop: 20 }}>
-              <button
-                onClick={() => setActive(null)}
-                style={{
-                  display: "flex", alignItems: "center", gap: 6, marginBottom: 16,
-                  background: "none", border: "none", color: C.textMuted, cursor: "pointer",
-                  fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
-                }}
-                onMouseOver={e => e.currentTarget.style.color = grade.accent}
-                onMouseOut={e => e.currentTarget.style.color = C.textMuted}
-              >
-                ← Back to {grade.label} stories
-              </button>
+            <div ref={activeWrapperRef} style={{ marginTop: 20, scrollMarginTop: 80 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16, flexWrap: "wrap" }}>
+                <button
+                  onClick={closeActive}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    background: "none", border: "none", color: C.textMuted, cursor: "pointer",
+                    fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = grade.accent}
+                  onMouseOut={e => e.currentTarget.style.color = C.textMuted}
+                >
+                  ← Back to {grade.label} stories
+                </button>
+                <button
+                  onClick={() => { audioBus.stop(); navigate?.("thought-experiments/k-5"); }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    background: "none", border: "none", color: C.textMuted, cursor: "pointer",
+                    fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = grade.accent}
+                  onMouseOut={e => e.currentTarget.style.color = C.textMuted}
+                >
+                  ⌂ K–5 hub
+                </button>
+              </div>
               <ScenarioCard
+                key={active.id}
                 experiment={active}
                 mode="kid"
-                onClose={() => setActive(null)}
+                onClose={closeActive}
                 onRecordChoice={recordChoice}
               />
             </div>

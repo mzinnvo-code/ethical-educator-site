@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function ReluctantEducatorExperiment() {
@@ -11,7 +12,13 @@ export default function ReluctantEducatorExperiment() {
   const [decision, setDecision] = useState(null);
   const [anim, setAnim] = useState(false);
   const audio = useAudio();
-  useEffect(() => () => audio.stopAll(), [audio]);
+  const cardTopRef = useRef(null);
+  const scrollToTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+  useEffect(() => () => { audio.stopAll(); audioBus.stop(); }, [audio]);
 
   const data = [
     { wk: 1, j: { test: 72, think: 85, engage: 90, create: 88 }, c: { test: 74, think: 82, engage: 78, create: 75 } },
@@ -61,7 +68,7 @@ export default function ReluctantEducatorExperiment() {
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 24px" }}>
           Both teach AP English Literature. Same school, same student demographics, same curriculum. Watch their classrooms diverge over 12 weeks through a live dashboard — then decide what the principal should do.
         </p>
-        <button onClick={() => { audio.playDeep(); setStage(1); }} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${C.gold}, ${C.coral})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.93rem" }}>Open the Dashboard</button>
+        <button onClick={() => { audioBus.stop(); audio.playDeep(); setStage(1); scrollToTop(); }} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${C.gold}, ${C.coral})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.93rem" }}>Open the Dashboard</button>
       </div>
     ),
 
@@ -112,10 +119,10 @@ export default function ReluctantEducatorExperiment() {
               </CounterArgument>
               <p style={{ color: C.gold, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "1rem", margin: "16px 0" }}>You're the principal. What do you recommend for next year?</p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <ChoiceBtn onClick={() => { setDecision("mandate"); setStage(2); audio.playChime(); }} color={C.coral}>Mandate AI tools for all teachers — test scores determine funding and reputation</ChoiceBtn>
-                <ChoiceBtn onClick={() => { setDecision("jennings"); setStage(2); audio.playChime(); }} color={C.teal}>Support Mr. Jennings' approach — the unmeasured qualities are what education is really about</ChoiceBtn>
-                <ChoiceBtn onClick={() => { setDecision("hybrid"); setStage(2); audio.playChime(); }} color={C.gold}>Require a research-informed hybrid — both teachers incorporate elements of each approach</ChoiceBtn>
-                <ChoiceBtn onClick={() => { setDecision("autonomy"); setStage(2); audio.playChime(); }} color={C.ocean}>Preserve teacher autonomy — professional educators should make pedagogical choices</ChoiceBtn>
+                <ChoiceBtn onClick={() => { setDecision("mandate"); audioBus.stop(); setStage(2); audio.playChime(); scrollToTop(); }} color={C.coral}>Mandate AI tools for all teachers — test scores determine funding and reputation</ChoiceBtn>
+                <ChoiceBtn onClick={() => { setDecision("jennings"); audioBus.stop(); setStage(2); audio.playChime(); scrollToTop(); }} color={C.teal}>Support Mr. Jennings' approach — the unmeasured qualities are what education is really about</ChoiceBtn>
+                <ChoiceBtn onClick={() => { setDecision("hybrid"); audioBus.stop(); setStage(2); audio.playChime(); scrollToTop(); }} color={C.gold}>Require a research-informed hybrid — both teachers incorporate elements of each approach</ChoiceBtn>
+                <ChoiceBtn onClick={() => { setDecision("autonomy"); audioBus.stop(); setStage(2); audio.playChime(); scrollToTop(); }} color={C.ocean}>Preserve teacher autonomy — professional educators should make pedagogical choices</ChoiceBtn>
               </div>
             </div>
           ) : (
@@ -166,11 +173,15 @@ export default function ReluctantEducatorExperiment() {
             "Design a metric that captures what Mr. Jennings' classroom produces (intellectual courage, tolerance for ambiguity, original thinking) in a way that could be reported alongside test scores. Is this possible? What does the difficulty tell you?",
           ]} />
 
-          <RestartBtn onClick={() => { setStage(0); setWeek(0); setDecision(null); }} />
+          <RestartBtn onClick={() => { audioBus.stop(); setStage(0); setWeek(0); setDecision(null); scrollToTop(); }} />
         </div>
       );
     },
   ];
 
-  return <Shell animating={anim} color={C.gold}>{stages[stage]()}</Shell>;
+  return (
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
+      <Shell animating={anim} color={C.gold}>{stages[stage]()}</Shell>
+    </div>
+  );
 }

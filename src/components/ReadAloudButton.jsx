@@ -2,57 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { C } from "../theme.js";
 import { useSpeech } from "../hooks/useSpeech.js";
 import manifest from "../data/k5AudioManifest.json";
-
-// One singleton <audio> element (created lazily) shared by every
-// ReadAloudButton on the page. Tapping any speaker stops whatever was playing.
-const audioBus = (() => {
-  let el = null;
-  const listeners = new Set();
-  const notify = (state) => listeners.forEach(fn => fn(state));
-  const ensure = () => {
-    if (el) return el;
-    el = typeof Audio !== "undefined" ? new Audio() : null;
-    if (el) {
-      el.preload = "none";
-      el.addEventListener("ended", () => notify({ type: "ended", src: el.src }));
-      el.addEventListener("pause", () => notify({ type: "pause", src: el.src }));
-      el.addEventListener("play", () => notify({ type: "play", src: el.src }));
-      el.addEventListener("error", () => notify({ type: "error", src: el.src }));
-    }
-    return el;
-  };
-  return {
-    play(src, onEnded) {
-      const audio = ensure();
-      if (!audio) return false;
-      try {
-        audio.pause();
-        audio.src = src;
-        audio.currentTime = 0;
-        audio.onended = onEnded || null;
-        const result = audio.play();
-        if (result && typeof result.catch === "function") {
-          result.catch(() => notify({ type: "error", src }));
-        }
-        return true;
-      } catch {
-        return false;
-      }
-    },
-    stop() {
-      if (!el) return;
-      try { el.pause(); } catch { /* ignore */ }
-      el.onended = null;
-    },
-    currentSrc() {
-      return el && !el.paused ? el.src : null;
-    },
-    subscribe(fn) {
-      listeners.add(fn);
-      return () => listeners.delete(fn);
-    },
-  };
-})();
+import { audioBus } from "../lib/audioBus.js";
 
 function lookupAudio(audioKey) {
   if (!audioKey) return null;
