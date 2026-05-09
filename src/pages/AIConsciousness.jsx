@@ -156,7 +156,7 @@ function NeuronComparisonFigure() {
       title="Biological and Artificial Neurons Are Related Metaphors, Not Equivalents"
       caption="The artificial neuron borrows language from biology, but it abstracts away metabolism, cellular repair, chemical signaling, and embodiment."
     >
-      <svg viewBox="0 0 720 410" role="img" aria-label="Comparison of a biological neuron and an artificial neuron" style={{ width: "100%", height: "auto", display: "block" }}>
+      <svg viewBox="0 0 720 440" role="img" aria-label="Comparison of a biological neuron and an artificial neuron" style={{ width: "100%", height: "auto", display: "block" }}>
         <defs>
           <linearGradient id="neuronPanel" x1="0" x2="1">
             <stop offset="0" stopColor={C.ocean} stopOpacity="0.16" />
@@ -175,11 +175,11 @@ function NeuronComparisonFigure() {
           </filter>
         </defs>
 
-        <rect x="22" y="24" width="676" height="166" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
-        <rect x="22" y="218" width="676" height="166" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
+        <rect x="22" y="24" width="676" height="188" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
+        <rect x="22" y="226" width="676" height="190" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
 
         <text x="360" y="54" textAnchor="middle" fill={C.textPrimary} fontFamily="Source Serif 4, Georgia, serif" fontSize="22" fontWeight="700">Biological Neuron</text>
-        <text x="360" y="248" textAnchor="middle" fill={C.textPrimary} fontFamily="Source Serif 4, Georgia, serif" fontSize="22" fontWeight="700">Artificial Neuron</text>
+        <text x="360" y="256" textAnchor="middle" fill={C.textPrimary} fontFamily="Source Serif 4, Georgia, serif" fontSize="22" fontWeight="700">Artificial Neuron</text>
 
         <g transform="translate(72 76)" strokeLinecap="round" strokeLinejoin="round">
           <path d="M83 56 C51 28 28 18 12 8 M83 56 C48 61 27 79 10 104 M83 56 C53 45 33 48 17 55 M83 56 C61 76 55 101 46 132 M83 56 C82 31 78 14 71 -2" fill="none" stroke={C.teal} strokeWidth="8" />
@@ -193,12 +193,12 @@ function NeuronComparisonFigure() {
           {[0, 1, 2, 3, 4].map(i => (
             <circle key={i} cx={492 + i * 17} cy={38 + (i % 2) * 42} r="5" fill={C.gold} opacity="0.9" />
           ))}
-          <text x="76" y="128" fill={C.textMuted} fontSize="14">dendrites</text>
-          <text x="184" y="118" fill={C.textMuted} fontSize="14">axon</text>
-          <text x="438" y="136" fill={C.textMuted} fontSize="14">signals</text>
+          <text x="76" y="136" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">dendrites</text>
+          <text x="184" y="126" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">axon</text>
+          <text x="438" y="142" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">signals</text>
         </g>
 
-        <g transform="translate(76 274)" strokeLinecap="round" strokeLinejoin="round">
+        <g transform="translate(76 286)" strokeLinecap="round" strokeLinejoin="round">
           {[0, 1, 2].map((i) => (
             <g key={i}>
               <circle cx="28" cy={14 + i * 47} r="20" fill={C.midnight} stroke={C.ocean} strokeWidth="4" />
@@ -217,10 +217,10 @@ function NeuronComparisonFigure() {
           <circle cx="244" cy="128" r="14" fill={C.midnight} stroke={C.gold} strokeWidth="4" />
           <text x="244" y="133" textAnchor="middle" fill={C.goldLight} fontSize="13" fontWeight="700">b</text>
           <path d="M244 114 L244 98" stroke={C.gold} strokeWidth="4" />
-          <text x="206" y="112" fill={C.textMuted} fontSize="14">bias</text>
-          <text x="203" y="22" fill={C.textMuted} fontSize="14">weighted sum</text>
-          <text x="340" y="22" fill={C.textMuted} fontSize="14">activation</text>
-          <text x="552" y="67" fill={C.textMuted} fontSize="14">output</text>
+          <text x="202" y="119" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">bias</text>
+          <text x="204" y="21" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">weighted sum</text>
+          <text x="338" y="21" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">activation</text>
+          <text x="552" y="67" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">output</text>
         </g>
       </svg>
     </FigureShell>
@@ -280,21 +280,21 @@ function BioDigitalLoopFigure() {
       title="DishBrain as a Biological-Digital Feedback Loop"
       caption="The middle case: living neurons are not merely described by software; they are coupled to a digital environment that changes their activity."
     >
-      <svg viewBox="0 0 720 300" role="img" aria-label="Closed loop between neurons, electrodes, game world, and feedback" style={{ width: "100%", height: "auto", display: "block" }}>
+      <svg viewBox="0 0 720 340" role="img" aria-label="Closed loop between neurons, electrodes, game world, and feedback" style={{ width: "100%", height: "auto", display: "block" }}>
         <defs>
           <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
             <path d="M0,0 L0,6 L9,3 z" fill={C.gold} />
           </marker>
         </defs>
-        <rect x="34" y="44" width="184" height="174" rx="20" fill={`${C.teal}12`} stroke={`${C.teal}66`} />
-        <rect x="270" y="44" width="184" height="174" rx="20" fill={`${C.ocean}18`} stroke={`${C.ocean}80`} />
-        <rect x="506" y="44" width="184" height="174" rx="20" fill={`${C.gold}12`} stroke={`${C.gold}66`} />
-        <text x="126" y="74" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Living cells</text>
-        <text x="362" y="74" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Electrode array</text>
-        <text x="598" y="74" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Game world</text>
+        <rect x="34" y="52" width="184" height="166" rx="20" fill={`${C.teal}12`} stroke={`${C.teal}66`} />
+        <rect x="270" y="52" width="184" height="166" rx="20" fill={`${C.ocean}18`} stroke={`${C.ocean}80`} />
+        <rect x="506" y="52" width="184" height="166" rx="20" fill={`${C.gold}12`} stroke={`${C.gold}66`} />
+        <text x="126" y="84" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Living cells</text>
+        <text x="362" y="84" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Electrode array</text>
+        <text x="598" y="84" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">Game world</text>
 
         {[0, 1, 2, 3, 4, 5].map(i => (
-          <g key={i} transform={`translate(${78 + (i % 3) * 48} ${116 + Math.floor(i / 3) * 46})`}>
+          <g key={i} transform={`translate(${78 + (i % 3) * 48} ${124 + Math.floor(i / 3) * 42})`}>
             <circle r="15" fill={C.midnight} stroke={i % 2 ? C.gold : C.teal} strokeWidth="3" />
             <path d="M-14 -2 C-30 -16 -34 -28 -44 -35 M12 7 C29 14 38 22 48 34 M-4 15 C-12 30 -21 38 -30 49" fill="none" stroke={i % 2 ? C.gold : C.teal} strokeWidth="3" strokeLinecap="round" />
           </g>
@@ -303,21 +303,21 @@ function BioDigitalLoopFigure() {
         {[0, 1, 2, 3].map(row => (
           <g key={row}>
             {[0, 1, 2, 3].map(col => (
-              <circle key={`${row}-${col}`} cx={315 + col * 31} cy={112 + row * 25} r="7" fill={row === col ? C.gold : C.ocean} opacity="0.85" />
+              <circle key={`${row}-${col}`} cx={315 + col * 31} cy={120 + row * 23} r="7" fill={row === col ? C.gold : C.ocean} opacity="0.85" />
             ))}
           </g>
         ))}
-        <path d="M300 104 H424 M300 154 H424 M331 92 V188 M393 92 V188" stroke={C.textMuted} strokeWidth="1" opacity="0.5" />
+        <path d="M300 112 H424 M300 158 H424 M331 100 V188 M393 100 V188" stroke={C.textMuted} strokeWidth="1" opacity="0.5" />
 
-        <rect x="546" y="112" width="104" height="72" rx="8" fill={C.midnight} stroke={C.gold} />
-        <circle cx="578" cy="148" r="8" fill={C.coral} />
-        <rect x="626" y="126" width="8" height="44" rx="4" fill={C.teal} />
-        <path d="M586 148 C608 130 618 130 626 148" fill="none" stroke={C.gold} strokeWidth="3" strokeDasharray="4 5" />
+        <rect x="546" y="120" width="104" height="72" rx="8" fill={C.midnight} stroke={C.gold} />
+        <circle cx="578" cy="156" r="8" fill={C.coral} />
+        <rect x="626" y="134" width="8" height="44" rx="4" fill={C.teal} />
+        <path d="M586 156 C608 138 618 138 626 156" fill="none" stroke={C.gold} strokeWidth="3" strokeDasharray="4 5" />
 
-        <path d="M218 132 H266" stroke={C.gold} strokeWidth="4" markerEnd="url(#arrowHead)" />
-        <path d="M454 132 H502" stroke={C.gold} strokeWidth="4" markerEnd="url(#arrowHead)" />
-        <path d="M598 218 C508 270 218 270 126 220" fill="none" stroke={C.coral} strokeWidth="4" markerEnd="url(#arrowHead)" />
-        <text x="362" y="267" textAnchor="middle" fill={C.coral} fontSize="14" fontWeight="700">feedback changes future activity</text>
+        <path d="M218 140 H266" stroke={C.gold} strokeWidth="4" markerEnd="url(#arrowHead)" />
+        <path d="M454 140 H502" stroke={C.gold} strokeWidth="4" markerEnd="url(#arrowHead)" />
+        <path d="M598 226 C508 292 224 292 126 228" fill="none" stroke={C.coral} strokeWidth="4" markerEnd="url(#arrowHead)" />
+        <text x="362" y="318" textAnchor="middle" fill={C.coral} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14" fontWeight="700">feedback changes future activity</text>
       </svg>
     </FigureShell>
   );
@@ -479,7 +479,7 @@ function DiscussionBridge() {
           textTransform: "uppercase",
           marginBottom: 10,
         }}>By Grade Band</p>
-        <div className="grid-2">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24 }}>
           <BandLinks
             title="K-5"
             color={C.teal}
@@ -505,15 +505,6 @@ function DiscussionBridge() {
               { href: "#thought-experiments/9-12?theme=knowledge&experiment=marys-room", experimentId: "marys-room", title: "Knowledge: Mary's Room", desc: "The article's Nagel/Jackson thread translated into a classroom scenario." },
               { href: "#thought-experiments/9-12?theme=reasoning&experiment=chinese-room", experimentId: "chinese-room", title: "Reasoning: The Chinese Room", desc: "Language fluency, understanding, and the difference between syntax and mind." },
               { href: "#thought-experiments/9-12?theme=reality&experiment=experience-machine", experimentId: "experience-machine", title: "Reality: The Experience Machine", desc: "Whether simulated mastery or simulated life can substitute for the real thing." },
-            ]}
-          />
-          <BandLinks
-            title="For Educators"
-            color={C.coral}
-            items={[
-              { href: "#thought-experiments/educators?experiment=the-shortcut", experimentId: "the-shortcut", title: "The Shortcut", desc: "The adult PD version of experience, process, and educational value." },
-              { href: "#thought-experiments/educators?experiment=digital-doppelganger", experimentId: "digital-doppelganger", title: "The Digital Doppelganger", desc: "AI proxies, simulated presence, and whether someone was really there." },
-              { href: "#thought-experiments/educators?experiment=reluctant-educator", experimentId: "reluctant-educator", title: "The Reluctant Educator", desc: "How institutions should reason when AI benefits and ethical caution collide." },
             ]}
           />
         </div>
