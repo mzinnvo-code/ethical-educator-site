@@ -105,7 +105,7 @@ export function Expandable({ title, children, color = C.gold, defaultOpen = fals
 export function VideoEmbed({ id, title }) {
   return (
     <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, borderRadius: 12, overflow: "hidden", margin: "16px 0", boxShadow: "0 6px 24px rgba(0,0,0,0.4)" }}>
-      <iframe src={`https://www.youtube.com/embed/${id}`} title={title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
+      <iframe src={`https://www.youtube.com/embed/${id}`} title={title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
     </div>
   );

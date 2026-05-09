@@ -157,6 +157,7 @@ export default function AIEthics({ navigate }) {
           <TopicCard icon="⚖️" title="From Ambiguity to Action" desc="Why saying 'uphold ethics' isn't enough. Normative frameworks — utilitarianism, deontology, virtue ethics — with thought experiments designed for educators." delay={0.06} onClick={() => window.open("https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/", "_blank")} />
           <TopicCard icon="🤖" title="The Paradox of AI in Education" desc="Even if AI could perfectly replicate human teachers, should it? Shared humanity, communal learning, and the is/ought distinction at its most urgent." delay={0.1} onClick={() => window.open("https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/", "_blank")} />
           <TopicCard icon="📝" title="The AI Authorship Quandary" desc="When a student submits AI-written work and the parent defends it — a thought experiment for navigating academic integrity in the age of AI." delay={0.14} onClick={() => navigate("thought-experiments")} />
+          <TopicCard icon="🧠" title="The Consciousness Line" desc="Current AI is probably not conscious, but fuzzy boundaries, organoids, and synthetic biology make ethical humility worth teaching." delay={0.18} accent={C.ocean} onClick={() => navigate("ai-consciousness")} />
         </div>
 
         <Narrow>
@@ -764,6 +765,7 @@ export default function AIEthics({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
+                { id: "ai-consciousness", icon: "🧠", title: "The Consciousness Line", desc: "AI consciousness, organoids, and moral caution", color: C.coral },
                 { id: "thought-experiments", icon: "🧪", title: "Thought Experiments", desc: "Work through the ethical dilemmas", color: C.gold },
                 { id: "ai-education", icon: "🤖", title: "AI in Education", desc: "Tools, evidence, and practice", color: C.teal },
                 { id: "for-educators", icon: "📋", title: "For Educators", desc: "Professional development resources", color: C.ocean },
