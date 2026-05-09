@@ -122,6 +122,9 @@ export default function Resources({ navigate }) {
               <RefItem>Coeckelbergh, M. AI Ethics. MIT Press (2020).</RefItem>
               <RefItem>Coeckelbergh, M. Why AI Undermines Democracy. Polity (2024). Power and governance dimensions.</RefItem>
               <RefItem>Selwyn, N. Should Robots Replace Teachers? AI and the Future of Education. Polity (2019).</RefItem>
+
+              <p style={{ color: C.gold, fontSize: "0.82rem", fontWeight: 600, marginTop: 20, marginBottom: 8 }}>AI Consciousness & Moral Status</p>
+              <RefItem><a href="#" onClick={(e) => { e.preventDefault(); navigate("ai-consciousness"); }}>The Consciousness Line.</a> The Ethical Educator article connecting current AI, biological naturalism, organoids, Nagel, Austin, and classroom discussion.</RefItem>
             </Expandable>
           </FadeIn>
 
@@ -167,6 +170,7 @@ export default function Resources({ navigate }) {
 
           <ContinueExploring navigate={navigate} links={[
             { id: "moral-psych", icon: "🧠", title: "Moral Psychology", desc: "The thesis research with 2023–2026 updates", color: C.teal },
+            { id: "ai-consciousness", icon: "🧬", title: "The Consciousness Line", desc: "AI consciousness, organoids, and moral caution", color: C.ocean },
             { id: "thought-experiments", icon: "💡", title: "Thought Experiments", desc: "Interactive scenarios for AI ethics", color: C.gold },
             { id: "phil-education", icon: "🏛️", title: "Philosophy in K–12", desc: "Curriculum proposal with research evidence", color: C.coral },
           ]} />

@@ -68,6 +68,12 @@ export const ELEMENTARY_GRADES = [
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 
+function experimentIdFromHash() {
+  if (typeof window === "undefined") return null;
+  const query = window.location.hash.split("?")[1] || "";
+  return new URLSearchParams(query).get("experiment");
+}
+
 function gradeLinks(currentId) {
   return [
     withImage({ id: "thought-experiments/k-5", title: "K-5 Hub", desc: "Choose another elementary grade", color: C.coral }),
@@ -89,8 +95,16 @@ export function ElementaryGradePage({ navigate, gradeId }) {
   const [lensChoices, setLensChoices] = useState([]);
 
   useEffect(() => {
-    setActive(null);
-    setLensChoices([]);
+    const syncExperimentFromHash = () => {
+      const id = experimentIdFromHash();
+      const target = id ? getExperimentsByElementaryGrade(grade.id).find(experiment => experiment.id === id) : null;
+      setActive(target || null);
+      setLensChoices([]);
+    };
+
+    syncExperimentFromHash();
+    window.addEventListener("hashchange", syncExperimentFromHash);
+    return () => window.removeEventListener("hashchange", syncExperimentFromHash);
   }, [grade.id]);
 
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);

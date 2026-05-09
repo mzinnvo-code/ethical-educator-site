@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { C, isNewExperiment } from "../../theme.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { FadeIn, Narrow, NewBadge } from "../../components/shared.jsx";
@@ -14,6 +14,12 @@ const FLAGSHIPS = [
   { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", image: getFeatureIllustration("reluctant-educator"), title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
   { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", image: getFeatureIllustration("digital-doppelganger"), title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
 ];
+
+function experimentIdFromHash() {
+  if (typeof window === "undefined") return null;
+  const query = window.location.hash.split("?")[1] || "";
+  return new URLSearchParams(query).get("experiment");
+}
 
 function FlagshipArtwork({ f, animDelay }) {
   const [failed, setFailed] = useState(false);
@@ -83,6 +89,17 @@ function FlagshipCard({ f, onClick, animDelay = "0s" }) {
 function FlagshipsBlock() {
   const [activeId, setActiveId] = useState(null);
   const active = FLAGSHIPS.find(f => f.id === activeId);
+
+  useEffect(() => {
+    const syncFlagshipFromHash = () => {
+      const id = experimentIdFromHash();
+      setActiveId(FLAGSHIPS.some(f => f.id === id) ? id : null);
+    };
+
+    syncFlagshipFromHash();
+    window.addEventListener("hashchange", syncFlagshipFromHash);
+    return () => window.removeEventListener("hashchange", syncFlagshipFromHash);
+  }, []);
 
   return (
     <>
