@@ -150,24 +150,239 @@ function FigureShell({ label, title, caption, children }) {
 }
 
 function NeuronComparisonFigure() {
+  const bioSteps = [
+    { n: 1, title: "Receive Signals", lines: ["Dendrites receive", "electrical signals", "from other neurons."] },
+    { n: 2, title: "Integrate", lines: ["The cell body", "integrates incoming", "signals."] },
+    { n: 3, title: "Transmit", lines: ["If the threshold is", "reached, an impulse", "travels down the axon."] },
+    { n: 4, title: "Communicate", lines: ["The signal is passed", "to other neurons", "across synapses."] },
+  ];
+  const aiSteps = [
+    { n: 1, title: "Inputs", lines: ["Features enter the", "model as numeric", "values."] },
+    { n: 2, title: "Weighted Sum", lines: ["Inputs are scaled by", "weights and summed", "together, plus bias."] },
+    { n: 3, title: "Activation", lines: ["A function introduces", "non-linearity to decide", "the neuron response."] },
+    { n: 4, title: "Output", lines: ["The output is passed", "to the next layer or", "used for predictions."] },
+  ];
+
   return (
-    <FigureShell
-      label="Visualization"
-      title="Biological and Artificial Neurons Are Related Metaphors, Not Equivalents"
-      caption="The artificial neuron borrows language from biology, but it abstracts away metabolism, cellular repair, chemical signaling, and embodiment."
-    >
-      <svg viewBox="0 0 720 440" role="img" aria-label="Comparison of a biological neuron and an artificial neuron" style={{ width: "100%", height: "auto", display: "block" }}>
+    <figure style={{
+      margin: "32px 0",
+      border: `1px solid ${C.border}`,
+      borderRadius: 18,
+      overflow: "hidden",
+      background: C.midnight,
+      boxShadow: `0 22px 70px ${C.glow}`,
+    }}>
+      <svg
+        viewBox="0 0 1560 1006"
+        role="img"
+        aria-label="Infographic comparing biological neurons and artificial neurons as related metaphors, not equivalents"
+        style={{ width: "100%", height: "auto", display: "block" }}
+      >
         <defs>
-          <linearGradient id="neuronPanel" x1="0" x2="1">
-            <stop offset="0" stopColor={C.ocean} stopOpacity="0.16" />
-            <stop offset="1" stopColor={C.teal} stopOpacity="0.08" />
+          <radialGradient id="neuronInfoBg" cx="50%" cy="36%" r="78%">
+            <stop offset="0" stopColor={C.surface} stopOpacity="0.98" />
+            <stop offset="0.55" stopColor={C.bgAlt} />
+            <stop offset="1" stopColor={C.midnight} />
+          </radialGradient>
+          <linearGradient id="bioStroke" x1="0" x2="1">
+            <stop offset="0" stopColor="#21cbb6" />
+            <stop offset="1" stopColor="#7fd8c9" />
           </linearGradient>
-          <linearGradient id="axonGlow" x1="0" x2="1">
-            <stop offset="0" stopColor={C.gold} />
+          <linearGradient id="axonStroke" x1="0" x2="1">
+            <stop offset="0" stopColor={C.goldLight} />
             <stop offset="1" stopColor={C.coral} />
           </linearGradient>
-          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
+          <linearGradient id="aiLine" x1="0" x2="1">
+            <stop offset="0" stopColor="#23c6a8" />
+            <stop offset="0.58" stopColor="#20a494" />
+            <stop offset="1" stopColor="#2f92dc" />
+          </linearGradient>
+          <filter id="neuronInfoGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="9" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <marker id="neuronArrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L11,5 L0,10 Z" fill="#23c6a8" />
+          </marker>
+          <marker id="neuronArrowGold" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L11,5 L0,10 Z" fill={C.goldLight} />
+          </marker>
+          <marker id="neuronArrowBlue" markerWidth="13" markerHeight="13" refX="11" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L12,5.5 L0,11 Z" fill="#2f92dc" />
+          </marker>
+        </defs>
+
+        <rect width="1560" height="1006" fill="url(#neuronInfoBg)" />
+        <text x="780" y="64" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="42" fontWeight="800">
+          Biological and Artificial Neurons Are Related Metaphors, Not Equivalents
+        </text>
+
+        <rect x="34" y="92" width="1492" height="402" rx="18" fill={`${C.ocean}18`} stroke={`${C.textSecondary}66`} />
+        <rect x="34" y="512" width="1492" height="392" rx="18" fill={`${C.ocean}12`} stroke={`${C.textSecondary}55`} />
+
+        <text x="66" y="142" fill="#23c6a8" fontSize="34" fontWeight="800">Biological Neuron</text>
+        <text x="66" y="558" fill="#3d9cff" fontSize="34" fontWeight="800">Artificial Neuron</text>
+
+        {bioSteps.map((step, index) => (
+          <g key={step.title} transform={`translate(${398 + index * 286} 116)`}>
+            {index > 0 && <path d="M-34 0 V144" stroke={C.textMuted} strokeWidth="1.5" strokeDasharray="6 8" opacity="0.75" />}
+            <circle cx="0" cy="14" r="17" fill="none" stroke="#23c6a8" strokeWidth="3" />
+            <text x="0" y="23" textAnchor="middle" fill="#23c6a8" fontSize="24" fontWeight="800">{step.n}</text>
+            <text x="32" y="20" fill="#23c6a8" fontSize="19" fontWeight="800">{step.title}</text>
+            {step.lines.map((line, lineIndex) => (
+              <text key={line} x="32" y={52 + lineIndex * 32} fill={C.textPrimary} fontSize="20">{line}</text>
+            ))}
+          </g>
+        ))}
+
+        <g transform="translate(64 206)" strokeLinecap="round" strokeLinejoin="round">
+          <text x="82" y="232" textAnchor="middle" fill="#23c6a8" stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="20">inputs from</text>
+          <text x="82" y="258" textAnchor="middle" fill="#23c6a8" stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="20">other neurons</text>
+          {[0, 1, 2].map(i => (
+            <path key={i} d={`M96 ${50 + i * 54} H204`} stroke="#23c6a8" strokeWidth="3" markerEnd="url(#neuronArrowTeal)" />
+          ))}
+          <path d="M226 106 C176 82 170 50 152 28 M226 106 C170 110 146 138 118 174 M226 106 C180 82 140 84 104 92 M226 106 C214 52 194 28 166 10 M226 106 C196 152 166 182 124 204" fill="none" stroke="url(#bioStroke)" strokeWidth="8" />
+          <path d="M238 110 C290 74 334 74 388 132" fill="none" stroke="url(#bioStroke)" strokeWidth="8" />
+          {[152, 208, 240, 196, 116].map((x, i) => (
+            <circle key={i} cx={x} cy={[48, 88, 112, 154, 192][i]} r="7" fill={C.goldLight} filter="url(#neuronInfoGlow)" />
+          ))}
+          <circle cx="402" cy="132" r="56" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
+          <circle cx="402" cy="132" r="24" fill={C.coral} filter="url(#neuronInfoGlow)" />
+          <path d="M458 132 C536 110 604 115 680 132 C776 154 858 150 948 132" fill="none" stroke="url(#axonStroke)" strokeWidth="16" />
+          {[530, 612, 696, 780, 864].map((x, i) => (
+            <rect key={x} x={x} y={116 + (i % 2) * 6} width="72" height="36" rx="15" fill={C.goldLight} opacity="0.78" stroke={C.goldLight} strokeWidth="2" />
+          ))}
+          <path d="M620 108 H972" stroke={C.goldLight} strokeWidth="4" markerEnd="url(#neuronArrowGold)" />
+          <text x="714" y="96" fill={C.goldLight} fontSize="19">electrical impulse</text>
+          <path d="M948 132 C1000 98 1042 84 1100 96 M948 132 C1000 130 1042 126 1108 132 M948 132 C1002 168 1044 180 1102 166" fill="none" stroke="url(#bioStroke)" strokeWidth="6" />
+          {[1116, 1116, 1116, 1188, 1236, 1280, 1322].map((x, i) => (
+            <circle key={i} cx={x} cy={[96, 132, 166, 102, 132, 154, 128][i]} r="7" fill={C.goldLight} />
+          ))}
+          <text x="1254" y="142" fill={C.goldLight} fontSize="20">neurotransmitters</text>
+          <text x="1254" y="168" fill={C.goldLight} fontSize="20">cross the synapse</text>
+          <text x="398" y="246" textAnchor="middle" fill={C.textPrimary} fontSize="19">cell body</text>
+          <text x="398" y="270" textAnchor="middle" fill={C.textPrimary} fontSize="19">(soma)</text>
+          <text x="682" y="254" textAnchor="middle" fill={C.textPrimary} fontSize="19">axon</text>
+          <text x="1060" y="254" textAnchor="middle" fill={C.textPrimary} fontSize="19">axon terminals</text>
+          <text x="1060" y="278" textAnchor="middle" fill={C.textPrimary} fontSize="19">(synapses)</text>
+        </g>
+
+        {aiSteps.map((step, index) => (
+          <g key={step.title} transform={`translate(${398 + index * 286} 536)`}>
+            {index > 0 && <path d="M-34 0 V144" stroke={C.textMuted} strokeWidth="1.5" strokeDasharray="6 8" opacity="0.75" />}
+            <circle cx="0" cy="14" r="17" fill="none" stroke="#3d9cff" strokeWidth="3" />
+            <text x="0" y="23" textAnchor="middle" fill="#3d9cff" fontSize="24" fontWeight="800">{step.n}</text>
+            <text x="32" y="20" fill="#3d9cff" fontSize="19" fontWeight="800">{step.title}</text>
+            {step.lines.map((line, lineIndex) => (
+              <text key={line} x="32" y={52 + lineIndex * 32} fill={C.textPrimary} fontSize="20">{line}</text>
+            ))}
+          </g>
+        ))}
+
+        <g transform="translate(86 620)" strokeLinecap="round" strokeLinejoin="round">
+          {[0, 1, 2].map(i => (
+            <g key={i}>
+              <circle cx="68" cy={28 + i * 88} r="31" fill={C.midnight} stroke="#3d9cff" strokeWidth="4" />
+              <text x="68" y={38 + i * 88} textAnchor="middle" fill="#f3f0e9" fontSize="21" fontWeight="800">
+                x{i === 2 ? "n" : i + 1}
+              </text>
+              <path d={`M100 ${28 + i * 88} L280 ${76 + i * 6}`} stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
+              <text x="176" y={22 + i * 88} fill={C.goldLight} fontSize="18" fontWeight="800">
+                w{i === 2 ? "n" : i + 1}
+              </text>
+            </g>
+          ))}
+          {[0, 1, 2].map(i => (
+            <circle key={i} cx="292" cy={76 + i * 6} r="14" fill={C.midnight} stroke={C.goldLight} strokeWidth="4" />
+          ))}
+          <path d="M310 76 L484 106 M310 82 L484 106 M310 88 L484 106" stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
+          <circle cx="542" cy="106" r="58" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
+          <text x="542" y="128" textAnchor="middle" fill={C.goldLight} fontSize="62" fontWeight="900">Σ</text>
+          <circle cx="542" cy="214" r="23" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
+          <text x="542" y="222" textAnchor="middle" fill={C.goldLight} fontSize="18" fontWeight="800">b</text>
+          <path d="M542 190 V164" stroke={C.goldLight} strokeWidth="5" markerEnd="url(#neuronArrowGold)" />
+          <text x="518" y="260" textAnchor="middle" fill={C.textPrimary} fontSize="19">bias</text>
+          <text x="672" y="246" textAnchor="middle" fill={C.goldLight} fontSize="20" fontStyle="italic">z = Σ wᵢxᵢ + b</text>
+          <path d="M600 106 H780" stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
+          <text x="686" y="92" textAnchor="middle" fill={C.goldLight} fontSize="22" fontWeight="800">z</text>
+          <circle cx="840" cy="106" r="52" fill={C.midnight} stroke={C.coral} strokeWidth="5" />
+          <text x="840" y="126" textAnchor="middle" fill={C.coral} fontSize="55" fontWeight="800">φ</text>
+          <text x="840" y="240" textAnchor="middle" fill={C.textPrimary} fontSize="19">activation function</text>
+          <text x="840" y="264" textAnchor="middle" fill={C.textPrimary} fontSize="19">(e.g., ReLU, sigmoid)</text>
+          <path d="M892 106 H1204" stroke="#2f92dc" strokeWidth="6" markerEnd="url(#neuronArrowBlue)" />
+          <text x="1048" y="92" textAnchor="middle" fill={C.coral} fontSize="25" fontWeight="800">a = φ(z)</text>
+          <text x="1268" y="114" textAnchor="middle" fill="#3d9cff" fontSize="26" fontWeight="800">y</text>
+          <text x="1268" y="168" textAnchor="middle" fill={C.textPrimary} fontSize="19">output</text>
+          <text x="1268" y="194" textAnchor="middle" fill={C.textPrimary} fontSize="19">(to next layer</text>
+          <text x="1268" y="220" textAnchor="middle" fill={C.textPrimary} fontSize="19">or prediction)</text>
+        </g>
+
+        <rect x="240" y="918" width="1080" height="74" rx="14" fill={`${C.midnight}cc`} stroke={`${C.textSecondary}55`} />
+        <path d="M292 940 v30 M280 955 h24 M274 944 q18 -20 36 0 q-3 16 -18 22 q-15 -6 -18 -22Z" fill="none" stroke="#23c6a8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="344" y="950" fill={C.textPrimary} fontSize="19">
+          Artificial neurons borrow language from biology,
+        </text>
+        <text x="344" y="977" fill={C.textPrimary} fontSize="19">
+          but they abstract away metabolism, repair, chemical signaling, and embodiment.
+        </text>
+      </svg>
+    </figure>
+  );
+}
+
+function ConsciousnessLineFigure() {
+  const nodes = [
+    { x: 84, color: "#9fb0c0" },
+    { x: 160, color: "#9fb0c0" },
+    { x: 250, color: "#9fb0c0" },
+    { x: 390, color: C.sky },
+    { x: 530, color: C.teal },
+    { x: 700, color: C.greenLight },
+    { x: 860, color: C.goldLight },
+    { x: 1030, color: C.goldLight },
+    { x: 1190, color: C.coral },
+    { x: 1340, color: C.coral },
+    { x: 1460, color: C.coral },
+  ];
+
+  return (
+    <figure style={{
+      margin: "32px 0",
+      border: `1px solid ${C.border}`,
+      borderRadius: 18,
+      overflow: "hidden",
+      background: C.midnight,
+      boxShadow: `0 22px 70px ${C.glow}`,
+    }}>
+      <svg
+        viewBox="0 0 1560 520"
+        role="img"
+        aria-label="A fuzzy consciousness line with an uncertain moral zone between clearly not conscious and clearly conscious cases"
+        style={{ width: "100%", height: "auto", display: "block" }}
+      >
+        <defs>
+          <radialGradient id="fuzzyLineBg" cx="50%" cy="52%" r="72%">
+            <stop offset="0" stopColor={C.surface} stopOpacity="0.98" />
+            <stop offset="0.62" stopColor={C.bgAlt} />
+            <stop offset="1" stopColor={C.midnight} />
+          </radialGradient>
+          <linearGradient id="fuzzyAxis" x1="0" x2="1">
+            <stop offset="0" stopColor="#9fb0c0" />
+            <stop offset="0.28" stopColor={C.sky} />
+            <stop offset="0.44" stopColor={C.teal} />
+            <stop offset="0.62" stopColor={C.goldLight} />
+            <stop offset="1" stopColor={C.coral} />
+          </linearGradient>
+          <radialGradient id="moralZoneGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stopColor={C.goldLight} stopOpacity="0.28" />
+            <stop offset="0.55" stopColor={C.teal} stopOpacity="0.14" />
+            <stop offset="1" stopColor={C.coral} stopOpacity="0" />
+          </radialGradient>
+          <filter id="fuzzyIconGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -175,101 +390,96 @@ function NeuronComparisonFigure() {
           </filter>
         </defs>
 
-        <rect x="22" y="24" width="676" height="188" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
-        <rect x="22" y="226" width="676" height="190" rx="18" fill="url(#neuronPanel)" stroke={C.border} />
+        <rect width="1560" height="520" fill="url(#fuzzyLineBg)" />
+        <rect x="36" y="36" width="1488" height="448" rx="20" fill={`${C.midnight}66`} stroke={`${C.textSecondary}55`} />
+        <text x="780" y="78" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="34" fontWeight="800">
+          The Consciousness Line Is a Fuzzy Zone
+        </text>
 
-        <text x="360" y="54" textAnchor="middle" fill={C.textPrimary} fontFamily="Source Serif 4, Georgia, serif" fontSize="22" fontWeight="700">Biological Neuron</text>
-        <text x="360" y="256" textAnchor="middle" fill={C.textPrimary} fontFamily="Source Serif 4, Georgia, serif" fontSize="22" fontWeight="700">Artificial Neuron</text>
+        <ellipse cx="790" cy="264" rx="490" ry="118" fill="url(#moralZoneGlow)" />
+        <ellipse cx="790" cy="264" rx="490" ry="118" fill="none" stroke={C.goldLight} strokeWidth="2" strokeDasharray="2 12" opacity="0.9" />
+        <ellipse cx="790" cy="264" rx="490" ry="118" fill="none" stroke={C.sky} strokeWidth="1.5" strokeDasharray="2 12" opacity="0.55" transform="rotate(-4 790 264)" />
 
-        <g transform="translate(72 76)" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M83 56 C51 28 28 18 12 8 M83 56 C48 61 27 79 10 104 M83 56 C53 45 33 48 17 55 M83 56 C61 76 55 101 46 132 M83 56 C82 31 78 14 71 -2" fill="none" stroke={C.teal} strokeWidth="8" />
-          <circle cx="100" cy="66" r="28" fill={C.midnight} stroke={C.gold} strokeWidth="4" />
-          <circle cx="100" cy="66" r="12" fill={C.coral} filter="url(#softGlow)" />
-          <path d="M127 66 C176 42 220 45 259 68 C300 92 338 88 376 67" fill="none" stroke="url(#axonGlow)" strokeWidth="14" />
-          {[164, 201, 238, 278, 318].map((x, i) => (
-            <rect key={x} x={x} y={52 + (i % 2) * 7} width="33" height="26" rx="12" fill={i % 2 ? C.coral : C.gold} opacity="0.82" />
-          ))}
-          <path d="M376 67 C404 50 421 38 444 26 M376 67 C405 80 424 96 450 113" fill="none" stroke={C.teal} strokeWidth="5" />
-          {[0, 1, 2, 3, 4].map(i => (
-            <circle key={i} cx={492 + i * 17} cy={38 + (i % 2) * 42} r="5" fill={C.gold} opacity="0.9" />
-          ))}
-          <text x="76" y="136" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">dendrites</text>
-          <text x="184" y="126" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">axon</text>
-          <text x="438" y="142" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">signals</text>
-        </g>
+        <text x="130" y="154" textAnchor="middle" fill={C.textPrimary} fontSize="22">Clearly</text>
+        <text x="130" y="181" textAnchor="middle" fill={C.textPrimary} fontSize="22">not conscious</text>
+        <text x="1394" y="154" textAnchor="middle" fill={C.textPrimary} fontSize="22">Clearly</text>
+        <text x="1394" y="181" textAnchor="middle" fill={C.textPrimary} fontSize="22">conscious</text>
+        <text x="780" y="214" textAnchor="middle" fill={C.goldLight} fontSize="23" fontWeight="800">uncertain moral zone</text>
 
-        <g transform="translate(76 286)" strokeLinecap="round" strokeLinejoin="round">
-          {[0, 1, 2].map((i) => (
-            <g key={i}>
-              <circle cx="28" cy={14 + i * 47} r="20" fill={C.midnight} stroke={C.ocean} strokeWidth="4" />
-              <text x="28" y={20 + i * 47} textAnchor="middle" fill={C.textPrimary} fontSize="15" fontWeight="700">x{i === 2 ? "n" : i + 1}</text>
-              <path d={`M49 ${14 + i * 47} L215 61`} stroke={C.teal} strokeWidth="5" />
-              <text x="88" y={10 + i * 47} fill={C.gold} fontSize="14" fontWeight="700">w{i === 2 ? "n" : i + 1}</text>
-            </g>
-          ))}
-          <circle cx="244" cy="61" r="35" fill={C.midnight} stroke={C.gold} strokeWidth="5" />
-          <text x="244" y="73" textAnchor="middle" fill={C.goldLight} fontSize="38" fontWeight="700">Σ</text>
-          <path d="M279 61 L342 61" stroke={C.teal} strokeWidth="6" />
-          <circle cx="384" cy="61" r="28" fill={C.midnight} stroke={C.coral} strokeWidth="5" />
-          <text x="384" y="70" textAnchor="middle" fill={C.coral} fontSize="27" fontWeight="700">φ</text>
-          <path d="M412 61 L540 61" stroke={C.ocean} strokeWidth="8" />
-          <path d="M540 61 L515 43 M540 61 L515 79" stroke={C.ocean} strokeWidth="8" />
-          <circle cx="244" cy="128" r="14" fill={C.midnight} stroke={C.gold} strokeWidth="4" />
-          <text x="244" y="133" textAnchor="middle" fill={C.goldLight} fontSize="13" fontWeight="700">b</text>
-          <path d="M244 114 L244 98" stroke={C.gold} strokeWidth="4" />
-          <text x="202" y="119" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">bias</text>
-          <text x="204" y="21" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">weighted sum</text>
-          <text x="338" y="21" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">activation</text>
-          <text x="552" y="67" fill={C.textMuted} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14">output</text>
-        </g>
-      </svg>
-    </FigureShell>
-  );
-}
-
-function ConsciousnessLineFigure() {
-  const nodes = [
-    { x: 78, y: 112, label: "cell", color: C.textMuted },
-    { x: 196, y: 92, label: "organism", color: C.ocean },
-    { x: 316, y: 78, label: "animal mind", color: C.teal },
-    { x: 442, y: 104, label: "organoid", color: C.gold },
-    { x: 570, y: 80, label: "synthetic brain", color: C.coral },
-  ];
-  return (
-    <FigureShell
-      label="Visualization"
-      title="The Consciousness Line Is More Like a Fuzzy Zone"
-      caption="The article's demarcation claim: a boundary can be ethically important even when it is not sharp enough to locate with one decisive test."
-    >
-      <svg viewBox="0 0 720 230" role="img" aria-label="A fuzzy consciousness boundary from cells to synthetic brains" style={{ width: "100%", height: "auto", display: "block" }}>
-        <defs>
-          <linearGradient id="lineGradient" x1="0" x2="1">
-            <stop offset="0" stopColor={C.textMuted} />
-            <stop offset="0.38" stopColor={C.teal} />
-            <stop offset="0.7" stopColor={C.gold} />
-            <stop offset="1" stopColor={C.coral} />
-          </linearGradient>
-          <radialGradient id="fuzzyZone">
-            <stop offset="0" stopColor={C.gold} stopOpacity="0.3" />
-            <stop offset="1" stopColor={C.gold} stopOpacity="0" />
-          </radialGradient>
-        </defs>
-        <rect x="28" y="28" width="664" height="164" rx="18" fill={`${C.midnight}`} stroke={C.border} />
-        <ellipse cx="440" cy="104" rx="190" ry="72" fill="url(#fuzzyZone)" />
-        <path d="M78 112 C180 63 268 86 360 88 C459 90 522 115 618 70" fill="none" stroke="url(#lineGradient)" strokeWidth="7" strokeLinecap="round" />
-        <path d="M258 160 L592 160" stroke={C.gold} strokeWidth="2" strokeDasharray="6 8" opacity="0.8" />
-        <text x="425" y="181" textAnchor="middle" fill={C.gold} fontSize="14" fontWeight="700">uncertain moral zone</text>
+        <line x1="82" y1="300" x2="1470" y2="300" stroke="url(#fuzzyAxis)" strokeWidth="7" strokeLinecap="round" />
         {nodes.map(node => (
-          <g key={node.label}>
-            <circle cx={node.x} cy={node.y} r="18" fill={C.midnight} stroke={node.color} strokeWidth="4" />
-            <circle cx={node.x} cy={node.y} r="6" fill={node.color} />
-            <text x={node.x} y={node.y + 38} textAnchor="middle" fill={C.textSecondary} fontSize="13">{node.label}</text>
-          </g>
+          <circle key={node.x} cx={node.x} cy="300" r="10" fill={node.color} filter="url(#fuzzyIconGlow)" />
         ))}
-        <text x="74" y="66" fill={C.textMuted} fontSize="13">not enough</text>
-        <text x="604" y="42" fill={C.textMuted} fontSize="13">harder to dismiss</text>
+
+        <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+          <g transform="translate(84 232)" stroke="#9fb0c0" strokeWidth="5">
+            <circle cx="0" cy="38" r="18" />
+            <circle cx="0" cy="38" r="7" />
+          </g>
+          <g transform="translate(160 230)" stroke="#9fb0c0" strokeWidth="4">
+            <ellipse cx="0" cy="38" rx="23" ry="14" transform="rotate(-20)" />
+            {[0, 1, 2, 3, 4, 5].map(i => (
+              <path key={i} d={`M${-28 + i * 11} ${22 + (i % 2) * 28} l${i % 2 ? -12 : 12} ${i % 2 ? 10 : -10}`} />
+            ))}
+          </g>
+          <g transform="translate(250 226)" stroke="#9fb0c0" strokeWidth="4">
+            <circle cx="0" cy="40" r="10" />
+            <path d="M-8 34 C-42 18 -48 2 -56 -14 M-6 42 C-40 46 -52 60 -66 78 M8 36 C42 20 48 4 58 -12 M8 44 C38 58 52 66 68 76" />
+          </g>
+          <g transform="translate(390 250)" stroke={C.sky} strokeWidth="5">
+            <path d="M-42 26 C-18 0 10 0 36 26 S86 52 106 26" />
+          </g>
+          <g transform="translate(530 230)" stroke={C.teal} strokeWidth="4">
+            <ellipse cx="0" cy="42" rx="30" ry="18" />
+            <circle cx="-16" cy="38" r="5" fill={C.teal} />
+            <circle cx="18" cy="38" r="5" fill={C.teal} />
+            <path d="M-24 28 L-44 12 M0 24 V2 M24 28 L44 12 M-24 56 L-44 72 M0 60 V82 M24 56 L44 72" />
+          </g>
+          <g transform="translate(700 232)" stroke={C.greenLight} strokeWidth="5">
+            <path d="M-42 38 C-8 4 52 10 74 38 C48 66 -10 72 -42 38Z" />
+            <path d="M74 38 L102 20 L102 56 Z" />
+            <circle cx="26" cy="33" r="4" fill={C.greenLight} />
+          </g>
+          <g transform="translate(860 220)" stroke={C.goldLight} strokeWidth="5">
+            <path d="M0 34 C-24 34 -40 52 -32 76 C-12 70 6 72 28 82 C28 58 18 42 0 34Z" fill="none" />
+            <circle cx="-2" cy="30" r="12" />
+            <path d="M-16 42 L-34 22 M-4 84 V104 M18 84 L36 102 M-22 86 L-42 102" />
+          </g>
+          <g transform="translate(1030 224)" stroke={C.goldLight} strokeWidth="5">
+            <circle cx="0" cy="42" r="36" />
+            <circle cx="-14" cy="36" r="4" fill={C.goldLight} />
+            <circle cx="14" cy="36" r="4" fill={C.goldLight} />
+            <path d="M-18 55 C-6 68 10 68 22 55 M-32 46 C-52 48 -58 70 -42 82 M32 46 C52 48 58 70 42 82" />
+          </g>
+          <g transform="translate(1190 220)" stroke={C.coral} strokeWidth="5">
+            <path d="M12 16 C-30 28 -46 66 -20 96 H36 M12 16 C56 28 66 66 44 92" />
+            <path d="M-8 52 H22 M-4 72 H28" />
+          </g>
+          <g transform="translate(1340 222)" stroke={C.coral} strokeWidth="5">
+            <rect x="-34" y="20" width="68" height="72" rx="14" />
+            <path d="M0 20 V4 M-20 92 V112 M20 92 V112" />
+            <circle cx="-13" cy="52" r="4" fill={C.coral} />
+            <circle cx="13" cy="52" r="4" fill={C.coral} />
+            <path d="M-16 72 H16" />
+          </g>
+          <g transform="translate(1460 222)" stroke={C.coral} strokeWidth="5">
+            <rect x="-32" y="18" width="64" height="64" rx="14" />
+            <path d="M-18 0 V18 M0 0 V18 M18 0 V18 M-18 82 V100 M0 82 V100 M18 82 V100 M-50 36 H-32 M-50 62 H-32 M32 36 H50 M32 62 H50" />
+            <path d="M-14 48 H14 M0 34 V64" />
+          </g>
+        </g>
+
+        <line x1="780" y1="318" x2="780" y2="390" stroke={C.goldLight} strokeWidth="2" strokeDasharray="7 8" opacity="0.8" />
+        <text x="780" y="398" textAnchor="middle" fill={C.textPrimary} fontSize="18">no sharp boundary</text>
+        <text x="780" y="423" textAnchor="middle" fill={C.textPrimary} fontSize="18">only gradual change</text>
+
+        <rect x="194" y="440" width="1172" height="56" rx="14" fill={`${C.midnight}cc`} stroke={`${C.textSecondary}55`} />
+        <path d="M250 456 v24 M238 470 h24 M232 460 q18 -20 36 0 q-3 16 -18 22 q-15 -6 -18 -22Z" fill="none" stroke="#23c6a8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="292" y="475" fill={C.textPrimary} fontSize="19">
+          Ethically important questions often live in the uncertain middle. The task is careful reasoning, not a premature cutoff.
+        </text>
       </svg>
-    </FigureShell>
+    </figure>
   );
 }
 
