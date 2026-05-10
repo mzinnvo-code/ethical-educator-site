@@ -333,6 +333,94 @@ function NeuronComparisonFigure() {
   );
 }
 
+function NeuronAiDiagramOverlay() {
+  const inputYs = [86, 145, 204, 304];
+  const dots = [238, 258, 278];
+
+  return (
+    <svg
+      className="neuron-ai-diagram"
+      viewBox="0 0 1000 360"
+      role="img"
+      aria-label="Artificial neuron diagram with four inputs, four weights, weighted sum, activation function, and output"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <linearGradient id="neuronAiPanel" x1="0" x2="1">
+          <stop offset="0" stopColor="#071f36" stopOpacity="0.94" />
+          <stop offset="0.55" stopColor="#061a2d" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#071420" stopOpacity="0.94" />
+        </linearGradient>
+        <linearGradient id="neuronAiLine" x1="0" x2="1">
+          <stop offset="0" stopColor="#23c6a8" />
+          <stop offset="0.68" stopColor="#1ca99b" />
+          <stop offset="1" stopColor="#2f92dc" />
+        </linearGradient>
+        <filter id="neuronAiGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <marker id="neuronAiArrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0 0 L9 5 L0 10 Z" fill="#23c6a8" />
+        </marker>
+        <marker id="neuronAiArrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+          <path d="M0 0 L11 6 L0 12 Z" fill="#2f92dc" />
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="1000" height="360" rx="20" fill="url(#neuronAiPanel)" stroke="#2f92dc" strokeWidth="1.2" />
+
+      {inputYs.map((y, index) => {
+        const label = index === 3 ? "n" : String(index + 1);
+        return (
+          <g key={label}>
+            <text x="58" y={y + 6} textAnchor="middle" fill="#f3f0e9" fontSize="17" fontWeight="800">
+              x<tspan baselineShift="sub" fontSize="11">{label}</tspan>
+            </text>
+            <circle className="input-node" cx="114" cy={y} r="27" fill="#071420" stroke="#3d9cff" strokeWidth="3" filter="url(#neuronAiGlow)" />
+            <path d={`M72 ${y} H87`} stroke="#23c6a8" strokeWidth="2.2" markerEnd="url(#neuronAiArrowTeal)" />
+            <circle className="weight-node" cx="218" cy={y} r="24" fill="#082c3f" stroke="#ffc400" strokeWidth="2.4" filter="url(#neuronAiGlow)" />
+            <text x="218" y={y + 6} textAnchor="middle" fill="#f3f0e9" fontSize="13" fontWeight="800">
+              w<tspan baselineShift="sub" fontSize="9">{label}</tspan>
+            </text>
+            <path d={`M141 ${y} H190`} stroke="#23c6a8" strokeWidth="2.2" markerEnd="url(#neuronAiArrowTeal)" />
+            <path d={`M242 ${y} L430 176`} stroke="#23c6a8" strokeWidth="2.1" markerEnd="url(#neuronAiArrowTeal)" />
+          </g>
+        );
+      })}
+
+      {dots.map((y) => (
+        <g key={y}>
+          <circle cx="58" cy={y} r="3.2" fill="#f3f0e9" />
+          <circle cx="218" cy={y} r="3.2" fill="#f3f0e9" />
+        </g>
+      ))}
+
+      <circle cx="466" cy="176" r="55" fill="#1c6c9a" stroke="#ffc400" strokeWidth="2.6" filter="url(#neuronAiGlow)" />
+      <text x="466" y="198" textAnchor="middle" fill="#f3f0e9" fontSize="74" fontWeight="900">Σ</text>
+      <text x="466" y="264" textAnchor="middle" fill="#f3f0e9" fontSize="18" fontWeight="800">transfer</text>
+      <text x="466" y="286" textAnchor="middle" fill="#f3f0e9" fontSize="18" fontWeight="800">function</text>
+
+      <path d="M521 176 H644" stroke="#23c6a8" strokeWidth="3" markerEnd="url(#neuronAiArrowTeal)" />
+      <text x="585" y="141" textAnchor="middle" fill="#f3f0e9" fontSize="19" fontWeight="800">net input</text>
+      <text x="585" y="165" textAnchor="middle" fill="#f3f0e9" fontSize="18" fontStyle="italic">net<tspan baselineShift="sub" fontSize="12">j</tspan></text>
+
+      <rect x="654" y="122" width="98" height="108" rx="4" fill="#7c1c73" stroke="#ffc400" strokeWidth="2.4" filter="url(#neuronAiGlow)" />
+      <text x="703" y="190" textAnchor="middle" fill="#f3f0e9" fontSize="62" fontWeight="900">φ</text>
+      <path d="M703 300 V230" stroke="#f3f0e9" strokeWidth="2" markerEnd="url(#neuronAiArrowTeal)" />
+      <circle cx="703" cy="300" r="5" fill="#f3f0e9" />
+      <text x="703" y="336" textAnchor="middle" fill="#f3f0e9" fontSize="18" fontWeight="800">θj threshold</text>
+
+      <path d="M752 176 H850" stroke="#2f92dc" strokeWidth="3.2" markerEnd="url(#neuronAiArrowBlue)" />
+      <text x="890" y="168" textAnchor="middle" fill="#f3f0e9" fontSize="21" fontStyle="italic">o<tspan baselineShift="sub" fontSize="12">j</tspan></text>
+      <text x="890" y="198" textAnchor="middle" fill="#f3f0e9" fontSize="18" fontWeight="800">Activation</text>
+    </svg>
+  );
+}
+
 function NeuronComparisonArtFigure() {
   const bioSteps = [
     { n: 1, title: "Receive Signals", lines: ["Dendrites receive", "electrical signals", "from other neurons."] },
@@ -379,6 +467,16 @@ function NeuronComparisonArtFigure() {
           object-fit: cover;
           display: block;
         }
+        .neuron-ai-diagram {
+          position: absolute;
+          left: 3.0%;
+          top: 43.8%;
+          width: 94.0%;
+          height: 35.6%;
+          z-index: 1;
+          display: block;
+          filter: drop-shadow(0 0 18px rgba(22, 124, 184, 0.18));
+        }
         .neuron-art-text,
         .neuron-art-title,
         .neuron-art-kicker,
@@ -423,7 +521,7 @@ function NeuronComparisonArtFigure() {
         }
         .neuron-art-section.ai {
           left: 3.6%;
-          top: 46.4%;
+          top: 45.7%;
           color: #3d9cff;
         }
         .neuron-art-step {
@@ -435,7 +533,7 @@ function NeuronComparisonArtFigure() {
           top: 12.7%;
         }
         .neuron-art-step.ai {
-          top: 46.2%;
+          top: 45.5%;
         }
         .neuron-art-step .num {
           display: inline-grid;
@@ -522,6 +620,7 @@ function NeuronComparisonArtFigure() {
       <div className="neuron-art-scroll">
         <div className="neuron-art-canvas">
           <img src="/article-art/neuron-comparison-metaphors.png" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <NeuronAiDiagramOverlay />
 
           <div className="neuron-art-kicker">Visualization</div>
           <div className="neuron-art-title">Biological and Artificial Neurons Are Related Metaphors, Not Equivalents</div>
@@ -547,23 +646,6 @@ function NeuronComparisonArtFigure() {
           <div className="neuron-art-label" style={{ left: "24.4%", top: "40.2%", width: "116px" }}>cell body<br />(soma)</div>
           <div className="neuron-art-label" style={{ left: "45.1%", top: "41.4%", width: "80px" }}>axon</div>
           <div className="neuron-art-label" style={{ left: "70.1%", top: "40.8%", width: "170px" }}>axon terminals<br />(synapses)</div>
-
-          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "54.2%", fontSize: "1rem" }}>x<sub>1</sub></div>
-          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "61.7%", fontSize: "1rem" }}>x<sub>2</sub></div>
-          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "69.4%", fontSize: "1rem" }}>x<sub>n</sub></div>
-          <div className="neuron-art-label gold" style={{ left: "21.2%", top: "51.8%", width: "38px" }}>w<sub>1</sub></div>
-          <div className="neuron-art-label gold" style={{ left: "20.2%", top: "57.8%", width: "38px" }}>w<sub>2</sub></div>
-          <div className="neuron-art-label gold" style={{ left: "19.4%", top: "64.7%", width: "38px" }}>w<sub>n</sub></div>
-          <div className="neuron-art-symbol gold" style={{ left: "45.7%", top: "58.0%", fontSize: "3rem" }}>Σ</div>
-          <div className="neuron-art-symbol gold" style={{ left: "45.7%", top: "68.6%", fontSize: "1rem" }}>b</div>
-          <div className="neuron-art-label gold" style={{ left: "50.6%", top: "65.8%", width: "160px" }}>z = Σ w<sub>i</sub>x<sub>i</sub> + b</div>
-          <div className="neuron-art-label" style={{ left: "45.7%", top: "71.2%", width: "60px" }}>bias</div>
-          <div className="neuron-art-symbol gold" style={{ left: "58.2%", top: "55.0%", fontSize: "1.25rem" }}>z</div>
-          <div className="neuron-art-symbol orange" style={{ left: "64.0%", top: "57.6%", fontSize: "2.7rem" }}>φ</div>
-          <div className="neuron-art-label" style={{ left: "64.0%", top: "68.5%", width: "170px" }}>activation function<br />(e.g., ReLU, sigmoid)</div>
-          <div className="neuron-art-label coral" style={{ left: "75.0%", top: "53.9%", width: "150px", fontSize: "clamp(0.72rem, 1.3vw, 1rem)" }}>a = φ(z)</div>
-          <div className="neuron-art-symbol blue" style={{ left: "89.0%", top: "56.5%", fontSize: "1.55rem" }}>y</div>
-          <div className="neuron-art-label" style={{ left: "88.0%", top: "62.3%", width: "150px" }}>output<br />(to next layer<br />or prediction)</div>
 
           <div className="neuron-art-note">
             Artificial neurons borrow language from biology, but they abstract away metabolism, cellular repair, chemical signaling, and embodiment.
