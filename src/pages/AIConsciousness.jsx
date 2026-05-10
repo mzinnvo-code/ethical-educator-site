@@ -1258,7 +1258,7 @@ function FuzzyZoneArtFigure() {
         .fuzzy-zone-art-canvas {
           position: relative;
           width: 100%;
-          aspect-ratio: 3 / 1;
+          aspect-ratio: 2075 / 758;
           border-radius: 12px;
           overflow: hidden;
           background: ${C.midnight};
@@ -1297,7 +1297,7 @@ function FuzzyZoneArtFigure() {
         .fuzzy-zone-art-zone {
           position: absolute;
           left: 50%;
-          top: 9.7%;
+          top: 9.8%;
           transform: translateX(-50%);
           z-index: 2;
           color: ${C.goldLight};
@@ -1333,7 +1333,7 @@ function FuzzyZoneArtFigure() {
           pointer-events: none;
         }
         .fuzzy-zone-art-row-label.bio {
-          top: 36.2%;
+          top: 35.2%;
           color: #23c6a8;
         }
         .fuzzy-zone-art-row-label.ai {
@@ -1351,14 +1351,14 @@ function FuzzyZoneArtFigure() {
           white-space: normal;
         }
         .fuzzy-zone-art-label.bio {
-          top: 18.5%;
+          top: 13.8%;
         }
         .fuzzy-zone-art-label.ai {
-          top: 47.3%;
+          top: 44.6%;
         }
         .fuzzy-zone-art-boundary {
           left: 50%;
-          top: 71.6%;
+          top: 67.8%;
           transform: translateX(-50%);
           width: 210px;
           text-align: center;
