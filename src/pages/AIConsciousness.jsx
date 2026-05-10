@@ -347,9 +347,9 @@ function NeuronAiDiagramOverlay() {
     >
       <defs>
         <linearGradient id="neuronAiPanel" x1="0" x2="1">
-          <stop offset="0" stopColor="#071f36" stopOpacity="0.94" />
-          <stop offset="0.55" stopColor="#061a2d" stopOpacity="0.95" />
-          <stop offset="1" stopColor="#071420" stopOpacity="0.94" />
+          <stop offset="0" stopColor="#071f36" />
+          <stop offset="0.55" stopColor="#061a2d" />
+          <stop offset="1" stopColor="#071420" />
         </linearGradient>
         <linearGradient id="neuronAiLine" x1="0" x2="1">
           <stop offset="0" stopColor="#23c6a8" />
@@ -434,6 +434,8 @@ function NeuronComparisonArtFigure() {
     { n: 3, title: "Activation", lines: ["The activation function", "introduces non-linearity", "to decide the response."] },
     { n: 4, title: "Output", lines: ["The output is passed", "to the next layer or", "used for predictions."] },
   ];
+  const bioStepLefts = [28.6, 45.3, 62.0, 79.4];
+  const aiStepLefts = [25.0, 43.1, 61.2, 79.3];
 
   return (
     <figure className="neuron-art-figure" aria-label="Biological and artificial neuron comparison illustration">
@@ -470,9 +472,9 @@ function NeuronComparisonArtFigure() {
         .neuron-ai-diagram {
           position: absolute;
           left: 3.0%;
-          top: 43.8%;
+          top: 43.5%;
           width: 94.0%;
-          height: 35.6%;
+          height: 38.1%;
           z-index: 1;
           display: block;
           filter: drop-shadow(0 0 18px rgba(22, 124, 184, 0.18));
@@ -530,7 +532,7 @@ function NeuronComparisonArtFigure() {
           line-height: 1.24;
         }
         .neuron-art-step.bio {
-          top: 12.7%;
+          top: 12.1%;
         }
         .neuron-art-step.ai {
           top: 45.5%;
@@ -628,13 +630,13 @@ function NeuronComparisonArtFigure() {
           <div className="neuron-art-section ai">Artificial Neuron</div>
 
           {bioSteps.map((step, index) => (
-            <div key={step.title} className="neuron-art-step bio" style={{ left: `${25.0 + index * 18.1}%` }}>
+            <div key={step.title} className="neuron-art-step bio" style={{ left: `${bioStepLefts[index]}%` }}>
               <span className="num">{step.n}</span><span className="heading">{step.title}</span>
               <div className="copy">{step.lines.map((line) => <span key={line}>{line}<br /></span>)}</div>
             </div>
           ))}
           {aiSteps.map((step, index) => (
-            <div key={step.title} className="neuron-art-step ai" style={{ left: `${25.0 + index * 18.1}%` }}>
+            <div key={step.title} className="neuron-art-step ai" style={{ left: `${aiStepLefts[index]}%` }}>
               <span className="num">{step.n}</span><span className="heading">{step.title}</span>
               <div className="copy">{step.lines.map((line) => <span key={line}>{line}<br /></span>)}</div>
             </div>
