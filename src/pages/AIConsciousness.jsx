@@ -333,152 +333,607 @@ function NeuronComparisonFigure() {
   );
 }
 
+function ScalesIcon({ color = C.teal }) {
+  return (
+    <svg viewBox="0 0 120 96" aria-hidden="true" style={{ width: "86px", height: "auto", display: "block" }}>
+      <g fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M60 14 V72" />
+        <path d="M36 82 H84" />
+        <path d="M47 72 H73" />
+        <circle cx="60" cy="12" r="7" />
+        <path d="M28 24 H92" />
+        <path d="M28 24 L14 56 H42 Z" />
+        <path d="M92 24 L78 56 H106 Z" />
+        <path d="M14 56 C20 66 36 66 42 56" />
+        <path d="M78 56 C84 66 100 66 106 56" />
+      </g>
+    </svg>
+  );
+}
+
+function BulbIcon({ color = C.teal }) {
+  return (
+    <svg viewBox="0 0 58 58" aria-hidden="true" style={{ width: 46, height: 46, flex: "0 0 46px" }}>
+      <g fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 38 C15 34 12 29 12 23 C12 13 19 7 29 7 C39 7 46 13 46 23 C46 29 43 34 38 38" />
+        <path d="M22 40 H36 M23 47 H35 M26 53 H32" />
+        <path d="M29 1 V4 M9 8 L12 11 M49 8 L46 11 M2 28 H6 M52 28 H56" />
+      </g>
+    </svg>
+  );
+}
+
+function FuzzyIcon({ type, x = 0, y = 0, color = C.gold, scale = 1 }) {
+  const common = {
+    fill: "none",
+    stroke: color,
+    strokeWidth: 3.2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  };
+
+  return (
+    <g transform={`translate(${x} ${y}) scale(${scale})`}>
+      {type === "cell" && (
+        <g {...common}>
+          <circle cx="0" cy="0" r="23" />
+          <circle cx="6" cy="-2" r="9" />
+          <path d="M13 -18 C25 -8 24 12 10 22 M-15 -12 C-23 2 -17 18 -3 23" strokeDasharray="5 6" />
+        </g>
+      )}
+      {type === "worm" && (
+        <g {...common}>
+          <path d="M-34 8 C-16 -18 4 -18 20 2 C32 16 48 14 58 -2" />
+          <path d="M-22 3 C-12 11 0 12 12 4 M22 6 C32 12 44 10 52 2" strokeWidth="2" opacity="0.7" />
+        </g>
+      )}
+      {type === "insect" && (
+        <g {...common}>
+          <ellipse cx="0" cy="0" rx="13" ry="18" />
+          <circle cx="0" cy="-22" r="9" />
+          <path d="M-12 -6 L-34 -18 M-13 2 L-38 2 M-10 10 L-30 23 M12 -6 L34 -18 M13 2 L38 2 M10 10 L30 23 M-6 -31 L-20 -45 M6 -31 L20 -45" />
+        </g>
+      )}
+      {type === "fish" && (
+        <g {...common}>
+          <path d="M-40 0 C-12 -28 38 -24 62 0 C38 24 -12 28 -40 0Z" />
+          <path d="M62 0 L90 -20 L90 20 Z" />
+          <circle cx="20" cy="-7" r="3" fill={color} />
+          <path d="M-8 -18 C2 -6 2 6 -8 18" />
+        </g>
+      )}
+      {type === "bird" && (
+        <g {...common}>
+          <path d="M-10 -3 C-32 -6 -46 11 -38 32 C-19 26 -2 27 20 38 C23 17 12 2 -10 -3Z" />
+          <circle cx="-9" cy="-9" r="10" />
+          <path d="M-22 1 L-38 -18 M-4 39 V58 M16 39 L34 55 M-25 39 L-44 54" />
+        </g>
+      )}
+      {type === "primate" && (
+        <g {...common}>
+          <circle cx="0" cy="0" r="29" />
+          <circle cx="-12" cy="-5" r="3.5" fill={color} />
+          <circle cx="12" cy="-5" r="3.5" fill={color} />
+          <path d="M-15 10 C-5 22 8 22 18 10 M-29 1 C-48 4 -53 24 -38 35 M29 1 C48 4 53 24 38 35" />
+        </g>
+      )}
+      {type === "human" && (
+        <g {...common}>
+          <path d="M7 -38 C-28 -28 -43 4 -24 34 H24 M7 -38 C42 -25 49 5 31 30" />
+          <path d="M-12 -2 H14 M-7 17 H19 M-2 34 V54" />
+        </g>
+      )}
+      {type === "gear" && (
+        <g {...common}>
+          <circle cx="0" cy="0" r="18" />
+          <circle cx="0" cy="0" r="6" />
+          <path d="M0 -34 V-24 M0 24 V34 M-34 0 H-24 M24 0 H34 M-24 -24 L-17 -17 M17 17 L24 24 M24 -24 L17 -17 M-17 17 L-24 24" />
+        </g>
+      )}
+      {type === "flow" && (
+        <g {...common}>
+          <rect x="-10" y="-36" width="20" height="20" rx="2" />
+          <rect x="-48" y="14" width="20" height="20" rx="2" />
+          <rect x="-10" y="14" width="20" height="20" rx="2" />
+          <rect x="28" y="14" width="20" height="20" rx="2" />
+          <path d="M0 -16 V0 H-38 V14 M0 0 V14 M0 0 H38 V14" />
+        </g>
+      )}
+      {type === "network" && (
+        <g {...common}>
+          <circle cx="0" cy="0" r="11" />
+          {[
+            [-37, -25], [0, -42], [37, -25], [42, 14], [16, 39], [-26, 34], [-42, -2],
+          ].map(([cx, cy]) => (
+            <g key={`${cx}-${cy}`}>
+              <path d={`M0 0 L${cx} ${cy}`} opacity="0.65" />
+              <circle cx={cx} cy={cy} r="5" fill={C.midnight} />
+            </g>
+          ))}
+        </g>
+      )}
+      {type === "chipBrain" && (
+        <g {...common}>
+          <path d="M-10 -31 C-31 -29 -42 -13 -34 7 C-49 20 -36 45 -12 40 C-4 50 12 49 18 38 C40 42 50 18 34 5 C42 -16 24 -34 5 -25 C0 -31 -5 -33 -10 -31Z" />
+          <path d="M-20 -8 H-4 V11 H16 M4 -23 V-8 M-14 22 H8 M23 -5 H37 M28 18 H40" />
+          <circle cx="-20" cy="-8" r="3" fill={color} />
+          <circle cx="16" cy="11" r="3" fill={color} />
+          <circle cx="8" cy="22" r="3" fill={color} />
+        </g>
+      )}
+      {type === "processor" && (
+        <g {...common}>
+          <rect x="-28" y="-32" width="56" height="64" rx="6" />
+          <path d="M-12 -18 V18 M2 -18 V18 M16 -18 V18 M-42 -14 H-28 M-42 0 H-28 M-42 14 H-28 M28 -14 H42 M28 0 H42 M28 14 H42" />
+          <path d="M-16 -4 C-2 -18 8 -18 18 -4 M-16 12 C-2 -2 8 -2 18 12" />
+        </g>
+      )}
+      {type === "brain" && (
+        <g {...common}>
+          <path d="M-8 -33 C-28 -36 -43 -20 -36 -1 C-52 8 -46 34 -25 35 C-21 51 -1 52 6 37 V-28 C3 -31 -2 -32 -8 -33Z" />
+          <path d="M8 -33 C28 -36 43 -20 36 -1 C52 8 46 34 25 35 C21 51 1 52 -6 37 V-28 C-3 -31 2 -32 8 -33Z" transform="translate(10 0)" />
+          <path d="M-26 -12 C-12 -18 -2 -10 -7 4 M-28 18 C-14 10 -3 19 -8 33 M26 -12 C12 -18 2 -10 7 4 M28 18 C14 10 3 19 8 33" />
+        </g>
+      )}
+    </g>
+  );
+}
+
 function ConsciousnessLineFigure() {
-  const nodes = [
-    { x: 84, color: "#9fb0c0" },
-    { x: 160, color: "#9fb0c0" },
-    { x: 250, color: "#9fb0c0" },
-    { x: 390, color: C.sky },
-    { x: 530, color: C.teal },
-    { x: 700, color: C.greenLight },
-    { x: 860, color: C.goldLight },
-    { x: 1030, color: C.goldLight },
-    { x: 1190, color: C.coral },
-    { x: 1340, color: C.coral },
-    { x: 1460, color: C.coral },
+  const boundaryRows = [
+    { n: 1, title: "Single cells", color: C.textMuted, text: "They maintain themselves, respond to the environment, and resist entropy, but we do not normally treat them as conscious subjects." },
+    { n: 2, title: "Simple nervous systems", color: C.sky, text: "The case becomes harder. Behavior, sensation, and adaptation begin to look morally relevant." },
+    { n: 3, title: "Animal minds", color: C.goldLight, text: "History should humble us. Humans have repeatedly underestimated non-human experience when recognition would have inconvenienced us." },
+    { n: 4, title: "Synthetic or artificial systems", color: C.coral, text: "The temptation is to draw the line wherever our existing categories feel comfortable. That is not the same as having found the line." },
+  ];
+  const bioExamples = [
+    { label: "single cell", type: "cell", x: 220, color: "#b9c4ce" },
+    { label: "simple organisms", type: "worm", x: 380, color: C.sky },
+    { label: "insects", type: "insect", x: 510, color: C.sky },
+    { label: "fish", type: "fish", x: 640, color: C.sand },
+    { label: "birds", type: "bird", x: 780, color: C.goldLight },
+    { label: "primates", type: "primate", x: 910, color: C.goldLight },
+    { label: "humans", type: "human", x: 1040, color: C.goldLight },
+  ];
+  const artificialExamples = [
+    { label: "simple machine", type: "gear", x: 220, color: "#b9c4ce" },
+    { label: "rule-based systems", type: "flow", x: 400, color: C.sky },
+    { label: "machine learning", type: "network", x: 565, color: C.sky },
+    { label: "advanced AI", type: "chipBrain", x: 750, color: C.goldLight },
+    { label: "general AI", type: "processor", x: 910, color: C.coral },
+    { label: "fully synthetic brain", type: "brain", x: 1040, color: C.coral },
   ];
 
   return (
-    <figure style={{
-      margin: "32px 0",
-      border: `1px solid ${C.border}`,
-      borderRadius: 18,
-      overflow: "hidden",
-      background: C.midnight,
-      boxShadow: `0 22px 70px ${C.glow}`,
-    }}>
-      <svg
-        viewBox="0 0 1560 520"
-        role="img"
-        aria-label="A fuzzy consciousness line with an uncertain moral zone between clearly not conscious and clearly conscious cases"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      >
-        <defs>
-          <radialGradient id="fuzzyLineBg" cx="50%" cy="52%" r="72%">
-            <stop offset="0" stopColor={C.surface} stopOpacity="0.98" />
-            <stop offset="0.62" stopColor={C.bgAlt} />
-            <stop offset="1" stopColor={C.midnight} />
-          </radialGradient>
-          <linearGradient id="fuzzyAxis" x1="0" x2="1">
-            <stop offset="0" stopColor="#9fb0c0" />
-            <stop offset="0.28" stopColor={C.sky} />
-            <stop offset="0.44" stopColor={C.teal} />
-            <stop offset="0.62" stopColor={C.goldLight} />
-            <stop offset="1" stopColor={C.coral} />
-          </linearGradient>
-          <radialGradient id="moralZoneGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stopColor={C.goldLight} stopOpacity="0.28" />
-            <stop offset="0.55" stopColor={C.teal} stopOpacity="0.14" />
-            <stop offset="1" stopColor={C.coral} stopOpacity="0" />
-          </radialGradient>
-          <filter id="fuzzyIconGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+    <figure className="consciousness-line-infographic" aria-labelledby="consciousness-line-title">
+      <style>{`
+        .consciousness-line-infographic {
+          width: min(1180px, calc(100vw - 32px));
+          margin: 38px 0 42px 50%;
+          transform: translateX(-50%);
+          color: ${C.textPrimary};
+        }
+        .consciousness-line-panel {
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(144,160,176,0.48);
+          border-radius: 18px;
+          padding: clamp(18px, 2.4vw, 28px);
+          background:
+            radial-gradient(circle at 20% 16%, rgba(42,136,192,0.23), transparent 32%),
+            radial-gradient(circle at 72% 74%, rgba(200,152,48,0.14), transparent 32%),
+            radial-gradient(circle at 50% 46%, rgba(18,37,61,0.86), rgba(8,18,32,0.98) 70%);
+          box-shadow: 0 28px 90px rgba(0,0,0,0.34), inset 0 0 90px rgba(42,136,192,0.08);
+          isolation: isolate;
+        }
+        .consciousness-line-panel::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+          background-size: 44px 44px;
+          opacity: 0.24;
+          mask-image: radial-gradient(circle at 50% 46%, black, transparent 78%);
+          z-index: -1;
+        }
+        .line-problem-kicker {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          color: ${C.textSecondary};
+          font-family: "JetBrains Mono", monospace;
+          font-size: clamp(0.82rem, 1.3vw, 1rem);
+          font-weight: 700;
+          letter-spacing: 0.32em;
+          text-align: center;
+          margin: -2px 0 16px;
+        }
+        .line-problem-kicker::before,
+        .line-problem-kicker::after {
+          content: "";
+          height: 1px;
+          flex: 1;
+          background: linear-gradient(90deg, transparent, rgba(144,160,176,0.7));
+        }
+        .line-problem-kicker::after {
+          background: linear-gradient(90deg, rgba(144,160,176,0.7), transparent);
+        }
+        .line-infographic-top {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 280px;
+          gap: clamp(22px, 3.4vw, 42px);
+          align-items: start;
+        }
+        .line-infographic-heading {
+          display: grid;
+          grid-template-columns: auto minmax(0, 1fr);
+          align-items: baseline;
+          gap: 16px;
+          margin-bottom: 12px;
+        }
+        .line-infographic-tag {
+          color: ${C.coral};
+          border: 1px solid rgba(192,112,64,0.5);
+          background: rgba(192,112,64,0.09);
+          border-radius: 5px;
+          padding: 5px 9px;
+          font-family: "JetBrains Mono", monospace;
+          font-size: 0.78rem;
+          font-weight: 800;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+        .line-infographic-title {
+          font-family: "Source Serif 4", Georgia, serif;
+          font-size: clamp(1.24rem, 2vw, 1.62rem);
+          line-height: 1.12;
+          color: #f3f0e9;
+          margin: 0;
+          letter-spacing: 0;
+        }
+        .line-infographic-copy {
+          color: #d7d9dc;
+          font-size: clamp(0.92rem, 1.4vw, 1.12rem);
+          line-height: 1.55;
+          margin: 0 0 10px;
+          max-width: 800px;
+        }
+        .line-boundary-intro {
+          margin: 16px 0 2px;
+          color: #f3f0e9;
+          font-size: clamp(0.96rem, 1.4vw, 1.16rem);
+        }
+        .line-boundary-list {
+          margin-top: 8px;
+        }
+        .line-boundary-row {
+          display: grid;
+          grid-template-columns: 56px minmax(190px, 270px) 1fr;
+          gap: 18px;
+          align-items: center;
+          min-height: 70px;
+          border-bottom: 1px solid rgba(144,160,176,0.34);
+        }
+        .line-boundary-row:last-child {
+          border-bottom: none;
+        }
+        .line-boundary-number {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.24rem;
+          font-weight: 800;
+          border: 1.5px solid currentColor;
+          background: rgba(8,18,32,0.48);
+        }
+        .line-boundary-title {
+          font-family: "Source Serif 4", Georgia, serif;
+          font-weight: 800;
+          font-size: clamp(1rem, 1.7vw, 1.28rem);
+          line-height: 1.15;
+        }
+        .line-boundary-text {
+          border-left: 1px solid rgba(144,160,176,0.62);
+          padding-left: 22px;
+          color: #d5d9de;
+          font-size: clamp(0.88rem, 1.25vw, 1.02rem);
+          line-height: 1.38;
+        }
+        .line-ethical-card {
+          border: 1px solid rgba(144,160,176,0.56);
+          border-radius: 18px;
+          padding: 26px 24px;
+          background: linear-gradient(160deg, rgba(26,90,138,0.14), rgba(8,18,32,0.72));
+          box-shadow: inset 0 0 34px rgba(26,138,122,0.08);
+        }
+        .line-ethical-card svg {
+          margin: 0 auto 18px;
+        }
+        .line-ethical-card p {
+          margin: 0 0 18px;
+          color: #edf0f2;
+          font-size: clamp(0.98rem, 1.55vw, 1.17rem);
+          line-height: 1.5;
+        }
+        .line-ethical-card p:last-child {
+          margin-bottom: 0;
+        }
+        .line-ethical-card strong {
+          color: #23c6a8;
+          font-weight: 800;
+        }
+        .line-chart-card {
+          margin-top: 24px;
+          border: 1px solid rgba(144,160,176,0.42);
+          border-radius: 18px;
+          background: radial-gradient(circle at 52% 42%, rgba(26,90,138,0.2), rgba(8,18,32,0.76) 62%);
+          overflow: hidden;
+        }
+        .line-chart-desktop {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+        .line-chart-mobile {
+          display: none;
+        }
+        @media (max-width: 820px) {
+          .consciousness-line-infographic {
+            width: min(100%, calc(100vw - 24px));
+            margin-top: 30px;
+            margin-bottom: 34px;
+          }
+          .consciousness-line-panel {
+            border-radius: 14px;
+            padding: 16px;
+          }
+          .line-problem-kicker {
+            gap: 10px;
+            letter-spacing: 0.22em;
+            font-size: 0.72rem;
+            margin-bottom: 14px;
+          }
+          .line-infographic-top {
+            grid-template-columns: 1fr;
+            gap: 18px;
+          }
+          .line-infographic-heading {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+          }
+          .line-boundary-row {
+            grid-template-columns: 44px 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            align-items: start;
+          }
+          .line-boundary-number {
+            width: 34px;
+            height: 34px;
+            font-size: 1rem;
+          }
+          .line-boundary-text {
+            grid-column: 2;
+            border-left: none;
+            padding-left: 0;
+            font-size: 0.84rem;
+            line-height: 1.5;
+          }
+          .line-ethical-card {
+            padding: 20px 18px;
+          }
+          .line-ethical-card svg {
+            width: 66px;
+          }
+          .line-chart-desktop {
+            display: none;
+          }
+          .line-chart-mobile {
+            display: block;
+            padding: 18px 16px;
+          }
+          .line-chart-mobile h4 {
+            font-family: "Source Serif 4", Georgia, serif;
+            color: #f3f0e9;
+            font-size: 1.12rem;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 8px;
+          }
+          .line-mobile-zone {
+            color: ${C.goldLight};
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.88rem;
+            margin-bottom: 16px;
+          }
+          .line-mobile-track {
+            border: 1px solid rgba(144,160,176,0.24);
+            border-radius: 12px;
+            padding: 13px;
+            margin-top: 12px;
+            background: rgba(8,18,32,0.34);
+          }
+          .line-mobile-track-title {
+            font-family: "JetBrains Mono", monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.68rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+          }
+          .line-mobile-items {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+          }
+          .line-mobile-item {
+            min-width: 0;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(144,160,176,0.16);
+            padding: 10px 8px;
+            text-align: center;
+          }
+          .line-mobile-item svg {
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 6px;
+            display: block;
+          }
+          .line-mobile-item span {
+            display: block;
+            color: #e4e6e8;
+            font-size: 0.72rem;
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+          }
+          .line-mobile-note {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 14px;
+            border: 1px solid rgba(144,160,176,0.24);
+            border-radius: 12px;
+            padding: 12px;
+            color: #e4e6e8;
+            font-size: 0.78rem;
+            line-height: 1.4;
+          }
+        }
+      `}</style>
+      <div className="consciousness-line-panel">
+        <div className="line-problem-kicker"><span>THE LINE PROBLEM</span></div>
+        <div className="line-infographic-top">
+          <div>
+            <div className="line-infographic-heading">
+              <span className="line-infographic-tag">Demarcation</span>
+              <h3 id="consciousness-line-title" className="line-infographic-title">4. Sorites: When Does the Heap Become a Mind?</h3>
+            </div>
+            <p className="line-infographic-copy">The Sorites paradox asks when grains of sand become a heap. One grain is not a heap. Two grains are not a heap.</p>
+            <p className="line-infographic-copy">But at some point the label begins to feel appropriate, even though no single grain performs the magic.</p>
+            <p className="line-boundary-intro">Consciousness may have a similar boundary problem:</p>
+            <div className="line-boundary-list">
+              {boundaryRows.map(row => (
+                <div key={row.n} className="line-boundary-row">
+                  <span className="line-boundary-number" style={{ color: row.color }}>{row.n}</span>
+                  <span className="line-boundary-title" style={{ color: row.color }}>{row.title}</span>
+                  <span className="line-boundary-text">{row.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <aside className="line-ethical-card" aria-label="Ethical caution note">
+            <ScalesIcon color="#5fc7bf" />
+            <p>The point is not that every borderline case is conscious.</p>
+            <p>The point is that a <strong>fuzzy line</strong> can still matter ethically.</p>
+            <p>We do not need perfect metaphysics before we begin careful moral reasoning.</p>
+          </aside>
+        </div>
+        <div className="line-chart-card">
+          <svg className="line-chart-desktop" viewBox="0 0 1120 438" role="img" aria-label="Two fuzzy consciousness lines comparing biological and artificial examples">
+            <defs>
+              <linearGradient id="bioConsciousnessTrack" x1="0" x2="1">
+                <stop offset="0" stopColor="#b9c4ce" />
+                <stop offset="0.28" stopColor={C.sky} />
+                <stop offset="0.52" stopColor={C.teal} />
+                <stop offset="0.72" stopColor={C.goldLight} />
+                <stop offset="1" stopColor={C.goldLight} />
+              </linearGradient>
+              <linearGradient id="aiConsciousnessTrack" x1="0" x2="1">
+                <stop offset="0" stopColor="#b9c4ce" />
+                <stop offset="0.35" stopColor={C.sky} />
+                <stop offset="0.66" stopColor={C.goldLight} />
+                <stop offset="1" stopColor={C.coral} />
+              </linearGradient>
+              <radialGradient id="lineZoneGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stopColor={C.goldLight} stopOpacity="0.22" />
+                <stop offset="0.55" stopColor={C.teal} stopOpacity="0.12" />
+                <stop offset="1" stopColor={C.sky} stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <rect width="1120" height="438" fill="transparent" />
+            <text x="560" y="44" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="28" fontWeight="800">The Consciousness Line Is a Fuzzy Zone</text>
+            <text x="92" y="76" textAnchor="middle" fill={C.textPrimary} fontSize="17">Clearly</text>
+            <text x="92" y="98" textAnchor="middle" fill={C.textPrimary} fontSize="17">not conscious</text>
+            <text x="1020" y="76" textAnchor="middle" fill={C.textPrimary} fontSize="17">Clearly</text>
+            <text x="1020" y="98" textAnchor="middle" fill={C.textPrimary} fontSize="17">conscious</text>
+            <text x="80" y="142" fill="#23c6a8" fontSize="17" fontWeight="800">Biological</text>
+            <text x="80" y="164" fill="#23c6a8" fontSize="17" fontWeight="800">examples</text>
+            <text x="80" y="252" fill={C.coral} fontSize="17" fontWeight="800">Artificial</text>
+            <text x="80" y="274" fill={C.coral} fontSize="17" fontWeight="800">examples</text>
 
-        <rect width="1560" height="520" fill="url(#fuzzyLineBg)" />
-        <rect x="36" y="36" width="1488" height="448" rx="20" fill={`${C.midnight}66`} stroke={`${C.textSecondary}55`} />
-        <text x="780" y="78" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="34" fontWeight="800">
-          The Consciousness Line Is a Fuzzy Zone
-        </text>
+            <ellipse cx="622" cy="193" rx="392" ry="118" fill="url(#lineZoneGlow)" />
+            <ellipse cx="622" cy="193" rx="392" ry="118" fill="none" stroke={C.goldLight} strokeWidth="1.5" strokeDasharray="2 9" opacity="0.9" />
+            <ellipse cx="622" cy="193" rx="392" ry="118" fill="none" stroke={C.sky} strokeWidth="1.4" strokeDasharray="2 9" opacity="0.72" transform="rotate(-3 622 193)" />
+            <text x="560" y="76" textAnchor="middle" fill={C.goldLight} fontSize="18" fontWeight="800">uncertain moral zone</text>
 
-        <ellipse cx="790" cy="264" rx="490" ry="118" fill="url(#moralZoneGlow)" />
-        <ellipse cx="790" cy="264" rx="490" ry="118" fill="none" stroke={C.goldLight} strokeWidth="2" strokeDasharray="2 12" opacity="0.9" />
-        <ellipse cx="790" cy="264" rx="490" ry="118" fill="none" stroke={C.sky} strokeWidth="1.5" strokeDasharray="2 12" opacity="0.55" transform="rotate(-4 790 264)" />
-
-        <text x="130" y="154" textAnchor="middle" fill={C.textPrimary} fontSize="22">Clearly</text>
-        <text x="130" y="181" textAnchor="middle" fill={C.textPrimary} fontSize="22">not conscious</text>
-        <text x="1394" y="154" textAnchor="middle" fill={C.textPrimary} fontSize="22">Clearly</text>
-        <text x="1394" y="181" textAnchor="middle" fill={C.textPrimary} fontSize="22">conscious</text>
-        <text x="780" y="214" textAnchor="middle" fill={C.goldLight} fontSize="23" fontWeight="800">uncertain moral zone</text>
-
-        <line x1="82" y1="300" x2="1470" y2="300" stroke="url(#fuzzyAxis)" strokeWidth="7" strokeLinecap="round" />
-        {nodes.map(node => (
-          <circle key={node.x} cx={node.x} cy="300" r="10" fill={node.color} filter="url(#fuzzyIconGlow)" />
-        ))}
-
-        <g strokeLinecap="round" strokeLinejoin="round" fill="none">
-          <g transform="translate(84 232)" stroke="#9fb0c0" strokeWidth="5">
-            <circle cx="0" cy="38" r="18" />
-            <circle cx="0" cy="38" r="7" />
-          </g>
-          <g transform="translate(160 230)" stroke="#9fb0c0" strokeWidth="4">
-            <ellipse cx="0" cy="38" rx="23" ry="14" transform="rotate(-20)" />
-            {[0, 1, 2, 3, 4, 5].map(i => (
-              <path key={i} d={`M${-28 + i * 11} ${22 + (i % 2) * 28} l${i % 2 ? -12 : 12} ${i % 2 ? 10 : -10}`} />
+            <line x1="150" y1="170" x2="1040" y2="170" stroke="url(#bioConsciousnessTrack)" strokeWidth="4" strokeLinecap="round" />
+            <line x1="150" y1="280" x2="1040" y2="280" stroke="url(#aiConsciousnessTrack)" strokeWidth="4" strokeLinecap="round" />
+            {bioExamples.map(item => (
+              <g key={item.label}>
+                <text x={item.x} y="115" textAnchor="middle" fill="#f3f0e9" fontSize="15">{item.label}</text>
+                <FuzzyIcon type={item.type} x={item.x} y={138} color={item.color} scale={0.58} />
+                <circle cx={item.x} cy="170" r="8" fill={item.color} />
+              </g>
             ))}
-          </g>
-          <g transform="translate(250 226)" stroke="#9fb0c0" strokeWidth="4">
-            <circle cx="0" cy="40" r="10" />
-            <path d="M-8 34 C-42 18 -48 2 -56 -14 M-6 42 C-40 46 -52 60 -66 78 M8 36 C42 20 48 4 58 -12 M8 44 C38 58 52 66 68 76" />
-          </g>
-          <g transform="translate(390 250)" stroke={C.sky} strokeWidth="5">
-            <path d="M-42 26 C-18 0 10 0 36 26 S86 52 106 26" />
-          </g>
-          <g transform="translate(530 230)" stroke={C.teal} strokeWidth="4">
-            <ellipse cx="0" cy="42" rx="30" ry="18" />
-            <circle cx="-16" cy="38" r="5" fill={C.teal} />
-            <circle cx="18" cy="38" r="5" fill={C.teal} />
-            <path d="M-24 28 L-44 12 M0 24 V2 M24 28 L44 12 M-24 56 L-44 72 M0 60 V82 M24 56 L44 72" />
-          </g>
-          <g transform="translate(700 232)" stroke={C.greenLight} strokeWidth="5">
-            <path d="M-42 38 C-8 4 52 10 74 38 C48 66 -10 72 -42 38Z" />
-            <path d="M74 38 L102 20 L102 56 Z" />
-            <circle cx="26" cy="33" r="4" fill={C.greenLight} />
-          </g>
-          <g transform="translate(860 220)" stroke={C.goldLight} strokeWidth="5">
-            <path d="M0 34 C-24 34 -40 52 -32 76 C-12 70 6 72 28 82 C28 58 18 42 0 34Z" fill="none" />
-            <circle cx="-2" cy="30" r="12" />
-            <path d="M-16 42 L-34 22 M-4 84 V104 M18 84 L36 102 M-22 86 L-42 102" />
-          </g>
-          <g transform="translate(1030 224)" stroke={C.goldLight} strokeWidth="5">
-            <circle cx="0" cy="42" r="36" />
-            <circle cx="-14" cy="36" r="4" fill={C.goldLight} />
-            <circle cx="14" cy="36" r="4" fill={C.goldLight} />
-            <path d="M-18 55 C-6 68 10 68 22 55 M-32 46 C-52 48 -58 70 -42 82 M32 46 C52 48 58 70 42 82" />
-          </g>
-          <g transform="translate(1190 220)" stroke={C.coral} strokeWidth="5">
-            <path d="M12 16 C-30 28 -46 66 -20 96 H36 M12 16 C56 28 66 66 44 92" />
-            <path d="M-8 52 H22 M-4 72 H28" />
-          </g>
-          <g transform="translate(1340 222)" stroke={C.coral} strokeWidth="5">
-            <rect x="-34" y="20" width="68" height="72" rx="14" />
-            <path d="M0 20 V4 M-20 92 V112 M20 92 V112" />
-            <circle cx="-13" cy="52" r="4" fill={C.coral} />
-            <circle cx="13" cy="52" r="4" fill={C.coral} />
-            <path d="M-16 72 H16" />
-          </g>
-          <g transform="translate(1460 222)" stroke={C.coral} strokeWidth="5">
-            <rect x="-32" y="18" width="64" height="64" rx="14" />
-            <path d="M-18 0 V18 M0 0 V18 M18 0 V18 M-18 82 V100 M0 82 V100 M18 82 V100 M-50 36 H-32 M-50 62 H-32 M32 36 H50 M32 62 H50" />
-            <path d="M-14 48 H14 M0 34 V64" />
-          </g>
-        </g>
+            {artificialExamples.map(item => (
+              <g key={item.label}>
+                <text x={item.x} y="226" textAnchor="middle" fill="#f3f0e9" fontSize="15">{item.label}</text>
+                <FuzzyIcon type={item.type} x={item.x} y={252} color={item.color} scale={0.58} />
+                <circle cx={item.x} cy="280" r="8" fill={item.color} />
+              </g>
+            ))}
 
-        <line x1="780" y1="318" x2="780" y2="390" stroke={C.goldLight} strokeWidth="2" strokeDasharray="7 8" opacity="0.8" />
-        <text x="780" y="398" textAnchor="middle" fill={C.textPrimary} fontSize="18">no sharp boundary</text>
-        <text x="780" y="423" textAnchor="middle" fill={C.textPrimary} fontSize="18">only gradual change</text>
-
-        <rect x="194" y="440" width="1172" height="56" rx="14" fill={`${C.midnight}cc`} stroke={`${C.textSecondary}55`} />
-        <path d="M250 456 v24 M238 470 h24 M232 460 q18 -20 36 0 q-3 16 -18 22 q-15 -6 -18 -22Z" fill="none" stroke="#23c6a8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="292" y="475" fill={C.textPrimary} fontSize="19">
-          Ethically important questions often live in the uncertain middle. The task is careful reasoning, not a premature cutoff.
-        </text>
-      </svg>
+            <line x1="620" y1="288" x2="620" y2="326" stroke={C.goldLight} strokeWidth="1.5" strokeDasharray="6 7" />
+            <text x="620" y="333" textAnchor="middle" fill="#d7d9dc" fontSize="14">no sharp boundary</text>
+            <text x="620" y="352" textAnchor="middle" fill="#d7d9dc" fontSize="14">only gradual change</text>
+            <rect x="154" y="368" width="812" height="56" rx="12" fill="rgba(8,18,32,0.72)" stroke="rgba(144,160,176,0.35)" />
+            <foreignObject x="176" y="373" width="58" height="48">
+              <BulbIcon color="#23c6a8" />
+            </foreignObject>
+            <text x="246" y="391" fill="#edf0f2" fontSize="16">Ethically important questions often live in the uncertain middle. Our task is not to declare a precise cutoff,</text>
+            <text x="246" y="413" fill="#edf0f2" fontSize="16">but to reason carefully, remain open to new evidence, and err on the side of moral consideration.</text>
+          </svg>
+          <div className="line-chart-mobile">
+            <h4>The Consciousness Line Is a Fuzzy Zone</h4>
+            <p className="line-mobile-zone">uncertain moral zone · no sharp boundary</p>
+            <div className="line-mobile-track">
+              <p className="line-mobile-track-title" style={{ color: "#23c6a8" }}>Biological examples</p>
+              <div className="line-mobile-items">
+                {bioExamples.map(item => (
+                  <div key={item.label} className="line-mobile-item">
+                    <svg viewBox="-48 -48 96 96" aria-hidden="true"><FuzzyIcon type={item.type} color={item.color} /></svg>
+                    <span>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="line-mobile-track">
+              <p className="line-mobile-track-title" style={{ color: C.coral }}>Artificial examples</p>
+              <div className="line-mobile-items">
+                {artificialExamples.map(item => (
+                  <div key={item.label} className="line-mobile-item">
+                    <svg viewBox="-48 -48 96 96" aria-hidden="true"><FuzzyIcon type={item.type} color={item.color} /></svg>
+                    <span>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="line-mobile-note">
+              <BulbIcon color="#23c6a8" />
+              <span>Ethically important questions often live in the uncertain middle. Reason carefully, stay open to new evidence, and err on the side of moral consideration.</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </figure>
   );
 }
@@ -849,22 +1304,6 @@ export default function AIConsciousness({ navigate }) {
 
           <FadeIn delay={0.12}>
             <ConsciousnessLineFigure />
-          </FadeIn>
-
-          <Divider label="The Line Problem" />
-
-          <FadeIn delay={0.06}>
-            <Expandable title="4. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
-              <p>The Sorites paradox asks when grains of sand become a heap. One grain is not a heap. Two grains are not a heap. But at some point the label begins to feel appropriate, even though no single grain performs the magic.</p>
-              <p style={{ marginTop: 12 }}>Consciousness may have a similar boundary problem:</p>
-              <StepList items={[
-                { title: "Single cells", text: "They maintain themselves, respond to the environment, and resist entropy, but we do not normally treat them as conscious subjects.", color: C.textMuted },
-                { title: "Simple nervous systems", text: "The case becomes harder. Behavior, sensation, and adaptation begin to look morally relevant.", color: C.ocean },
-                { title: "Animal minds", text: "Here history should humble us. Humans have repeatedly underestimated non-human experience when recognition would have inconvenienced us.", color: C.gold },
-                { title: "Synthetic or artificial systems", text: "The temptation is to draw the line wherever our existing categories feel comfortable. That is not the same as having found the line.", color: C.coral },
-              ]} />
-              <p>The point is not that every borderline case is conscious. The point is that a fuzzy line can still matter ethically. We do not need perfect metaphysics before we begin careful moral reasoning.</p>
-            </Expandable>
           </FadeIn>
 
           <FadeIn delay={0.08}>
