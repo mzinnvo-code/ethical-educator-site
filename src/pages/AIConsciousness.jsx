@@ -333,6 +333,247 @@ function NeuronComparisonFigure() {
   );
 }
 
+function NeuronComparisonArtFigure() {
+  const bioSteps = [
+    { n: 1, title: "Receive Signals", lines: ["Dendrites receive", "electrical signals", "from other neurons."] },
+    { n: 2, title: "Integrate", lines: ["The cell body", "integrates incoming", "signals."] },
+    { n: 3, title: "Transmit", lines: ["If the threshold is", "reached, an impulse", "travels down the axon."] },
+    { n: 4, title: "Communicate", lines: ["The signal is passed", "to other neurons", "across synapses."] },
+  ];
+  const aiSteps = [
+    { n: 1, title: "Inputs", lines: ["Features enter the", "model as numeric", "values."] },
+    { n: 2, title: "Weighted Sum", lines: ["Inputs are scaled by", "weights and summed", "together, plus bias."] },
+    { n: 3, title: "Activation", lines: ["The activation function", "introduces non-linearity", "to decide the response."] },
+    { n: 4, title: "Output", lines: ["The output is passed", "to the next layer or", "used for predictions."] },
+  ];
+
+  return (
+    <figure className="neuron-art-figure" aria-label="Biological and artificial neuron comparison illustration">
+      <style>{`
+        .neuron-art-figure {
+          width: min(1120px, calc(100vw - 32px));
+          margin: 34px 0 30px 50%;
+          transform: translateX(-50%);
+        }
+        .neuron-art-scroll {
+          max-width: 100%;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-color: ${C.ocean}33 transparent;
+        }
+        .neuron-art-canvas {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 3 / 2;
+          border-radius: 18px;
+          overflow: hidden;
+          background: ${C.midnight};
+          border: 1px solid ${C.border};
+          box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
+        }
+        .neuron-art-canvas img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .neuron-art-text,
+        .neuron-art-title,
+        .neuron-art-kicker,
+        .neuron-art-section,
+        .neuron-art-step,
+        .neuron-art-label,
+        .neuron-art-symbol,
+        .neuron-art-note {
+          position: absolute;
+          z-index: 2;
+          pointer-events: none;
+          color: ${C.textPrimary};
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.92), 0 0 12px rgba(4, 14, 24, 0.82);
+        }
+        .neuron-art-kicker {
+          left: 2.1%;
+          top: 1.6%;
+          color: ${C.gold};
+          font-size: clamp(0.72rem, 1.2vw, 0.96rem);
+          font-weight: 900;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+        .neuron-art-title {
+          left: 2.1%;
+          right: 2.1%;
+          top: 5.0%;
+          font-family: "Source Serif 4", Georgia, serif;
+          font-size: clamp(1.08rem, 2.25vw, 1.72rem);
+          font-weight: 900;
+          line-height: 1.08;
+        }
+        .neuron-art-section {
+          font-size: clamp(0.98rem, 2.2vw, 1.72rem);
+          font-weight: 900;
+          line-height: 1;
+        }
+        .neuron-art-section.bio {
+          left: 3.6%;
+          top: 12.5%;
+          color: #23c6a8;
+        }
+        .neuron-art-section.ai {
+          left: 3.6%;
+          top: 46.4%;
+          color: #3d9cff;
+        }
+        .neuron-art-step {
+          width: 14.8%;
+          font-size: clamp(0.5rem, 0.78vw, 0.66rem);
+          line-height: 1.24;
+        }
+        .neuron-art-step.bio {
+          top: 12.7%;
+        }
+        .neuron-art-step.ai {
+          top: 46.2%;
+        }
+        .neuron-art-step .num {
+          display: inline-grid;
+          place-items: center;
+          width: 1.62em;
+          height: 1.62em;
+          margin-right: 0.42em;
+          border: 2px solid currentColor;
+          border-radius: 999px;
+          font-weight: 900;
+          line-height: 1;
+        }
+        .neuron-art-step .heading {
+          color: inherit;
+          font-weight: 900;
+        }
+        .neuron-art-step .copy {
+          margin-top: 0.28em;
+          padding-left: 2.42em;
+          color: #f3f0e9;
+          font-weight: 650;
+        }
+        .neuron-art-step.bio {
+          color: #23c6a8;
+        }
+        .neuron-art-step.ai {
+          color: #3d9cff;
+        }
+        .neuron-art-label {
+          font-size: clamp(0.56rem, 0.95vw, 0.82rem);
+          font-weight: 750;
+          line-height: 1.2;
+          text-align: center;
+          color: #f3f0e9;
+        }
+        .neuron-art-label.teal {
+          color: #23c6a8;
+        }
+        .neuron-art-label.gold {
+          color: ${C.goldLight};
+        }
+        .neuron-art-label.blue {
+          color: #3d9cff;
+        }
+        .neuron-art-label.coral {
+          color: ${C.coral};
+        }
+        .neuron-art-symbol {
+          transform: translate(-50%, -50%);
+          font-weight: 900;
+          line-height: 1;
+          text-align: center;
+        }
+        .neuron-art-symbol.gold {
+          color: ${C.goldLight};
+        }
+        .neuron-art-symbol.orange {
+          color: ${C.coral};
+        }
+        .neuron-art-symbol.blue {
+          color: #3d9cff;
+        }
+        .neuron-art-note {
+          left: 15.4%;
+          right: 8%;
+          top: 88.4%;
+          color: #f3f0e9;
+          font-size: clamp(0.62rem, 1.0vw, 0.82rem);
+          font-weight: 700;
+          line-height: 1.32;
+        }
+        @media (max-width: 520px) {
+          .neuron-art-figure {
+            width: 100%;
+            margin-left: 0;
+            transform: none;
+            margin-top: 26px;
+          }
+          .neuron-art-canvas {
+            min-width: 1120px;
+          }
+        }
+      `}</style>
+      <div className="neuron-art-scroll">
+        <div className="neuron-art-canvas">
+          <img src="/article-art/neuron-comparison-metaphors.png" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+
+          <div className="neuron-art-kicker">Visualization</div>
+          <div className="neuron-art-title">Biological and Artificial Neurons Are Related Metaphors, Not Equivalents</div>
+          <div className="neuron-art-section bio">Biological Neuron</div>
+          <div className="neuron-art-section ai">Artificial Neuron</div>
+
+          {bioSteps.map((step, index) => (
+            <div key={step.title} className="neuron-art-step bio" style={{ left: `${25.0 + index * 18.1}%` }}>
+              <span className="num">{step.n}</span><span className="heading">{step.title}</span>
+              <div className="copy">{step.lines.map((line) => <span key={line}>{line}<br /></span>)}</div>
+            </div>
+          ))}
+          {aiSteps.map((step, index) => (
+            <div key={step.title} className="neuron-art-step ai" style={{ left: `${25.0 + index * 18.1}%` }}>
+              <span className="num">{step.n}</span><span className="heading">{step.title}</span>
+              <div className="copy">{step.lines.map((line) => <span key={line}>{line}<br /></span>)}</div>
+            </div>
+          ))}
+
+          <div className="neuron-art-label teal" style={{ left: "5.2%", top: "34.0%", width: "130px" }}>inputs from<br />other neurons</div>
+          <div className="neuron-art-label gold" style={{ left: "47.6%", top: "24.0%", width: "190px" }}>electrical impulse</div>
+          <div className="neuron-art-label gold" style={{ left: "80.2%", top: "31.4%", width: "180px" }}>neurotransmitters<br />cross the synapse</div>
+          <div className="neuron-art-label" style={{ left: "24.4%", top: "40.2%", width: "116px" }}>cell body<br />(soma)</div>
+          <div className="neuron-art-label" style={{ left: "45.1%", top: "41.4%", width: "80px" }}>axon</div>
+          <div className="neuron-art-label" style={{ left: "70.1%", top: "40.8%", width: "170px" }}>axon terminals<br />(synapses)</div>
+
+          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "54.2%", fontSize: "1rem" }}>x<sub>1</sub></div>
+          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "61.7%", fontSize: "1rem" }}>x<sub>2</sub></div>
+          <div className="neuron-art-symbol blue" style={{ left: "13.7%", top: "69.4%", fontSize: "1rem" }}>x<sub>n</sub></div>
+          <div className="neuron-art-label gold" style={{ left: "21.2%", top: "51.8%", width: "38px" }}>w<sub>1</sub></div>
+          <div className="neuron-art-label gold" style={{ left: "20.2%", top: "57.8%", width: "38px" }}>w<sub>2</sub></div>
+          <div className="neuron-art-label gold" style={{ left: "19.4%", top: "64.7%", width: "38px" }}>w<sub>n</sub></div>
+          <div className="neuron-art-symbol gold" style={{ left: "45.7%", top: "58.0%", fontSize: "3rem" }}>Σ</div>
+          <div className="neuron-art-symbol gold" style={{ left: "45.7%", top: "68.6%", fontSize: "1rem" }}>b</div>
+          <div className="neuron-art-label gold" style={{ left: "50.6%", top: "65.8%", width: "160px" }}>z = Σ w<sub>i</sub>x<sub>i</sub> + b</div>
+          <div className="neuron-art-label" style={{ left: "45.7%", top: "71.2%", width: "60px" }}>bias</div>
+          <div className="neuron-art-symbol gold" style={{ left: "58.2%", top: "55.0%", fontSize: "1.25rem" }}>z</div>
+          <div className="neuron-art-symbol orange" style={{ left: "64.0%", top: "57.6%", fontSize: "2.7rem" }}>φ</div>
+          <div className="neuron-art-label" style={{ left: "64.0%", top: "68.5%", width: "170px" }}>activation function<br />(e.g., ReLU, sigmoid)</div>
+          <div className="neuron-art-label coral" style={{ left: "75.0%", top: "53.9%", width: "150px", fontSize: "clamp(0.72rem, 1.3vw, 1rem)" }}>a = φ(z)</div>
+          <div className="neuron-art-symbol blue" style={{ left: "89.0%", top: "56.5%", fontSize: "1.55rem" }}>y</div>
+          <div className="neuron-art-label" style={{ left: "88.0%", top: "62.3%", width: "150px" }}>output<br />(to next layer<br />or prediction)</div>
+
+          <div className="neuron-art-note">
+            Artificial neurons borrow language from biology, but they abstract away metabolism, cellular repair, chemical signaling, and embodiment.
+          </div>
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 function ScalesIcon({ color = C.teal }) {
   return (
     <svg viewBox="0 0 120 96" aria-hidden="true" style={{ width: "86px", height: "auto", display: "block" }}>
@@ -1360,16 +1601,18 @@ function FuzzyZoneArtFigure() {
           left: 50%;
           top: 67.8%;
           transform: translateX(-50%);
-          width: 210px;
+          width: 320px;
           text-align: center;
           font-size: clamp(0.66rem, 1.08vw, 0.82rem);
           line-height: 1.18;
           color: ${C.textPrimary};
+          white-space: nowrap;
         }
         .fuzzy-zone-art-note {
           left: 18.5%;
           right: 8.2%;
-          bottom: 5.8%;
+          top: 80.8%;
+          bottom: auto;
           font-size: clamp(0.62rem, 0.96vw, 0.78rem);
           line-height: 1.22;
           color: #f4f1e9;
@@ -1410,7 +1653,7 @@ function FuzzyZoneArtFigure() {
           {artificialLabels.map((label) => (
             <div key={label.text} className="fuzzy-zone-art-label ai" style={{ left: label.left }}>{label.text}</div>
           ))}
-          <div className="fuzzy-zone-art-boundary">no sharp boundary<br />only gradual change</div>
+          <div className="fuzzy-zone-art-boundary">no sharp boundary · only gradual change</div>
           <div className="fuzzy-zone-art-note">
             <strong>Ethically important questions often live in the uncertain middle.</strong> Our task is not to declare a precise cutoff, but to reason carefully, remain open to new evidence, and err on the side of moral consideration.
           </div>
@@ -1714,7 +1957,7 @@ export default function AIConsciousness({ navigate }) {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <NeuronComparisonFigure />
+            <NeuronComparisonArtFigure />
           </FadeIn>
 
           <Divider label="The Starting Point" />
