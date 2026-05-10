@@ -479,7 +479,7 @@ function FuzzyIcon({ type, x = 0, y = 0, color = C.gold, scale = 1 }) {
   );
 }
 
-function ConsciousnessLineFigure() {
+function LegacyConsciousnessLineFigure() {
   const boundaryRows = [
     { n: 1, title: "Single cells", color: C.textMuted, text: "They maintain themselves, respond to the environment, and resist entropy, but we do not normally treat them as conscious subjects." },
     { n: 2, title: "Simple nervous systems", color: C.sky, text: "The case becomes harder. Behavior, sensation, and adaptation begin to look morally relevant." },
@@ -938,6 +938,323 @@ function ConsciousnessLineFigure() {
   );
 }
 
+function LineProblemSummaryFigure() {
+  const rows = [
+    {
+      n: 1,
+      titleLines: ["Single cells"],
+      color: C.textMuted,
+      lines: [
+        "They maintain themselves, respond",
+        "to the environment, and resist entropy.",
+        "Not normally treated as conscious.",
+      ],
+    },
+    {
+      n: 2,
+      titleLines: ["Simple nervous", "systems"],
+      color: C.sky,
+      lines: [
+        "The case becomes harder: behavior,",
+        "sensation, and adaptation start",
+        "to look morally relevant.",
+      ],
+    },
+    {
+      n: 3,
+      titleLines: ["Animal minds"],
+      color: C.goldLight,
+      lines: [
+        "History should humble us: humans",
+        "have repeatedly underestimated",
+        "non-human experience.",
+      ],
+    },
+    {
+      n: 4,
+      titleLines: ["Synthetic or", "artificial systems"],
+      color: C.coral,
+      lines: [
+        "The temptation is to draw the line",
+        "where categories feel comfortable,",
+        "not where the line is found.",
+      ],
+    },
+  ];
+
+  return (
+    <svg viewBox="0 0 720 398" role="img" aria-label="Sorites boundary problem summary" style={{ width: "100%", height: "auto", display: "block", margin: "12px 0 18px" }}>
+      <defs>
+        <radialGradient id="lineProblemSummaryGlow" cx="42%" cy="44%" r="72%">
+          <stop offset="0" stopColor={C.ocean} stopOpacity="0.2" />
+          <stop offset="0.62" stopColor={C.midnight} stopOpacity="0.92" />
+          <stop offset="1" stopColor={C.bgAlt} stopOpacity="1" />
+        </radialGradient>
+      </defs>
+      <rect x="1" y="1" width="718" height="396" rx="14" fill="url(#lineProblemSummaryGlow)" stroke={`${C.textMuted}55`} />
+      <text x="24" y="34" fill={C.textPrimary} fontSize="15" fontWeight="700">
+        The Sorites paradox asks when grains of sand become a heap. One grain is not a heap.
+      </text>
+      <text x="24" y="58" fill={C.textPrimary} fontSize="15" fontWeight="700">
+        Two grains are not a heap. But at some point the label begins to feel appropriate.
+      </text>
+      <text x="24" y="92" fill="#f3f0e9" fontSize="16" fontWeight="700">
+        Consciousness may have a similar boundary problem:
+      </text>
+
+      {rows.map((row, index) => {
+        const y = 130 + index * 64;
+        const titleStart = row.titleLines.length === 1 ? y + 7 : y - 7;
+        return (
+          <g key={row.n}>
+            <line x1="24" y1={y + 42} x2="486" y2={y + 42} stroke={`${C.textMuted}55`} />
+            <circle cx="48" cy={y} r="20" fill={`${C.bgAlt}b8`} stroke={row.color} strokeWidth="1.5" />
+            <text x="48" y={y + 7} textAnchor="middle" fill={row.color} fontSize="21" fontWeight="800">{row.n}</text>
+            {row.titleLines.map((line, titleIndex) => (
+              <text key={line} x="84" y={titleStart + titleIndex * 19} fill={row.color} fontFamily="Source Serif 4, Georgia, serif" fontSize="18" fontWeight="800">
+                {line}
+              </text>
+            ))}
+            <line x1="252" y1={y - 24} x2="252" y2={y + 28} stroke={`${C.textMuted}66`} />
+            {row.lines.map((line, lineIndex) => (
+              <text key={line} x="274" y={y - 17 + lineIndex * 16} fill={C.textSecondary} fontSize="12.4" fontWeight="600">
+                {line}
+              </text>
+            ))}
+          </g>
+        );
+      })}
+
+      <line x1="500" y1="112" x2="500" y2="350" stroke={`${C.textMuted}66`} strokeDasharray="4 5" />
+      <rect x="522" y="108" width="170" height="242" rx="16" fill={`${C.bgAlt}b8`} stroke={`${C.textMuted}55`} />
+      <g transform="translate(607 136)" fill="none" stroke={C.teal} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M0 0 V48" />
+        <path d="M-24 57 H24" />
+        <path d="M-15 48 H15" />
+        <circle cx="0" cy="-3" r="6" />
+        <path d="M-36 10 H36" />
+        <path d="M-36 10 L-50 42 H-22 Z" />
+        <path d="M36 10 L22 42 H50 Z" />
+        <path d="M-50 42 C-42 50 -30 50 -22 42" />
+        <path d="M22 42 C30 50 42 50 50 42" />
+      </g>
+      <text x="550" y="220" fill={C.textPrimary} fontSize="15" fontWeight="700">The point is not that</text>
+      <text x="550" y="242" fill={C.textPrimary} fontSize="15" fontWeight="700">every borderline case</text>
+      <text x="550" y="264" fill={C.textPrimary} fontSize="15" fontWeight="700">is conscious.</text>
+      <text x="550" y="294" fill={C.textPrimary} fontSize="15" fontWeight="700">A fuzzy line can still</text>
+      <text x="550" y="316" fill={C.textPrimary} fontSize="15" fontWeight="700">matter ethically.</text>
+    </svg>
+  );
+}
+
+function LineProblemSummaryMobileFigure() {
+  const rows = [
+    {
+      n: 1,
+      title: "Single cells",
+      color: C.textMuted,
+      lines: ["Self-maintaining and responsive,", "but not normally treated as conscious."],
+    },
+    {
+      n: 2,
+      title: "Simple nervous systems",
+      color: C.sky,
+      lines: ["Behavior, sensation, and adaptation", "begin to look morally relevant."],
+    },
+    {
+      n: 3,
+      title: "Animal minds",
+      color: C.goldLight,
+      lines: ["History should humble us:", "we have often underestimated", "non-human experience."],
+    },
+    {
+      n: 4,
+      title: "Synthetic or artificial systems",
+      color: C.coral,
+      lines: ["Our categories can feel comfortable", "without actually finding the line."],
+    },
+  ];
+
+  return (
+    <svg viewBox="0 0 340 610" role="img" aria-label="Mobile Sorites boundary problem summary" style={{ width: "100%", height: "auto", display: "block", margin: "12px 0 18px" }}>
+      <defs>
+        <radialGradient id="lineProblemMobileGlow" cx="42%" cy="44%" r="72%">
+          <stop offset="0" stopColor={C.ocean} stopOpacity="0.2" />
+          <stop offset="0.62" stopColor={C.midnight} stopOpacity="0.92" />
+          <stop offset="1" stopColor={C.bgAlt} stopOpacity="1" />
+        </radialGradient>
+      </defs>
+      <rect x="1" y="1" width="338" height="608" rx="14" fill="url(#lineProblemMobileGlow)" stroke={`${C.textMuted}55`} />
+      <text x="20" y="34" fill={C.textPrimary} fontSize="13" fontWeight="800">The Sorites paradox asks when grains</text>
+      <text x="20" y="55" fill={C.textPrimary} fontSize="13" fontWeight="800">of sand become a heap. At some point,</text>
+      <text x="20" y="76" fill={C.textPrimary} fontSize="13" fontWeight="800">the label begins to feel appropriate.</text>
+      <text x="20" y="112" fill="#f3f0e9" fontSize="14" fontWeight="800">Consciousness may have a similar problem:</text>
+
+      {rows.map((row, index) => {
+        const y = 154 + index * 86;
+        return (
+          <g key={row.n}>
+            <line x1="20" y1={y + 58} x2="320" y2={y + 58} stroke={`${C.textMuted}55`} />
+            <circle cx="38" cy={y} r="18" fill={`${C.bgAlt}b8`} stroke={row.color} strokeWidth="1.5" />
+            <text x="38" y={y + 6} textAnchor="middle" fill={row.color} fontSize="18" fontWeight="800">{row.n}</text>
+            <text x="68" y={y - 6} fill={row.color} fontFamily="Source Serif 4, Georgia, serif" fontSize={row.title.length > 24 ? "15" : "17"} fontWeight="800">
+              {row.title}
+            </text>
+            {row.lines.map((line, lineIndex) => (
+              <text key={line} x="68" y={y + 19 + lineIndex * 16} fill={C.textSecondary} fontSize="12.2" fontWeight="700">
+                {line}
+              </text>
+            ))}
+          </g>
+        );
+      })}
+
+      <rect x="20" y="506" width="300" height="78" rx="14" fill={`${C.bgAlt}b8`} stroke={`${C.textMuted}55`} />
+      <g transform="translate(46 532)" fill="none" stroke={C.teal} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M0 0 V34" />
+        <path d="M-16 40 H16" />
+        <circle cx="0" cy="-3" r="5" />
+        <path d="M-26 7 H26" />
+        <path d="M-26 7 L-36 30 H-16 Z" />
+        <path d="M26 7 L16 30 H36 Z" />
+      </g>
+      <text x="86" y="528" fill={C.textPrimary} fontSize="12.5" fontWeight="800">A fuzzy line can still matter ethically.</text>
+      <text x="86" y="550" fill={C.textPrimary} fontSize="12.5" fontWeight="800">We can reason carefully before</text>
+      <text x="86" y="572" fill={C.textPrimary} fontSize="12.5" fontWeight="800">perfect metaphysics arrives.</text>
+    </svg>
+  );
+}
+
+function FuzzyZoneChart() {
+  const bioExamples = [
+    { label: "single cell", type: "cell", x: 212, color: "#b9c4ce", scale: 0.54 },
+    { label: "simple organisms", type: "worm", x: 373, color: C.sky, scale: 0.53 },
+    { label: "insects", type: "insect", x: 513, color: C.sky, scale: 0.48 },
+    { label: "fish", type: "fish", x: 643, color: C.sand, scale: 0.48 },
+    { label: "birds", type: "bird", x: 763, color: C.goldLight, scale: 0.5 },
+    { label: "primates", type: "primate", x: 903, color: C.goldLight, scale: 0.48 },
+    { label: "humans", type: "human", x: 1042, color: C.goldLight, scale: 0.5 },
+  ];
+  const artificialExamples = [
+    { label: "simple machine", type: "gear", x: 212, color: "#b9c4ce", scale: 0.52 },
+    { label: "rule-based systems", type: "flow", x: 397, color: C.sky, scale: 0.48 },
+    { label: "machine learning", type: "network", x: 568, color: C.sky, scale: 0.48 },
+    { label: "advanced AI", type: "chipBrain", x: 748, color: C.goldLight, scale: 0.48 },
+    { label: "general AI", type: "processor", x: 899, color: C.coral, scale: 0.48 },
+    { label: "fully synthetic brain", type: "brain", x: 1056, color: C.coral, scale: 0.48 },
+  ];
+
+  return (
+    <svg viewBox="0 0 1227 401" role="img" aria-label="The Consciousness Line fuzzy zone chart" style={{ width: "100%", height: "auto", display: "block" }}>
+      <defs>
+        <linearGradient id="bioFuzzyTrack" x1="0" x2="1">
+          <stop offset="0" stopColor="#b9c4ce" />
+          <stop offset="0.3" stopColor={C.sky} />
+          <stop offset="0.55" stopColor={C.teal} />
+          <stop offset="0.72" stopColor={C.goldLight} />
+          <stop offset="1" stopColor={C.goldLight} />
+        </linearGradient>
+        <linearGradient id="aiFuzzyTrack" x1="0" x2="1">
+          <stop offset="0" stopColor="#b9c4ce" />
+          <stop offset="0.38" stopColor={C.sky} />
+          <stop offset="0.62" stopColor={C.goldLight} />
+          <stop offset="1" stopColor={C.coral} />
+        </linearGradient>
+        <radialGradient id="fuzzyChartBg" cx="48%" cy="42%" r="72%">
+          <stop offset="0" stopColor={C.ocean} stopOpacity="0.24" />
+          <stop offset="0.58" stopColor={C.midnight} stopOpacity="0.92" />
+          <stop offset="1" stopColor="#071421" stopOpacity="1" />
+        </radialGradient>
+        <radialGradient id="fuzzyMoralZone" cx="52%" cy="50%" r="52%">
+          <stop offset="0" stopColor={C.goldLight} stopOpacity="0.24" />
+          <stop offset="0.5" stopColor={C.teal} stopOpacity="0.14" />
+          <stop offset="1" stopColor={C.sky} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect x="1.5" y="1.5" width="1224" height="398" rx="16" fill="url(#fuzzyChartBg)" stroke={`${C.textMuted}66`} strokeWidth="1.5" />
+      <ellipse cx="640" cy="151" rx="380" ry="104" fill="url(#fuzzyMoralZone)" />
+      <ellipse cx="640" cy="151" rx="382" ry="105" fill="none" stroke={C.sky} strokeWidth="1.4" strokeDasharray="2 8" opacity="0.72" />
+      <ellipse cx="640" cy="151" rx="382" ry="105" fill="none" stroke={C.goldLight} strokeWidth="1.4" strokeDasharray="2 8" opacity="0.86" transform="rotate(1.5 640 151)" />
+
+      <text x="614" y="36" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="24" fontWeight="800">The Consciousness Line Is a Fuzzy Zone</text>
+      <text x="614" y="61" textAnchor="middle" fill={C.goldLight} fontSize="18" fontWeight="800">uncertain moral zone</text>
+      <text x="94" y="38" textAnchor="middle" fill={C.textPrimary} fontSize="16">Clearly</text>
+      <text x="94" y="60" textAnchor="middle" fill={C.textPrimary} fontSize="16">not conscious</text>
+      <text x="1138" y="38" textAnchor="middle" fill={C.textPrimary} fontSize="16">Clearly</text>
+      <text x="1138" y="60" textAnchor="middle" fill={C.textPrimary} fontSize="16">conscious</text>
+
+      <text x="22" y="115" fill="#23c6a8" fontSize="18" fontWeight="800">Biological</text>
+      <text x="22" y="140" fill="#23c6a8" fontSize="18" fontWeight="800">examples</text>
+      <text x="22" y="213" fill={C.coral} fontSize="18" fontWeight="800">Artificial</text>
+      <text x="22" y="239" fill={C.coral} fontSize="18" fontWeight="800">examples</text>
+
+      <line x1="123" y1="141" x2="1136" y2="141" stroke="url(#bioFuzzyTrack)" strokeWidth="4" strokeLinecap="round" />
+      <line x1="123" y1="260" x2="1147" y2="260" stroke="url(#aiFuzzyTrack)" strokeWidth="4" strokeLinecap="round" />
+
+      {bioExamples.map(item => (
+        <g key={item.label}>
+          <text x={item.x} y="82" textAnchor="middle" fill={C.textPrimary} fontSize="15" fontWeight="600">{item.label}</text>
+          <FuzzyIcon type={item.type} x={item.x} y={113} color={item.color} scale={item.scale} />
+          <circle cx={item.x} cy="141" r="7.5" fill={item.color} />
+        </g>
+      ))}
+      {artificialExamples.map(item => (
+        <g key={item.label}>
+          <text x={item.x} y="198" textAnchor="middle" fill={C.textPrimary} fontSize="15" fontWeight="600">{item.label}</text>
+          <FuzzyIcon type={item.type} x={item.x} y={231} color={item.color} scale={item.scale} />
+          <circle cx={item.x} cy="260" r="7.5" fill={item.color} />
+        </g>
+      ))}
+
+      <line x1="621" y1="268" x2="621" y2="296" stroke={C.goldLight} strokeWidth="1.5" strokeDasharray="6 7" />
+      <text x="621" y="309" textAnchor="middle" fill={C.textPrimary} fontSize="15">no sharp boundary</text>
+      <text x="621" y="327" textAnchor="middle" fill={C.textPrimary} fontSize="15">only gradual change</text>
+
+      <rect x="135" y="335" width="925" height="56" rx="12" fill={`${C.bgAlt}cc`} stroke={`${C.textMuted}55`} />
+      <g transform="translate(177 365)" fill="none" stroke="#23c6a8" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M-12 9 C-18 4 -21 -3 -21 -10 C-21 -23 -12 -31 0 -31 C12 -31 21 -23 21 -10 C21 -3 18 4 12 9" />
+        <path d="M-10 13 H10 M-8 20 H8 M-4 27 H4" />
+        <path d="M0 -41 V-36 M-28 -30 L-24 -26 M28 -30 L24 -26 M-38 -8 H-32 M32 -8 H38" />
+      </g>
+      <text x="222" y="360" fill={C.textPrimary} fontSize="17">Ethically important questions often live in the uncertain middle. Our task is not to declare a precise cutoff,</text>
+      <text x="222" y="381" fill={C.textPrimary} fontSize="17">but to reason carefully, remain open to new evidence, and err on the side of moral consideration.</text>
+    </svg>
+  );
+}
+
+function ConsciousnessLineFigure() {
+  return (
+    <Expandable title="4. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
+      <style>{`
+        .line-problem-summary-mobile {
+          display: none;
+        }
+        @media (max-width: 700px) {
+          .line-problem-summary-desktop {
+            display: none;
+          }
+          .line-problem-summary-mobile {
+            display: block;
+          }
+        }
+      `}</style>
+      <div className="line-problem-summary-desktop" style={{ overflowX: "auto", paddingBottom: 4 }}>
+        <div style={{ minWidth: 640 }}>
+          <LineProblemSummaryFigure />
+        </div>
+      </div>
+      <div className="line-problem-summary-mobile">
+        <LineProblemSummaryMobileFigure />
+      </div>
+      <div style={{ overflowX: "auto", paddingBottom: 4, marginTop: 12 }}>
+        <div style={{ minWidth: 720 }}>
+          <FuzzyZoneChart />
+        </div>
+      </div>
+    </Expandable>
+  );
+}
+
 function BioDigitalLoopFigure() {
   return (
     <FigureShell
@@ -1301,6 +1618,8 @@ export default function AIConsciousness({ navigate }) {
               <SourceLink href={links.functionalism}>Stanford Encyclopedia of Philosophy, "Functionalism"</SourceLink>
             </Expandable>
           </FadeIn>
+
+          <Divider label="The Line Problem" />
 
           <FadeIn delay={0.12}>
             <ConsciousnessLineFigure />
