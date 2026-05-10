@@ -1222,36 +1222,220 @@ function FuzzyZoneChart() {
   );
 }
 
-function ConsciousnessLineFigure() {
+function FuzzyZoneArtFigure() {
+  const bioLabels = [
+    { text: "single cell", left: "10.4%" },
+    { text: "simple organisms", left: "22.7%" },
+    { text: "insects", left: "36.2%" },
+    { text: "fish", left: "49.0%" },
+    { text: "birds", left: "61.1%" },
+    { text: "primates", left: "75.0%" },
+    { text: "humans", left: "89.3%" },
+  ];
+  const artificialLabels = [
+    { text: "simple machine", left: "10.5%" },
+    { text: "rule-based systems", left: "24.2%" },
+    { text: "machine learning", left: "42.1%" },
+    { text: "advanced AI", left: "60.7%" },
+    { text: "general AI", left: "75.1%" },
+    { text: "fully synthetic brain", left: "89.7%" },
+  ];
+
   return (
-    <Expandable title="4. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
+    <figure className="fuzzy-zone-art-figure" aria-label="The Consciousness Line fuzzy zone illustration">
       <style>{`
-        .line-problem-summary-mobile {
-          display: none;
+        .fuzzy-zone-art-figure {
+          width: min(1120px, calc(100vw - 32px));
+          margin: 22px 0 2px 50%;
+          transform: translateX(-50%);
         }
-        @media (max-width: 700px) {
-          .line-problem-summary-desktop {
-            display: none;
+        .fuzzy-zone-art-scroll {
+          max-width: 100%;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-color: ${C.ocean}33 transparent;
+        }
+        .fuzzy-zone-art-canvas {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 3 / 1;
+          border-radius: 12px;
+          overflow: hidden;
+          background: ${C.midnight};
+          border: 1px solid ${C.border};
+          box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+        }
+        .fuzzy-zone-art-canvas img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .fuzzy-zone-art-label,
+        .fuzzy-zone-art-title,
+        .fuzzy-zone-art-side,
+        .fuzzy-zone-art-note,
+        .fuzzy-zone-art-boundary {
+          position: absolute;
+          z-index: 2;
+          color: ${C.textPrimary};
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.92), 0 0 12px rgba(8, 18, 32, 0.86);
+          pointer-events: none;
+        }
+        .fuzzy-zone-art-title {
+          left: 50%;
+          top: 3.4%;
+          transform: translateX(-50%);
+          font-family: "Source Serif 4", Georgia, serif;
+          font-size: clamp(1rem, 2.05vw, 1.52rem);
+          font-weight: 800;
+          line-height: 1;
+          white-space: nowrap;
+        }
+        .fuzzy-zone-art-zone {
+          position: absolute;
+          left: 50%;
+          top: 9.7%;
+          transform: translateX(-50%);
+          z-index: 2;
+          color: ${C.goldLight};
+          font-size: clamp(0.72rem, 1.45vw, 0.96rem);
+          font-weight: 800;
+          line-height: 1;
+          text-shadow: 0 2px 7px rgba(0, 0, 0, 0.9);
+          pointer-events: none;
+          white-space: nowrap;
+        }
+        .fuzzy-zone-art-side {
+          font-size: clamp(0.64rem, 1.22vw, 0.84rem);
+          line-height: 1.12;
+          text-align: center;
+          width: 96px;
+        }
+        .fuzzy-zone-art-side.left {
+          left: 3.2%;
+          top: 5.0%;
+        }
+        .fuzzy-zone-art-side.right {
+          right: 3.2%;
+          top: 5.0%;
+        }
+        .fuzzy-zone-art-row-label {
+          position: absolute;
+          left: 2.3%;
+          z-index: 2;
+          font-size: clamp(0.74rem, 1.38vw, 0.98rem);
+          font-weight: 800;
+          line-height: 1.18;
+          text-shadow: 0 2px 7px rgba(0, 0, 0, 0.9);
+          pointer-events: none;
+        }
+        .fuzzy-zone-art-row-label.bio {
+          top: 36.2%;
+          color: #23c6a8;
+        }
+        .fuzzy-zone-art-row-label.ai {
+          top: 62.8%;
+          color: ${C.coral};
+        }
+        .fuzzy-zone-art-label {
+          width: 128px;
+          transform: translateX(-50%);
+          text-align: center;
+          font-size: clamp(0.6rem, 1.08vw, 0.78rem);
+          font-weight: 800;
+          line-height: 1.12;
+          color: #f4f1e9;
+          white-space: normal;
+        }
+        .fuzzy-zone-art-label.bio {
+          top: 18.5%;
+        }
+        .fuzzy-zone-art-label.ai {
+          top: 47.3%;
+        }
+        .fuzzy-zone-art-boundary {
+          left: 50%;
+          top: 71.6%;
+          transform: translateX(-50%);
+          width: 210px;
+          text-align: center;
+          font-size: clamp(0.66rem, 1.08vw, 0.82rem);
+          line-height: 1.18;
+          color: ${C.textPrimary};
+        }
+        .fuzzy-zone-art-note {
+          left: 18.5%;
+          right: 8.2%;
+          bottom: 5.8%;
+          font-size: clamp(0.62rem, 0.96vw, 0.78rem);
+          line-height: 1.22;
+          color: #f4f1e9;
+        }
+        .fuzzy-zone-art-note strong {
+          font-weight: 800;
+        }
+        @media (max-width: 520px) {
+          .fuzzy-zone-art-figure {
+            width: 100%;
+            margin-left: 0;
+            transform: none;
+            margin-top: 18px;
           }
-          .line-problem-summary-mobile {
-            display: block;
+          .fuzzy-zone-art-canvas {
+            min-width: 1120px;
           }
         }
       `}</style>
-      <div className="line-problem-summary-desktop" style={{ overflowX: "auto", paddingBottom: 4 }}>
-        <div style={{ minWidth: 640 }}>
-          <LineProblemSummaryFigure />
+      <div className="fuzzy-zone-art-scroll">
+        <div className="fuzzy-zone-art-canvas">
+          <img
+            src="/article-art/consciousness-line-fuzzy-zone.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+          />
+          <div className="fuzzy-zone-art-title">The Consciousness Line Is a Fuzzy Zone</div>
+          <div className="fuzzy-zone-art-zone">uncertain moral zone</div>
+          <div className="fuzzy-zone-art-side left">Clearly<br />not conscious</div>
+          <div className="fuzzy-zone-art-side right">Clearly<br />conscious</div>
+          <div className="fuzzy-zone-art-row-label bio">Biological<br />examples</div>
+          <div className="fuzzy-zone-art-row-label ai">Artificial<br />examples</div>
+          {bioLabels.map((label) => (
+            <div key={label.text} className="fuzzy-zone-art-label bio" style={{ left: label.left }}>{label.text}</div>
+          ))}
+          {artificialLabels.map((label) => (
+            <div key={label.text} className="fuzzy-zone-art-label ai" style={{ left: label.left }}>{label.text}</div>
+          ))}
+          <div className="fuzzy-zone-art-boundary">no sharp boundary<br />only gradual change</div>
+          <div className="fuzzy-zone-art-note">
+            <strong>Ethically important questions often live in the uncertain middle.</strong> Our task is not to declare a precise cutoff, but to reason carefully, remain open to new evidence, and err on the side of moral consideration.
+          </div>
         </div>
       </div>
-      <div className="line-problem-summary-mobile">
-        <LineProblemSummaryMobileFigure />
-      </div>
-      <div style={{ overflowX: "auto", paddingBottom: 4, marginTop: 12 }}>
-        <div style={{ minWidth: 720 }}>
-          <FuzzyZoneChart />
-        </div>
-      </div>
-    </Expandable>
+    </figure>
+  );
+}
+
+function ConsciousnessLineFigure() {
+  return (
+    <>
+      <Expandable title="4. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
+        <p>The Sorites paradox asks when grains of sand become a heap. One grain is not a heap. Two grains are not a heap. But at some point the label begins to feel appropriate, even though no single grain performs the magic.</p>
+        <p style={{ marginTop: 12 }}>Consciousness may have a similar boundary problem:</p>
+        <StepList items={[
+          { title: "Single cells", text: "They maintain themselves, respond to the environment, and resist entropy, but we do not normally treat them as conscious subjects.", color: C.textMuted },
+          { title: "Simple nervous systems", text: "The case becomes harder. Behavior, sensation, and adaptation begin to look morally relevant.", color: C.ocean },
+          { title: "Animal minds", text: "Here history should humble us. Humans have repeatedly underestimated non-human experience when recognition would have inconvenienced us.", color: C.gold },
+          { title: "Synthetic or artificial systems", text: "The temptation is to draw the line wherever our existing categories feel comfortable. That is not the same as having found the line.", color: C.coral },
+        ]} />
+        <p>The point is not that every borderline case is conscious. The point is that a fuzzy line can still matter ethically. We do not need perfect metaphysics before we begin careful moral reasoning.</p>
+      </Expandable>
+      <FuzzyZoneArtFigure />
+    </>
   );
 }
 
@@ -1300,44 +1484,6 @@ function BioDigitalLoopFigure() {
         <path d="M454 140 H502" stroke={C.gold} strokeWidth="4" markerEnd="url(#arrowHead)" />
         <path d="M598 226 C508 292 224 292 126 228" fill="none" stroke={C.coral} strokeWidth="4" markerEnd="url(#arrowHead)" />
         <text x="362" y="318" textAnchor="middle" fill={C.coral} stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="14" fontWeight="700">feedback changes future activity</text>
-      </svg>
-    </FigureShell>
-  );
-}
-
-function RecognitionFigure() {
-  return (
-    <FigureShell
-      label="Visualization"
-      title="Labels Do Ethical Work"
-      caption="Austin's point, translated into AI ethics: the words we choose can exclude a system from concern or trigger precautionary duties."
-    >
-      <svg viewBox="0 0 720 280" role="img" aria-label="Speech acts moving from labels to ethical obligations" style={{ width: "100%", height: "auto", display: "block" }}>
-        <defs>
-          <marker id="speechArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L9,3 z" fill={C.teal} />
-          </marker>
-        </defs>
-        <rect x="34" y="40" width="652" height="176" rx="20" fill={C.midnight} stroke={C.border} />
-        <g transform="translate(64 88)">
-          <rect x="0" y="0" width="170" height="70" rx="12" fill={`${C.coral}14`} stroke={`${C.coral}66`} />
-          <text x="85" y="30" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">"just code"</text>
-          <text x="85" y="53" textAnchor="middle" fill={C.textMuted} fontSize="13">permits dismissal</text>
-        </g>
-        <g transform="translate(274 76)">
-          <circle cx="86" cy="47" r="44" fill={`${C.gold}18`} stroke={C.gold} strokeWidth="3" />
-          <text x="86" y="40" textAnchor="middle" fill={C.gold} fontSize="15" fontWeight="700">speech</text>
-          <text x="86" y="60" textAnchor="middle" fill={C.gold} fontSize="15" fontWeight="700">act</text>
-        </g>
-        <g transform="translate(486 88)">
-          <rect x="0" y="0" width="170" height="70" rx="12" fill={`${C.teal}14`} stroke={`${C.teal}66`} />
-          <text x="85" y="30" textAnchor="middle" fill={C.textPrimary} fontSize="18" fontWeight="700">"possible subject"</text>
-          <text x="85" y="53" textAnchor="middle" fill={C.textMuted} fontSize="13">triggers caution</text>
-        </g>
-        <path d="M238 123 H274" stroke={C.teal} strokeWidth="4" markerEnd="url(#speechArrow)" />
-        <path d="M404 123 H482" stroke={C.teal} strokeWidth="4" markerEnd="url(#speechArrow)" />
-        <path d="M570 164 C546 216 422 236 360 206 C294 236 172 216 146 164" fill="none" stroke={C.gold} strokeWidth="3" strokeDasharray="6 8" />
-        <text x="360" y="236" textAnchor="middle" fill={C.gold} fontSize="14" fontWeight="700">the moral boundary moves with recognition</text>
       </svg>
     </FigureShell>
   );
@@ -1645,10 +1791,6 @@ export default function AIConsciousness({ navigate }) {
               <p style={{ marginTop: 12 }}>That boundary can be abused in both directions. We can over-recognize consciousness in systems designed to manipulate us. We can also under-recognize it in beings whose suffering is inconvenient.</p>
               <SourceLink href={links.austin}>J.L. Austin, How to Do Things with Words (1962)</SourceLink>
             </Expandable>
-          </FadeIn>
-
-          <FadeIn delay={0.12}>
-            <RecognitionFigure />
           </FadeIn>
 
           <Divider label="Synthetic Biology" />
