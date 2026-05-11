@@ -381,7 +381,7 @@ function NeuronComparisonArtFigure() {
       <div className="neuron-art-scroll">
         <div className="neuron-art-canvas">
           <img
-            src="/article-art/neuron-comparison-metaphors.png"
+            src="/article-art/neuron-comparison-metaphors-cohesive.png"
             alt="Infographic comparing a biological neuron with an artificial neuron, emphasizing that artificial neurons borrow biological language but abstract away metabolism, cellular repair, chemical signaling, and embodiment."
             loading="lazy"
             decoding="async"
