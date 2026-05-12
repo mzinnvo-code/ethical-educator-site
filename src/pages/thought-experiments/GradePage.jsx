@@ -14,6 +14,12 @@ import { audioBus } from "../../lib/audioBus.js";
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 
+function experimentIdFromHash() {
+  if (typeof window === "undefined") return null;
+  const query = window.location.hash.split("?")[1] || "";
+  return new URLSearchParams(query).get("experiment");
+}
+
 const TOOLKIT_LINK = withImage({ id: "thought-experiments/toolkit", icon: "🛠", title: "Dialogue Toolkit", desc: "Norms, protocols, decision tree", color: C.teal });
 
 const SIBLING_LINKS = {
@@ -65,8 +71,20 @@ export default function GradePage({
   const [lensChoices, setLensChoices] = useState([]); // session-only
   const activeWrapperRef = useRef(null);
 
-  // Reset selection AND profile when band changes
-  useEffect(() => { audioBus.stop(); setActive(null); setLensChoices([]); }, [band]);
+  // Reset selection/profile when the band changes, and honour article deep links.
+  useEffect(() => {
+    const syncExperimentFromHash = () => {
+      audioBus.stop();
+      const id = experimentIdFromHash();
+      const target = id ? getExperimentsByGrade(band).find(experiment => experiment.id === id) : null;
+      setActive(target || null);
+      setLensChoices([]);
+    };
+
+    syncExperimentFromHash();
+    window.addEventListener("hashchange", syncExperimentFromHash);
+    return () => window.removeEventListener("hashchange", syncExperimentFromHash);
+  }, [band]);
 
   // Stop in-flight narration when the page unmounts (e.g. user navigates away).
   useEffect(() => () => audioBus.stop(), []);
