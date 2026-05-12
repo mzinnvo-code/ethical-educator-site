@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../../theme.js";
 import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring,
@@ -10,6 +10,7 @@ import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { useExperimentFilter } from "../../hooks/useExperimentFilter.js";
 import { getExperimentsByGrade, getTopicIdsForGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { audioBus } from "../../lib/audioBus.js";
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 
@@ -68,10 +69,12 @@ export default function GradePage({
   const filterApi = useExperimentFilter(all);
   const [active, setActive] = useState(null);
   const [lensChoices, setLensChoices] = useState([]); // session-only
+  const activeWrapperRef = useRef(null);
 
   // Reset selection/profile when the band changes, and honour article deep links.
   useEffect(() => {
     const syncExperimentFromHash = () => {
+      audioBus.stop();
       const id = experimentIdFromHash();
       const target = id ? getExperimentsByGrade(band).find(experiment => experiment.id === id) : null;
       setActive(target || null);
@@ -83,12 +86,31 @@ export default function GradePage({
     return () => window.removeEventListener("hashchange", syncExperimentFromHash);
   }, [band]);
 
+  // Stop in-flight narration when the page unmounts (e.g. user navigates away).
+  useEffect(() => () => audioBus.stop(), []);
+
+  // Smoothly scroll the active card into view after it mounts.
+  useEffect(() => {
+    if (!active) return;
+    requestAnimationFrame(() => {
+      activeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [active]);
+
+  const closeActive = () => { audioBus.stop(); setActive(null); };
+
+  const pickRelated = (current, pool) => {
+    if (!current || !pool?.length) return null;
+    const currentTopics = new Set(current.topics || []);
+    return pool.find(e => e.id !== current.id && (e.topics || []).some(t => currentTopics.has(t))) || null;
+  };
+  const handlePickRelated = (next) => { audioBus.stop(); setActive(next); };
+
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   const resetProfile = () => setLensChoices([]);
   const suggestTopic = (topicId) => {
     filterApi.setSelectedTopics([topicId]);
-    setActive(null);
-    window.scrollTo({ top: 200, behavior: "smooth" });
+    closeActive();
   };
 
   const availableTopicIds = getTopicIdsForGrade(band);
@@ -132,12 +154,12 @@ export default function GradePage({
                 experiments: filterApi.filtered,
                 all,
                 filterApi,
-                onSelect: (e) => { setActive(e); window.scrollTo({ top: 200, behavior: "smooth" }); },
+                onSelect: (e) => setActive(e),
                 emptyMessage,
               }) : (
                 <ExperimentGrid
                   experiments={filterApi.filtered}
-                  onSelect={(e) => { setActive(e); window.scrollTo({ top: 200, behavior: "smooth" }); }}
+                  onSelect={(e) => setActive(e)}
                   emptyMessage={emptyMessage}
                 />
               )}
@@ -145,24 +167,41 @@ export default function GradePage({
           )}
 
           {active && (
-            <div style={{ marginTop: 20 }}>
-              <button
-                onClick={() => setActive(null)}
-                style={{
-                  display: "flex", alignItems: "center", gap: 6, marginBottom: 16,
-                  background: "none", border: "none", color: C.textMuted, cursor: "pointer",
-                  fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
-                }}
-                onMouseOver={e => e.currentTarget.style.color = C.gold}
-                onMouseOut={e => e.currentTarget.style.color = C.textMuted}
-              >
-                ← Back to all {label} experiments
-              </button>
+            <div ref={activeWrapperRef} style={{ marginTop: 20, scrollMarginTop: 80 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16, flexWrap: "wrap" }}>
+                <button
+                  onClick={closeActive}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    background: "none", border: "none", color: C.textMuted, cursor: "pointer",
+                    fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = C.gold}
+                  onMouseOut={e => e.currentTarget.style.color = C.textMuted}
+                >
+                  ← Back to all {label} experiments
+                </button>
+                <button
+                  onClick={() => { audioBus.stop(); navigate?.("thought-experiments"); }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    background: "none", border: "none", color: C.textMuted, cursor: "pointer",
+                    fontSize: "0.84rem", padding: 0, transition: "color 0.2s",
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = C.gold}
+                  onMouseOut={e => e.currentTarget.style.color = C.textMuted}
+                >
+                  ⌂ Thought Experiments hub
+                </button>
+              </div>
               <ScenarioCard
+                key={active.id}
                 experiment={active}
                 mode={mode}
-                onClose={() => setActive(null)}
+                onClose={closeActive}
                 onRecordChoice={recordChoice}
+                relatedExperiment={pickRelated(active, all)}
+                onPickRelated={handlePickRelated}
               />
             </div>
           )}

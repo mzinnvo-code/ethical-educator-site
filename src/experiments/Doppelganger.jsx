@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function DoppelgangerExperiment() {
@@ -11,15 +12,22 @@ export default function DoppelgangerExperiment() {
   const [guess, setGuess] = useState(null);
   const [anim, setAnim] = useState(false);
   const audio = useAudio();
+  const cardTopRef = useRef(null);
+  const scrollToTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   const go = (key, val, nextAct) => {
+    audioBus.stop();
     audio.playChime();
     setAnim(true);
     setChoices({ ...choices, [key]: val });
-    setTimeout(() => { setAct(nextAct !== undefined ? nextAct : act + 1); setAnim(false); }, 500);
+    setTimeout(() => { setAct(nextAct !== undefined ? nextAct : act + 1); setAnim(false); scrollToTop(); }, 500);
   };
 
-  useEffect(() => () => audio.stopAll(), [audio]);
+  useEffect(() => () => { audio.stopAll(); audioBus.stop(); }, [audio]);
 
   const responses = [
     { name: "Alex", text: "I think Kafka is showing how alienation changes identity at the biological level. Gregor doesn't just feel different — he IS different. The transformation is literal because Kafka wants us to stop treating alienation as metaphor. It's real, physical, devastating.", av: "🟦", style: "casual" },
@@ -45,7 +53,7 @@ export default function DoppelgangerExperiment() {
         <p style={{ color: C.textMuted, fontSize: "0.82rem", maxWidth: 420, margin: "0 auto 24px" }}>
           This experiment unfolds across five acts. Your choices at each stage will cascade into the next. There are no resets between acts — just as there are none in a real semester.
         </p>
-        <button onClick={() => { audio.playDeep(); setAct(1); }} style={{ padding: "14px 40px", background: `linear-gradient(135deg, ${C.coral}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.95rem", boxShadow: `0 4px 24px rgba(192,112,64,0.25)` }}>
+        <button onClick={() => { audioBus.stop(); audio.playDeep(); setAct(1); scrollToTop(); }} style={{ padding: "14px 40px", background: `linear-gradient(135deg, ${C.coral}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.95rem", boxShadow: `0 4px 24px rgba(192,112,64,0.25)` }}>
           Begin the Semester
         </button>
       </div>
@@ -313,10 +321,14 @@ export default function DoppelgangerExperiment() {
           "Kai's exam revealed a gap between AI-generated performance and actual learning. Design an assessment approach that makes this gap visible BEFORE the final exam — without prohibiting AI entirely.",
         ]} />
 
-        <RestartBtn onClick={() => { setAct(0); setChoices({}); setGuess(null); }} />
+        <RestartBtn onClick={() => { audioBus.stop(); setAct(0); setChoices({}); setGuess(null); scrollToTop(); }} />
       </div>
     ),
   ];
 
-  return <Shell animating={anim} color={C.coral}>{acts[act]()}</Shell>;
+  return (
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
+      <Shell animating={anim} color={C.coral}>{acts[act]()}</Shell>
+    </div>
+  );
 }

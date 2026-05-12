@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { useAudio } from "./shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import {
   Shell, ChoiceBtn, CounterArgument, ReflectionPanel, EthicalLensTag,
 } from "../experiments/ExperimentShared.jsx";
@@ -145,22 +146,42 @@ function TeacherToggle({ active, onToggle, accent }) {
   );
 }
 
-export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice }) {
+export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice, relatedExperiment = null, onPickRelated = null }) {
   const audio = useAudio();
   const stages = experiment.stages || synthesizeStages(experiment);
   const [stageIdx, setStageIdx] = useState(0);
   const [chose, setChose] = useState([]); // chosen Option per stage (sparse — synthesis stages get null)
   const [stageChoiceIdx, setStageChoiceIdx] = useState(null); // index of currently chosen option for the active stage
   const [showTeacherKit, setShowTeacherKit] = useState(false);
+  const cardTopRef = useRef(null);
+  const reflectionRef = useRef(null);
 
   useEffect(() => {
+    audioBus.stop();
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
     setShowTeacherKit(false);
   }, [experiment?.id]);
 
+  // Stop in-flight narration if the card unmounts (e.g. user backs out).
+  useEffect(() => () => audioBus.stop(), []);
+
   if (!experiment) return null;
+
+  const scrollToCardTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  // Two RAFs so the reflection block has had a chance to mount before we measure.
+  const scrollToReflection = () => {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = reflectionRef.current || cardTopRef.current;
+      target?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }));
+  };
 
   const accent = TOPIC_BY_ID[experiment.topics[0]]?.color || C.gold;
   const stage = stages[stageIdx];
@@ -186,14 +207,18 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
   const handleChoose = (idx) => {
     if (!stage.options) return;
+    if (stageChoiceIdx != null) return; // debounce — already chose for this stage
+    audioBus.stop(); // stop any in-flight voice-over so the chime is alone
     setStageChoiceIdx(idx);
     const opt = stage.options[idx];
     const weighty = opt?.lens === "deontological" || stage.weighty;
     if (weighty) audio.playDeep();
     else audio.playChime();
+    scrollToReflection();
   };
 
   const handleNext = () => {
+    audioBus.stop();
     if (stageChoiceIdx != null) {
       const opt = stage.options[stageChoiceIdx];
       // Record this stage's choice
@@ -206,26 +231,32 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
     setStageChoiceIdx(null);
     audio.playReveal();
     setStageIdx(i => Math.min(i + 1, stages.length - 1));
+    scrollToCardTop();
   };
 
   const handleAdvanceFromSynthesis = () => {
+    audioBus.stop();
     audio.playClick();
     onClose?.();
   };
 
   const handleStageJump = (idx) => {
     if (idx >= stageIdx) return; // can only jump back
+    audioBus.stop();
     audio.playClick();
     setStageIdx(idx);
     setChose(prev => prev.slice(0, idx));
     setStageChoiceIdx(null);
+    scrollToCardTop();
   };
 
   const handleRestart = () => {
+    audioBus.stop();
     audio.playClick();
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
+    scrollToCardTop();
   };
 
   // Header bar: kicker, stage indicator + teacher kit toggle
@@ -257,7 +288,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
   // ──────────────── KID MODE (K-5) ────────────────
   if (mode === "kid") {
     return (
-      <>
+      <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
       <Shell color={accent}>
         <HeaderBar />
 
@@ -370,7 +401,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 )}
               </>
             ) : (
-              <>
+              <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
                 <ReflectionPanel
                   option={choiceForStage}
                   color={accent}
@@ -380,25 +411,26 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                   <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>
                 )}
                 <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-              </>
+              </div>
             )}
           </>
         )}
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
-      </>
+      </div>
     );
   }
 
   // ──────────────── STORY MODE (6-8) ────────────────
   if (mode === "story") {
     return (
-      <>
+      <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
       <Shell color={accent}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
           <div style={{ flex: 1, minWidth: 220 }}>
@@ -469,28 +501,29 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
                 </div>
               </>
             ) : (
-              <>
+              <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
                 <ReflectionPanel option={choiceForStage} color={accent} />
                 {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
                 <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-              </>
+              </div>
             )}
           </>
         )}
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
-      </>
+      </div>
     );
   }
 
   // ──────────────── CANON MODE (9-12 + educators) ────────────────
   return (
-    <>
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
     <Shell color={accent}>
       <div style={{ marginBottom: 16 }}>
         <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.7rem", fontWeight: 700, marginBottom: 8, lineHeight: 1.2 }}>
@@ -505,24 +538,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
       <HeaderBar />
 
       {experiment.id === "marys-room" && (
-        <div style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "16 / 9",
-          marginBottom: 16,
-          borderRadius: 10,
-          overflow: "hidden",
-          background: "#060a12",
-          border: "1px solid rgba(200,152,48,0.18)",
-        }}>
-          <iframe
-            src="/animations/marys-room/index.html"
-            title="Mary's Room — animated thought experiment"
-            loading="lazy"
-            allow="autoplay; fullscreen"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
-          />
-        </div>
+        <MarysRoomEmbed accent={accent} />
       )}
       {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
@@ -606,22 +622,23 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
             </div>
             </>
           ) : (
-            <>
+            <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
               <ReflectionPanel option={choiceForStage} color={accent} />
               {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
               <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-            </>
+            </div>
           )}
         </>
       )}
 
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
       )}
     </Shell>
     <TeacherKitBelow />
-    </>
+    </div>
   );
 }
 
@@ -672,7 +689,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   );
 }
 
-function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [] }) {
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [], relatedExperiment = null, onPickRelated = null }) {
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
@@ -698,6 +715,10 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
         />
       )}
 
+      {relatedExperiment && onPickRelated && (
+        <RelatedExperimentCard experiment={relatedExperiment} accent={accent} onPick={onPickRelated} />
+      )}
+
       <div style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
         <button
           onClick={onRestart}
@@ -718,6 +739,109 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
           >← Pick a new experiment</button>
         )}
       </div>
+    </div>
+  );
+}
+
+function RelatedExperimentCard({ experiment, accent, onPick }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div style={{ marginTop: 22 }}>
+      <p style={{
+        color: accent, fontSize: "0.66rem", fontWeight: 800,
+        letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: 8,
+      }}>
+        Try this next
+      </p>
+      <button
+        onClick={() => onPick(experiment)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        style={{
+          display: "block", width: "100%", textAlign: "left",
+          padding: "14px 16px", borderRadius: 12,
+          background: hover ? `${accent}18` : `${accent}0a`,
+          border: `1px solid ${hover ? accent + "60" : accent + "30"}`,
+          color: C.textPrimary, cursor: "pointer",
+          transition: "all 0.2s",
+          transform: hover ? "translateY(-1px)" : "none",
+        }}
+      >
+        <p style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1rem", fontWeight: 600, marginBottom: 4,
+        }}>
+          {experiment.title}
+        </p>
+        {experiment.tagline && (
+          <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.5 }}>
+            {experiment.tagline}
+          </p>
+        )}
+      </button>
+    </div>
+  );
+}
+
+const MARYS_ROOM_SRC = "/animations/marys-room/index.html";
+
+function MarysRoomEmbed({ accent }) {
+  const [status, setStatus] = useState("checking"); // checking | ok | missing
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(MARYS_ROOM_SRC, { method: "HEAD" })
+      .then(res => { if (!cancelled) setStatus(res.ok ? "ok" : "missing"); })
+      .catch(() => { if (!cancelled) setStatus("missing"); });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (status === "missing") {
+    return (
+      <div style={{
+        marginBottom: 16,
+        padding: "16px 18px",
+        borderRadius: 10,
+        background: `${accent}08`,
+        border: `1px dashed ${accent}40`,
+        color: C.textSecondary,
+        fontSize: "0.88rem",
+        lineHeight: 1.6,
+      }}>
+        <p style={{ color: accent, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>
+          Animation unavailable
+        </p>
+        The Mary's Room animation didn't load. The thought experiment still works
+        without it — keep reading and the question will make sense.
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      position: "relative",
+      width: "100%",
+      aspectRatio: "16 / 9",
+      marginBottom: 16,
+      borderRadius: 10,
+      overflow: "hidden",
+      background: "#060a12",
+      border: "1px solid rgba(200,152,48,0.18)",
+    }}>
+      {status === "checking" && (
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: C.textMuted, fontSize: "0.82rem",
+        }}>Loading animation…</div>
+      )}
+      <iframe
+        src={MARYS_ROOM_SRC}
+        title="Mary's Room — animated thought experiment"
+        loading="lazy"
+        allow="autoplay; fullscreen"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+      />
     </div>
   );
 }

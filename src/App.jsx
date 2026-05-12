@@ -343,6 +343,10 @@ export default function App() {
         .mobile-menu a.active{color:${C.gold}}
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        button:focus{outline:none}
+        button:focus-visible{outline:2px solid ${C.gold};outline-offset:2px;border-radius:6px}
+        a:focus{outline:none}
+        a:focus-visible{outline:2px solid ${C.gold};outline-offset:2px;border-radius:4px}
         .page-enter{animation:pageIn 0.4s ease}
         @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}

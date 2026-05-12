@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function TheShortcutExperiment() {
@@ -10,8 +11,20 @@ export default function TheShortcutExperiment() {
   const [choices, setChoices] = useState({});
   const [anim, setAnim] = useState(false);
   const audio = useAudio();
-  const go = (k, v) => { audio.playChime(); setAnim(true); setChoices({ ...choices, [k]: v }); setTimeout(() => { setStage(stage + 1); setAnim(false); }, 500); };
-  useEffect(() => () => audio.stopAll(), [audio]);
+  const cardTopRef = useRef(null);
+  const scrollToTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+  const go = (k, v) => {
+    audioBus.stop();
+    audio.playChime();
+    setAnim(true);
+    setChoices({ ...choices, [k]: v });
+    setTimeout(() => { setStage(stage + 1); setAnim(false); scrollToTop(); }, 500);
+  };
+  useEffect(() => () => { audio.stopAll(); audioBus.stop(); }, [audio]);
 
   const stages = [
     // ─── INTRO ───
@@ -25,7 +38,7 @@ export default function TheShortcutExperiment() {
         <p style={{ color: C.textSecondary, fontSize: "0.93rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 24px" }}>
           This experiment asks you to confront four escalating versions of the same question. Your answers will map onto real philosophical frameworks — and real policy positions.
         </p>
-        <button onClick={() => { audio.playDeep(); setStage(1); }} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.93rem", boxShadow: `0 4px 20px rgba(26,138,122,0.25)` }}>Begin the Experiment</button>
+        <button onClick={() => { audioBus.stop(); audio.playDeep(); setStage(1); scrollToTop(); }} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`, border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: "0.93rem", boxShadow: `0 4px 20px rgba(26,138,122,0.25)` }}>Begin the Experiment</button>
       </div>
     ),
 
@@ -150,10 +163,14 @@ export default function TheShortcutExperiment() {
           "Identify one learning objective in your curriculum where the process of learning is more important than the outcome. How would you protect that process from AI shortcuts?",
           "How would your school's AI policy change if you took seriously the possibility that AI is a partial shortcut — delivering qualification but not socialization or subjectification?",
         ]} />
-        <RestartBtn onClick={() => { setStage(0); setChoices({}); }} />
+        <RestartBtn onClick={() => { audioBus.stop(); setStage(0); setChoices({}); scrollToTop(); }} />
       </div>
     ),
   ];
 
-  return <Shell animating={anim}>{stages[stage]()}</Shell>;
+  return (
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
+      <Shell animating={anim}>{stages[stage]()}</Shell>
+    </div>
+  );
 }

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
 import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
+import { audioBus } from "../lib/audioBus.js";
 import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 export default function AuthorshipExperiment() {
@@ -11,8 +12,20 @@ export default function AuthorshipExperiment() {
   const [decisions, setDecisions] = useState([]);
   const [anim, setAnim] = useState(false);
   const audio = useAudio();
-  const go = (v) => { audio.playClick(); setAnim(true); setDecisions([...decisions, v]); setTimeout(() => { setStage(stage + 1); setAnim(false); }, 400); };
-  useEffect(() => () => audio.stopAll(), [audio]);
+  const cardTopRef = useRef(null);
+  const scrollToTop = () => {
+    requestAnimationFrame(() => {
+      cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+  const go = (v) => {
+    audioBus.stop();
+    audio.playClick();
+    setAnim(true);
+    setDecisions([...decisions, v]);
+    setTimeout(() => { setStage(stage + 1); setAnim(false); scrollToTop(); }, 400);
+  };
+  useEffect(() => () => { audio.stopAll(); audioBus.stop(); }, [audio]);
 
   const roles = {
     student: { icon: "🎒", color: C.teal,
@@ -41,7 +54,7 @@ export default function AuthorshipExperiment() {
         <p style={{ color: C.gold, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "1rem", marginBottom: 16, marginTop: 20 }}>Choose your role:</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10 }}>
           {Object.entries(roles).map(([k, r]) => (
-            <button key={k} onClick={() => { setRole(k); audio.playChime(); setStage(1); }} style={{ padding: "18px 12px", background: `${r.color}0a`, border: `1px solid ${r.color}25`, borderRadius: 12, cursor: "pointer", transition: "all 0.25s", textAlign: "center" }}
+            <button key={k} onClick={() => { audioBus.stop(); setRole(k); audio.playChime(); setStage(1); scrollToTop(); }} style={{ padding: "18px 12px", background: `${r.color}0a`, border: `1px solid ${r.color}25`, borderRadius: 12, cursor: "pointer", transition: "all 0.25s", textAlign: "center" }}
               onMouseOver={e => { e.currentTarget.style.borderColor = r.color; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = `0 8px 24px ${r.color}15`; }}
               onMouseOut={e => { e.currentTarget.style.borderColor = r.color + "25"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}>
               <div style={{ fontSize: "2rem", marginBottom: 8 }}>{r.icon}</div>
@@ -151,11 +164,15 @@ export default function AuthorshipExperiment() {
             "If you adopted each framework (transparency, outcomes, process) as your school's primary value, what specific policies would follow? Where would they conflict with each other?",
             "Draft three thought experiments specific to YOUR school context that would test the boundaries of your AI policy — scenarios where reasonable people would disagree.",
           ]} />
-          <RestartBtn onClick={() => { setStage(0); setRole(null); setDecisions([]); }} />
+          <RestartBtn onClick={() => { audioBus.stop(); setStage(0); setRole(null); setDecisions([]); scrollToTop(); }} />
         </div>
       );
     },
   ];
 
-  return <Shell animating={anim} color={role ? roles[role].color : C.gold}>{stages[stage]()}</Shell>;
+  return (
+    <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
+      <Shell animating={anim} color={role ? roles[role].color : C.gold}>{stages[stage]()}</Shell>
+    </div>
+  );
 }
