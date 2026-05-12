@@ -333,65 +333,6 @@ function NeuronComparisonFigure() {
   );
 }
 
-function NeuronComparisonArtFigure() {
-  return (
-    <figure className="neuron-art-figure" aria-label="Biological and artificial neuron comparison illustration">
-      <style>{`
-        .neuron-art-figure {
-          width: min(1120px, calc(100vw - 32px));
-          margin: 34px 0 30px 50%;
-          transform: translateX(-50%);
-        }
-        .neuron-art-scroll {
-          max-width: 100%;
-          overflow-x: auto;
-          padding-bottom: 4px;
-          scrollbar-color: ${C.ocean}33 transparent;
-        }
-        .neuron-art-canvas {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 3 / 2;
-          border-radius: 18px;
-          overflow: hidden;
-          background: ${C.midnight};
-          border: 1px solid ${C.border};
-          box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
-        }
-        .neuron-art-canvas img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        }
-        @media (max-width: 520px) {
-          .neuron-art-figure {
-            width: 100%;
-            margin-left: 0;
-            transform: none;
-            margin-top: 26px;
-          }
-          .neuron-art-canvas {
-            min-width: 1120px;
-          }
-        }
-      `}</style>
-      <div className="neuron-art-scroll">
-        <div className="neuron-art-canvas">
-          <img
-            src="/article-art/neuron-comparison-metaphors-cohesive.png"
-            alt="Infographic comparing a biological neuron with an artificial neuron, emphasizing that artificial neurons borrow biological language but abstract away metabolism, cellular repair, chemical signaling, and embodiment."
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-    </figure>
-  );
-}
-
 function ScalesIcon({ color = C.teal }) {
   return (
     <svg viewBox="0 0 120 96" aria-hidden="true" style={{ width: "86px", height: "auto", display: "block" }}>
@@ -1772,10 +1713,6 @@ export default function AIConsciousness({ navigate }) {
             <BodyText>
               I agree with that caution. The place where I hesitate is the confidence of the boundary. Since we still do not have a settled theory of consciousness, we should be careful about claims that present biological life as the obvious line between inner light and inner darkness.
             </BodyText>
-          </FadeIn>
-
-          <FadeIn delay={0.1}>
-            <NeuronComparisonArtFigure />
           </FadeIn>
 
           <Divider label="The Starting Point" />
