@@ -6,6 +6,7 @@ import About from "./pages/About.jsx";
 import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
+import AIConsciousness from "./pages/AIConsciousness.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
@@ -60,6 +61,7 @@ const PAGE_MAP = {
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
   "ai-education": AIEducation,
+  "ai-consciousness": AIConsciousness,
   "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "thought-experiments/educators": ThoughtExperimentsForEducators,
@@ -108,6 +110,12 @@ const PAGE_META = {
   "ai-education": {
     title: "AI in the Classroom: Evidence and Ethics — The Ethical Educator",
     description: "What the research says about AI tutors, personalization, and learning outcomes. Key voices from Mollick to Luckin, with the neuroscience of AI-assisted learning.",
+  },
+  "ai-consciousness": {
+    title: "The Consciousness Line — The Ethical Educator",
+    description: "A philosophically grounded response to Anil Seth on AI consciousness, synthetic biology, organoids, Nagel, Austin, and ethical caution under uncertainty.",
+    datePublished: "2026-05-09",
+    dateModified: "2026-05-09",
   },
   "phil-education": {
     title: "Philosophy in K–12 Education — The Ethical Educator",
@@ -217,7 +225,7 @@ const PAGE_META = {
 
 function getPageFromHash() {
   if (typeof window === "undefined") return "home";
-  return window.location.hash.replace("#", "") || "home";
+  return window.location.hash.replace("#", "").split("?")[0] || "home";
 }
 
 export default function App() {
@@ -233,14 +241,18 @@ export default function App() {
 
   // Handle browser back/forward and direct URL entry
   useEffect(() => {
-    const syncPageFromHash = () => setCurrentPage(getPageFromHash()); // set even for unknown pages so NotFound renders
+    const syncPageFromHash = () => {
+      setCurrentPage(getPageFromHash()); // set even for unknown pages so NotFound renders
+      setMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     window.addEventListener("hashchange", syncPageFromHash);
     return () => window.removeEventListener("hashchange", syncPageFromHash);
   }, []);
 
   useEffect(() => {
-    if (window.location.hash.replace("#", "") !== currentPage) {
+    if (getPageFromHash() !== currentPage) {
       window.location.hash = currentPage;
     }
   }, [currentPage]);
@@ -291,8 +303,8 @@ export default function App() {
           "name": "The Ethical Educator",
           "url": "https://theethicaleducator.com",
         },
-        "datePublished": "2024-01-01",
-        "dateModified": "2026-04-24",
+        "datePublished": meta.datePublished || "2024-01-01",
+        "dateModified": meta.dateModified || "2026-04-24",
       });
       document.head.appendChild(script);
     }
