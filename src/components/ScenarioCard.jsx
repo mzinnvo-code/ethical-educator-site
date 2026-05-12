@@ -210,9 +210,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
     if (stageChoiceIdx != null) return; // debounce — already chose for this stage
     audioBus.stop(); // stop any in-flight voice-over so the chime is alone
     setStageChoiceIdx(idx);
-    const opt = stage.options[idx];
-    const weighty = opt?.lens === "deontological" || stage.weighty;
-    if (weighty) audio.playDeep();
+    if (stage.weighty) audio.playDeep();
     else audio.playChime();
     scrollToReflection();
   };
