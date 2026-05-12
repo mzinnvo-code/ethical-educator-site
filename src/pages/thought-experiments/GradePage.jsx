@@ -81,6 +81,13 @@ export default function GradePage({
 
   const closeActive = () => { audioBus.stop(); setActive(null); };
 
+  const pickRelated = (current, pool) => {
+    if (!current || !pool?.length) return null;
+    const currentTopics = new Set(current.topics || []);
+    return pool.find(e => e.id !== current.id && (e.topics || []).some(t => currentTopics.has(t))) || null;
+  };
+  const handlePickRelated = (next) => { audioBus.stop(); setActive(next); };
+
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   const resetProfile = () => setLensChoices([]);
   const suggestTopic = (topicId) => {
@@ -175,6 +182,8 @@ export default function GradePage({
                 mode={mode}
                 onClose={closeActive}
                 onRecordChoice={recordChoice}
+                relatedExperiment={pickRelated(active, all)}
+                onPickRelated={handlePickRelated}
               />
             </div>
           )}

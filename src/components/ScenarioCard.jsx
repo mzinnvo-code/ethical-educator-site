@@ -146,7 +146,7 @@ function TeacherToggle({ active, onToggle, accent }) {
   );
 }
 
-export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice }) {
+export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice, relatedExperiment = null, onPickRelated = null }) {
   const audio = useAudio();
   const stages = experiment.stages || synthesizeStages(experiment);
   const [stageIdx, setStageIdx] = useState(0);
@@ -418,7 +418,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -511,7 +512,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -536,24 +538,7 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
       <HeaderBar />
 
       {experiment.id === "marys-room" && (
-        <div style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "16 / 9",
-          marginBottom: 16,
-          borderRadius: 10,
-          overflow: "hidden",
-          background: "#060a12",
-          border: "1px solid rgba(200,152,48,0.18)",
-        }}>
-          <iframe
-            src="/animations/marys-room/index.html"
-            title="Mary's Room — animated thought experiment"
-            loading="lazy"
-            allow="autoplay; fullscreen"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
-          />
-        </div>
+        <MarysRoomEmbed accent={accent} />
       )}
       {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
@@ -648,7 +633,8 @@ export default function ScenarioCard({ experiment, mode = "story", onClose, onRe
 
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} />
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
       )}
     </Shell>
     <TeacherKitBelow />
@@ -703,7 +689,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   );
 }
 
-function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [] }) {
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [], relatedExperiment = null, onPickRelated = null }) {
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
@@ -729,6 +715,10 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
         />
       )}
 
+      {relatedExperiment && onPickRelated && (
+        <RelatedExperimentCard experiment={relatedExperiment} accent={accent} onPick={onPickRelated} />
+      )}
+
       <div style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
         <button
           onClick={onRestart}
@@ -749,6 +739,109 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
           >← Pick a new experiment</button>
         )}
       </div>
+    </div>
+  );
+}
+
+function RelatedExperimentCard({ experiment, accent, onPick }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div style={{ marginTop: 22 }}>
+      <p style={{
+        color: accent, fontSize: "0.66rem", fontWeight: 800,
+        letterSpacing: "0.13em", textTransform: "uppercase", marginBottom: 8,
+      }}>
+        Try this next
+      </p>
+      <button
+        onClick={() => onPick(experiment)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        style={{
+          display: "block", width: "100%", textAlign: "left",
+          padding: "14px 16px", borderRadius: 12,
+          background: hover ? `${accent}18` : `${accent}0a`,
+          border: `1px solid ${hover ? accent + "60" : accent + "30"}`,
+          color: C.textPrimary, cursor: "pointer",
+          transition: "all 0.2s",
+          transform: hover ? "translateY(-1px)" : "none",
+        }}
+      >
+        <p style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1rem", fontWeight: 600, marginBottom: 4,
+        }}>
+          {experiment.title}
+        </p>
+        {experiment.tagline && (
+          <p style={{ color: C.textMuted, fontSize: "0.82rem", lineHeight: 1.5 }}>
+            {experiment.tagline}
+          </p>
+        )}
+      </button>
+    </div>
+  );
+}
+
+const MARYS_ROOM_SRC = "/animations/marys-room/index.html";
+
+function MarysRoomEmbed({ accent }) {
+  const [status, setStatus] = useState("checking"); // checking | ok | missing
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(MARYS_ROOM_SRC, { method: "HEAD" })
+      .then(res => { if (!cancelled) setStatus(res.ok ? "ok" : "missing"); })
+      .catch(() => { if (!cancelled) setStatus("missing"); });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (status === "missing") {
+    return (
+      <div style={{
+        marginBottom: 16,
+        padding: "16px 18px",
+        borderRadius: 10,
+        background: `${accent}08`,
+        border: `1px dashed ${accent}40`,
+        color: C.textSecondary,
+        fontSize: "0.88rem",
+        lineHeight: 1.6,
+      }}>
+        <p style={{ color: accent, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>
+          Animation unavailable
+        </p>
+        The Mary's Room animation didn't load. The thought experiment still works
+        without it — keep reading and the question will make sense.
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      position: "relative",
+      width: "100%",
+      aspectRatio: "16 / 9",
+      marginBottom: 16,
+      borderRadius: 10,
+      overflow: "hidden",
+      background: "#060a12",
+      border: "1px solid rgba(200,152,48,0.18)",
+    }}>
+      {status === "checking" && (
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          color: C.textMuted, fontSize: "0.82rem",
+        }}>Loading animation…</div>
+      )}
+      <iframe
+        src={MARYS_ROOM_SRC}
+        title="Mary's Room — animated thought experiment"
+        loading="lazy"
+        allow="autoplay; fullscreen"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+      />
     </div>
   );
 }

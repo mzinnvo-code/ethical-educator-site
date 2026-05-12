@@ -58,13 +58,21 @@ export default function ReadAloudButton({
     }
     const src = srcs[idx];
     myAudioSrcRef.current = src;
-    const ok = audioBus.play(src, () => playSequence(srcs, idx + 1));
+    const next = () => { if (unsub) unsub(); playSequence(srcs, idx + 1); };
+    const ok = audioBus.play(src, next);
     if (!ok) {
       myAudioSrcRef.current = null;
       if (supported && text) speak(text, { rate });
-    } else {
-      setAudioPlaying(true);
+      return;
     }
+    setAudioPlaying(true);
+    // If this clip errors (e.g. 404), skip to the next so a single missing MP3
+    // doesn't strand the rest of the sequence.
+    let unsub = audioBus.subscribe((evt) => {
+      if (!evt.src || !evt.src.endsWith(src)) return;
+      if (evt.type === "error") next();
+      else if (evt.type === "ended" || evt.type === "pause") { unsub(); }
+    });
   };
 
   const onClick = () => {

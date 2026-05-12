@@ -109,6 +109,13 @@ export function ElementaryGradePage({ navigate, gradeId }) {
 
   const closeActive = () => { audioBus.stop(); setActive(null); };
 
+  const pickRelated = (current, pool) => {
+    if (!current || !pool?.length) return null;
+    const currentTopics = new Set(current.topics || []);
+    return pool.find(e => e.id !== current.id && (e.topics || []).some(t => currentTopics.has(t))) || null;
+  };
+  const handlePickRelated = (next) => { audioBus.stop(); setActive(next); };
+
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -170,6 +177,8 @@ export function ElementaryGradePage({ navigate, gradeId }) {
                 mode="kid"
                 onClose={closeActive}
                 onRecordChoice={recordChoice}
+                relatedExperiment={pickRelated(active, experiments)}
+                onPickRelated={handlePickRelated}
               />
             </div>
           )}
