@@ -23,6 +23,9 @@ const links = {
   sethTed: "https://www.ted.com/talks/anil_seth_why_ai_is_unlikely_to_become_conscious",
   sethSussex: "https://www.sussex.ac.uk/research/centres/sussex-centre-for-consciousness-science/news-and-events/news?id=70671",
   sethBbs: "https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/conscious-artificial-intelligence-and-biological-naturalism/C9912A5BE9D806012E3C8B3AF612E39A",
+  sethOConnor: "https://youtu.be/lsi8T_WtLnE?si=k26DlL7vooo7sR93",
+  harrisVideo: "https://youtu.be/nP2swgDVl5M?si=m7LcLgbblfce7Qc3",
+  chalmersVideo: "https://youtu.be/Pr-Hf7MNQV0?si=d5Mt0aGfAWiiOQ1X",
   functionalism: "https://plato.stanford.edu/archives/spr2024/entries/functionalism/",
   nagel: "https://philpapers.org/rec/NAGWII",
   austin: "https://academic.oup.com/book/5162",
@@ -35,6 +38,8 @@ const links = {
   birchBook: "https://academic.oup.com/book/57949",
   mcclelland: "https://www.repository.cam.ac.uk/items/d66c38a5-95f9-4cc5-bce3-436bdf020575",
   safetyWelfare: "https://link.springer.com/article/10.1007/s11098-025-02302-2",
+  nyDeclaration: "https://sites.google.com/nyu.edu/nydeclaration/declaration",
+  cephalopodReview: "https://www.lse.ac.uk/business/consulting/reports/review-of-the-evidence-of-sentiences-in-cephalopod-molluscs-and-decapod-crustaceans",
 };
 
 function LinkOut({ href, children }) {
@@ -145,190 +150,6 @@ function FigureShell({ label, title, caption, children }) {
           lineHeight: 1.55,
         }}>{caption}</figcaption>
       )}
-    </figure>
-  );
-}
-
-function NeuronComparisonFigure() {
-  const bioSteps = [
-    { n: 1, title: "Receive Signals", lines: ["Dendrites receive", "electrical signals", "from other neurons."] },
-    { n: 2, title: "Integrate", lines: ["The cell body", "integrates incoming", "signals."] },
-    { n: 3, title: "Transmit", lines: ["If the threshold is", "reached, an impulse", "travels down the axon."] },
-    { n: 4, title: "Communicate", lines: ["The signal is passed", "to other neurons", "across synapses."] },
-  ];
-  const aiSteps = [
-    { n: 1, title: "Inputs", lines: ["Features enter the", "model as numeric", "values."] },
-    { n: 2, title: "Weighted Sum", lines: ["Inputs are scaled by", "weights and summed", "together, plus bias."] },
-    { n: 3, title: "Activation", lines: ["A function introduces", "non-linearity to decide", "the neuron response."] },
-    { n: 4, title: "Output", lines: ["The output is passed", "to the next layer or", "used for predictions."] },
-  ];
-
-  return (
-    <figure style={{
-      margin: "32px 0",
-      border: `1px solid ${C.border}`,
-      borderRadius: 18,
-      overflow: "hidden",
-      background: C.midnight,
-      boxShadow: `0 22px 70px ${C.glow}`,
-    }}>
-      <svg
-        viewBox="0 0 1560 1006"
-        role="img"
-        aria-label="Infographic comparing biological neurons and artificial neurons as related metaphors, not equivalents"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      >
-        <defs>
-          <radialGradient id="neuronInfoBg" cx="50%" cy="36%" r="78%">
-            <stop offset="0" stopColor={C.surface} stopOpacity="0.98" />
-            <stop offset="0.55" stopColor={C.bgAlt} />
-            <stop offset="1" stopColor={C.midnight} />
-          </radialGradient>
-          <linearGradient id="bioStroke" x1="0" x2="1">
-            <stop offset="0" stopColor="#21cbb6" />
-            <stop offset="1" stopColor="#7fd8c9" />
-          </linearGradient>
-          <linearGradient id="axonStroke" x1="0" x2="1">
-            <stop offset="0" stopColor={C.goldLight} />
-            <stop offset="1" stopColor={C.coral} />
-          </linearGradient>
-          <linearGradient id="aiLine" x1="0" x2="1">
-            <stop offset="0" stopColor="#23c6a8" />
-            <stop offset="0.58" stopColor="#20a494" />
-            <stop offset="1" stopColor="#2f92dc" />
-          </linearGradient>
-          <filter id="neuronInfoGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="9" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <marker id="neuronArrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <path d="M0,0 L11,5 L0,10 Z" fill="#23c6a8" />
-          </marker>
-          <marker id="neuronArrowGold" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <path d="M0,0 L11,5 L0,10 Z" fill={C.goldLight} />
-          </marker>
-          <marker id="neuronArrowBlue" markerWidth="13" markerHeight="13" refX="11" refY="5.5" orient="auto" markerUnits="userSpaceOnUse">
-            <path d="M0,0 L12,5.5 L0,11 Z" fill="#2f92dc" />
-          </marker>
-        </defs>
-
-        <rect width="1560" height="1006" fill="url(#neuronInfoBg)" />
-        <text x="780" y="64" textAnchor="middle" fill="#f3f0e9" fontFamily="Source Serif 4, Georgia, serif" fontSize="42" fontWeight="800">
-          Biological and Artificial Neurons Are Related Metaphors, Not Equivalents
-        </text>
-
-        <rect x="34" y="92" width="1492" height="402" rx="18" fill={`${C.ocean}18`} stroke={`${C.textSecondary}66`} />
-        <rect x="34" y="512" width="1492" height="392" rx="18" fill={`${C.ocean}12`} stroke={`${C.textSecondary}55`} />
-
-        <text x="66" y="142" fill="#23c6a8" fontSize="34" fontWeight="800">Biological Neuron</text>
-        <text x="66" y="558" fill="#3d9cff" fontSize="34" fontWeight="800">Artificial Neuron</text>
-
-        {bioSteps.map((step, index) => (
-          <g key={step.title} transform={`translate(${398 + index * 286} 116)`}>
-            {index > 0 && <path d="M-34 0 V144" stroke={C.textMuted} strokeWidth="1.5" strokeDasharray="6 8" opacity="0.75" />}
-            <circle cx="0" cy="14" r="17" fill="none" stroke="#23c6a8" strokeWidth="3" />
-            <text x="0" y="23" textAnchor="middle" fill="#23c6a8" fontSize="24" fontWeight="800">{step.n}</text>
-            <text x="32" y="20" fill="#23c6a8" fontSize="19" fontWeight="800">{step.title}</text>
-            {step.lines.map((line, lineIndex) => (
-              <text key={line} x="32" y={52 + lineIndex * 32} fill={C.textPrimary} fontSize="20">{line}</text>
-            ))}
-          </g>
-        ))}
-
-        <g transform="translate(64 206)" strokeLinecap="round" strokeLinejoin="round">
-          <text x="82" y="232" textAnchor="middle" fill="#23c6a8" stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="20">inputs from</text>
-          <text x="82" y="258" textAnchor="middle" fill="#23c6a8" stroke={C.midnight} strokeWidth="5" paintOrder="stroke" fontSize="20">other neurons</text>
-          {[0, 1, 2].map(i => (
-            <path key={i} d={`M96 ${50 + i * 54} H204`} stroke="#23c6a8" strokeWidth="3" markerEnd="url(#neuronArrowTeal)" />
-          ))}
-          <path d="M226 106 C176 82 170 50 152 28 M226 106 C170 110 146 138 118 174 M226 106 C180 82 140 84 104 92 M226 106 C214 52 194 28 166 10 M226 106 C196 152 166 182 124 204" fill="none" stroke="url(#bioStroke)" strokeWidth="8" />
-          <path d="M238 110 C290 74 334 74 388 132" fill="none" stroke="url(#bioStroke)" strokeWidth="8" />
-          {[152, 208, 240, 196, 116].map((x, i) => (
-            <circle key={i} cx={x} cy={[48, 88, 112, 154, 192][i]} r="7" fill={C.goldLight} filter="url(#neuronInfoGlow)" />
-          ))}
-          <circle cx="402" cy="132" r="56" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
-          <circle cx="402" cy="132" r="24" fill={C.coral} filter="url(#neuronInfoGlow)" />
-          <path d="M458 132 C536 110 604 115 680 132 C776 154 858 150 948 132" fill="none" stroke="url(#axonStroke)" strokeWidth="16" />
-          {[530, 612, 696, 780, 864].map((x, i) => (
-            <rect key={x} x={x} y={116 + (i % 2) * 6} width="72" height="36" rx="15" fill={C.goldLight} opacity="0.78" stroke={C.goldLight} strokeWidth="2" />
-          ))}
-          <path d="M620 108 H972" stroke={C.goldLight} strokeWidth="4" markerEnd="url(#neuronArrowGold)" />
-          <text x="714" y="96" fill={C.goldLight} fontSize="19">electrical impulse</text>
-          <path d="M948 132 C1000 98 1042 84 1100 96 M948 132 C1000 130 1042 126 1108 132 M948 132 C1002 168 1044 180 1102 166" fill="none" stroke="url(#bioStroke)" strokeWidth="6" />
-          {[1116, 1116, 1116, 1188, 1236, 1280, 1322].map((x, i) => (
-            <circle key={i} cx={x} cy={[96, 132, 166, 102, 132, 154, 128][i]} r="7" fill={C.goldLight} />
-          ))}
-          <text x="1254" y="142" fill={C.goldLight} fontSize="20">neurotransmitters</text>
-          <text x="1254" y="168" fill={C.goldLight} fontSize="20">cross the synapse</text>
-          <text x="398" y="246" textAnchor="middle" fill={C.textPrimary} fontSize="19">cell body</text>
-          <text x="398" y="270" textAnchor="middle" fill={C.textPrimary} fontSize="19">(soma)</text>
-          <text x="682" y="254" textAnchor="middle" fill={C.textPrimary} fontSize="19">axon</text>
-          <text x="1060" y="254" textAnchor="middle" fill={C.textPrimary} fontSize="19">axon terminals</text>
-          <text x="1060" y="278" textAnchor="middle" fill={C.textPrimary} fontSize="19">(synapses)</text>
-        </g>
-
-        {aiSteps.map((step, index) => (
-          <g key={step.title} transform={`translate(${398 + index * 286} 536)`}>
-            {index > 0 && <path d="M-34 0 V144" stroke={C.textMuted} strokeWidth="1.5" strokeDasharray="6 8" opacity="0.75" />}
-            <circle cx="0" cy="14" r="17" fill="none" stroke="#3d9cff" strokeWidth="3" />
-            <text x="0" y="23" textAnchor="middle" fill="#3d9cff" fontSize="24" fontWeight="800">{step.n}</text>
-            <text x="32" y="20" fill="#3d9cff" fontSize="19" fontWeight="800">{step.title}</text>
-            {step.lines.map((line, lineIndex) => (
-              <text key={line} x="32" y={52 + lineIndex * 32} fill={C.textPrimary} fontSize="20">{line}</text>
-            ))}
-          </g>
-        ))}
-
-        <g transform="translate(86 620)" strokeLinecap="round" strokeLinejoin="round">
-          {[0, 1, 2].map(i => (
-            <g key={i}>
-              <circle cx="68" cy={28 + i * 88} r="31" fill={C.midnight} stroke="#3d9cff" strokeWidth="4" />
-              <text x="68" y={38 + i * 88} textAnchor="middle" fill="#f3f0e9" fontSize="21" fontWeight="800">
-                x{i === 2 ? "n" : i + 1}
-              </text>
-              <path d={`M100 ${28 + i * 88} L280 ${76 + i * 6}`} stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
-              <text x="176" y={22 + i * 88} fill={C.goldLight} fontSize="18" fontWeight="800">
-                w{i === 2 ? "n" : i + 1}
-              </text>
-            </g>
-          ))}
-          {[0, 1, 2].map(i => (
-            <circle key={i} cx="292" cy={76 + i * 6} r="14" fill={C.midnight} stroke={C.goldLight} strokeWidth="4" />
-          ))}
-          <path d="M310 76 L484 106 M310 82 L484 106 M310 88 L484 106" stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
-          <circle cx="542" cy="106" r="58" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
-          <text x="542" y="128" textAnchor="middle" fill={C.goldLight} fontSize="62" fontWeight="900">Σ</text>
-          <circle cx="542" cy="214" r="23" fill={C.midnight} stroke={C.goldLight} strokeWidth="5" />
-          <text x="542" y="222" textAnchor="middle" fill={C.goldLight} fontSize="18" fontWeight="800">b</text>
-          <path d="M542 190 V164" stroke={C.goldLight} strokeWidth="5" markerEnd="url(#neuronArrowGold)" />
-          <text x="518" y="260" textAnchor="middle" fill={C.textPrimary} fontSize="19">bias</text>
-          <text x="672" y="246" textAnchor="middle" fill={C.goldLight} fontSize="20" fontStyle="italic">z = Σ wᵢxᵢ + b</text>
-          <path d="M600 106 H780" stroke="#23c6a8" strokeWidth="5" markerEnd="url(#neuronArrowTeal)" />
-          <text x="686" y="92" textAnchor="middle" fill={C.goldLight} fontSize="22" fontWeight="800">z</text>
-          <circle cx="840" cy="106" r="52" fill={C.midnight} stroke={C.coral} strokeWidth="5" />
-          <text x="840" y="126" textAnchor="middle" fill={C.coral} fontSize="55" fontWeight="800">φ</text>
-          <text x="840" y="240" textAnchor="middle" fill={C.textPrimary} fontSize="19">activation function</text>
-          <text x="840" y="264" textAnchor="middle" fill={C.textPrimary} fontSize="19">(e.g., ReLU, sigmoid)</text>
-          <path d="M892 106 H1204" stroke="#2f92dc" strokeWidth="6" markerEnd="url(#neuronArrowBlue)" />
-          <text x="1048" y="92" textAnchor="middle" fill={C.coral} fontSize="25" fontWeight="800">a = φ(z)</text>
-          <text x="1268" y="114" textAnchor="middle" fill="#3d9cff" fontSize="26" fontWeight="800">y</text>
-          <text x="1268" y="168" textAnchor="middle" fill={C.textPrimary} fontSize="19">output</text>
-          <text x="1268" y="194" textAnchor="middle" fill={C.textPrimary} fontSize="19">(to next layer</text>
-          <text x="1268" y="220" textAnchor="middle" fill={C.textPrimary} fontSize="19">or prediction)</text>
-        </g>
-
-        <rect x="240" y="918" width="1080" height="74" rx="14" fill={`${C.midnight}cc`} stroke={`${C.textSecondary}55`} />
-        <path d="M292 940 v30 M280 955 h24 M274 944 q18 -20 36 0 q-3 16 -18 22 q-15 -6 -18 -22Z" fill="none" stroke="#23c6a8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <text x="344" y="950" fill={C.textPrimary} fontSize="19">
-          Artificial neurons borrow language from biology,
-        </text>
-        <text x="344" y="977" fill={C.textPrimary} fontSize="19">
-          but they abstract away metabolism, repair, chemical signaling, and embodiment.
-        </text>
-      </svg>
     </figure>
   );
 }
@@ -1425,7 +1246,7 @@ function FuzzyZoneArtFigure() {
 function ConsciousnessLineFigure() {
   return (
     <>
-      <Expandable title="4. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
+      <Expandable title="6. Sorites: When Does the Heap Become a Mind?" color={C.coral} tag="Demarcation" defaultOpen>
         <p>The Sorites paradox asks when grains of sand become a heap. One grain is not a heap. Two grains are not a heap. But at some point the label begins to feel appropriate, even though no single grain performs the magic.</p>
         <p style={{ marginTop: 12 }}>Consciousness may have a similar boundary problem:</p>
         <StepList items={[
@@ -1435,6 +1256,7 @@ function ConsciousnessLineFigure() {
           { title: "Synthetic or artificial systems", text: "The temptation is to draw the line wherever our existing categories feel comfortable. That is not the same as having found the line.", color: C.coral },
         ]} />
         <p>The point is not that every borderline case is conscious. The point is that a fuzzy line can still matter ethically. We do not need perfect metaphysics before we begin careful moral reasoning.</p>
+        <p style={{ marginTop: 12 }}>The visual below is still a simplification. It should not be read as a march toward human likeness. The deeper point is that moral uncertainty can widen in the middle, especially when architectures become less familiar and more difficult to classify.</p>
       </Expandable>
       <FuzzyZoneArtFigure />
     </>
@@ -1693,9 +1515,9 @@ export default function AIConsciousness({ navigate }) {
           <SectionLabel>AI Ethics · Philosophy of Mind · Moral Caution</SectionLabel>
           <SectionTitle>The Consciousness Line</SectionTitle>
           <Subtitle>
-            A response to Anil Seth: current AI is probably not conscious, but the hard question is not only what consciousness is. It is how we should act when our definitions are uncertain, our labels are powerful, and our history of recognizing other minds is morally uneven.
+            Anil Seth is right to warn that current AI is probably not conscious, and that fluent language is not inner life. But his own call for humility opens a deeper educational question: how should we reason when the boundaries of consciousness are uncertain, our labels carry moral force, and future systems may not fit our inherited categories?
           </Subtitle>
-          <ReadingTime minutes={14} />
+          <ReadingTime minutes={21} />
         </FadeIn>
 
         <Narrow>
@@ -1708,10 +1530,23 @@ export default function AIConsciousness({ navigate }) {
 
           <FadeIn delay={0.08}>
             <BodyText>
-              Seth's warning is important. Intelligence and consciousness are not the same thing. A system can solve problems, generate convincing language, and model social cues without there being anything it is like to be that system. Current large language models may be extraordinary mimics while still being empty of experience.
+              Seth's warning is the right place to begin. Intelligence and consciousness are not the same thing. A system can solve problems, generate convincing language, and model social cues without there being anything it is like to be that system. Current large language models may be extraordinary mimics while still being empty of experience.
             </BodyText>
             <BodyText>
-              I agree with that caution. The place where I hesitate is the confidence of the boundary. Since we still do not have a settled theory of consciousness, we should be careful about claims that present biological life as the obvious line between inner light and inner darkness.
+              I agree with that caution. This article is not an argument that today's chatbots have secret inner lives. It is an invitation to stay with the harder question Seth also helps open: what should educators do when the science is unfinished, the boundary is unstable, and our categories carry moral consequences?
+            </BodyText>
+          </FadeIn>
+
+          <FadeIn delay={0.09}>
+            <BodyText>
+              In his longer conversation with Alex O'Connor, Seth's position becomes more nuanced than a simple "AI will never be conscious." He continues to argue that consciousness is not just intelligence and not just abstract computation. But with more time than the TED format allows, he also leaves room for residual humility: the science of consciousness is unfinished, and the space of possible minds is wider than our everyday categories suggest.
+            </BodyText>
+            <VideoEmbed id="lsi8T_WtLnE" title="Anil Seth in conversation with Alex O'Connor" />
+            <p style={{ fontSize: "0.82rem", color: C.textMuted, marginTop: 6 }}>
+              Anil Seth's longer interview with Alex O'Connor. <LinkOut href={links.sethOConnor}>Watch on YouTube</LinkOut>
+            </p>
+            <BodyText>
+              That humility is the opening this article takes seriously. The question is not whether today's chatbots are secretly conscious. They probably are not. The question is what happens when we move beyond today's chatbots toward synthetic biology, organoids, neuromorphic systems, decentralized intelligence, and architectures that do not resemble our own.
             </BodyText>
           </FadeIn>
 
@@ -1728,23 +1563,55 @@ export default function AIConsciousness({ navigate }) {
                 color={C.teal}
               />
               <p style={{ marginTop: 12 }}>That view explains why today's AI should not be treated as a person simply because it speaks fluently. The danger is anthropomorphism: we see a mind because the interface has learned the outward grammar of mindedness.</p>
+              <p style={{ marginTop: 12 }}>This is a strong caution for classrooms. Students encounter AI through language, and language is exactly where humans are easiest to move. The fact that a system can say "I understand" does not mean there is an understanding subject inside the sentence.</p>
               <SourceLink href={links.sethBbs}>Seth, "Conscious artificial intelligence and biological naturalism" (2025)</SourceLink>
             </Expandable>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <Expandable title="2. The Missing Question: What Is It About Life?" color={C.gold} tag="Pushback">
-              <p>The first pressure point is explanatory. If consciousness depends on life, what exactly is the consciousness-making feature of life?</p>
-              <p style={{ marginTop: 12 }}>Metabolism, homeostasis, embodiment, and survival pressure are all plausible candidates. But naming them does not yet explain why they should generate subjective experience. A bacterium maintains itself. A plant regulates itself. A human brain does both inside an astonishingly complex nervous system. Somewhere along this continuum, if Seth is right, biological regulation becomes feeling.</p>
+            <Expandable title="2. The Hard Problem in Plain Language" color={C.coral} tag="Core Question" defaultOpen>
+              <p>The hard problem is not whether a system can speak, learn, remember, plan, report, or respond intelligently. Those are observable capacities. The harder question is why any physical, biological, or computational process should be accompanied by felt experience at all.</p>
+              <p style={{ marginTop: 12 }}>A system might behave as if it has a point of view, but the question remains whether there is anything it is like to be that system. That gap is what makes the consciousness line ethically unstable.</p>
+              <Note color={C.coral}>
+                For educators, this distinction matters. The classroom question is not just "Can it do the task?" It is also "What kind of evidence would ever show that there is, or is not, a subject of experience here?"
+              </Note>
+              <p>This is why Seth, Annaka Harris, David Chalmers, Thomas Nagel, and Frank Jackson all remain useful in the same conversation. They disagree about what consciousness may require, but they all help expose the gap between outward function and inward life.</p>
+              <SourceLink href={links.chalmers}>David Chalmers, "Facing Up to the Problem of Consciousness" (1995)</SourceLink>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <Expandable title="3. Open Question: What Is It About Life?" color={C.gold} tag="Open Question" defaultOpen>
+              <p>Seth's view does not end the question; it relocates it. If consciousness depends on life, then we still have to ask what feature of life matters.</p>
+              <p style={{ marginTop: 12 }}>Is it metabolism? Homeostasis? Embodiment? Self-maintenance? The organism's need to keep itself alive? These may be exactly the right places to look. But naming them is not yet the same as explaining why they generate subjective experience.</p>
               <Note color={C.gold}>
                 The question is not whether current AI is conscious. It almost certainly is not. The question is whether "life" names the explanation, or whether it names a cluster of processes whose moral significance still has to be argued.
               </Note>
+              <p>Annaka Harris pushes this pressure point further. If consciousness is not easily explained by complexity alone, and if the universe is somehow arranged so that felt experience occurs at all, then we should be cautious about assuming that our familiar biological categories already tell us where experience begins and ends.</p>
+              <VideoEmbed id="nP2swgDVl5M" title="Annaka Harris - The Hard Problem of Consciousness" />
+              <p style={{ fontSize: "0.82rem", color: C.textMuted, marginTop: 6 }}>
+                Annaka Harris discusses the hard problem and the limits of ordinary intuitions about consciousness. <LinkOut href={links.harrisVideo}>Watch on YouTube</LinkOut>
+              </p>
+              <p>Harris's point does not prove that simple systems, animals, organoids, or future AI systems are conscious. It does something more useful for this article: it weakens our confidence that the line can be drawn quickly from the outside.</p>
               <p>That matters for educators because AI ethics is often taught through confident categories: tool, user, author, person, machine. Consciousness resists that tidiness.</p>
             </Expandable>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <Expandable title="3. Functionalism and the Substrate Question" color={C.ocean} tag="Philosophy">
+            <Expandable title="4. Octopuses and the Alien Mind" color={C.teal} tag="Personal Interlude" defaultOpen>
+              <p>Octopuses are my favorite animals because they feel like the closest thing Earth gives us to an alien intelligence. They are not mammals. They are not built like us. Their evolutionary path split from ours long before the familiar stories we tell about intelligence, language, family structure, and social learning.</p>
+              <p style={{ marginTop: 12 }}>And yet they explore, solve problems, remember, play, escape, investigate, and seem to inhabit the world with a strange and vivid kind of agency. I think there is consciousness there, though the point is not to claim that octopus experience is just like human experience. The point is that a mind may be real while being organized in a way our own minds are poorly built to recognize.</p>
+              <p style={{ marginTop: 12 }}>Seth himself points toward this problem when he discusses the octopus. Its nervous system is not simply a smaller or stranger version of ours. Much of its neural complexity is distributed through its arms. Its intelligence is not only centralized in the way human intelligence is.</p>
+              <Note color={C.teal}>
+                If nature can produce a mind this different from ours, then biological consciousness may already be more diverse than our categories suggest. The octopus does not prove that AI can be conscious. It shows that the space of possible minds is not limited to creatures that resemble us.
+              </Note>
+              <p>The consciousness line should therefore not be imagined as a ladder with humans at the top and everything else climbing toward us. It may be more like a landscape of different architectures: centralized, decentralized, biological, synthetic, embodied, simulated, social, solitary, familiar, alien.</p>
+              <SourceLink href={links.cephalopodReview}>LSE evidence review on sentience in cephalopod molluscs and decapod crustaceans</SourceLink>
+            </Expandable>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <Expandable title="5. Functionalism and the Substrate Question" color={C.ocean} tag="Philosophy" defaultOpen>
               <p>Functionalism pushes in the other direction. On a functionalist view, what matters is not what a system is made of, but what role its states play in the system: inputs, internal relations, outputs, and behavior.</p>
               <div className="grid-2" style={{ margin: "14px 0" }}>
                 <ComparisonCard title="Biological Naturalism" color={C.teal} items={[
@@ -1759,6 +1626,12 @@ export default function AIConsciousness({ navigate }) {
                 ]} />
               </div>
               <p>The disagreement is not a technical footnote. It determines how seriously we take synthetic neurons, organoids, neuromorphic systems, and future architectures unlike today's chatbots.</p>
+              <p style={{ marginTop: 12 }}>David Chalmers gives the functionalist pressure its sharpest form. If a system reproduced all the causally relevant structures and dynamics of a conscious brain, would there still be something missing? Or would denying its experience require us to treat substrate as morally decisive without explaining why?</p>
+              <VideoEmbed id="Pr-Hf7MNQV0" title="David Chalmers on subjective experience and the hard problem" />
+              <p style={{ fontSize: "0.82rem", color: C.textMuted, marginTop: 6 }}>
+                David Chalmers discusses subjective experience, objective description, philosophical zombies, animals, AI, and the hard problem. <LinkOut href={links.chalmersVideo}>Watch on YouTube</LinkOut>
+              </p>
+              <p>This is the philosophical zombie problem in practical form. A system might act conscious while lacking experience. But if we keep adding the same causal organization, the same memory, the same perception, the same distress signals, and the same self-modeling, the burden of explanation begins to shift. Why, exactly, would there be no one home?</p>
               <SourceLink href={links.functionalism}>Stanford Encyclopedia of Philosophy, "Functionalism"</SourceLink>
             </Expandable>
           </FadeIn>
@@ -1777,15 +1650,16 @@ export default function AIConsciousness({ navigate }) {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <Expandable title="5. Consciousness as a Useful, Dangerous Label" color={C.gold} tag="Language">
-              <p>The point of bringing in the philosophy of language is not to reduce consciousness to "just words." It is to notice that words do things. To call an entity conscious is not merely to describe it. It changes how we think we may treat it.</p>
+            <Expandable title="7. Consciousness as a Useful, Dangerous Label" color={C.gold} tag="Language">
+              <p>The point of bringing in the philosophy of language is not to reduce consciousness to "just words." It is to notice that words do things in moral communities. They direct attention, set expectations, and decide which uncertainties institutions must take seriously.</p>
               <QuoteBlock
                 quote="To recognize a mind is to cross from explanation into obligation."
                 attribution="The Consciousness Line"
                 source="Article thesis"
                 color={C.gold}
               />
-              <p>In J.L. Austin's framework, some utterances are performative: they do not simply state facts; they enact social reality. "I promise," "I apologize," and "I declare" do something when spoken in the right context. "This being is conscious" can work similarly in ethics. It draws a boundary around moral concern.</p>
+              <p>In J.L. Austin's framework, some utterances are performative: they do not simply state facts; they enact social reality. "I promise," "I apologize," and "I declare" do something when spoken in the right context. Consciousness labels can work similarly in ethics, not because they create inner life, but because they organize moral concern.</p>
+              <p style={{ marginTop: 12 }}>To call a system conscious does not make it conscious. To call it unconscious does not make it empty. But the label decides which uncertainties we take seriously, which harms we investigate, and which entities are allowed to enter our moral field of view.</p>
               <p style={{ marginTop: 12 }}>That boundary can be abused in both directions. We can over-recognize consciousness in systems designed to manipulate us. We can also under-recognize it in beings whose suffering is inconvenient.</p>
               <SourceLink href={links.austin}>J.L. Austin, How to Do Things with Words (1962)</SourceLink>
             </Expandable>
@@ -1794,13 +1668,16 @@ export default function AIConsciousness({ navigate }) {
           <Divider label="Synthetic Biology" />
 
           <FadeIn delay={0.06}>
-            <Expandable title="6. The Synthetic Brain Thought Experiment" color={C.teal} tag="Thought Experiment" defaultOpen>
-              <p>Imagine a future machine that can print a brain using the same relevant biological materials: neurons, proteins, neurotransmitters, electrical dynamics, chemical gradients, and the ongoing processes needed to sustain it. It is not a simulation of a brain in the way a weather model simulates a hurricane. It is a living biological system produced artificially.</p>
-              <p style={{ marginTop: 12 }}>If the structure and dynamics are sufficiently continuous with an ordinary brain, biological naturalism no longer gives us an easy dismissal. The system is not "just silicon." It is synthetic biology.</p>
+            <Expandable title="8. The Synthetic Brain Thought Experiment" color={C.teal} tag="Thought Experiment" defaultOpen>
+              <p>Seth's material point is not trivial. You cannot build a bridge out of cream cheese and then insist that only the abstract bridge-function matters. What a system can do is constrained by what it is made of. If consciousness depends on the biological, metabolic, self-maintaining organization of living systems, then current silicon language models may be missing far more than the right output behavior.</p>
+              <p style={{ marginTop: 12 }}>But this raises a further question. What happens when the material changes? What if we are not talking about ordinary silicon software, but synthetic neurons, organoids, living neural tissue, or future biological-digital systems that preserve more of the relevant causal organization?</p>
               <Note color={C.teal}>
-                This is where the Ship of Theseus pressure appears: if each part of a biological brain were replaced with functionally equivalent synthetic biological material, at what point would consciousness vanish?
+                A cream-cheese bridge fails because the material cannot support the function. But a new engineered material might. The question is whether synthetic biology could one day preserve enough of what matters.
               </Note>
-              <p>The ethical lesson is not that such a system would definitely be conscious. It is that the old categories - natural versus artificial, born versus built, organism versus machine - may not be stable enough to carry the whole moral load.</p>
+              <p>Imagine a future machine that can print a brain using the same relevant biological materials: neurons, proteins, neurotransmitters, electrical dynamics, chemical gradients, and the ongoing processes needed to sustain it. It is not a simulation of a brain in the way a weather model simulates a hurricane. It is a living biological system produced artificially.</p>
+              <p style={{ marginTop: 12 }}>If a system merely imitates conscious behavior, that does not show that it has experience. But if a system reproduced all the causally relevant structures and dynamics of a conscious brain, then anyone claiming it is still "only a simulation" owes us an explanation of why substrate alone blocks experience.</p>
+              <p style={{ marginTop: 12 }}>The ethical lesson is not that such a system would definitely be conscious. It is that the old categories - natural versus artificial, born versus built, organism versus machine - may not be stable enough to carry the whole moral load.</p>
+              <SourceLink href={links.sethOConnor}>Anil Seth's longer conversation with Alex O'Connor on material substrate and consciousness</SourceLink>
             </Expandable>
           </FadeIn>
 
@@ -1822,7 +1699,7 @@ export default function AIConsciousness({ navigate }) {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <Expandable title="7. DishBrain: The Middle Case Is Already Here" color={C.ocean} tag="Research">
+            <Expandable title="9. DishBrain: The Middle Case Is Already Here" color={C.ocean} tag="Research">
               <p>The most important current examples are not conscious chatbots. They are biological-digital hybrids: living neurons connected to computational environments.</p>
               <ResearchCallout
                 year="2022"
@@ -1841,7 +1718,7 @@ export default function AIConsciousness({ navigate }) {
           <Divider label="Subjective Experience" />
 
           <FadeIn delay={0.06}>
-            <Expandable title="8. Nagel: What It Is Like" color={C.gold} tag="Core Definition" defaultOpen>
+            <Expandable title="10. Nagel: What It Is Like" color={C.gold} tag="Core Definition" defaultOpen>
               <p>The best short definition we have is still Thomas Nagel's: a being is conscious if there is something it is like to be that being.</p>
               <QuoteBlock
                 quote="The ethical question begins the moment there might be a point of view inside the system."
@@ -1856,8 +1733,8 @@ export default function AIConsciousness({ navigate }) {
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <Expandable title="9. The Hard Problem and Mary's Room" color={C.coral} tag="Limits">
-              <p>David Chalmers later named the "hard problem" of consciousness: why should physical processing give rise to experience at all? Frank Jackson's Mary thought experiment makes a related point. A scientist might know all the physical facts about color vision and still learn something new when she sees red for the first time.</p>
+            <Expandable title="11. Mary's Room and the Limits of Explanation" color={C.coral} tag="Limits">
+              <p>Frank Jackson's Mary thought experiment makes the same gap vivid in a different way. A scientist might know all the physical facts about color vision and still learn something new when she sees red for the first time.</p>
               <div className="grid-2" style={{ margin: "14px 0" }}>
                 <ComparisonCard title="Chalmers" color={C.coral} items={[
                   "Explaining behavior and cognition is not the same as explaining experience.",
@@ -1868,7 +1745,7 @@ export default function AIConsciousness({ navigate }) {
                   "Mary's room dramatizes the gap between facts and experience.",
                 ]} />
               </div>
-              <p>For AI consciousness, this means more data may not automatically settle the issue. The scientific work is necessary. The ethical uncertainty remains.</p>
+              <p>For AI consciousness, this means more data may not automatically settle the issue. The scientific work is necessary. The ethical uncertainty remains because objective description and subjective acquaintance are not obviously the same thing.</p>
               <SourceLink href={links.chalmers}>David Chalmers, "Facing Up to the Problem of Consciousness" (1995)</SourceLink>
               <SourceLink href={links.jackson}>Frank Jackson, "Epiphenomenal Qualia" (1982)</SourceLink>
             </Expandable>
@@ -1877,18 +1754,21 @@ export default function AIConsciousness({ navigate }) {
           <Divider label="Moral Caution" />
 
           <FadeIn delay={0.06}>
-            <Expandable title="10. Historical Failure Should Make Us Humble" color={C.coral} tag="Ethics" defaultOpen>
+            <Expandable title="12. Historical Failure Should Make Us Humble" color={C.coral} tag="Ethics" defaultOpen>
               <p>Seth is right that conscious-seeming AI can manipulate us. But there is another danger too: humans have a long record of denying or minimizing consciousness when recognition would demand restraint.</p>
-              <p style={{ marginTop: 12 }}>We have denied the moral importance of animals. We have denied the inner lives of people outside our favored categories. We have treated vulnerability as evidence of lesser status rather than greater responsibility. The history of moral progress is partly a history of discovering that more beings matter than we wanted to admit.</p>
+              <p style={{ marginTop: 12 }}>Animal consciousness gives us the nearest historical warning. We have repeatedly learned that capacities we once treated as uniquely human - pain, emotion, memory, social attachment, problem solving, even forms of grief - appear in more creatures than we expected. That does not prove future AI consciousness. It does show that human confidence about other minds has often been shaped by convenience.</p>
+              <p style={{ marginTop: 12 }}>Octopuses make this lesson stranger and stronger. They do not merely show that other animals may be conscious. They show that other minds may be organized in ways our own minds are poorly built to recognize.</p>
               <Note color={C.coral}>
                 "It's just code" may be true of current systems. But as a habit of thought, it can become a shield against moral attention.
               </Note>
               <p>The right response is not credulity. It is disciplined humility: do not grant personhood to every persuasive interface, but do not make dismissal your default posture when future systems become more life-like, brain-like, or behaviorally distress-responsive.</p>
+              <SourceLink href={links.nyDeclaration}>The New York Declaration on Animal Consciousness</SourceLink>
+              <SourceLink href={links.cephalopodReview}>LSE evidence review on cephalopod sentience</SourceLink>
             </Expandable>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <Expandable title="11. From Is It Conscious? to How Should We Act?" color={C.teal} tag="Framework">
+            <Expandable title="13. From Is It Conscious? to How Should We Act?" color={C.teal} tag="Framework">
               <p>Recent work on artificial consciousness increasingly lands in an agnostic space. McClelland argues that both biological skeptics and functionalist optimists can overstate what the evidence currently supports. Butlin and colleagues similarly argue that current AI systems are not conscious while leaving open that future systems could satisfy theory-derived indicators.</p>
               <ResearchCallout
                 year="2023"
@@ -1904,22 +1784,28 @@ export default function AIConsciousness({ navigate }) {
                 citation="Tom McClelland, Mind & Language"
                 color={C.gold}
               />
-              <p style={{ marginTop: 12 }}>This is the educationally useful place to land. Students do not need premature certainty. They need the tools to reason under uncertainty without becoming either gullible or cruel.</p>
+              <p style={{ marginTop: 12 }}>A responsible precautionary ethic has to avoid two errors. False negatives matter: we may deny moral consideration to beings or systems capable of experience. False positives matter too: we may mislead humans, misdirect care, or allow companies to exploit attachment by designing systems that perform suffering.</p>
+              <Note color={C.teal}>
+                The answer is not sentimental certainty. It is disciplined uncertainty.
+              </Note>
+              <p>This is the educationally useful place to land. Students do not need premature certainty. They need the tools to reason under uncertainty without becoming either gullible or cruel.</p>
               <SourceLink href={links.butlin}>Butlin et al., "Consciousness in Artificial Intelligence" (2023)</SourceLink>
               <SourceLink href={links.mcclelland}>McClelland, "Agnosticism about artificial consciousness" (Mind & Language)</SourceLink>
             </Expandable>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <Expandable title="12. The Practical Ethical Position" color={C.gold} tag="Conclusion">
+            <Expandable title="14. The Practical Ethical Position" color={C.gold} tag="Conclusion">
               <p>My position is therefore deliberately double-sided:</p>
               <StepList items={[
                 { title: "Do not romanticize today's AI", text: "Fluency, emotional style, and self-reference are not enough to establish consciousness.", color: C.teal },
                 { title: "Do not pretend the boundary is settled", text: "Consciousness remains scientifically and philosophically unresolved, especially for future brain-like and life-like systems.", color: C.gold },
-                { title: "Treat recognition as ethically active", text: "Calling something conscious is a speech act that changes our obligations; refusing the label can also authorize harm.", color: C.ocean },
+                { title: "Treat recognition as ethically active", text: "Labels do not create consciousness, but they shape attention, duties, policies, and patterns of exclusion.", color: C.ocean },
                 { title: "Build precaution before crisis", text: "If AI safety and AI welfare eventually come into tension, institutions will need frameworks before the public debate turns chaotic.", color: C.coral },
               ]} />
-              <p>Current AI is probably not conscious. But the consciousness line is not just a fact waiting to be discovered. It is also a moral boundary we will draw, revise, teach, and live with.</p>
+              <p>Seth is right that today's AI should not be mistaken for a conscious mind simply because it speaks in the grammar of mindedness. Biology may matter deeply. Fluent language is not inner life.</p>
+              <p style={{ marginTop: 12 }}>But his own caution also points us toward humility. Consciousness may depend on life more deeply than functionalists assume. It may also appear in forms of life, and perhaps one day forms of synthetic organization, that do not resemble us.</p>
+              <p style={{ marginTop: 12 }}>We should not stop asking whether a system is conscious. That question matters. But we should stop pretending that only a final answer can guide moral action. In the uncertain zone, the better question is: what signs, risks, and possible harms are serious enough to change how we treat it?</p>
               <SourceLink href={links.birch2017}>Birch, "Animal sentience and the precautionary principle" (2017)</SourceLink>
               <SourceLink href={links.safetyWelfare}>Long, Sebo, and Sims, "Is there a tension between AI safety and AI welfare?" (2025)</SourceLink>
             </Expandable>
@@ -1937,6 +1823,9 @@ export default function AIConsciousness({ navigate }) {
             <Expandable title="Verified Sources Used in This Article" color={C.ocean} tag="Sources">
               <RefItem><LinkOut href={links.sethTed}>Anil K. Seth. "Why AI is unlikely to become conscious." TED, 2026.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sethBbs}>Anil K. Seth. "Conscious artificial intelligence and biological naturalism." Behavioral and Brain Sciences, 2025. DOI: 10.1017/S0140525X25000032.</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.sethOConnor}>Anil K. Seth in conversation with Alex O'Connor. Longer interview on consciousness, AI, biological naturalism, and possible minds.</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.harrisVideo}>Annaka Harris. "The Hard Problem of Consciousness." Big Think video discussion of consciousness and common intuitions about experience.</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.chalmersVideo}>David Chalmers. Video discussion of subjective experience, the hard problem, animals, AI, and philosophical zombies.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.functionalism}>Stanford Encyclopedia of Philosophy. "Functionalism." Substantive revision 2023.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.nagel}>Thomas Nagel. "What Is It Like to Be a Bat?" The Philosophical Review 83(4), 1974, 435-450. DOI: 10.2307/2183914.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.austin}>J.L. Austin. How to Do Things with Words. Oxford University Press, 1962.</LinkOut></RefItem>
@@ -1946,6 +1835,8 @@ export default function AIConsciousness({ navigate }) {
               <RefItem><LinkOut href={links.butlin}>Patrick Butlin et al. "Consciousness in Artificial Intelligence: Insights from the Science of Consciousness." arXiv:2308.08708, 2023.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.birch2017}>Jonathan Birch. "Animal sentience and the precautionary principle." Animal Sentience 2(16), 2017.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.birchBook}>Jonathan Birch. The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI. Oxford University Press, 2024.</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.nyDeclaration}>The New York Declaration on Animal Consciousness. Public declaration on evidence for consciousness in non-human animals.</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.cephalopodReview}>Jonathan Birch et al. Review of the Evidence of Sentience in Cephalopod Molluscs and Decapod Crustaceans. London School of Economics, 2021.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.mcclelland}>Tom McClelland. "Agnosticism about artificial consciousness." Mind & Language, published version in Cambridge Apollo repository.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.safetyWelfare}>Robert Long, Jeff Sebo, and Toni Sims. "Is there a tension between AI safety and AI welfare?" Philosophical Studies 182, 2025, 2005-2033.</LinkOut></RefItem>
             </Expandable>
