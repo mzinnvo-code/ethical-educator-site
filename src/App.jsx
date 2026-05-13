@@ -7,6 +7,7 @@ import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
 import AIConsciousness from "./pages/AIConsciousness.jsx";
+import AIAuthorship from "./pages/AIAuthorship.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
@@ -62,6 +63,7 @@ const PAGE_MAP = {
   "ai-ethics": AIEthics,
   "ai-education": AIEducation,
   "ai-consciousness": AIConsciousness,
+  "ai-authorship-quandary": AIAuthorship,
   "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "thought-experiments/educators": ThoughtExperimentsForEducators,
@@ -116,6 +118,12 @@ const PAGE_META = {
     description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
     datePublished: "2026-05-09",
     dateModified: "2026-05-12",
+  },
+  "ai-authorship-quandary": {
+    title: "The AI Authorship Quandary — The Ethical Educator",
+    description: "A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. The interactive scenario, the evidence on AI detectors, and what good school policy actually looks like.",
+    datePublished: "2024-02-14",
+    dateModified: "2026-05-13",
   },
   "phil-education": {
     title: "Philosophy in K–12 Education — The Ethical Educator",
