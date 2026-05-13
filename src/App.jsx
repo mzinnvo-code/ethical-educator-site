@@ -8,6 +8,9 @@ import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
 import AIConsciousness from "./pages/AIConsciousness.jsx";
 import AIAuthorship from "./pages/AIAuthorship.jsx";
+import AIAmbiguityToAction from "./pages/AIAmbiguityToAction.jsx";
+import AIParadox from "./pages/AIParadox.jsx";
+import AIReplaceTeachers from "./pages/AIReplaceTeachers.jsx";
 import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
 import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
 import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
@@ -64,6 +67,9 @@ const PAGE_MAP = {
   "ai-education": AIEducation,
   "ai-consciousness": AIConsciousness,
   "ai-authorship-quandary": AIAuthorship,
+  "ai-ambiguity-to-action": AIAmbiguityToAction,
+  "ai-paradox": AIParadox,
+  "ai-replace-teachers": AIReplaceTeachers,
   "phil-education": PhilosophyEducation,
   "thought-experiments": ThoughtExperiments,
   "thought-experiments/educators": ThoughtExperimentsForEducators,
@@ -122,6 +128,24 @@ const PAGE_META = {
   "ai-authorship-quandary": {
     title: "The AI Authorship Quandary — The Ethical Educator",
     description: "A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. The interactive scenario, the evidence on AI detectors, and what good school policy actually looks like.",
+    datePublished: "2024-02-14",
+    dateModified: "2026-05-13",
+  },
+  "ai-ambiguity-to-action": {
+    title: "From Ambiguity to Action — The Ethical Educator",
+    description: "Why \"uphold ethics\" isn't a policy. Utilitarianism, deontology, virtue ethics, and thought experiments as policy tools. The funnel from value to practice for AI in education.",
+    datePublished: "2024-07-12",
+    dateModified: "2026-05-13",
+  },
+  "ai-paradox": {
+    title: "The Paradox of AI in Education — The Ethical Educator",
+    description: "Assume the harder version: AI has matched human teachers. The interesting question is whether teaching, as we have understood it, can be done by a machine at all — and what schools are for if it can.",
+    datePublished: "2024-02-13",
+    dateModified: "2026-05-13",
+  },
+  "ai-replace-teachers": {
+    title: "Why AI Won't Replace Teachers — A Response — The Ethical Educator",
+    description: "A friendly disagreement with the standard defense of human teachers. The conclusion is right but the capability arguments keep losing. The argument that survives the next iteration of the technology is values-based, not technical.",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
