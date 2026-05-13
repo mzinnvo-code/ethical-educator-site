@@ -346,6 +346,171 @@ export function NewBadge() {
   );
 }
 
+export function EducatorsFooter({ takeaways = [], classroomActivities = [], whereToGoNext = { internal: [], external: [] }, navigate }) {
+  const sectionLabel = {
+    fontSize: "0.66rem",
+    fontWeight: 700,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: C.gold,
+    marginBottom: 10,
+  };
+  return (
+    <section aria-label="For educators" style={{
+      marginTop: 40,
+      padding: "28px clamp(18px, 3vw, 28px)",
+      background: `linear-gradient(135deg, ${C.gold}0c, ${C.teal}06)`,
+      border: `1px solid ${C.gold}24`,
+      borderRadius: 14,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <span aria-hidden="true" style={{ fontSize: "1.3rem" }}>🍎</span>
+        <h3 style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          color: C.textPrimary,
+          fontSize: "1.25rem",
+          fontWeight: 700,
+        }}>For Educators</h3>
+      </div>
+      <p style={{ color: C.textMuted, fontSize: "0.86rem", lineHeight: 1.6, marginBottom: 22, maxWidth: 600 }}>
+        Take this somewhere. The three sections below distill what to remember, what to do with students next week, and where to keep reading.
+      </p>
+
+      {takeaways.length > 0 && (
+        <div style={{ marginBottom: 26 }}>
+          <p style={sectionLabel}>Key Takeaways</p>
+          <ol style={{ listStyle: "none", padding: 0, counterReset: "tk" }}>
+            {takeaways.map((t, i) => (
+              <li key={i} style={{
+                counterIncrement: "tk",
+                display: "flex",
+                gap: 12,
+                padding: "10px 0",
+                borderBottom: i < takeaways.length - 1 ? `1px solid ${C.border}` : "none",
+              }}>
+                <span aria-hidden="true" style={{
+                  flexShrink: 0,
+                  width: 24,
+                  height: 24,
+                  borderRadius: "50%",
+                  background: `${C.gold}15`,
+                  border: `1px solid ${C.gold}40`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: C.gold,
+                  fontWeight: 700,
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}>{i + 1}</span>
+                <p style={{ color: C.textSecondary, fontSize: "0.92rem", lineHeight: 1.7, paddingTop: 2 }}>{t}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {classroomActivities.length > 0 && (
+        <div style={{ marginBottom: 26 }}>
+          <p style={sectionLabel}>Bring It Into Your Classroom</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
+            {classroomActivities.map((a, i) => (
+              <div key={i} style={{
+                background: C.surface,
+                border: `1px solid ${C.border}`,
+                borderLeft: `3px solid ${C.teal}`,
+                borderRadius: 10,
+                padding: "16px 18px",
+              }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap", marginBottom: 8 }}>
+                  <h4 style={{
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    color: C.textPrimary,
+                    fontSize: "0.98rem",
+                    fontWeight: 600,
+                  }}>{a.title}</h4>
+                  {a.time && (
+                    <span style={{
+                      fontSize: "0.66rem",
+                      color: C.teal,
+                      background: `${C.teal}15`,
+                      padding: "2px 8px",
+                      borderRadius: 4,
+                      fontWeight: 600,
+                      letterSpacing: "0.06em",
+                    }}>{a.time}</span>
+                  )}
+                </div>
+                <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.65 }}>{a.description}</p>
+                {a.prompt && (
+                  <p style={{
+                    marginTop: 10,
+                    paddingTop: 10,
+                    borderTop: `1px solid ${C.border}`,
+                    color: C.textMuted,
+                    fontSize: "0.82rem",
+                    fontStyle: "italic",
+                    lineHeight: 1.55,
+                  }}>Discussion prompt: {a.prompt}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(whereToGoNext.internal?.length || whereToGoNext.external?.length) && (
+        <div>
+          <p style={sectionLabel}>Where to Go Next</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
+            {whereToGoNext.internal?.map((link, i) => (
+              <button key={`int-${i}`} onClick={() => navigate?.(link.id)} style={{
+                textAlign: "left",
+                background: `${C.ocean}0a`,
+                border: `1px solid ${C.ocean}28`,
+                borderRadius: 10,
+                padding: "12px 14px",
+                cursor: "pointer",
+                color: C.textSecondary,
+                transition: "all 0.2s",
+                fontFamily: "inherit",
+              }}
+                onMouseOver={e => { e.currentTarget.style.borderColor = C.ocean; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseOut={e => { e.currentTarget.style.borderColor = `${C.ocean}28`; e.currentTarget.style.transform = "none"; }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.ocean }}>On this site</span>
+                </div>
+                <p style={{ color: C.textPrimary, fontSize: "0.88rem", fontWeight: 600, marginBottom: 4 }}>{link.label}</p>
+                {link.blurb && <p style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.5 }}>{link.blurb}</p>}
+              </button>
+            ))}
+            {whereToGoNext.external?.map((link, i) => (
+              <a key={`ext-${i}`} href={link.href} target="_blank" rel="noopener noreferrer" style={{
+                display: "block",
+                background: `${C.coral}0a`,
+                border: `1px solid ${C.coral}28`,
+                borderRadius: 10,
+                padding: "12px 14px",
+                color: C.textSecondary,
+                textDecoration: "none",
+                transition: "all 0.2s",
+              }}
+                onMouseOver={e => { e.currentTarget.style.borderColor = C.coral; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseOut={e => { e.currentTarget.style.borderColor = `${C.coral}28`; e.currentTarget.style.transform = "none"; }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                  <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.coral }}>Outside reading ↗</span>
+                </div>
+                <p style={{ color: C.textPrimary, fontSize: "0.88rem", fontWeight: 600, marginBottom: 4 }}>{link.label}</p>
+                {link.blurb && <p style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.5 }}>{link.blurb}</p>}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function ContinueExploringCard({ link, navigate }) {
   const [hover, setHover] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);

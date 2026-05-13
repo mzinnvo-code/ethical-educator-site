@@ -153,11 +153,12 @@ export default function AIEthics({ navigate }) {
           <FadeIn delay={0.14}><StatCounter value={35} suffix="M €" label="Maximum EU AI Act fine" subtitle="or 7% of global turnover" color={C.coral} /></FadeIn>
         </div>
 
-        <div className="grid-3" style={{ marginTop: 32 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18, marginTop: 32 }}>
           <TopicCard icon="⚖️" title="From Ambiguity to Action" desc="Why saying 'uphold ethics' isn't enough. Normative frameworks — utilitarianism, deontology, virtue ethics — with thought experiments designed for educators." delay={0.06} onClick={() => window.open("https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/", "_blank")} />
           <TopicCard icon="🤖" title="The Paradox of AI in Education" desc="Even if AI could perfectly replicate human teachers, should it? Shared humanity, communal learning, and the is/ought distinction at its most urgent." delay={0.1} onClick={() => window.open("https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/", "_blank")} />
-          <TopicCard icon="📝" title="The AI Authorship Quandary" desc="When a student submits AI-written work and the parent defends it — a thought experiment for navigating academic integrity in the age of AI." delay={0.14} onClick={() => navigate("thought-experiments")} />
+          <TopicCard icon="📝" title="The AI Authorship Quandary" desc="A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. What good policy looks like — and the interactive scenario at the heart of it." delay={0.14} accent={C.gold} onClick={() => navigate("ai-authorship-quandary")} />
           <TopicCard icon="🧠" title="The Consciousness Line" desc="Current AI is probably not conscious, but fuzzy boundaries, organoids, and synthetic biology make ethical humility worth teaching." delay={0.18} accent={C.ocean} onClick={() => navigate("ai-consciousness")} />
+          <TopicCard icon="👩‍🏫" title="Why AI Won't Replace Teachers — A Response" desc="A challenge to the comforting claim that AI's limits are permanent. What 'replacement' actually means, and why the harder argument is normative, not technical." delay={0.22} onClick={() => window.open("https://ethicalaiedu.wordpress.com/2024/02/14/response-to-why-ai-wont-replace-teachers/", "_blank")} />
         </div>
 
         <Narrow>
