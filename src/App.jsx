@@ -113,9 +113,9 @@ const PAGE_META = {
   },
   "ai-consciousness": {
     title: "The Consciousness Line — The Ethical Educator",
-    description: "A philosophically grounded response to Anil Seth on AI consciousness, synthetic biology, organoids, Nagel, Austin, and ethical caution under uncertainty.",
+    description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
     datePublished: "2026-05-09",
-    dateModified: "2026-05-09",
+    dateModified: "2026-05-12",
   },
   "phil-education": {
     title: "Philosophy in K–12 Education — The Ethical Educator",
@@ -343,10 +343,6 @@ export default function App() {
         .mobile-menu a.active{color:${C.gold}}
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-        button:focus{outline:none}
-        button:focus-visible{outline:2px solid ${C.gold};outline-offset:2px;border-radius:6px}
-        a:focus{outline:none}
-        a:focus-visible{outline:2px solid ${C.gold};outline-offset:2px;border-radius:4px}
         .page-enter{animation:pageIn 0.4s ease}
         @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}
