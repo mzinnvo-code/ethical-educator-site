@@ -1533,7 +1533,7 @@ export default function AIConsciousness({ navigate }) {
               Seth's warning is the right place to begin. Intelligence and consciousness are not the same thing. A system can solve problems, generate convincing language, and model social cues without there being anything it is like to be that system. Current large language models may be extraordinary mimics while still being empty of experience.
             </BodyText>
             <BodyText>
-              I agree with that caution. This article is not an argument that today's chatbots have secret inner lives. It is an invitation to stay with the harder question Seth also helps open: what should educators do when the science is unfinished, the boundary is unstable, and our categories carry moral consequences?
+              I agree with that caution. This article is not an argument that today's chatbots have secret inner lives. It is an invitation to stay with the harder question Seth also helps open: what should we do when the science is unfinished, the boundary is unstable, and our categories carry moral consequences?
             </BodyText>
           </FadeIn>
 
@@ -1572,10 +1572,9 @@ export default function AIConsciousness({ navigate }) {
             <Expandable title="2. The Hard Problem in Plain Language" color={C.coral} tag="Core Question" defaultOpen>
               <p>The hard problem is not whether a system can speak, learn, remember, plan, report, or respond intelligently. Those are observable capacities. The harder question is why any physical, biological, or computational process should be accompanied by felt experience at all.</p>
               <p style={{ marginTop: 12 }}>A system might behave as if it has a point of view, but the question remains whether there is anything it is like to be that system. That gap is what makes the consciousness line ethically unstable.</p>
-              <Note color={C.coral}>
-                For educators, this distinction matters. The classroom question is not just "Can it do the task?" It is also "What kind of evidence would ever show that there is, or is not, a subject of experience here?"
-              </Note>
-              <p>This is why Seth, Annaka Harris, David Chalmers, Thomas Nagel, and Frank Jackson all remain useful in the same conversation. They disagree about what consciousness may require, but they all help expose the gap between outward function and inward life.</p>
+              <p style={{ marginTop: 12 }}>Notice what this question does and does not ask. It is not asking whether a machine can produce a sentence about pain, fear, perception, or selfhood. Reports are still behavior. The hard problem asks why any arrangement of matter should be accompanied by first-person presence: pain felt as pain, color seen as color, fear lived from the inside.</p>
+              <p style={{ marginTop: 12 }}>That is why consciousness is harder than intelligence. Intelligence can often be measured by performance. Consciousness asks whether performance is accompanied by a subject for whom anything appears, matters, or is felt.</p>
+              <p style={{ marginTop: 12 }}>This is why Seth, Annaka Harris, David Chalmers, Thomas Nagel, and Frank Jackson all remain useful in the same conversation. They disagree about what consciousness may require, but they all help expose the gap between outward function and inward life.</p>
               <SourceLink href={links.chalmers}>David Chalmers, "Facing Up to the Problem of Consciousness" (1995)</SourceLink>
             </Expandable>
           </FadeIn>
@@ -1593,7 +1592,7 @@ export default function AIConsciousness({ navigate }) {
                 Annaka Harris discusses the hard problem and the limits of ordinary intuitions about consciousness. <LinkOut href={links.harrisVideo}>Watch on YouTube</LinkOut>
               </p>
               <p>Harris's point does not prove that simple systems, animals, organoids, or future AI systems are conscious. It does something more useful for this article: it weakens our confidence that the line can be drawn quickly from the outside.</p>
-              <p>That matters for educators because AI ethics is often taught through confident categories: tool, user, author, person, machine. Consciousness resists that tidiness.</p>
+              <p>That matters because AI ethics is often debated through confident categories: tool, user, author, person, machine. Consciousness resists that tidiness.</p>
             </Expandable>
           </FadeIn>
 
@@ -1719,13 +1718,11 @@ export default function AIConsciousness({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="10. Nagel: What It Is Like" color={C.gold} tag="Core Definition" defaultOpen>
-              <p>The best short definition we have is still Thomas Nagel's: a being is conscious if there is something it is like to be that being.</p>
-              <QuoteBlock
-                quote="The ethical question begins the moment there might be a point of view inside the system."
-                attribution="The Consciousness Line"
-                source="After Nagel"
-                color={C.gold}
-              />
+              <p>Thomas Nagel's 1974 essay, "What Is It Like to Be a Bat?", gives one of philosophy's clearest ways of naming subjective experience. Nagel did not choose the bat because bats are simple. He chose it because their way of sensing the world through echolocation is close enough for science to study and strange enough to remind us that objective description is not the same as occupying a point of view.</p>
+              <p style={{ marginTop: 12 }}>The best short definition we have is still Nagel's: a being is conscious if there is something it is like to be that being.</p>
+              <Note color={C.gold}>
+                The ethical question begins the moment there might be a point of view inside the system.
+              </Note>
               <p>Nagel's bat matters because it blocks a tempting move. We can know a great deal about a bat's physiology, echolocation, neural activity, and behavior while still not knowing what it is like for the bat. Subjective experience is not easily captured from the outside.</p>
               <p style={{ marginTop: 12 }}>That cuts against both arrogance and panic. We should not assume that fluent AI language means there is something it is like to be the AI. But we also should not assume that our inability to access another system's inner life proves there is nothing there.</p>
               <SourceLink href={links.nagel}>Thomas Nagel, "What Is It Like to Be a Bat?" (1974)</SourceLink>
@@ -1788,7 +1785,7 @@ export default function AIConsciousness({ navigate }) {
               <Note color={C.teal}>
                 The answer is not sentimental certainty. It is disciplined uncertainty.
               </Note>
-              <p>This is the educationally useful place to land. Students do not need premature certainty. They need the tools to reason under uncertainty without becoming either gullible or cruel.</p>
+              <p>This is a useful place to land. Students do not need premature certainty. They need the tools to reason under uncertainty without becoming either gullible or cruel.</p>
               <SourceLink href={links.butlin}>Butlin et al., "Consciousness in Artificial Intelligence" (2023)</SourceLink>
               <SourceLink href={links.mcclelland}>McClelland, "Agnosticism about artificial consciousness" (Mind & Language)</SourceLink>
             </Expandable>
@@ -1820,7 +1817,7 @@ export default function AIConsciousness({ navigate }) {
           <Divider label="References" />
 
           <FadeIn delay={0.06}>
-            <Expandable title="Verified Sources Used in This Article" color={C.ocean} tag="Sources">
+            <Expandable title="Sources Used in This Article" color={C.ocean} tag="Sources">
               <RefItem><LinkOut href={links.sethTed}>Anil K. Seth. "Why AI is unlikely to become conscious." TED, 2026.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sethBbs}>Anil K. Seth. "Conscious artificial intelligence and biological naturalism." Behavioral and Brain Sciences, 2025. DOI: 10.1017/S0140525X25000032.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sethOConnor}>Anil K. Seth in conversation with Alex O'Connor. Longer interview on consciousness, AI, biological naturalism, and possible minds.</LinkOut></RefItem>
