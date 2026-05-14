@@ -208,7 +208,7 @@ export function EducatorHero({ label, title, subtitle, image, imageAlt, accent =
             margin: "0 auto",
             padding: "clamp(56px, 8vw, 96px) 24px",
           }}>
-            <div style={{ maxWidth: 670 }}>
+            <div style={{ width: "min(670px, calc(100vw - 48px))", maxWidth: "100%" }}>
               <SectionLabel>{label}</SectionLabel>
               <h2 style={{
                 fontFamily: "'Source Serif 4', Georgia, serif",
@@ -217,12 +217,15 @@ export function EducatorHero({ label, title, subtitle, image, imageAlt, accent =
                 fontWeight: 700,
                 lineHeight: 1.08,
                 marginBottom: 18,
+                maxWidth: "100%",
+                overflowWrap: "break-word",
               }}>{title}</h2>
               <p style={{
                 color: C.textSecondary,
                 fontSize: "clamp(0.98rem, 2vw, 1.12rem)",
                 lineHeight: 1.78,
-                maxWidth: 620,
+                width: "min(620px, 100%)",
+                overflowWrap: "break-word",
               }}>{subtitle}</p>
             </div>
           </div>

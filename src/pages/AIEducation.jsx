@@ -1,31 +1,359 @@
 import { C } from "../theme.js";
 import {
-  FadeIn, Expandable, TopicCard, VideoEmbed, SectionLabel, SectionTitle, Subtitle,
-  Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
-  FigureCard, Divider, ComparisonCard, ReadingTime
+  FadeIn, Expandable, TopicCard, VideoEmbed, EducatorHero,
+  Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock,
+  FigureCard, Divider, ReadingTime, ContinueExploring
 } from "../components/shared.jsx";
+import {
+  AI_EDUCATION_CONTINUE_LINKS,
+  AI_EDUCATION_HUB,
+  AI_EDUCATION_NAV_ITEMS,
+  AI_EDUCATION_SECTION_VISUALS,
+  AI_EDUCATION_SNAPSHOT_STATS,
+  AI_EDUCATION_TOPICS,
+  AI_EDUCATION_TOOLS,
+} from "../data/aiEducationResources.js";
+
+function SectionVisual({ visual, delay = 0.06 }) {
+  return (
+    <FadeIn delay={delay}>
+      <section id={visual.id} className="ai-section-visual" style={{ borderColor: `${visual.accent}28`, scrollMarginTop: 82 }}>
+        <div className="ai-section-visual-media">
+          <img src={visual.image} alt={visual.imageAlt} loading="lazy" />
+          <div className="ai-section-visual-scrim" />
+        </div>
+        <div className="ai-section-visual-copy">
+          <p className="ai-section-visual-label" style={{ color: visual.accent }}>{visual.label}</p>
+          <h3>{visual.title}</h3>
+          <p>{visual.desc}</p>
+          <div className="ai-section-visual-points">
+            {visual.points.map((point) => (
+              <span key={point} style={{ borderColor: `${visual.accent}36`, color: visual.accent, background: `${visual.accent}0d` }}>{point}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+  );
+}
+
+function SnapshotStrip() {
+  const jumpTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  return (
+    <FadeIn delay={0.08}>
+      <section className="ai-snapshot" aria-label="AI in Education snapshot">
+        <div className="ai-snapshot-heading">
+          <p>At a glance</p>
+          <h3>The practical pattern is nuance.</h3>
+        </div>
+        <div className="ai-snapshot-stats">
+          {AI_EDUCATION_SNAPSHOT_STATS.map((stat) => (
+            <div key={stat.label} className="ai-snapshot-stat" style={{ borderColor: `${stat.color}26` }}>
+              <strong style={{ color: stat.color }}>{stat.display}</strong>
+              <span>{stat.label}</span>
+              <em>{stat.subtitle}</em>
+            </div>
+          ))}
+        </div>
+        <div className="ai-snapshot-nav" aria-label="Jump to AI in Education sections">
+          {AI_EDUCATION_NAV_ITEMS.map((item) => (
+            <button key={item.id} onClick={() => jumpTo(item.id)} style={{ color: item.color, borderColor: `${item.color}34`, background: `${item.color}0c` }}>
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </section>
+    </FadeIn>
+  );
+}
+
+function ToolMatrix() {
+  return (
+    <div className="ai-tool-matrix">
+      {AI_EDUCATION_TOOLS.map((tool) => (
+        <article key={tool.name} className="ai-tool-card" style={{ borderColor: `${tool.color}28`, borderTopColor: tool.color }}>
+          <p style={{ color: tool.color }}>{tool.category}</p>
+          <h4>{tool.name}</h4>
+          <span>{tool.desc}</span>
+          <em>{tool.note}</em>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 export default function AIEducation({ navigate }) {
   return (
-    <div style={{ padding: "80px 0", background: C.bgAlt }}>
+    <div style={{ padding: "0 0 80px", background: C.bgAlt }}>
+      <style>{`
+        .ai-section-visual {
+          display: grid;
+          grid-template-columns: minmax(0, 1.08fr) minmax(250px, 0.92fr);
+          gap: 0;
+          margin: 42px 0 28px;
+          border: 1px solid;
+          border-radius: 14px;
+          overflow: hidden;
+          background: ${C.surface};
+          box-shadow: 0 18px 60px rgba(0,0,0,0.18);
+        }
+        .ai-section-visual-media {
+          position: relative;
+          min-height: 270px;
+          background: ${C.midnight};
+        }
+        .ai-section-visual-media img {
+          width: 100%;
+          height: 100%;
+          min-height: 270px;
+          object-fit: cover;
+          display: block;
+        }
+        .ai-section-visual-scrim {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, transparent 45%, rgba(11,22,34,0.42));
+          pointer-events: none;
+        }
+        .ai-section-visual-copy {
+          padding: clamp(22px, 4vw, 34px);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .ai-section-visual-label {
+          font-size: 0.66rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          margin-bottom: 10px;
+        }
+        .ai-section-visual-copy h3 {
+          font-family: 'Source Serif 4', Georgia, serif;
+          color: ${C.textPrimary};
+          font-size: clamp(1.35rem, 3vw, 1.9rem);
+          line-height: 1.16;
+          font-weight: 700;
+          margin-bottom: 12px;
+        }
+        .ai-section-visual-copy p {
+          color: ${C.textSecondary};
+          font-size: 0.92rem;
+          line-height: 1.72;
+        }
+        .ai-section-visual-points {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 18px;
+        }
+        .ai-section-visual-points span {
+          border: 1px solid;
+          border-radius: 999px;
+          padding: 5px 10px;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+        .ai-snapshot {
+          margin: 34px 0 42px;
+          padding: clamp(22px, 4vw, 30px);
+          background: linear-gradient(135deg, rgba(18,37,61,0.96), rgba(8,18,32,0.72));
+          border: 1px solid ${C.border};
+          border-radius: 14px;
+          box-shadow: 0 18px 60px rgba(0,0,0,0.14);
+        }
+        .ai-snapshot-heading {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          gap: 18px;
+          margin-bottom: 18px;
+        }
+        .ai-snapshot-heading p {
+          color: ${C.gold};
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+        }
+        .ai-snapshot-heading h3 {
+          color: ${C.textPrimary};
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: clamp(1.28rem, 3vw, 1.75rem);
+          line-height: 1.18;
+          text-align: right;
+        }
+        .ai-snapshot-stats {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .ai-snapshot-stat {
+          min-height: 118px;
+          padding: 18px 14px;
+          background: rgba(18,37,61,0.72);
+          border: 1px solid;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .ai-snapshot-stat strong {
+          display: block;
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: clamp(1.75rem, 4vw, 2.35rem);
+          line-height: 1;
+          font-weight: 700;
+        }
+        .ai-snapshot-stat span {
+          display: block;
+          color: ${C.textSecondary};
+          font-size: 0.82rem;
+          line-height: 1.45;
+          margin-top: 8px;
+        }
+        .ai-snapshot-stat em {
+          display: block;
+          color: ${C.textMuted};
+          font-size: 0.72rem;
+          line-height: 1.4;
+          margin-top: 6px;
+        }
+        .ai-snapshot-nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 18px;
+        }
+        .ai-snapshot-nav button {
+          border: 1px solid;
+          border-radius: 999px;
+          padding: 7px 12px;
+          font-family: inherit;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: transform 0.2s, border-color 0.2s;
+        }
+        .ai-snapshot-nav button:hover {
+          transform: translateY(-2px);
+          border-color: currentColor;
+        }
+        .ai-tool-matrix {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+          gap: 12px;
+          margin-top: 14px;
+        }
+        .ai-tool-card {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          min-height: 168px;
+          padding: 15px 16px;
+          background: rgba(18,37,61,0.86);
+          border: 1px solid;
+          border-top: 3px solid;
+          border-radius: 10px;
+        }
+        .ai-tool-card p {
+          font-size: 0.62rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+        .ai-tool-card h4 {
+          color: ${C.textPrimary};
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: 1rem;
+          line-height: 1.2;
+          font-weight: 700;
+        }
+        .ai-tool-card span {
+          color: ${C.textSecondary};
+          font-size: 0.82rem;
+          line-height: 1.52;
+        }
+        .ai-tool-card em {
+          margin-top: auto;
+          padding-top: 9px;
+          border-top: 1px solid ${C.border};
+          color: ${C.textMuted};
+          font-size: 0.74rem;
+          line-height: 1.45;
+          font-style: italic;
+        }
+        @media (max-width: 860px) {
+          .ai-snapshot-stats,
+          .ai-tool-matrix {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        @media (max-width: 760px) {
+          .ai-section-visual {
+            grid-template-columns: 1fr;
+            margin: 34px 0 24px;
+          }
+          .ai-section-visual-media,
+          .ai-section-visual-media img {
+            min-height: 220px;
+          }
+          .ai-section-visual-scrim {
+            background: linear-gradient(180deg, transparent 48%, rgba(11,22,34,0.58));
+          }
+          .ai-snapshot-heading {
+            display: block;
+          }
+          .ai-snapshot-heading h3 {
+            text-align: left;
+            margin-top: 8px;
+          }
+          .ai-snapshot-stats,
+          .ai-tool-matrix {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+      <EducatorHero
+        label={AI_EDUCATION_HUB.sectionLabel}
+        title={AI_EDUCATION_HUB.title}
+        subtitle={AI_EDUCATION_HUB.desc}
+        image={AI_EDUCATION_HUB.image}
+        imageAlt={AI_EDUCATION_HUB.imageAlt}
+        accent={AI_EDUCATION_HUB.accent}
+        variant="background"
+      />
+
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Practical Applications · Evidence · Voices</SectionLabel>
-          <SectionTitle>AI in the Classroom</SectionTitle>
-          <Subtitle>From personalized learning and IEP support to custom GPTs and lesson review tools — how AI is actually being used right now, what the evidence says works, and the voices shaping the discourse. Grounded in philosophy, connected to real classrooms.</Subtitle>
+        <FadeIn delay={0.04}>
           <ReadingTime minutes={10} />
         </FadeIn>
 
         <div className="grid-3" style={{ marginTop: 32 }}>
-          <TopicCard icon="🎯" title="Personalized Learning" desc="AI tutors like Khanmigo remember interests and adapt in real time. A soccer fan learns polynomials through game statistics. Every student gets a path tailored to how they learn best." delay={0.06} accent={C.teal} />
-          <TopicCard icon="♿" title="IEP & Special Education" desc="AI tools generate IEP drafts, suggest accommodations, and level text — saving teachers hours. But the teacher makes the final call. AI is the assistant, never the decision-maker." delay={0.1} accent={C.gold} />
-          <TopicCard icon="🎵" title="Creative AI Tools" desc="ReviewSongGPT turns lessons into songs. Students' narratives become children's books. AI remixes work across genres, opening doors to creativity students didn't know existed." delay={0.14} accent={C.coral} />
-          <TopicCard icon="📊" title="AI-Powered Grading" desc="Tools like AutoMark provide fast, consistent feedback. NYC's 2026 policy prohibits AI-driven grading decisions — but using AI as a co-pilot for feedback is encouraged." delay={0.18} accent={C.ocean} />
-          <TopicCard icon="🧠" title="Custom GPTs for PD" desc="RigorGPT, BackwardDesignGPT, OutcomesGPT, Science of Reading GPT — specialized AI assistants built by Matthew for professional development in key teaching domains." delay={0.22} accent={C.gold} />
-          <TopicCard icon="🔮" title="The Future" desc="Predictive analytics with complete learner profiles, AI tutoring 24/7, virtual learning communities, and administrative automation. The OECD will assess AI literacy in 2029 PISA." delay={0.26} accent={C.teal} />
+          {AI_EDUCATION_TOPICS.map((topic, index) => (
+            <TopicCard
+              key={topic.id}
+              image={topic.image}
+              imageAlt={topic.imageAlt}
+              title={topic.title}
+              desc={topic.desc}
+              delay={0.06 + index * 0.04}
+              accent={topic.accent}
+            />
+          ))}
         </div>
 
+        <SnapshotStrip />
+
         <Narrow>
+          <SectionVisual visual={AI_EDUCATION_SECTION_VISUALS.evidence} />
           <Divider label="The Evidence" />
 
           <FadeIn delay={0.06}>
@@ -73,6 +401,7 @@ export default function AIEducation({ navigate }) {
             </Expandable>
           </FadeIn>
 
+          <SectionVisual visual={AI_EDUCATION_SECTION_VISUALS.classroom} delay={0.08} />
           <Divider label="How It Actually Works in the Classroom" />
 
           <FadeIn delay={0.06}>
@@ -126,20 +455,14 @@ export default function AIEducation({ navigate }) {
           </FadeIn>
 
           <FadeIn delay={0.12}>
-            <Expandable title="Essential Tools for Educators">
-              <p><strong>ChatGPT / Copilot / Gemini</strong> — General-purpose AI assistants for lesson planning, content creation, and professional development. Users must be at least 13 with parental permission for ages 13–18.</p>
-              <p style={{ marginTop: 8 }}><strong>Khan Academy's Khanmigo</strong> — AI tutor that personalizes learning and reports the collaborative process. Example Khanmigo report: "Sal initially had trouble with a thesis. The outlining went smoothly. I'd recommend a B+ based on the rubric."</p>
-              <p style={{ marginTop: 8 }}><strong>Microsoft Copilot "Learn Live"</strong> — Launched October 2025 under Suleyman's leadership. Voice-enabled Socratic tutor with interactive whiteboards.</p>
-              <p style={{ marginTop: 8 }}><strong>MagicSchool AI</strong> — 60+ tools including IEP generators, choice board creators, rubric builders, differentiation assistants.</p>
-              <p style={{ marginTop: 8 }}><strong>Amira Learning</strong> — AI reading tutor that listens to children read aloud. Shown to double reading growth rates for ages 5–10.</p>
-              <p style={{ marginTop: 8 }}><strong>Duolingo</strong> — Gamified AI-powered language learning with adaptive difficulty.</p>
-              <p style={{ marginTop: 8 }}><strong>Learning Ally</strong> — Audiobook solution for struggling readers, focusing on dyslexia and brain-based literacy.</p>
-              <p style={{ marginTop: 8 }}><strong>PeerTeach</strong> — AI-powered peer tutoring matching based on learning styles.</p>
-              <p style={{ marginTop: 8 }}><strong>AutoMark</strong> — AI-powered grading co-pilot for essays, quizzes, exams.</p>
+            <Expandable title="Essential Tools for Educators" color={C.ocean} tag="Tools" defaultOpen>
+              <p>Scan tools by classroom role first, then decide whether the use case belongs in planning, tutoring, accessibility, feedback, or policy-sensitive review.</p>
+              <ToolMatrix />
               <p style={{ marginTop: 12, color: C.textMuted, fontSize: "0.85rem" }}><em>Always follow your school, district, or corporate policy regarding AI use. Ensure compliance with FERPA and COPPA when using any AI tools with students.</em></p>
             </Expandable>
           </FadeIn>
 
+          <SectionVisual visual={AI_EDUCATION_SECTION_VISUALS.voices} delay={0.08} />
           <Divider label="Voices Shaping the Discourse" />
 
           <FadeIn delay={0.06}>
@@ -250,7 +573,9 @@ export default function AIEducation({ navigate }) {
             </Expandable>
           </FadeIn>
 
-          <Divider label="Videos" />
+          <div id="ai-education-videos" style={{ scrollMarginTop: 82 }}>
+            <Divider label="Videos" />
+          </div>
           <FadeIn delay={0.08}>
             <div className="grid-2">
               <div>
@@ -262,6 +587,10 @@ export default function AIEducation({ navigate }) {
                 <p style={{ fontSize: "0.8rem", color: C.textMuted, marginTop: 6 }}>Tristan Harris & Aza Raskin — The AI Dilemma</p>
               </div>
             </div>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <ContinueExploring navigate={navigate} links={AI_EDUCATION_CONTINUE_LINKS} />
           </FadeIn>
         </Narrow>
       </PageContainer>
