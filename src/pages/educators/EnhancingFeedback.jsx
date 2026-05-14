@@ -171,7 +171,7 @@ export default function EnhancingFeedback({ navigate }) {
             <FadeIn delay={0.06}>
               <Expandable title="The 5Rs and the 4C Model — Quick Reference" color={C.gold} tag="Tool">
                 <BodyText>
-                  Both frameworks are covered in depth on the foundational <a onClick={(e) => { e.preventDefault(); navigate("teaching-feedback"); }} href="#teaching-feedback" style={{ color: C.gold, cursor: "pointer" }}>Effective Academic Feedback page</a>. Quick reminder of the structure:
+                  Both frameworks are covered in depth on the foundational <a onClick={(e) => { e.preventDefault(); navigate("teaching-feedback"); }} href="/teaching-feedback" style={{ color: C.gold, cursor: "pointer" }}>Effective Academic Feedback page</a>. Quick reminder of the structure:
                 </BodyText>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12, margin: "16px 0" }}>
                   <div style={{ background: `${C.teal}08`, border: `1px solid ${C.teal}25`, borderRadius: 10, padding: "14px 16px" }}>

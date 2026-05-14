@@ -209,7 +209,7 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
             const pid = findProtocolId(kit.protocol.name);
             const NameEl = pid ? (
               <a
-                href={`#thought-experiments/toolkit?protocol=${pid}`}
+                href={`/thought-experiments/toolkit?protocol=${pid}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

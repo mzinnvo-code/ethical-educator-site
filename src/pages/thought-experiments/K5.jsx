@@ -6,6 +6,7 @@ import { ELEMENTARY_GRADES } from "./ElementaryGrade.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { getSceneIllustration } from "../../data/sceneIllustrations.js";
+import FeaturedRedBanner from "./FeaturedRedBanner.jsx";
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 const needsPunctuation = (text) => !/[.!?]$/.test(text);
@@ -34,6 +35,10 @@ export default function K5({ navigate }) {
         </FadeIn>
 
         <Narrow>
+          <FadeIn>
+            <FeaturedRedBanner navigate={navigate} />
+          </FadeIn>
+
           <Divider label="Choose a grade" />
           <FadeIn>
             <BodyText>

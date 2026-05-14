@@ -1464,6 +1464,57 @@ export const EXPERIMENTS = [
     furtherReading: [{ title: "Veil of Ignorance (LibreTexts)", url: "https://human.libretexts.org/Bookshelves/Philosophy/Political_Philosophy/Political_Philosophy_Reader_(Levin_et_al.)/01%3A_Thinking_About_and_Justifying_the_State/1.02%3A_John_Rawls_Veil_of_Ignorance", level: "intermediate" }],
     emoji: "🎭", added: "2026-04-30", estimatedMinutes: 7,
   },
+  {
+    id: "explaining-red-middle",
+    title: "Explaining Red",
+    tagline: "A classmate who was born without sight asks: does the wavelength tell you what red looks like?",
+    gradeBands: ["6-8"],
+    topics: ["mind", "knowledge", "ai-ethics"],
+    tier: "scenario",
+    scene: MarysRoomScene,
+    stages: [
+      {
+        id: "question", kicker: "Stage 1 — the question", title: "Red is 700 nanometers. Is that enough?",
+        prompt: "A new student named Hassan joined your science class today. The class is in the middle of the light-spectrum unit — Ms. Park is explaining wavelengths. Red, she says, is 700 nanometers. Hassan, who was born without sight, raises his hand: 'If red is 700 nanometers — does that tell you what red looks like?' What do you tell him?",
+        options: [
+          { label: "A", text: "Yes — the wavelength is what red is.", reflection: "You sided with the science. The number names a real thing in the world, and the thing it names is the same for everyone, whether they have seen red or not. But Hassan can memorize the number too. There's something else behind the word.", lens: "wavelength-yes" },
+          { label: "B", text: "No — knowing the number is not the same as seeing.", reflection: "You sided with experience. The wavelength is true. The wavelength is not the thing. You've drawn a line philosophers have been drawing for a long time.", lens: "wavelength-no" },
+          { label: "C", text: "Sort of — you'd know about red, but not what it's like.", reflection: "You allowed two kinds of knowing. Hassan can have the propositional knowledge (700 nm) and not the phenomenal knowledge (what red looks like). One of the oldest distinctions in philosophy.", lens: "wavelength-sort" },
+        ],
+      },
+      {
+        id: "help", kicker: "Stage 2 — how would you help?", title: "Hassan wants to understand red another way",
+        prompt: ({ chose }) => `Hassan smiles. ${chose[0]?.lens === "wavelength-yes" ? "\"I have the number. But when you say 'red,' your face changes. There's something else. What is it?\"" : "\"How would you help me have that other kind of knowing?\""} How do you try?`,
+        options: [
+          { label: "A", text: "Borrow from senses he DOES have — warmth, sound, touch.", reflection: "You reached for the world Hassan already knew. Useful — but calling red 'warm' is a borrowed word. Are you helping him understand red, or making up a new word that happens to share spelling?", lens: "associations" },
+          { label: "B", text: "Tell stories — every place I've seen red.", reflection: "Red lives in a hundred ordinary moments. As you speak them aloud, Hassan starts to hear the shape of the word. But stories describe what red DOES in the world, not what red IS to look at.", lens: "stories" },
+          { label: "C", text: "Stick with the science — that's the real answer.", reflection: "Hassan listens carefully. He takes notes. He understands the system. Whether he understands the color, the science cannot say. Philosophers call this gap qualia.", lens: "facts" },
+        ],
+      },
+      {
+        id: "knowing", kicker: "Stage 3 — what is knowing?", title: "Two kinds of knowing — or just one?",
+        prompt: ({ chose }) => `${chose[1]?.lens === "facts" ? "Hassan thanks you for the science. " : ""}This is the question philosopher Frank Jackson made famous in 1982 with a thought experiment about a scientist named Mary. Mary knew every physical fact about color but had lived her whole life in a black-and-white room. When she stepped out and saw red — did she learn something new? Most people say yes. So what is knowing, really?`,
+        options: [
+          { label: "A", text: "Some kinds of knowing have to come through experience.", reflection: "Phenomenal realism: there is a kind of knowledge that descriptions, no matter how complete, do not deliver. The Mary's Room answer most people give.", lens: "experience" },
+          { label: "B", text: "Knowing is knowing — descriptions count too.", reflection: "Strong physicalism: if Hassan has the facts, he has the knowledge. The Mary's Room thought experiment, on this view, fails. Daniel Dennett argued exactly this.", lens: "same" },
+          { label: "C", text: "There are several kinds of knowing, and we need all of them.", reflection: "Epistemic pluralism: 'knowing' is not one thing. The word red has many doors, and that's more honest than any single answer.", lens: "plural" },
+        ],
+        counterpoint: "This is the question that connects you to one of philosophy's oldest puzzles — and to AI. An AI can describe red beautifully. Whether it KNOWS red is another question.",
+      },
+      synthesis({ title: "What you and Hassan worked out together", positions: [
+        { name: "Frank Jackson", school: "1982", view: "Imagined Mary in a black-and-white room — the original Mary's Room thought experiment. Asked whether descriptions can ever deliver experience." },
+        { name: "Thomas Nagel", school: "1974", view: "Asked what it is like to be a bat. We know what bats DO. Whether we can know what they FEEL is a different question." },
+        { name: "Brock & Hay", school: "2019, Science Education", view: "Applied Mary's Room directly to science classrooms — students without direct experience possess 'Mary's knowledge': complete in theory, incomplete in understanding." },
+      ]}),
+    ],
+    reference: { text: "Frank Jackson, 'Epiphenomenal Qualia' (1982)", url: "https://en.wikipedia.org/wiki/Knowledge_argument" },
+    furtherReading: [
+      { title: "Qualia (SEP)", url: "https://plato.stanford.edu/entries/qualia/", level: "intermediate" },
+      { title: "Brock & Hay, Mary's Room and Science Education", url: "https://link.springer.com/article/10.1007/s11191-019-00060-2", level: "advanced" },
+      { title: "Nagel, 'What Is It Like to Be a Bat?' (1974)", url: "https://en.wikipedia.org/wiki/What_Is_It_Like_to_Be_a_Bat%3F", level: "advanced" },
+    ],
+    emoji: "🔴", added: "2026-05-13", estimatedMinutes: 9,
+  },
 
   // ════════════════════════════════════════════════════════════════════
   // 9-12 / Canon — canon mode: 3 stages (setup + remix + synthesis with positions)
@@ -1512,9 +1563,9 @@ export const EXPERIMENTS = [
   {
     id: "marys-room",
     title: "Mary's Room",
-    tagline: "Mary knows every fact about color — but has only seen black and white.",
+    tagline: "Mary knows every fact about color. So does Riya. So does an AI. Does any of them know red?",
     gradeBands: ["9-12", "educators"],
-    topics: ["mind", "knowledge", "education"],
+    topics: ["mind", "knowledge", "education", "ai-ethics"],
     tier: "scenario",
     scene: MarysRoomScene,
     stages: [
@@ -1522,10 +1573,10 @@ export const EXPERIMENTS = [
         id: "canon", kicker: "Stage 1 — Jackson's challenge", title: "Mary leaves the room",
         prompt: "Mary is a brilliant neuroscientist. She knows every physical fact about color: wavelengths, retinal biology, neural correlates. But she's lived her entire life in a black-and-white room — never SEEN color. One day, she walks outside and sees a red rose. Does she learn anything new?",
         options: [
-          { label: "A", text: "Yes — she gains qualia. Facts beyond the physical exist.", reflection: "Jackson's original conclusion.", lens: "qualia-realism" },
-          { label: "B", text: "No — she gains an ability, not new knowledge.", reflection: "Lewis-Nemirow ability hypothesis.", lens: "ability-hypothesis" },
-          { label: "C", text: "No — physical facts already covered it.", reflection: "Eliminativist physicalism.", lens: "physicalist" },
-          { label: "D", text: "The question conflates two senses of 'knowing.'", reflection: "Knowing-academically and knowing-experientially may simply be different.", lens: "epistemic-pluralism" },
+          { label: "A", text: "Yes — she gains qualia. Facts beyond the physical exist.", reflection: "Jackson's original conclusion. The felt quality of red is genuinely new knowledge no description can deliver.", lens: "qualia-realism" },
+          { label: "B", text: "No — she gains an ability, not new knowledge.", reflection: "Lewis-Nemirow ability hypothesis: Mary acquires capacities (recognize, imagine, remember red) but no new propositional fact.", lens: "ability-hypothesis" },
+          { label: "C", text: "No — physical facts already covered it.", reflection: "Eliminativist physicalism: any 'further fact' about red must reduce to neural states already covered by the facts Mary had.", lens: "physicalist" },
+          { label: "D", text: "The question conflates two senses of 'knowing.'", reflection: "Knowing-academically and knowing-experientially may simply be different — and the gap between them is real but not metaphysical.", lens: "epistemic-pluralism" },
         ],
       },
       {
@@ -1537,18 +1588,46 @@ export const EXPERIMENTS = [
           { label: "C", text: "Partially — it's not the same as seeing red, but it's not nothing.", reflection: "Maybe consciousness is a spectrum.", lens: "gradient" },
         ],
       },
-      synthesis({ title: "What Mary teaches us about understanding", positions: [
-        { name: "Frank Jackson", school: "1982", view: "Argued there are facts about consciousness physical science cannot capture. Later partially recanted." },
-        { name: "David Lewis & Lawrence Nemirow", school: "1980s", view: "Argued Mary gains an ABILITY (to recognize, recall, imagine) — not new propositional knowledge." },
+      {
+        id: "riya", kicker: "Stage 3 — into your classroom", title: "Riya joins your class",
+        prompt: ({ chose }) => `Mary is a thought experiment. Riya is a real student. She was born without sight and just joined your class. She's fluent in the science of color, the cultural associations of red, the literary uses of color across every novel you have read this year. Sitting next to you, she asks the obvious question: ${chose[0]?.lens === "qualia-realism" ? "given what you said about Mary — does Riya know red?" : "do I know red?"}`,
+        options: [
+          { label: "A", text: "Yes — her knowledge of red is real, even without the visual.", reflection: "Refuses to flatten Riya's hard-won understanding into a single visual channel she does not have. Disability philosophers (Siegel and others) push hard on this.", lens: "knows" },
+          { label: "B", text: "No — she knows about red, but not the redness of red.", reflection: "Holds the line: knowing about is not knowing what it is like. Block, Chalmers, and the phenomenal-consciousness lineage agree — but you'll need to defend that distinction when AI describes its experience in increasingly convincing terms.", lens: "doesnt" },
+          { label: "C", text: "Both — there are several kinds of knowing, and she has several.", reflection: "Generous, but it costs something: now you have to decide which kinds AI plausibly has and which it doesn't, and you cannot lean on 'all or nothing' anymore. Welcome to the actual hard problem.", lens: "both" },
+        ],
+        counterpoint: "If phenomenal experience is the key to knowing red, then anyone who has not seen red is locked out of 'real' color knowledge. That is a heavy implication.",
+      },
+      {
+        id: "model", kicker: "Stage 4 — the AI mirror", title: "The model",
+        prompt: ({ chose }) => `A large multimodal model has processed roughly two billion images in training, many labeled with the word 'red.' It can identify red in any photograph with high accuracy. It can describe red poetically — sunsets, arterial blood, the particular red of a stop sign on a wet evening. ${chose[2]?.lens === "knows" ? "By your reasoning about Riya, " : ""}does the model know red?`,
+        options: [
+          { label: "A", text: "No — pattern-matching is not experience.", reflection: "The model lives in Mary's room and may never leave. Convincing description is evidence of what language can do, not phenomenal access.", lens: "no" },
+          { label: "B", text: "Yes — perhaps differently than humans, but it knows red in its own way.", reflection: "The kind of knowing that comes from billions of contextual associations is its own form of understanding. Why privilege the phenomenal?", lens: "yes" },
+          { label: "C", text: "We can't tell — and the uncertainty itself is the most important fact.", reflection: "Whether there is anything it is like to be the model is a question we have no reliable way to answer, and that should make us cautious in both directions.", lens: "unknown" },
+        ],
+        counterpoint: "Three rooms, one question. Where you draw your lines here will tell you something about what knowledge is — and what we owe to AI and to each other.",
+      },
+      synthesis({ title: "Three rooms, one question — what you decided about knowing", positions: [
+        { name: "Frank Jackson", school: "1982", view: "Argued there are facts about consciousness physical science cannot capture. Later partially recanted, arguing the knowledge gain can be explained representationally." },
+        { name: "Thomas Nagel", school: "1974", view: "Asked whether you could understand what it is like to be a bat — framing phenomenal consciousness as 'something it is like' to be a subject that may resist objective description." },
+        { name: "David Lewis & Lawrence Nemirow", school: "1980s", view: "Mary gains an ABILITY (to recognize, recall, imagine) — not new propositional knowledge. Elegant deflation; contested by many." },
         { name: "Daniel Dennett", school: "Tufts", view: "Argued the experiment relies on hidden assumptions; if Mary REALLY knew everything physical, nothing would surprise her." },
+        { name: "David Chalmers", school: "1996", view: "Contemporary defense of irreducible phenomenal consciousness — what Chalmers calls 'the hard problem.' Directly relevant to whether AI systems could have qualia." },
+        { name: "Shannon Vallor", school: "2024", view: "In The AI Mirror: AI's pattern of mirroring human knowledge without inhabiting it makes the Mary's Room problem newly urgent — not as metaphysics but as ethics." },
+        { name: "Sebo & Long", school: "2023", view: "Argued we should take seriously the possibility AI may have phenomenal experience, even at low probability — because what we owe to systems depends on what we think experience is." },
       ]}),
     ],
     reference: { text: "Frank Jackson, 'Epiphenomenal Qualia' (1982)", url: "https://en.wikipedia.org/wiki/Knowledge_argument" },
     furtherReading: [
-      { title: "Knowledge Argument (Wikipedia)", url: "https://en.wikipedia.org/wiki/Knowledge_argument", level: "intermediate" },
+      { title: "Knowledge Argument (SEP)", url: "https://plato.stanford.edu/entries/qualia-knowledge/", level: "advanced" },
+      { title: "Nagel, 'What Is It Like to Be a Bat?' (1974)", url: "https://en.wikipedia.org/wiki/What_Is_It_Like_to_Be_a_Bat%3F", level: "advanced" },
+      { title: "Chalmers, The Conscious Mind (1996)", url: "https://consc.net/books/tcm/", level: "advanced" },
+      { title: "Vallor, The AI Mirror (2024)", url: "https://www.shannonvallor.net/books.html", level: "intermediate" },
       { title: "Brock & Hay, Mary's Room and Science Education", url: "https://link.springer.com/article/10.1007/s11191-019-00060-2", level: "advanced" },
+      { title: "Knowledge Argument (Wikipedia)", url: "https://en.wikipedia.org/wiki/Knowledge_argument", level: "intermediate" },
     ],
-    emoji: "🌈", added: "2026-04-30", estimatedMinutes: 8,
+    emoji: "🌈", added: "2026-04-30", estimatedMinutes: 12,
   },
   {
     id: "chinese-room",

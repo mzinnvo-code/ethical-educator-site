@@ -1471,7 +1471,7 @@ function DiscussionBridge() {
       }}>Featured Educator Pathways</p>
       <div className="grid-2">
         <DiscussionCard
-          href="#thought-experiments/educators?experiment=the-shortcut"
+          href="/thought-experiments/educators?experiment=the-shortcut"
           experimentId="the-shortcut"
           title="The Shortcut"
           color={C.teal}
@@ -1479,7 +1479,7 @@ function DiscussionBridge() {
           use="Best prompt: If the output is perfect, what is still lost?"
         />
         <DiscussionCard
-          href="#thought-experiments/educators?experiment=digital-doppelganger"
+          href="/thought-experiments/educators?experiment=digital-doppelganger"
           experimentId="digital-doppelganger"
           title="The Digital Doppelgänger"
           color={C.ocean}
@@ -1487,7 +1487,7 @@ function DiscussionBridge() {
           use="Best prompt: Who, if anyone, was present in the room?"
         />
         <DiscussionCard
-          href="#thought-experiments/educators?experiment=ai-authorship"
+          href="/thought-experiments/educators?experiment=ai-authorship"
           experimentId="ai-authorship"
           title="The AI Authorship Quandary"
           color={C.gold}
@@ -1495,7 +1495,7 @@ function DiscussionBridge() {
           use="Best prompt: What does the label 'author' do?"
         />
         <DiscussionCard
-          href="#thought-experiments/educators?experiment=reluctant-educator"
+          href="/thought-experiments/educators?experiment=reluctant-educator"
           experimentId="reluctant-educator"
           title="The Reluctant Educator"
           color={C.coral}

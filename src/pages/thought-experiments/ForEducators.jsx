@@ -17,7 +17,7 @@ const FLAGSHIPS = [
 
 function experimentIdFromHash() {
   if (typeof window === "undefined") return null;
-  const query = window.location.hash.split("?")[1] || "";
+  const query = window.location.search.slice(1) || "";
   return new URLSearchParams(query).get("experiment");
 }
 
@@ -97,8 +97,12 @@ function FlagshipsBlock() {
     };
 
     syncFlagshipFromHash();
-    window.addEventListener("hashchange", syncFlagshipFromHash);
-    return () => window.removeEventListener("hashchange", syncFlagshipFromHash);
+    window.addEventListener("popstate", syncFlagshipFromHash);
+    window.addEventListener("ethed:route", syncFlagshipFromHash);
+    return () => {
+      window.removeEventListener("popstate", syncFlagshipFromHash);
+      window.removeEventListener("ethed:route", syncFlagshipFromHash);
+    };
   }, []);
 
   return (

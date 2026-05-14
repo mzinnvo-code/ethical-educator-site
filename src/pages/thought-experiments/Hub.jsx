@@ -57,74 +57,8 @@ export default function Hub({ navigate }) {
           </Subtitle>
         </FadeIn>
 
-        {/* AUDIENCE TILES */}
         <Narrow>
-          <Divider label="Where would you like to begin?" />
-          <div className="grid-2" style={{ marginTop: 18, marginBottom: 18 }}>
-            <TopicCard
-              icon="🍎" iconLabel="Apple"
-              image={getFeatureIllustration("thought-experiments/educators")}
-              title="For Educators"
-              desc="Adult dilemmas about AI in your classroom — flagship experiments and decision tools."
-              onClick={() => navigate("thought-experiments/educators")}
-              accent={C.teal} delay={0}
-            />
-            <TopicCard
-              icon="🧸" iconLabel="Teddy bear"
-              image={getFeatureIllustration("thought-experiments/k-5")}
-              title="K–5"
-              desc="A grade-by-grade elementary hub with 24 storylike dilemmas, read-aloud support, and teacher kits."
-              onClick={() => navigate("thought-experiments/k-5")}
-              accent={C.coral} delay={0.05}
-            />
-          </div>
-          <div className="grid-2" style={{ marginBottom: 18 }}>
-            <TopicCard
-              icon="🚋" iconLabel="Trolley"
-              image={getFeatureIllustration("thought-experiments/6-8")}
-              title="Grades 6–8"
-              desc="Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions."
-              onClick={() => navigate("thought-experiments/6-8")}
-              accent={C.gold} delay={0.1}
-            />
-            <TopicCard
-              icon="🕳️" iconLabel="Cave"
-              image={getFeatureIllustration("thought-experiments/9-12")}
-              title="Grades 9–12"
-              desc="The philosophical canon — Plato's Cave, Mary's Room, Chinese Room — alongside the AI questions of our age."
-              onClick={() => navigate("thought-experiments/9-12")}
-              accent={C.ocean} delay={0.15}
-            />
-          </div>
-          <div style={{ marginBottom: 18 }}>
-            <TopicCard
-              icon="🛠" iconLabel="Toolkit"
-              image={getFeatureIllustration("thought-experiments/toolkit")}
-              title="Dialogue Toolkit"
-              desc="Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students."
-              onClick={() => navigate("thought-experiments/toolkit")}
-              accent={C.teal} delay={0.2}
-            />
-          </div>
-          <div style={{ marginBottom: 28, textAlign: "center" }}>
-            <button
-              onClick={() => navigate("thought-experiments/journal")}
-              style={{
-                background: "transparent", border: `1px solid ${C.gold}40`,
-                borderRadius: 999, padding: "8px 18px",
-                color: C.gold, cursor: "pointer", fontSize: "0.82rem", fontWeight: 600,
-              }}
-            >
-              📓 Open your Decision Journal
-            </button>
-            <p style={{ color: C.textMuted, fontSize: "0.74rem", marginTop: 8 }}>
-              Saved on this device only. Export to Markdown any time.
-            </p>
-          </div>
-        </Narrow>
-
-        {/* WHAT IS A THOUGHT EXPERIMENT? */}
-        <Narrow>
+          {/* WHAT IS A THOUGHT EXPERIMENT? — moved up so readers learn what these are before picking a grade. */}
           <Divider label="What is a thought experiment?" />
           <FadeIn>
             <BodyText>
@@ -194,37 +128,142 @@ export default function Hub({ navigate }) {
               experiments under <em>For Educators</em> are designed for adult professional dialogue — your AI policy depends on
               decisions it's better to make through scenario than through abstraction.</p>
             </Expandable>
+          </FadeIn>
 
-            <div style={{
-              marginTop: 18,
-              padding: "16px 20px",
-              background: `linear-gradient(135deg, ${C.teal}10, ${C.bgAlt})`,
-              border: `1px solid ${C.teal}30`,
-              borderRadius: 12,
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              gap: 14, flexWrap: "wrap",
-            }}>
-              <div style={{ flex: 1, minWidth: 240 }}>
+          {/* K-12 AUDIENCE TILES — three-up grid for the student-facing grade bands, separated from the For Educators section below. */}
+          <Divider label="Pick a grade band" />
+          <FadeIn>
+            <BodyText>
+              The student-facing material is organised by grade. K-5 leans on stories and read-aloud.
+              6-8 leans on dilemmas. 9-12 is the philosophical canon alongside the AI questions of our age.
+            </BodyText>
+          </FadeIn>
+          <div className="grid-3" style={{ marginTop: 18, marginBottom: 18 }}>
+            <TopicCard
+              icon="🧸" iconLabel="Teddy bear"
+              image={getFeatureIllustration("thought-experiments/k-5")}
+              title="K–5"
+              desc="A grade-by-grade elementary hub with storylike dilemmas, read-aloud support, and teacher kits."
+              onClick={() => navigate("thought-experiments/k-5")}
+              accent={C.coral} delay={0}
+            />
+            <TopicCard
+              icon="🚋" iconLabel="Trolley"
+              image={getFeatureIllustration("thought-experiments/6-8")}
+              title="Grades 6–8"
+              desc="Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions."
+              onClick={() => navigate("thought-experiments/6-8")}
+              accent={C.gold} delay={0.05}
+            />
+            <TopicCard
+              icon="🕳️" iconLabel="Cave"
+              image={getFeatureIllustration("thought-experiments/9-12")}
+              title="Grades 9–12"
+              desc="The philosophical canon — Plato's Cave, Mary's Room, the Chinese Room — alongside the AI questions of our age."
+              onClick={() => navigate("thought-experiments/9-12")}
+              accent={C.ocean} delay={0.1}
+            />
+          </div>
+
+          {/* TOOLKIT + DECISION JOURNAL — two-up callout that lives between the grade picker and For Educators. */}
+          <div className="grid-2" style={{ marginBottom: 32 }}>
+            <TopicCard
+              icon="🛠" iconLabel="Toolkit"
+              image={getFeatureIllustration("thought-experiments/toolkit")}
+              title="Dialogue Toolkit"
+              desc="Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon."
+              onClick={() => navigate("thought-experiments/toolkit")}
+              accent={C.teal} delay={0}
+            />
+            <TopicCard
+              icon="📓" iconLabel="Notebook"
+              image={getFeatureIllustration("thought-experiments/journal")}
+              title="Decision Journal"
+              desc="A private, browser-only record of your reasoning across thought experiments. Notes, paths, and a Markdown export. Nothing leaves your device."
+              onClick={() => navigate("thought-experiments/journal")}
+              accent={C.gold} delay={0.05}
+            />
+          </div>
+
+          {/* FOR EDUCATORS — its own dedicated section, not in the K-12 audience grid. */}
+          <Divider label="For Educators" />
+          <FadeIn>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => navigate("thought-experiments/educators")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate("thought-experiments/educators");
+                }
+              }}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1fr) auto",
+                gap: 22,
+                alignItems: "center",
+                padding: "26px 28px",
+                marginTop: 14,
+                marginBottom: 28,
+                background: `linear-gradient(135deg, ${C.teal}14, ${C.ocean}08)`,
+                border: `1px solid ${C.teal}30`,
+                borderLeft: `4px solid ${C.teal}`,
+                borderRadius: 14,
+                cursor: "pointer",
+                outline: "none",
+                transition: "all 0.24s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 14px 32px ${C.teal}22`; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              <div>
                 <p style={{
-                  fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em",
-                  textTransform: "uppercase", color: C.teal, marginBottom: 6,
-                }}>Want more?</p>
-                <p style={{ color: C.textPrimary, fontSize: "0.94rem", fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.55 }}>
-                  The full <strong>Dialogue Toolkit</strong> includes twelve protocols with step-by-step
-                  scripts, a "what do I do when…" decision tree, and a parallel canon across East Asian,
-                  African, South Asian, and Indigenous traditions.
+                  color: C.teal,
+                  fontSize: "0.68rem",
+                  fontWeight: 800,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  marginBottom: 8,
+                }}>Adult dilemmas · For Staff PD</p>
+                <h3 style={{
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  color: C.textPrimary,
+                  fontSize: "1.35rem",
+                  fontWeight: 700,
+                  lineHeight: 1.22,
+                  marginBottom: 8,
+                }}>For Educators</h3>
+                <p style={{
+                  color: C.textSecondary,
+                  fontSize: "0.94rem",
+                  lineHeight: 1.6,
+                  marginBottom: 12,
+                  maxWidth: 660,
+                }}>
+                  Four flagship multi-stage scenarios designed for the conversations you wish you'd had before
+                  the vendor demo. The Shortcut, the AI Authorship Quandary, the Reluctant Educator, the Digital
+                  Doppelgänger. Built for staff meetings, leadership retreats, and policy work.
                 </p>
+                <span style={{
+                  color: C.teal,
+                  fontSize: "0.84rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.04em",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}>Open the educator flagships <span aria-hidden="true">→</span></span>
               </div>
-              <button
-                onClick={() => navigate("thought-experiments/toolkit")}
-                style={{
-                  padding: "10px 20px",
-                  background: `linear-gradient(135deg, ${C.teal}, ${C.ocean})`,
-                  color: "#fff", border: "none", borderRadius: 8,
-                  cursor: "pointer", fontWeight: 600, fontSize: "0.86rem",
-                  whiteSpace: "nowrap",
-                }}
-              >Open the Toolkit →</button>
+              <div style={{
+                width: 80, height: 80,
+                borderRadius: 16,
+                background: `linear-gradient(135deg, ${C.teal}30, ${C.ocean}18)`,
+                border: `1px solid ${C.teal}45`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "2.2rem",
+                flexShrink: 0,
+              }} aria-hidden="true">🍎</div>
             </div>
           </FadeIn>
 
@@ -262,7 +301,7 @@ export default function Hub({ navigate }) {
             </>
           )}
 
-          {/* PHILOSOPHICAL CANON (kept verbatim from prior version) */}
+          {/* PHILOSOPHICAL CANON */}
           <Divider label="The Philosophical Canon" />
           <FadeIn delay={0.06}><BodyText>The four flagship interactive experiments under <em>For Educators</em> are
             original scenarios. But they draw on a rich tradition of thought experiments — each illuminating a

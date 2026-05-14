@@ -71,7 +71,7 @@ const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) }
 
 function experimentIdFromHash() {
   if (typeof window === "undefined") return null;
-  const query = window.location.hash.split("?")[1] || "";
+  const query = window.location.search.slice(1) || "";
   return new URLSearchParams(query).get("experiment");
 }
 
@@ -106,8 +106,12 @@ export function ElementaryGradePage({ navigate, gradeId }) {
     };
 
     syncExperimentFromHash();
-    window.addEventListener("hashchange", syncExperimentFromHash);
-    return () => window.removeEventListener("hashchange", syncExperimentFromHash);
+    window.addEventListener("popstate", syncExperimentFromHash);
+    window.addEventListener("ethed:route", syncExperimentFromHash);
+    return () => {
+      window.removeEventListener("popstate", syncExperimentFromHash);
+      window.removeEventListener("ethed:route", syncExperimentFromHash);
+    };
   }, [grade.id]);
 
   // Stop in-flight narration when the page unmounts (e.g. user navigates away).

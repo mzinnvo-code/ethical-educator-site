@@ -2,6 +2,33 @@ import { C } from "../theme.js";
 import { FadeIn } from "../components/shared.jsx";
 import { getFeatureIllustration } from "../data/illustrations.js";
 
+const audiences = [
+  {
+    label: "I'm a student",
+    desc: "Try the thought experiments first. Built to argue with, not memorize.",
+    page: "audiences/student",
+    color: C.teal,
+  },
+  {
+    label: "I'm a teacher",
+    desc: "Classroom-ready scenarios by grade band and PD resources for the work itself.",
+    page: "audiences/teacher",
+    color: C.gold,
+  },
+  {
+    label: "I'm an administrator",
+    desc: "Policy frameworks and decision tools for AI in schools.",
+    page: "audiences/administrator",
+    color: C.ocean,
+  },
+  {
+    label: "I'm a parent or family member",
+    desc: "Conversations to have at the kitchen table. Stories to read together.",
+    page: "audiences/parent",
+    color: C.coral,
+  },
+];
+
 const pathways = [
   {
     number: "01",
@@ -323,6 +350,35 @@ function HomeStyles() {
       }
       .centered{text-align:center}
       .centered .section-copy{margin:0 auto}
+      .audience-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+      .audience-card{
+        border-radius:12px;
+        border:1px solid ${C.border};
+        background:${C.surface};
+        padding:18px;
+        cursor:pointer;
+        outline:none;
+        transition:transform 0.24s ease,border-color 0.24s ease,background 0.24s ease,box-shadow 0.24s ease;
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        min-height:148px;
+      }
+      .audience-card:hover,.audience-card:focus-visible{
+        transform:translateY(-3px);
+        border-color:var(--accent);
+        background:linear-gradient(135deg,var(--accent-soft),rgba(18,37,61,0.96));
+        box-shadow:0 14px 32px rgba(0,0,0,0.16);
+      }
+      .audience-label{
+        font-family:'Source Serif 4',Georgia,serif;
+        color:${C.textPrimary};
+        font-size:1.04rem;
+        font-weight:700;
+        line-height:1.28;
+      }
+      .audience-desc{color:${C.textMuted};font-size:0.84rem;line-height:1.55}
+      .audience-action{margin-top:auto;color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:0.04em}
       .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
       .pathway-card,.feature-card,.research-card,.resource-card,.about-band{
         border-radius:8px;
@@ -449,6 +505,7 @@ function HomeStyles() {
           opacity:0.38;
           pointer-events:none;
         }
+        .audience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
         .pathway-grid,.feature-grid,.research-grid{grid-template-columns:1fr}
         .feature-card,.pathway-card,.research-card{min-height:auto}
       }
@@ -457,6 +514,8 @@ function HomeStyles() {
         .home-cta-row,.home-button{width:100%}
         .home-section{padding:48px 18px}
         .hero-scene{right:-34%;bottom:-18%;width:96vw;min-height:250px}
+        .audience-grid{grid-template-columns:1fr}
+        .audience-card{min-height:auto}
         .resource-card,.about-band{grid-template-columns:1fr}
         .resource-card{padding:22px}
         .resource-main{grid-template-columns:1fr}
@@ -505,6 +564,26 @@ function SectionIntro({ kicker, title, children, centered = false }) {
         <p className="section-kicker">{kicker}</p>
         <h2 className="section-heading">{title}</h2>
         <p className="section-copy">{children}</p>
+      </div>
+    </FadeIn>
+  );
+}
+
+function AudienceCard({ item, delay, navigate }) {
+  const openPage = () => navigate(item.page);
+  return (
+    <FadeIn delay={delay}>
+      <div
+        role="button"
+        tabIndex={0}
+        className="audience-card"
+        style={{ "--accent": item.color, "--accent-soft": `${item.color}14` }}
+        onClick={openPage}
+        onKeyDown={event => handleCardKeyDown(event, openPage)}
+      >
+        <p className="audience-label">{item.label}</p>
+        <p className="audience-desc">{item.desc}</p>
+        <span className="audience-action" aria-hidden="true">Open <span style={{ marginLeft: 4 }}>-&gt;</span></span>
       </div>
     </FadeIn>
   );
@@ -607,6 +686,24 @@ export default function Home({ navigate }) {
               </div>
             </div>
           </FadeIn>
+        </div>
+      </section>
+
+      <section className="home-section alt">
+        <div className="home-container">
+          <SectionIntro
+            kicker="Who are you visiting as?"
+            title="Find the doorway built for you"
+            centered
+          >
+            The same routes underneath, a different framing on top. Pick whichever fits — and you can always
+            switch later.
+          </SectionIntro>
+          <div className="audience-grid">
+            {audiences.map((item, index) => (
+              <AudienceCard key={item.label} item={item} delay={0.04 * index} navigate={navigate} />
+            ))}
+          </div>
         </div>
       </section>
 

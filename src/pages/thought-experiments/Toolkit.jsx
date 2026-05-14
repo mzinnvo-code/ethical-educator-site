@@ -31,10 +31,10 @@ export default function Toolkit({ navigate }) {
   const [maxTime, setMaxTime] = useState("");
   const [groupSize, setGroupSize] = useState("");
 
-  // Read URL hash to deep-link to a specific protocol on first load
+  // Read URL query string to deep-link to a specific protocol on first load.
   useEffect(() => {
-    const hash = window.location.hash;
-    const m = hash.match(/protocol=([\w-]+)/);
+    const query = typeof window === "undefined" ? "" : window.location.search;
+    const m = query.match(/protocol=([\w-]+)/);
     if (m) {
       // Wait for paint, then scroll
       setTimeout(() => {
