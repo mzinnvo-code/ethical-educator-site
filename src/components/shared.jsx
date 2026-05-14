@@ -111,9 +111,10 @@ export function VideoEmbed({ id, title }) {
   );
 }
 
-export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 0, onClick, accent = null }) {
+export function TopicCard({ icon, iconLabel, image = null, imageAlt = "", title, desc, delay = 0, onClick, accent = null }) {
   const [hover, setHover] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const imageSrc = typeof image === "string" ? image : image?.src;
   const handleKeyDown = (event) => {
     if (!onClick || (event.key !== "Enter" && event.key !== " ")) return;
     event.preventDefault();
@@ -141,7 +142,7 @@ export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 
           height: "100%", position: "relative",
         }}>
         {accent && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: accent, borderRadius: "14px 14px 0 0" }} />}
-        {image && !imageFailed ? (
+        {imageSrc && !imageFailed ? (
           <div style={{
             width: "100%",
             aspectRatio: "1.8",
@@ -152,8 +153,8 @@ export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 
             background: `${(accent || C.gold)}10`,
           }}>
             <img
-              src={image.src}
-              alt=""
+              src={imageSrc}
+              alt={imageAlt || ""}
               loading="lazy"
               onError={() => setImageFailed(true)}
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
@@ -167,6 +168,95 @@ export function TopicCard({ icon, iconLabel, image = null, title, desc, delay = 
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.08rem", marginBottom: 6, fontWeight: 600 }}>{title}</h3>
         <p style={{ color: C.textMuted, fontSize: "0.85rem", lineHeight: 1.6 }}>{desc}</p>
       </div>
+    </FadeIn>
+  );
+}
+
+export function EducatorHero({ label, title, subtitle, image, imageAlt, accent = C.gold, variant = "split" }) {
+  const imageSrc = typeof image === "string" ? image : image?.src;
+
+  if (variant === "background" && imageSrc) {
+    return (
+      <FadeIn>
+        <section style={{
+          position: "relative",
+          minHeight: "clamp(430px, 62vh, 640px)",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          borderBottom: `1px solid ${accent}22`,
+          backgroundImage: `
+            linear-gradient(90deg, rgba(11,22,34,0.96) 0%, rgba(11,22,34,0.86) 42%, rgba(11,22,34,0.48) 72%, rgba(11,22,34,0.34) 100%),
+            linear-gradient(180deg, rgba(11,22,34,0.28), rgba(11,22,34,0.84)),
+            url(${imageSrc})
+          `,
+          backgroundSize: "cover",
+          backgroundPosition: "center right",
+          boxShadow: `inset 0 -90px 110px ${C.bg}, inset 0 0 90px rgba(0,0,0,0.22)`,
+        }}>
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(circle at 24% 42%, ${accent}16, transparent 34%)`,
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "relative",
+            zIndex: 1,
+            width: "100%",
+            maxWidth: 1080,
+            margin: "0 auto",
+            padding: "clamp(56px, 8vw, 96px) 24px",
+          }}>
+            <div style={{ maxWidth: 670 }}>
+              <SectionLabel>{label}</SectionLabel>
+              <h2 style={{
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                fontSize: "clamp(2.15rem, 6vw, 4rem)",
+                color: C.textPrimary,
+                fontWeight: 700,
+                lineHeight: 1.08,
+                marginBottom: 18,
+              }}>{title}</h2>
+              <p style={{
+                color: C.textSecondary,
+                fontSize: "clamp(0.98rem, 2vw, 1.12rem)",
+                lineHeight: 1.78,
+                maxWidth: 620,
+              }}>{subtitle}</p>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+    );
+  }
+
+  return (
+    <FadeIn>
+      <section style={{
+        display: "flex", gap: "clamp(22px, 4vw, 42px)",
+        alignItems: "center", justifyContent: "space-between",
+        flexWrap: "wrap",
+      }}>
+        <div style={{ flex: "1 1 430px", minWidth: 0 }}>
+          <SectionLabel>{label}</SectionLabel>
+          <SectionTitle>{title}</SectionTitle>
+          <Subtitle>{subtitle}</Subtitle>
+        </div>
+        {imageSrc && (
+          <figure style={{
+            flex: "0 1 292px", width: "min(100%, 292px)", aspectRatio: "1 / 1",
+            margin: "4px auto 0", borderRadius: 18, overflow: "hidden",
+            border: `1px solid ${accent}33`,
+            background: `linear-gradient(135deg, ${accent}14, ${C.midnight})`,
+            boxShadow: `0 22px 70px rgba(0,0,0,0.28), 0 0 46px ${accent}12`,
+          }}>
+            <img src={imageSrc} alt={imageAlt || ""} loading="eager" style={{
+              width: "100%", height: "100%", objectFit: "cover", display: "block",
+            }} />
+          </figure>
+        )}
+      </section>
     </FadeIn>
   );
 }
@@ -514,6 +604,7 @@ export function EducatorsFooter({ takeaways = [], classroomActivities = [], wher
 function ContinueExploringCard({ link, navigate }) {
   const [hover, setHover] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const imageSrc = typeof link.image === "string" ? link.image : link.image?.src;
   return (
     <div onClick={() => navigate(link.id)}
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
@@ -524,7 +615,7 @@ function ContinueExploringCard({ link, navigate }) {
         transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
       }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {link.image && !imageFailed ? (
+        {imageSrc && !imageFailed ? (
           <span style={{
             width: 44,
             height: 44,
@@ -535,8 +626,8 @@ function ContinueExploringCard({ link, navigate }) {
             background: `${link.color}10`,
           }} aria-hidden="true">
             <img
-              src={link.image.src}
-              alt=""
+              src={imageSrc}
+              alt={link.imageAlt || ""}
               loading="lazy"
               onError={() => setImageFailed(true)}
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}

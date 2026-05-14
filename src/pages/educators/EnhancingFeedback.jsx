@@ -1,19 +1,26 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ComparisonCard,
   Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 export default function EnhancingFeedback({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["enhancing-feedback"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · Teaching & Feedback</SectionLabel>
-          <SectionTitle>Enhancing Academic Feedback</SectionTitle>
-          <Subtitle>An advanced complement to the foundational feedback page. Performance levels, multimodal delivery, assessment integrity, and the personal action plan that takes feedback from "best effort" to genuinely effective.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -212,8 +219,8 @@ export default function EnhancingFeedback({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "teaching-feedback", icon: "💬", title: "Effective Academic Feedback", desc: "Foundations: the 5Rs, 4C reflection, and 1:1 conferencing", color: C.teal },
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.ocean },
+                educatorLink("teaching-feedback", { desc: "Foundations: the 5Rs, 4C reflection, and 1:1 conferencing" }),
+                educatorLink("for-educators", { desc: "All professional development resources" }),
                 { id: "ai-education", icon: "🤖", title: "AI in Education", desc: "How AI tools intersect with feedback practice", color: C.gold },
               ]} />
             </FadeIn>

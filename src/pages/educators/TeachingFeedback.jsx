@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, TopicCard, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
   ComparisonCard, Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 /* ─── 4C Reflection Interactive ─── */
 function FourCReflection() {
@@ -56,14 +58,19 @@ function FourCReflection() {
 }
 
 export default function TeachingFeedback({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["teaching-feedback"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · Teaching & Feedback</SectionLabel>
-          <SectionTitle>Effective Academic Feedback</SectionTitle>
-          <Subtitle>Strategies for providing personalized, actionable, and growth-oriented feedback that prompts students' thinking, addresses misconceptions, and builds toward mastery. Grounded in research from Hattie & Timperley and contemporary teacher evaluation standards.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -288,7 +295,7 @@ export default function TeachingFeedback({ navigate }) {
 
             <FadeIn delay={0.08}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.ocean },
+                educatorLink("for-educators", { desc: "All professional development resources" }),
                 { id: "ai-ethics", icon: "⚖️", title: "AI & Ethics", desc: "Ethical frameworks for education", color: C.gold },
                 { id: "ai-education", icon: "🤖", title: "AI in Education", desc: "Tools and evidence", color: C.teal },
               ]} />

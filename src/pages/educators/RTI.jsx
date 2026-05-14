@@ -1,19 +1,26 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ComparisonCard,
   Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 export default function RTI({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["rti"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · School Performance</SectionLabel>
-          <SectionTitle>Response to Intervention (RTI)</SectionTitle>
-          <Subtitle>The tiered intervention framework — identifying struggling students early, providing targeted support, and monitoring progress systematically. A K–12 overview of how RTI is designed, what it can and cannot do, and what implementation actually requires.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -190,9 +197,9 @@ export default function RTI({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "high-performing-schools", icon: "📈", title: "High-Performing K-12 Schools", desc: "Data-driven decisions and supportive culture", color: C.teal },
-                { id: "quality-leadership", icon: "🏫", title: "Quality Leadership & Instruction", desc: "Leadership styles and instructional pillars", color: C.gold },
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.ocean },
+                educatorLink("high-performing-schools", { desc: "Data-driven decisions and supportive culture" }),
+                educatorLink("quality-leadership", { desc: "Leadership styles and instructional pillars" }),
+                educatorLink("for-educators", { desc: "All professional development resources" }),
               ]} />
             </FadeIn>
           </div>
