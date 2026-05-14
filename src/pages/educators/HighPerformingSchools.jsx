@@ -1,19 +1,26 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ComparisonCard,
   Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 export default function HighPerformingSchools({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["high-performing-schools"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · School Performance</SectionLabel>
-          <SectionTitle>High-Performing K–12 Schools</SectionTitle>
-          <Subtitle>The nation's top-performing schools don't rely on last-minute test prep. They cultivate a culture of ongoing preparation that consistently produces strong results — built on data, rigorous instruction, intensive teacher training, and a supportive culture.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -147,9 +154,9 @@ export default function HighPerformingSchools({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "quality-leadership", icon: "🏫", title: "Quality Leadership & Instruction", desc: "Leadership styles and instructional pillars", color: C.gold },
-                { id: "rti", icon: "🔄", title: "Response to Intervention (RTI)", desc: "Tiered intervention for struggling students", color: C.coral },
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.teal },
+                educatorLink("quality-leadership", { desc: "Leadership styles and instructional pillars" }),
+                educatorLink("rti", { desc: "Tiered intervention for struggling students" }),
+                educatorLink("for-educators", { desc: "All professional development resources" }),
               ]} />
             </FadeIn>
           </div>

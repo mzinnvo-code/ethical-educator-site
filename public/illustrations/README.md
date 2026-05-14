@@ -7,7 +7,7 @@ field so the site still works.
 ## Style guide
 
 - **Aspect:** 1:1 (square) for card art; wide landscape for hero art.
-- **Format:** PNG.
+- **Format:** PNG for thought experiment slots; optimized WebP is fine for section art and hero backgrounds.
 - **Palette:** Warm, painterly. Match the impressionist beach palette in `src/theme.js`:
   midnight blues (#0b1622, #1a5a8a), teal (#1a8a7a), gold (#c89830), coral (#c07040),
   sand (#d4b868). Avoid harsh whites — use the off-white #e0dcd0.
@@ -68,6 +68,22 @@ field so the site still works.
 | `grading.png` | A red pen and a glowing screen side by side | 📝 |
 | `admissions.png` | A graduation cap with a sorting algorithm flowchart | 🎓 |
 | `ai-friend.png` | A chat bubble beside an empty chair at a window | 💬 |
+
+### For Educators / Professional Development
+These generated assets live in `public/illustrations/educators/` and are wired through
+`src/data/educatorResources.js`. They use optimized WebP files for page performance.
+
+| Slug | Subject |
+|---|---|
+| `for-educators-hub.webp` | Professional development desk with planner, compass, resource folders, and classroom cards |
+| `effective-academic-feedback.webp` | Annotated student work, red pen, rubrics, sticky notes, and teacher laptop |
+| `enhancing-academic-feedback.webp` | Multimodal feedback system with rubrics, revision bridge, and assessment tools |
+| `enhancing-student-engagement.webp` | Collaborative active-learning table with discussion cards and puzzle pieces |
+| `asynchronous-learning-engagement.webp` | Online course workspace with modular learning path and instructor presence cues |
+| `av-resources-online-teaching.webp` | Camera, microphone, headphones, video panes, and accessibility cues |
+| `quality-leadership-instruction.webp` | School improvement map, compass, model school, and strategy tiles |
+| `high-performing-k12-schools.webp` | Assessment dashboards, notebooks, progress charts, and classroom materials |
+| `rti.webp` | Three-tier support structure with student folders and progress-monitoring markers |
 
 ## How to add an image
 

@@ -1,19 +1,26 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ComparisonCard,
   Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 export default function EnhancingEngagement({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["enhancing-engagement"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · Student Engagement</SectionLabel>
-          <SectionTitle>Enhancing Student Engagement</SectionTitle>
-          <Subtitle>Theoretical frameworks and practical models for understanding what engagement looks like, why it matters, and how to design learning experiences that sustain it. Behavioral, cognitive, and emotional dimensions — and the strategies that move all three at once.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -196,9 +203,9 @@ export default function EnhancingEngagement({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "async-engagement", icon: "🖥️", title: "Asynchronous Learning Engagement", desc: "Engagement strategies for online and async contexts", color: C.ocean },
-                { id: "av-resources", icon: "🎬", title: "AV Resources for Online Teaching", desc: "Audio/video tools that support engagement", color: C.gold },
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.teal },
+                educatorLink("async-engagement", { desc: "Engagement strategies for online and async contexts" }),
+                educatorLink("av-resources", { desc: "Audio/video tools that support engagement" }),
+                educatorLink("for-educators", { desc: "All professional development resources" }),
               ]} />
             </FadeIn>
           </div>
