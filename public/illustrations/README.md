@@ -85,6 +85,23 @@ These generated assets live in `public/illustrations/educators/` and are wired t
 | `high-performing-k12-schools.webp` | Assessment dashboards, notebooks, progress charts, and classroom materials |
 | `rti.webp` | Three-tier support structure with student folders and progress-monitoring markers |
 
+### AI in Education
+These generated assets live in `public/illustrations/ai-education/` and are wired through
+`src/data/aiEducationResources.js`. They use optimized WebP files for page performance.
+
+| Slug | Subject |
+|---|---|
+| `ai-classroom-hub.webp` | Contemporary classroom planning table with AI interface panels, learning pathways, rubrics, and accessibility tools |
+| `personalized-learning.webp` | Adaptive learning path with math notebook, soccer diagram, and practice cards |
+| `iep-special-education.webp` | IEP folder, accessibility supports, accommodation notes, and leveled reading materials |
+| `creative-ai-tools.webp` | Music, story, art, and remix materials around a glowing teaching tablet |
+| `ai-powered-feedback.webp` | Teacher rubric, essay draft, red pen, feedback notes, and AI suggestion cards |
+| `custom-gpts-pd.webp` | Professional development planning table with specialized assistant cards and connected tool nodes |
+| `future-ai-literacy.webp` | AI literacy map, student profile cards, compass, globe, and future-facing classroom materials |
+| `evidence-learning-balance.webp` | Research desk balancing AI learning gains, scaffolding, and cognitive-shortcut cautions |
+| `classroom-implementation.webp` | Teacher planning table for human-in-the-loop AI, differentiation, accommodations, and feedback |
+| `voices-discourse.webp` | Scholarly roundtable with microphones, policy notes, and connected AI education perspectives |
+
 ## How to add an image
 
 1. Generate or commission the PNG at the slug listed above.
