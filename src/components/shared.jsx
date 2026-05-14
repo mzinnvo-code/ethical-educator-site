@@ -111,7 +111,7 @@ export function VideoEmbed({ id, title }) {
   );
 }
 
-export function TopicCard({ icon, iconLabel, title, desc, delay = 0, onClick, accent = null }) {
+export function TopicCard({ icon, iconLabel, image, imageAlt, title, desc, delay = 0, onClick, accent = null }) {
   const [hover, setHover] = useState(false);
   return (
     <FadeIn delay={delay}>
@@ -127,12 +127,119 @@ export function TopicCard({ icon, iconLabel, title, desc, delay = 0, onClick, ac
           height: "100%", position: "relative",
         }}>
         {accent && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: accent, borderRadius: "14px 14px 0 0" }} />}
-        <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>
-          {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
-        </div>
+        {image ? (
+          <div style={{
+            position: "relative", aspectRatio: "16 / 10", margin: "-6px -2px 16px",
+            borderRadius: 10, overflow: "hidden",
+            border: `1px solid ${accent ? accent + "24" : C.border}`,
+            background: C.midnight,
+          }}>
+            <img src={image} alt={imageAlt || ""} loading="lazy" style={{
+              width: "100%", height: "100%", objectFit: "cover", display: "block",
+              transform: hover ? "scale(1.04)" : "scale(1)",
+              transition: "transform 0.45s ease",
+            }} />
+            <div style={{
+              position: "absolute", inset: 0,
+              background: `linear-gradient(180deg, transparent 55%, ${C.bg}66)`,
+              pointerEvents: "none",
+            }} />
+          </div>
+        ) : (
+          <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>
+            {iconLabel ? <span role="img" aria-label={iconLabel}>{icon}</span> : <span aria-hidden="true">{icon}</span>}
+          </div>
+        )}
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.08rem", marginBottom: 6, fontWeight: 600 }}>{title}</h3>
         <p style={{ color: C.textMuted, fontSize: "0.85rem", lineHeight: 1.6 }}>{desc}</p>
       </div>
+    </FadeIn>
+  );
+}
+
+export function EducatorHero({ label, title, subtitle, image, imageAlt, accent = C.gold, variant = "split" }) {
+  if (variant === "background" && image) {
+    return (
+      <FadeIn>
+        <section style={{
+          position: "relative",
+          minHeight: "clamp(430px, 62vh, 640px)",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          borderBottom: `1px solid ${accent}22`,
+          backgroundImage: `
+            linear-gradient(90deg, rgba(11,22,34,0.96) 0%, rgba(11,22,34,0.86) 42%, rgba(11,22,34,0.48) 72%, rgba(11,22,34,0.34) 100%),
+            linear-gradient(180deg, rgba(11,22,34,0.28), rgba(11,22,34,0.84)),
+            url(${image})
+          `,
+          backgroundSize: "cover",
+          backgroundPosition: "center right",
+          boxShadow: `inset 0 -90px 110px ${C.bg}, inset 0 0 90px rgba(0,0,0,0.22)`,
+        }}>
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(circle at 24% 42%, ${accent}16, transparent 34%)`,
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "relative",
+            zIndex: 1,
+            width: "100%",
+            maxWidth: 1080,
+            margin: "0 auto",
+            padding: "clamp(56px, 8vw, 96px) 24px",
+          }}>
+            <div style={{ maxWidth: 670 }}>
+              <SectionLabel>{label}</SectionLabel>
+              <h2 style={{
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                fontSize: "clamp(2.15rem, 6vw, 4rem)",
+                color: C.textPrimary,
+                fontWeight: 700,
+                lineHeight: 1.08,
+                marginBottom: 18,
+              }}>{title}</h2>
+              <p style={{
+                color: C.textSecondary,
+                fontSize: "clamp(0.98rem, 2vw, 1.12rem)",
+                lineHeight: 1.78,
+                maxWidth: 620,
+              }}>{subtitle}</p>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+    );
+  }
+
+  return (
+    <FadeIn>
+      <section style={{
+        display: "flex", gap: "clamp(22px, 4vw, 42px)",
+        alignItems: "center", justifyContent: "space-between",
+        flexWrap: "wrap",
+      }}>
+        <div style={{ flex: "1 1 430px", minWidth: 0 }}>
+          <SectionLabel>{label}</SectionLabel>
+          <SectionTitle>{title}</SectionTitle>
+          <Subtitle>{subtitle}</Subtitle>
+        </div>
+        {image && (
+          <figure style={{
+            flex: "0 1 292px", width: "min(100%, 292px)", aspectRatio: "1 / 1",
+            margin: "4px auto 0", borderRadius: 18, overflow: "hidden",
+            border: `1px solid ${accent}33`,
+            background: `linear-gradient(135deg, ${accent}14, ${C.midnight})`,
+            boxShadow: `0 22px 70px rgba(0,0,0,0.28), 0 0 46px ${accent}12`,
+          }}>
+            <img src={image} alt={imageAlt || ""} loading="eager" style={{
+              width: "100%", height: "100%", objectFit: "cover", display: "block",
+            }} />
+          </figure>
+        )}
+      </section>
     </FadeIn>
   );
 }
@@ -324,7 +431,14 @@ function ContinueExploringCard({ link, navigate }) {
         transition: "all 0.3s", transform: hover ? "translateY(-2px)" : "none",
       }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: "1rem" }} aria-hidden="true">{link.icon}</span>
+        {link.image ? (
+          <img src={link.image} alt={link.imageAlt || ""} loading="lazy" style={{
+            width: 42, height: 42, borderRadius: 8, objectFit: "cover",
+            border: `1px solid ${link.color}30`, flexShrink: 0,
+          }} />
+        ) : (
+          <span style={{ fontSize: "1rem" }} aria-hidden="true">{link.icon}</span>
+        )}
         <div>
           <p style={{ color: C.textPrimary, fontSize: "0.85rem", fontWeight: 600 }}>{link.title}</p>
           <p style={{ color: C.textMuted, fontSize: "0.72rem", marginTop: 2 }}>{link.desc}</p>

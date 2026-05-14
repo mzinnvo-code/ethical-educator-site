@@ -1,97 +1,122 @@
 import { C } from "../theme.js";
 import {
-  FadeIn, TopicCard, SectionLabel, SectionTitle, Subtitle,
-  Narrow, PageContainer, Divider
+  FadeIn, TopicCard, EducatorHero, Narrow, PageContainer
 } from "../components/shared.jsx";
+import EducatorResourceNav from "../components/EducatorResourceNav.jsx";
+import { EDUCATOR_HUB, EDUCATOR_RESOURCE_GROUPS, EDUCATOR_RESOURCES } from "../data/educatorResources.js";
+
+function PathwayHeader({ group, index }) {
+  return (
+    <FadeIn delay={0.04}>
+      <div style={{
+        marginTop: index === 0 ? 36 : 48,
+        paddingTop: 28,
+        borderTop: `1px solid ${C.border}`,
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: 20,
+        alignItems: "flex-end",
+      }}>
+        <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+          <span aria-hidden="true" style={{
+            width: 34,
+            height: 34,
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            color: group.accent,
+            background: `${group.accent}12`,
+            border: `1px solid ${group.accent}38`,
+            fontFamily: "'JetBrains Mono', monospace",
+            fontWeight: 700,
+            fontSize: "0.74rem",
+          }}>{index + 1}</span>
+          <div>
+            <p style={{
+              color: group.accent,
+              fontSize: "0.64rem",
+              fontWeight: 700,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              marginBottom: 6,
+            }}>{group.kicker}</p>
+            <h2 style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              color: C.textPrimary,
+              fontSize: "clamp(1.25rem, 3vw, 1.65rem)",
+              lineHeight: 1.2,
+              marginBottom: 8,
+            }}>{group.label}</h2>
+            <p style={{
+              color: C.textMuted,
+              fontSize: "0.9rem",
+              lineHeight: 1.65,
+              maxWidth: 620,
+            }}>{group.desc}</p>
+          </div>
+        </div>
+        <span style={{
+          color: C.textMuted,
+          fontSize: "0.72rem",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          paddingBottom: 6,
+          whiteSpace: "nowrap",
+        }}>{group.ids.length} resources</span>
+      </div>
+    </FadeIn>
+  );
+}
 
 export default function ForEducators({ navigate }) {
   return (
-    <div style={{ padding: "80px 0", background: C.bg }}>
+    <div style={{ padding: "0 0 80px", background: C.bg }}>
+      <EducatorHero
+        label={EDUCATOR_HUB.sectionLabel}
+        title={EDUCATOR_HUB.title}
+        subtitle={EDUCATOR_HUB.desc}
+        image={EDUCATOR_HUB.image}
+        imageAlt={EDUCATOR_HUB.imageAlt}
+        accent={EDUCATOR_HUB.accent}
+        variant="background"
+      />
+
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Professional Development</SectionLabel>
-          <SectionTitle>For Educators</SectionTitle>
-          <Subtitle>Practitioner-facing resources drawn from professional development workshops, evaluation frameworks, and instructional research. Built for teachers who want concrete strategies, not just theory — though the theory is here when you need it.</Subtitle>
-        </FadeIn>
+        <EducatorResourceNav navigate={navigate} title="Choose a professional learning focus" />
 
-        <Divider label="Teaching & Feedback" />
-
-        <div className="grid-3" style={{ marginTop: 16 }}>
-          <TopicCard
-            icon="💬"
-            title="Effective Academic Feedback"
-            desc="Personalized growth feedback, the 5 R's of action feedback, 1:1 conferencing strategies, and a research-based evaluation standard. How to write comments that students actually use."
-            delay={0.06}
-            accent={C.teal}
-            onClick={() => navigate("teaching-feedback")}
-          />
-          <TopicCard
-            icon="📊"
-            title="Enhancing Academic Feedback"
-            desc="Advanced strategies for effective, actionable, and personalized feedback. A deeper dive into assessment alignment and feedback quality frameworks."
-            delay={0.1}
-            accent={C.gold}
-            onClick={() => navigate("enhancing-feedback")}
-          />
-        </div>
-
-        <Divider label="Student Engagement" />
-
-        <div className="grid-3" style={{ marginTop: 16 }}>
-          <TopicCard
-            icon="🧠"
-            title="Enhancing Student Engagement"
-            desc="Theoretical frameworks and practical models for understanding what engagement looks like, why it matters, and how to design learning experiences that sustain it."
-            delay={0.06}
-            accent={C.teal}
-            onClick={() => navigate("enhancing-engagement")}
-          />
-          <TopicCard
-            icon="🖥️"
-            title="Asynchronous Learning Engagement"
-            desc="Strategies specific to online and asynchronous contexts — where engagement requires different tools and approaches than in-person instruction."
-            delay={0.1}
-            accent={C.ocean}
-            onClick={() => navigate("async-engagement")}
-          />
-          <TopicCard
-            icon="🎬"
-            title="AV Resources for Online Teaching"
-            desc="Audio and video tools that make online instruction more engaging, accessible, and human. Practical tech recommendations for virtual classrooms."
-            delay={0.14}
-            accent={C.gold}
-            onClick={() => navigate("av-resources")}
-          />
-        </div>
-
-        <Divider label="School Leadership & Performance" />
-
-        <div className="grid-3" style={{ marginTop: 16 }}>
-          <TopicCard
-            icon="🏫"
-            title="Quality Leadership & Instruction"
-            desc="Instructional leadership PD — what distinguishes high-performing school leaders and how leadership practices translate to classroom outcomes."
-            delay={0.06}
-            accent={C.gold}
-            onClick={() => navigate("quality-leadership")}
-          />
-          <TopicCard
-            icon="📈"
-            title="High-Performing K-12 Schools"
-            desc="Data-driven decisions, extended learning time, and the organizational practices that separate consistently excellent schools from the rest."
-            delay={0.1}
-            accent={C.teal}
-            onClick={() => navigate("high-performing-schools")}
-          />
-          <TopicCard
-            icon="🔄"
-            title="Response to Intervention (RTI)"
-            desc="The tiered intervention framework — identifying struggling students early, providing targeted support, and monitoring progress systematically."
-            delay={0.14}
-            accent={C.coral}
-            onClick={() => navigate("rti")}
-          />
-        </div>
+        {EDUCATOR_RESOURCE_GROUPS.map((group, groupIndex) => (
+          <div key={group.label}>
+            <PathwayHeader group={group} index={groupIndex} />
+            <div
+              className="grid-3"
+              style={{
+                marginTop: 18,
+                gridTemplateColumns: group.ids.length === 2
+                  ? "repeat(2, minmax(0, 1fr))"
+                  : "repeat(3, minmax(0, 1fr))",
+              }}
+            >
+              {group.ids.map((id, index) => {
+                const resource = EDUCATOR_RESOURCES[id];
+                return (
+                  <TopicCard
+                    key={resource.id}
+                    image={resource.image}
+                    imageAlt={resource.imageAlt}
+                    title={resource.title}
+                    desc={resource.shortDesc}
+                    delay={0.06 + index * 0.04}
+                    accent={resource.accent}
+                    onClick={() => navigate(resource.id)}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ))}
 
         <Narrow>
           <FadeIn delay={0.1}>

@@ -1,19 +1,26 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, EducatorHero,
   Narrow, PageContainer, BodyText, ComparisonCard,
   Divider, ContinueExploring
 } from "../../components/shared.jsx";
+import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 
 export default function QualityLeadership({ navigate }) {
+  const resource = EDUCATOR_RESOURCES["quality-leadership"];
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>For Educators · School Leadership</SectionLabel>
-          <SectionTitle>Quality Leadership & Instruction</SectionTitle>
-          <Subtitle>What distinguishes high-performing school leaders, and how leadership practices translate to classroom outcomes. Theoretical frameworks for leadership style, the components of quality instruction, and five reflection scenarios drawn from situations real principals face.</Subtitle>
-        </FadeIn>
+        <EducatorHero
+          label={resource.sectionLabel}
+          title={resource.title}
+          subtitle={resource.desc}
+          image={resource.image}
+          imageAlt={resource.imageAlt}
+          accent={resource.accent}
+        />
+        <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -263,9 +270,9 @@ export default function QualityLeadership({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
-                { id: "high-performing-schools", icon: "📈", title: "High-Performing K-12 Schools", desc: "What distinguishes consistently excellent schools", color: C.teal },
-                { id: "rti", icon: "🔄", title: "Response to Intervention (RTI)", desc: "Tiered intervention for struggling students", color: C.coral },
-                { id: "for-educators", icon: "📋", title: "For Educators", desc: "All professional development resources", color: C.ocean },
+                educatorLink("high-performing-schools", { desc: "What distinguishes consistently excellent schools" }),
+                educatorLink("rti", { desc: "Tiered intervention for struggling students" }),
+                educatorLink("for-educators", { desc: "All professional development resources" }),
               ]} />
             </FadeIn>
           </div>
