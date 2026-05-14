@@ -34,6 +34,7 @@ export const MIDDLE_SCHOOL_ORDER = [
   "tragedy-commons",
   "liar-paradox",
   "sorites-heap",
+  "explaining-red-middle",
 ];
 
 export const MIDDLE_SCHOOL_SCENARIO_COPY = {
@@ -1006,6 +1007,104 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
     furtherReading: [
       reading("Sorites paradox (Wikipedia)", "https://en.wikipedia.org/wiki/Sorites_paradox", "intro"),
       reading("Vagueness (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/vagueness/", "advanced"),
+    ],
+  },
+
+  "explaining-red-middle": {
+    title: "Explaining Red",
+    tagline: "A new classmate has never seen color. Does knowing the wavelength tell you what red looks like?",
+    estimatedMinutes: 10,
+    stages: [
+      {
+        id: "question",
+        kicker: "Act 1 - the question",
+        title: "Red is 700 nanometers. Is that enough?",
+        storySections: [
+          section("The situation", "A new student named Hassan joined your science class today. The class is in the middle of the light-spectrum unit. Ms. Park has written on the board: red = 700 nanometers. She explains that red is the wavelength human eyes pick up at the long end of the visible spectrum."),
+          section("The pressure", "Hassan was born without sight. He has heard the word red his whole life — stop signs, fire engines, his grandmother's favorite sweater. But he has never seen it. He raises his hand."),
+          section("The question", "Hassan asks, very simply, 'If red is 700 nanometers — does that tell you what red looks like?' The whole class quiets. Everyone is suddenly uncertain about how to answer."),
+        ],
+        prompt: "What do you tell Hassan?",
+        options: [
+          { label: "A", text: "Yes — the wavelength IS what red is. The science gives you the answer.", reflection: "You side with physical description. The number names a real thing in the world, and the thing it names is the same for everyone, whether they have seen red or not. But Hassan can memorize the number too. There's something else behind the word.", lens: "wavelength-yes" },
+          { label: "B", text: "No — knowing the number is not the same as seeing.", reflection: "You side with experience. The wavelength is true. The wavelength is not the thing. You've drawn a line philosophers have argued about for a long time.", lens: "wavelength-no" },
+          { label: "C", text: "Sort of — you'd know about red, but not what it looks like.", reflection: "You allowed two kinds of knowing: the propositional kind (700 nm) and the phenomenal kind (what red looks like). One of the oldest distinctions in philosophy.", lens: "wavelength-sort" },
+        ],
+      },
+      {
+        id: "help",
+        kicker: "Act 2 - how would you help?",
+        title: "Hassan wants to understand red another way",
+        storySections: [
+          section("The situation", "Hassan thinks about your answer. Then he asks something harder. 'When you say red, your face changes. There's something else there. Could you help me have a sense of that?'"),
+          section("The pressure", "The class is genuinely trying. But every approach has a trap. Borrow from other senses, and you might just be making up a new word. Tell stories, and you describe what red DOES, not what red IS. Stick to the science, and you're back where you started."),
+          section("The choice", "You have to pick something. The class is waiting."),
+        ],
+        prompt: "How do you try to help Hassan understand red?",
+        options: [
+          { label: "A", text: "Borrow from senses he DOES have — warmth, sound, touch.", reflection: "You reach for the world Hassan already knows. Useful — but calling red 'warm' is a borrowed word. Are you helping him understand red, or making up a new word that happens to share a spelling?", lens: "associations" },
+          { label: "B", text: "Tell stories — every place I've seen red.", reflection: "Red lives in a hundred ordinary moments. As you tell them aloud, Hassan starts to hear the shape of the word. But stories describe what red DOES in the world, not what red IS to look at.", lens: "stories" },
+          { label: "C", text: "Stick with the science — that's the real answer.", reflection: "Hassan takes notes. He understands the system. Whether he understands the color, the science cannot say. Philosophers call this gap qualia.", lens: "facts" },
+        ],
+        counterpoint: "Notice what just happened: every approach you can try is *partial*. That's not a flaw in your answer — it's a clue about what kind of question this is.",
+      },
+      {
+        id: "knowing",
+        kicker: "Act 3 - the real question",
+        title: "Two kinds of knowing — or just one?",
+        storySections: [
+          section("The situation", "Ms. Park steps in. She says this question has a long history. In 1982, philosopher Frank Jackson imagined a scientist named Mary who knew every physical fact about color from inside a black-and-white room. When Mary finally stepped out and saw red — did she learn something new?"),
+          section("The pressure", "Most people say yes. Which means there might be a kind of knowledge that descriptions — no matter how complete — do not deliver. That's a strange thing to be true."),
+          section("The question", "And it isn't just about color. It's about pain, hunger, love, the taste of a strawberry. You can describe any of these in great detail. But description and experience are not the same thing."),
+        ],
+        prompt: "So what is knowing, really?",
+        options: [
+          { label: "A", text: "Some kinds of knowing have to come through experience.", reflection: "Phenomenal realism: there is a kind of knowledge descriptions don't deliver. The Mary's Room answer most people give.", lens: "experience" },
+          { label: "B", text: "Knowing is knowing — descriptions count too.", reflection: "Strong physicalism: if Hassan has the facts, he has the knowledge. The Mary's Room thought experiment, on this view, fails. Daniel Dennett argued exactly this.", lens: "same" },
+          { label: "C", text: "There are several kinds of knowing, and we need all of them.", reflection: "Epistemic pluralism: 'knowing' is not one thing. The word red has many doors — and that's more honest than any single answer.", lens: "plural" },
+        ],
+      },
+      reflection("What you and Hassan worked out together", [
+        { name: "Frank Jackson", school: "1982", view: "Imagined Mary in a black-and-white room — the original Mary's Room thought experiment. Asked whether descriptions can ever deliver experience." },
+        { name: "Thomas Nagel", school: "1974", view: "Asked what it is like to be a bat. We know what bats DO. Whether we can know what they FEEL is a different question." },
+        { name: "Brock & Hay", school: "2019, Science Education", view: "Applied Mary's Room directly to science classrooms — students without direct experience possess 'Mary's knowledge': complete in theory, incomplete in understanding." },
+      ]),
+    ],
+    teacherKit: {
+      bigQuestion: "Is description enough — or does some knowing have to come through experience?",
+      objectives: [
+        "Students will distinguish propositional knowledge (knowing that) from phenomenal knowledge (knowing what it is like).",
+        "Students will evaluate whether language alone can deliver an experience to someone who has not had it.",
+        "Students will connect the classroom case to Frank Jackson's Mary's Room and the broader question of how AI might (or might not) know color.",
+      ],
+      warmUp: "Ask each student to describe a taste or smell to someone who has never had it. Then ask: what does the listener now know, and what's still missing?",
+      discussionPrompts: [
+        "Can you think of something you know how to do but can't fully explain — like recognizing a friend's voice, or knowing when a joke is funny? Why is the experience easier than the explanation?",
+        "If you had to teach an AI what red is, what would you give it: the wavelength, pictures of red things, stories?",
+        "What's the difference between knowing about something and knowing what it is like?",
+        "Are there things blind people can know about color that sighted people might miss?",
+      ],
+      handout: "Two-column chart — Things you can fully share with words / Things you can only share by experience. List five examples in each column. Bottom: write one sentence about where the line falls and why.",
+      exitTicket: "Pick one option from Act 3 and defend it in two sentences. Include one objection someone might raise.",
+    },
+    philosophyLab: lab({
+      discussion: "The strongest case for physicalism says: if you knew *every* physical fact about red, nothing new could surprise you. The strongest case against says: descriptions can prepare you for an experience, but they can't substitute for having it. The interesting question is whether 'knowing what red is like' is a *fact* you can be told, an *ability* you can develop, or something else entirely.",
+      fallacySpotting: "Spot the equivocation in this sentence: 'Hassan knows everything about red, so he must know red.' How is the word *know* doing two different jobs?",
+      argumentRepair: "Make the physicalist objection stronger without dismissing experience as fake — and without saying Hassan doesn't really know red.",
+      variationPrompt: "Now imagine the new student has never tasted *anything* sweet. How would you teach them what sweetness is like — and does it work?",
+      related: ["The Biased Algorithm", "Are You Sure You're Real?", "Robot Replacement Parts"],
+    }),
+    reference: ref({
+      concept: "Qualia — the felt quality of experience that seems to live on a different layer from physical facts. Mary's Room is the canonical thought experiment.",
+      philosopher: "Frank Jackson",
+      year: "1982",
+      text: "Frank Jackson, 'Epiphenomenal Qualia' (1982); Brock & Hay, 'Mary's Room and Science Education' (2019)",
+      url: "https://en.wikipedia.org/wiki/Knowledge_argument",
+    }),
+    furtherReading: [
+      reading("Qualia (Stanford Encyclopedia of Philosophy)", "https://plato.stanford.edu/entries/qualia/", "intermediate"),
+      reading("Knowledge Argument (Wikipedia)", "https://en.wikipedia.org/wiki/Knowledge_argument", "intro"),
+      reading("Nagel, 'What Is It Like to Be a Bat?'", "https://en.wikipedia.org/wiki/What_Is_It_Like_to_Be_a_Bat%3F", "advanced"),
     ],
   },
 };

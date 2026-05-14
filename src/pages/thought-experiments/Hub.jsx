@@ -58,78 +58,6 @@ export default function Hub({ navigate }) {
         </FadeIn>
 
         <Narrow>
-          {/* WHAT IS A THOUGHT EXPERIMENT? — moved up so readers learn what these are before picking a grade. */}
-          <Divider label="What is a thought experiment?" />
-          <FadeIn>
-            <BodyText>
-              A thought experiment is a <strong>device of the imagination</strong> used to investigate the nature
-              of things. When real experiments would be impossible, dangerous, or impractical — when the question
-              is about consciousness, identity, justice, or a future we haven't lived yet — philosophers and
-              scientists set up an imagined scenario to isolate one variable and test our intuitions against it.{" "}
-              <PhiloRef text="The Stanford Encyclopedia of Philosophy" url="https://plato.stanford.edu/entries/thought-experiment/" />{" "}
-              describes them as the most powerful intuition pumps we have.
-            </BodyText>
-            <BodyText>
-              Galileo dropped two cannonballs of different weights — but only in his head — and reasoned that
-              Aristotle had been wrong about gravity for two thousand years. Einstein imagined himself riding
-              alongside a beam of light, and out fell special relativity. Plato imagined prisoners watching
-              shadows in a cave, and educators have wrestled with what real understanding means ever since.
-              The thought experiment is older than the laboratory. It works because thinking, done carefully,
-              is itself a way of finding things out.
-            </BodyText>
-          </FadeIn>
-
-          {/* WHY THEY MATTER NOW */}
-          <Divider label="Why they matter now" />
-          <FadeIn>
-            <BodyText>
-              We are running a real-time experiment with artificial intelligence in our classrooms, our courts,
-              our news feeds, and our friendships. We have no precedent. We have no track record. We have many
-              very confident vendors. What we do have is <strong>2,400 years of careful imagined scenarios</strong> that
-              already framed most of the questions: What makes a mind? What do we owe each other? When is a
-              choice authentic? Who counts? Whose work is this?
-            </BodyText>
-            <BodyText>
-              The Trolley Problem is now being programmed into self-driving cars. Plato's Ring of Gyges is
-              the design brief for every anonymous account. Mary's Room is what happens when a student
-              arrives at fluency without ever having struggled. Thought experiments give a teacher and a
-              fourteen-year-old a shared language for things neither of them has lived through yet.
-            </BodyText>
-          </FadeIn>
-
-          {/* HOW TO USE THEM */}
-          <Divider label="Using them in your classroom" />
-          <FadeIn>
-            <Expandable title="The four norms" color={C.teal} defaultOpen>
-              <p><strong>1. There are no right answers.</strong> A thought experiment that ends in a verdict has been
-              misunderstood. The point is the conversation it makes possible.</p>
-              <p style={{ marginTop: 10 }}><strong>2. Steelman the option you didn't choose.</strong> Before you defend yours,
-              try to argue the opposite as well as you can. This is the single most underused move in classroom dialogue.</p>
-              <p style={{ marginTop: 10 }}><strong>3. Probe assumptions, not people.</strong> The Socratic move isn't "you're wrong" —
-              it's "what would have to be true for that to be right?" That keeps the room safe and the thinking sharp.</p>
-              <p style={{ marginTop: 10 }}><strong>4. Pair with writing.</strong> Speaking and writing exercise different muscles.
-              A short reflection after a discussion ("Which option still bothers you, and why?") locks in the learning.</p>
-            </Expandable>
-            <Expandable title="A simple Socratic move set" color={C.gold}>
-              <p><strong>Clarify:</strong> "Can you say that another way?"</p>
-              <p style={{ marginTop: 8 }}><strong>Probe assumption:</strong> "What does that depend on?"</p>
-              <p style={{ marginTop: 8 }}><strong>Counter-example:</strong> "What if instead of A, it were B — does your answer change?"</p>
-              <p style={{ marginTop: 8 }}><strong>Implication:</strong> "If that's true, then what else has to be true?"</p>
-              <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
-            </Expandable>
-            <Expandable title="By age band" color={C.coral} defaultOpen>
-              <p><strong>K–5:</strong> Choose the grade page first. Kindergarten stories are short and concrete; Grade 5 stories are longer,
-              more layered, and ready for competing values. The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
-              <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students
-              defend the option they didn't pick. Magic happens when they realize they can.</p>
-              <p style={{ marginTop: 10 }}><strong>9–12 / AP Philosophy:</strong> One scenario in depth. Read the original source. Compare ethical
-              lenses (utilitarian, deontological, virtue, care). Connect it to a current AI story in the news that morning.</p>
-              <p style={{ marginTop: 10 }}><strong>For educators (PD, leadership team, board meetings):</strong> The four flagship interactive
-              experiments under <em>For Educators</em> are designed for adult professional dialogue — your AI policy depends on
-              decisions it's better to make through scenario than through abstraction.</p>
-            </Expandable>
-          </FadeIn>
-
           {/* K-12 AUDIENCE TILES — three-up grid for the student-facing grade bands, separated from the For Educators section below. */}
           <Divider label="Pick a grade band" />
           <FadeIn>
@@ -265,6 +193,78 @@ export default function Hub({ navigate }) {
                 flexShrink: 0,
               }} aria-hidden="true">🍎</div>
             </div>
+          </FadeIn>
+
+          {/* WHAT IS A THOUGHT EXPERIMENT? — moved below the picker so it doesn't front-load text before the visitor's most useful first action. */}
+          <Divider label="What is a thought experiment?" />
+          <FadeIn>
+            <BodyText>
+              A thought experiment is a <strong>device of the imagination</strong> used to investigate the nature
+              of things. When real experiments would be impossible, dangerous, or impractical — when the question
+              is about consciousness, identity, justice, or a future we haven't lived yet — philosophers and
+              scientists set up an imagined scenario to isolate one variable and test our intuitions against it.{" "}
+              <PhiloRef text="The Stanford Encyclopedia of Philosophy" url="https://plato.stanford.edu/entries/thought-experiment/" />{" "}
+              describes them as the most powerful intuition pumps we have.
+            </BodyText>
+            <BodyText>
+              Galileo dropped two cannonballs of different weights — but only in his head — and reasoned that
+              Aristotle had been wrong about gravity for two thousand years. Einstein imagined himself riding
+              alongside a beam of light, and out fell special relativity. Plato imagined prisoners watching
+              shadows in a cave, and educators have wrestled with what real understanding means ever since.
+              The thought experiment is older than the laboratory. It works because thinking, done carefully,
+              is itself a way of finding things out.
+            </BodyText>
+          </FadeIn>
+
+          {/* WHY THEY MATTER NOW */}
+          <Divider label="Why they matter now" />
+          <FadeIn>
+            <BodyText>
+              We are running a real-time experiment with artificial intelligence in our classrooms, our courts,
+              our news feeds, and our friendships. We have no precedent. We have no track record. We have many
+              very confident vendors. What we do have is <strong>2,400 years of careful imagined scenarios</strong> that
+              already framed most of the questions: What makes a mind? What do we owe each other? When is a
+              choice authentic? Who counts? Whose work is this?
+            </BodyText>
+            <BodyText>
+              The Trolley Problem is now being programmed into self-driving cars. Plato's Ring of Gyges is
+              the design brief for every anonymous account. Mary's Room is what happens when a student
+              arrives at fluency without ever having struggled. Thought experiments give a teacher and a
+              fourteen-year-old a shared language for things neither of them has lived through yet.
+            </BodyText>
+          </FadeIn>
+
+          {/* HOW TO USE THEM */}
+          <Divider label="Using them in your classroom" />
+          <FadeIn>
+            <Expandable title="The four norms" color={C.teal} defaultOpen>
+              <p><strong>1. There are no right answers.</strong> A thought experiment that ends in a verdict has been
+              misunderstood. The point is the conversation it makes possible.</p>
+              <p style={{ marginTop: 10 }}><strong>2. Steelman the option you didn't choose.</strong> Before you defend yours,
+              try to argue the opposite as well as you can. This is the single most underused move in classroom dialogue.</p>
+              <p style={{ marginTop: 10 }}><strong>3. Probe assumptions, not people.</strong> The Socratic move isn't "you're wrong" —
+              it's "what would have to be true for that to be right?" That keeps the room safe and the thinking sharp.</p>
+              <p style={{ marginTop: 10 }}><strong>4. Pair with writing.</strong> Speaking and writing exercise different muscles.
+              A short reflection after a discussion ("Which option still bothers you, and why?") locks in the learning.</p>
+            </Expandable>
+            <Expandable title="A simple Socratic move set" color={C.gold}>
+              <p><strong>Clarify:</strong> "Can you say that another way?"</p>
+              <p style={{ marginTop: 8 }}><strong>Probe assumption:</strong> "What does that depend on?"</p>
+              <p style={{ marginTop: 8 }}><strong>Counter-example:</strong> "What if instead of A, it were B — does your answer change?"</p>
+              <p style={{ marginTop: 8 }}><strong>Implication:</strong> "If that's true, then what else has to be true?"</p>
+              <p style={{ marginTop: 8 }}><strong>Meta:</strong> "Why is this question hard?"</p>
+            </Expandable>
+            <Expandable title="By age band" color={C.coral} defaultOpen>
+              <p><strong>K–5:</strong> Choose the grade page first. Kindergarten stories are short and concrete; Grade 5 stories are longer,
+              more layered, and ready for competing values. The read-aloud button on every K–5 prompt is built in for non-readers and early readers.</p>
+              <p style={{ marginTop: 10 }}><strong>6–8:</strong> Two scenarios, paired with a quick written reflection. Have students
+              defend the option they didn't pick. Magic happens when they realize they can.</p>
+              <p style={{ marginTop: 10 }}><strong>9–12 / AP Philosophy:</strong> One scenario in depth. Read the original source. Compare ethical
+              lenses (utilitarian, deontological, virtue, care). Connect it to a current AI story in the news that morning.</p>
+              <p style={{ marginTop: 10 }}><strong>For educators (PD, leadership team, board meetings):</strong> The four flagship interactive
+              experiments under <em>For Educators</em> are designed for adult professional dialogue — your AI policy depends on
+              decisions it's better to make through scenario than through abstraction.</p>
+            </Expandable>
           </FadeIn>
 
           {/* FEATURED THIS WEEK */}
