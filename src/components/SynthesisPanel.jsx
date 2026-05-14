@@ -591,7 +591,9 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
 
   const goToJournal = () => {
     if (typeof window !== "undefined") {
-      window.location.hash = "thought-experiments/journal";
+      window.history.pushState(null, "", "/thought-experiments/journal");
+      window.dispatchEvent(new Event("ethed:route"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

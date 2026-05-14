@@ -26,6 +26,11 @@ import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
 import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
 import ThoughtExperimentsToolkit from "./pages/thought-experiments/Toolkit.jsx";
 import ThoughtExperimentsJournal from "./pages/thought-experiments/Journal.jsx";
+import { ExplainingRedK_2 as ThoughtExperimentsExplainingRedK2 } from "./pages/thought-experiments/ExplainingRed.jsx";
+import AudienceStudent from "./pages/audiences/Student.jsx";
+import AudienceTeacher from "./pages/audiences/Teacher.jsx";
+import AudienceAdministrator from "./pages/audiences/Administrator.jsx";
+import AudienceParent from "./pages/audiences/Parent.jsx";
 import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -82,8 +87,13 @@ const PAGE_MAP = {
   "thought-experiments/grade-5": ThoughtExperimentsGrade5,
   "thought-experiments/6-8": ThoughtExperimentsMiddle,
   "thought-experiments/9-12": ThoughtExperimentsHigh,
+  "thought-experiments/explaining-red-k-2": ThoughtExperimentsExplainingRedK2,
   "thought-experiments/toolkit": ThoughtExperimentsToolkit,
   "thought-experiments/journal": ThoughtExperimentsJournal,
+  "audiences/student": AudienceStudent,
+  "audiences/teacher": AudienceTeacher,
+  "audiences/administrator": AudienceAdministrator,
+  "audiences/parent": AudienceParent,
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
@@ -197,6 +207,12 @@ const PAGE_META = {
     title: "Grades 9–12 Thought Experiments — The Ethical Educator",
     description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
   },
+  "thought-experiments/explaining-red-k-2": {
+    title: "Explaining Red — K–2 Classroom Scene — The Ethical Educator",
+    description: "A new student named Ada joins the class while everyone is learning about colors. A gentle multi-character scene about how to share what red is — even with someone who has never seen it.",
+    datePublished: "2026-05-13",
+    dateModified: "2026-05-13",
+  },
   "thought-experiments/toolkit": {
     title: "Dialogue Toolkit — The Ethical Educator",
     description: "Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students who want to run philosophy well.",
@@ -204,6 +220,22 @@ const PAGE_META = {
   "thought-experiments/journal": {
     title: "Decision Journal — The Ethical Educator",
     description: "A private, browser-only record of your reasoning across thought experiments. Notes, paths, dominant lenses, and a one-click Markdown export. Nothing leaves your device.",
+  },
+  "audiences/student": {
+    title: "For Students — The Ethical Educator",
+    description: "If you're a student, start with the thought experiments. Branching scenarios, AI ethics dilemmas, and the questions that don't have a single right answer.",
+  },
+  "audiences/teacher": {
+    title: "For Teachers — The Ethical Educator",
+    description: "Classroom-ready thought experiments by grade band, practical PD on feedback and engagement, and a Dialogue Toolkit for running the conversation well.",
+  },
+  "audiences/administrator": {
+    title: "For Administrators & School Leaders — The Ethical Educator",
+    description: "Research-grounded AI ethics frameworks, decision tools for leadership teams, and operational leadership resources for K–12 school leaders.",
+  },
+  "audiences/parent": {
+    title: "For Parents & Families — The Ethical Educator",
+    description: "Stories to read with your kids, short essays for parents, and a Decision Journal that lives only on your device. Conversations to have at the kitchen table.",
   },
   "resources": {
     title: "Research Resources & Reading List — The Ethical Educator",
@@ -255,39 +287,81 @@ const PAGE_META = {
   },
 };
 
-function getPageFromHash() {
+function getPageFromPath() {
   if (typeof window === "undefined") return "home";
-  return window.location.hash.replace("#", "").split("?")[0] || "home";
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+  return path || "home";
+}
+
+// Convert any legacy `#x` URLs to `/x` so old bookmarks keep working. Also
+// handles the GitHub Pages 404.html redirect which encodes the original path
+// as `?p=/foo` so that the SPA can restore it after the static 404 bounces to /.
+function reconcileLegacyUrls() {
+  if (typeof window === "undefined") return null;
+  let nextPath = null;
+
+  // GitHub Pages 404 trick: 404.html stores the original path in a `p` query
+  // param and redirects to /. Restore it here.
+  const params = new URLSearchParams(window.location.search);
+  const restored = params.get("p");
+  if (restored) {
+    params.delete("p");
+    const search = params.toString();
+    nextPath = `${restored}${search ? `?${search}` : ""}`;
+  } else if (window.location.hash && window.location.hash.length > 1) {
+    // Legacy hash route like #thought-experiments?experiment=foo
+    const raw = window.location.hash.replace(/^#/, "");
+    const [pathPart, queryPart] = raw.split("?");
+    nextPath = `/${pathPart || ""}${queryPart ? `?${queryPart}` : ""}`;
+  }
+
+  if (nextPath) {
+    window.history.replaceState(null, "", nextPath);
+  }
+  return nextPath;
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState(getPageFromHash);
+  // Reconcile any legacy hash URL or GitHub Pages 404 redirect before reading
+  // the page from the path.
+  const [currentPage, setCurrentPage] = useState(() => {
+    reconcileLegacyUrls();
+    return getPageFromPath();
+  });
   const [menuOpen, setMenuOpen] = useState(false);
   const hasNew = hasAnyNewExperiments();
 
   const navigate = (pageId) => {
+    const target = pageId === "home" ? "/" : `/${pageId}`;
+    if (window.location.pathname + window.location.search !== target) {
+      window.history.pushState(null, "", target);
+    }
     setCurrentPage(pageId);
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    // Notify in-page listeners (e.g. grade pages syncing ?experiment=).
+    window.dispatchEvent(new Event("ethed:route"));
   };
 
-  // Handle browser back/forward and direct URL entry
+  // Handle browser back/forward, direct URL entry, and in-app pushState calls
+  // that bypass navigate() (rare, but supported via ethed:route event).
   useEffect(() => {
-    const syncPageFromHash = () => {
-      setCurrentPage(getPageFromHash()); // set even for unknown pages so NotFound renders
+    const sync = () => {
+      reconcileLegacyUrls();
+      setCurrentPage(getPageFromPath());
       setMenuOpen(false);
+    };
+    const syncFromBrowser = () => {
+      sync();
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
-
-    window.addEventListener("hashchange", syncPageFromHash);
-    return () => window.removeEventListener("hashchange", syncPageFromHash);
+    window.addEventListener("popstate", syncFromBrowser);
+    window.addEventListener("ethed:route", sync);
+    return () => {
+      window.removeEventListener("popstate", syncFromBrowser);
+      window.removeEventListener("ethed:route", sync);
+    };
   }, []);
-
-  useEffect(() => {
-    if (getPageFromHash() !== currentPage) {
-      window.location.hash = currentPage;
-    }
-  }, [currentPage]);
 
   // Dynamic title, meta description, and Article schema per page
   useEffect(() => {
@@ -316,6 +390,18 @@ export default function App() {
     }
     descEl.setAttribute("content", meta.description);
 
+    // Canonical link for the current path (so each route advertises its own URL).
+    const canonicalUrl = currentPage === "home"
+      ? "https://theethicaleducator.com/"
+      : `https://theethicaleducator.com/${currentPage}`;
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement("link");
+      canonicalEl.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute("href", canonicalUrl);
+
     // Article schema for content pages (not home)
     if (currentPage !== "home") {
       const script = document.createElement("script");
@@ -325,6 +411,8 @@ export default function App() {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": meta.title,
+        "url": canonicalUrl,
+        "mainEntityOfPage": canonicalUrl,
         "author": {
           "@type": "Person",
           "name": "Matthew A. Zinn",
@@ -336,7 +424,7 @@ export default function App() {
           "url": "https://theethicaleducator.com",
         },
         "datePublished": meta.datePublished || "2024-01-01",
-        "dateModified": meta.dateModified || "2026-04-24",
+        "dateModified": meta.dateModified || "2026-05-13",
       });
       document.head.appendChild(script);
     }
@@ -401,7 +489,7 @@ export default function App() {
         <ul className="topbar-nav">
           {PAGES.map(p => (
             <li key={p.id}>
-              <a href={`#${p.id}`}
+              <a href={p.id === "home" ? "/" : `/${p.id}`}
                 className={currentPage === p.id ? "active" : ""}
                 onClick={(e) => { e.preventDefault(); navigate(p.id); }}>
                 {p.label}
@@ -437,7 +525,7 @@ export default function App() {
             <div>
               <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Explore</p>
               {PAGES.filter(p => p.id !== "home").map(p => (
-                <a key={p.id} href={`#${p.id}`} onClick={e => { e.preventDefault(); navigate(p.id); }} style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0", transition: "color 0.2s" }}
+                <a key={p.id} href={p.id === "home" ? "/" : `/${p.id}`} onClick={e => { e.preventDefault(); navigate(p.id); }} style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0", transition: "color 0.2s" }}
                   onMouseOver={e => e.currentTarget.style.color = C.gold} onMouseOut={e => e.currentTarget.style.color = C.textMuted}>{p.label}</a>
               ))}
             </div>
@@ -462,7 +550,7 @@ export default function App() {
                 { label: "Privacy Policy", id: "privacy" },
                 { label: "Accessibility", id: "accessibility" },
               ].map(link => (
-                <a key={link.label} href={`#${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
+                <a key={link.label} href={`/${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · All Rights Reserved</p>

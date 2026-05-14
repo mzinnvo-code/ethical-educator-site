@@ -49,6 +49,37 @@ export function RestartBtn({ onClick }) {
   return <div style={{textAlign:"center",marginTop:20}}><button onClick={onClick} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div>;
 }
 
+// PathReveal — renders a composed personal narrative built from path-keyed
+// fragments. The paragraphs are written to flow when assembled in order so that
+// every traversal of an experiment yields a unique closing scene.
+export function PathReveal({ paragraphs = [], eyebrow = "Your Path", color = C.gold }) {
+  const joined = paragraphs.filter(Boolean).join(" ");
+  if (!joined) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${color}10, ${color}04)`,
+      border: `1px solid ${color}25`,
+      borderRadius: 12,
+      padding: "22px 24px",
+      marginBottom: 18,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
+        <span style={{ color, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" }}>{eyebrow}</span>
+        <ReadAloudButton text={joined} variant="icon" label="Hear your path" />
+      </div>
+      {paragraphs.filter(Boolean).map((p, i) => (
+        <p key={i} style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1rem",
+          lineHeight: 1.78,
+          marginBottom: i < paragraphs.length - 1 ? 14 : 0,
+        }}>{p}</p>
+      ))}
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────
 // Bank-experiment building blocks (used by ScenarioCard for Tier-2 entries)
 // ─────────────────────────────────────────────────────────────────────

@@ -208,11 +208,11 @@ function ThemedResults({ experiments, onSelect, emptyMessage, selectedThemes }) 
 }
 
 export default function High({ navigate }) {
-  // Honour deep links like #thought-experiments/9-12?theme=values by scrolling
+  // Honour deep links like /thought-experiments/9-12?theme=values by scrolling
   // to the theme section once the page has rendered.
   useEffect(() => {
-    const hash = typeof window === "undefined" ? "" : window.location.hash;
-    const match = hash.match(/[?&]theme=([\w-]+)/);
+    const query = typeof window === "undefined" ? "" : window.location.search;
+    const match = query.match(/[?&]theme=([\w-]+)/);
     if (match) {
       const themeId = match[1];
       requestAnimationFrame(() => {

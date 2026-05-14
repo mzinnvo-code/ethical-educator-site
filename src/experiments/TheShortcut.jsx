@@ -1,10 +1,35 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../theme.js";
 import { Expandable } from "../components/shared.jsx";
-import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn } from "./ExperimentShared.jsx";
+import { StageHeader, InfoBox, ChoiceBtn, Shell, ResultBox, CounterArgument, DiscussionGuide, PhiloRef, RestartBtn, PathReveal } from "./ExperimentShared.jsx";
 import { useAudio } from "../components/shared.jsx";
 import { audioBus } from "../lib/audioBus.js";
 import IllustratedScene from "../scenes/IllustratedScene.jsx";
+
+// Path-keyed narrative fragments — 3 × 2 × 3 × 2 = 36 unique closing stories.
+// Each fragment is a second-person paragraph written to flow when assembled in
+// order. The seams are designed to hide regardless of which branch precedes
+// each one.
+const SHORTCUT_FRAGMENTS = {
+  basic: {
+    yes: "You took it. The next morning you woke up holding knowledge you hadn't earned — the structure of cells, the calculus of motion, the grammar of three languages — and for a moment you wondered if you were still yourself or someone wearing your face. By afternoon the strangeness had faded. The knowing felt ordinary, like an old room rearranged.",
+    no: "You refused. Some mornings the refusal felt like wisdom; others, like a small vanity — the quiet heroism of doing things the hard way. Years passed. You learned what you learned slowly, and sometimes you watched friends who had taken the shortcut and could not tell, from the outside, whether they knew more than you did.",
+    depends: "You took some, left others. The propositional facts came easy — history, anatomy, syntax. The skills you kept for yourself: your way of teaching, your way of arguing, your way of being patient with people. You drew a line and tried to keep it. The line moved on you, year by year, in directions you had not predicted.",
+  },
+  scarcity: {
+    yes: "When your child was old enough, you gave them the shortcut too. It was supposed to be a hard choice, but standing in the room with them — watching them already reaching for what their friends had — the principle thinned to almost nothing. You wanted them not to fall behind. You wanted them to have the world.",
+    no: "When your child was old enough, you withheld it. They were furious for a while. Some of their friends took the shortcut and you watched those parents' relief and your child's slow, hard-won mastery side by side, and you could not tell, most days, whether you had loved your child well or only your principles. You held the line anyway.",
+  },
+  universal: {
+    yes: "By the time your child was grown, the shortcut was everywhere and free. The schools persisted. They became smaller, slower places — gardens, almost — where children still struggled with long division and the rules of a sonnet not because anyone needed them to, but because the struggling had become the point. Some called it nostalgia. Some called it the last honest work.",
+    no: "By the time your child was grown, the shortcut was everywhere and free, and the schools were mostly gone. The buildings became other things — community centers, art spaces, places to be with other people. Childhood became something else; you weren't sure what to call it. Some days that felt like grief, some days like progress, most days like both at once.",
+    different: "By the time your child was grown, the shortcut was everywhere and free, and the schools had become something else — not gone, not what they were. They held onto the parts of education that couldn't be downloaded: the running on a field, the awkward first conversations, the failures that taught you what you were. People argued, often, about whether they were schools at all.",
+  },
+  age: {
+    yes: "But you held one line you would not cross. Children, you said, needed the slow climb — needed to feel the weight of a thing before they were given it. Some called this cruelty. Some called it care. You called it the only honest gift you had left to give them.",
+    no: "You held no line on age. If the knowing was safe for adults, you said, it was safe for children too — and to withhold it was to play a kind of god you had never wanted to be. Sometimes you watched a three-year-old quote Aristotle and felt a small, complicated grief. You let yourself feel it. You did not change your mind.",
+  },
+};
 
 export default function TheShortcutExperiment() {
   const [stage, setStage] = useState(0);
@@ -138,6 +163,15 @@ export default function TheShortcutExperiment() {
     () => (
       <div>
         <StageHeader num="✦" title="What The Shortcut Reveals" color={C.gold} gradient />
+        <PathReveal
+          eyebrow="Your path, in your own choices"
+          paragraphs={[
+            SHORTCUT_FRAGMENTS.basic[choices.basic],
+            SHORTCUT_FRAGMENTS.scarcity[choices.scarcity],
+            SHORTCUT_FRAGMENTS.universal[choices.universal],
+            SHORTCUT_FRAGMENTS.age[choices.age],
+          ]}
+        />
         {choices.age === "yes" && <CounterArgument><p>If the process matters for children, doesn't it also matter for adults? If you said "yes" to the shortcut for yourself but "no" for children, you've drawn a line between developmental learning and adult knowledge acquisition. Where exactly does that line fall — and who enforces it? This tension between protecting children and respecting autonomy is one of the oldest problems in political philosophy.</p></CounterArgument>}
         <InfoBox color={C.gold} gradient>
           <p><strong style={{ color: C.gold }}>The shortcut is not hypothetical.</strong> It stands in for any technology that radically compresses the process of learning — including the AI systems already in classrooms worldwide. As <PhiloRef text="Sal Khan acknowledged in 2026" url="https://www.chalkbeat.org/2026/04/09/sal-khan-reflects-on-ai-in-schools-and-khanmigo/" />, even Khanmigo found that 80–85% of students couldn't formulate questions independently, because the capacity for self-directed inquiry is itself a skill that must be developed through practice.</p>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Ethical Educator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex" />
+<script>
+  // GitHub Pages SPA fallback. When a visitor lands on /foo or /foo/bar
+  // (which has no matching static file), Pages serves this 404.html. We
+  // capture the original path, redirect to /, and let the SPA's
+  // reconcileLegacyUrls() restore it from ?p=… so the React app renders the
+  // intended page.
+  (function () {
+    var loc = window.location;
+    var path = loc.pathname || "/";
+    var search = loc.search || "";
+    var redirect = loc.protocol + "//" + loc.host + "/?p=" + encodeURIComponent(path) +
+      (search ? "&" + search.slice(1) : "");
+    loc.replace(redirect);
+  })();
+</script>
+</head>
+<body>
+  <p style="font-family:sans-serif;color:#999;padding:32px;">Redirecting…</p>
+</body>
+</html>
