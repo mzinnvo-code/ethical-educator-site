@@ -32,11 +32,19 @@ export function CounterArgument({ children, color=C.coral }) {
   );
 }
 
-export function DiscussionGuide({ questions, color=C.gold }) {
+export function DiscussionGuide({ questions, color=C.gold, audioKeys=null }) {
   return (
     <div style={{ background:C.surface,border:`1px solid ${C.border}`,borderRadius:12,padding:"18px 20px",marginTop:20 }}>
       <p style={{ color,fontSize:"0.72rem",fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:10 }}>📋 Bring this to your school</p>
-      {questions.map((q,i)=>(<p key={i} style={{ color:C.textSecondary,fontSize:"0.88rem",lineHeight:1.6,marginBottom:8,paddingLeft:16,borderLeft:`2px solid ${C.border}` }}><strong style={{color:C.textPrimary}}>{i+1}.</strong> {q}</p>))}
+      {questions.map((q,i)=>{
+        const audioKey = Array.isArray(audioKeys) ? audioKeys[i] : null;
+        return (
+          <div key={i} style={{ display:"grid",gridTemplateColumns:audioKey?"1fr auto":"1fr",gap:8,alignItems:"start",marginBottom:8,paddingLeft:16,borderLeft:`2px solid ${C.border}` }}>
+            <p style={{ color:C.textSecondary,fontSize:"0.88rem",lineHeight:1.6 }}><strong style={{color:C.textPrimary}}>{i+1}.</strong> {q}</p>
+            {audioKey && <ReadAloudButton text={q} audioKey={audioKey} variant="icon" label={`Hear question ${i+1}`} />}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -52,7 +60,7 @@ export function RestartBtn({ onClick }) {
 // PathReveal — renders a composed personal narrative built from path-keyed
 // fragments. The paragraphs are written to flow when assembled in order so that
 // every traversal of an experiment yields a unique closing scene.
-export function PathReveal({ paragraphs = [], eyebrow = "Your Path", color = C.gold }) {
+export function PathReveal({ paragraphs = [], eyebrow = "Your Path", color = C.gold, audioSrcs = null }) {
   const joined = paragraphs.filter(Boolean).join(" ");
   if (!joined) return null;
   return (
@@ -65,7 +73,7 @@ export function PathReveal({ paragraphs = [], eyebrow = "Your Path", color = C.g
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
         <span style={{ color, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" }}>{eyebrow}</span>
-        <ReadAloudButton text={joined} variant="icon" label="Hear your path" />
+        <ReadAloudButton text={joined} audioSrcs={audioSrcs} variant="icon" label="Hear your path" />
       </div>
       {paragraphs.filter(Boolean).map((p, i) => (
         <p key={i} style={{
