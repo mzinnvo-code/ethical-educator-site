@@ -63,9 +63,9 @@
       },
       "stage-follow-option-A-reflection": {
         "file": "/audio/k5/magic-toy/stage-follow-option-A-reflection.mp3",
-        "hash": "cd30c9833b166112",
-        "chars": 70,
-        "bytes": 66499
+        "hash": "8d928272dd692469",
+        "chars": 62,
+        "bytes": 63991
       },
       "stage-follow-option-B": {
         "file": "/audio/k5/magic-toy/stage-follow-option-B.mp3",
@@ -75,9 +75,9 @@
       },
       "stage-follow-option-B-reflection": {
         "file": "/audio/k5/magic-toy/stage-follow-option-B-reflection.mp3",
-        "hash": "94f8ea194aded633",
-        "chars": 66,
-        "bytes": 65245
+        "hash": "16d19f4b17b1c879",
+        "chars": 43,
+        "bytes": 48527
       },
       "stage-follow-option-C": {
         "file": "/audio/k5/magic-toy/stage-follow-option-C.mp3",
@@ -87,29 +87,29 @@
       },
       "stage-follow-option-C-reflection": {
         "file": "/audio/k5/magic-toy/stage-follow-option-C-reflection.mp3",
-        "hash": "1cbcc568bc21acb1",
-        "chars": 58,
-        "bytes": 57304
+        "hash": "70d3ff3eea8f5f2f",
+        "chars": 57,
+        "bytes": 79038
       },
       "lab-wonder": {
         "file": "/audio/k5/magic-toy/lab-wonder.mp3",
-        "hash": "4e7b0c4d3bbfa23b",
-        "chars": 64,
-        "bytes": 104951
+        "hash": "7873e15dc44a724d",
+        "chars": 55,
+        "bytes": 75276
       },
       "lab-bigidea": {
         "file": "/audio/k5/magic-toy/lab-bigidea.mp3",
-        "hash": "00c60bbe55b00e37",
-        "chars": 109,
-        "bytes": 136716
+        "hash": "78d89c8c1935af58",
+        "chars": 75,
+        "bytes": 97010
       }
     },
     "ai-grading-mistake": {
       "stage-score-prompt": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-prompt.mp3",
-        "hash": "53a7c0362e49c620",
-        "chars": 569,
-        "bytes": 787061
+        "hash": "b8a9c91caac6b7da",
+        "chars": 567,
+        "bytes": 795838
       },
       "stage-score-option-A": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-A.mp3",
@@ -119,9 +119,9 @@
       },
       "stage-score-option-A-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-A-reflection.mp3",
-        "hash": "bb0d4c6e59e57df2",
+        "hash": "da8788acd1b031f8",
         "chars": 65,
-        "bytes": 75276
+        "bytes": 71515
       },
       "stage-score-option-B": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-B.mp3",
@@ -131,9 +131,9 @@
       },
       "stage-score-option-B-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-B-reflection.mp3",
-        "hash": "bb45fffc94734c0d",
+        "hash": "4756ea6f2f667542",
         "chars": 80,
-        "bytes": 85725
+        "bytes": 102026
       },
       "stage-score-option-C": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-C.mp3",
@@ -143,15 +143,15 @@
       },
       "stage-score-option-C-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-score-option-C-reflection.mp3",
-        "hash": "1766985f4dd307f6",
-        "chars": 96,
-        "bytes": 116236
+        "hash": "1375ae778fd0d64f",
+        "chars": 95,
+        "bytes": 100772
       },
       "stage-pattern-prompt": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-prompt.mp3",
-        "hash": "c1e190d17cebce46",
-        "chars": 493,
-        "bytes": 664181
+        "hash": "e5409488c8d1961e",
+        "chars": 499,
+        "bytes": 675466
       },
       "stage-pattern-option-A": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-A.mp3",
@@ -161,9 +161,9 @@
       },
       "stage-pattern-option-A-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-A-reflection.mp3",
-        "hash": "6b167c035f84b9b7",
+        "hash": "9efd029fe8b9e99a",
         "chars": 72,
-        "bytes": 77784
+        "bytes": 89487
       },
       "stage-pattern-option-B": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-B.mp3",
@@ -173,9 +173,9 @@
       },
       "stage-pattern-option-B-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-B-reflection.mp3",
-        "hash": "38d4ace0a87f249b",
-        "chars": 85,
-        "bytes": 109967
+        "hash": "37c2e7c567aa52c0",
+        "chars": 83,
+        "bytes": 89487
       },
       "stage-pattern-option-C": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-C.mp3",
@@ -185,15 +185,15 @@
       },
       "stage-pattern-option-C-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-pattern-option-C-reflection.mp3",
-        "hash": "46b490c8d2fc6947",
+        "hash": "33f8c478bf9553ea",
         "chars": 73,
-        "bytes": 85725
+        "bytes": 70261
       },
       "stage-policy-prompt": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-prompt.mp3",
-        "hash": "90ca5263492bfea2",
+        "hash": "1aedaacc5efe35e2",
         "chars": 449,
-        "bytes": 550078
+        "bytes": 564288
       },
       "stage-policy-option-A": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-A.mp3",
@@ -203,9 +203,9 @@
       },
       "stage-policy-option-A-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-A-reflection.mp3",
-        "hash": "7ee611acf67bc985",
+        "hash": "076102c121e9bfa8",
         "chars": 65,
-        "bytes": 106205
+        "bytes": 65245
       },
       "stage-policy-option-B": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-B.mp3",
@@ -215,9 +215,9 @@
       },
       "stage-policy-option-B-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-B-reflection.mp3",
-        "hash": "27e8783b117894fa",
+        "hash": "c7ed08b0ddb0ea63",
         "chars": 62,
-        "bytes": 74022
+        "bytes": 75276
       },
       "stage-policy-option-C": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-C.mp3",
@@ -227,9 +227,9 @@
       },
       "stage-policy-option-C-reflection": {
         "file": "/audio/k5/ai-grading-mistake/stage-policy-option-C-reflection.mp3",
-        "hash": "8cb1d00dd8759153",
+        "hash": "22a6cbfb638d8dd8",
         "chars": 79,
-        "bytes": 97010
+        "bytes": 102026
       },
       "lab-wonder": {
         "file": "/audio/k5/ai-grading-mistake/lab-wonder.mp3",
@@ -239,9 +239,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/ai-grading-mistake/lab-bigidea.mp3",
-        "hash": "27ec05df48e0b035",
-        "chars": 117,
-        "bytes": 131701
+        "hash": "4d3b53f4813fa2f6",
+        "chars": 115,
+        "bytes": 129193
       },
       "lab-trythis": {
         "file": "/audio/k5/ai-grading-mistake/lab-trythis.mp3",
@@ -251,9 +251,9 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/ai-grading-mistake/lab-spottheslip.mp3",
-        "hash": "bcf0038309b2d670",
-        "chars": 128,
-        "bytes": 152181
+        "hash": "28bf226e91012d92",
+        "chars": 126,
+        "bytes": 131701
       }
     },
     "robot-friend-turn": {
@@ -271,9 +271,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-setup-option-A-reflection.mp3",
-        "hash": "427c8d9f06731083",
-        "chars": 82,
-        "bytes": 89487
+        "hash": "f63245f40c15337d",
+        "chars": 69,
+        "bytes": 98264
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/robot-friend-turn/stage-setup-option-B.mp3",
@@ -283,9 +283,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-setup-option-B-reflection.mp3",
-        "hash": "2974132af9ae7e0f",
-        "chars": 76,
-        "bytes": 86979
+        "hash": "4c018ce852669623",
+        "chars": 53,
+        "bytes": 53542
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/robot-friend-turn/stage-setup-option-C.mp3",
@@ -295,9 +295,9 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-setup-option-C-reflection.mp3",
-        "hash": "fde47f362f27f029",
-        "chars": 53,
-        "bytes": 84471
+        "hash": "35f6f3a7ebbea0cf",
+        "chars": 54,
+        "bytes": 93248
       },
       "stage-week-prompt": {
         "file": "/audio/k5/robot-friend-turn/stage-week-prompt.mp3",
@@ -313,9 +313,9 @@
       },
       "stage-week-option-A-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-week-option-A-reflection.mp3",
-        "hash": "57e6cc9617ed7cf5",
-        "chars": 76,
-        "bytes": 81546
+        "hash": "5560b731c4eed5b5",
+        "chars": 50,
+        "bytes": 47273
       },
       "stage-week-option-B": {
         "file": "/audio/k5/robot-friend-turn/stage-week-option-B.mp3",
@@ -325,8 +325,8 @@
       },
       "stage-week-option-B-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-week-option-B-reflection.mp3",
-        "hash": "8816eb799b3e5076",
-        "chars": 75,
+        "hash": "4ca9342f1ae0052c",
+        "chars": 73,
         "bytes": 106205
       },
       "stage-week-option-C": {
@@ -337,29 +337,29 @@
       },
       "stage-week-option-C-reflection": {
         "file": "/audio/k5/robot-friend-turn/stage-week-option-C-reflection.mp3",
-        "hash": "829a103607e35daf",
-        "chars": 69,
-        "bytes": 84471
+        "hash": "4e08f1a0bf566b0c",
+        "chars": 59,
+        "bytes": 56050
       },
       "lab-wonder": {
         "file": "/audio/k5/robot-friend-turn/lab-wonder.mp3",
-        "hash": "e86b3455032f10ad",
-        "chars": 69,
-        "bytes": 71515
+        "hash": "ae231f2616e7da3d",
+        "chars": 61,
+        "bytes": 65245
       },
       "lab-bigidea": {
         "file": "/audio/k5/robot-friend-turn/lab-bigidea.mp3",
-        "hash": "373847befbaeda7d",
-        "chars": 108,
-        "bytes": 117490
+        "hash": "edc0a907a03a5be1",
+        "chars": 69,
+        "bytes": 77784
       }
     },
     "messy-robot": {
       "stage-setup-prompt": {
         "file": "/audio/k5/messy-robot/stage-setup-prompt.mp3",
-        "hash": "032e7b1280743541",
+        "hash": "a84d49e05e17410e",
         "chars": 127,
-        "bytes": 178930
+        "bytes": 185199
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/messy-robot/stage-setup-option-A.mp3",
@@ -369,9 +369,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/messy-robot/stage-setup-option-A-reflection.mp3",
-        "hash": "81bfd26682d09d3f",
-        "chars": 66,
-        "bytes": 104951
+        "hash": "f0b729cc59f86192",
+        "chars": 50,
+        "bytes": 82799
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/messy-robot/stage-setup-option-B.mp3",
@@ -381,9 +381,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/messy-robot/stage-setup-option-B-reflection.mp3",
-        "hash": "786da77ce57cf850",
-        "chars": 54,
-        "bytes": 67753
+        "hash": "5d007d715d1a3915",
+        "chars": 60,
+        "bytes": 65245
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/messy-robot/stage-setup-option-C.mp3",
@@ -393,9 +393,9 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/messy-robot/stage-setup-option-C-reflection.mp3",
-        "hash": "9fbc95e8ab9a7b6e",
-        "chars": 68,
-        "bytes": 88233
+        "hash": "add189b0abcee13e",
+        "chars": 53,
+        "bytes": 77784
       },
       "stage-breaks-prompt": {
         "file": "/audio/k5/messy-robot/stage-breaks-prompt.mp3",
@@ -411,9 +411,9 @@
       },
       "stage-breaks-option-A-reflection": {
         "file": "/audio/k5/messy-robot/stage-breaks-option-A-reflection.mp3",
-        "hash": "20dbd222da7acc2f",
-        "chars": 83,
-        "bytes": 118744
+        "hash": "40ab12fa63db8816",
+        "chars": 85,
+        "bytes": 136716
       },
       "stage-breaks-option-B": {
         "file": "/audio/k5/messy-robot/stage-breaks-option-B.mp3",
@@ -423,9 +423,9 @@
       },
       "stage-breaks-option-B-reflection": {
         "file": "/audio/k5/messy-robot/stage-breaks-option-B-reflection.mp3",
-        "hash": "6fc05e88fd1ad4d7",
-        "chars": 82,
-        "bytes": 106205
+        "hash": "6eb7bc21043388ba",
+        "chars": 74,
+        "bytes": 88233
       },
       "stage-breaks-option-C": {
         "file": "/audio/k5/messy-robot/stage-breaks-option-C.mp3",
@@ -435,29 +435,29 @@
       },
       "stage-breaks-option-C-reflection": {
         "file": "/audio/k5/messy-robot/stage-breaks-option-C-reflection.mp3",
-        "hash": "a25bbd7ad29195ed",
-        "chars": 57,
-        "bytes": 58558
+        "hash": "7218254b65e0a8ea",
+        "chars": 51,
+        "bytes": 53542
       },
       "lab-wonder": {
         "file": "/audio/k5/messy-robot/lab-wonder.mp3",
-        "hash": "2bee99742d7fcfeb",
-        "chars": 66,
-        "bytes": 71515
+        "hash": "a4f03743dfa82362",
+        "chars": 57,
+        "bytes": 88233
       },
       "lab-bigidea": {
         "file": "/audio/k5/messy-robot/lab-bigidea.mp3",
-        "hash": "beba7f3340321818",
-        "chars": 100,
-        "bytes": 116236
+        "hash": "0879b4313a6bc837",
+        "chars": 60,
+        "bytes": 76530
       }
     },
     "robot-pet-goodbye": {
       "stage-setup-prompt": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-prompt.mp3",
-        "hash": "96be939a292a7d14",
-        "chars": 118,
-        "bytes": 204426
+        "hash": "97ebd71b3d9ef486",
+        "chars": 128,
+        "bytes": 231593
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-A.mp3",
@@ -467,9 +467,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-A-reflection.mp3",
-        "hash": "ff135347826bf8e0",
+        "hash": "01f1e16ad9d072d8",
         "chars": 61,
-        "bytes": 74022
+        "bytes": 89487
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-B.mp3",
@@ -479,9 +479,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-B-reflection.mp3",
-        "hash": "54875bfc1f341670",
-        "chars": 76,
-        "bytes": 91995
+        "hash": "f630275da8fa03cb",
+        "chars": 61,
+        "bytes": 65245
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-C.mp3",
@@ -491,15 +491,15 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-setup-option-C-reflection.mp3",
-        "hash": "d9fa30950cc057e6",
-        "chars": 52,
-        "bytes": 47273
+        "hash": "033cedeb8e4ec11d",
+        "chars": 58,
+        "bytes": 52288
       },
       "stage-repair-prompt": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-prompt.mp3",
-        "hash": "f81183eef8ca093d",
-        "chars": 111,
-        "bytes": 148419
+        "hash": "83d15247b57797b6",
+        "chars": 114,
+        "bytes": 166391
       },
       "stage-repair-option-A": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-option-A.mp3",
@@ -509,9 +509,9 @@
       },
       "stage-repair-option-A-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-option-A-reflection.mp3",
-        "hash": "c599f03c574d895a",
-        "chars": 59,
-        "bytes": 72768
+        "hash": "2f0f824c2a9e813d",
+        "chars": 63,
+        "bytes": 71515
       },
       "stage-repair-option-B": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-option-B.mp3",
@@ -521,8 +521,8 @@
       },
       "stage-repair-option-B-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-option-B-reflection.mp3",
-        "hash": "6a1f965281a006c9",
-        "chars": 61,
+        "hash": "7e64887d0773a21b",
+        "chars": 64,
         "bytes": 80292
       },
       "stage-repair-option-C": {
@@ -533,21 +533,21 @@
       },
       "stage-repair-option-C-reflection": {
         "file": "/audio/k5/robot-pet-goodbye/stage-repair-option-C-reflection.mp3",
-        "hash": "d1daa84f2c6ba107",
-        "chars": 53,
-        "bytes": 63991
+        "hash": "053ab3514545f7a6",
+        "chars": 48,
+        "bytes": 54796
       },
       "lab-wonder": {
         "file": "/audio/k5/robot-pet-goodbye/lab-wonder.mp3",
-        "hash": "2728456360f3f6f7",
-        "chars": 49,
+        "hash": "370c8407952e8e26",
+        "chars": 57,
         "bytes": 70261
       },
       "lab-bigidea": {
         "file": "/audio/k5/robot-pet-goodbye/lab-bigidea.mp3",
-        "hash": "bd9a6242e46caee7",
-        "chars": 92,
-        "bytes": 114982
+        "hash": "9df5072e2efeca52",
+        "chars": 89,
+        "bytes": 137970
       }
     },
     "invisible-ring": {
@@ -565,9 +565,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/invisible-ring/stage-setup-option-A-reflection.mp3",
-        "hash": "d2e00028fcfb4b09",
-        "chars": 75,
-        "bytes": 100772
+        "hash": "a07207bbaad85e54",
+        "chars": 64,
+        "bytes": 94502
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/invisible-ring/stage-setup-option-B.mp3",
@@ -577,9 +577,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/invisible-ring/stage-setup-option-B-reflection.mp3",
-        "hash": "7956a657eacd7a12",
-        "chars": 67,
-        "bytes": 99518
+        "hash": "78d86f9333e7d6bc",
+        "chars": 71,
+        "bytes": 103279
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/invisible-ring/stage-setup-option-C.mp3",
@@ -589,15 +589,15 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/invisible-ring/stage-setup-option-C-reflection.mp3",
-        "hash": "b8ba1bfca20e5cb9",
-        "chars": 63,
-        "bytes": 80292
+        "hash": "6996b0da34259152",
+        "chars": 65,
+        "bytes": 86979
       },
       "stage-mirror-prompt": {
         "file": "/audio/k5/invisible-ring/stage-mirror-prompt.mp3",
-        "hash": "2aac154789bd5af6",
-        "chars": 108,
-        "bytes": 139224
+        "hash": "2ae1c9507d93fd49",
+        "chars": 103,
+        "bytes": 144239
       },
       "stage-mirror-option-A": {
         "file": "/audio/k5/invisible-ring/stage-mirror-option-A.mp3",
@@ -607,9 +607,9 @@
       },
       "stage-mirror-option-A-reflection": {
         "file": "/audio/k5/invisible-ring/stage-mirror-option-A-reflection.mp3",
-        "hash": "253fe78ec3fb8d5b",
-        "chars": 75,
-        "bytes": 65245
+        "hash": "a1bed86338e975cf",
+        "chars": 63,
+        "bytes": 69007
       },
       "stage-mirror-option-B": {
         "file": "/audio/k5/invisible-ring/stage-mirror-option-B.mp3",
@@ -619,8 +619,8 @@
       },
       "stage-mirror-option-B-reflection": {
         "file": "/audio/k5/invisible-ring/stage-mirror-option-B-reflection.mp3",
-        "hash": "f0b3da24b7317a47",
-        "chars": 59,
+        "hash": "9d663f91f602b5f6",
+        "chars": 51,
         "bytes": 52288
       },
       "stage-mirror-option-C": {
@@ -631,21 +631,21 @@
       },
       "stage-mirror-option-C-reflection": {
         "file": "/audio/k5/invisible-ring/stage-mirror-option-C-reflection.mp3",
-        "hash": "e6a30a4217ec067a",
-        "chars": 75,
-        "bytes": 102026
+        "hash": "dfe69338bffaec83",
+        "chars": 74,
+        "bytes": 84471
       },
       "lab-wonder": {
         "file": "/audio/k5/invisible-ring/lab-wonder.mp3",
-        "hash": "4efe1f01c7111b1c",
-        "chars": 75,
-        "bytes": 116236
+        "hash": "efdee3f02a5b56ae",
+        "chars": 60,
+        "bytes": 76530
       },
       "lab-bigidea": {
         "file": "/audio/k5/invisible-ring/lab-bigidea.mp3",
-        "hash": "47be967599d05a64",
-        "chars": 91,
-        "bytes": 99518
+        "hash": "843150f00af165e9",
+        "chars": 72,
+        "bytes": 109967
       },
       "lab-trythis": {
         "file": "/audio/k5/invisible-ring/lab-trythis.mp3",
@@ -657,9 +657,9 @@
     "honesty-protection": {
       "stage-setup-prompt": {
         "file": "/audio/k5/honesty-protection/stage-setup-prompt.mp3",
-        "hash": "0fd9b14820b52a27",
+        "hash": "69559333fe3e98ac",
         "chars": 130,
-        "bytes": 193141
+        "bytes": 190633
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-A.mp3",
@@ -669,9 +669,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-A-reflection.mp3",
-        "hash": "bc2fa43af01de161",
-        "chars": 70,
-        "bytes": 112475
+        "hash": "1b2e0a58c30530df",
+        "chars": 62,
+        "bytes": 72768
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-B.mp3",
@@ -681,9 +681,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-B-reflection.mp3",
-        "hash": "513ac8a0d3e75020",
-        "chars": 65,
-        "bytes": 79038
+        "hash": "2ae667faaa7c2f73",
+        "chars": 68,
+        "bytes": 89487
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-C.mp3",
@@ -693,9 +693,9 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/honesty-protection/stage-setup-option-C-reflection.mp3",
-        "hash": "28528b9b12079977",
-        "chars": 62,
-        "bytes": 75276
+        "hash": "4abdab61f1aae654",
+        "chars": 68,
+        "bytes": 85725
       },
       "stage-pattern-prompt": {
         "file": "/audio/k5/honesty-protection/stage-pattern-prompt.mp3",
@@ -711,9 +711,9 @@
       },
       "stage-pattern-option-A-reflection": {
         "file": "/audio/k5/honesty-protection/stage-pattern-option-A-reflection.mp3",
-        "hash": "0d1e7abb1f54e338",
-        "chars": 59,
-        "bytes": 61066
+        "hash": "c5ed6bdfa174901f",
+        "chars": 72,
+        "bytes": 75276
       },
       "stage-pattern-option-B": {
         "file": "/audio/k5/honesty-protection/stage-pattern-option-B.mp3",
@@ -723,9 +723,9 @@
       },
       "stage-pattern-option-B-reflection": {
         "file": "/audio/k5/honesty-protection/stage-pattern-option-B-reflection.mp3",
-        "hash": "fd2e617b8bbaed07",
-        "chars": 66,
-        "bytes": 75276
+        "hash": "c16e7453a6780a5e",
+        "chars": 63,
+        "bytes": 95756
       },
       "stage-pattern-option-C": {
         "file": "/audio/k5/honesty-protection/stage-pattern-option-C.mp3",
@@ -735,9 +735,9 @@
       },
       "stage-pattern-option-C-reflection": {
         "file": "/audio/k5/honesty-protection/stage-pattern-option-C-reflection.mp3",
-        "hash": "947c0c6d8756f57e",
-        "chars": 72,
-        "bytes": 71515
+        "hash": "176e8d3944717f84",
+        "chars": 62,
+        "bytes": 77784
       },
       "lab-wonder": {
         "file": "/audio/k5/honesty-protection/lab-wonder.mp3",
@@ -747,15 +747,15 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/honesty-protection/lab-bigidea.mp3",
-        "hash": "d9445177ec6e8a3f",
-        "chars": 95,
-        "bytes": 123759
+        "hash": "60b02cc19814843a",
+        "chars": 72,
+        "bytes": 86979
       },
       "lab-trythis": {
         "file": "/audio/k5/honesty-protection/lab-trythis.mp3",
-        "hash": "1a329240b808a60d",
-        "chars": 121,
-        "bytes": 117490
+        "hash": "6acf3f48f937fb43",
+        "chars": 109,
+        "bytes": 119998
       }
     },
     "rude-toy": {
@@ -773,9 +773,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/rude-toy/stage-setup-option-A-reflection.mp3",
-        "hash": "97f90607bb7891cb",
-        "chars": 60,
-        "bytes": 70261
+        "hash": "bea6d1e6824538dc",
+        "chars": 62,
+        "bytes": 67753
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/rude-toy/stage-setup-option-B.mp3",
@@ -785,9 +785,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/rude-toy/stage-setup-option-B-reflection.mp3",
-        "hash": "06784bb7e33fd395",
-        "chars": 62,
-        "bytes": 71515
+        "hash": "9c7a7cd2c3bd0c73",
+        "chars": 68,
+        "bytes": 85725
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/rude-toy/stage-setup-option-C.mp3",
@@ -797,15 +797,15 @@
       },
       "stage-setup-option-C-reflection": {
         "file": "/audio/k5/rude-toy/stage-setup-option-C-reflection.mp3",
-        "hash": "d4875bacb9631bbc",
-        "chars": 48,
-        "bytes": 54796
+        "hash": "6c7c24f17609defa",
+        "chars": 44,
+        "bytes": 51035
       },
       "stage-copy-prompt": {
         "file": "/audio/k5/rude-toy/stage-copy-prompt.mp3",
-        "hash": "01a823d6914f74aa",
-        "chars": 105,
-        "bytes": 144239
+        "hash": "0c58558eb9a24593",
+        "chars": 97,
+        "bytes": 142986
       },
       "stage-copy-option-A": {
         "file": "/audio/k5/rude-toy/stage-copy-option-A.mp3",
@@ -815,9 +815,9 @@
       },
       "stage-copy-option-A-reflection": {
         "file": "/audio/k5/rude-toy/stage-copy-option-A-reflection.mp3",
-        "hash": "1f8f1ddac6d9d552",
-        "chars": 46,
-        "bytes": 58558
+        "hash": "70e0e74863f7a963",
+        "chars": 65,
+        "bytes": 71515
       },
       "stage-copy-option-B": {
         "file": "/audio/k5/rude-toy/stage-copy-option-B.mp3",
@@ -827,9 +827,9 @@
       },
       "stage-copy-option-B-reflection": {
         "file": "/audio/k5/rude-toy/stage-copy-option-B-reflection.mp3",
-        "hash": "568275a119117260",
-        "chars": 62,
-        "bytes": 71515
+        "hash": "726ef367ffe2acbf",
+        "chars": 68,
+        "bytes": 70261
       },
       "stage-copy-option-C": {
         "file": "/audio/k5/rude-toy/stage-copy-option-C.mp3",
@@ -839,21 +839,21 @@
       },
       "stage-copy-option-C-reflection": {
         "file": "/audio/k5/rude-toy/stage-copy-option-C-reflection.mp3",
-        "hash": "3cef5c58ff5597c1",
-        "chars": 49,
-        "bytes": 51035
+        "hash": "358c1dd6f4690853",
+        "chars": 46,
+        "bytes": 44765
       },
       "lab-wonder": {
         "file": "/audio/k5/rude-toy/lab-wonder.mp3",
-        "hash": "11528d202e21debe",
-        "chars": 99,
-        "bytes": 126685
+        "hash": "116aad39f21572f5",
+        "chars": 78,
+        "bytes": 90741
       },
       "lab-bigidea": {
         "file": "/audio/k5/rude-toy/lab-bigidea.mp3",
-        "hash": "d183ab0f820f4989",
-        "chars": 87,
-        "bytes": 90741
+        "hash": "358e0501a902f3af",
+        "chars": 75,
+        "bytes": 80292
       },
       "lab-trythis": {
         "file": "/audio/k5/rude-toy/lab-trythis.mp3",
@@ -865,9 +865,9 @@
     "winning-game": {
       "stage-setup-prompt": {
         "file": "/audio/k5/winning-game/stage-setup-prompt.mp3",
-        "hash": "5d497e22d08cc7dc",
-        "chars": 104,
-        "bytes": 135462
+        "hash": "e288df35a6c5947e",
+        "chars": 102,
+        "bytes": 155942
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/winning-game/stage-setup-option-A.mp3",
@@ -919,9 +919,9 @@
       },
       "stage-trophy-option-A-reflection": {
         "file": "/audio/k5/winning-game/stage-trophy-option-A-reflection.mp3",
-        "hash": "080d0c5240e2a860",
-        "chars": 53,
-        "bytes": 54796
+        "hash": "71ea60ce5a7c201c",
+        "chars": 61,
+        "bytes": 88233
       },
       "stage-trophy-option-B": {
         "file": "/audio/k5/winning-game/stage-trophy-option-B.mp3",
@@ -931,9 +931,9 @@
       },
       "stage-trophy-option-B-reflection": {
         "file": "/audio/k5/winning-game/stage-trophy-option-B-reflection.mp3",
-        "hash": "2c34096c7f007188",
-        "chars": 52,
-        "bytes": 69007
+        "hash": "517bf5ebb583a4b6",
+        "chars": 49,
+        "bytes": 53542
       },
       "stage-trophy-option-C": {
         "file": "/audio/k5/winning-game/stage-trophy-option-C.mp3",
@@ -943,21 +943,21 @@
       },
       "stage-trophy-option-C-reflection": {
         "file": "/audio/k5/winning-game/stage-trophy-option-C-reflection.mp3",
-        "hash": "3cc5ec0c80b8f6f9",
-        "chars": 53,
-        "bytes": 53542
+        "hash": "448d16aa5c467e52",
+        "chars": 50,
+        "bytes": 54796
       },
       "lab-wonder": {
         "file": "/audio/k5/winning-game/lab-wonder.mp3",
-        "hash": "3e91be9c3393ec99",
-        "chars": 57,
-        "bytes": 85725
+        "hash": "c513b5348d75d165",
+        "chars": 53,
+        "bytes": 104951
       },
       "lab-bigidea": {
         "file": "/audio/k5/winning-game/lab-bigidea.mp3",
-        "hash": "b4031be024d44c17",
-        "chars": 96,
-        "bytes": 93248
+        "hash": "4ba44925a46b7b9a",
+        "chars": 81,
+        "bytes": 98264
       },
       "lab-trythis": {
         "file": "/audio/k5/winning-game/lab-trythis.mp3",
@@ -969,9 +969,9 @@
     "ai-art-help": {
       "stage-setup-prompt": {
         "file": "/audio/k5/ai-art-help/stage-setup-prompt.mp3",
-        "hash": "71e5aa9c74c36d42",
+        "hash": "984b603258c6a33f",
         "chars": 331,
-        "bytes": 469412
+        "bytes": 464396
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/ai-art-help/stage-setup-option-A.mp3",
@@ -993,9 +993,9 @@
       },
       "stage-setup-option-B-reflection": {
         "file": "/audio/k5/ai-art-help/stage-setup-option-B-reflection.mp3",
-        "hash": "22b5a5ad55f9074d",
-        "chars": 72,
-        "bytes": 80292
+        "hash": "0167475cf331d7ad",
+        "chars": 60,
+        "bytes": 67753
       },
       "stage-setup-option-C": {
         "file": "/audio/k5/ai-art-help/stage-setup-option-C.mp3",
@@ -1011,9 +1011,9 @@
       },
       "stage-friend-prompt": {
         "file": "/audio/k5/ai-art-help/stage-friend-prompt.mp3",
-        "hash": "a3f0b97b9b13ca64",
+        "hash": "befb6dc07c65ef9f",
         "chars": 289,
-        "bytes": 422182
+        "bytes": 402956
       },
       "stage-friend-option-A": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-A.mp3",
@@ -1023,9 +1023,9 @@
       },
       "stage-friend-option-A-reflection": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-A-reflection.mp3",
-        "hash": "c837fd26c462c97c",
-        "chars": 64,
-        "bytes": 90741
+        "hash": "2856baf8a2a8c994",
+        "chars": 67,
+        "bytes": 80292
       },
       "stage-friend-option-B": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-B.mp3",
@@ -1035,9 +1035,9 @@
       },
       "stage-friend-option-B-reflection": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-B-reflection.mp3",
-        "hash": "8e7e97ac117be095",
-        "chars": 61,
-        "bytes": 63991
+        "hash": "4b9e75b502b2c847",
+        "chars": 37,
+        "bytes": 38078
       },
       "stage-friend-option-C": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-C.mp3",
@@ -1047,15 +1047,15 @@
       },
       "stage-friend-option-C-reflection": {
         "file": "/audio/k5/ai-art-help/stage-friend-option-C-reflection.mp3",
-        "hash": "197bc728bf3fcbe1",
-        "chars": 68,
+        "hash": "690fae7a8b136464",
+        "chars": 69,
         "bytes": 80292
       },
       "stage-gallery-prompt": {
         "file": "/audio/k5/ai-art-help/stage-gallery-prompt.mp3",
-        "hash": "5ac9a44ed01764a5",
-        "chars": 319,
-        "bytes": 440155
+        "hash": "a8bee512e105c8d3",
+        "chars": 313,
+        "bytes": 448932
       },
       "stage-gallery-option-A": {
         "file": "/audio/k5/ai-art-help/stage-gallery-option-A.mp3",
@@ -1089,9 +1089,9 @@
       },
       "stage-gallery-option-C-reflection": {
         "file": "/audio/k5/ai-art-help/stage-gallery-option-C-reflection.mp3",
-        "hash": "77b2f96ce6355501",
-        "chars": 75,
-        "bytes": 75276
+        "hash": "706454d0940e6acd",
+        "chars": 87,
+        "bytes": 98264
       },
       "lab-wonder": {
         "file": "/audio/k5/ai-art-help/lab-wonder.mp3",
@@ -1101,9 +1101,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/ai-art-help/lab-bigidea.mp3",
-        "hash": "4db41f4490fa1dcb",
-        "chars": 109,
-        "bytes": 122506
+        "hash": "5638cf567e93d898",
+        "chars": 78,
+        "bytes": 93248
       },
       "lab-trythis": {
         "file": "/audio/k5/ai-art-help/lab-trythis.mp3",
@@ -1115,9 +1115,9 @@
     "rules-vs-helping": {
       "stage-setup-prompt": {
         "file": "/audio/k5/rules-vs-helping/stage-setup-prompt.mp3",
-        "hash": "dfc6a5dd14f6dee1",
-        "chars": 303,
-        "bytes": 446424
+        "hash": "789ee81f30cfd5ad",
+        "chars": 308,
+        "bytes": 463142
       },
       "stage-setup-option-A": {
         "file": "/audio/k5/rules-vs-helping/stage-setup-option-A.mp3",
@@ -1127,9 +1127,9 @@
       },
       "stage-setup-option-A-reflection": {
         "file": "/audio/k5/rules-vs-helping/stage-setup-option-A-reflection.mp3",
-        "hash": "3b99b992963134e2",
-        "chars": 78,
-        "bytes": 93248
+        "hash": "0d364b0631fa4258",
+        "chars": 74,
+        "bytes": 102026
       },
       "stage-setup-option-B": {
         "file": "/audio/k5/rules-vs-helping/stage-setup-option-B.mp3",
@@ -1157,9 +1157,9 @@
       },
       "stage-everyone-prompt": {
         "file": "/audio/k5/rules-vs-helping/stage-everyone-prompt.mp3",
-        "hash": "63f2df9b773b4f95",
-        "chars": 301,
-        "bytes": 407972
+        "hash": "ec35971baf982129",
+        "chars": 285,
+        "bytes": 391671
       },
       "stage-everyone-option-A": {
         "file": "/audio/k5/rules-vs-helping/stage-everyone-option-A.mp3",
@@ -1193,15 +1193,15 @@
       },
       "stage-everyone-option-C-reflection": {
         "file": "/audio/k5/rules-vs-helping/stage-everyone-option-C-reflection.mp3",
-        "hash": "4c57de337078a490",
-        "chars": 50,
-        "bytes": 69007
+        "hash": "701ace969dcb578a",
+        "chars": 60,
+        "bytes": 66499
       },
       "stage-signal-prompt": {
         "file": "/audio/k5/rules-vs-helping/stage-signal-prompt.mp3",
-        "hash": "6ff100683df15a4f",
-        "chars": 284,
-        "bytes": 397941
+        "hash": "6338c4d6498bb52a",
+        "chars": 279,
+        "bytes": 396687
       },
       "stage-signal-option-A": {
         "file": "/audio/k5/rules-vs-helping/stage-signal-option-A.mp3",
@@ -1235,9 +1235,9 @@
       },
       "stage-signal-option-C-reflection": {
         "file": "/audio/k5/rules-vs-helping/stage-signal-option-C-reflection.mp3",
-        "hash": "d0d0be12a7e49a96",
-        "chars": 52,
-        "bytes": 66499
+        "hash": "f6fdf387acf4bd90",
+        "chars": 56,
+        "bytes": 53542
       },
       "lab-wonder": {
         "file": "/audio/k5/rules-vs-helping/lab-wonder.mp3",
@@ -1247,23 +1247,23 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/rules-vs-helping/lab-bigidea.mp3",
-        "hash": "c27b4eb4f53c5cc9",
-        "chars": 116,
-        "bytes": 130447
+        "hash": "a89c3ac556893d06",
+        "chars": 110,
+        "bytes": 117490
       },
       "lab-trythis": {
         "file": "/audio/k5/rules-vs-helping/lab-trythis.mp3",
-        "hash": "20c70e0065738bff",
-        "chars": 94,
-        "bytes": 123759
+        "hash": "5e41906811bd9ad2",
+        "chars": 69,
+        "bytes": 102026
       }
     },
     "always-agreeable-ai-friend": {
       "stage-advice-prompt": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-advice-prompt.mp3",
-        "hash": "dad283fe6c6ef753",
-        "chars": 312,
-        "bytes": 478607
+        "hash": "9f6feadaef408a05",
+        "chars": 299,
+        "bytes": 469412
       },
       "stage-advice-option-A": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-advice-option-A.mp3",
@@ -1297,15 +1297,15 @@
       },
       "stage-advice-option-C-reflection": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-advice-option-C-reflection.mp3",
-        "hash": "c7165d12934a4a3e",
+        "hash": "e3fa595548990009",
         "chars": 76,
-        "bytes": 74022
+        "bytes": 62319
       },
       "stage-drawing-prompt": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-drawing-prompt.mp3",
-        "hash": "d300f5a71f0db136",
-        "chars": 285,
-        "bytes": 463142
+        "hash": "71b016b67514aa80",
+        "chars": 284,
+        "bytes": 441408
       },
       "stage-drawing-option-A": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-drawing-option-A.mp3",
@@ -1327,9 +1327,9 @@
       },
       "stage-drawing-option-B-reflection": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-drawing-option-B-reflection.mp3",
-        "hash": "12fe319ddad9a856",
-        "chars": 64,
-        "bytes": 69007
+        "hash": "84c724ee8af7e1e3",
+        "chars": 61,
+        "bytes": 74022
       },
       "stage-drawing-option-C": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-drawing-option-C.mp3",
@@ -1339,15 +1339,15 @@
       },
       "stage-drawing-option-C-reflection": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-drawing-option-C-reflection.mp3",
-        "hash": "384029be7e6571e7",
-        "chars": 64,
-        "bytes": 75276
+        "hash": "90063b26d522cf9e",
+        "chars": 78,
+        "bytes": 90741
       },
       "stage-classmate-prompt": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-classmate-prompt.mp3",
-        "hash": "2f454e6c1dd688cc",
-        "chars": 290,
-        "bytes": 404210
+        "hash": "bb002e4c9a68f01f",
+        "chars": 305,
+        "bytes": 435139
       },
       "stage-classmate-option-A": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-classmate-option-A.mp3",
@@ -1357,9 +1357,9 @@
       },
       "stage-classmate-option-A-reflection": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-classmate-option-A-reflection.mp3",
-        "hash": "030e5f65bee8a7c0",
-        "chars": 57,
-        "bytes": 59812
+        "hash": "30a2e890b3d1d3d3",
+        "chars": 61,
+        "bytes": 56050
       },
       "stage-classmate-option-B": {
         "file": "/audio/k5/always-agreeable-ai-friend/stage-classmate-option-B.mp3",
@@ -1393,9 +1393,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/always-agreeable-ai-friend/lab-bigidea.mp3",
-        "hash": "5c4b53a886b4d5eb",
-        "chars": 99,
-        "bytes": 97010
+        "hash": "d8a297851be6e630",
+        "chars": 55,
+        "bytes": 74022
       },
       "lab-trythis": {
         "file": "/audio/k5/always-agreeable-ai-friend/lab-trythis.mp3",
@@ -1407,9 +1407,9 @@
     "same-toy-or-not": {
       "stage-wheel-prompt": {
         "file": "/audio/k5/same-toy-or-not/stage-wheel-prompt.mp3",
-        "hash": "0ebf5275c031c74f",
-        "chars": 267,
-        "bytes": 405464
+        "hash": "dbafd6174bfb1d21",
+        "chars": 263,
+        "bytes": 425944
       },
       "stage-wheel-option-A": {
         "file": "/audio/k5/same-toy-or-not/stage-wheel-option-A.mp3",
@@ -1419,9 +1419,9 @@
       },
       "stage-wheel-option-A-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-wheel-option-A-reflection.mp3",
-        "hash": "615de8b586a6fc6b",
-        "chars": 51,
-        "bytes": 67753
+        "hash": "460115999338839f",
+        "chars": 52,
+        "bytes": 75276
       },
       "stage-wheel-option-B": {
         "file": "/audio/k5/same-toy-or-not/stage-wheel-option-B.mp3",
@@ -1443,15 +1443,15 @@
       },
       "stage-wheel-option-C-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-wheel-option-C-reflection.mp3",
-        "hash": "bb7fafa830fa0d8d",
+        "hash": "2b5c764929c812c7",
         "chars": 50,
-        "bytes": 59812
+        "bytes": 47273
       },
       "stage-voice-prompt": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-prompt.mp3",
-        "hash": "617491ca043ec093",
+        "hash": "84ee42a26f3c5a5e",
         "chars": 325,
-        "bytes": 459381
+        "bytes": 456873
       },
       "stage-voice-option-A": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-A.mp3",
@@ -1461,9 +1461,9 @@
       },
       "stage-voice-option-A-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-A-reflection.mp3",
-        "hash": "5adb5846f0487bc3",
-        "chars": 71,
-        "bytes": 74022
+        "hash": "96eea252f592f795",
+        "chars": 72,
+        "bytes": 81546
       },
       "stage-voice-option-B": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-B.mp3",
@@ -1473,9 +1473,9 @@
       },
       "stage-voice-option-B-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-B-reflection.mp3",
-        "hash": "badda67dbcd567e4",
-        "chars": 55,
-        "bytes": 58558
+        "hash": "80607cc17a14045c",
+        "chars": 60,
+        "bytes": 71515
       },
       "stage-voice-option-C": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-C.mp3",
@@ -1485,15 +1485,15 @@
       },
       "stage-voice-option-C-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-voice-option-C-reflection.mp3",
-        "hash": "adc40ab2f180d976",
-        "chars": 47,
-        "bytes": 46019
+        "hash": "e388551922ae1da2",
+        "chars": 52,
+        "bytes": 54796
       },
       "stage-second-prompt": {
         "file": "/audio/k5/same-toy-or-not/stage-second-prompt.mp3",
-        "hash": "219a061ac5a0ae9b",
+        "hash": "6837c9e3397ed95d",
         "chars": 287,
-        "bytes": 454365
+        "bytes": 464396
       },
       "stage-second-option-A": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-A.mp3",
@@ -1503,9 +1503,9 @@
       },
       "stage-second-option-A-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-A-reflection.mp3",
-        "hash": "1f88c1c92ada5aa8",
-        "chars": 55,
-        "bytes": 65245
+        "hash": "c5b0852a66f3a9ca",
+        "chars": 61,
+        "bytes": 71515
       },
       "stage-second-option-B": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-B.mp3",
@@ -1515,9 +1515,9 @@
       },
       "stage-second-option-B-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-B-reflection.mp3",
-        "hash": "a0b60715b32c0247",
-        "chars": 58,
-        "bytes": 74022
+        "hash": "0cd69134c8cba0c9",
+        "chars": 61,
+        "bytes": 65245
       },
       "stage-second-option-C": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-C.mp3",
@@ -1527,21 +1527,21 @@
       },
       "stage-second-option-C-reflection": {
         "file": "/audio/k5/same-toy-or-not/stage-second-option-C-reflection.mp3",
-        "hash": "5785ca6c43d8ae38",
-        "chars": 54,
-        "bytes": 66499
+        "hash": "eac73d0b80423386",
+        "chars": 59,
+        "bytes": 80292
       },
       "lab-wonder": {
         "file": "/audio/k5/same-toy-or-not/lab-wonder.mp3",
-        "hash": "db5ad664553f7238",
-        "chars": 92,
-        "bytes": 126685
+        "hash": "3d457f287e9ebb52",
+        "chars": 83,
+        "bytes": 116236
       },
       "lab-bigidea": {
         "file": "/audio/k5/same-toy-or-not/lab-bigidea.mp3",
-        "hash": "0e3a21e4ba01056d",
+        "hash": "6a98bb4839ae1d34",
         "chars": 105,
-        "bytes": 139224
+        "bytes": 147165
       },
       "lab-trythis": {
         "file": "/audio/k5/same-toy-or-not/lab-trythis.mp3",
@@ -1553,9 +1553,9 @@
     "ai-written-story": {
       "stage-draft-prompt": {
         "file": "/audio/k5/ai-written-story/stage-draft-prompt.mp3",
-        "hash": "e7e7d965de2f5a4e",
-        "chars": 375,
-        "bytes": 524582
+        "hash": "dc2abe4378f3bd1b",
+        "chars": 414,
+        "bytes": 552586
       },
       "stage-draft-option-A": {
         "file": "/audio/k5/ai-written-story/stage-draft-option-A.mp3",
@@ -1565,9 +1565,9 @@
       },
       "stage-draft-option-A-reflection": {
         "file": "/audio/k5/ai-written-story/stage-draft-option-A-reflection.mp3",
-        "hash": "9f508022f20a1ce2",
-        "chars": 56,
-        "bytes": 72768
+        "hash": "b89a8f7c50aa795f",
+        "chars": 72,
+        "bytes": 81546
       },
       "stage-draft-option-B": {
         "file": "/audio/k5/ai-written-story/stage-draft-option-B.mp3",
@@ -1577,9 +1577,9 @@
       },
       "stage-draft-option-B-reflection": {
         "file": "/audio/k5/ai-written-story/stage-draft-option-B-reflection.mp3",
-        "hash": "7f4cb48a61e093bb",
-        "chars": 58,
-        "bytes": 53542
+        "hash": "f5068d011f603be0",
+        "chars": 69,
+        "bytes": 71515
       },
       "stage-draft-option-C": {
         "file": "/audio/k5/ai-written-story/stage-draft-option-C.mp3",
@@ -1595,9 +1595,9 @@
       },
       "stage-voice-prompt": {
         "file": "/audio/k5/ai-written-story/stage-voice-prompt.mp3",
-        "hash": "d9f2321fad19266c",
-        "chars": 324,
-        "bytes": 428452
+        "hash": "aff58a457ae80830",
+        "chars": 343,
+        "bytes": 422182
       },
       "stage-voice-option-A": {
         "file": "/audio/k5/ai-written-story/stage-voice-option-A.mp3",
@@ -1619,9 +1619,9 @@
       },
       "stage-voice-option-B-reflection": {
         "file": "/audio/k5/ai-written-story/stage-voice-option-B-reflection.mp3",
-        "hash": "bb4c46ac6a5d5628",
-        "chars": 82,
-        "bytes": 89487
+        "hash": "810409169155a196",
+        "chars": 81,
+        "bytes": 99518
       },
       "stage-voice-option-C": {
         "file": "/audio/k5/ai-written-story/stage-voice-option-C.mp3",
@@ -1631,15 +1631,15 @@
       },
       "stage-voice-option-C-reflection": {
         "file": "/audio/k5/ai-written-story/stage-voice-option-C-reflection.mp3",
-        "hash": "baf1895f2e24eb32",
-        "chars": 68,
-        "bytes": 76530
+        "hash": "72125c31f7ec1dad",
+        "chars": 92,
+        "bytes": 85725
       },
       "stage-magazine-prompt": {
         "file": "/audio/k5/ai-written-story/stage-magazine-prompt.mp3",
-        "hash": "3164f83ddc296792",
-        "chars": 303,
-        "bytes": 389999
+        "hash": "a094035ff5cc855d",
+        "chars": 315,
+        "bytes": 427198
       },
       "stage-magazine-option-A": {
         "file": "/audio/k5/ai-written-story/stage-magazine-option-A.mp3",
@@ -1685,23 +1685,23 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/ai-written-story/lab-bigidea.mp3",
-        "hash": "1e81f9145c3abdd9",
-        "chars": 96,
-        "bytes": 122506
+        "hash": "f1d0c249be473b2a",
+        "chars": 89,
+        "bytes": 104951
       },
       "lab-trythis": {
         "file": "/audio/k5/ai-written-story/lab-trythis.mp3",
-        "hash": "f6183e0ee54c0048",
-        "chars": 91,
-        "bytes": 125431
+        "hash": "e47248cbf5080ff4",
+        "chars": 101,
+        "bytes": 129193
       }
     },
     "gps-shortcut": {
       "stage-shortcut-prompt": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-prompt.mp3",
-        "hash": "cfd4228e44682439",
+        "hash": "0bc0cfdebd39f9ac",
         "chars": 325,
-        "bytes": 406718
+        "bytes": 454365
       },
       "stage-shortcut-option-A": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-A.mp3",
@@ -1711,9 +1711,9 @@
       },
       "stage-shortcut-option-A-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-A-reflection.mp3",
-        "hash": "39e2a6a266c2ba7a",
-        "chars": 52,
-        "bytes": 61066
+        "hash": "fda4dc92e576b573",
+        "chars": 70,
+        "bytes": 69007
       },
       "stage-shortcut-option-B": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-B.mp3",
@@ -1723,9 +1723,9 @@
       },
       "stage-shortcut-option-B-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-B-reflection.mp3",
-        "hash": "bf52630057b42b35",
-        "chars": 68,
-        "bytes": 91995
+        "hash": "5dc3722b9fab83e0",
+        "chars": 59,
+        "bytes": 54796
       },
       "stage-shortcut-option-C": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-C.mp3",
@@ -1735,15 +1735,15 @@
       },
       "stage-shortcut-option-C-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-shortcut-option-C-reflection.mp3",
-        "hash": "1b669ac1e0986bc8",
-        "chars": 61,
-        "bytes": 63991
+        "hash": "37e33905b1c11eb3",
+        "chars": 70,
+        "bytes": 106205
       },
       "stage-mud-prompt": {
         "file": "/audio/k5/gps-shortcut/stage-mud-prompt.mp3",
-        "hash": "244ca5c523d63acd",
-        "chars": 316,
-        "bytes": 445170
+        "hash": "67495cea4f6b2e86",
+        "chars": 310,
+        "bytes": 430959
       },
       "stage-mud-option-A": {
         "file": "/audio/k5/gps-shortcut/stage-mud-option-A.mp3",
@@ -1753,9 +1753,9 @@
       },
       "stage-mud-option-A-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-mud-option-A-reflection.mp3",
-        "hash": "6c0b932de3e81015",
-        "chars": 63,
-        "bytes": 59812
+        "hash": "899e4fc1ceab436c",
+        "chars": 65,
+        "bytes": 62319
       },
       "stage-mud-option-B": {
         "file": "/audio/k5/gps-shortcut/stage-mud-option-B.mp3",
@@ -1777,15 +1777,15 @@
       },
       "stage-mud-option-C-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-mud-option-C-reflection.mp3",
-        "hash": "0072ab83580ecf59",
-        "chars": 57,
-        "bytes": 76530
+        "hash": "11b922ddd575f34c",
+        "chars": 75,
+        "bytes": 90741
       },
       "stage-butterflies-prompt": {
         "file": "/audio/k5/gps-shortcut/stage-butterflies-prompt.mp3",
-        "hash": "b110e37a9438718c",
-        "chars": 349,
-        "bytes": 430959
+        "hash": "f9f462fbf22ccc2c",
+        "chars": 356,
+        "bytes": 441408
       },
       "stage-butterflies-option-A": {
         "file": "/audio/k5/gps-shortcut/stage-butterflies-option-A.mp3",
@@ -1807,9 +1807,9 @@
       },
       "stage-butterflies-option-B-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-butterflies-option-B-reflection.mp3",
-        "hash": "3c05974c1aa9f1b3",
-        "chars": 43,
-        "bytes": 61066
+        "hash": "f79f7511ead750b7",
+        "chars": 52,
+        "bytes": 56050
       },
       "stage-butterflies-option-C": {
         "file": "/audio/k5/gps-shortcut/stage-butterflies-option-C.mp3",
@@ -1819,9 +1819,9 @@
       },
       "stage-butterflies-option-C-reflection": {
         "file": "/audio/k5/gps-shortcut/stage-butterflies-option-C-reflection.mp3",
-        "hash": "50a0a217a1b43139",
-        "chars": 55,
-        "bytes": 52288
+        "hash": "a9c1a1e5b831a698",
+        "chars": 57,
+        "bytes": 65245
       },
       "lab-wonder": {
         "file": "/audio/k5/gps-shortcut/lab-wonder.mp3",
@@ -1831,9 +1831,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/gps-shortcut/lab-bigidea.mp3",
-        "hash": "e3037e2ff1a2e545",
-        "chars": 87,
-        "bytes": 93248
+        "hash": "a8252debbb760ebc",
+        "chars": 94,
+        "bytes": 117490
       },
       "lab-trythis": {
         "file": "/audio/k5/gps-shortcut/lab-trythis.mp3",
@@ -1845,9 +1845,9 @@
     "ai-photo-art": {
       "stage-poster-prompt": {
         "file": "/audio/k5/ai-photo-art/stage-poster-prompt.mp3",
-        "hash": "94a474a607bfdb8f",
-        "chars": 317,
-        "bytes": 459381
+        "hash": "9ca97b9dc37ac514",
+        "chars": 328,
+        "bytes": 473591
       },
       "stage-poster-option-A": {
         "file": "/audio/k5/ai-photo-art/stage-poster-option-A.mp3",
@@ -1857,8 +1857,8 @@
       },
       "stage-poster-option-A-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-poster-option-A-reflection.mp3",
-        "hash": "0bc645185a1a38e4",
-        "chars": 71,
+        "hash": "f4647f872073442f",
+        "chars": 76,
         "bytes": 86979
       },
       "stage-poster-option-B": {
@@ -1887,9 +1887,9 @@
       },
       "stage-contest-prompt": {
         "file": "/audio/k5/ai-photo-art/stage-contest-prompt.mp3",
-        "hash": "fbcc17fe9d09f2e8",
-        "chars": 310,
-        "bytes": 428452
+        "hash": "c0f41b0c436f7698",
+        "chars": 309,
+        "bytes": 433885
       },
       "stage-contest-option-A": {
         "file": "/audio/k5/ai-photo-art/stage-contest-option-A.mp3",
@@ -1899,9 +1899,9 @@
       },
       "stage-contest-option-A-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-contest-option-A-reflection.mp3",
-        "hash": "e4d0ba282141c7d1",
-        "chars": 58,
-        "bytes": 74022
+        "hash": "c6fc2144b323a39d",
+        "chars": 63,
+        "bytes": 59812
       },
       "stage-contest-option-B": {
         "file": "/audio/k5/ai-photo-art/stage-contest-option-B.mp3",
@@ -1911,9 +1911,9 @@
       },
       "stage-contest-option-B-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-contest-option-B-reflection.mp3",
-        "hash": "160b2443376b166f",
-        "chars": 49,
-        "bytes": 69007
+        "hash": "dbf7fce2e2527c95",
+        "chars": 57,
+        "bytes": 85725
       },
       "stage-contest-option-C": {
         "file": "/audio/k5/ai-photo-art/stage-contest-option-C.mp3",
@@ -1929,9 +1929,9 @@
       },
       "stage-rule-prompt": {
         "file": "/audio/k5/ai-photo-art/stage-rule-prompt.mp3",
-        "hash": "4a1251cf9f01ab45",
+        "hash": "36c63bb6e70f3edf",
         "chars": 317,
-        "bytes": 451439
+        "bytes": 438901
       },
       "stage-rule-option-A": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-A.mp3",
@@ -1941,9 +1941,9 @@
       },
       "stage-rule-option-A-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-A-reflection.mp3",
-        "hash": "d84fc901f15afc87",
-        "chars": 49,
-        "bytes": 72768
+        "hash": "302558b279c2abe4",
+        "chars": 65,
+        "bytes": 86979
       },
       "stage-rule-option-B": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-B.mp3",
@@ -1953,9 +1953,9 @@
       },
       "stage-rule-option-B-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-B-reflection.mp3",
-        "hash": "5e2613f2b806fd87",
-        "chars": 55,
-        "bytes": 57304
+        "hash": "c2a5a8efb482a075",
+        "chars": 52,
+        "bytes": 56050
       },
       "stage-rule-option-C": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-C.mp3",
@@ -1965,9 +1965,9 @@
       },
       "stage-rule-option-C-reflection": {
         "file": "/audio/k5/ai-photo-art/stage-rule-option-C-reflection.mp3",
-        "hash": "a3cc5dcebcad755e",
-        "chars": 67,
-        "bytes": 79038
+        "hash": "551e5a80f478a441",
+        "chars": 76,
+        "bytes": 81546
       },
       "lab-wonder": {
         "file": "/audio/k5/ai-photo-art/lab-wonder.mp3",
@@ -1977,9 +1977,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/ai-photo-art/lab-bigidea.mp3",
-        "hash": "47560f3e968be659",
-        "chars": 90,
-        "bytes": 102026
+        "hash": "e42807d1086fa054",
+        "chars": 96,
+        "bytes": 111221
       },
       "lab-trythis": {
         "file": "/audio/k5/ai-photo-art/lab-trythis.mp3",
@@ -1991,9 +1991,9 @@
     "adaptive-learning-fairness": {
       "stage-levels-prompt": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-levels-prompt.mp3",
-        "hash": "5b7212181dee24b6",
-        "chars": 310,
-        "bytes": 464396
+        "hash": "41140e77f61c84cc",
+        "chars": 321,
+        "bytes": 436393
       },
       "stage-levels-option-A": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-levels-option-A.mp3",
@@ -2027,15 +2027,15 @@
       },
       "stage-levels-option-C-reflection": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-levels-option-C-reflection.mp3",
-        "hash": "fa45783d04317f5a",
-        "chars": 74,
-        "bytes": 109967
+        "hash": "24ca6a6933dd8433",
+        "chars": 82,
+        "bytes": 80292
       },
       "stage-mistake-prompt": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-mistake-prompt.mp3",
-        "hash": "8221737513adc824",
+        "hash": "aae835afb3a2709d",
         "chars": 277,
-        "bytes": 365758
+        "bytes": 394179
       },
       "stage-mistake-option-A": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-mistake-option-A.mp3",
@@ -2057,9 +2057,9 @@
       },
       "stage-mistake-option-B-reflection": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-mistake-option-B-reflection.mp3",
-        "hash": "8abec94cfcb24967",
-        "chars": 51,
-        "bytes": 53542
+        "hash": "00cc957d4f72c684",
+        "chars": 48,
+        "bytes": 44765
       },
       "stage-mistake-option-C": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-mistake-option-C.mp3",
@@ -2075,9 +2075,9 @@
       },
       "stage-badges-prompt": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-prompt.mp3",
-        "hash": "337375baa38b7fed",
-        "chars": 293,
-        "bytes": 376207
+        "hash": "f19dcc729cb7b41a",
+        "chars": 292,
+        "bytes": 401702
       },
       "stage-badges-option-A": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-A.mp3",
@@ -2087,9 +2087,9 @@
       },
       "stage-badges-option-A-reflection": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-A-reflection.mp3",
-        "hash": "c604e6ca83e87d98",
-        "chars": 67,
-        "bytes": 69007
+        "hash": "fa04ed2a61e6fb19",
+        "chars": 84,
+        "bytes": 76530
       },
       "stage-badges-option-B": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-B.mp3",
@@ -2099,9 +2099,9 @@
       },
       "stage-badges-option-B-reflection": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-B-reflection.mp3",
-        "hash": "31c21a299f3e7008",
-        "chars": 63,
-        "bytes": 62319
+        "hash": "8166ccb7a906204f",
+        "chars": 78,
+        "bytes": 70261
       },
       "stage-badges-option-C": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-C.mp3",
@@ -2111,9 +2111,9 @@
       },
       "stage-badges-option-C-reflection": {
         "file": "/audio/k5/adaptive-learning-fairness/stage-badges-option-C-reflection.mp3",
-        "hash": "cb5a0dbb12a3b20c",
-        "chars": 48,
-        "bytes": 47273
+        "hash": "f762640738ba954e",
+        "chars": 54,
+        "bytes": 46019
       },
       "lab-wonder": {
         "file": "/audio/k5/adaptive-learning-fairness/lab-wonder.mp3",
@@ -2137,9 +2137,9 @@
     "conflicting-ai-answers": {
       "stage-volcano-prompt": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-prompt.mp3",
-        "hash": "960f6ba547d7ad89",
-        "chars": 530,
-        "bytes": 685915
+        "hash": "f0974acb11ab177c",
+        "chars": 525,
+        "bytes": 710156
       },
       "stage-volcano-option-A": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-A.mp3",
@@ -2149,9 +2149,9 @@
       },
       "stage-volcano-option-A-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-A-reflection.mp3",
-        "hash": "41587de32c235a59",
+        "hash": "15320966bed40be5",
         "chars": 83,
-        "bytes": 113728
+        "bytes": 114982
       },
       "stage-volcano-option-B": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-B.mp3",
@@ -2161,9 +2161,9 @@
       },
       "stage-volcano-option-B-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-B-reflection.mp3",
-        "hash": "758dc06ac052bace",
-        "chars": 82,
-        "bytes": 88233
+        "hash": "e15836e084a82d72",
+        "chars": 77,
+        "bytes": 81546
       },
       "stage-volcano-option-C": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-C.mp3",
@@ -2173,15 +2173,15 @@
       },
       "stage-volcano-option-C-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-volcano-option-C-reflection.mp3",
-        "hash": "253bb288c50470ab",
+        "hash": "faebef75509cc09b",
         "chars": 64,
-        "bytes": 62319
+        "bytes": 56050
       },
       "stage-source-prompt": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-prompt.mp3",
-        "hash": "9defd688db964a75",
+        "hash": "922c251b6baf7708",
         "chars": 410,
-        "bytes": 541301
+        "bytes": 556765
       },
       "stage-source-option-A": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-A.mp3",
@@ -2191,9 +2191,9 @@
       },
       "stage-source-option-A-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-A-reflection.mp3",
-        "hash": "de9bfdcf7532b3e6",
-        "chars": 78,
-        "bytes": 75276
+        "hash": "50ed18b20e0e0966",
+        "chars": 86,
+        "bytes": 82799
       },
       "stage-source-option-B": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-B.mp3",
@@ -2203,9 +2203,9 @@
       },
       "stage-source-option-B-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-B-reflection.mp3",
-        "hash": "d2ef949ef0c2cb82",
+        "hash": "958ebcae6e979421",
         "chars": 68,
-        "bytes": 58558
+        "bytes": 84471
       },
       "stage-source-option-C": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-C.mp3",
@@ -2215,15 +2215,15 @@
       },
       "stage-source-option-C-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-source-option-C-reflection.mp3",
-        "hash": "e007fe0932dfde91",
+        "hash": "30e860436552e8e4",
         "chars": 73,
-        "bytes": 72768
+        "bytes": 77784
       },
       "stage-poster-prompt": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-prompt.mp3",
-        "hash": "d0a6fac5481b699f",
-        "chars": 431,
-        "bytes": 568050
+        "hash": "3320637522377dd5",
+        "chars": 426,
+        "bytes": 528344
       },
       "stage-poster-option-A": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-A.mp3",
@@ -2233,9 +2233,9 @@
       },
       "stage-poster-option-A-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-A-reflection.mp3",
-        "hash": "8aa15b0f728ef07a",
+        "hash": "112b6bed1dd783e1",
         "chars": 51,
-        "bytes": 54796
+        "bytes": 57304
       },
       "stage-poster-option-B": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-B.mp3",
@@ -2245,9 +2245,9 @@
       },
       "stage-poster-option-B-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-B-reflection.mp3",
-        "hash": "183014b9c79a4dce",
+        "hash": "eb96243902ce6779",
         "chars": 61,
-        "bytes": 69007
+        "bytes": 65245
       },
       "stage-poster-option-C": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-C.mp3",
@@ -2257,7 +2257,7 @@
       },
       "stage-poster-option-C-reflection": {
         "file": "/audio/k5/conflicting-ai-answers/stage-poster-option-C-reflection.mp3",
-        "hash": "586d6f1b288ff6d8",
+        "hash": "d8a2c9a93f51ce3a",
         "chars": 69,
         "bytes": 72768
       },
@@ -2269,9 +2269,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/conflicting-ai-answers/lab-bigidea.mp3",
-        "hash": "ad573500f2f3155d",
-        "chars": 90,
-        "bytes": 99518
+        "hash": "3107b4daa6fd38db",
+        "chars": 93,
+        "bytes": 119998
       },
       "lab-trythis": {
         "file": "/audio/k5/conflicting-ai-answers/lab-trythis.mp3",
@@ -2281,17 +2281,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/conflicting-ai-answers/lab-spottheslip.mp3",
-        "hash": "724ede6c522fdd1b",
-        "chars": 129,
-        "bytes": 148419
+        "hash": "659f0cdbed27d135",
+        "chars": 126,
+        "bytes": 166391
       }
     },
     "robot-rules-real-life": {
       "stage-hall-prompt": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-prompt.mp3",
-        "hash": "cdde35c391982a32",
+        "hash": "8f99386eec3ab8c9",
         "chars": 436,
-        "bytes": 584768
+        "bytes": 614026
       },
       "stage-hall-option-A": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-A.mp3",
@@ -2301,9 +2301,9 @@
       },
       "stage-hall-option-A-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-A-reflection.mp3",
-        "hash": "20b090a1311f111d",
-        "chars": 91,
-        "bytes": 97010
+        "hash": "5417a43404912287",
+        "chars": 88,
+        "bytes": 90741
       },
       "stage-hall-option-B": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-B.mp3",
@@ -2313,9 +2313,9 @@
       },
       "stage-hall-option-B-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-B-reflection.mp3",
-        "hash": "3550367640390d61",
+        "hash": "967ad970ccc55e9f",
         "chars": 55,
-        "bytes": 62319
+        "bytes": 66499
       },
       "stage-hall-option-C": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-C.mp3",
@@ -2325,15 +2325,15 @@
       },
       "stage-hall-option-C-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-hall-option-C-reflection.mp3",
-        "hash": "4d35f99381265446",
+        "hash": "777de36bc10c8601",
         "chars": 72,
-        "bytes": 80292
+        "bytes": 89487
       },
       "stage-pretend-prompt": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-prompt.mp3",
-        "hash": "c824da6f928ee76c",
-        "chars": 430,
-        "bytes": 546316
+        "hash": "5263b6456e28a732",
+        "chars": 436,
+        "bytes": 582261
       },
       "stage-pretend-option-A": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-option-A.mp3",
@@ -2343,7 +2343,7 @@
       },
       "stage-pretend-option-A-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-option-A-reflection.mp3",
-        "hash": "7e4326c51ab36e5c",
+        "hash": "633de567ead7c514",
         "chars": 58,
         "bytes": 58558
       },
@@ -2355,9 +2355,9 @@
       },
       "stage-pretend-option-B-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-option-B-reflection.mp3",
-        "hash": "bc10adfaf7ec0597",
-        "chars": 78,
-        "bytes": 82799
+        "hash": "eb7c099b3f52a9e7",
+        "chars": 88,
+        "bytes": 94502
       },
       "stage-pretend-option-C": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-option-C.mp3",
@@ -2367,14 +2367,14 @@
       },
       "stage-pretend-option-C-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-pretend-option-C-reflection.mp3",
-        "hash": "218a737eeb2f3504",
-        "chars": 77,
-        "bytes": 79038
+        "hash": "7beae262a6a50259",
+        "chars": 82,
+        "bytes": 80292
       },
       "stage-rewrite-prompt": {
         "file": "/audio/k5/robot-rules-real-life/stage-rewrite-prompt.mp3",
-        "hash": "6256e4026ce3ae5c",
-        "chars": 408,
+        "hash": "7590b3332abcccd2",
+        "chars": 392,
         "bytes": 538793
       },
       "stage-rewrite-option-A": {
@@ -2385,9 +2385,9 @@
       },
       "stage-rewrite-option-A-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-rewrite-option-A-reflection.mp3",
-        "hash": "dd1062d1710e651e",
+        "hash": "c4d6951d66ada6c1",
         "chars": 78,
-        "bytes": 82799
+        "bytes": 75276
       },
       "stage-rewrite-option-B": {
         "file": "/audio/k5/robot-rules-real-life/stage-rewrite-option-B.mp3",
@@ -2397,7 +2397,7 @@
       },
       "stage-rewrite-option-B-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-rewrite-option-B-reflection.mp3",
-        "hash": "ce25c86c5b40ca5d",
+        "hash": "7248a3fc1043b252",
         "chars": 67,
         "bytes": 66499
       },
@@ -2409,9 +2409,9 @@
       },
       "stage-rewrite-option-C-reflection": {
         "file": "/audio/k5/robot-rules-real-life/stage-rewrite-option-C-reflection.mp3",
-        "hash": "1e20faa88f12ffe9",
-        "chars": 77,
-        "bytes": 69007
+        "hash": "7a829fa06d083e38",
+        "chars": 84,
+        "bytes": 86979
       },
       "lab-wonder": {
         "file": "/audio/k5/robot-rules-real-life/lab-wonder.mp3",
@@ -2421,9 +2421,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/robot-rules-real-life/lab-bigidea.mp3",
-        "hash": "d97f91660e6ad4d6",
-        "chars": 62,
-        "bytes": 84471
+        "hash": "ace9eaa01ef61d69",
+        "chars": 58,
+        "bytes": 81546
       },
       "lab-trythis": {
         "file": "/audio/k5/robot-rules-real-life/lab-trythis.mp3",
@@ -2433,17 +2433,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/robot-rules-real-life/lab-spottheslip.mp3",
-        "hash": "3b69c357deddf37b",
+        "hash": "ab20b873fd548cb4",
         "chars": 109,
-        "bytes": 134208
+        "bytes": 123759
       }
     },
     "elementary-trolley": {
       "stage-shuttle-prompt": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-prompt.mp3",
-        "hash": "7043c38d57779b99",
-        "chars": 525,
-        "bytes": 690930
+        "hash": "ee37a0bf69973131",
+        "chars": 574,
+        "bytes": 738159
       },
       "stage-shuttle-option-A": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-A.mp3",
@@ -2453,9 +2453,9 @@
       },
       "stage-shuttle-option-A-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-A-reflection.mp3",
-        "hash": "0f89a48d2b027252",
+        "hash": "67ad8fd0aa4c419c",
         "chars": 60,
-        "bytes": 66499
+        "bytes": 65245
       },
       "stage-shuttle-option-B": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-B.mp3",
@@ -2465,9 +2465,9 @@
       },
       "stage-shuttle-option-B-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-B-reflection.mp3",
-        "hash": "fc13a6603971ad97",
-        "chars": 68,
-        "bytes": 94502
+        "hash": "4776099849b26120",
+        "chars": 74,
+        "bytes": 77784
       },
       "stage-shuttle-option-C": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-C.mp3",
@@ -2477,15 +2477,15 @@
       },
       "stage-shuttle-option-C-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-shuttle-option-C-reflection.mp3",
-        "hash": "9f35668263c6e56e",
-        "chars": 83,
-        "bytes": 104951
+        "hash": "f4aacd35799836a5",
+        "chars": 92,
+        "bytes": 109967
       },
       "stage-people-prompt": {
         "file": "/audio/k5/elementary-trolley/stage-people-prompt.mp3",
-        "hash": "e9213e25e135bb58",
-        "chars": 444,
-        "bytes": 579753
+        "hash": "9f294df4016d056c",
+        "chars": 440,
+        "bytes": 609010
       },
       "stage-people-option-A": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-A.mp3",
@@ -2495,9 +2495,9 @@
       },
       "stage-people-option-A-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-A-reflection.mp3",
-        "hash": "ddf62823677b0afc",
-        "chars": 62,
-        "bytes": 88233
+        "hash": "02bce7ffdfbaeec4",
+        "chars": 70,
+        "bytes": 95756
       },
       "stage-people-option-B": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-B.mp3",
@@ -2507,9 +2507,9 @@
       },
       "stage-people-option-B-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-B-reflection.mp3",
-        "hash": "ed3517613622803d",
+        "hash": "9458cbbf8a7a01f2",
         "chars": 80,
-        "bytes": 82799
+        "bytes": 85725
       },
       "stage-people-option-C": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-C.mp3",
@@ -2519,15 +2519,15 @@
       },
       "stage-people-option-C-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-people-option-C-reflection.mp3",
-        "hash": "b8bae29f6470c3fd",
-        "chars": 66,
-        "bytes": 71515
+        "hash": "c897739644e6f1cf",
+        "chars": 67,
+        "bytes": 94502
       },
       "stage-public-rule-prompt": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-prompt.mp3",
-        "hash": "8f9794eb45a4edd7",
-        "chars": 391,
-        "bytes": 506610
+        "hash": "cd541e4310b30d4f",
+        "chars": 371,
+        "bytes": 470666
       },
       "stage-public-rule-option-A": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-A.mp3",
@@ -2537,9 +2537,9 @@
       },
       "stage-public-rule-option-A-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-A-reflection.mp3",
-        "hash": "3320084ace6ed88d",
+        "hash": "355898c1f84514b2",
         "chars": 59,
-        "bytes": 86979
+        "bytes": 75276
       },
       "stage-public-rule-option-B": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-B.mp3",
@@ -2549,9 +2549,9 @@
       },
       "stage-public-rule-option-B-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-B-reflection.mp3",
-        "hash": "5d8f19a4b774c9b0",
+        "hash": "be03917ace2446a1",
         "chars": 56,
-        "bytes": 57304
+        "bytes": 53542
       },
       "stage-public-rule-option-C": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-C.mp3",
@@ -2561,21 +2561,21 @@
       },
       "stage-public-rule-option-C-reflection": {
         "file": "/audio/k5/elementary-trolley/stage-public-rule-option-C-reflection.mp3",
-        "hash": "a4bb32c4de177c6c",
-        "chars": 75,
-        "bytes": 85725
+        "hash": "891224dd6059a8be",
+        "chars": 95,
+        "bytes": 103279
       },
       "lab-wonder": {
         "file": "/audio/k5/elementary-trolley/lab-wonder.mp3",
-        "hash": "9afc1e3b4f140a98",
-        "chars": 102,
-        "bytes": 102026
+        "hash": "d61f763da1e5baa7",
+        "chars": 94,
+        "bytes": 112475
       },
       "lab-bigidea": {
         "file": "/audio/k5/elementary-trolley/lab-bigidea.mp3",
-        "hash": "c79ad21ccab3e6c7",
+        "hash": "001a1940b69dcad1",
         "chars": 127,
-        "bytes": 136716
+        "bytes": 123759
       },
       "lab-trythis": {
         "file": "/audio/k5/elementary-trolley/lab-trythis.mp3",
@@ -2585,17 +2585,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/elementary-trolley/lab-spottheslip.mp3",
-        "hash": "d26ca74ba2c7c138",
-        "chars": 98,
+        "hash": "6b8b717b3e152194",
+        "chars": 99,
         "bytes": 132955
       }
     },
     "ai-science-fair": {
       "stage-board-prompt": {
         "file": "/audio/k5/ai-science-fair/stage-board-prompt.mp3",
-        "hash": "dc6fb43b6f4053d6",
-        "chars": 500,
-        "bytes": 660419
+        "hash": "e05e61a1de397451",
+        "chars": 488,
+        "bytes": 716426
       },
       "stage-board-option-A": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-A.mp3",
@@ -2605,9 +2605,9 @@
       },
       "stage-board-option-A-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-A-reflection.mp3",
-        "hash": "9044da93e633e437",
-        "chars": 79,
-        "bytes": 84471
+        "hash": "43d2081c665ef911",
+        "chars": 86,
+        "bytes": 82799
       },
       "stage-board-option-B": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-B.mp3",
@@ -2617,9 +2617,9 @@
       },
       "stage-board-option-B-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-B-reflection.mp3",
-        "hash": "7a4f3bd388bece9a",
-        "chars": 70,
-        "bytes": 66499
+        "hash": "7fe958f38e0f2020",
+        "chars": 78,
+        "bytes": 62319
       },
       "stage-board-option-C": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-C.mp3",
@@ -2629,15 +2629,15 @@
       },
       "stage-board-option-C-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-board-option-C-reflection.mp3",
-        "hash": "98a67da4f48f8092",
-        "chars": 71,
-        "bytes": 91995
+        "hash": "9af13e82ee98458c",
+        "chars": 87,
+        "bytes": 103279
       },
       "stage-judge-prompt": {
         "file": "/audio/k5/ai-science-fair/stage-judge-prompt.mp3",
-        "hash": "7cc9992106b56a7a",
-        "chars": 442,
-        "bytes": 588530
+        "hash": "9cb4fab966a1b3e7",
+        "chars": 436,
+        "bytes": 648716
       },
       "stage-judge-option-A": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-A.mp3",
@@ -2647,9 +2647,9 @@
       },
       "stage-judge-option-A-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-A-reflection.mp3",
-        "hash": "9b1b87891e7d1eb6",
-        "chars": 54,
-        "bytes": 58558
+        "hash": "c7cd5634432328af",
+        "chars": 48,
+        "bytes": 52288
       },
       "stage-judge-option-B": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-B.mp3",
@@ -2659,9 +2659,9 @@
       },
       "stage-judge-option-B-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-B-reflection.mp3",
-        "hash": "9cdbaebb5f585511",
+        "hash": "088b65c4f0e51037",
         "chars": 74,
-        "bytes": 80292
+        "bytes": 77784
       },
       "stage-judge-option-C": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-C.mp3",
@@ -2671,15 +2671,15 @@
       },
       "stage-judge-option-C-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-judge-option-C-reflection.mp3",
-        "hash": "1951f11832cdbd76",
-        "chars": 63,
-        "bytes": 67753
+        "hash": "d8020640bdb090cc",
+        "chars": 75,
+        "bytes": 80292
       },
       "stage-revision-prompt": {
         "file": "/audio/k5/ai-science-fair/stage-revision-prompt.mp3",
-        "hash": "af200e06691bc5a4",
-        "chars": 446,
-        "bytes": 583515
+        "hash": "be6be05a668fcf89",
+        "chars": 482,
+        "bytes": 706395
       },
       "stage-revision-option-A": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-A.mp3",
@@ -2689,9 +2689,9 @@
       },
       "stage-revision-option-A-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-A-reflection.mp3",
-        "hash": "7e427af72e7693e4",
+        "hash": "cd1f24217c449fc5",
         "chars": 58,
-        "bytes": 62319
+        "bytes": 86979
       },
       "stage-revision-option-B": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-B.mp3",
@@ -2701,9 +2701,9 @@
       },
       "stage-revision-option-B-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-B-reflection.mp3",
-        "hash": "204030dff70a4354",
-        "chars": 68,
-        "bytes": 76530
+        "hash": "a9f754956b53b151",
+        "chars": 88,
+        "bytes": 93248
       },
       "stage-revision-option-C": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-C.mp3",
@@ -2713,9 +2713,9 @@
       },
       "stage-revision-option-C-reflection": {
         "file": "/audio/k5/ai-science-fair/stage-revision-option-C-reflection.mp3",
-        "hash": "55992172427ac26e",
+        "hash": "a48ce248f77c332e",
         "chars": 50,
-        "bytes": 54796
+        "bytes": 74022
       },
       "lab-wonder": {
         "file": "/audio/k5/ai-science-fair/lab-wonder.mp3",
@@ -2725,9 +2725,9 @@
       },
       "lab-bigidea": {
         "file": "/audio/k5/ai-science-fair/lab-bigidea.mp3",
-        "hash": "1003c605e48b7400",
-        "chars": 93,
-        "bytes": 97010
+        "hash": "407badef9277e398",
+        "chars": 89,
+        "bytes": 89487
       },
       "lab-trythis": {
         "file": "/audio/k5/ai-science-fair/lab-trythis.mp3",
@@ -2737,17 +2737,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/ai-science-fair/lab-spottheslip.mp3",
-        "hash": "6575426efc0b0610",
+        "hash": "a895ec2f47e994b2",
         "chars": 88,
-        "bytes": 103279
+        "bytes": 99518
       }
     },
     "online-friend-or-ai": {
       "stage-game-prompt": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-prompt.mp3",
-        "hash": "b6ed24e8dd415bbc",
+        "hash": "b572b5133d4abf05",
         "chars": 518,
-        "bytes": 647462
+        "bytes": 656239
       },
       "stage-game-option-A": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-A.mp3",
@@ -2757,9 +2757,9 @@
       },
       "stage-game-option-A-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-A-reflection.mp3",
-        "hash": "0ae35e22a465037f",
+        "hash": "82fc66fb04f6c52f",
         "chars": 70,
-        "bytes": 98264
+        "bytes": 89487
       },
       "stage-game-option-B": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-B.mp3",
@@ -2769,9 +2769,9 @@
       },
       "stage-game-option-B-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-B-reflection.mp3",
-        "hash": "ec5ea70e0d4172c6",
-        "chars": 83,
-        "bytes": 90741
+        "hash": "e5c1369879f5b97c",
+        "chars": 106,
+        "bytes": 116236
       },
       "stage-game-option-C": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-C.mp3",
@@ -2781,15 +2781,15 @@
       },
       "stage-game-option-C-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-game-option-C-reflection.mp3",
-        "hash": "0b2c613f53402c12",
-        "chars": 92,
-        "bytes": 113728
+        "hash": "ae40277188d6ac78",
+        "chars": 85,
+        "bytes": 104951
       },
       "stage-secret-prompt": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-prompt.mp3",
-        "hash": "902f45ab53d21f76",
-        "chars": 506,
-        "bytes": 652478
+        "hash": "088dc8cc402b4a76",
+        "chars": 507,
+        "bytes": 642447
       },
       "stage-secret-option-A": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-A.mp3",
@@ -2799,9 +2799,9 @@
       },
       "stage-secret-option-A-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-A-reflection.mp3",
-        "hash": "58a2a8424c6875f5",
+        "hash": "5babf5cb6e133ba9",
         "chars": 88,
-        "bytes": 111221
+        "bytes": 116236
       },
       "stage-secret-option-B": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-B.mp3",
@@ -2811,9 +2811,9 @@
       },
       "stage-secret-option-B-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-B-reflection.mp3",
-        "hash": "dc5722d8a514cd8c",
+        "hash": "badecc8d013e41b8",
         "chars": 59,
-        "bytes": 67753
+        "bytes": 59812
       },
       "stage-secret-option-C": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-C.mp3",
@@ -2823,15 +2823,15 @@
       },
       "stage-secret-option-C-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-secret-option-C-reflection.mp3",
-        "hash": "98206b022f1588d5",
+        "hash": "7951bdc4ae42aa6b",
         "chars": 39,
-        "bytes": 46019
+        "bytes": 53542
       },
       "stage-label-prompt": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-prompt.mp3",
-        "hash": "79db0571c792e658",
-        "chars": 454,
-        "bytes": 637431
+        "hash": "401db60bb9ff2192",
+        "chars": 458,
+        "bytes": 680899
       },
       "stage-label-option-A": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-A.mp3",
@@ -2841,9 +2841,9 @@
       },
       "stage-label-option-A-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-A-reflection.mp3",
-        "hash": "92bef02aa3ef4aca",
+        "hash": "7661d35637d85257",
         "chars": 75,
-        "bytes": 74022
+        "bytes": 69007
       },
       "stage-label-option-B": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-B.mp3",
@@ -2853,9 +2853,9 @@
       },
       "stage-label-option-B-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-B-reflection.mp3",
-        "hash": "1b67646b399ddba9",
+        "hash": "f2f7289b2adc240d",
         "chars": 73,
-        "bytes": 75276
+        "bytes": 80292
       },
       "stage-label-option-C": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-C.mp3",
@@ -2865,9 +2865,9 @@
       },
       "stage-label-option-C-reflection": {
         "file": "/audio/k5/online-friend-or-ai/stage-label-option-C-reflection.mp3",
-        "hash": "d6096b99d01d5a5b",
+        "hash": "3b0fae81daa55417",
         "chars": 76,
-        "bytes": 80292
+        "bytes": 82799
       },
       "lab-wonder": {
         "file": "/audio/k5/online-friend-or-ai/lab-wonder.mp3",
@@ -2889,17 +2889,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/online-friend-or-ai/lab-spottheslip.mp3",
-        "hash": "2672072e94e98c27",
+        "hash": "32d21cbda915d5c2",
         "chars": 151,
-        "bytes": 170153
+        "bytes": 178930
       }
     },
     "ai-homework-help": {
       "stage-stuck-prompt": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-prompt.mp3",
-        "hash": "bac2b0a0b5c0e5d3",
-        "chars": 471,
-        "bytes": 695946
+        "hash": "b9cf577f7a5e2494",
+        "chars": 469,
+        "bytes": 738159
       },
       "stage-stuck-option-A": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-A.mp3",
@@ -2909,9 +2909,9 @@
       },
       "stage-stuck-option-A-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-A-reflection.mp3",
-        "hash": "3298291d6c393fd8",
+        "hash": "e44aefbc29533053",
         "chars": 59,
-        "bytes": 67753
+        "bytes": 65245
       },
       "stage-stuck-option-B": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-B.mp3",
@@ -2921,9 +2921,9 @@
       },
       "stage-stuck-option-B-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-B-reflection.mp3",
-        "hash": "886ad56795509dfd",
+        "hash": "9af6999732783205",
         "chars": 65,
-        "bytes": 75276
+        "bytes": 65245
       },
       "stage-stuck-option-C": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-C.mp3",
@@ -2933,15 +2933,15 @@
       },
       "stage-stuck-option-C-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-stuck-option-C-reflection.mp3",
-        "hash": "b3a086e7b044afb1",
-        "chars": 78,
-        "bytes": 88233
+        "hash": "df4df2e4cd9879a6",
+        "chars": 74,
+        "bytes": 91995
       },
       "stage-quiz-prompt": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-prompt.mp3",
-        "hash": "4955da88cb2040e6",
+        "hash": "e590bab7a37467b9",
         "chars": 401,
-        "bytes": 547570
+        "bytes": 582261
       },
       "stage-quiz-option-A": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-A.mp3",
@@ -2951,9 +2951,9 @@
       },
       "stage-quiz-option-A-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-A-reflection.mp3",
-        "hash": "591ccbe7939018eb",
+        "hash": "9b4ae2de0b519d04",
         "chars": 48,
-        "bytes": 51035
+        "bytes": 85725
       },
       "stage-quiz-option-B": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-B.mp3",
@@ -2963,9 +2963,9 @@
       },
       "stage-quiz-option-B-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-B-reflection.mp3",
-        "hash": "c112deb7ecdd087c",
+        "hash": "7f8e30a5dd6e4f7e",
         "chars": 62,
-        "bytes": 71515
+        "bytes": 108713
       },
       "stage-quiz-option-C": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-C.mp3",
@@ -2975,15 +2975,15 @@
       },
       "stage-quiz-option-C-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-quiz-option-C-reflection.mp3",
-        "hash": "23c0c2cb1264b4cd",
-        "chars": 50,
-        "bytes": 58558
+        "hash": "b6d22ba968b282e5",
+        "chars": 70,
+        "bytes": 81546
       },
       "stage-note-prompt": {
         "file": "/audio/k5/ai-homework-help/stage-note-prompt.mp3",
-        "hash": "a530567c071a1c08",
-        "chars": 462,
-        "bytes": 611518
+        "hash": "b27d7a0c1268aa97",
+        "chars": 479,
+        "bytes": 621967
       },
       "stage-note-option-A": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-A.mp3",
@@ -2993,9 +2993,9 @@
       },
       "stage-note-option-A-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-A-reflection.mp3",
-        "hash": "7e86451b4cea422f",
+        "hash": "9b5e802e50949496",
         "chars": 58,
-        "bytes": 62319
+        "bytes": 61066
       },
       "stage-note-option-B": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-B.mp3",
@@ -3005,9 +3005,9 @@
       },
       "stage-note-option-B-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-B-reflection.mp3",
-        "hash": "1cd75b3c65def9b6",
+        "hash": "eb396689d7badbdb",
         "chars": 62,
-        "bytes": 51035
+        "bytes": 52288
       },
       "stage-note-option-C": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-C.mp3",
@@ -3017,9 +3017,9 @@
       },
       "stage-note-option-C-reflection": {
         "file": "/audio/k5/ai-homework-help/stage-note-option-C-reflection.mp3",
-        "hash": "0f445a58fe3a27b5",
+        "hash": "57b8bb96cfcbb3e4",
         "chars": 83,
-        "bytes": 76530
+        "bytes": 77784
       },
       "lab-wonder": {
         "file": "/audio/k5/ai-homework-help/lab-wonder.mp3",
@@ -3041,17 +3041,17 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/ai-homework-help/lab-spottheslip.mp3",
-        "hash": "dcee03d09055eb97",
+        "hash": "507534c01bf812d9",
         "chars": 98,
-        "bytes": 122506
+        "bytes": 116236
       }
     },
     "biased-classroom-robot": {
       "stage-pattern-prompt": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-prompt.mp3",
-        "hash": "4593ae7962c7421c",
+        "hash": "b3ec0497b945ba92",
         "chars": 485,
-        "bytes": 664181
+        "bytes": 652478
       },
       "stage-pattern-option-A": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-A.mp3",
@@ -3061,9 +3061,9 @@
       },
       "stage-pattern-option-A-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-A-reflection.mp3",
-        "hash": "5a1117e07f351e26",
+        "hash": "8dd126266aa39ce3",
         "chars": 47,
-        "bytes": 54796
+        "bytes": 52288
       },
       "stage-pattern-option-B": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-B.mp3",
@@ -3073,9 +3073,9 @@
       },
       "stage-pattern-option-B-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-B-reflection.mp3",
-        "hash": "3fbba824dc20cdbc",
+        "hash": "2e0e8330f34de690",
         "chars": 61,
-        "bytes": 72768
+        "bytes": 82799
       },
       "stage-pattern-option-C": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-C.mp3",
@@ -3085,15 +3085,15 @@
       },
       "stage-pattern-option-C-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-pattern-option-C-reflection.mp3",
-        "hash": "fd4a1773288fe4b0",
-        "chars": 69,
-        "bytes": 74022
+        "hash": "a5cebed3adf19965",
+        "chars": 67,
+        "bytes": 80292
       },
       "stage-names-prompt": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-prompt.mp3",
-        "hash": "5f35f2af14378689",
-        "chars": 461,
-        "bytes": 545062
+        "hash": "38a9095a552acb8e",
+        "chars": 466,
+        "bytes": 600233
       },
       "stage-names-option-A": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-A.mp3",
@@ -3103,9 +3103,9 @@
       },
       "stage-names-option-A-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-A-reflection.mp3",
-        "hash": "7a9c7d21246dcbe3",
+        "hash": "fef2ac4618d264f0",
         "chars": 71,
-        "bytes": 86979
+        "bytes": 82799
       },
       "stage-names-option-B": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-B.mp3",
@@ -3115,9 +3115,9 @@
       },
       "stage-names-option-B-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-B-reflection.mp3",
-        "hash": "2a54e029ec3a998b",
+        "hash": "d0a3262dce59341c",
         "chars": 87,
-        "bytes": 89487
+        "bytes": 82799
       },
       "stage-names-option-C": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-C.mp3",
@@ -3127,15 +3127,15 @@
       },
       "stage-names-option-C-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-names-option-C-reflection.mp3",
-        "hash": "6db036c960dee070",
-        "chars": 88,
-        "bytes": 93248
+        "hash": "c9ce7bee3421d92d",
+        "chars": 89,
+        "bytes": 90741
       },
       "stage-redesign-prompt": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-prompt.mp3",
-        "hash": "161e0843bf555655",
-        "chars": 514,
-        "bytes": 667942
+        "hash": "55a2ac6f1610d280",
+        "chars": 534,
+        "bytes": 707648
       },
       "stage-redesign-option-A": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-A.mp3",
@@ -3145,9 +3145,9 @@
       },
       "stage-redesign-option-A-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-A-reflection.mp3",
-        "hash": "a9e8ee7002e48b1e",
+        "hash": "7a41911f05780dcf",
         "chars": 56,
-        "bytes": 61066
+        "bytes": 93248
       },
       "stage-redesign-option-B": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-B.mp3",
@@ -3157,9 +3157,9 @@
       },
       "stage-redesign-option-B-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-B-reflection.mp3",
-        "hash": "ad64b145f16f54c6",
-        "chars": 62,
-        "bytes": 62319
+        "hash": "433e0b5ce3a3479d",
+        "chars": 76,
+        "bytes": 75276
       },
       "stage-redesign-option-C": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-C.mp3",
@@ -3169,9 +3169,9 @@
       },
       "stage-redesign-option-C-reflection": {
         "file": "/audio/k5/biased-classroom-robot/stage-redesign-option-C-reflection.mp3",
-        "hash": "68432b4205536224",
+        "hash": "ec6149ce3ef1eabe",
         "chars": 59,
-        "bytes": 81546
+        "bytes": 74022
       },
       "lab-wonder": {
         "file": "/audio/k5/biased-classroom-robot/lab-wonder.mp3",
@@ -3193,9 +3193,9 @@
       },
       "lab-spottheslip": {
         "file": "/audio/k5/biased-classroom-robot/lab-spottheslip.mp3",
-        "hash": "d98c1c9f142eba85",
-        "chars": 148,
-        "bytes": 188125
+        "hash": "1a7bef89741d7583",
+        "chars": 150,
+        "bytes": 198156
       }
     }
   }

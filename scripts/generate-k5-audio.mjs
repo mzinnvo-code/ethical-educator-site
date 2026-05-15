@@ -42,6 +42,56 @@ const GRADE_LEVEL = {
   "online-friend-or-ai": "5", "ai-homework-help": "5", "biased-classroom-robot": "5", "ai-grading-mistake": "5",
 };
 
+// Per-grade narrative pacing tag for stage-prompt narration. Younger grades
+// get unhurried, storybook delivery; upper grades get conversational
+// engagement that respects their attention. Used by the stage-prompt builder
+// for the storySections wrapper.
+const GRADE_PACING = {
+  k:   "[unhurried, like a bedtime story]",
+  "1": "[gentle, with space to think]",
+  "2": "[warm storytelling, unhurried]",
+  "3": "[engaged storytelling]",
+  "4": "[thoughtful, conversational]",
+  "5": "[reflective, peer-to-peer]",
+};
+
+// When a scenario contains quoted dialogue, this controls the voice that
+// wraps the quoted segment. Default = a clear "reading aloud" voice for
+// labels, rules, and unattributed quotes. Scenarios listed here have a
+// dominant character speaker; richer per-quote attribution would require
+// metadata in the source data and is deferred.
+const SCENARIO_SPEAKER_VOICE = {
+  // K — talking toys
+  "magic-toy":                 "[small, soft toy voice]",
+  "rude-toy":                  "[small, soft toy voice]",
+  // K-G2 — child peers
+  "messy-robot":               "[child voice, mischievous]",
+  "honesty-protection":        "[child voice, whispered, anxious]",
+  "ai-art-help":               "[child voice, curious]",
+  "same-toy-or-not":           "[child voice, friendly]",
+  // G2 — AI assistant friend (multiple speakers; AI is dominant)
+  "always-agreeable-ai-friend": "[smooth AI assistant voice]",
+  // G4-5 — robots that follow or report rules
+  "robot-rules-real-life":     "[neutral, mechanical robot voice]",
+  "biased-classroom-robot":    "[neutral, mechanical robot voice]",
+  // G5 — AI companion in a game
+  "online-friend-or-ai":       "[friendly AI companion voice]",
+  // G5 — student's own essay being read back
+  "ai-grading-mistake":        "[student voice, slightly anxious]",
+};
+const DEFAULT_SPEAKER_VOICE = "[clearly, like a quoted line]";
+
+// Per-grade narrator tag wrapping the question itself ("What do you think?").
+// Same warmth across grades, but the upper grades sound less wide-eyed.
+const NARRATOR_VOICE_BY_GRADE = {
+  k:   "[curious, like inviting a friend]",
+  "1": "[curious, like inviting a friend]",
+  "2": "[curious, like inviting a friend]",
+  "3": "[curious, inviting]",
+  "4": "[engaged, inviting reflection]",
+  "5": "[engaged, inviting reflection]",
+};
+
 // ──────────────── Config ────────────────
 const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || "cgSgspJ2msm6clMCkdW9"; // Jessica — Playful, Bright, Warm
 // eleven_v3 supports inline audio tags ([softly], [warm storytelling], etc.) so
@@ -90,29 +140,55 @@ function splitByDialogue(text) {
   return segments;
 }
 
-function tagPrompt(prompt) {
+function tagPrompt(prompt, scenarioId, grade) {
   const segs = splitByDialogue(prompt);
   if (segs.length === 0) return "";
+  const narratorTag = NARRATOR_VOICE_BY_GRADE[grade] || "[curious, like inviting a friend]";
   if (segs.length === 1 && segs[0].kind === "narrative") {
-    return `[curious, like inviting a friend] ${segs[0].text}`;
+    return `${narratorTag} ${segs[0].text}`;
   }
+  const speakerTag = SCENARIO_SPEAKER_VOICE[scenarioId] || DEFAULT_SPEAKER_VOICE;
   return segs
     .map(s => s.kind === "dialogue"
-      ? `[small, soft toy voice] "${s.text}"`
-      : `[curious, like inviting a friend] ${s.text}`)
+      ? `${speakerTag} "${s.text}"`
+      : `${narratorTag} ${s.text}`)
     .join(" ");
 }
 
+// Build the narration string from structured sections, inserting a short
+// pause between a section's label ("The situation.") and its body, and a
+// longer breath between consecutive sections so the listener can absorb
+// each beat. Skips the label entirely when missing.
+function sectionsToNarrationText(sectionsArr) {
+  if (!Array.isArray(sectionsArr) || sectionsArr.length === 0) return "";
+  return sectionsArr
+    .filter(s => s?.text)
+    .map(s => s.label
+      ? `${s.label}. [short pause] ${s.text}`
+      : s.text)
+    .join(" [breath] ");
+}
+
 const TONE_TEXT = {
-  "stage-prompt": ({ title, sections, prompt }) => {
+  "stage-prompt": ({ title, sectionsArr, prompt }, grade, scenarioId) => {
     const parts = [];
     if (title) parts.push(`[softly, like a story title] ${title}.`);
-    if (sections) parts.push(`[warm storytelling, unhurried] ${sections}`);
-    if (prompt) parts.push(tagPrompt(prompt));
+    const sectionText = sectionsToNarrationText(sectionsArr);
+    if (sectionText) {
+      const pacing = GRADE_PACING[grade] || "[warm storytelling, unhurried]";
+      parts.push(`${pacing} ${sectionText}`);
+    }
+    if (prompt) parts.push(tagPrompt(prompt, scenarioId, grade));
     return parts.filter(Boolean).join(" ");
   },
   "option": ({ label, text }) => `[clear, friendly] Choice ${label}. [warmly] ${text}`,
-  "reflection": ({ text }) => `[thoughtful, warm] ${text}`,
+  "reflection": ({ text }, grade) => {
+    // G4-5 reflections sound peer-to-peer rather than warm-storytime.
+    const tag = (grade === "4" || grade === "5")
+      ? "[reflective, peer-to-peer]"
+      : "[thoughtful, warm]";
+    return `${tag} ${text}`;
+  },
   "lab-wonder": ({ text }) => `[wondering aloud, gently] ${text}`,
   "lab-bigidea": ({ text }) => `[wise, gentle, like sharing a small secret] ${text}`,
   "lab-trythis": ({ text }) => `[playful, inviting] ${text}`,
@@ -254,8 +330,10 @@ function* enumerateChunks(scenarios) {
       if (!stage.prompt && !stage.promptShort && !stage.options) continue;
 
       // Stage prompt: keep title / sections / prompt as separate pieces so we
-      // can apply different tone tags to each. Falls back to the joined plain
-      // text for the cache hash and the runtime Web Speech fallback.
+      // can apply different tone tags to each. We pass the structured sections
+      // array (not pre-joined) so the tone builder can insert pause + breath
+      // beats between label and body. plainText still uses the flat
+      // sectionsToSpeech for the cache hash and the Web Speech fallback.
       const sections = resolveStaticStorySections(stage);
       const prompt = resolveStaticPrompt({ stage, experiment, useShortKidPrompt });
       if (sections !== null && prompt !== null) {
@@ -266,7 +344,7 @@ function* enumerateChunks(scenarios) {
             scenarioId,
             slot: `stage-${stage.id}-prompt`,
             type: "stage-prompt",
-            parts: { title: stage.title || "", sections: sectionsText, prompt },
+            parts: { title: stage.title || "", sectionsArr: sections, prompt },
             plainText,
           };
         }
@@ -305,7 +383,8 @@ function* enumerateChunks(scenarios) {
 function buildToneText(chunk) {
   const builder = TONE_TEXT[chunk.type];
   if (!builder) throw new Error(`No tone builder for type "${chunk.type}"`);
-  return stripEmphasis(builder(chunk.parts));
+  const grade = GRADE_LEVEL[chunk.scenarioId];
+  return stripEmphasis(builder(chunk.parts, grade, chunk.scenarioId));
 }
 
 // ──────────────── Main ────────────────
