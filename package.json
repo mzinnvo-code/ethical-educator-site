@@ -8,7 +8,8 @@
     "build": "vite build",
     "prerender": "react-snap",
     "preview": "vite preview",
-    "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs"
+    "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
+    "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

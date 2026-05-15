@@ -16,13 +16,19 @@ const SPEAKER_PALETTE = {
   narrator: { color: C.textMuted, label: "Narrator", glyph: "·" },
 };
 
-export function SceneSpeaker({ id = "narrator", line, className }) {
+export function SceneSpeaker({ id = "narrator", line, className, audioKey }) {
   const persona = SPEAKER_PALETTE[id] || SPEAKER_PALETTE.narrator;
   const isNarrator = id === "narrator";
+  // For narrator lines, only render the listen button when audioKey is supplied
+  // — otherwise the italic descriptive text reads cleaner without UI chrome.
+  // Non-narrator lines always get a button (falls back to Web Speech if no MP3).
+  const showButton = !isNarrator || Boolean(audioKey);
   return (
     <div className={className} style={{
       display: "grid",
-      gridTemplateColumns: isNarrator ? "1fr" : "auto 1fr auto",
+      gridTemplateColumns: isNarrator
+        ? (showButton ? "1fr auto" : "1fr")
+        : "auto 1fr auto",
       gap: 12,
       alignItems: "start",
       marginBottom: 12,
@@ -55,16 +61,19 @@ export function SceneSpeaker({ id = "narrator", line, className }) {
           fontStyle: isNarrator ? "italic" : "normal",
         }}>{line}</p>
       </div>
-      {!isNarrator && (
-        <ReadAloudButton text={line} variant="icon" label={`Hear ${persona.label}`} />
+      {showButton && (
+        <ReadAloudButton text={line} audioKey={audioKey} variant="icon" label={`Hear ${persona.label}`} />
       )}
     </div>
   );
 }
 
-export function SceneAction({ children, onClick, color = C.teal }) {
+export function SceneAction({ children, onClick, color = C.teal, audioKey, audioText }) {
   const [h, setH] = useState(false);
-  return (
+  // The audio button is rendered as a sibling (not a child) of the choice
+  // button to keep clicks separate — tapping the speaker plays the line,
+  // tapping the body advances the scene. Buttons-in-buttons aren't valid HTML.
+  const button = (
     <button
       onClick={onClick}
       onMouseEnter={() => setH(true)}
@@ -93,6 +102,15 @@ export function SceneAction({ children, onClick, color = C.teal }) {
       }}>You say</span>
       {children}
     </button>
+  );
+  if (!audioKey) return button;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 8, alignItems: "start" }}>
+      {button}
+      <div style={{ paddingTop: 6 }}>
+        <ReadAloudButton text={audioText} audioKey={audioKey} variant="icon" label="Hear this choice" />
+      </div>
+    </div>
   );
 }
 
