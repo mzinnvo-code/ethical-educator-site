@@ -3197,6 +3197,288 @@
         "chars": 150,
         "bytes": 198156
       }
+    },
+    "explaining-red-k-2": {
+      "intro": {
+        "file": "/audio/k5/explaining-red-k-2/intro.mp3",
+        "hash": "d6f49e4069a9f978",
+        "chars": 150,
+        "bytes": 175168,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat1-teacher-1": {
+        "file": "/audio/k5/explaining-red-k-2/beat1-teacher-1.mp3",
+        "hash": "85ee6ceca84f5f35",
+        "chars": 178,
+        "bytes": 189379,
+        "speaker": "teacher",
+        "voiceId": "EXAVITQu4vr4xnSDxMaL"
+      },
+      "beat1-ada": {
+        "file": "/audio/k5/explaining-red-k-2/beat1-ada.mp3",
+        "hash": "f94e03e46c9d6b42",
+        "chars": 104,
+        "bytes": 135462,
+        "speaker": "ada",
+        "voiceId": "XB0fDUnXU5powFXDhCwa"
+      },
+      "beat2-noor-stop-sign": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-noor-stop-sign.mp3",
+        "hash": "b98fd44229649c01",
+        "chars": 90,
+        "bytes": 118744,
+        "speaker": "noor",
+        "voiceId": "pFZP5JQG7iQjIQuC4Bku"
+      },
+      "beat1-narrator": {
+        "file": "/audio/k5/explaining-red-k-2/beat1-narrator.mp3",
+        "hash": "0bec783902284a9f",
+        "chars": 105,
+        "bytes": 134208,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat1-teacher-2": {
+        "file": "/audio/k5/explaining-red-k-2/beat1-teacher-2.mp3",
+        "hash": "e25882935b9b8e4b",
+        "chars": 56,
+        "bytes": 74022,
+        "speaker": "teacher",
+        "voiceId": "EXAVITQu4vr4xnSDxMaL"
+      },
+      "beat1-question": {
+        "file": "/audio/k5/explaining-red-k-2/beat1-question.mp3",
+        "hash": "2d607dc115dc1ad4",
+        "chars": 22,
+        "bytes": 25539,
+        "speaker": "question",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "firstTry-stop-sign": {
+        "file": "/audio/k5/explaining-red-k-2/firstTry-stop-sign.mp3",
+        "hash": "f8ef739b64f9b9c3",
+        "chars": 32,
+        "bytes": 40586,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "firstTry-warm-fire": {
+        "file": "/audio/k5/explaining-red-k-2/firstTry-warm-fire.mp3",
+        "hash": "2320f6df3d33b8d5",
+        "chars": 43,
+        "bytes": 65245,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "firstTry-loud-bell": {
+        "file": "/audio/k5/explaining-red-k-2/firstTry-loud-bell.mp3",
+        "hash": "e970d15daf71d4b6",
+        "chars": 36,
+        "bytes": 57304,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "firstTry-touch-sweater": {
+        "file": "/audio/k5/explaining-red-k-2/firstTry-touch-sweater.mp3",
+        "hash": "44fe2165eeb41a31",
+        "chars": 49,
+        "bytes": 53542,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat2-ada-stop-sign": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-ada-stop-sign.mp3",
+        "hash": "f42e287bf5b74c29",
+        "chars": 119,
+        "bytes": 190633,
+        "speaker": "ada",
+        "voiceId": "XB0fDUnXU5powFXDhCwa"
+      },
+      "beat2-ada-warm-fire": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-ada-warm-fire.mp3",
+        "hash": "b009cefe27ccd818",
+        "chars": 76,
+        "bytes": 121252,
+        "speaker": "ada",
+        "voiceId": "XB0fDUnXU5powFXDhCwa"
+      },
+      "beat2-noor-warm-fire": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-noor-warm-fire.mp3",
+        "hash": "e4cf6bfac43db849",
+        "chars": 104,
+        "bytes": 166391,
+        "speaker": "noor",
+        "voiceId": "pFZP5JQG7iQjIQuC4Bku"
+      },
+      "beat2-ada-loud-bell": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-ada-loud-bell.mp3",
+        "hash": "479925bcd3fd47b6",
+        "chars": 105,
+        "bytes": 145911,
+        "speaker": "ada",
+        "voiceId": "XB0fDUnXU5powFXDhCwa"
+      },
+      "beat2-noor-loud-bell": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-noor-loud-bell.mp3",
+        "hash": "09cc51ba3e0280c7",
+        "chars": 95,
+        "bytes": 131701,
+        "speaker": "noor",
+        "voiceId": "pFZP5JQG7iQjIQuC4Bku"
+      },
+      "beat2-ada-touch-sweater": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-ada-touch-sweater.mp3",
+        "hash": "1dd2e487d5d86850",
+        "chars": 62,
+        "bytes": 84471,
+        "speaker": "ada",
+        "voiceId": "XB0fDUnXU5powFXDhCwa"
+      },
+      "beat2-noor-touch-sweater": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-noor-touch-sweater.mp3",
+        "hash": "c79e58a793823d02",
+        "chars": 124,
+        "bytes": 137970,
+        "speaker": "noor",
+        "voiceId": "pFZP5JQG7iQjIQuC4Bku"
+      },
+      "beat2-teacher": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-teacher.mp3",
+        "hash": "98c989555b6c87a1",
+        "chars": 114,
+        "bytes": 142986,
+        "speaker": "teacher",
+        "voiceId": "EXAVITQu4vr4xnSDxMaL"
+      },
+      "beat2-question": {
+        "file": "/audio/k5/explaining-red-k-2/beat2-question.mp3",
+        "hash": "87373a1918f81810",
+        "chars": 47,
+        "bytes": 56050,
+        "speaker": "question",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "together-words": {
+        "file": "/audio/k5/explaining-red-k-2/together-words.mp3",
+        "hash": "a7313f692b9a4615",
+        "chars": 57,
+        "bytes": 76530,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "together-sounds": {
+        "file": "/audio/k5/explaining-red-k-2/together-sounds.mp3",
+        "hash": "558a7f234e691355",
+        "chars": 53,
+        "bytes": 63991,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "together-stories": {
+        "file": "/audio/k5/explaining-red-k-2/together-stories.mp3",
+        "hash": "a9df7578185adc9d",
+        "chars": 74,
+        "bytes": 93248,
+        "speaker": "player",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-firstTry-stop-sign": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-firstTry-stop-sign.mp3",
+        "hash": "89747257dc493401",
+        "chars": 95,
+        "bytes": 104951,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-firstTry-warm-fire": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-firstTry-warm-fire.mp3",
+        "hash": "31e3c5aadcb965cc",
+        "chars": 106,
+        "bytes": 139224,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-firstTry-loud-bell": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-firstTry-loud-bell.mp3",
+        "hash": "5a5dc0d15aa17900",
+        "chars": 125,
+        "bytes": 172661,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-firstTry-touch-sweater": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-firstTry-touch-sweater.mp3",
+        "hash": "b5034b5894aba2c4",
+        "chars": 121,
+        "bytes": 152181,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-together-words": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-together-words.mp3",
+        "hash": "6528aacd9aaf0de6",
+        "chars": 261,
+        "bytes": 376207,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-together-sounds": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-together-sounds.mp3",
+        "hash": "a22b67b15ecd5d7c",
+        "chars": 216,
+        "bytes": 287599,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-together-stories": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-together-stories.mp3",
+        "hash": "047f304e738b5347",
+        "chars": 178,
+        "bytes": 246639,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-closing-fixed": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-closing-fixed.mp3",
+        "hash": "7a7babeb5c74c6a8",
+        "chars": 154,
+        "bytes": 198156,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "beat3-bigidea": {
+        "file": "/audio/k5/explaining-red-k-2/beat3-bigidea.mp3",
+        "hash": "23db44fc258693e8",
+        "chars": 299,
+        "bytes": 404210,
+        "speaker": "narrator",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "discussion-1": {
+        "file": "/audio/k5/explaining-red-k-2/discussion-1.mp3",
+        "hash": "ba1fc7b0cdb1619a",
+        "chars": 149,
+        "bytes": 152181,
+        "speaker": "question",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "discussion-2": {
+        "file": "/audio/k5/explaining-red-k-2/discussion-2.mp3",
+        "hash": "46e33f81f9736418",
+        "chars": 106,
+        "bytes": 108713,
+        "speaker": "question",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      },
+      "discussion-3": {
+        "file": "/audio/k5/explaining-red-k-2/discussion-3.mp3",
+        "hash": "a29f167dda4899ca",
+        "chars": 84,
+        "bytes": 85725,
+        "speaker": "question",
+        "voiceId": "cgSgspJ2msm6clMCkdW9"
+      }
     }
   }
 }
