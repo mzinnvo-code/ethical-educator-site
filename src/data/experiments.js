@@ -132,7 +132,7 @@ export const EXPERIMENTS = [
   {
     id: "invisible-ring",
     title: "The Invisible Ring",
-    tagline: "If no one could see you, what would you do?",
+    tagline: "If no one could see you, what would your choices reveal?",
     gradeBands: ["k-5"],
     gradeLevels: ["1"],
     topics: ["ethics", "moral-psychology", "honesty"],
@@ -169,7 +169,7 @@ export const EXPERIMENTS = [
   {
     id: "robot-friend-turn",
     title: "Sharing a Robot Friend",
-    tagline: "You both want to play. There's only one robot.",
+    tagline: "Two friends want the same robot. What would fair sharing look like?",
     gradeBands: ["k-5"],
     gradeLevels: ["k"],
     topics: ["fairness", "rules", "friendship"],
@@ -204,7 +204,7 @@ export const EXPERIMENTS = [
   {
     id: "honesty-protection",
     title: "Honest or Loyal?",
-    tagline: "Your friend asks you not to tell. The teacher asks what happened.",
+    tagline: "A friend asks for secrecy. The truth asks for courage.",
     gradeBands: ["k-5"],
     gradeLevels: ["1"],
     topics: ["honesty", "ethics", "friendship"],
@@ -239,7 +239,7 @@ export const EXPERIMENTS = [
   {
     id: "robot-pet-goodbye",
     title: "Goodbye, Robot Pet",
-    tagline: "The class robot dog stopped working. How do you feel?",
+    tagline: "The class robot pet stops working. What exactly are students missing?",
     gradeBands: ["k-5"],
     gradeLevels: ["k"],
     topics: ["mind", "identity", "ai-ethics"],
@@ -273,7 +273,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-art-help",
     title: "Did the Computer Help?",
-    tagline: "An AI helped your art look better. The teacher loves it.",
+    tagline: "An AI polished the drawing. What should the artist say?",
     gradeBands: ["k-5"],
     gradeLevels: ["2"],
     topics: ["honesty", "creativity", "ai-ethics"],
@@ -318,7 +318,7 @@ export const EXPERIMENTS = [
   {
     id: "messy-robot",
     title: "Make a Mess for the Robot?",
-    tagline: "A cleaning robot helps tidy up. Your friend wants to test it.",
+    tagline: "A cleaning robot can help. Does that make extra mess okay?",
     gradeBands: ["k-5"],
     gradeLevels: ["k"],
     topics: ["ethics", "rules", "fairness"],
@@ -352,7 +352,7 @@ export const EXPERIMENTS = [
   {
     id: "rules-vs-helping",
     title: "Quiet Rule vs. Kind Rule",
-    tagline: "Quiet time. Your friend is about to cry. Do you stay silent?",
+    tagline: "A rule keeps the room calm. A friend needs help right now.",
     gradeBands: ["k-5"],
     gradeLevels: ["2"],
     topics: ["ethics", "rules", "moral-psychology"],
@@ -398,7 +398,7 @@ export const EXPERIMENTS = [
   {
     id: "rude-toy",
     title: "The Rude Toy",
-    tagline: "Your toy says mean words. What do you do?",
+    tagline: "A toy says something unkind. Do words matter when a machine says them?",
     gradeBands: ["k-5"],
     gradeLevels: ["1"],
     topics: ["ai-ethics", "honesty"],
@@ -432,7 +432,7 @@ export const EXPERIMENTS = [
   {
     id: "winning-game",
     title: "Did I Really Win?",
-    tagline: "The game lets you win. Does that count?",
+    tagline: "The game lets you win. Does victory still feel earned?",
     gradeBands: ["k-5"],
     gradeLevels: ["1"],
     topics: ["authenticity", "ai-ethics", "education"],
@@ -467,7 +467,7 @@ export const EXPERIMENTS = [
   {
     id: "always-agreeable-ai-friend",
     title: "The Always-Agreeable AI Friend",
-    tagline: "A chatbot always says yes. Is that what a good friend does?",
+    tagline: "A helpful AI always says yes. Is that friendship or flattery?",
     gradeBands: ["k-5"],
     gradeLevels: ["2"],
     topics: ["friendship", "mind", "ai-ethics"],
@@ -513,7 +513,7 @@ export const EXPERIMENTS = [
   {
     id: "same-toy-or-not",
     title: "The Same Toy or Not?",
-    tagline: "A favorite toy is fixed piece by piece. When does it become new?",
+    tagline: "One toy changes piece by piece. When does it become something new?",
     gradeBands: ["k-5"],
     gradeLevels: ["2"],
     topics: ["identity", "mind", "logic"],
@@ -559,7 +559,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-written-story",
     title: "AI-Written Story",
-    tagline: "Your idea becomes a polished story. Whose writing is it?",
+    tagline: "The AI wrote the polished draft. Whose story is it now?",
     gradeBands: ["k-5"],
     gradeLevels: ["3"],
     topics: ["creativity", "honesty", "education"],
@@ -605,7 +605,7 @@ export const EXPERIMENTS = [
   {
     id: "gps-shortcut",
     title: "Trusting the GPS Shortcut",
-    tagline: "The map says faster. The teacher chose a safer path.",
+    tagline: "The GPS has a faster route. The teacher has a reason to hesitate.",
     gradeBands: ["k-5"],
     gradeLevels: ["3"],
     topics: ["knowledge", "rules", "ai-ethics"],
@@ -651,7 +651,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-photo-art",
     title: "Using Your Photo in AI Art",
-    tagline: "A friend's face becomes a superhero poster without permission.",
+    tagline: "A friend's face becomes AI art. Creativity meets consent.",
     gradeBands: ["k-5"],
     gradeLevels: ["3"],
     topics: ["privacy", "creativity", "friendship"],
@@ -697,7 +697,7 @@ export const EXPERIMENTS = [
   {
     id: "adaptive-learning-fairness",
     title: "Adaptive Learning: Fair or Not?",
-    tagline: "A math app gives different work to different students.",
+    tagline: "Different work can be fair, unfair, or both depending on how it is used.",
     gradeBands: ["k-5"],
     gradeLevels: ["3"],
     topics: ["fairness", "education", "ai-ethics"],
@@ -743,7 +743,7 @@ export const EXPERIMENTS = [
   {
     id: "conflicting-ai-answers",
     title: "Conflicting Answers: Trust the AI?",
-    tagline: "Two AI tools answer the same science question differently.",
+    tagline: "Two confident answers disagree. What turns an answer into knowledge?",
     gradeBands: ["k-5"],
     gradeLevels: ["4"],
     topics: ["knowledge", "ai-ethics", "education"],
@@ -789,7 +789,7 @@ export const EXPERIMENTS = [
   {
     id: "robot-rules-real-life",
     title: "Robot Rules vs. Real Life",
-    tagline: "A hall robot follows the rules, but a student needs help.",
+    tagline: "A robot follows the rule. A student needs care.",
     gradeBands: ["k-5"],
     gradeLevels: ["4"],
     topics: ["rules", "ethics", "ai-ethics"],
@@ -835,7 +835,7 @@ export const EXPERIMENTS = [
   {
     id: "elementary-trolley",
     title: "Self-Driving Trolley Problem",
-    tagline: "A school shuttle must choose between bad options.",
+    tagline: "A self-driving shuttle faces a choice nobody wants it to make.",
     gradeBands: ["k-5"],
     gradeLevels: ["4"],
     topics: ["ethics", "ai-ethics", "justice"],
@@ -881,7 +881,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-science-fair",
     title: "AI-Generated Science Fair Project",
-    tagline: "The board looks brilliant, but who did the science?",
+    tagline: "The display shines. The question is whether the understanding does.",
     gradeBands: ["k-5"],
     gradeLevels: ["4"],
     topics: ["creativity", "honesty", "education"],
@@ -927,7 +927,7 @@ export const EXPERIMENTS = [
   {
     id: "online-friend-or-ai",
     title: "Online Friend or AI?",
-    tagline: "A game friend feels real, but something is hidden.",
+    tagline: "A game friend listens perfectly. That might be exactly what makes the choice hard.",
     gradeBands: ["k-5"],
     gradeLevels: ["5"],
     topics: ["friendship", "privacy", "mind"],
@@ -973,7 +973,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-homework-help",
     title: "Using AI to Do Homework",
-    tagline: "The AI can explain, hint, or solve. Where is the line?",
+    tagline: "The AI can end the homework fast. That is not the same as learning.",
     gradeBands: ["k-5"],
     gradeLevels: ["5"],
     topics: ["education", "honesty", "ai-ethics"],
@@ -1019,7 +1019,7 @@ export const EXPERIMENTS = [
   {
     id: "biased-classroom-robot",
     title: "Biased Classroom Robot",
-    tagline: "A classroom robot keeps choosing the same students.",
+    tagline: "The robot says it is neutral. The pattern says something else.",
     gradeBands: ["k-5"],
     gradeLevels: ["5"],
     topics: ["fairness", "justice", "ai-ethics"],
@@ -1065,7 +1065,7 @@ export const EXPERIMENTS = [
   {
     id: "ai-grading-mistake",
     title: "AI Grading Mistake",
-    tagline: "An AI score does not match what the student actually wrote.",
+    tagline: "A score looks official. The writing tells a different story.",
     gradeBands: ["k-5"],
     gradeLevels: ["5"],
     topics: ["fairness", "education", "ai-ethics"],
