@@ -32,6 +32,7 @@ export default function Hub({ navigate }) {
   const featured = featuredThisWeek().map(experiment =>
     experiment.gradeBands.includes("6-8") ? middleSchoolById.get(experiment.id) || experiment : experiment
   );
+  const educatorFeature = getFeatureIllustration("thought-experiments/educators");
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -183,15 +184,24 @@ export default function Hub({ navigate }) {
                   gap: 6,
                 }}>Open the educator flagships <span aria-hidden="true">→</span></span>
               </div>
-              <div style={{
-                width: 80, height: 80,
-                borderRadius: 16,
+              <figure style={{
+                width: "clamp(92px, 16vw, 124px)",
+                aspectRatio: "1 / 1",
+                borderRadius: 18,
+                overflow: "hidden",
                 background: `linear-gradient(135deg, ${C.teal}30, ${C.ocean}18)`,
                 border: `1px solid ${C.teal}45`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "2.2rem",
+                boxShadow: `0 16px 44px rgba(0,0,0,0.24), 0 0 28px ${C.teal}14`,
                 flexShrink: 0,
-              }} aria-hidden="true">🍎</div>
+                margin: 0,
+              }}>
+                <img
+                  src={educatorFeature?.src}
+                  alt={educatorFeature?.alt || ""}
+                  loading="lazy"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </figure>
             </div>
           </FadeIn>
 

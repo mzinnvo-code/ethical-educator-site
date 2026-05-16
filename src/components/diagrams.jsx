@@ -153,76 +153,126 @@ export function PolicyTimelineDiagram() {
 }
 
 const THINKERS = [
-  { name: "Plato",      year: "c. 380 BCE", tradition: "Virtue & Forms" },
-  { name: "Aristotle",  year: "c. 340 BCE", tradition: "Habituation" },
-  { name: "Dewey",      year: "1938",        tradition: "Pragmatism" },
-  { name: "Nozick",     year: "1974",        tradition: "Experience Machine" },
-  { name: "Jackson",    year: "1982",        tradition: "Mary's Room" },
-  { name: "Searle",     year: "1980",        tradition: "Chinese Room" },
-  { name: "Huxley",     year: "1932",        tradition: "Brave New World" },
-  { name: "Lemire",     year: "2025",        tradition: "Practice & Understanding" },
+  { name: "Plato", year: "c. 380 BCE", tradition: "Virtue & Forms", angle: -90, color: C.coral },
+  { name: "Aristotle", year: "c. 340 BCE", tradition: "Habituation", angle: -45, color: C.coral },
+  { name: "Dewey", year: "1938", tradition: "Pragmatism", angle: 0, color: C.teal },
+  { name: "Nozick", year: "1974", tradition: "Experience Machine", angle: 45, color: C.ocean },
+  { name: "Jackson", year: "1982", tradition: "Mary's Room", angle: 90, color: C.sky },
+  { name: "Searle", year: "1980", tradition: "Chinese Room", angle: 135, color: C.gold },
+  { name: "Huxley", year: "1932", tradition: "Brave New World", angle: 180, color: C.sand },
+  { name: "Lemire", year: "2025", tradition: "Practice & Understanding", angle: 225, color: C.greenLight },
 ];
 
 export function ConvergenceDiagram() {
-  const cx = 300;
-  const cy = 210;
-  const r = 150;
-  const svgH = 450;
+  const cx = 360;
+  const cy = 238;
+  const nodeR = 158;
+  const labelR = 226;
+  const svgW = 720;
+  const svgH = 500;
 
   return (
     <svg
-      viewBox={`0 0 600 ${svgH}`}
+      viewBox={`0 0 ${svgW} ${svgH}`}
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "100%", maxWidth: 600, display: "block", margin: "24px auto" }}
+      style={{ width: "100%", maxWidth: 760, display: "block", margin: "24px auto" }}
       role="img"
       aria-label="Convergence diagram: eight thinkers from across 2,400 years all point toward the central thesis that process is constitutive of value"
     >
-      <rect width="600" height={svgH} rx="12" fill={C.bg} />
+      <defs>
+        <radialGradient id="convergenceBg" cx="50%" cy="48%" r="62%">
+          <stop offset="0%" stopColor={`${C.gold}10`} />
+          <stop offset="50%" stopColor={`${C.ocean}08`} />
+          <stop offset="100%" stopColor={C.bg} />
+        </radialGradient>
+        <radialGradient id="convergenceCenter" cx="50%" cy="43%" r="65%">
+          <stop offset="0%" stopColor={`${C.gold}38`} />
+          <stop offset="64%" stopColor={`${C.gold}18`} />
+          <stop offset="100%" stopColor={`${C.bg}f2`} />
+        </radialGradient>
+        <filter id="convergenceGlow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="7" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
 
-      {/* Spoke lines */}
-      {THINKERS.map((t, i) => {
-        const angle = (i / THINKERS.length) * 2 * Math.PI - Math.PI / 2;
-        const nx = cx + r * Math.cos(angle);
-        const ny = cy + r * Math.sin(angle);
+      <rect width={svgW} height={svgH} rx="16" fill="url(#convergenceBg)" />
+      <circle cx={cx} cy={cy} r="206" fill="none" stroke={`${C.border}`} strokeWidth="1" opacity="0.42" />
+      <circle cx={cx} cy={cy} r="118" fill="none" stroke={`${C.gold}18`} strokeWidth="1" strokeDasharray="3 7" />
+
+      <text x={cx} y="34" textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="10" fill={C.textMuted} fontStyle="italic">
+        Eight independent traditions, one converging claim
+      </text>
+
+      {THINKERS.map((thinker) => {
+        const angle = (thinker.angle * Math.PI) / 180;
+        const nx = cx + nodeR * Math.cos(angle);
+        const ny = cy + nodeR * Math.sin(angle);
         return (
-          <line key={i} x1={cx} y1={cy} x2={nx} y2={ny}
-            stroke={C.border} strokeWidth="1" strokeDasharray="4 3" />
+          <line
+            key={`spoke-${thinker.name}`}
+            x1={cx}
+            y1={cy}
+            x2={nx}
+            y2={ny}
+            stroke={`${thinker.color}34`}
+            strokeWidth="1"
+            strokeDasharray="4 6"
+          />
         );
       })}
 
-      {/* Thinker nodes */}
-      {THINKERS.map((t, i) => {
-        const angle = (i / THINKERS.length) * 2 * Math.PI - Math.PI / 2;
-        const nx = cx + r * Math.cos(angle);
-        const ny = cy + r * Math.sin(angle);
-        // Label offset outward
-        const lx = cx + (r + 46) * Math.cos(angle);
-        const ly = cy + (r + 46) * Math.sin(angle);
-        const colors = [C.coral, C.coral, C.teal, C.ocean, C.sky, C.gold, C.sand, C.greenLight];
-        const col = colors[i % colors.length];
+      {THINKERS.map((thinker) => {
+        const angle = (thinker.angle * Math.PI) / 180;
+        const nx = cx + nodeR * Math.cos(angle);
+        const ny = cy + nodeR * Math.sin(angle);
+        const lx = cx + labelR * Math.cos(angle);
+        const ly = cy + labelR * Math.sin(angle);
+        const anchor = thinker.angle === -90 || thinker.angle === 90 ? "middle" : thinker.angle > -90 && thinker.angle < 90 ? "start" : "end";
 
         return (
-          <g key={i}>
-            <circle cx={nx} cy={ny} r="20" fill={`${col}20`} stroke={col} strokeWidth="1.5" />
-            <text x={nx} y={ny - 4} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="10" fontWeight="700" fill={col}>{t.name}</text>
-            <text x={nx} y={ny + 8} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="8.5" fill={C.textMuted}>{t.year}</text>
-            {/* Tradition label outside the circle */}
-            <text x={lx} y={ly} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="9" fill={C.textSecondary} fontStyle="italic">{t.tradition}</text>
+          <g key={thinker.name}>
+            <circle cx={nx} cy={ny} r="28" fill={`${thinker.color}0f`} filter="url(#convergenceGlow)" opacity="0.72" />
+            <circle cx={nx} cy={ny} r="24" fill={`${C.bg}d9`} stroke={`${thinker.color}70`} strokeWidth="1.5" />
+            <circle cx={nx} cy={ny} r="18" fill={`${thinker.color}16`} stroke={`${thinker.color}42`} strokeWidth="1" />
+            <text x={nx} y={ny - 3} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="11" fontWeight="700" fill={thinker.color}>
+              {thinker.name}
+            </text>
+            <text x={nx} y={ny + 11} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="8" fill={C.textMuted}>
+              {thinker.year}
+            </text>
+            <text x={lx} y={ly} textAnchor={anchor} fontFamily="'DM Sans', sans-serif" fontSize="9.5" fill={C.textSecondary} fontStyle="italic">
+              {thinker.tradition}
+            </text>
           </g>
         );
       })}
 
-      {/* Central thesis */}
-      <circle cx={cx} cy={cy} r="58" fill={`${C.gold}14`} stroke={C.gold} strokeWidth="2" />
-      <text x={cx} y={cy - 18} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="11" fontWeight="700" fill={C.gold}>Process is</text>
-      <text x={cx} y={cy - 4} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="11" fontWeight="700" fill={C.gold}>constitutive</text>
-      <text x={cx} y={cy + 10} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="11" fontWeight="700" fill={C.gold}>of value</text>
-      <text x={cx} y={cy + 28} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="9" fill={C.textMuted} fontStyle="italic">The Convergence</text>
-
-      {/* Caption */}
-      <text x={cx} y={svgH - 14} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="10" fill={C.textMuted} fontStyle="italic">
-        Eight independent traditions across 2,400 years arrive at the same conclusion
+      <circle cx={cx} cy={cy} r="76" fill={`${C.gold}08`} stroke={`${C.gold}22`} strokeWidth="1" />
+      <circle cx={cx} cy={cy} r="62" fill="url(#convergenceCenter)" stroke={C.gold} strokeWidth="2" />
+      <text x={cx} y={cy - 25} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="12" fontWeight="700" fill={C.gold}>
+        Process is
       </text>
+      <text x={cx} y={cy - 9} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="12" fontWeight="700" fill={C.gold}>
+        constitutive
+      </text>
+      <text x={cx} y={cy + 7} textAnchor="middle" fontFamily="'Source Serif 4', Georgia, serif" fontSize="12" fontWeight="700" fill={C.gold}>
+        of value
+      </text>
+      <line x1={cx - 34} y1={cy + 20} x2={cx + 34} y2={cy + 20} stroke={`${C.gold}42`} strokeWidth="1" />
+      <text x={cx} y={cy + 37} textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="9" fill={C.textMuted} fontStyle="italic">
+        The Convergence
+      </text>
+
+      <g>
+        <rect x="126" y="444" width="468" height="30" rx="15" fill={`${C.surface}b8`} stroke={`${C.gold}22`} />
+        <text x={cx} y="464" textAnchor="middle" fontFamily="'DM Sans', sans-serif" fontSize="10.5" fill={C.textMuted} fontStyle="italic">
+          Across 2,400 years, learning keeps appearing as transformation, not transfer.
+        </text>
+      </g>
     </svg>
   );
 }

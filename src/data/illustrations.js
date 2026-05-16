@@ -62,11 +62,12 @@ export const FEATURE_ILLUSTRATIONS = {
   "ai-authorship": illustration("ai-authorship", "Four workspaces around one glowing essay page."),
   "reluctant-educator": illustration("reluctant-educator", "Classroom data dissolving into questions."),
   "digital-doppelganger": illustration("digital-doppelganger", "A glowing digital silhouette reflected in an empty desk screen."),
-  "thought-experiments/educators": illustration("educator-resources", "Educator materials arranged for professional dialogue."),
+  "thought-experiments/educators": illustration("educator-dialogue", "Educator scenario cards arranged around a lantern for professional dialogue."),
   "thought-experiments/k-5": illustration("magic-toy", "A talking classroom toy with a gentle glow."),
   "thought-experiments/6-8": illustration("trolley", "A stylized trolley at a forked track."),
   "thought-experiments/9-12": illustration("cave", "A cave mouth with warm light beyond."),
   "thought-experiments/toolkit": illustration("dialogue-toolkit", "A dialogue circle arranged around a warm lantern."),
+  "thought-experiments/journal": illustration("decision-journal", "A private decision journal open beside a lantern, pen, sealed note, and lock."),
 };
 
 export function getExperimentIllustration(experimentOrId) {

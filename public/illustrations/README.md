@@ -85,6 +85,15 @@ These generated assets live in `public/illustrations/educators/` and are wired t
 | `high-performing-k12-schools.webp` | Assessment dashboards, notebooks, progress charts, and classroom materials |
 | `rti.webp` | Three-tier support structure with student folders and progress-monitoring markers |
 
+### Thought Experiments Landing Page
+These generated assets replace placeholder icons on the Thought Experiments landing page
+and are wired through `src/data/illustrations.js`.
+
+| Slug | Subject |
+|---|---|
+| `decision-journal.png` | Private decision journal with branching reasoning paths, lantern light, pen, sealed note, and lock |
+| `educator-dialogue.png` | Educator staff-dialogue table with four scenario cards, policy binder, notebook, lantern, and apple accent |
+
 ### AI in Education
 These generated assets live in `public/illustrations/ai-education/` and are wired through
 `src/data/aiEducationResources.js`. They use optimized WebP files for page performance.
