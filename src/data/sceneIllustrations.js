@@ -20,6 +20,16 @@ export const SCENE_ILLUSTRATIONS = {
     "mirror",
     "young"
   ),
+  // TODO(illustration): /public/experiment-scenes/explaining-red-k-2.webp does
+  // not exist yet. Until it is produced, the fallback chain
+  // (getExperimentIllustration -> getFeatureIllustration) renders no thumbnail
+  // for this scenario card. Illustrator brief lives in the PR / commit body.
+  "explaining-red-k-2": scene(
+    "/experiment-scenes/explaining-red-k-2.webp",
+    "Ada stands at the door of a K-2 classroom with a white cane. Her classmates sit on a rug, listening to their teacher introduce the colors lesson.",
+    "subtle",
+    "young"
+  ),
   "robot-friend-turn": scene(
     "/experiment-scenes/robot-friend-turn.webp",
     "Two young children sit beside a friendly classroom robot, deciding how to share attention and kindness fairly.",

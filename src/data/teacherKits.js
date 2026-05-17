@@ -1980,4 +1980,52 @@ Object.assign(TEACHER_KITS, {
     homeExtension: "Ask a grown-up about a time a score or system misunderstood their work. What did they do?",
     extension: "Students compare human and AI-style comments on a sample paragraph, then draft a class grading-tool policy.",
   }),
+
+  "explaining-red-k-2": elementaryKit({
+    bigQuestion: "When can words share what we see — and when do we need more than words?",
+    objectives: [
+      "Students will name several ways to describe a color without using sight — touch, sound, warmth, story, places it lives.",
+      "Students will work alongside a classmate whose senses differ from their own.",
+      "Students will explain why some things are easier to share with words than others.",
+    ],
+    standards: [
+      "CCSS.ELA-LITERACY.SL.K.1 / SL.1.1 / SL.2.1 — Participate in collaborative conversations with diverse partners.",
+      "CASEL Social Awareness — Perspective-taking and appreciating diversity.",
+    ],
+    times: { quick: "15 min circle time", standard: "30 min", deep: "45 min + sensory carousel" },
+    warmUp: "Hand each student one everyday object — a leaf, a smooth stone, a small bell, a piece of fabric. Ask them to describe it using only touch and sound. No looking, no naming the color. Then ask: \"How would you tell a friend who has never seen this what it looks like?\"",
+    protocol: { name: "Sensory Carousel", why: "K-2 students learn best by doing. Small stations where students explore objects with non-visual senses make the question concrete, and turn the lesson into shared classroom experience instead of discussion about a classmate." },
+    discussionPrompts: [
+      "What is something you know really well? How would you teach it to someone who has never tried it?",
+      "If a friend has never tasted chocolate, can your words make them know what it tastes like? What is still missing?",
+      "What might Ada know about the world that her classmates don't?",
+      "When is a word enough? When do we need to show, touch, or share?",
+    ],
+    derailers: [
+      { trigger: "A student says \"It's so sad Ada can't see colors.\"", redirect: "Reframe gently: \"Ada knows colors in a different way — and she knows things her classmates don't. The class is luckier because she is in it. What might Ada teach the rest of you?\"" },
+      { trigger: "Students argue about whose description of red is the \"right\" one.", redirect: "\"You found a real piece of red. Your classmate found a different real piece. Red is big enough for both. What would happen if Ada heard both descriptions?\"" },
+      { trigger: "A student suggests \"fixing\" Ada's eyes.", redirect: "Honor the kindness, then redirect: \"You wanted to help. Ada doesn't need fixing — she needs friends who think about how to share their world with her. That is also a way of helping.\"" },
+    ],
+    sensitivities: [
+      "Avoid framing Ada as someone to be pitied or \"fixed.\" Blindness is a different way of being in the world, not a tragedy. Center her as a full classmate with expertise, preferences, and ideas.",
+      "If you have a blind, low-vision, or visually impaired student in your class, plan ahead. Do not put them on the spot to speak for the experience of blindness. Check with the student and family before teaching the lesson when possible.",
+      "Some students may have family members who are blind or visually impaired. Welcome their lived knowledge — they may have expertise to share that you don't.",
+      "Skip \"inspiration\" framings (\"isn't it amazing she can…\"). They feel patronizing. Ada is a kid at school. That's the frame.",
+    ],
+    differentiation: {
+      ell: "Pre-teach \"see,\" \"touch,\" \"sound,\" \"warm,\" \"feel.\" Pair picture cards with simple objects students can hold.",
+      iep: "Allow students to point to choice cards, hold up an object, or draw a response instead of speaking. The Sensory Carousel especially supports kinesthetic learners.",
+      advanced: "Ask: \"If a person could describe red perfectly — every word, every story — but had never seen it, would they really know what red is?\" This quietly bridges to Mary's Room. See the K–12 alignment note below.",
+    },
+    handout: "One page: a circle in the middle labeled RED. Four boxes around it — \"Red looks like ___\" (drawing), \"Red feels like ___\" (texture words), \"Red sounds like ___\" (sound), \"Red lives in ___\" (a place in the world). One word, sticker, or picture per box.",
+    exitTicket: "Finish this sentence: \"A way I could help Ada learn about my favorite color is ___.\"",
+    crossCurricular: [
+      { subject: "Art", connection: "Texture rubbings of red objects — students make a \"red collage\" without using sight to verify what they've collected." },
+      { subject: "Music", connection: "Play two short pieces. Which one feels more red? Which feels more blue? Why?" },
+      { subject: "Science (light and color)", connection: "How do our eyes turn light into color? What might it mean to \"know\" a color without that pathway?" },
+      { subject: "SEL and disability awareness", connection: "Different bodies experience the world in different ways. All are full ways of being a person." },
+    ],
+    homeExtension: "Family conversation: \"Pick a color you love. With eyes closed, take turns telling each other what that color is like — not what it LOOKS like, but what it feels like, sounds like, lives near. Write down the best three.\"",
+    extension: "Read aloud one of: \"The Black Book of Colors\" by Menena Cottin and Rosana Faría (a tactile picture book made for sighted and blind readers together), \"What Color Is the Wind?\" by Anne Herbauts, or \"I See Things Differently\" by Pat Thomas. Ask: \"Which way of sharing colors felt most true?\"\n\nK–12 alignment: this story is the K-2 entry point to a thread that runs across the whole site. The same question — can a description ever stand in for an experience? — returns in the 6-8 catalog as a science-class version of \"Explaining Red\" (Hassan, in a wavelengths unit), and in the 9-12 canon as Frank Jackson's \"Mary's Room.\" Teachers building a vertical curriculum can run all three as one throughline.\n\nResources for teaching about blindness respectfully: American Foundation for the Blind — Educators (afb.org/educators); Paths to Literacy (pathstoliteracy.org); Perkins School for the Blind — Classroom Resources (perkins.org); National Federation of the Blind — In the Classroom (nfb.org).",
+  }),
 });
