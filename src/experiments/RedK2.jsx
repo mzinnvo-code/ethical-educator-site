@@ -5,6 +5,7 @@ import { audioBus } from "../lib/audioBus.js";
 import ReadAloudButton from "../components/ReadAloudButton.jsx";
 import { Shell, StageHeader, DiscussionGuide, RestartBtn, PathReveal } from "./ExperimentShared.jsx";
 import { SceneSpeaker, SceneAction, SceneBeat, SceneChoices } from "./SceneShared.jsx";
+import IllustratedScene from "../scenes/IllustratedScene.jsx";
 
 // audioKey helper — every narrated chunk in this scene shares the same
 // scenarioId, so we just need to vary the slot. See
@@ -65,6 +66,12 @@ export default function ExplainingRedK2() {
       topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+  const stageVisuals = [
+    ["intro", "Explaining Red"],
+    ["arrival", "A new student arrives"],
+    ["ada-responds", "Ada thinks about it"],
+    ["reflection", "What the class learned today"],
+  ];
 
   const choose = (key, value) => {
     audioBus.stop();
@@ -225,9 +232,22 @@ export default function ExplainingRedK2() {
     },
   ];
 
+  const [visualStageId, visualStageTitle] = stageVisuals[stage] || stageVisuals[0];
+
   return (
     <div ref={topRef} style={{ scrollMarginTop: 80 }}>
-      <Shell animating={anim} color={C.coral}>{stages[stage]()}</Shell>
+      <Shell animating={anim} color={C.coral}>
+        <IllustratedScene
+          experimentId={SCENARIO_ID}
+          visualVariant="k-2"
+          stage={stage}
+          stageId={visualStageId}
+          stageTitle={visualStageTitle}
+          stageCount={stageVisuals.length}
+          mode="kid"
+        />
+        {stages[stage]()}
+      </Shell>
     </div>
   );
 }

@@ -157,6 +157,7 @@ export function ElementaryGradePage({ navigate, gradeId }) {
                 experiments={experiments}
                 onSelect={(experiment) => setActive(experiment)}
                 emptyMessage={`No ${grade.label} experiments are ready yet.`}
+                visualVariant="k-5"
               />
             </>
           )}
@@ -193,6 +194,7 @@ export function ElementaryGradePage({ navigate, gradeId }) {
                 key={active.id}
                 experiment={active}
                 mode="kid"
+                visualVariant="k-5"
                 onClose={closeActive}
                 onRecordChoice={recordChoice}
                 relatedExperiment={pickRelated(active, experiments)}

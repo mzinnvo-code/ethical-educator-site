@@ -1,4 +1,5 @@
 import { getExperimentIllustration, getFeatureIllustration } from "./illustrations.js";
+import { STAGE_SCENE_SETS } from "./stageSceneManifest.js";
 
 const scene = (src, alt, motion = "subtle", tone = "story") => ({
   src,
@@ -6,6 +7,26 @@ const scene = (src, alt, motion = "subtle", tone = "story") => ({
   motion,
   tone,
 });
+
+const normalizeVariant = (variant) => variant || "default";
+
+function resolveStageSet(id, visualVariant) {
+  const variant = normalizeVariant(visualVariant);
+  return (
+    STAGE_SCENE_SETS[`${variant}:${id}`] ||
+    STAGE_SCENE_SETS[`default:${id}`] ||
+    STAGE_SCENE_SETS[id] ||
+    null
+  );
+}
+
+function stageScene(set, stageId, stageIndex) {
+  if (!set?.stages) return null;
+  const direct = stageId ? set.stages[stageId] : null;
+  if (direct) return direct;
+  const byIndex = Number.isFinite(stageIndex) ? Object.values(set.stages)[stageIndex] : null;
+  return byIndex || null;
+}
 
 export const SCENE_ILLUSTRATIONS = {
   "magic-toy": scene(
@@ -344,8 +365,25 @@ export const SCENE_ILLUSTRATIONS = {
   ),
 };
 
-export function getSceneIllustration(experimentOrId) {
+export function getStageSceneIllustration(experimentOrId, options = {}) {
   const id = typeof experimentOrId === "string" ? experimentOrId : experimentOrId?.id;
   if (!id) return null;
+  const set = resolveStageSet(id, options.visualVariant || experimentOrId?.visualVariant);
+  const staged = stageScene(set, options.stageId, options.stageIndex);
+  if (!staged) return null;
+  return {
+    motion: staged.motion || set.motion || "subtle",
+    tone: staged.tone || set.tone || "story",
+    characterNotes: staged.characterNotes || set.characterNotes || "",
+    styleNotes: staged.styleNotes || set.styleNotes || "",
+    ...staged,
+  };
+}
+
+export function getSceneIllustration(experimentOrId, options = {}) {
+  const id = typeof experimentOrId === "string" ? experimentOrId : experimentOrId?.id;
+  if (!id) return null;
+  const staged = getStageSceneIllustration(experimentOrId, options);
+  if (staged) return staged;
   return SCENE_ILLUSTRATIONS[id] || getExperimentIllustration(id) || getFeatureIllustration(id) || null;
 }

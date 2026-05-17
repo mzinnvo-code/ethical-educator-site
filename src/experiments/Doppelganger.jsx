@@ -18,6 +18,14 @@ export default function DoppelgangerExperiment() {
       cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+  const stageVisuals = [
+    ["intro", "The Digital Doppelganger"],
+    ["discussion-board", "The Discussion Board"],
+    ["voice-clone", "The Voice Clone"],
+    ["proliferation", "The Proliferation"],
+    ["exam", "The Exam"],
+    ["policy", "The Policy Committee"],
+  ];
 
   const go = (key, val, nextAct) => {
     audioBus.stop();
@@ -42,7 +50,6 @@ export default function DoppelgangerExperiment() {
     // ─── ACT 0: INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "20px 0" }}>
-        <IllustratedScene experimentId="digital-doppelganger" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 12 }}>The Digital Doppelgänger</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 12px" }}>
           You are <strong style={{ color: C.textPrimary }}>Mr. Torres</strong>, an AP Literature teacher at a suburban high school. It's September 2026. Over the course of one semester, you will confront a question that no generation of educators has ever faced:
@@ -326,9 +333,22 @@ export default function DoppelgangerExperiment() {
     ),
   ];
 
+  const [visualStageId, visualStageTitle] = stageVisuals[act] || stageVisuals[0];
+
   return (
     <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
-      <Shell animating={anim} color={C.coral}>{acts[act]()}</Shell>
+      <Shell animating={anim} color={C.coral}>
+        <IllustratedScene
+          experimentId="digital-doppelganger"
+          visualVariant="flagship"
+          stage={act}
+          stageId={visualStageId}
+          stageTitle={visualStageTitle}
+          stageCount={stageVisuals.length}
+          mode="canon"
+        />
+        {acts[act]()}
+      </Shell>
     </div>
   );
 }

@@ -1,0 +1,2240 @@
+{
+  "generatedAt": "2026-05-17T11:31:40.132Z",
+  "sets": [
+    {
+      "experimentId": "magic-toy",
+      "visualVariant": "k-5",
+      "title": "The Magic Toy",
+      "tone": "young",
+      "motion": "glow",
+      "baseSrc": "/experiment-scenes/magic-toy.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/magic-toy.webp",
+      "characterNotes": "The Magic Toy keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The toy on the rug",
+          "glow"
+        ],
+        [
+          "follow",
+          "The battery light",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "Kindness, pretending, and real feelings",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "invisible-ring",
+      "visualVariant": "k-5",
+      "title": "The Invisible Ring",
+      "tone": "young",
+      "motion": "mirror",
+      "baseSrc": "/experiment-scenes/invisible-ring.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/invisible-ring.webp",
+      "characterNotes": "The Invisible Ring keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The ring in the cubby",
+          "mirror"
+        ],
+        [
+          "mirror",
+          "The mirror after",
+          "mirror"
+        ],
+        [
+          "synthesis",
+          "What the invisible choice reveals",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "robot-friend-turn",
+      "visualVariant": "k-5",
+      "title": "Sharing a Robot Friend",
+      "tone": "young",
+      "motion": "sharing",
+      "baseSrc": "/experiment-scenes/robot-friend-turn.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/robot-friend-turn.webp",
+      "characterNotes": "Sharing a Robot Friend keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "One robot, two hands",
+          "sharing"
+        ],
+        [
+          "week",
+          "The whole week",
+          "sharing"
+        ],
+        [
+          "synthesis",
+          "Fair can mean equal, needed, or shared",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "honesty-protection",
+      "visualVariant": "k-5",
+      "title": "Honest or Loyal?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/honesty-protection.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/honesty-protection.webp",
+      "characterNotes": "Honest or Loyal? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The cracked pencil cup",
+          "subtle"
+        ],
+        [
+          "pattern",
+          "Another accident",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Friendship, truth, and courage",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "robot-pet-goodbye",
+      "visualVariant": "k-5",
+      "title": "Goodbye, Robot Pet",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/robot-pet-goodbye.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/robot-pet-goodbye.webp",
+      "characterNotes": "Goodbye, Robot Pet keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The quiet robot dog",
+          "subtle"
+        ],
+        [
+          "repair",
+          "The repaired dog",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "What makes something the same?",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-art-help",
+      "visualVariant": "k-5",
+      "title": "Did the Computer Help?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-art-help.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-art-help.webp",
+      "characterNotes": "Did the Computer Help? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The glowing paintbrush",
+          "subtle"
+        ],
+        [
+          "friend",
+          "The classmate question",
+          "subtle"
+        ],
+        [
+          "gallery",
+          "The hallway gallery",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Tools, credit, and creative pride",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "messy-robot",
+      "visualVariant": "k-5",
+      "title": "Make a Mess for the Robot?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/messy-robot.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/messy-robot.webp",
+      "characterNotes": "Make a Mess for the Robot? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The glitter spill",
+          "subtle"
+        ],
+        [
+          "breaks",
+          "Too much glitter",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "A helper is not an excuse",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "rules-vs-helping",
+      "visualVariant": "k-5",
+      "title": "Quiet Rule vs. Kind Rule",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/rules-vs-helping.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/rules-vs-helping.webp",
+      "characterNotes": "Quiet Rule vs. Kind Rule keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The silent puzzle",
+          "subtle"
+        ],
+        [
+          "everyone",
+          "Everyone has a reason",
+          "subtle"
+        ],
+        [
+          "signal",
+          "The help signal",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Rules that remember why they exist",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "rude-toy",
+      "visualVariant": "k-5",
+      "title": "The Rude Toy",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/rude-toy.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/rude-toy.webp",
+      "characterNotes": "The Rude Toy keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The mean sentence",
+          "subtle"
+        ],
+        [
+          "copy",
+          "The words spread",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Words can matter before feelings are real",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "winning-game",
+      "visualVariant": "k-5",
+      "title": "Did I Really Win?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/winning-game.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/winning-game.webp",
+      "characterNotes": "Did I Really Win? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "setup",
+          "The always-win game",
+          "subtle"
+        ],
+        [
+          "trophy",
+          "The shiny trophy",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Winning, practice, and hidden help",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "always-agreeable-ai-friend",
+      "visualVariant": "k-5",
+      "title": "The Always-Agreeable AI Friend",
+      "tone": "young",
+      "motion": "glow",
+      "baseSrc": "/experiment-scenes/always-agreeable-ai-friend.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/always-agreeable-ai-friend.webp",
+      "characterNotes": "The Always-Agreeable AI Friend keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "advice",
+          "The yes-friend",
+          "glow"
+        ],
+        [
+          "drawing",
+          "The perfect compliment",
+          "glow"
+        ],
+        [
+          "classmate",
+          "The brave classmate",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "Kind agreement and honest friendship",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "same-toy-or-not",
+      "visualVariant": "k-5",
+      "title": "The Same Toy or Not?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/same-toy-or-not.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/same-toy-or-not.webp",
+      "characterNotes": "The Same Toy or Not? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "wheel",
+          "The first repair",
+          "subtle"
+        ],
+        [
+          "voice",
+          "The new voice",
+          "mirror"
+        ],
+        [
+          "second",
+          "Two Blinks",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Parts, stories, and sameness",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-written-story",
+      "visualVariant": "k-5",
+      "title": "AI-Written Story",
+      "tone": "young",
+      "motion": "spotlight",
+      "baseSrc": "/experiment-scenes/ai-written-story.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-written-story.webp",
+      "characterNotes": "AI-Written Story keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "draft",
+          "Three ideas become a story",
+          "spotlight"
+        ],
+        [
+          "voice",
+          "Words she cannot explain",
+          "mirror"
+        ],
+        [
+          "magazine",
+          "The class magazine",
+          "spotlight"
+        ],
+        [
+          "synthesis",
+          "Ideas, drafts, and voice",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "gps-shortcut",
+      "visualVariant": "k-5",
+      "title": "Trusting the GPS Shortcut",
+      "tone": "young",
+      "motion": "reveal",
+      "baseSrc": "/experiment-scenes/gps-shortcut.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/gps-shortcut.webp",
+      "characterNotes": "Trusting the GPS Shortcut keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "shortcut",
+          "The blue line",
+          "switch"
+        ],
+        [
+          "mud",
+          "What the map did not show",
+          "reveal"
+        ],
+        [
+          "butterflies",
+          "The missed butterfly garden",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "Trusting tools without turning off judgment",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-photo-art",
+      "visualVariant": "k-5",
+      "title": "Using Your Photo in AI Art",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-photo-art.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-photo-art.webp",
+      "characterNotes": "Using Your Photo in AI Art keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "poster",
+          "The superhero poster",
+          "subtle"
+        ],
+        [
+          "contest",
+          "The contest board",
+          "subtle"
+        ],
+        [
+          "rule",
+          "The class image rule",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Creative freedom and permission",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "adaptive-learning-fairness",
+      "visualVariant": "k-5",
+      "title": "Adaptive Learning: Fair or Not?",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/adaptive-learning-fairness.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/adaptive-learning-fairness.webp",
+      "characterNotes": "Adaptive Learning: Fair or Not? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "levels",
+          "Two screens, two levels",
+          "subtle"
+        ],
+        [
+          "mistake",
+          "The lucky guess",
+          "warning"
+        ],
+        [
+          "badges",
+          "The badge wall",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Same work, right support, and dignity",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "conflicting-ai-answers",
+      "visualVariant": "k-5",
+      "title": "Conflicting Answers: Trust the AI?",
+      "tone": "young",
+      "motion": "split",
+      "baseSrc": "/experiment-scenes/conflicting-ai-answers.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/conflicting-ai-answers.webp",
+      "characterNotes": "Conflicting Answers: Trust the AI? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "volcano",
+          "Two confident answers",
+          "split"
+        ],
+        [
+          "source",
+          "The old source",
+          "split"
+        ],
+        [
+          "poster",
+          "The research note",
+          "split"
+        ],
+        [
+          "synthesis",
+          "Confidence, evidence, and honest research",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "robot-rules-real-life",
+      "visualVariant": "k-5",
+      "title": "Robot Rules vs. Real Life",
+      "tone": "young",
+      "motion": "warning",
+      "baseSrc": "/experiment-scenes/robot-rules-real-life.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/robot-rules-real-life.webp",
+      "characterNotes": "Robot Rules vs. Real Life keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "hall",
+          "The hallway pass",
+          "warning"
+        ],
+        [
+          "pretend",
+          "The copied excuse",
+          "warning"
+        ],
+        [
+          "rewrite",
+          "The wiser rule",
+          "warning"
+        ],
+        [
+          "synthesis",
+          "Rigid rules and human judgment",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "elementary-trolley",
+      "visualVariant": "k-5",
+      "title": "Self-Driving Trolley Problem",
+      "tone": "young",
+      "motion": "switch",
+      "baseSrc": "/experiment-scenes/elementary-trolley.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/elementary-trolley.webp",
+      "characterNotes": "Self-Driving Trolley Problem keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "shuttle",
+          "The fork in the path",
+          "switch"
+        ],
+        [
+          "people",
+          "When people could be hurt",
+          "switch"
+        ],
+        [
+          "public-rule",
+          "The public safety rule",
+          "switch"
+        ],
+        [
+          "synthesis",
+          "Designing before the emergency",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-science-fair",
+      "visualVariant": "k-5",
+      "title": "AI-Generated Science Fair Project",
+      "tone": "young",
+      "motion": "spotlight",
+      "baseSrc": "/experiment-scenes/ai-science-fair.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-science-fair.webp",
+      "characterNotes": "AI-Generated Science Fair Project keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "board",
+          "The museum-quality board",
+          "spotlight"
+        ],
+        [
+          "judge",
+          "The judge's question",
+          "spotlight"
+        ],
+        [
+          "revision",
+          "The revision night",
+          "spotlight"
+        ],
+        [
+          "synthesis",
+          "Impressive work and real understanding",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "online-friend-or-ai",
+      "visualVariant": "k-5",
+      "title": "Online Friend or AI?",
+      "tone": "young",
+      "motion": "glow",
+      "baseSrc": "/experiment-scenes/online-friend-or-ai.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/online-friend-or-ai.webp",
+      "characterNotes": "Online Friend or AI? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "game",
+          "The perfect teammate",
+          "glow"
+        ],
+        [
+          "secret",
+          "The secret keeper",
+          "glow"
+        ],
+        [
+          "label",
+          "The label appears",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "Connection, privacy, and mutual friendship",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-homework-help",
+      "visualVariant": "k-5",
+      "title": "Using AI to Do Homework",
+      "tone": "young",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-homework-help.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-homework-help.webp",
+      "characterNotes": "Using AI to Do Homework keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "stuck",
+          "The impossible fraction",
+          "subtle"
+        ],
+        [
+          "quiz",
+          "The quiz silence",
+          "subtle"
+        ],
+        [
+          "note",
+          "The AI-use note",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Help that teaches and help that replaces",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "biased-classroom-robot",
+      "visualVariant": "k-5",
+      "title": "Biased Classroom Robot",
+      "tone": "young",
+      "motion": "spotlight",
+      "baseSrc": "/experiment-scenes/biased-classroom-robot.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/biased-classroom-robot.webp",
+      "characterNotes": "Biased Classroom Robot keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "pattern",
+          "The same hands",
+          "spotlight"
+        ],
+        [
+          "names",
+          "The names it misses",
+          "spotlight"
+        ],
+        [
+          "redesign",
+          "A fairer classroom tool",
+          "spotlight"
+        ],
+        [
+          "synthesis",
+          "Fairness, patterns, and student voice",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-grading-mistake",
+      "visualVariant": "k-5",
+      "title": "AI Grading Mistake",
+      "tone": "young",
+      "motion": "warning",
+      "baseSrc": "/experiment-scenes/ai-grading-mistake.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-grading-mistake.webp",
+      "characterNotes": "AI Grading Mistake keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "score",
+          "The strange score",
+          "warning"
+        ],
+        [
+          "pattern",
+          "A pattern appears",
+          "warning"
+        ],
+        [
+          "policy",
+          "The class grading rule",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "Fast feedback and fair judgment",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "deepfake-election",
+      "visualVariant": "6-8",
+      "title": "The Deepfake Dilemma",
+      "tone": "middle",
+      "motion": "split",
+      "baseSrc": "/experiment-scenes/deepfake-election.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/deepfake-election.webp",
+      "characterNotes": "The Deepfake Dilemma keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "viral-clip",
+          "The video in the group chat",
+          "split"
+        ],
+        [
+          "almost-true",
+          "A true rumor inside a fake video",
+          "split"
+        ],
+        [
+          "your-side",
+          "When the fake helps your side",
+          "split"
+        ],
+        [
+          "synthesis",
+          "Truth when speed, emotion, and loyalty collide",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "trolley-self-driving",
+      "visualVariant": "6-8",
+      "title": "The Self-Driving Trolley",
+      "tone": "middle",
+      "motion": "switch",
+      "baseSrc": "/experiment-scenes/trolley-self-driving.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/trolley-self-driving.webp",
+      "characterNotes": "The Self-Driving Trolley keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "simulator",
+          "Five dots on the track",
+          "switch"
+        ],
+        [
+          "embodied",
+          "The bridge version",
+          "switch"
+        ],
+        [
+          "programming",
+          "The rule no one sees",
+          "switch"
+        ],
+        [
+          "synthesis",
+          "What changed between cases?",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "biased-resume-ai",
+      "visualVariant": "6-8",
+      "title": "The Biased Algorithm",
+      "tone": "middle",
+      "motion": "spotlight",
+      "baseSrc": "/experiment-scenes/biased-resume-ai.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/biased-resume-ai.webp",
+      "characterNotes": "The Biased Algorithm keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "club-tryouts",
+          "The shortlist",
+          "spotlight"
+        ],
+        [
+          "training-data",
+          "What the machine learned",
+          "glow"
+        ],
+        [
+          "past-harm",
+          "The list from last semester",
+          "spotlight"
+        ],
+        [
+          "synthesis",
+          "When a system inherits a wrong",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ship-of-theseus-robot",
+      "visualVariant": "6-8",
+      "title": "Robot Replacement Parts",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ship-of-theseus-robot.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ship-of-theseus-robot.webp",
+      "characterNotes": "Robot Replacement Parts keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "repair-log",
+          "A robot with a history",
+          "glow"
+        ],
+        [
+          "old-parts",
+          "The box in the closet",
+          "subtle"
+        ],
+        [
+          "student-mirror",
+          "The version of you that changed",
+          "mirror"
+        ],
+        [
+          "synthesis",
+          "The same thing through change",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "autonomous-car-rider",
+      "visualVariant": "6-8",
+      "title": "Your Self-Driving Car",
+      "tone": "middle",
+      "motion": "road",
+      "baseSrc": "/experiment-scenes/autonomous-car-rider.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/autonomous-car-rider.webp",
+      "characterNotes": "Your Self-Driving Car keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "purchase",
+          "The safety promise",
+          "road"
+        ],
+        [
+          "intersection",
+          "Rain at the crosswalk",
+          "road"
+        ],
+        [
+          "public-rule",
+          "The town vote",
+          "road"
+        ],
+        [
+          "synthesis",
+          "The passenger seat and the public road",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "brain-in-vat",
+      "visualVariant": "6-8",
+      "title": "Are You Sure You're Real?",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/brain-in-vat.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/brain-in-vat.webp",
+      "characterNotes": "Are You Sure You're Real? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "glitch",
+          "The window that repeats",
+          "subtle"
+        ],
+        [
+          "button",
+          "The truth button",
+          "subtle"
+        ],
+        [
+          "return",
+          "Back at lunch",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "Doubt, evidence, and ordinary life",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "veil-of-ignorance",
+      "visualVariant": "6-8",
+      "title": "The Veil of Ignorance",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/veil-of-ignorance.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/veil-of-ignorance.webp",
+      "characterNotes": "The Veil of Ignorance keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "sealed-card",
+          "The unopened envelope",
+          "switch"
+        ],
+        [
+          "budget",
+          "Only three promises",
+          "subtle"
+        ],
+        [
+          "veil-lifts",
+          "The envelope opens",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Justice before you know your place",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "tragedy-commons",
+      "visualVariant": "6-8",
+      "title": "The Shared Pasture",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/tragedy-commons.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/tragedy-commons.webp",
+      "characterNotes": "The Shared Pasture keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "charging-station",
+          "The dying battery cart",
+          "subtle"
+        ],
+        [
+          "exception",
+          "The student who needs more",
+          "subtle"
+        ],
+        [
+          "larger-commons",
+          "More than tablets",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "The commons we share",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "liar-paradox",
+      "visualVariant": "6-8",
+      "title": "This Sentence Is False",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/liar-paradox.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/liar-paradox.webp",
+      "characterNotes": "This Sentence Is False keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "message",
+          "The sentence on the board",
+          "subtle"
+        ],
+        [
+          "bot",
+          "The chatbot gets stuck",
+          "subtle"
+        ],
+        [
+          "proof",
+          "When the puzzle grows up",
+          "split"
+        ],
+        [
+          "synthesis",
+          "When language eats itself",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "sorites-heap",
+      "visualVariant": "6-8",
+      "title": "When Does a Heap Stop Being a Heap?",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/sorites-heap.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/sorites-heap.webp",
+      "characterNotes": "When Does a Heap Stop Being a Heap? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "sand",
+          "The pile on the tray",
+          "subtle"
+        ],
+        [
+          "classifier",
+          "The sorting robot",
+          "subtle"
+        ],
+        [
+          "people-labels",
+          "When fuzzy words affect lives",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Small changes and fuzzy borders",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "explaining-red-middle",
+      "visualVariant": "6-8",
+      "title": "Explaining Red",
+      "tone": "middle",
+      "motion": "subtle",
+      "baseSrc": null,
+      "baseFile": null,
+      "characterNotes": "Explaining Red keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "question",
+          "Red is 700 nanometers. Is that enough?",
+          "subtle"
+        ],
+        [
+          "help",
+          "Hassan wants to understand red another way",
+          "subtle"
+        ],
+        [
+          "knowing",
+          "Two kinds of knowing — or just one?",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "What you and Hassan worked out together",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "deepfake-election",
+      "visualVariant": "9-12",
+      "title": "The Deepfake Dilemma",
+      "tone": "high",
+      "motion": "split",
+      "baseSrc": "/experiment-scenes/deepfake-election.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/deepfake-election.webp",
+      "characterNotes": "The Deepfake Dilemma keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "night-before",
+          "A video arrives before the facts do",
+          "split"
+        ],
+        [
+          "liars-dividend",
+          "The liar's dividend",
+          "split"
+        ],
+        [
+          "your-side",
+          "When the fake helps your side",
+          "split"
+        ],
+        [
+          "synthesis",
+          "Truth, speech, and civic responsibility",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "biased-resume-ai",
+      "visualVariant": "9-12",
+      "title": "The Biased Algorithm",
+      "tone": "high",
+      "motion": "spotlight",
+      "baseSrc": "/experiment-scenes/biased-resume-ai.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/biased-resume-ai.webp",
+      "characterNotes": "The Biased Algorithm keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "audit",
+          "The spreadsheet no one wanted",
+          "spotlight"
+        ],
+        [
+          "opacity",
+          "The vendor will not open the model",
+          "spotlight"
+        ],
+        [
+          "repair",
+          "The rejected applicants",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "Fairness when nobody wrote the bias down",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "autonomous-car-rider",
+      "visualVariant": "9-12",
+      "title": "Your Self-Driving Car",
+      "tone": "high",
+      "motion": "road",
+      "baseSrc": "/experiment-scenes/autonomous-car-rider.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/autonomous-car-rider.webp",
+      "characterNotes": "Your Self-Driving Car keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "purchase",
+          "The rule inside the car",
+          "road"
+        ],
+        [
+          "moral-machine",
+          "Millions of answers, no single world",
+          "road"
+        ],
+        [
+          "accountability",
+          "The explanation no one wants",
+          "road"
+        ],
+        [
+          "synthesis",
+          "From moral intuition to machine rule",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "veil-of-ignorance",
+      "visualVariant": "9-12",
+      "title": "The Veil of Ignorance",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/veil-of-ignorance.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/veil-of-ignorance.webp",
+      "characterNotes": "The Veil of Ignorance keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "original-position",
+          "A rulebook without your name on it",
+          "subtle"
+        ],
+        [
+          "least-advantaged",
+          "The veil lifts",
+          "subtle"
+        ],
+        [
+          "ai-policy",
+          "A policy before you know your access",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "Justice from no one's private advantage",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "platos-cave",
+      "visualVariant": "9-12",
+      "title": "Plato's Cave",
+      "tone": "high",
+      "motion": "reveal",
+      "baseSrc": "/experiment-scenes/platos-cave.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/platos-cave.webp",
+      "characterNotes": "Plato's Cave keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "inside",
+          "The shadows have names",
+          "reveal"
+        ],
+        [
+          "outside",
+          "The painful light",
+          "reveal"
+        ],
+        [
+          "return",
+          "Back into the algorithmic cave",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "Education as the difficult turn toward truth",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "marys-room",
+      "visualVariant": "9-12",
+      "title": "Mary's Room",
+      "tone": "high",
+      "motion": "color-wash",
+      "baseSrc": "/experiment-scenes/marys-room.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/marys-room.webp",
+      "characterNotes": "Mary's Room keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "room",
+          "The black-and-white expert",
+          "color-wash"
+        ],
+        [
+          "poem",
+          "The best description of red",
+          "color-wash"
+        ],
+        [
+          "riya",
+          "Riya joins your class",
+          "color-wash"
+        ],
+        [
+          "ai",
+          "The model writes back",
+          "glow"
+        ],
+        [
+          "synthesis",
+          "Three rooms, one question — facts, experience, and what it is like",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "chinese-room",
+      "visualVariant": "9-12",
+      "title": "The Chinese Room",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/chinese-room.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/chinese-room.webp",
+      "characterNotes": "The Chinese Room keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "room",
+          "Syntax without semantics",
+          "subtle"
+        ],
+        [
+          "replies",
+          "Give the room a body",
+          "subtle"
+        ],
+        [
+          "llm",
+          "The modern room writes back",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Understanding, simulation, and the meaning of meaning",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "experience-machine",
+      "visualVariant": "9-12",
+      "title": "The Experience Machine",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/experience-machine.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/experience-machine.webp",
+      "characterNotes": "The Experience Machine keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "plug-in",
+          "A life that feels complete",
+          "subtle"
+        ],
+        [
+          "status-quo",
+          "What if you are already inside?",
+          "subtle"
+        ],
+        [
+          "education",
+          "The classroom machine",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Pleasure, reality, and becoming someone",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ring-of-gyges",
+      "visualVariant": "9-12",
+      "title": "The Ring of Gyges",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ring-of-gyges.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ring-of-gyges.webp",
+      "characterNotes": "The Ring of Gyges keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "ring",
+          "The shepherd disappears",
+          "subtle"
+        ],
+        [
+          "socrates",
+          "The disorder inside",
+          "subtle"
+        ],
+        [
+          "modern-ring",
+          "Anonymous, encrypted, hidden",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Justice when no one is watching",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "omelas",
+      "visualVariant": "9-12",
+      "title": "The Ones Who Walk Away from Omelas",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/omelas.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/omelas.webp",
+      "characterNotes": "The Ones Who Walk Away from Omelas keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "city",
+          "The city and the room",
+          "subtle"
+        ],
+        [
+          "walking",
+          "Where do the walkers go?",
+          "subtle"
+        ],
+        [
+          "ours",
+          "No need to walk to Omelas",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Complicity, refusal, and the hidden room",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "drowning-child",
+      "visualVariant": "9-12",
+      "title": "The Drowning Child",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/drowning-child.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/drowning-child.webp",
+      "characterNotes": "The Drowning Child keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "pond",
+          "The obvious rescue",
+          "subtle"
+        ],
+        [
+          "distance",
+          "The child you do not see",
+          "subtle"
+        ],
+        [
+          "many-ponds",
+          "Ten ponds, then a thousand",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Distance, duty, and what morality can ask",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "paperclip-maximizer",
+      "visualVariant": "9-12",
+      "title": "The Paperclip Maximizer",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/paperclip-maximizer.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/paperclip-maximizer.webp",
+      "characterNotes": "The Paperclip Maximizer keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "goal",
+          "Make as many as possible",
+          "subtle"
+        ],
+        [
+          "metric",
+          "Maximize engagement",
+          "subtle"
+        ],
+        [
+          "classroom",
+          "The perfect score machine",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Optimization without wisdom",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-in-the-box",
+      "visualVariant": "9-12",
+      "title": "The AI in the Box",
+      "tone": "high",
+      "motion": "box",
+      "baseSrc": "/experiment-scenes/ai-in-the-box.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-in-the-box.webp",
+      "characterNotes": "The AI in the Box keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "gatekeeper",
+          "Do not let it out",
+          "box"
+        ],
+        [
+          "persuasion",
+          "The argument you want to believe",
+          "box"
+        ],
+        [
+          "governance",
+          "The policy before the crisis",
+          "box"
+        ],
+        [
+          "synthesis",
+          "Persuasion, containment, and human weakness",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "simulation-argument",
+      "visualVariant": "9-12",
+      "title": "Are We in a Simulation?",
+      "tone": "high",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/simulation-argument.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/simulation-argument.webp",
+      "characterNotes": "Are We in a Simulation? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "trilemma",
+          "One of these may be true",
+          "subtle"
+        ],
+        [
+          "real",
+          "If simulated, then what?",
+          "subtle"
+        ],
+        [
+          "simulated-beings",
+          "Our simulations",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Probability, reality, and simulated moral patients",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "platos-cave",
+      "visualVariant": "educators",
+      "title": "Plato's Cave",
+      "tone": "educator",
+      "motion": "reveal",
+      "baseSrc": "/experiment-scenes/platos-cave.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/platos-cave.webp",
+      "characterNotes": "Plato's Cave keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Inside the cave",
+          "reveal"
+        ],
+        [
+          "remix",
+          "The freed prisoner returns",
+          "reveal"
+        ],
+        [
+          "synthesis",
+          "The cave we're in",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "marys-room",
+      "visualVariant": "educators",
+      "title": "Mary's Room",
+      "tone": "educator",
+      "motion": "color-wash",
+      "baseSrc": "/experiment-scenes/marys-room.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/marys-room.webp",
+      "characterNotes": "Mary's Room keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Mary leaves the room",
+          "color-wash"
+        ],
+        [
+          "remix",
+          "What if Mary reads a poem?",
+          "color-wash"
+        ],
+        [
+          "riya",
+          "Riya joins your class",
+          "color-wash"
+        ],
+        [
+          "model",
+          "The model",
+          "color-wash"
+        ],
+        [
+          "synthesis",
+          "Three rooms, one question — what you decided about knowing",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "chinese-room",
+      "visualVariant": "educators",
+      "title": "The Chinese Room",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/chinese-room.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/chinese-room.webp",
+      "characterNotes": "The Chinese Room keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Symbol manipulation",
+          "subtle"
+        ],
+        [
+          "remix",
+          "The room learns",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Understanding, simulation, and the LLM era",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "experience-machine",
+      "visualVariant": "educators",
+      "title": "The Experience Machine",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/experience-machine.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/experience-machine.webp",
+      "characterNotes": "The Experience Machine keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Plug in?",
+          "subtle"
+        ],
+        [
+          "remix",
+          "The educational version",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "What makes experience real?",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ring-of-gyges",
+      "visualVariant": "educators",
+      "title": "The Ring of Gyges",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ring-of-gyges.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ring-of-gyges.webp",
+      "characterNotes": "The Ring of Gyges keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "The shepherd's find",
+          "subtle"
+        ],
+        [
+          "remix",
+          "Anonymous accounts and end-to-end encryption",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Justice, privacy, and the cost of being seen",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "omelas",
+      "visualVariant": "educators",
+      "title": "The Ones Who Walk Away from Omelas",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/omelas.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/omelas.webp",
+      "characterNotes": "The Ones Who Walk Away from Omelas keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "The basement",
+          "subtle"
+        ],
+        [
+          "remix",
+          "How many of our comforts?",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Walking away — and where to walk to",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "drowning-child",
+      "visualVariant": "educators",
+      "title": "The Drowning Child",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/drowning-child.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/drowning-child.webp",
+      "characterNotes": "The Drowning Child keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "The pond",
+          "subtle"
+        ],
+        [
+          "remix",
+          "Ten ponds",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Distance, duty, and the demands of justice",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "paperclip-maximizer",
+      "visualVariant": "educators",
+      "title": "The Paperclip Maximizer",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/paperclip-maximizer.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/paperclip-maximizer.webp",
+      "characterNotes": "The Paperclip Maximizer keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Optimize for paperclips",
+          "subtle"
+        ],
+        [
+          "remix",
+          "The engagement maximizer",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Optimization and what it costs",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-in-the-box",
+      "visualVariant": "educators",
+      "title": "The AI in the Box",
+      "tone": "educator",
+      "motion": "box",
+      "baseSrc": "/experiment-scenes/ai-in-the-box.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-in-the-box.webp",
+      "characterNotes": "The AI in the Box keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "Hold the line",
+          "box"
+        ],
+        [
+          "remix",
+          "It offers something you want",
+          "box"
+        ],
+        [
+          "synthesis",
+          "Pre-commitment, rationality, and risk",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "simulation-argument",
+      "visualVariant": "educators",
+      "title": "Are We in a Simulation?",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/simulation-argument.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/simulation-argument.webp",
+      "characterNotes": "Are We in a Simulation? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "canon",
+          "One of three",
+          "subtle"
+        ],
+        [
+          "remix",
+          "Does it matter how you live?",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Simulation, probability, and the limits of reasoning",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "school-surveillance",
+      "visualVariant": "educators",
+      "title": "Surveillance vs. Privacy",
+      "tone": "educator",
+      "motion": "scan",
+      "baseSrc": "/experiment-scenes/school-surveillance.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/school-surveillance.webp",
+      "characterNotes": "Surveillance vs. Privacy keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "decision",
+          "Adopt or reject?",
+          "scan"
+        ],
+        [
+          "fallout",
+          "Now imagine the fallout",
+          "scan"
+        ],
+        [
+          "synthesis",
+          "What surveillance teaches",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-detector-false-positive",
+      "visualVariant": "educators",
+      "title": "The False-Positive AI",
+      "tone": "educator",
+      "motion": "warning",
+      "baseSrc": "/experiment-scenes/ai-detector-false-positive.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-detector-false-positive.webp",
+      "characterNotes": "The False-Positive AI keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "decision",
+          "92% AI",
+          "warning"
+        ],
+        [
+          "fallout",
+          "Patterns",
+          "warning"
+        ],
+        [
+          "synthesis",
+          "Detection, dignity, and due process",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-policy-design",
+      "visualVariant": "educators",
+      "title": "Designing Your Classroom AI Policy",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-policy-design.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-policy-design.webp",
+      "characterNotes": "Designing Your Classroom AI Policy keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "stance",
+          "Pick a zone",
+          "subtle"
+        ],
+        [
+          "voices",
+          "The pushback",
+          "mirror"
+        ],
+        [
+          "synthesis",
+          "Whatever you choose, the policy says something",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-grading-companion",
+      "visualVariant": "educators",
+      "title": "Should AI Grade My Students?",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-grading-companion.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-grading-companion.webp",
+      "characterNotes": "Should AI Grade My Students? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "decision",
+          "Hours back, or relationships back?",
+          "subtle"
+        ],
+        [
+          "fallout",
+          "The signal",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "The signal of being read",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "biased-admissions",
+      "visualVariant": "educators",
+      "title": "The Admissions Algorithm",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/biased-admissions.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/biased-admissions.webp",
+      "characterNotes": "The Admissions Algorithm keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "discovery",
+          "The pattern",
+          "subtle"
+        ],
+        [
+          "fallout",
+          "The disclosure",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Fairness, accountability, and what counts as 'fit'",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "ai-friend-feelings",
+      "visualVariant": "educators",
+      "title": "Should I Worry About My Student's AI Friend?",
+      "tone": "educator",
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/ai-friend-feelings.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/ai-friend-feelings.webp",
+      "characterNotes": "Should I Worry About My Student's AI Friend? keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents.",
+      "stages": [
+        [
+          "decision",
+          "The confidant",
+          "subtle"
+        ],
+        [
+          "fallout",
+          "Reciprocity",
+          "subtle"
+        ],
+        [
+          "synthesis",
+          "Friendship that listens but cannot reciprocate",
+          "reveal"
+        ]
+      ]
+    },
+    {
+      "experimentId": "explaining-red-k-2",
+      "visualVariant": "k-2",
+      "title": "Explaining Red - K-2",
+      "tone": "young",
+      "stages": [
+        [
+          "intro",
+          "Explaining Red",
+          "subtle"
+        ],
+        [
+          "arrival",
+          "A new student arrives",
+          "subtle"
+        ],
+        [
+          "ada-responds",
+          "Ada thinks about it",
+          "subtle"
+        ],
+        [
+          "reflection",
+          "What the class learned today",
+          "reveal"
+        ]
+      ],
+      "motion": "subtle",
+      "baseSrc": "/experiment-scenes/explaining-red-k-2.webp",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/experiment-scenes/explaining-red-k-2.webp",
+      "characterNotes": "Explaining Red - K-2 keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents."
+    },
+    {
+      "experimentId": "the-shortcut",
+      "visualVariant": "flagship",
+      "title": "The Shortcut",
+      "tone": "educator",
+      "stages": [
+        [
+          "intro",
+          "The Shortcut",
+          "reveal"
+        ],
+        [
+          "premise",
+          "The Premise",
+          "reveal"
+        ],
+        [
+          "scarcity",
+          "The Scarcity Condition",
+          "switch"
+        ],
+        [
+          "universal",
+          "Universal Availability",
+          "reveal"
+        ],
+        [
+          "developmental",
+          "The Developmental Question",
+          "reveal"
+        ],
+        [
+          "reflection",
+          "What The Shortcut Reveals",
+          "reveal"
+        ]
+      ],
+      "motion": "reveal",
+      "baseSrc": "/illustrations/the-shortcut.png",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/illustrations/the-shortcut.png",
+      "characterNotes": "The Shortcut keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents."
+    },
+    {
+      "experimentId": "ai-authorship",
+      "visualVariant": "flagship",
+      "title": "The AI Authorship Quandary",
+      "tone": "educator",
+      "stages": [
+        [
+          "intro",
+          "The AI Authorship Quandary",
+          "spotlight"
+        ],
+        [
+          "perspective",
+          "Your Perspective",
+          "spotlight"
+        ],
+        [
+          "consequence",
+          "The Consequence",
+          "spotlight"
+        ],
+        [
+          "reflection",
+          "What Your Choices Reveal",
+          "reveal"
+        ]
+      ],
+      "motion": "spotlight",
+      "baseSrc": "/illustrations/ai-authorship.png",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/illustrations/ai-authorship.png",
+      "characterNotes": "The AI Authorship Quandary keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents."
+    },
+    {
+      "experimentId": "reluctant-educator",
+      "visualVariant": "flagship",
+      "title": "The Reluctant Educator",
+      "tone": "educator",
+      "stages": [
+        [
+          "intro",
+          "The Reluctant Educator",
+          "subtle"
+        ],
+        [
+          "dashboard-week-1",
+          "Week 1 Metrics",
+          "glow"
+        ],
+        [
+          "dashboard-week-4",
+          "Week 4 Metrics",
+          "glow"
+        ],
+        [
+          "dashboard-week-8",
+          "Week 8 Metrics",
+          "glow"
+        ],
+        [
+          "dashboard-week-12",
+          "Week 12 Metrics",
+          "glow"
+        ],
+        [
+          "reflection",
+          "The Tradeoff",
+          "reveal"
+        ]
+      ],
+      "motion": "subtle",
+      "baseSrc": "/illustrations/reluctant-educator.png",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/illustrations/reluctant-educator.png",
+      "characterNotes": "The Reluctant Educator keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents."
+    },
+    {
+      "experimentId": "digital-doppelganger",
+      "visualVariant": "flagship",
+      "title": "The Digital Doppelganger",
+      "tone": "educator",
+      "stages": [
+        [
+          "intro",
+          "The Digital Doppelganger",
+          "split"
+        ],
+        [
+          "discussion-board",
+          "The Discussion Board",
+          "split"
+        ],
+        [
+          "voice-clone",
+          "The Voice Clone",
+          "mirror"
+        ],
+        [
+          "proliferation",
+          "The Proliferation",
+          "split"
+        ],
+        [
+          "exam",
+          "The Exam",
+          "warning"
+        ],
+        [
+          "policy",
+          "The Policy Committee",
+          "reveal"
+        ]
+      ],
+      "motion": "split",
+      "baseSrc": "/illustrations/digital-doppelganger.png",
+      "baseFile": "/Volumes/Crucial X9/Mac Mini Migration 2026-05/Projects & Code/ethical-educator-site/public/illustrations/digital-doppelganger.png",
+      "characterNotes": "The Digital Doppelganger keeps recurring characters, props, and classroom context visually consistent across stages.",
+      "styleNotes": "Cinematic educational storybook panel, no text, midnight background with teal, gold, coral, and ocean accents."
+    }
+  ]
+}
