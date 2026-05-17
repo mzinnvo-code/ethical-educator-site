@@ -146,15 +146,7 @@ function TeacherToggle({ active, onToggle, accent }) {
   );
 }
 
-export default function ScenarioCard({
-  experiment,
-  mode = "story",
-  visualVariant,
-  onClose,
-  onRecordChoice,
-  relatedExperiment = null,
-  onPickRelated = null,
-}) {
+export default function ScenarioCard({ experiment, mode = "story", onClose, onRecordChoice, relatedExperiment = null, onPickRelated = null }) {
   const audio = useAudio();
   const stages = experiment.stages || synthesizeStages(experiment);
   const [stageIdx, setStageIdx] = useState(0);
@@ -196,7 +188,6 @@ export default function ScenarioCard({
   const isSynthesisStage = !!stage.synthesis;
   const isLastStage = stageIdx === stages.length - 1;
   const Scene = experiment.scene || null;
-  const sceneVariant = visualVariant || experiment.visualVariant || experiment.gradeBands?.[0] || mode;
   const elementaryGrade = experiment.gradeLevels?.[0];
   const useShortKidPrompt = mode === "kid" && (elementaryGrade === "k" || elementaryGrade === "1");
   const storySections = resolveStorySections(stage, chose, mode);
@@ -299,17 +290,7 @@ export default function ScenarioCard({
       <Shell color={accent}>
         <HeaderBar />
 
-        {Scene && (
-          <Scene
-            stage={stageIdx}
-            stageId={stage.id}
-            stageTitle={stage.title || stage.kicker}
-            stageCount={stages.length}
-            visualVariant={sceneVariant}
-            chose={chose}
-            mode={mode}
-          />
-        )}
+        {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
         {!isSynthesisStage && (
           <>
@@ -460,17 +441,7 @@ export default function ScenarioCard({
 
         <HeaderBar />
 
-        {Scene && (
-          <Scene
-            stage={stageIdx}
-            stageId={stage.id}
-            stageTitle={stage.title || stage.kicker}
-            stageCount={stages.length}
-            visualVariant={sceneVariant}
-            chose={chose}
-            mode={mode}
-          />
-        )}
+        {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
         {!isSynthesisStage && (
           <>
@@ -567,17 +538,7 @@ export default function ScenarioCard({
       {experiment.id === "marys-room" && (
         <MarysRoomEmbed accent={accent} />
       )}
-      {Scene && (
-        <Scene
-          stage={stageIdx}
-          stageId={stage.id}
-          stageTitle={stage.title || stage.kicker}
-          stageCount={stages.length}
-          visualVariant={sceneVariant}
-          chose={chose}
-          mode={mode}
-        />
-      )}
+      {Scene && <Scene stage={stageIdx} chose={chose} mode={mode} />}
 
       {!isSynthesisStage && (
         <>

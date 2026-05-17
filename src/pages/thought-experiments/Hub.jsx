@@ -10,7 +10,6 @@ import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import { EXPERIMENTS, getExperimentsByGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
-import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 
 // Pick three "featured this week" — rotates by ISO week, deterministic.
 function featuredThisWeek() {
@@ -26,105 +25,6 @@ function featuredThisWeek() {
 }
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
-
-const JOURNEY_PREVIEWS = [
-  {
-    label: "K-5",
-    title: "Story choices",
-    image: getSceneIllustration("magic-toy", { stageId: "setup", visualVariant: "k-5" }),
-    color: C.coral,
-  },
-  {
-    label: "6-8",
-    title: "Dilemma turns",
-    image: getSceneIllustration("deepfake-election", { stageId: "viral-clip", visualVariant: "6-8" }),
-    color: C.gold,
-  },
-  {
-    label: "9-12",
-    title: "Canon remixed",
-    image: getSceneIllustration("marys-room", { stageId: "room", visualVariant: "9-12" }),
-    color: C.sky,
-  },
-  {
-    label: "Educators",
-    title: "Policy pressure",
-    image: getSceneIllustration("the-shortcut", { stageId: "premise", visualVariant: "flagship" }),
-    color: C.teal,
-  },
-];
-
-function JourneyPreviewStrip() {
-  return (
-    <FadeIn delay={0.08}>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-        gap: 10,
-        margin: "24px auto 30px",
-        maxWidth: 980,
-      }}>
-        {JOURNEY_PREVIEWS.map((item, index) => (
-          <figure
-            key={item.label}
-            style={{
-              position: "relative",
-              overflow: "hidden",
-              aspectRatio: "16 / 9",
-              borderRadius: 14,
-              margin: 0,
-              border: `1px solid ${item.color}32`,
-              background: `${item.color}12`,
-              boxShadow: `0 16px 42px rgba(0,0,0,0.18)`,
-            }}
-          >
-            {item.image?.src && (
-              <img
-                src={item.image.src}
-                alt={item.image.alt || `${item.label} thought experiment visual preview`}
-                loading={index === 0 ? "eager" : "lazy"}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  filter: "saturate(1.02) contrast(0.98)",
-                }}
-              />
-            )}
-            <span style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(180deg, rgba(8,18,32,0.05), rgba(8,18,32,0.72))",
-            }} />
-            <figcaption style={{
-              position: "absolute",
-              left: 12,
-              right: 12,
-              bottom: 11,
-            }}>
-              <p style={{
-                color: item.color,
-                fontSize: "0.62rem",
-                fontWeight: 800,
-                letterSpacing: "0.13em",
-                textTransform: "uppercase",
-                marginBottom: 3,
-              }}>{item.label}</p>
-              <p style={{
-                color: C.textPrimary,
-                fontFamily: "'Source Serif 4', Georgia, serif",
-                fontSize: "0.98rem",
-                fontWeight: 700,
-                lineHeight: 1.2,
-              }}>{item.title}</p>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </FadeIn>
-  );
-}
 
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
@@ -157,8 +57,6 @@ export default function Hub({ navigate }) {
             None have right answers. All of them help us think.
           </Subtitle>
         </FadeIn>
-
-        <JourneyPreviewStrip />
 
         <Narrow>
           {/* K-12 AUDIENCE TILES — three-up grid for the student-facing grade bands, separated from the For Educators section below. */}

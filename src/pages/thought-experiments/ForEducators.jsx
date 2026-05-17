@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { C, isNewExperiment } from "../../theme.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
-import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 import { FadeIn, Narrow, NewBadge } from "../../components/shared.jsx";
 import GradePage from "./GradePage.jsx";
 import TheShortcutExperiment from "../../experiments/TheShortcut.jsx";
@@ -10,10 +9,10 @@ import ReluctantEducatorExperiment from "../../experiments/ReluctantEducator.jsx
 import DoppelgangerExperiment from "../../experiments/Doppelganger.jsx";
 
 const FLAGSHIPS = [
-  { id: "the-shortcut", icon: "⚡", iconLabel: "Lightning bolt", image: getSceneIllustration("the-shortcut", { stageId: "intro", visualVariant: "flagship" }) || getFeatureIllustration("the-shortcut"), title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you?", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
-  { id: "ai-authorship", icon: "📝", iconLabel: "Memo", image: getSceneIllustration("ai-authorship", { stageId: "intro", visualVariant: "flagship" }) || getFeatureIllustration("ai-authorship"), title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
-  { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", image: getSceneIllustration("reluctant-educator", { stageId: "intro", visualVariant: "flagship" }) || getFeatureIllustration("reluctant-educator"), title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
-  { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", image: getSceneIllustration("digital-doppelganger", { stageId: "intro", visualVariant: "flagship" }) || getFeatureIllustration("digital-doppelganger"), title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
+  { id: "the-shortcut", icon: "⚡", iconLabel: "Lightning bolt", image: getFeatureIllustration("the-shortcut"), title: "The Shortcut", tagline: "If you could bypass the entire process of learning and arrive at mastery instantly — should you?", color: C.teal, gf: "rgba(26,138,122,0.12)", gt: "rgba(26,90,138,0.06)", Comp: TheShortcutExperiment },
+  { id: "ai-authorship", icon: "📝", iconLabel: "Memo", image: getFeatureIllustration("ai-authorship"), title: "The AI Authorship Quandary", tagline: "Same essay. Same AI. Four people. Four completely different truths.", color: C.gold, gf: "rgba(200,152,48,0.12)", gt: "rgba(192,112,64,0.06)", Comp: AuthorshipExperiment },
+  { id: "reluctant-educator", icon: "📊", iconLabel: "Bar chart", image: getFeatureIllustration("reluctant-educator"), title: "The Reluctant Educator", tagline: "When test scores and critical thinking pull in opposite directions — make the call.", color: C.coral, gf: "rgba(192,112,64,0.12)", gt: "rgba(200,152,48,0.06)", Comp: ReluctantEducatorExperiment },
+  { id: "digital-doppelganger", icon: "👤", iconLabel: "Silhouette", image: getFeatureIllustration("digital-doppelganger"), title: "The Digital Doppelgänger", tagline: "A five-act semester. Voice clones. AI proxies. Who was educated?", color: C.ocean, gf: "rgba(26,90,138,0.12)", gt: "rgba(26,138,122,0.06)", Comp: DoppelgangerExperiment },
 ];
 
 function experimentIdFromHash() {

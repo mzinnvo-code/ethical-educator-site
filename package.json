@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "visuals:check": "node scripts/check-stage-visuals.mjs",
     "prerender": "react-snap",
     "preview": "vite preview",
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",

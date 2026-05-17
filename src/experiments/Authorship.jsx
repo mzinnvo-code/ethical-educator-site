@@ -18,12 +18,6 @@ export default function AuthorshipExperiment() {
       cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
-  const stageVisuals = [
-    ["intro", "The AI Authorship Quandary"],
-    ["perspective", "Your Perspective"],
-    ["consequence", "The Consequence"],
-    ["reflection", "What Your Choices Reveal"],
-  ];
   const go = (v) => {
     audioBus.stop();
     audio.playClick();
@@ -52,6 +46,7 @@ export default function AuthorshipExperiment() {
     // ─── INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "20px 0" }}>
+        <IllustratedScene experimentId="ai-authorship" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.4rem", marginBottom: 10 }}>The AI Authorship Quandary</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 12px" }}>
           A student submits an AI-assisted essay that shows genuine understanding of the material. The teacher flags it. The parent defends it. The syllabus is silent. This scenario — drawn from Matthew's blog post <PhiloRef text="'The AI Authorship Quandary'" url="https://ethicalaiedu.wordpress.com/2024/02/14/the-ai-authorship-quandary/" /> — has played out in thousands of schools since 2023. You'll experience it from one perspective and discover how the same facts produce entirely different moral conclusions depending on where you stand.
@@ -175,22 +170,9 @@ export default function AuthorshipExperiment() {
     },
   ];
 
-  const [visualStageId, visualStageTitle] = stageVisuals[stage] || stageVisuals[0];
-
   return (
     <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
-      <Shell animating={anim} color={role ? roles[role].color : C.gold}>
-        <IllustratedScene
-          experimentId="ai-authorship"
-          visualVariant="flagship"
-          stage={stage}
-          stageId={visualStageId}
-          stageTitle={visualStageTitle}
-          stageCount={stageVisuals.length}
-          mode="canon"
-        />
-        {stages[stage]()}
-      </Shell>
+      <Shell animating={anim} color={role ? roles[role].color : C.gold}>{stages[stage]()}</Shell>
     </div>
   );
 }

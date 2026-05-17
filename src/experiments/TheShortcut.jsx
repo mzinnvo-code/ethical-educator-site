@@ -42,14 +42,6 @@ export default function TheShortcutExperiment() {
       cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
-  const stageVisuals = [
-    ["intro", "The Shortcut"],
-    ["premise", "The Premise"],
-    ["scarcity", "The Scarcity Condition"],
-    ["universal", "Universal Availability"],
-    ["developmental", "The Developmental Question"],
-    ["reflection", "What The Shortcut Reveals"],
-  ];
   const go = (k, v) => {
     audioBus.stop();
     audio.playChime();
@@ -63,6 +55,7 @@ export default function TheShortcutExperiment() {
     // ─── INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "24px 0" }}>
+        <IllustratedScene experimentId="the-shortcut" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.5rem", marginBottom: 10 }}>The Shortcut</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 12px" }}>
           Computer scientist <PhiloRef text="Daniel Lemire" url="https://lemire.me/blog/2012/11/16/the-learning-pill/" /> posed a version of this question in 2012: imagine a pill granting instant expert knowledge. He predicted the pill would be made illegal, educators would insist knowledge is "just one component," and degrees would persist because they signal character. A decade later, AI is testing every one of those predictions.
@@ -209,22 +202,9 @@ export default function TheShortcutExperiment() {
     ),
   ];
 
-  const [visualStageId, visualStageTitle] = stageVisuals[stage] || stageVisuals[0];
-
   return (
     <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
-      <Shell animating={anim}>
-        <IllustratedScene
-          experimentId="the-shortcut"
-          visualVariant="flagship"
-          stage={stage}
-          stageId={visualStageId}
-          stageTitle={visualStageTitle}
-          stageCount={stageVisuals.length}
-          mode="canon"
-        />
-        {stages[stage]()}
-      </Shell>
+      <Shell animating={anim}>{stages[stage]()}</Shell>
     </div>
   );
 }

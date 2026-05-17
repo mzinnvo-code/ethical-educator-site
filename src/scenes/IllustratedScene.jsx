@@ -61,10 +61,6 @@ function SceneStyles() {
         animation: eeeSceneDrift 18s ease-in-out infinite alternate;
       }
 
-      .eee-illustrated-scene[data-fresh="true"] {
-        animation: eeeScenePanelIn 0.38s ease-out both;
-      }
-
       .eee-scene__aura,
       .eee-scene__motion,
       .eee-scene__grain {
@@ -182,37 +178,6 @@ function SceneStyles() {
         box-shadow: 0 0 12px var(--scene-accent);
       }
 
-      .eee-scene__progress {
-        position: absolute;
-        left: 14px;
-        top: 12px;
-        z-index: 5;
-        display: flex;
-        gap: 5px;
-        padding: 7px 8px;
-        border-radius: 999px;
-        background: rgba(5, 10, 18, 0.42);
-        border: 1px solid rgba(224, 220, 208, 0.12);
-        backdrop-filter: blur(8px);
-      }
-
-      .eee-scene__progress i {
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: rgba(224, 220, 208, 0.28);
-      }
-
-      .eee-scene__progress i.is-active {
-        background: var(--scene-accent);
-        box-shadow: 0 0 12px var(--scene-accent);
-      }
-
-      @keyframes eeeScenePanelIn {
-        from { opacity: 0.36; transform: translateY(8px) scale(0.992); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-      }
-
       @keyframes eeeSceneDrift {
         from { transform: scale(1.025) translate3d(-0.35%, -0.25%, 0); }
         to { transform: scale(1.06) translate3d(0.45%, 0.35%, 0); }
@@ -282,7 +247,6 @@ function SceneStyles() {
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .eee-illustrated-scene,
         .eee-illustrated-scene img,
         .eee-scene__aura,
         .eee-scene__motion,
@@ -295,23 +259,8 @@ function SceneStyles() {
   );
 }
 
-export default function IllustratedScene({
-  experimentId,
-  stage = 0,
-  stageId,
-  stageTitle,
-  stageCount,
-  visualVariant,
-  chose = [],
-  mode = "story",
-}) {
-  const stageIndex = Number(stage) || 0;
-  const illustration = getSceneIllustration(experimentId, {
-    stageId,
-    stageIndex,
-    stageTitle,
-    visualVariant,
-  });
+export default function IllustratedScene({ experimentId, stage = 0, chose = [], mode = "story" }) {
+  const illustration = getSceneIllustration(experimentId);
   if (!illustration?.src) return null;
 
   const motion = MOTION_CLASS[illustration.motion] || "subtle";
@@ -319,21 +268,15 @@ export default function IllustratedScene({
   const accent = TONE_ACCENT[tone] || C.teal;
   const choiceCount = Array.isArray(chose) ? chose.filter(Boolean).length : 0;
   const maxWidth = mode === "kid" ? 640 : 700;
-  const stageDepth = Math.min(stageIndex, 4);
-  const progressTotal = Math.max(Number(stageCount) || 0, 0);
-  const progressIndex = progressTotal ? Math.min(stageIndex, progressTotal - 1) : -1;
+  const stageDepth = Math.min(Number(stage) || 0, 4);
 
   return (
     <>
       <SceneStyles />
       <figure
-        key={`${visualVariant || "default"}:${illustration.src}`}
         className={`eee-illustrated-scene eee-illustrated-scene--${tone}`}
         data-motion={motion}
         data-stage={stage}
-        data-stage-id={stageId || stage}
-        data-variant={visualVariant || "default"}
-        data-fresh="true"
         style={{
           "--scene-accent": accent,
           "--scene-accent-soft": `${accent}44`,
@@ -350,13 +293,6 @@ export default function IllustratedScene({
         }}
       >
         <img src={illustration.src} alt={illustration.alt} decoding="async" loading="eager" />
-        {progressTotal > 1 && (
-          <span className="eee-scene__progress" aria-hidden="true">
-            {Array.from({ length: Math.min(progressTotal, 6) }).map((_, index) => (
-              <i key={index} className={index <= progressIndex ? "is-active" : ""} />
-            ))}
-          </span>
-        )}
         <span className="eee-scene__aura" aria-hidden="true" />
         <span className={`eee-scene__motion eee-scene__motion--${motion}`} aria-hidden="true" />
         <span className="eee-scene__grain" aria-hidden="true" />

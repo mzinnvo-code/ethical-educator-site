@@ -6,15 +6,9 @@ import { getSceneIllustration } from "../data/sceneIllustrations.js";
 import { FadeIn, NewBadge } from "./shared.jsx";
 import { isNewExperiment } from "../theme.js";
 
-function PreviewArtwork({ experiment, accent, visualVariant }) {
+function PreviewArtwork({ experiment, accent }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const firstStage = experiment.stages?.[0];
-  const image = getSceneIllustration(experiment, {
-    stageId: firstStage?.id,
-    stageTitle: firstStage?.title || firstStage?.kicker,
-    stageIndex: 0,
-    visualVariant,
-  }) || getExperimentIllustration(experiment);
+  const image = getExperimentIllustration(experiment) || getSceneIllustration(experiment);
 
   if (!image || imageFailed) {
     return (
@@ -57,7 +51,7 @@ function PreviewArtwork({ experiment, accent, visualVariant }) {
 }
 
 // A grid of preview cards. Clicking a card triggers `onSelect(experiment)`.
-function PreviewCard({ experiment, onSelect, delay = 0, visualVariant }) {
+function PreviewCard({ experiment, onSelect, delay = 0 }) {
   const [hover, setHover] = useState(false);
   const accent = TOPIC_BY_ID[experiment.topics[0]]?.color || C.gold;
   const isNew = isNewExperiment(experiment.id);
@@ -95,7 +89,7 @@ function PreviewCard({ experiment, onSelect, delay = 0, visualVariant }) {
         }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           {isNew && <div style={{ position: "absolute", top: -4, right: -4 }}><NewBadge /></div>}
-          <PreviewArtwork experiment={experiment} accent={accent} visualVariant={visualVariant} />
+          <PreviewArtwork experiment={experiment} accent={accent} />
           <h3 style={{
             fontFamily: "'Source Serif 4', Georgia, serif",
             color: C.textPrimary, fontSize: "1.02rem", fontWeight: 700,
@@ -140,7 +134,7 @@ function PreviewCard({ experiment, onSelect, delay = 0, visualVariant }) {
   );
 }
 
-export default function ExperimentGrid({ experiments, onSelect, emptyMessage = "No experiments match these filters.", visualVariant }) {
+export default function ExperimentGrid({ experiments, onSelect, emptyMessage = "No experiments match these filters." }) {
   if (!experiments.length) {
     return (
       <div style={{
@@ -160,13 +154,7 @@ export default function ExperimentGrid({ experiments, onSelect, emptyMessage = "
       gap: 16,
     }}>
       {experiments.map((e, i) => (
-        <PreviewCard
-          key={e.id}
-          experiment={e}
-          onSelect={onSelect}
-          delay={Math.min(i, 8) * 0.04}
-          visualVariant={visualVariant}
-        />
+        <PreviewCard key={e.id} experiment={e} onSelect={onSelect} delay={Math.min(i, 8) * 0.04} />
       ))}
     </div>
   );
