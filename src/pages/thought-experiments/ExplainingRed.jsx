@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { C } from "../../theme.js";
 import { FadeIn, PageContainer, Narrow, SectionTitle, Subtitle, ContinueExploring } from "../../components/shared.jsx";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { EXPERIMENTS } from "../../data/experiments.js";
+import TeacherKit from "../../components/TeacherKit.jsx";
 import ExplainingRedK2 from "../../experiments/RedK2.jsx";
 import { audioBus } from "../../lib/audioBus.js";
 
@@ -25,7 +27,10 @@ const K2_META = {
   ],
 };
 
+const K2_EXPERIMENT = EXPERIMENTS.find((e) => e.id === "explaining-red-k-2");
+
 export function ExplainingRedK_2({ navigate }) {
+  const [showTeacherKit, setShowTeacherKit] = useState(false);
   const [, setRefresh] = useState(0);
 
   useEffect(() => () => audioBus.stop(), []);
@@ -58,6 +63,39 @@ export function ExplainingRedK_2({ navigate }) {
           <div style={{ marginTop: 28 }}>
             <ExplainingRedK2 />
           </div>
+
+          {K2_EXPERIMENT?.teacherKit && (
+            <FadeIn>
+              <div style={{ marginTop: 28, textAlign: "center" }}>
+                <button
+                  onClick={() => setShowTeacherKit((s) => !s)}
+                  style={{
+                    padding: "10px 22px",
+                    background: showTeacherKit ? C.gold : "transparent",
+                    color: showTeacherKit ? "#fff" : C.gold,
+                    border: `1px solid ${C.gold}`,
+                    borderRadius: 999,
+                    fontSize: "0.82rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.06em",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                  }}
+                >
+                  {showTeacherKit ? "Hide" : "Show"} For Teachers · Lesson Plan
+                </button>
+              </div>
+              {showTeacherKit && (
+                <div style={{ marginTop: 20 }}>
+                  <TeacherKit
+                    kit={K2_EXPERIMENT.teacherKit}
+                    experiment={K2_EXPERIMENT}
+                    accent={C.coral}
+                  />
+                </div>
+              )}
+            </FadeIn>
+          )}
 
           <FadeIn>
             <div style={{ marginTop: 36 }}>

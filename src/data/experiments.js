@@ -1465,6 +1465,29 @@ export const EXPERIMENTS = [
     emoji: "🎭", added: "2026-04-30", estimatedMinutes: 7,
   },
   {
+    id: "explaining-red-k-2",
+    title: "Explaining Red",
+    tagline: "A new student named Ada joins the class while everyone is learning about colors. Help your classmates share what red is.",
+    gradeBands: ["k-5"],
+    gradeLevels: ["k", "1", "2"],
+    topics: ["mind", "knowledge", "friendship", "ai-ethics"],
+    tier: "scenario",
+    // This scenario uses a custom audio-driven classroom-scene component
+    // (src/experiments/RedK2.jsx), rendered by src/pages/thought-experiments/
+    // ExplainingRed.jsx, rather than the standard data-driven stages[] format.
+    // This record exists so the teacher kit auto-attaches and so the scenario
+    // appears in topic filters, related-scenario surfaces, and NewBadge logic.
+    customLayout: true,
+    customRoute: "thought-experiments/explaining-red-k-2",
+    reference: { text: "Frank Jackson, 'Epiphenomenal Qualia' (1982) — the K-2 entry point", url: "https://en.wikipedia.org/wiki/Knowledge_argument" },
+    furtherReading: [
+      { title: "Explaining Red — Grades 6-8 version", url: "#thought-experiments/6-8", level: "intro" },
+      { title: "Mary's Room — Grades 9-12 canon", url: "#thought-experiments/9-12", level: "intermediate" },
+      { title: "Brock & Hay, Mary's Room and Science Education", url: "https://link.springer.com/article/10.1007/s11191-019-00060-2", level: "advanced" },
+    ],
+    emoji: "🔴", added: "2026-05-13", estimatedMinutes: 6,
+  },
+  {
     id: "explaining-red-middle",
     title: "Explaining Red",
     tagline: "A classmate who was born without sight asks: does the wavelength tell you what red looks like?",
@@ -1509,6 +1532,8 @@ export const EXPERIMENTS = [
     ],
     reference: { text: "Frank Jackson, 'Epiphenomenal Qualia' (1982)", url: "https://en.wikipedia.org/wiki/Knowledge_argument" },
     furtherReading: [
+      { title: "Explaining Red — K-2 entry point (Ada and the colors lesson)", url: "#thought-experiments/explaining-red-k-2", level: "intro" },
+      { title: "Mary's Room — 9-12 canon", url: "#thought-experiments/9-12", level: "intermediate" },
       { title: "Qualia (SEP)", url: "https://plato.stanford.edu/entries/qualia/", level: "intermediate" },
       { title: "Brock & Hay, Mary's Room and Science Education", url: "https://link.springer.com/article/10.1007/s11191-019-00060-2", level: "advanced" },
       { title: "Nagel, 'What Is It Like to Be a Bat?' (1974)", url: "https://en.wikipedia.org/wiki/What_Is_It_Like_to_Be_a_Bat%3F", level: "advanced" },
