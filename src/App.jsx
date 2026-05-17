@@ -6,6 +6,14 @@ import About from "./pages/About.jsx";
 import MoralPsychology from "./pages/MoralPsychology.jsx";
 import AIEthics from "./pages/AIEthics.jsx";
 import AIEducation from "./pages/AIEducation.jsx";
+import {
+  AIEducationClassroomPractice,
+  AIEducationFoundations,
+  AIEducationFutureReadiness,
+  AIEducationPolicyEthics,
+  AIEducationStudentTools,
+  AIEducationToolsResources,
+} from "./pages/ai-education/SectionPage.jsx";
 import AIConsciousness from "./pages/AIConsciousness.jsx";
 import AIAuthorship from "./pages/AIAuthorship.jsx";
 import AIAmbiguityToAction from "./pages/AIAmbiguityToAction.jsx";
@@ -72,6 +80,12 @@ const PAGE_MAP = {
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
   "ai-education": AIEducation,
+  "ai-education/foundations": AIEducationFoundations,
+  "ai-education/classroom-practice": AIEducationClassroomPractice,
+  "ai-education/student-tools": AIEducationStudentTools,
+  "ai-education/policy-ethics": AIEducationPolicyEthics,
+  "ai-education/future-readiness": AIEducationFutureReadiness,
+  "ai-education/tools-resources": AIEducationToolsResources,
   "ai-consciousness": AIConsciousness,
   "ai-authorship-quandary": AIAuthorship,
   "ai-ambiguity-to-action": AIAmbiguityToAction,
@@ -130,8 +144,46 @@ const PAGE_META = {
     description: "The is/ought problem, UNESCO frameworks, the EU AI Act, NYC's traffic-light policy, and actionable ethical frameworks for educators navigating AI.",
   },
   "ai-education": {
-    title: "AI in the Classroom: Evidence and Ethics — The Ethical Educator",
-    description: "What the research says about AI tutors, personalization, and learning outcomes. Key voices from Mollick to Luckin, with the neuroscience of AI-assisted learning.",
+    title: "AI in Education — The Ethical Educator",
+    description: "A practical hub for teachers and school leaders covering AI foundations, classroom practice, student tools, policy, ethics, future readiness, and resources.",
+    datePublished: "2024-02-13",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/foundations": {
+    title: "Foundations & AI Landscape — The Ethical Educator",
+    description: "A teacher-friendly orientation to generative AI, realized AI, emerging capabilities, and the vocabulary educators need before making classroom decisions.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/classroom-practice": {
+    title: "AI Classroom Practice — The Ethical Educator",
+    description: "Instructional routines for planning, differentiation, feedback, accessibility, and educator judgment when using AI in teaching and learning.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/student-tools": {
+    title: "Student Learning Tools — The Ethical Educator",
+    description: "Guidance for AI tutors, study supports, creative tools, missed-lesson help, and student-facing guardrails that keep learning visible.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/policy-ethics": {
+    title: "AI Policy & Ethics for Schools — The Ethical Educator",
+    description: "Practical AI policy, academic integrity, privacy, equity, implementation ethics, and traffic-light guidance for school communities.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/future-readiness": {
+    title: "Future Readiness & AI Literacy — The Ethical Educator",
+    description: "AI literacy, PISA 2029 media and AI literacy, UNESCO teacher competencies, and the future-facing capacities students need.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
+  },
+  "ai-education/tools-resources": {
+    title: "AI Tools & Resources for Educators — The Ethical Educator",
+    description: "Curated AI tools, custom GPT guidance, case-study templates, professional reading, and implementation resources for teachers and leaders.",
+    datePublished: "2026-05-17",
+    dateModified: "2026-05-17",
   },
   "ai-consciousness": {
     title: "The Consciousness Line — The Ethical Educator",
@@ -355,6 +407,11 @@ export default function App() {
     window.dispatchEvent(new Event("ethed:route"));
   };
 
+  const isPageActive = (page) => (
+    currentPage === page.id ||
+    (page.matchPrefix && currentPage.startsWith(page.matchPrefix))
+  );
+
   // Handle browser back/forward, direct URL entry, and in-app pushState calls
   // that bypass navigate() (rare, but supported via ethed:route event).
   useEffect(() => {
@@ -502,7 +559,7 @@ export default function App() {
           {PAGES.map(p => (
             <li key={p.id}>
               <a href={p.id === "home" ? "/" : `/${p.id}`}
-                className={currentPage === p.id ? "active" : ""}
+                className={isPageActive(p) ? "active" : ""}
                 onClick={(e) => { e.preventDefault(); navigate(p.id); }}>
                 {p.label}
                 {p.id === "thought-experiments" && hasNew && <NewBadge />}
@@ -515,7 +572,7 @@ export default function App() {
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {PAGES.map(p => (
           <a key={p.id}
-            className={currentPage === p.id ? "active" : ""}
+            className={isPageActive(p) ? "active" : ""}
             onClick={() => navigate(p.id)}>
             {p.label}
             {p.id === "thought-experiments" && hasNew && <NewBadge />}
