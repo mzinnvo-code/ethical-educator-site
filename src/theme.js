@@ -28,7 +28,7 @@ export const PAGES = [
   { id: "home", label: "Home" },
   { id: "thought-experiments", label: "Thought Experiments" },
   { id: "for-educators", label: "For Educators" },
-  { id: "ai-education", label: "AI in Education" },
+  { id: "ai-education", label: "AI in Education", matchPrefix: "ai-education/" },
   { id: "phil-education", label: "Philosophy in K–12" },
   { id: "ai-ethics", label: "AI & Ethics" },
   { id: "moral-psych", label: "Moral Psychology" },
