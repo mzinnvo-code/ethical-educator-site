@@ -8,7 +8,7 @@ export default function Accessibility({ navigate }) {
         <FadeIn>
           <SectionLabel>Legal</SectionLabel>
           <SectionTitle>Accessibility Statement</SectionTitle>
-          <p style={{ color: C.textMuted, fontSize: "0.8rem", marginTop: 8 }}>Last updated: April 2026</p>
+          <p style={{ color: C.textMuted, fontSize: "0.8rem", marginTop: 8 }}>Last updated: May 2026</p>
         </FadeIn>
 
         <Narrow>
@@ -41,7 +41,7 @@ export default function Accessibility({ navigate }) {
 
             <FadeIn delay={0.12}>
               <Divider label="Reporting Issues" />
-              <p>If you encounter an accessibility barrier on this site, please describe the issue and the page or feature where you found it. Contact details will be added here shortly.</p>
+              <p>If you encounter an accessibility barrier on this site, please describe the issue and the page or feature where you found it, and send the details to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>. We aim to respond within ten business days.</p>
             </FadeIn>
 
             <FadeIn delay={0.14}>

@@ -35,6 +35,8 @@ import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
 import Resources from "./pages/Resources.jsx";
 import Privacy from "./pages/Privacy.jsx";
 import Accessibility from "./pages/Accessibility.jsx";
+import Terms from "./pages/Terms.jsx";
+import Credits from "./pages/Credits.jsx";
 import ForEducators from "./pages/ForEducators.jsx";
 import TeachingFeedback from "./pages/educators/TeachingFeedback.jsx";
 import EnhancingFeedback from "./pages/educators/EnhancingFeedback.jsx";
@@ -97,6 +99,8 @@ const PAGE_MAP = {
   "resources": Resources,
   "privacy": Privacy,
   "accessibility": Accessibility,
+  "terms": Terms,
+  "credits": Credits,
   "for-educators": ForEducators,
   "teaching-feedback": TeachingFeedback,
   "enhancing-feedback": EnhancingFeedback,
@@ -247,7 +251,15 @@ const PAGE_META = {
   },
   "accessibility": {
     title: "Accessibility Statement — The Ethical Educator",
-    description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to matthew@theethicaleducator.com.",
+    description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to hello@theethicaleducator.com.",
+  },
+  "terms": {
+    title: "Terms of Use — The Ethical Educator",
+    description: "Terms of use for The Ethical Educator: educational use only, no professional advice, content licensed CC BY-NC 4.0, standard limitation of liability and warranty disclaimers.",
+  },
+  "credits": {
+    title: "Credits & AI Disclosures — The Ethical Educator",
+    description: "Attribution for illustrations (OpenAI DALL·E), audio narration (ElevenLabs), typography (Google Fonts), and technology stack. Transparency about AI use across the site.",
   },
   "for-educators": {
     title: "For Educators — Professional Development Resources — The Ethical Educator",
@@ -547,13 +559,18 @@ export default function App() {
           <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 16, textAlign: "center" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 10, flexWrap: "wrap" }}>
               {[
-                { label: "Privacy Policy", id: "privacy" },
+                { label: "Privacy", id: "privacy" },
+                { label: "Terms", id: "terms" },
                 { label: "Accessibility", id: "accessibility" },
+                { label: "Credits", id: "credits" },
               ].map(link => (
                 <a key={link.label} href={`/${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
-            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · All Rights Reserved</p>
+            <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.5, maxWidth: 640, margin: "0 auto 8px", lineHeight: 1.5 }}>
+              Educational and informational only. Not legal, medical, or psychological advice. Always consult qualified professionals before acting in your specific context.
+            </p>
+            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
           </div>
         </div>
       </footer>

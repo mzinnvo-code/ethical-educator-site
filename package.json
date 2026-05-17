@@ -70,7 +70,9 @@
       "/rti",
       "/resources",
       "/privacy",
-      "/accessibility"
+      "/accessibility",
+      "/terms",
+      "/credits"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
