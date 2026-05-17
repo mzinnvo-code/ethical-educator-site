@@ -148,7 +148,7 @@ function ThemeSection({ themeId, experiments, onSelect }) {
           {theme.question}
         </p>
       </header>
-      <ExperimentGrid experiments={experiments} onSelect={onSelect} />
+      <ExperimentGrid experiments={experiments} onSelect={onSelect} visualVariant="9-12" />
     </section>
   );
 }

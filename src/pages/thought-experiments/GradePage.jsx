@@ -112,6 +112,7 @@ export default function GradePage({
 
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   const resetProfile = () => setLensChoices([]);
+  const visualVariant = band;
   const suggestTopic = (topicId) => {
     filterApi.setSelectedTopics([topicId]);
     closeActive();
@@ -165,6 +166,7 @@ export default function GradePage({
                   experiments={filterApi.filtered}
                   onSelect={(e) => setActive(e)}
                   emptyMessage={emptyMessage}
+                  visualVariant={visualVariant}
                 />
               )}
             </>
@@ -202,6 +204,7 @@ export default function GradePage({
                 key={active.id}
                 experiment={active}
                 mode={mode}
+                visualVariant={visualVariant}
                 onClose={closeActive}
                 onRecordChoice={recordChoice}
                 relatedExperiment={pickRelated(active, all)}
