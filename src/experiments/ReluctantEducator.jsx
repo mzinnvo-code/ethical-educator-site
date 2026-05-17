@@ -18,6 +18,11 @@ export default function ReluctantEducatorExperiment() {
       cardTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+  const stageVisuals = [
+    ["intro", "The Reluctant Educator"],
+    [`dashboard-week-${[1, 4, 8, 12][week] || 1}`, `Week ${[1, 4, 8, 12][week] || 1} Metrics`],
+    ["reflection", "The Tradeoff"],
+  ];
   useEffect(() => () => { audio.stopAll(); audioBus.stop(); }, [audio]);
 
   const data = [
@@ -57,7 +62,6 @@ export default function ReluctantEducatorExperiment() {
     // ─── INTRO ───
     () => (
       <div style={{ textAlign: "center", padding: "20px 0" }}>
-        <IllustratedScene experimentId="reluctant-educator" />
         <h3 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.4rem", marginBottom: 10 }}>The Reluctant Educator</h3>
         <p style={{ color: C.textSecondary, fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 540, margin: "0 auto 12px" }}>
           Mr. Jennings — 22 years in the classroom, National Board Certified, beloved by students — refuses all AI tools on philosophical grounds. He believes the struggle of learning is inseparable from its value, and that AI shortcuts undermine character formation.
@@ -179,9 +183,23 @@ export default function ReluctantEducatorExperiment() {
     },
   ];
 
+  const [visualStageId, visualStageTitle] = stageVisuals[stage] || stageVisuals[0];
+  const visualStageIndex = stage === 1 ? week + 1 : stage === 2 ? stageVisuals.length + 2 : 0;
+
   return (
     <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
-      <Shell animating={anim} color={C.gold}>{stages[stage]()}</Shell>
+      <Shell animating={anim} color={C.gold}>
+        <IllustratedScene
+          experimentId="reluctant-educator"
+          visualVariant="flagship"
+          stage={visualStageIndex}
+          stageId={visualStageId}
+          stageTitle={visualStageTitle}
+          stageCount={6}
+          mode="canon"
+        />
+        {stages[stage]()}
+      </Shell>
     </div>
   );
 }
