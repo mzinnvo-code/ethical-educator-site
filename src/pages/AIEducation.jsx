@@ -6,7 +6,6 @@ import {
   Narrow,
   PageContainer,
   BodyText,
-  Divider,
   ReadingTime,
   ContinueExploring,
 } from "../components/shared.jsx";
@@ -14,7 +13,6 @@ import {
   AI_EDUCATION_CONTINUE_LINKS,
   AI_EDUCATION_HUB,
   AI_EDUCATION_SNAPSHOT_STATS,
-  AI_EDUCATION_SOURCE_COVERAGE,
   AI_EDUCATION_TOPICS,
 } from "../data/aiEducationResources.js";
 
@@ -29,27 +27,6 @@ function SnapshotStrip() {
             <em>{stat.subtitle}</em>
           </div>
         ))}
-      </section>
-    </FadeIn>
-  );
-}
-
-function CoverageMap({ navigate }) {
-  return (
-    <FadeIn delay={0.1}>
-      <section aria-label="Source coverage map" className="ai-coverage-map">
-        <div className="ai-coverage-head">
-          <p>Source Coverage</p>
-          <h2>Every major section has a home.</h2>
-        </div>
-        <div className="ai-coverage-list">
-          {AI_EDUCATION_SOURCE_COVERAGE.map((item) => (
-            <button key={item.source} type="button" onClick={() => navigate(item.route)}>
-              <span>{item.source}</span>
-              <strong>{item.destination}</strong>
-            </button>
-          ))}
-        </div>
       </section>
     </FadeIn>
   );
@@ -106,93 +83,14 @@ export default function AIEducation({ navigate }) {
           margin-top: 6px;
           font-style: normal;
         }
-        .ai-coverage-map {
-          margin: 42px 0 20px;
-          padding: clamp(22px, 4vw, 30px);
-          background: ${C.surface};
-          border: 1px solid ${C.border};
-          border-radius: 14px;
-        }
-        .ai-coverage-head {
-          display: flex;
-          justify-content: space-between;
-          align-items: end;
-          gap: 18px;
-          margin-bottom: 16px;
-        }
-        .ai-coverage-head p {
-          color: ${C.gold};
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-        }
-        .ai-coverage-head h2 {
-          color: ${C.textPrimary};
-          font-family: 'Source Serif 4', Georgia, serif;
-          font-size: clamp(1.28rem, 3vw, 1.75rem);
-          line-height: 1.18;
-          text-align: right;
-        }
-        .ai-coverage-list {
-          display: grid;
-          gap: 8px;
-        }
-        .ai-coverage-list button {
-          width: 100%;
-          display: grid;
-          grid-template-columns: minmax(0, 1.35fr) minmax(180px, 0.65fr);
-          gap: 14px;
-          align-items: center;
-          border: 1px solid ${C.border};
-          border-radius: 10px;
-          padding: 12px 14px;
-          background: rgba(8,18,32,0.28);
-          color: ${C.textSecondary};
-          font: inherit;
-          text-align: left;
-          cursor: pointer;
-          transition: transform 0.2s, border-color 0.2s, background 0.2s;
-        }
-        .ai-coverage-list button:hover,
-        .ai-coverage-list button:focus-visible {
-          transform: translateY(-2px);
-          border-color: ${C.gold}70;
-          background: ${C.glow};
-          outline: none;
-        }
-        .ai-coverage-list span {
-          font-size: 0.84rem;
-          line-height: 1.55;
-        }
-        .ai-coverage-list strong {
-          color: ${C.gold};
-          font-size: 0.72rem;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          text-align: right;
-        }
         @media (max-width: 860px) {
           .ai-hub-snapshot {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-          .ai-coverage-list button {
-            grid-template-columns: 1fr;
-          }
-          .ai-coverage-list strong {
-            text-align: left;
           }
         }
         @media (max-width: 620px) {
           .ai-hub-snapshot {
             grid-template-columns: 1fr;
-          }
-          .ai-coverage-head {
-            display: block;
-          }
-          .ai-coverage-head h2 {
-            text-align: left;
-            margin-top: 8px;
           }
         }
       `}</style>
@@ -209,7 +107,7 @@ export default function AIEducation({ navigate }) {
 
       <PageContainer>
         <FadeIn delay={0.04}>
-          <ReadingTime minutes={7} label="7 min hub" />
+          <ReadingTime minutes={7} />
         </FadeIn>
 
         <div className="grid-3 ai-hub-grid">
@@ -230,17 +128,11 @@ export default function AIEducation({ navigate }) {
         <SnapshotStrip />
 
         <Narrow>
-          <Divider label="Why this rebuild exists" />
           <FadeIn delay={0.06}>
-            <BodyText>
-              The old Innovate Ed AI resource was rich, but it lived as a long presentation with several topics folded into one journey. This hub turns that material into navigable sections for teachers and school leaders. Each page keeps the useful depth, updates dated claims, removes organization-specific references, and separates practical classroom help from policy-sensitive decisions.
-            </BodyText>
             <BodyText>
               The organizing question is simple: how can AI help educators plan, support, explain, adapt, and reflect while keeping human judgment, student privacy, and real learning at the center?
             </BodyText>
           </FadeIn>
-
-          <CoverageMap navigate={navigate} />
 
           <FadeIn delay={0.1}>
             <div style={{
