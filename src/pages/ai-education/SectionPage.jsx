@@ -6,10 +6,10 @@ import {
   Narrow,
   PageContainer,
   BodyText,
-  ResearchCallout,
   ComparisonCard,
   Divider,
   ReadingTime,
+  ResearchCallout,
   ContinueExploring,
 } from "../../components/shared.jsx";
 import {
@@ -95,9 +95,25 @@ function ToolGroups({ groups }) {
             {group.title}
           </h4>
           <ul style={{ listStyle: "none", padding: 0 }}>
-            {group.items.map((item) => (
-              <li key={item} style={{ color: C.textSecondary, fontSize: "0.83rem", lineHeight: 1.6, padding: "4px 0" }}>{item}</li>
-            ))}
+            {group.items.map((item) => {
+              const label = typeof item === "string" ? item : item.label;
+              const href = typeof item === "object" ? item.href : null;
+              return (
+                <li key={label} style={{ color: C.textSecondary, fontSize: "0.83rem", lineHeight: 1.6, padding: "4px 0" }}>
+                  {href ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: C.textSecondary, textDecoration: "none" }}
+                    >
+                      {label}
+                      <span aria-hidden="true" style={{ color: group.color, marginLeft: 4, fontSize: "0.85em" }}>↗</span>
+                    </a>
+                  ) : label}
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}
@@ -105,7 +121,7 @@ function ToolGroups({ groups }) {
   );
 }
 
-function SectionBlock({ section, index }) {
+function SectionBlock({ section, index, navigate }) {
   return (
     <FadeIn delay={0.06 + index * 0.03}>
       <Expandable title={section.title} color={section.color || C.gold} tag={section.tag} defaultOpen={index === 0}>
@@ -117,7 +133,28 @@ function SectionBlock({ section, index }) {
           <div style={{ margin: "16px 0" }}>
             {section.listTitle && <p style={{ color: C.textPrimary, fontWeight: 700, marginBottom: 8 }}>{section.listTitle}</p>}
             <ul style={{ paddingLeft: 20, color: C.textSecondary, lineHeight: 1.8 }}>
-              {section.list.map((item) => <li key={item}>{item}</li>)}
+              {section.list.map((item) => {
+                if (typeof item === "string") return <li key={item}>{item}</li>;
+                const { label, href, desc } = item;
+                return (
+                  <li key={label}>
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: C.gold, textDecoration: "none", fontWeight: 600 }}
+                      >
+                        {label}
+                        <span aria-hidden="true" style={{ color: C.gold, marginLeft: 3, fontSize: "0.85em" }}>↗</span>
+                      </a>
+                    ) : (
+                      <strong style={{ color: C.textPrimary }}>{label}</strong>
+                    )}
+                    {desc ? <> — {desc}</> : null}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}
@@ -132,16 +169,53 @@ function SectionBlock({ section, index }) {
 
         <ToolGroups groups={section.toolGroups} />
 
-        {section.sources?.map((source) => (
-          <ResearchCallout
-            key={source.href}
-            year="Source"
-            title={source.label}
-            finding="Current reference used to refresh this section's guidance and avoid stale source framing."
-            citation={source.href}
-            color={section.color || C.gold}
-          />
-        ))}
+        {section.evidenceCallouts?.length > 0 && (
+          <div style={{ display: "grid", gap: 12, margin: "18px 0" }}>
+            {section.evidenceCallouts.map((cb) => (
+              <ResearchCallout
+                key={`${cb.year}-${cb.title}`}
+                year={cb.year}
+                title={cb.title}
+                finding={cb.finding}
+                citation={cb.citation}
+                color={cb.color || section.color || C.gold}
+              />
+            ))}
+          </div>
+        )}
+
+        {section.relatedExperiments?.length > 0 && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10, margin: "18px 0" }}>
+            {section.relatedExperiments.map((exp) => (
+              <button
+                key={exp.route}
+                type="button"
+                onClick={() => navigate(exp.route)}
+                style={{
+                  textAlign: "left",
+                  background: `${section.color || C.gold}08`,
+                  border: `1px solid ${section.color || C.gold}40`,
+                  borderRadius: 12,
+                  padding: "14px 16px",
+                  cursor: "pointer",
+                  color: C.textSecondary,
+                  font: "inherit",
+                }}
+              >
+                <strong style={{ display: "block", color: section.color || C.gold, marginBottom: 6, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                  {exp.title}
+                </strong>
+                <span style={{ fontSize: "0.86rem", lineHeight: 1.55 }}>{exp.framing}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {section.sources?.length > 0 && (
+          <div style={{ margin: "18px 0 4px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10 }}>
+            {section.sources.map((source) => <ResourceLink key={source.href} link={source} />)}
+          </div>
+        )}
       </Expandable>
     </FadeIn>
   );
@@ -250,7 +324,7 @@ function AIEducationSectionPage({ pageId, navigate }) {
 
           <Divider label="Core Sections" />
           {page.sections.map((section, index) => (
-            <SectionBlock key={section.title} section={section} index={index} />
+            <SectionBlock key={section.title} section={section} index={index} navigate={navigate} />
           ))}
 
           <PracticalNotes page={page} />
