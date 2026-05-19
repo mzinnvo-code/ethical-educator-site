@@ -40,7 +40,7 @@ export const MIDDLE_SCHOOL_ORDER = [
 export const MIDDLE_SCHOOL_SCENARIO_COPY = {
   "deepfake-election": {
     title: "The Deepfake Dilemma",
-    tagline: "A video looks real, the election is tomorrow, and sharing it could change everything.",
+    tagline: "The video looks real. The election is tomorrow. Sharing takes one tap.",
     estimatedMinutes: 10,
     stages: [
       {
@@ -48,15 +48,15 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
         kicker: "Act 1 - the clip",
         title: "The video in the group chat",
         storySections: [
-          section("The situation", "At 8:47 p.m., your class group chat lights up. Someone posts a video of a mayoral candidate apparently stuffing cash into an envelope."),
-          section("The pressure", "The election is tomorrow. People are already reposting it with flame emojis. One friend says, \"If this is real, everyone needs to know tonight.\""),
-          section("The choice", "You notice the candidate's mouth moves a little strangely, but the clip is convincing enough to make people furious."),
+          section("The situation", "At 8:47 p.m. the class group chat explodes. Someone has posted a clip of the mayoral candidate stuffing cash into an envelope. The lighting looks real. The voice sounds right."),
+          section("The pressure", "The election is tomorrow. The chat is already forty messages long, mostly flame emojis. One friend types, \"If this is real, everyone needs to know tonight.\" Another writes, \"Share it before the campaign takes it down.\""),
+          section("The choice", "You watch the clip again. The candidate's mouth moves a half-second off the words. Almost no one will notice. You haven't shared it yet. Your thumb is hovering."),
         ],
         prompt: "What should you do before anyone in your circle shares it again?",
         options: [
-          { label: "A", text: "Tell everyone not to share until there is verification from a reliable source.", reflection: "You are protecting truth by slowing the spread. The cost is that real evidence might also move more slowly.", lens: "precautionary" },
-          { label: "B", text: "Share it with a warning label so people can decide for themselves.", reflection: "You value openness, but warnings can still spread the image and emotion faster than the correction.", lens: "free-speech" },
-          { label: "C", text: "Report it to the platform and send it to a teacher or trusted adult who can help verify it.", reflection: "You are treating the problem as civic, not just personal. That moves responsibility toward people with more tools.", lens: "responsibility" },
+          { label: "A", text: "Tell everyone not to share until there is verification from a reliable source.", reflection: "You picked slow over loud. If the clip turns out to be real, the people who needed to know lost time. But every fake you don't post is one fewer rumor with your name attached.", lens: "precautionary" },
+          { label: "B", text: "Share it with a warning label so people can decide for themselves.", reflection: "Warnings don't outrun the image. People see the cash and the envelope first. They see your caveat second, if at all. The flame emojis don't care what you meant.", lens: "free-speech" },
+          { label: "C", text: "Report it to the platform and send it to a teacher or trusted adult who can help verify it.", reflection: "Good move. You didn't try to be the hero. You handed it to people with real tools and a bigger reach. The catch: 'an adult will handle it' can become a way to never decide anything yourself.", lens: "responsibility" },
         ],
       },
       {
@@ -64,32 +64,32 @@ export const MIDDLE_SCHOOL_SCENARIO_COPY = {
         kicker: "Act 2 - the twist",
         title: "A true rumor inside a fake video",
         storySections: [
-          section("The situation", "An hour later, a local reporter says the video is fake. But the reporter also says there may be a separate investigation into the campaign's money."),
-          section("The pressure", "Now the chat splits. Some students say the fake video does not matter because the candidate might still be guilty. Others say a fake is a fake, no matter what."),
-          section("The choice", "You are no longer deciding only whether the clip is real. You are deciding what kind of evidence people deserve before a public accusation spreads."),
+          section("The situation", "An hour later, a local reporter posts: the clip is fake. Then she adds something else. There may be a real investigation into the campaign's money, separate from anything in the video."),
+          section("The pressure", "The chat splits down the middle. Some friends say the fake doesn't matter because the candidate might still be guilty. Others say a fake is a fake, full stop."),
+          section("The choice", "The question is no longer whether the clip is real. It's what kind of proof people deserve before you let a public accusation keep traveling."),
         ],
         prompt: "How should your group talk about the story now?",
         options: [
-          { label: "A", text: "Separate the claims: the video is fake, and the investigation is unconfirmed.", reflection: "This protects careful thinking. Different claims need different evidence.", lens: "epistemic-care" },
-          { label: "B", text: "Keep warning people about the candidate because the larger concern may still be true.", reflection: "You are prioritizing public safety, but you risk letting suspicion do the work of proof.", lens: "precautionary" },
-          { label: "C", text: "Stop discussing it until trustworthy reporting catches up.", reflection: "Silence can prevent harm, but it can also feel frustrating when the public decision is close.", lens: "restraint" },
+          { label: "A", text: "Separate the claims: the video is fake, and the investigation is unconfirmed.", reflection: "You're keeping two different things in two different boxes. Sounds obvious until you try to do it in a chat where everyone wants one clean answer.", lens: "epistemic-care" },
+          { label: "B", text: "Keep warning people about the candidate because the larger concern may still be true.", reflection: "You're letting a maybe do the work of a definitely. That's how rumors keep their power even after the correction lands.", lens: "precautionary" },
+          { label: "C", text: "Stop discussing it until trustworthy reporting catches up.", reflection: "You stopped the spread. You also stopped the conversation. Sometimes that's right. Sometimes it leaves a real question hanging while people are still deciding how to vote.", lens: "restraint" },
         ],
-        counterpoint: "False media can contain a real worry. That is what makes it powerful: it lets people defend a bad method by pointing to a possible truth.",
+        counterpoint: "A fake can ride on a real worry. That's what makes it powerful. People use the possibility that the worry is true to defend the lie that delivered it.",
       },
       {
         id: "your-side",
         kicker: "Act 3 - the mirror",
         title: "When the fake helps your side",
         storySections: [
-          section("The situation", "The next morning, you learn the fake video is hurting a candidate you already dislike. A friend jokes, \"Good. Maybe this helps us win.\""),
-          section("The pressure", "Correcting the fake might help someone you disagree with. Ignoring it might help your side."),
-          section("The choice", "The principle is no longer abstract. You have to decide whether truth matters only when it protects people you like."),
+          section("The situation", "The next morning, you find out the fake is hurting the candidate you already disliked. A friend texts, \"Good. Maybe it costs them the election.\""),
+          section("The pressure", "Correcting the fake means helping someone you think shouldn't win. Staying quiet means letting a lie do work for your side."),
+          section("The choice", "The rule about truth was easy yesterday. Now it has teeth. You're about to find out whether you actually believe what you said before the fake started helping you."),
         ],
         prompt: "What principle should guide you when misinformation helps your side?",
         options: [
-          { label: "A", text: "Correct it anyway because fair elections need true evidence, not convenient fakes.", reflection: "Consistency is doing the heavy lifting here. You are choosing a rule that can be used against your own side.", lens: "consistency" },
-          { label: "B", text: "Focus on the larger political outcome because the stakes are bigger than one fake clip.", reflection: "You are weighing consequences, but the danger is making truth conditional on usefulness.", lens: "utilitarian" },
-          { label: "C", text: "Correct the fake and then argue your real reasons for opposing the candidate.", reflection: "This separates truth from persuasion. You can still take a side without relying on false evidence.", lens: "civic-integrity" },
+          { label: "A", text: "Correct it anyway because fair elections need true evidence, not convenient fakes.", reflection: "You picked a rule you'll have to keep when it costs you. That's harder than picking one that protects you. It's also the only kind that survives the next time someone uses a lie against your side.", lens: "consistency" },
+          { label: "B", text: "Focus on the larger political outcome because the stakes are bigger than one fake clip.", reflection: "You traded the rule about truth for one win. The candidate you didn't want still walks home if the lie holds. The rule you broke is still gone tomorrow.", lens: "utilitarian" },
+          { label: "C", text: "Correct the fake and then argue your real reasons for opposing the candidate.", reflection: "You separated the truth from your argument. You can still take your side. You just can't use the fake to do it for you. Most people skip this step because the argument gets harder.", lens: "civic-integrity" },
         ],
       },
       reflection("Truth when speed, emotion, and loyalty collide", [
