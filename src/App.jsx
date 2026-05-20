@@ -1,65 +1,77 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
 import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
 import { useScrollDepth } from "./hooks/useScrollDepth.js";
+
+// Home is eager — it's the entry point for most visits and we want it to
+// render in the same paint as the chrome. Everything else is route-split
+// via React.lazy so a fresh visit only loads what it needs.
 import Home from "./pages/Home.jsx";
-import About from "./pages/About.jsx";
-import MoralPsychology from "./pages/MoralPsychology.jsx";
-import AIEthics from "./pages/AIEthics.jsx";
-import AIEducation from "./pages/AIEducation.jsx";
-import {
-  AIEducationClassroomPractice,
-  AIEducationFoundations,
-  AIEducationFutureReadiness,
-  AIEducationPolicyEthics,
-  AIEducationStudentTools,
-  AIEducationToolsResources,
-} from "./pages/ai-education/SectionPage.jsx";
-import AIConsciousness from "./pages/AIConsciousness.jsx";
-import AIAuthorship from "./pages/AIAuthorship.jsx";
-import AIAmbiguityToAction from "./pages/AIAmbiguityToAction.jsx";
-import AIParadox from "./pages/AIParadox.jsx";
-import AIReplaceTeachers from "./pages/AIReplaceTeachers.jsx";
-import ThoughtExperiments from "./pages/ThoughtExperiments.jsx";
-import ThoughtExperimentsForEducators from "./pages/thought-experiments/ForEducators.jsx";
-import ThoughtExperimentsK5 from "./pages/thought-experiments/K5.jsx";
-import {
-  Kindergarten as ThoughtExperimentsKindergarten,
-  Grade1 as ThoughtExperimentsGrade1,
-  Grade2 as ThoughtExperimentsGrade2,
-  Grade3 as ThoughtExperimentsGrade3,
-  Grade4 as ThoughtExperimentsGrade4,
-  Grade5 as ThoughtExperimentsGrade5,
-} from "./pages/thought-experiments/ElementaryGrade.jsx";
-import ThoughtExperimentsMiddle from "./pages/thought-experiments/Middle.jsx";
-import ThoughtExperimentsHigh from "./pages/thought-experiments/High.jsx";
-import ThoughtExperimentsToolkit from "./pages/thought-experiments/Toolkit.jsx";
-import ThoughtExperimentsJournal from "./pages/thought-experiments/Journal.jsx";
-import { ExplainingRedK_2 as ThoughtExperimentsExplainingRedK2 } from "./pages/thought-experiments/ExplainingRed.jsx";
-import AudienceStudent from "./pages/audiences/Student.jsx";
-import AudienceTeacher from "./pages/audiences/Teacher.jsx";
-import AudienceAdministrator from "./pages/audiences/Administrator.jsx";
-import AudienceParent from "./pages/audiences/Parent.jsx";
-import PhilosophyEducation from "./pages/PhilosophyEducation.jsx";
-import Resources from "./pages/Resources.jsx";
-import Privacy from "./pages/Privacy.jsx";
-import Accessibility from "./pages/Accessibility.jsx";
-import Terms from "./pages/Terms.jsx";
-import Credits from "./pages/Credits.jsx";
-import ForEducators from "./pages/ForEducators.jsx";
-import TeachingFeedback from "./pages/educators/TeachingFeedback.jsx";
-import EnhancingFeedback from "./pages/educators/EnhancingFeedback.jsx";
-import EnhancingEngagement from "./pages/educators/EnhancingEngagement.jsx";
-import AsyncEngagement from "./pages/educators/AsyncEngagement.jsx";
-import AVResources from "./pages/educators/AVResources.jsx";
-import QualityLeadership from "./pages/educators/QualityLeadership.jsx";
-import HighPerformingSchools from "./pages/educators/HighPerformingSchools.jsx";
-import RTI from "./pages/educators/RTI.jsx";
-import Newsletter from "./pages/Newsletter.jsx";
+
+// NewsletterSignup is used in the footer of every page — needs to be eager
+// so the footer doesn't pop in. Modal renders null until visit-count triggers
+// so it's safe to lazy-load.
 import NewsletterSignup from "./components/NewsletterSignup.jsx";
-import NewsletterModal from "./components/NewsletterModal.jsx";
+
+// SearchPalette is the Cmd+K modal — its keyboard listener has to be live
+// the moment the page loads, so it stays eager (small + globally needed).
 import SearchPalette from "./components/SearchPalette.jsx";
 import WhatsNew from "./pages/WhatsNew.jsx";
+
+const NewsletterModal = lazy(() => import("./components/NewsletterModal.jsx"));
+
+// Lazy-loaded routes. Pulls each page (and its component tree, including
+// heavy data files like k5ScenarioCopy/highSchoolScenarioCopy/teacherKits)
+// into a separate chunk that's fetched only when a user navigates there.
+const About = lazy(() => import("./pages/About.jsx"));
+const MoralPsychology = lazy(() => import("./pages/MoralPsychology.jsx"));
+const AIEthics = lazy(() => import("./pages/AIEthics.jsx"));
+const AIEducation = lazy(() => import("./pages/AIEducation.jsx"));
+const AIEducationClassroomPractice = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationClassroomPractice })));
+const AIEducationFoundations = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationFoundations })));
+const AIEducationFutureReadiness = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationFutureReadiness })));
+const AIEducationPolicyEthics = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationPolicyEthics })));
+const AIEducationStudentTools = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationStudentTools })));
+const AIEducationToolsResources = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationToolsResources })));
+const AIConsciousness = lazy(() => import("./pages/AIConsciousness.jsx"));
+const AIAuthorship = lazy(() => import("./pages/AIAuthorship.jsx"));
+const AIAmbiguityToAction = lazy(() => import("./pages/AIAmbiguityToAction.jsx"));
+const AIParadox = lazy(() => import("./pages/AIParadox.jsx"));
+const AIReplaceTeachers = lazy(() => import("./pages/AIReplaceTeachers.jsx"));
+const ThoughtExperiments = lazy(() => import("./pages/ThoughtExperiments.jsx"));
+const ThoughtExperimentsForEducators = lazy(() => import("./pages/thought-experiments/ForEducators.jsx"));
+const ThoughtExperimentsK5 = lazy(() => import("./pages/thought-experiments/K5.jsx"));
+const ThoughtExperimentsKindergarten = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Kindergarten })));
+const ThoughtExperimentsGrade1 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade1 })));
+const ThoughtExperimentsGrade2 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade2 })));
+const ThoughtExperimentsGrade3 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade3 })));
+const ThoughtExperimentsGrade4 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade4 })));
+const ThoughtExperimentsGrade5 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade5 })));
+const ThoughtExperimentsMiddle = lazy(() => import("./pages/thought-experiments/Middle.jsx"));
+const ThoughtExperimentsHigh = lazy(() => import("./pages/thought-experiments/High.jsx"));
+const ThoughtExperimentsToolkit = lazy(() => import("./pages/thought-experiments/Toolkit.jsx"));
+const ThoughtExperimentsJournal = lazy(() => import("./pages/thought-experiments/Journal.jsx"));
+const ThoughtExperimentsExplainingRedK2 = lazy(() => import("./pages/thought-experiments/ExplainingRed.jsx").then(m => ({ default: m.ExplainingRedK_2 })));
+const AudienceStudent = lazy(() => import("./pages/audiences/Student.jsx"));
+const AudienceTeacher = lazy(() => import("./pages/audiences/Teacher.jsx"));
+const AudienceAdministrator = lazy(() => import("./pages/audiences/Administrator.jsx"));
+const AudienceParent = lazy(() => import("./pages/audiences/Parent.jsx"));
+const PhilosophyEducation = lazy(() => import("./pages/PhilosophyEducation.jsx"));
+const Resources = lazy(() => import("./pages/Resources.jsx"));
+const Privacy = lazy(() => import("./pages/Privacy.jsx"));
+const Accessibility = lazy(() => import("./pages/Accessibility.jsx"));
+const Terms = lazy(() => import("./pages/Terms.jsx"));
+const Credits = lazy(() => import("./pages/Credits.jsx"));
+const ForEducators = lazy(() => import("./pages/ForEducators.jsx"));
+const TeachingFeedback = lazy(() => import("./pages/educators/TeachingFeedback.jsx"));
+const EnhancingFeedback = lazy(() => import("./pages/educators/EnhancingFeedback.jsx"));
+const EnhancingEngagement = lazy(() => import("./pages/educators/EnhancingEngagement.jsx"));
+const AsyncEngagement = lazy(() => import("./pages/educators/AsyncEngagement.jsx"));
+const AVResources = lazy(() => import("./pages/educators/AVResources.jsx"));
+const QualityLeadership = lazy(() => import("./pages/educators/QualityLeadership.jsx"));
+const HighPerformingSchools = lazy(() => import("./pages/educators/HighPerformingSchools.jsx"));
+const RTI = lazy(() => import("./pages/educators/RTI.jsx"));
+const Newsletter = lazy(() => import("./pages/Newsletter.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -574,7 +586,9 @@ export default function App() {
       `}</style>
       <a href="#main" className="skip-link">Skip to content</a>
       <div className="grain" />
-      <NewsletterModal routeKey={currentPage} />
+      <Suspense fallback={null}>
+        <NewsletterModal routeKey={currentPage} />
+      </Suspense>
       <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />
 
       {/* NAV */}
@@ -625,9 +639,11 @@ export default function App() {
 
       {/* PAGE CONTENT */}
       <main id="main" tabIndex={-1} style={{ paddingTop: 56 }} className="page-enter" key={currentPage}>
-        {isNotFound
-          ? <NotFound navigate={navigate} />
-          : <PageComponent navigate={navigate} />}
+        <Suspense fallback={null}>
+          {isNotFound
+            ? <NotFound navigate={navigate} />
+            : <PageComponent navigate={navigate} />}
+        </Suspense>
       </main>
 
       {/* FOOTER */}
