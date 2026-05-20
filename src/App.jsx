@@ -58,6 +58,7 @@ import RTI from "./pages/educators/RTI.jsx";
 import Newsletter from "./pages/Newsletter.jsx";
 import NewsletterSignup from "./components/NewsletterSignup.jsx";
 import NewsletterModal from "./components/NewsletterModal.jsx";
+import SearchPalette from "./components/SearchPalette.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -539,7 +540,11 @@ export default function App() {
         .topbar-nav li a{font-size:0.74rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 8px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
         .topbar-nav li a:hover{color:${C.gold};background:rgba(200,152,48,0.06)}
         .topbar-nav li a.active{color:${C.gold};background:rgba(200,152,48,0.1)}
-        .hamburger{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative;flex-shrink:0}
+        .topbar-search{display:flex;align-items:center;gap:6px;padding:6px 10px;margin-left:auto;background:rgba(255,255,255,0.02);border:1px solid ${C.border};border-radius:6px;color:${C.textMuted};font-size:0.74rem;cursor:pointer;transition:all 0.2s;flex-shrink:0;font-family:inherit}
+        .topbar-search:hover{color:${C.gold};border-color:${C.borderHover};background:rgba(200,152,48,0.06)}
+        .topbar-search kbd{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:1px 5px;border:1px solid ${C.border};border-radius:3px;color:${C.textMuted}}
+        @media(max-width:768px){.topbar-search-label,.topbar-search kbd{display:none}.topbar-search{padding:6px 8px}}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;width:26px;height:18px;position:relative;flex-shrink:0;margin-left:8px}
         .hamburger span{position:absolute;left:0;width:100%;height:2px;background:${C.textPrimary};transition:all 0.3s}
         .hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:8px}.hamburger span:nth-child(3){top:16px}
         .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(11,22,34,0.97);backdrop-filter:blur(20px);padding:24px;z-index:999;overflow-y:auto}
@@ -564,6 +569,7 @@ export default function App() {
       <a href="#main" className="skip-link">Skip to content</a>
       <div className="grain" />
       <NewsletterModal routeKey={currentPage} />
+      <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />
 
       {/* NAV */}
       <header className="topbar">
@@ -586,6 +592,16 @@ export default function App() {
             </li>
           ))}
         </ul>
+        <button
+          type="button"
+          className="topbar-search"
+          aria-label="Open search (Cmd+K)"
+          onClick={() => window.dispatchEvent(new Event("ethed:openSearch"))}
+        >
+          <span aria-hidden="true">⌕</span>
+          <span className="topbar-search-label">Search</span>
+          <kbd aria-hidden="true">⌘K</kbd>
+        </button>
         <button className="hamburger" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
       </header>
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
