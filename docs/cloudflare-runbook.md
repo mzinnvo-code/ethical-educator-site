@@ -54,14 +54,47 @@ After the deploy finishes:
 
 ---
 
+---
+
+## Step 4 — Deploy the `ethed-events` Worker (5 min)
+
+This unlocks the custom events (scroll depth, newsletter clicks, PDF downloads) that Cloudflare Web Analytics can't capture on its own. Full details in `workers/events/README.md`; the short version:
+
+```bash
+cd workers/events
+npm install
+npx wrangler login        # opens browser; auth once
+npm run deploy
+```
+
+Wrangler prints something like:
+```
+Published ethed-events
+  https://ethed-events.<your-subdomain>.workers.dev
+```
+
+Copy that URL. Open `src/lib/analytics.js` at the repo root and replace:
+
+```js
+const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
+```
+
+with the URL (including the `/events` path):
+
+```js
+const ANALYTICS_ENDPOINT = "https://ethed-events.your-subdomain.workers.dev/events";
+```
+
+Commit, push, GitHub Actions redeploys. Custom events start landing in the `tee_events` Analytics Engine dataset within a few seconds of the first user interaction.
+
+To verify: run `npm run tail` in `workers/events/`, then visit the live site and scroll a long-form page — you'll see request entries stream into the terminal. Query the dataset with SQL examples in `docs/analytics-playbook.md`.
+
+---
+
 ## What's intentionally NOT in this runbook
 
-For the reasons explained in `docs/analytics-playbook.md`, the following are deferred to a later session:
-
-- **Custom events** (scroll depth, newsletter clicks, PDF downloads) — needs a tiny Worker + Workers Analytics Engine dataset. The client-side wiring is already in place; only the receiving endpoint is missing.
 - **Orange-cloud proxy** — not needed for analytics; not enabling it avoids any GitHub Pages SSL cert renewal complications. Revisit if/when we want Cloudflare cache rules, WAF, or edge security headers.
 - **Cache rules and security headers** — deferred along with the proxy decision above.
-- **Plausible/Umami fallback** — only worth considering if you want custom events live *before* we build the Worker. The Worker path is small (~30 min) and keeps you 100% Cloudflare; recommend not pivoting unless you're impatient.
 
 ---
 

@@ -1,15 +1,17 @@
 // Lightweight analytics wrapper.
 //
 // Cloudflare Web Analytics handles pageviews, top pages, referrers, and Core
-// Web Vitals automatically through the beacon in index.html. It does NOT
-// currently expose a JS API for custom events (per their FAQ, May 2026).
+// Web Vitals automatically through the beacon in index.html. CWA does not
+// expose a public JS API for custom events, so app-specific events (scroll
+// depth, newsletter clicks, PDF downloads) go to a tiny Cloudflare Worker
+// (workers/events/) that writes to a Workers Analytics Engine dataset.
 //
-// For custom events (scroll depth, newsletter clicks, PDF downloads) we buffer
-// them on window.__teeEvents for now. A follow-up will add a tiny Cloudflare
-// Worker bound to Workers Analytics Engine that accepts POST /events and
-// stores them queryable via SQL. When that endpoint lands, swap the buffer
-// for a fetch() call here — no other code in the app needs to change.
+// To enable real reporting:
+//   1. Deploy the Worker — see workers/events/README.md.
+//   2. Replace REPLACE_WITH_WORKER_URL below with the deployed URL.
+// Until then, events buffer to window.__teeEvents for DevTools inspection.
 
+const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
 const BUFFER_KEY = "__teeEvents";
 
 function buffer() {
@@ -18,19 +20,46 @@ function buffer() {
   return window[BUFFER_KEY];
 }
 
+function isConfigured() {
+  return typeof ANALYTICS_ENDPOINT === "string"
+    && ANALYTICS_ENDPOINT.startsWith("http")
+    && !ANALYTICS_ENDPOINT.includes("REPLACE_WITH");
+}
+
 export function track(name, properties = {}) {
-  const buf = buffer();
-  if (!buf) return;
+  if (typeof window === "undefined") return;
   const event = {
     name,
     properties,
-    path: typeof location !== "undefined" ? location.pathname : null,
+    path: location.pathname,
     ts: Date.now(),
   };
-  buf.push(event);
-  if (buf.length > 200) buf.splice(0, buf.length - 200);
-  if (typeof console !== "undefined" && import.meta.env?.DEV) {
+
+  const buf = buffer();
+  if (buf) {
+    buf.push(event);
+    if (buf.length > 200) buf.splice(0, buf.length - 200);
+  }
+  if (import.meta.env?.DEV) {
     console.debug("[analytics]", name, properties);
+  }
+
+  if (!isConfigured()) return;
+
+  // keepalive ensures the request survives page unload (matters for
+  // scroll_depth=100 and outbound-click events that fire as the user leaves).
+  // Errors are swallowed — analytics must never break the page.
+  try {
+    fetch(ANALYTICS_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(event),
+      keepalive: true,
+      mode: "cors",
+      credentials: "omit",
+    }).catch(() => {});
+  } catch {
+    // ignore
   }
 }
 
