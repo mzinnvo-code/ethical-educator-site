@@ -12,6 +12,8 @@ import {
   ResearchCallout,
   ContinueExploring,
 } from "../../components/shared.jsx";
+import Bars from "../../components/charts/Bars.jsx";
+import EffectSize from "../../components/charts/EffectSize.jsx";
 import {
   AI_EDUCATION_CONTINUE_LINKS,
   AI_EDUCATION_PAGES,
@@ -168,6 +170,41 @@ function SectionBlock({ section, index, navigate }) {
         )}
 
         <ToolGroups groups={section.toolGroups} />
+
+        {section.charts?.length > 0 && (
+          <div style={{ display: "grid", gap: 4, margin: "18px 0", padding: "18px 20px", background: `${section.color || C.gold}08`, border: `1px solid ${section.color || C.gold}25`, borderRadius: 12 }}>
+            <p style={{ fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: section.color || C.gold, marginBottom: 8 }}>
+              Evidence at a glance
+            </p>
+            {section.charts.map((chart, idx) => {
+              if (chart.type === "effect-size") {
+                return (
+                  <EffectSize
+                    key={`chart-${idx}`}
+                    value={chart.value}
+                    label={chart.label}
+                    citation={chart.citation}
+                    accent={chart.accent || section.color || C.teal}
+                  />
+                );
+              }
+              if (chart.type === "bars") {
+                return (
+                  <Bars
+                    key={`chart-${idx}`}
+                    title={chart.title}
+                    description={chart.description}
+                    items={chart.items}
+                    unit={chart.unit}
+                    max={chart.max}
+                    fillColor={chart.accent || section.color || C.gold}
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
+        )}
 
         {section.evidenceCallouts?.length > 0 && (
           <div style={{ display: "grid", gap: 12, margin: "18px 0" }}>
