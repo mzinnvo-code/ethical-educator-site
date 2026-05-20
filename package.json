@@ -10,7 +10,8 @@
     "prerender": "react-snap",
     "preview": "vite preview",
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
-    "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs"
+    "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "minisearch": "^7.2.0",
@@ -22,6 +23,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "react-snap": "^1.23.0",
+    "sharp": "^0.34.5",
     "vite": "^5.4.0"
   },
   "reactSnap": {
