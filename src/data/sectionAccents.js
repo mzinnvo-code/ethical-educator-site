@@ -31,7 +31,9 @@ const SECTION_RULES = [
   { id: "ai-paradox", accent: C.coral, label: "AI & Ethics" },
   { id: "ai-replace-teachers", accent: C.coral, label: "AI & Ethics" },
   { id: "moral-psych", accent: C.teal, label: "Philosophy" },
-  { id: "phil-education", accent: C.coral, label: "Philosophy" },
+  // C.green keeps Philosophy in K–12 distinct from its neighbors in the
+  // top nav (AI in Education = ocean, AI & Ethics = coral).
+  { id: "phil-education", accent: C.green, label: "Philosophy" },
 
   // For-Educators sub-pages (live at top-level slugs)
   { id: "teaching-feedback", accent: C.gold, label: "For Educators" },

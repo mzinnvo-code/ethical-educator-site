@@ -577,8 +577,8 @@ export default function App() {
         .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
         .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
         .brand-mark img{width:20px;height:20px;display:block}
-        .topbar-nav{display:flex;gap:4px;list-style:none;flex-wrap:nowrap}
-        .topbar-nav li a{font-size:0.74rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:6px 8px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+        .topbar-nav{display:flex;gap:6px;list-style:none;flex-wrap:nowrap;margin-left:32px}
+        .topbar-nav li a{font-size:0.82rem;font-weight:500;color:${C.textMuted};text-decoration:none;transition:all 0.2s;letter-spacing:0.01em;padding:7px 10px;border-radius:6px;white-space:nowrap;display:flex;align-items:center;gap:4px}
         .topbar-nav li a:hover{color:${C.gold};background:rgba(200,152,48,0.06)}
         .topbar-nav li a.active{color:${C.gold};background:rgba(200,152,48,0.1)}
         .topbar-search{display:flex;align-items:center;gap:6px;padding:6px 10px;margin-left:auto;background:rgba(255,255,255,0.02);border:1px solid ${C.border};border-radius:6px;color:${C.textMuted};font-size:0.74rem;cursor:pointer;transition:all 0.2s;flex-shrink:0;font-family:inherit}
