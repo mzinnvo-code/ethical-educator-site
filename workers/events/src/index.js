@@ -38,11 +38,19 @@ function noContent(origin) {
   return new Response(null, { status: 204, headers: corsHeaders(origin) });
 }
 
+function forbidden(origin) {
+  return new Response("Forbidden", { status: 403, headers: corsHeaders(origin) });
+}
+
 function badRequest(message, origin) {
   return new Response(JSON.stringify({ error: message }), {
     status: 400,
     headers: { "Content-Type": "application/json", ...corsHeaders(origin) },
   });
+}
+
+function isAllowedOrigin(origin) {
+  return origin === "" || ALLOWED_ORIGINS.has(origin);
 }
 
 function clampString(value, max = 256) {
@@ -61,6 +69,7 @@ export default {
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", { status: 405, headers: corsHeaders(origin) });
     }
+    if (!isAllowedOrigin(origin)) return forbidden(origin);
     if (new URL(request.url).pathname !== "/events") {
       return new Response("Not Found", { status: 404, headers: corsHeaders(origin) });
     }
