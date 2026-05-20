@@ -2,10 +2,27 @@ import { useState } from "react";
 import { C } from "../theme.js";
 import { TOPIC_BY_ID } from "../data/topics.js";
 
+// Built-in label/color map for grade-band chips. Hub pages pass
+// `availableGrades` with ids from this set; the component renders a chip row
+// just above the topic chips. Same component, opt-in surface — pages that
+// don't pass `availableGrades` keep their existing topic-only UI.
+const GRADE_META = {
+  "k-5": { label: "K–5", color: "#1a8a7a" },         // teal
+  "6-8": { label: "Grades 6–8", color: "#c89830" },  // gold
+  "9-12": { label: "Grades 9–12", color: "#1a5a8a" }, // ocean
+  "educators": { label: "Educator PD", color: "#c07040" }, // coral
+};
+
 export default function TopicFilter({
   availableTopicIds,
   selectedTopics,
   onToggleTopic,
+  availableGrades = [],
+  selectedGrades = [],
+  onToggleGrade,
+  hasKitOnly = false,
+  onToggleHasKit,
+  showHasKitFilter = false,
   query,
   onQueryChange,
   onClear,
@@ -14,7 +31,13 @@ export default function TopicFilter({
   extraActiveCount = 0,
 }) {
   const [searchFocus, setSearchFocus] = useState(false);
-  const active = selectedTopics.length + extraActiveCount + (query.trim() ? 1 : 0) > 0;
+  const active =
+    selectedTopics.length +
+      selectedGrades.length +
+      (hasKitOnly ? 1 : 0) +
+      extraActiveCount +
+      (query.trim() ? 1 : 0) >
+    0;
 
   return (
     <div style={{ marginBottom: 28 }}>
@@ -58,6 +81,69 @@ export default function TopicFilter({
           </button>
         )}
       </div>
+
+      {/* Grade-band + "has kit" filter row */}
+      {(availableGrades.length > 0 || showHasKitFilter) && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
+          {availableGrades.map(id => {
+            const meta = GRADE_META[id];
+            if (!meta) return null;
+            const selected = selectedGrades.includes(id);
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => onToggleGrade?.(id)}
+                aria-pressed={selected}
+                style={{
+                  padding: "5px 11px", borderRadius: 999,
+                  background: selected ? `${meta.color}28` : "transparent",
+                  border: `1px solid ${selected ? meta.color + "78" : C.border}`,
+                  color: selected ? meta.color : C.textSecondary,
+                  fontSize: "0.74rem", fontWeight: selected ? 700 : 600,
+                  letterSpacing: "0.04em",
+                  cursor: "pointer", transition: "all 0.2s",
+                  fontFamily: "inherit",
+                }}
+                onMouseOver={(e) => {
+                  if (!selected) {
+                    e.currentTarget.style.borderColor = meta.color + "60";
+                    e.currentTarget.style.color = meta.color;
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!selected) {
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.color = C.textSecondary;
+                  }
+                }}
+              >
+                {meta.label}
+              </button>
+            );
+          })}
+          {showHasKitFilter && (
+            <button
+              type="button"
+              onClick={() => onToggleHasKit?.()}
+              aria-pressed={hasKitOnly}
+              style={{
+                padding: "5px 11px", borderRadius: 999,
+                background: hasKitOnly ? `${C.gold}28` : "transparent",
+                border: `1px solid ${hasKitOnly ? C.gold + "78" : C.border}`,
+                color: hasKitOnly ? C.gold : C.textSecondary,
+                fontSize: "0.74rem", fontWeight: hasKitOnly ? 700 : 600,
+                letterSpacing: "0.04em",
+                cursor: "pointer", transition: "all 0.2s",
+                fontFamily: "inherit",
+              }}
+              title="Show only experiments with a printable teacher kit"
+            >
+              📄 Has teacher kit
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Topic chips */}
       {availableTopicIds.length > 0 && (
