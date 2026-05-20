@@ -49,6 +49,7 @@ const SECTION_RULES = [
   { id: "credits", accent: C.sand, label: "Reference" },
   { id: "newsletter", accent: C.teal, label: "Newsletter" },
   { id: "whats-new", accent: C.gold, label: "Changelog" },
+  { id: "stories", accent: C.gold, label: "From the Classroom" },
   { id: "about", accent: C.ocean, label: "About" },
 
   // Legal / site
