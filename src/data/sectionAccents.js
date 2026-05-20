@@ -50,6 +50,7 @@ const SECTION_RULES = [
   { id: "newsletter", accent: C.teal, label: "Newsletter" },
   { id: "whats-new", accent: C.gold, label: "Changelog" },
   { id: "stories", accent: C.gold, label: "From the Classroom" },
+  { id: "picker", accent: C.coral, label: "Picker" },
   { id: "about", accent: C.ocean, label: "About" },
 
   // Legal / site

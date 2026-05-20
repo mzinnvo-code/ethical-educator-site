@@ -90,7 +90,8 @@
       "/credits",
       "/newsletter",
       "/whats-new",
-      "/stories"
+      "/stories",
+      "/picker"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false

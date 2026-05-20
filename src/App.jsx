@@ -75,6 +75,7 @@ const HighPerformingSchools = lazy(() => import("./pages/educators/HighPerformin
 const RTI = lazy(() => import("./pages/educators/RTI.jsx"));
 const Newsletter = lazy(() => import("./pages/Newsletter.jsx"));
 const Stories = lazy(() => import("./pages/Stories.jsx"));
+const Picker = lazy(() => import("./pages/Picker.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -148,6 +149,7 @@ const PAGE_MAP = {
   "newsletter": Newsletter,
   "whats-new": WhatsNew,
   "stories": Stories,
+  "picker": Picker,
 };
 
 const PAGE_META = {
@@ -384,6 +386,10 @@ const PAGE_META = {
   "stories": {
     title: "From the Classroom — Stories from Educators — The Ethical Educator",
     description: "Classroom stories and short notes from teachers, administrators, and parents who have used The Ethical Educator resources. Currently in placeholder mode — real stories replace the samples as they come in.",
+  },
+  "picker": {
+    title: "Thought Experiment Picker — The Ethical Educator",
+    description: "Answer three quick questions about grade, time, and topic — get three classroom-ready thought experiments that fit. No login, no algorithm.",
   },
 };
 
