@@ -126,6 +126,7 @@ function TopicChips({ topicIds }) {
 function TeacherToggle({ active, onToggle, accent }) {
   return (
     <button
+      className="no-print"
       onClick={onToggle}
       aria-pressed={active}
       aria-label={active ? "Hide teacher lesson plan" : "Show teacher lesson plan"}
@@ -699,6 +700,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   return (
     <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap" }}>
       <button
+        className="no-print"
         onClick={onNext}
         style={{
           padding: "10px 22px",
@@ -711,6 +713,7 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
         {isLast ? "See reflection →" : "Continue →"}
       </button>
       <button
+        className="no-print"
         onClick={onRestart}
         style={{
           padding: "10px 18px",
@@ -758,6 +761,7 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
 
       <div style={{ display: "flex", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
         <button
+          className="no-print"
           onClick={onRestart}
           style={{
             padding: "10px 20px", background: `${C.gold}15`,
@@ -767,6 +771,7 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
         >↺ Run it again</button>
         {onClose && (
           <button
+            className="no-print"
             onClick={onClose}
             style={{
               padding: "10px 20px", background: "transparent",

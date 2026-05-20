@@ -1,0 +1,103 @@
+/* Print stylesheet — applied when the user prints (or "Save as PDF" from
+ * the print dialog) any page. Hides app chrome (nav, footer, modal,
+ * decoration), reformats typography for paper, and tries to keep cards
+ * from breaking awkwardly across pages.
+ *
+ * Components opt into "print just this section" by wrapping their content
+ * in <div class="print-only" data-print-slug="..."> and asking visitors to
+ * click their own "Print this kit / scenario" button — that button fires
+ * window.print() and the user picks Save as PDF in the dialog.
+ */
+
+@media print {
+  /* High-contrast, paper-friendly base */
+  html, body {
+    background: white !important;
+    color: #111 !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Hide everything that's pure UI chrome */
+  .topbar,
+  .mobile-menu,
+  .hamburger,
+  .grain,
+  .skip-link,
+  footer,
+  [role="dialog"],
+  .read-aloud-button,
+  audio,
+  video,
+  iframe {
+    display: none !important;
+  }
+
+  /* Strip dark theme colors — everything to black on white */
+  *, *::before, *::after {
+    color: #111 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Keep accent on links visible but printer-safe */
+  a {
+    color: #1a4a7a !important;
+    text-decoration: underline !important;
+  }
+
+  /* Show outbound link URLs after the link text (skips intra-app links) */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555 !important;
+  }
+
+  /* Borders to mid-gray so cards remain visible */
+  [style*="border"] {
+    border-color: #888 !important;
+  }
+
+  /* Try not to split cards across pages */
+  section,
+  article,
+  blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Headings sit with their following content */
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+    color: #111 !important;
+  }
+
+  /* Images: cap height so they don't blow up a page */
+  img {
+    max-width: 100% !important;
+    max-height: 420pt !important;
+    page-break-inside: avoid;
+  }
+
+  /* Expandables: force open so printed kits don't lose hidden content */
+  .expandable-content,
+  .kit-section-body,
+  details {
+    display: block !important;
+    max-height: none !important;
+  }
+
+  /* Command controls don't print, but content-bearing buttons do. */
+  .read-aloud-button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Page margins (US Letter / A4 friendly) */
+  @page {
+    margin: 0.6in 0.7in;
+  }
+}

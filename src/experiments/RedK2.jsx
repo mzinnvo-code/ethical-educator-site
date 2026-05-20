@@ -112,7 +112,7 @@ export default function ExplainingRedK2() {
             label="Hear the introduction"
           />
         </div>
-        <button onClick={() => { audioBus.stop(); audio.playDeep(); setStage(1); scrollToTop(); }} style={{
+        <button className="no-print" onClick={() => { audioBus.stop(); audio.playDeep(); setStage(1); scrollToTop(); }} style={{
           padding: "14px 32px",
           background: `linear-gradient(135deg, ${C.coral}, ${C.gold})`,
           border: "none", borderRadius: 8, color: "#fff",

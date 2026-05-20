@@ -68,6 +68,7 @@ export function ExplainingRedK_2({ navigate }) {
             <FadeIn>
               <div style={{ marginTop: 28, textAlign: "center" }}>
                 <button
+                  className="no-print"
                   onClick={() => setShowTeacherKit((s) => !s)}
                   style={{
                     padding: "10px 22px",

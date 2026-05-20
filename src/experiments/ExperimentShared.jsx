@@ -54,7 +54,7 @@ export function PhiloRef({ text, url }) {
 }
 
 export function RestartBtn({ onClick }) {
-  return <div style={{textAlign:"center",marginTop:20}}><button onClick={onClick} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div>;
+  return <div style={{textAlign:"center",marginTop:20}}><button className="no-print" onClick={onClick} style={{padding:"10px 24px",background:`${C.gold}12`,border:`1px solid ${C.borderHover}`,borderRadius:6,color:C.gold,cursor:"pointer",fontSize:"0.86rem"}}>↺ Restart</button></div>;
 }
 
 // PathReveal — renders a composed personal narrative built from path-keyed
