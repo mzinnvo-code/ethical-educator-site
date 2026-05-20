@@ -6,6 +6,14 @@ import { getSceneIllustration } from "../data/sceneIllustrations.js";
 import { FadeIn, NewBadge } from "./shared.jsx";
 import { isNewExperiment } from "../theme.js";
 
+// Short label for the grade-band pill on each card.
+const GRADE_LABEL = {
+  "k-5": "K–5",
+  "6-8": "6–8",
+  "9-12": "9–12",
+  "educators": "Educator PD",
+};
+
 function PreviewArtwork({ experiment, accent, visualVariant }) {
   const [imageFailed, setImageFailed] = useState(false);
   const firstStage = experiment.stages?.[0];
@@ -96,6 +104,43 @@ function PreviewCard({ experiment, onSelect, delay = 0, visualVariant }) {
         <div style={{ position: "relative", zIndex: 1 }}>
           {isNew && <div style={{ position: "absolute", top: -4, right: -4 }}><NewBadge /></div>}
           <PreviewArtwork experiment={experiment} accent={accent} visualVariant={visualVariant} />
+
+          {/* Grade band + has-kit metadata strip (always visible — no filter required) */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
+            {(experiment.gradeBands || []).map((gb) => {
+              const label = GRADE_LABEL[gb];
+              if (!label) return null;
+              return (
+                <span key={gb} style={{
+                  padding: "2px 7px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: `1px solid ${C.border}`,
+                  borderRadius: 4,
+                  fontSize: "0.6rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: C.textSecondary,
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}>{label}</span>
+              );
+            })}
+            {experiment.teacherKit && (
+              <span title="Includes a printable teacher kit" style={{
+                padding: "2px 7px",
+                background: `${C.gold}14`,
+                border: `1px solid ${C.gold}40`,
+                borderRadius: 4,
+                fontSize: "0.6rem",
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: C.gold,
+                fontFamily: "'JetBrains Mono', monospace",
+              }}>📄 Kit</span>
+            )}
+          </div>
+
           <h3 style={{
             fontFamily: "'Source Serif 4', Georgia, serif",
             color: C.textPrimary, fontSize: "1.02rem", fontWeight: 700,
