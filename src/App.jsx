@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
 import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
 import { useScrollDepth } from "./hooks/useScrollDepth.js";
+import { OG_PAGES_BY_ID } from "./data/ogPages.js";
 
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
@@ -501,6 +502,27 @@ export default function App() {
       document.head.appendChild(canonicalEl);
     }
     canonicalEl.setAttribute("href", canonicalUrl);
+
+    // Per-page OG image. Falls back to the static default in index.html when
+    // the page isn't in OG_PAGES (only the most-shareable surfaces get a card).
+    const ogCard = OG_PAGES_BY_ID[currentPage];
+    const ogImageUrl = ogCard
+      ? `https://theethicaleducator.com/og/${currentPage.replace(/\//g, "_")}.png`
+      : "https://theethicaleducator.com/illustrations/home-hero.png";
+    for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute("content", ogImageUrl);
+    }
+    const ogUrlEl = document.querySelector('meta[property="og:url"]');
+    if (ogUrlEl) ogUrlEl.setAttribute("content", canonicalUrl);
+    const ogTitleEl = document.querySelector('meta[property="og:title"]');
+    if (ogTitleEl) ogTitleEl.setAttribute("content", meta.title);
+    const twitterTitleEl = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitleEl) twitterTitleEl.setAttribute("content", meta.title);
+    const ogDescEl = document.querySelector('meta[property="og:description"]');
+    if (ogDescEl) ogDescEl.setAttribute("content", meta.description);
+    const twitterDescEl = document.querySelector('meta[name="twitter:description"]');
+    if (twitterDescEl) twitterDescEl.setAttribute("content", meta.description);
 
     // Article schema for content pages (not home)
     if (currentPage !== "home") {
