@@ -1,8 +1,10 @@
-// Build the document set the search palette indexes. Source of truth for v1
-// is PAGE_META (every routed page on the site, with its title + description).
-// v2 will add experiment-level docs (each thought experiment as its own entry)
-// and teacher kit docs — both require pulling from src/data/experiments.js,
-// which is heavy. Adding them is mechanical when the time comes.
+// Build the document sets the search palette indexes.
+//
+// Page-level docs (buildSearchDocs) ship in the main bundle because they're
+// derived from PAGE_META which the app already has at boot. Experiment-level
+// docs (buildExperimentDocs) are lazy-loaded inside useSearch on first
+// palette open — the experiments module is ~600KB+ gz including scenes,
+// so pulling it eagerly would defeat the code-splitting from PR #60.
 
 const SECTION_BY_PREFIX = [
   { prefix: "thought-experiments/", section: "Thought Experiments" },
@@ -65,4 +67,78 @@ export function buildSearchDocs(pageMeta) {
     url: id === "home" ? "/" : `/${id}`,
     type: "page",
   }));
+}
+
+// Map a K–5 grade level id ("k", "1", …, "5") to its dedicated grade page slug.
+const K5_GRADE_PATH = {
+  k: "kindergarten",
+  "1": "grade-1",
+  "2": "grade-2",
+  "3": "grade-3",
+  "4": "grade-4",
+  "5": "grade-5",
+};
+
+const GRADE_BAND_PATH = {
+  "k-5": "k-5",
+  "6-8": "6-8",
+  "9-12": "9-12",
+  "educators": "educators",
+};
+
+const GRADE_BAND_LABEL = {
+  "k-5": "K–5",
+  "6-8": "Grades 6–8",
+  "9-12": "Grades 9–12",
+  "educators": "Educator PD",
+};
+
+// Pick the most specific grade-scoped URL for an experiment, then attach
+// the ?experiment= deep-link so the grade page opens the right scenario.
+function urlForExperiment(e) {
+  const grades = e.gradeBands || [];
+  const k5Grade = grades.includes("k-5") ? e.gradeLevels?.[0] : null;
+  let pathSlug;
+  if (k5Grade && K5_GRADE_PATH[k5Grade]) {
+    pathSlug = K5_GRADE_PATH[k5Grade];
+  } else {
+    const band = grades.find((g) => GRADE_BAND_PATH[g]) || null;
+    pathSlug = band ? GRADE_BAND_PATH[band] : null;
+  }
+  const base = pathSlug
+    ? `/thought-experiments/${pathSlug}`
+    : "/thought-experiments";
+  return `${base}?experiment=${encodeURIComponent(e.id)}`;
+}
+
+function sectionForExperiment(e) {
+  const grades = e.gradeBands || [];
+  if (grades.includes("k-5")) return "Thought Experiment · K–5";
+  if (grades.includes("6-8")) return "Thought Experiment · Grades 6–8";
+  if (grades.includes("9-12")) return "Thought Experiment · Grades 9–12";
+  if (grades.includes("educators")) return "Thought Experiment · Educator PD";
+  return "Thought Experiment";
+}
+
+// Build search docs for individual thought experiments. Pass the EXPERIMENTS
+// array (loaded lazily by useSearch on first palette open). Each experiment
+// becomes a doc with title + tagline + topic labels as searchable fields and
+// a deep-link URL into the right grade page.
+export function buildExperimentDocs(experiments) {
+  if (!Array.isArray(experiments)) return [];
+  return experiments.map((e) => {
+    const description = [
+      e.tagline,
+      e.gradeBands?.map((g) => GRADE_BAND_LABEL[g] || g).join(", "),
+    ].filter(Boolean).join(" — ");
+    return {
+      // Prefix experiment ids so they never collide with page ids in the index.
+      id: `exp:${e.id}`,
+      title: e.title,
+      description,
+      section: sectionForExperiment(e),
+      url: urlForExperiment(e),
+      type: "experiment",
+    };
+  });
 }

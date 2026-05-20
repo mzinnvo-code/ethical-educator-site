@@ -432,11 +432,18 @@ export default function App() {
   const hasNew = hasAnyNewExperiments();
 
   const navigate = (pageId) => {
-    const target = pageId === "home" ? "/" : `/${pageId}`;
+    // Callers may pass a pageId with a query string attached
+    // (e.g. "thought-experiments/kindergarten?experiment=magic-toy" from
+    // the search palette). Split it so PAGE_MAP lookups see only the path,
+    // but the URL still carries the full query.
+    const [pathPart, queryPart] = String(pageId).split("?");
+    const path = pathPart || "home";
+    const queryString = queryPart ? `?${queryPart}` : "";
+    const target = path === "home" ? `/${queryString}` : `/${path}${queryString}`;
     if (window.location.pathname + window.location.search !== target) {
       window.history.pushState(null, "", target);
     }
-    setCurrentPage(pageId);
+    setCurrentPage(path);
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Notify in-page listeners (e.g. grade pages syncing ?experiment=).

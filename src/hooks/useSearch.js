@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import MiniSearch from "minisearch";
-import { buildSearchDocs } from "../lib/searchDocs.js";
+import { buildSearchDocs, buildExperimentDocs } from "../lib/searchDocs.js";
 
 const MINISEARCH_OPTIONS = {
   fields: ["title", "description", "section"],
@@ -13,30 +13,48 @@ const MINISEARCH_OPTIONS = {
   },
 };
 
-// Builds a MiniSearch index from PAGE_META lazily — the first call to
-// search() initializes the index; subsequent calls reuse it.
+// Builds a MiniSearch index from PAGE_META synchronously (the data is already
+// in the main bundle), then lazy-loads EXPERIMENTS on first init and appends
+// experiment-level docs to the same index. Until that lazy load resolves,
+// search returns page-level results only; once it does, experiment titles
+// like "Plato's Cave" or "The Magic Toy" are findable directly.
 export function useSearch(pageMeta) {
-  const docsRef = useRef(null);
   const indexRef = useRef(null);
-  const [ready, setReady] = useState(false);
+  const [docCount, setDocCount] = useState(0);
 
-  const docs = useMemo(() => buildSearchDocs(pageMeta), [pageMeta]);
+  const pageDocs = useMemo(() => buildSearchDocs(pageMeta), [pageMeta]);
 
   useEffect(() => {
-    docsRef.current = docs;
     const mini = new MiniSearch(MINISEARCH_OPTIONS);
-    mini.addAll(docs);
+    mini.addAll(pageDocs);
     indexRef.current = mini;
-    setReady(true);
-  }, [docs]);
+    setDocCount(pageDocs.length);
+
+    // Async append of experiment docs. import() returns the module — pulls
+    // in the experiments + scenes chunk only when search is actually used.
+    let cancelled = false;
+    import("../data/experiments.js")
+      .then((mod) => {
+        if (cancelled || !indexRef.current) return;
+        const docs = buildExperimentDocs(mod.EXPERIMENTS);
+        indexRef.current.addAll(docs);
+        setDocCount((n) => n + docs.length);
+      })
+      .catch((err) => {
+        // Search still works with page docs only; just log and move on.
+        // eslint-disable-next-line no-console
+        if (import.meta.env?.DEV) console.warn("[search] failed to load experiment docs", err);
+      });
+
+    return () => { cancelled = true; };
+  }, [pageDocs]);
 
   function search(query) {
-    if (!ready || !indexRef.current) return [];
+    if (!indexRef.current) return [];
     const trimmed = query.trim();
     if (!trimmed) return [];
-    const results = indexRef.current.search(trimmed);
-    return results.slice(0, 12);
+    return indexRef.current.search(trimmed).slice(0, 12);
   }
 
-  return { ready, search, docCount: docs.length };
+  return { ready: docCount > 0, search, docCount };
 }
