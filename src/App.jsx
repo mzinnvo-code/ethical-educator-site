@@ -55,6 +55,9 @@ import AVResources from "./pages/educators/AVResources.jsx";
 import QualityLeadership from "./pages/educators/QualityLeadership.jsx";
 import HighPerformingSchools from "./pages/educators/HighPerformingSchools.jsx";
 import RTI from "./pages/educators/RTI.jsx";
+import Newsletter from "./pages/Newsletter.jsx";
+import NewsletterSignup from "./components/NewsletterSignup.jsx";
+import NewsletterModal from "./components/NewsletterModal.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -125,6 +128,7 @@ const PAGE_MAP = {
   "quality-leadership": QualityLeadership,
   "high-performing-schools": HighPerformingSchools,
   "rti": RTI,
+  "newsletter": Newsletter,
 };
 
 const PAGE_META = {
@@ -350,6 +354,10 @@ const PAGE_META = {
     title: "Response to Intervention (RTI) — The Ethical Educator",
     description: "The tiered intervention framework — Tier 1, 2, and 3 — for early identification and support. Components, benefits, implementation challenges, and where to begin.",
   },
+  "newsletter": {
+    title: "The Sunday Dilemma Newsletter — The Ethical Educator",
+    description: "One classroom-ready thought experiment, one printable, and one research finding for K–12 teachers — every Sunday morning. Free, no spam, unsubscribe in one click.",
+  },
 };
 
 function getPageFromPath() {
@@ -555,6 +563,7 @@ export default function App() {
       `}</style>
       <a href="#main" className="skip-link">Skip to content</a>
       <div className="grain" />
+      <NewsletterModal />
 
       {/* NAV */}
       <header className="topbar">
@@ -602,6 +611,24 @@ export default function App() {
       {/* FOOTER */}
       <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(260px, 1.3fr) 1fr",
+            gap: 28,
+            marginBottom: 28,
+            paddingBottom: 28,
+            borderBottom: `1px solid ${C.border}`,
+          }}>
+            <div>
+              <NewsletterSignup variant="footer" placement="footer" />
+            </div>
+            <div style={{ color: C.textMuted, fontSize: "0.78rem", lineHeight: 1.65 }}>
+              <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 8 }}>
+                Why subscribe?
+              </p>
+              <p>Built for teachers who plan on Sundays. One classroom-ready dilemma + printable + research finding, in your inbox before Monday. <a href="/newsletter" onClick={e => { e.preventDefault(); navigate("newsletter"); }} style={{ color: C.gold }}>What's inside →</a></p>
+            </div>
+          </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 28, marginBottom: 32 }}>
             <div>
               <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Explore</p>
