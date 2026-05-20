@@ -59,6 +59,7 @@ import Newsletter from "./pages/Newsletter.jsx";
 import NewsletterSignup from "./components/NewsletterSignup.jsx";
 import NewsletterModal from "./components/NewsletterModal.jsx";
 import SearchPalette from "./components/SearchPalette.jsx";
+import WhatsNew from "./pages/WhatsNew.jsx";
 
 function NotFound({ navigate }) {
   return (
@@ -130,6 +131,7 @@ const PAGE_MAP = {
   "high-performing-schools": HighPerformingSchools,
   "rti": RTI,
   "newsletter": Newsletter,
+  "whats-new": WhatsNew,
 };
 
 const PAGE_META = {
@@ -358,6 +360,10 @@ const PAGE_META = {
   "newsletter": {
     title: "The Sunday Dilemma Newsletter — The Ethical Educator",
     description: "One classroom-ready thought experiment, one printable, and one research finding for K–12 teachers — every Sunday morning. Free, no spam, unsubscribe in one click.",
+  },
+  "whats-new": {
+    title: "What's New — The Ethical Educator",
+    description: "A reverse-chronological changelog of new thought experiments, research updates, features, and resources on The Ethical Educator.",
   },
 };
 

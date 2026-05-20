@@ -1,5 +1,6 @@
 import { C } from "../theme.js";
 import { FadeIn } from "../components/shared.jsx";
+import WhatsNewModule from "../components/WhatsNewModule.jsx";
 import { getFeatureIllustration } from "../data/illustrations.js";
 
 const audiences = [
@@ -688,6 +689,8 @@ export default function Home({ navigate }) {
           </FadeIn>
         </div>
       </section>
+
+      <WhatsNewModule navigate={navigate} />
 
       <section className="home-section alt">
         <div className="home-container">
