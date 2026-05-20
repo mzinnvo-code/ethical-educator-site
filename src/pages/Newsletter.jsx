@@ -76,13 +76,13 @@ export default function Newsletter() {
               One issue per week, Sunday morning your local time. That's it. No drip campaigns, no follow-up sequences, no marketing emails.
             </Expandable>
             <Expandable title="What we do with your email">
-              Send you the newsletter. That's the entire list. We don't sell, share, or trade subscriber addresses. Email is stored by Buttondown (a small independent newsletter platform); their privacy policy is at <a href="https://buttondown.email/privacy" target="_blank" rel="noopener noreferrer" style={{ color: C.gold }}>buttondown.email/privacy</a>.
+              Send you the newsletter. That's the entire list. We don't sell, share, or trade subscriber addresses. Email is stored by Buttondown (a small independent newsletter platform); their privacy policy is at <a href="https://buttondown.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: C.gold }}>buttondown.com/privacy</a>.
             </Expandable>
             <Expandable title="How to unsubscribe">
               Every issue includes a one-click unsubscribe link at the bottom. No questions, no friction.
             </Expandable>
             <Expandable title="Can I read past issues?">
-              Once a few weeks of issues exist, an archive will live at <code style={{ color: C.gold, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.88em" }}>buttondown.email/[username]/archive</code> — link will appear here after launch.
+              Once a few weeks of issues exist, an archive will live at <code style={{ color: C.gold, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.88em" }}>buttondown.com/theethicaleducator/archive</code> — link will appear here after launch.
             </Expandable>
           </FadeIn>
 

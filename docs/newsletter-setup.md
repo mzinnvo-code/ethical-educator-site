@@ -16,8 +16,8 @@ If you prefer Kit (ConvertKit), Beehiiv, or Substack, the swap is small — repl
 
 ### 1. Create the Buttondown account
 
-1. Go to https://buttondown.email and sign up.
-2. Choose a username — this becomes part of your public URL (`buttondown.email/<username>`) and the subscribe endpoint.
+1. Go to https://buttondown.com and sign up.
+2. Choose a username — this becomes part of your public URL (`buttondown.com/<username>`) and the subscribe endpoint.
 3. Suggested: `theethicaleducator` (matches the brand and stays predictable). Confirm it's available.
 4. Set your sender name to "Matthew A. Zinn" and reply-to to your real address.
 5. Skip the paid plan; the free tier is fine until you cross 100 subscribers.
@@ -27,21 +27,21 @@ If you prefer Kit (ConvertKit), Beehiiv, or Substack, the swap is small — repl
 Open `src/components/NewsletterSignup.jsx` at the repo root. Find:
 
 ```js
-const BUTTONDOWN_USERNAME = "REPLACE_WITH_BUTTONDOWN_USERNAME";
+const BUTTONDOWN_USERNAME = "theethicaleducator";
 ```
 
-Replace `REPLACE_WITH_BUTTONDOWN_USERNAME` with the username you chose. Save, commit, push.
+The site is currently wired for `theethicaleducator`. If you choose a different username, replace that string. Save, commit, push.
 
 Once the username is in place:
 - The footer form, the `/newsletter` page, and the third-visit modal all start accepting submissions.
-- Submissions POST to `https://buttondown.email/api/emails/embed-subscribe/<username>` in a popup window (so the user stays on our page).
+- Submissions POST to `https://buttondown.com/api/emails/embed-subscribe/<username>` in a popup window (so the user stays on our page).
 - The user gets a confirmation email from Buttondown; once they click the confirm link, they're added to your list.
 
 ### 3. Verify it works
 
 1. Visit the site in an incognito window.
 2. Open footer → enter a test address → click Subscribe.
-3. A popup opens to `buttondown.email/<username>`.
+3. A popup opens to `buttondown.com/<username>`.
 4. Check your test inbox for a Buttondown confirmation email.
 5. Confirm; you should appear in your Buttondown subscriber list.
 
@@ -83,9 +83,9 @@ The third-visit trigger is hardcoded in `src/components/NewsletterModal.jsx`:
 const TRIGGER_AT_VISIT = 3;
 ```
 
-Raise it (5, 7) if you think 3 is too eager; lower it (2) if you want to convert faster. Once a visitor dismisses or subscribes, the modal is suppressed permanently for that browser (via `localStorage`).
+Raise it (5, 7) if you think 3 is too eager; lower it (2) if you want to convert faster. Once a visitor dismisses the modal, it is suppressed permanently for that browser (via `localStorage`). A submitted form shows an in-page confirmation, but the modal is not permanently suppressed until dismissal because Buttondown confirmation happens outside the site.
 
-To reset for testing: open DevTools → Application → Local Storage → clear the `tee:visits`, `tee:newsletterModalDismissed`, and `tee:newsletterSubscribed` keys, then `sessionStorage` `tee:newsletterModalShownSession`.
+To reset for testing: open DevTools → Application → Local Storage → clear the `tee:visits` and `tee:newsletterModalDismissed` keys, then `sessionStorage` `tee:newsletterModalShownSession`.
 
 ## Switching providers later
 

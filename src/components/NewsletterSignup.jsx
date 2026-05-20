@@ -3,24 +3,20 @@ import { C } from "../theme.js";
 import { track } from "../lib/analytics.js";
 
 // Buttondown username — set this once after creating the Buttondown account
-// at https://buttondown.email. Until then, the form renders with a "coming
+// at https://buttondown.com. Until then, the form renders with a "coming
 // soon" hint and submission is disabled.
-const BUTTONDOWN_USERNAME = "REPLACE_WITH_BUTTONDOWN_USERNAME";
+const BUTTONDOWN_USERNAME = "theethicaleducator";
 
 function isConfigured() {
   return BUTTONDOWN_USERNAME && !BUTTONDOWN_USERNAME.includes("REPLACE_WITH");
 }
 
 function submitUrl() {
-  return `https://buttondown.email/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`;
+  return `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`;
 }
 
 function profileUrl() {
-  return `https://buttondown.email/${BUTTONDOWN_USERNAME}`;
-}
-
-function markSubscribed() {
-  try { localStorage.setItem("tee:newsletterSubscribed", "1"); } catch {}
+  return `https://buttondown.com/${BUTTONDOWN_USERNAME}`;
 }
 
 // variant: "footer" | "inline" | "modal"
@@ -44,7 +40,6 @@ export default function NewsletterSignup({
     if (typeof window !== "undefined") {
       window.open(profileUrl(), "tee-newsletter-popup", "width=560,height=720");
     }
-    markSubscribed();
     setSubmitted(true);
     // Let the browser submit the form to the popup target normally.
   };

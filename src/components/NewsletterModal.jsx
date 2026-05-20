@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { C } from "../theme.js";
 import NewsletterSignup from "./NewsletterSignup.jsx";
 
@@ -10,47 +10,86 @@ const SUBSCRIBED_KEY = "tee:newsletterSubscribed";
 const SHOWN_SESSION_KEY = "tee:newsletterModalShownSession";
 const TRIGGER_AT_VISIT = 3;
 
-function safeGet(storage, key) {
+function getStorage(kind) {
+  if (typeof window === "undefined") return null;
+  try { return window[kind]; } catch { return null; }
+}
+function safeGet(kind, key) {
+  const storage = getStorage(kind);
+  if (!storage) return null;
   try { return storage.getItem(key); } catch { return null; }
 }
-function safeSet(storage, key, value) {
+function safeSet(kind, key, value) {
+  const storage = getStorage(kind);
+  if (!storage) return;
   try { storage.setItem(key, value); } catch {}
 }
 
 function incrementVisits() {
-  const n = parseInt(safeGet(localStorage, VISITS_KEY) || "0", 10) || 0;
+  const n = parseInt(safeGet("localStorage", VISITS_KEY) || "0", 10) || 0;
   const next = Math.min(n + 1, 9999);
-  safeSet(localStorage, VISITS_KEY, String(next));
+  safeSet("localStorage", VISITS_KEY, String(next));
   return next;
 }
 
 function shouldShow() {
   if (typeof window === "undefined") return false;
-  if (safeGet(localStorage, DISMISSED_KEY)) return false;
-  if (safeGet(localStorage, SUBSCRIBED_KEY)) return false;
-  if (safeGet(sessionStorage, SHOWN_SESSION_KEY)) return false;
+  if (safeGet("localStorage", DISMISSED_KEY)) return false;
+  if (safeGet("localStorage", SUBSCRIBED_KEY)) return false;
+  if (safeGet("sessionStorage", SHOWN_SESSION_KEY)) return false;
   const visits = incrementVisits();
   return visits >= TRIGGER_AT_VISIT;
 }
 
-export default function NewsletterModal() {
+function focusableElements(root) {
+  if (!root) return [];
+  return Array.from(root.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )).filter((el) => !el.hasAttribute("disabled") && el.getAttribute("aria-hidden") !== "true");
+}
+
+export default function NewsletterModal({ routeKey }) {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef(null);
+  const previousFocusRef = useRef(null);
 
   useEffect(() => {
     // Defer slightly so we don't pop the modal during the first paint.
     const t = setTimeout(() => {
       if (shouldShow()) {
-        safeSet(sessionStorage, SHOWN_SESSION_KEY, "1");
+        safeSet("sessionStorage", SHOWN_SESSION_KEY, "1");
         setOpen(true);
       }
     }, 1200);
     return () => clearTimeout(t);
-  }, []);
+  }, [routeKey]);
 
   useEffect(() => {
     if (!open) return;
+    previousFocusRef.current = document.activeElement;
+    window.setTimeout(() => {
+      const [first] = focusableElements(dialogRef.current);
+      (first || dialogRef.current)?.focus();
+    }, 0);
+
     const onKey = (e) => {
       if (e.key === "Escape") dismiss();
+      if (e.key !== "Tab") return;
+      const focusable = focusableElements(dialogRef.current);
+      if (focusable.length === 0) {
+        e.preventDefault();
+        dialogRef.current?.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
@@ -58,12 +97,13 @@ export default function NewsletterModal() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      previousFocusRef.current?.focus?.();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   function dismiss() {
-    safeSet(localStorage, DISMISSED_KEY, "1");
+    safeSet("localStorage", DISMISSED_KEY, "1");
     setOpen(false);
   }
 
@@ -87,7 +127,7 @@ export default function NewsletterModal() {
         padding: 20,
       }}
     >
-      <div style={{
+      <div ref={dialogRef} tabIndex={-1} style={{
         background: C.bgAlt,
         border: `1px solid ${C.border}`,
         borderRadius: 14,

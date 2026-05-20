@@ -563,7 +563,7 @@ export default function App() {
       `}</style>
       <a href="#main" className="skip-link">Skip to content</a>
       <div className="grain" />
-      <NewsletterModal />
+      <NewsletterModal routeKey={currentPage} />
 
       {/* NAV */}
       <header className="topbar">
