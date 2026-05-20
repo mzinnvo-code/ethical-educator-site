@@ -667,6 +667,26 @@ export const AI_EDUCATION_PAGES = {
           "Tools earn or fail their place by what they actually do for students and teachers. The evidence base on AI in education is rapidly maturing, and it is not one-directional. The strongest signals are around access (reading practice, tutoring availability, adoption scale) and teacher time (drafting, planning, IEP first-passes). The most consistent cautionary signals are around cognitive offloading and the gap between productivity and learning.",
           "The findings below are organized as positive correlations, an adoption snapshot, and cautionary signals. Each card names a specific study or report. None of them are endorsements; all of them are evidence to weigh.",
         ],
+        charts: [
+          {
+            type: "effect-size",
+            value: 0.45,
+            label: "Overall effect of generative-AI interventions (68 studies, 337 effect sizes)",
+            citation: "Educational Research Review meta-analysis (2025)",
+            accent: C.teal,
+          },
+          {
+            type: "bars",
+            title: "AI use in K–12 classrooms, 2024–25",
+            description: "Center for Democracy and Technology, October 2025. Same survey: data-breach incidents and tech-fueled harassment cases rose alongside adoption.",
+            items: [
+              { label: "Teachers using AI", value: 85, accent: C.gold },
+              { label: "Students using AI", value: 86, accent: C.teal },
+              { label: "Students worried about AI", value: 60, accent: C.coral },
+            ],
+            unit: "%",
+          },
+        ],
         evidenceCallouts: [
           {
             year: "2025",
