@@ -3,6 +3,7 @@ import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
 import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
 import { useScrollDepth } from "./hooks/useScrollDepth.js";
 import { OG_PAGES_BY_ID } from "./data/ogPages.js";
+import { getSectionAccent } from "./data/sectionAccents.js";
 
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
@@ -17,9 +18,9 @@ import NewsletterSignup from "./components/NewsletterSignup.jsx";
 // SearchPalette is the Cmd+K modal — its keyboard listener has to be live
 // the moment the page loads, so it stays eager (small + globally needed).
 import SearchPalette from "./components/SearchPalette.jsx";
-import WhatsNew from "./pages/WhatsNew.jsx";
 
 const NewsletterModal = lazy(() => import("./components/NewsletterModal.jsx"));
+const WhatsNew = lazy(() => import("./pages/WhatsNew.jsx"));
 
 // Lazy-loaded routes. Pulls each page (and its component tree, including
 // heavy data files like k5ScenarioCopy/highSchoolScenarioCopy/teacherKits)
@@ -659,8 +660,24 @@ export default function App() {
         ))}
       </div>
 
+      {/* Section accent stripe — "you are here" signal, sits directly under
+          the fixed topbar. Color shifts to match the current section. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: 56,
+          left: 0,
+          right: 0,
+          height: 3,
+          background: getSectionAccent(currentPage),
+          zIndex: 999,
+          transition: "background 0.4s ease",
+        }}
+      />
+
       {/* PAGE CONTENT */}
-      <main id="main" tabIndex={-1} style={{ paddingTop: 56 }} className="page-enter" key={currentPage}>
+      <main id="main" tabIndex={-1} style={{ paddingTop: 59 }} className="page-enter" key={currentPage}>
         <Suspense fallback={null}>
           {isNotFound
             ? <NotFound navigate={navigate} />
