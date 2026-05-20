@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { C } from "../theme.js";
+import { track } from "../lib/analytics.js";
 
 // Map a free-text protocol name in a TeacherKit to a protocol id in the
 // Dialogue Toolkit library, so we can deep-link.
@@ -106,27 +107,14 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
   if (!kit) return null;
 
   const handlePrint = () => {
-    document.body.classList.add("printing-teacher-kit");
+    const slug = experiment?.id || experiment?.title || "unknown-kit";
+    track("pdf_download", { slug, type: "kit", placement: "teacher_kit" });
     window.print();
-    setTimeout(() => document.body.classList.remove("printing-teacher-kit"), 500);
   };
 
   return (
     <>
-      {/* Print-only stylesheet (scoped via body class) */}
-      <style>{`
-        @media print {
-          body.printing-teacher-kit > * { display: none !important; }
-          body.printing-teacher-kit .teacher-kit-print { display: block !important; }
-          body.printing-teacher-kit .kit-section,
-          body.printing-teacher-kit .kit-section-body { display: block !important; }
-          body.printing-teacher-kit { background: white !important; color: black !important; }
-          body.printing-teacher-kit * { color: black !important; background: transparent !important; border-color: #888 !important; }
-          body.printing-teacher-kit a { color: #333 !important; text-decoration: underline !important; }
-        }
-      `}</style>
-
-      <div className="teacher-kit-print" style={{
+      <div className="teacher-kit-print" data-print-slug={experiment?.id || ""} style={{
         marginTop: 22,
         background: `linear-gradient(135deg, ${accent}06, ${C.bgAlt})`,
         border: `1px solid ${accent}30`,
