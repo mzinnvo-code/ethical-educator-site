@@ -11,7 +11,7 @@
 //   2. Replace REPLACE_WITH_WORKER_URL below with the deployed URL.
 // Until then, events buffer to window.__teeEvents for DevTools inspection.
 
-const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
+const ANALYTICS_ENDPOINT = "https://ethed-events.theethicaleducator.workers.dev/events";
 const BUFFER_KEY = "__teeEvents";
 
 function buffer() {
