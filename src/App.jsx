@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
 import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
+import { useScrollDepth } from "./hooks/useScrollDepth.js";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import MoralPsychology from "./pages/MoralPsychology.jsx";
@@ -412,6 +413,9 @@ export default function App() {
     (page.matchPrefix && currentPage.startsWith(page.matchPrefix))
   );
 
+  // Scroll-depth analytics: fires 25/50/75/100% milestone events per page.
+  useScrollDepth(currentPage);
+
   // Handle browser back/forward, direct URL entry, and in-app pushState calls
   // that bypass navigate() (rare, but supported via ethed:route event).
   useEffect(() => {
@@ -515,6 +519,10 @@ export default function App() {
         strong{color:${C.textPrimary}}
         em{color:${C.sand};font-style:italic}
         .grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+        :focus-visible{outline:2px solid ${C.gold};outline-offset:2px;border-radius:4px}
+        .skip-link{position:absolute;left:12px;top:-44px;z-index:10000;padding:10px 16px;background:${C.gold};color:${C.midnight};font-weight:600;font-size:0.85rem;border-radius:6px;text-decoration:none;transition:top 0.2s}
+        .skip-link:focus{top:12px;opacity:1}
+        #main:focus{outline:none}
         .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
         .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
         .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
@@ -545,6 +553,7 @@ export default function App() {
           @keyframes newPulse{0%,100%{opacity:1}50%{opacity:1}}
         }
       `}</style>
+      <a href="#main" className="skip-link">Skip to content</a>
       <div className="grain" />
 
       {/* NAV */}
@@ -560,6 +569,7 @@ export default function App() {
             <li key={p.id}>
               <a href={p.id === "home" ? "/" : `/${p.id}`}
                 className={isPageActive(p) ? "active" : ""}
+                aria-current={isPageActive(p) ? "page" : undefined}
                 onClick={(e) => { e.preventDefault(); navigate(p.id); }}>
                 {p.label}
                 {p.id === "thought-experiments" && hasNew && <NewBadge />}
@@ -567,13 +577,15 @@ export default function App() {
             </li>
           ))}
         </ul>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
+        <button className="hamburger" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
       </header>
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {PAGES.map(p => (
           <a key={p.id}
+            href={p.id === "home" ? "/" : `/${p.id}`}
             className={isPageActive(p) ? "active" : ""}
-            onClick={() => navigate(p.id)}>
+            aria-current={isPageActive(p) ? "page" : undefined}
+            onClick={(e) => { e.preventDefault(); navigate(p.id); }}>
             {p.label}
             {p.id === "thought-experiments" && hasNew && <NewBadge />}
           </a>
@@ -581,7 +593,7 @@ export default function App() {
       </div>
 
       {/* PAGE CONTENT */}
-      <main style={{ paddingTop: 56 }} className="page-enter" key={currentPage}>
+      <main id="main" tabIndex={-1} style={{ paddingTop: 56 }} className="page-enter" key={currentPage}>
         {isNotFound
           ? <NotFound navigate={navigate} />
           : <PageComponent navigate={navigate} />}
