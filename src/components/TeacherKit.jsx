@@ -57,7 +57,7 @@ function Section({ title, color, children, defaultOpen = false }) {
       background: open ? `${color}06` : "transparent",
       transition: "all 0.25s",
     }}>
-      <button onClick={() => setOpen(!open)} style={{
+      <button className="kit-section-toggle" onClick={() => setOpen(!open)} style={{
         width: "100%", padding: "12px 16px",
         background: "transparent", border: "none",
         color: C.textPrimary, fontFamily: "'Source Serif 4', Georgia, serif",
@@ -74,15 +74,14 @@ function Section({ title, color, children, defaultOpen = false }) {
         </span>
         <span style={{ color, fontSize: "0.85rem", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▾</span>
       </button>
-      {open && (
-        <div className="kit-section-body" style={{
+      <div className="kit-section-body" style={{
+          display: open ? "block" : "none",
           padding: "0 16px 16px",
           color: C.textSecondary,
           fontSize: "0.88rem", lineHeight: 1.7,
         }}>
           {children}
         </div>
-      )}
     </div>
   );
 }
@@ -129,7 +128,7 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
               {experiment.title}
             </h3>
           </div>
-          <button onClick={handlePrint} style={{
+          <button className="no-print" onClick={handlePrint} style={{
             padding: "7px 14px",
             background: `${accent}15`, color: accent,
             border: `1px solid ${accent}40`, borderRadius: 8,

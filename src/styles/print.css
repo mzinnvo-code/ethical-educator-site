@@ -84,14 +84,14 @@
 
   /* Expandables: force open so printed kits don't lose hidden content */
   .expandable-content,
-  [aria-expanded="false"] + div,
+  .kit-section-body,
   details {
     display: block !important;
     max-height: none !important;
   }
 
-  /* Buttons (Print, Download, Subscribe, etc.) don't print */
-  button,
+  /* Command controls don't print, but content-bearing buttons do. */
+  .read-aloud-button,
   .no-print {
     display: none !important;
   }

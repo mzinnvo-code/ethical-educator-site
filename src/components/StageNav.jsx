@@ -23,6 +23,7 @@ export default function StageNav({ stages, currentIdx, onSelect, accent = C.gold
           const future = i > currentIdx;
           return (
             <button
+              className="no-print"
               key={s.id || i}
               onClick={() => !future && onSelect?.(i)}
               disabled={future}

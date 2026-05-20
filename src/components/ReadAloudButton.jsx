@@ -119,6 +119,7 @@ export default function ReadAloudButton({
   if (variant === "primary") {
     return (
       <button
+        className="read-aloud-button"
         onClick={onClick}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -148,6 +149,7 @@ export default function ReadAloudButton({
   // icon variant
   return (
     <button
+      className="read-aloud-button"
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
