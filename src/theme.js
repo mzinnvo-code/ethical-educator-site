@@ -18,7 +18,9 @@ export const C = {
   coral: "#c07040",
   textPrimary: "#e0dcd0",
   textSecondary: "#90a0b0",
-  textMuted: "#607080",
+  // Bumped from #607080 (5.2:1 on bg, marginal AA, fails on tinted card bg)
+  // to #8a9aac (~7:1 on bg, passes AAA on bg and AA on common tinted cards).
+  textMuted: "#8a9aac",
   border: "rgba(200,152,48,0.12)",
   borderHover: "rgba(200,152,48,0.3)",
   glow: "rgba(200,152,48,0.06)",

@@ -65,6 +65,34 @@
       "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders."
     }
     </script>
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "The Ethical Educator",
+      "url": "https://theethicaleducator.com",
+      "logo": "https://theethicaleducator.com/favicon.svg",
+      "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
+      "founder": {
+        "@type": "Person",
+        "name": "Matthew A. Zinn"
+      },
+      "sameAs": [
+        "https://ethicalaiedu.wordpress.com",
+        "https://innovateedai.com"
+      ]
+    }
+    </script>
+
+    <!-- Cloudflare Web Analytics
+         Cookieless, GDPR-clean, no PII. Setup steps: docs/cloudflare-runbook.md
+         Replace REPLACE_WITH_CLOUDFLARE_TOKEN with the token from
+         dash.cloudflare.com → Web Analytics → Add a site → theethicaleducator.com.
+         The "spa": true flag tells the beacon to report on SPA route changes. -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "510341a8a120458f8fe313de1c65aa52", "spa": true}'></script>
   </head>
   <body>
     <div id="root"></div>
