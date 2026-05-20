@@ -84,7 +84,8 @@
       "/accessibility",
       "/terms",
       "/credits",
-      "/newsletter"
+      "/newsletter",
+      "/whats-new"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
