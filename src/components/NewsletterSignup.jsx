@@ -3,12 +3,13 @@ import { C } from "../theme.js";
 import { track } from "../lib/analytics.js";
 
 // Buttondown username — set this once after creating the Buttondown account
-// at https://buttondown.com. Until then, the form renders with a "coming
-// soon" hint and submission is disabled.
+// at https://buttondown.com. Keep BUTTONDOWN_ENABLED false until the
+// publication exists, otherwise visitors hit Buttondown's Not Found page.
 const BUTTONDOWN_USERNAME = "theethicaleducator";
+const BUTTONDOWN_ENABLED = false;
 
 function isConfigured() {
-  return BUTTONDOWN_USERNAME && !BUTTONDOWN_USERNAME.includes("REPLACE_WITH");
+  return BUTTONDOWN_ENABLED && BUTTONDOWN_USERNAME && !BUTTONDOWN_USERNAME.includes("REPLACE_WITH");
 }
 
 function submitUrl() {
@@ -144,7 +145,7 @@ function FooterForm({ configured, submitted, onSubmit, buttonLabel }) {
       )}
       {!configured && (
         <p style={{ color: C.textMuted, fontSize: "0.68rem", marginTop: 6, fontStyle: "italic" }}>
-          (Coming soon — newsletter launches once Buttondown is configured.)
+          (Coming soon — newsletter signup opens once Buttondown is ready.)
         </p>
       )}
     </form>
@@ -226,7 +227,7 @@ function InlineForm({ configured, submitted, onSubmit, headline, subhead, button
       <p style={{ color: C.textMuted, fontSize: "0.74rem", marginTop: 10, fontStyle: "italic" }}>
         {configured
           ? "No spam, no ads, no tracking. Unsubscribe in one click."
-          : "(Coming soon — newsletter launches once Buttondown is configured.)"}
+          : "(Coming soon — newsletter signup opens once Buttondown is ready.)"}
       </p>
     </section>
   );

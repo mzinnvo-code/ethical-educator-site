@@ -28,9 +28,18 @@ Open `src/components/NewsletterSignup.jsx` at the repo root. Find:
 
 ```js
 const BUTTONDOWN_USERNAME = "theethicaleducator";
+const BUTTONDOWN_ENABLED = false;
 ```
 
-The site is currently wired for `theethicaleducator`. If you choose a different username, replace that string. Save, commit, push.
+The site is currently reserved for `theethicaleducator`, but submissions stay disabled while `BUTTONDOWN_ENABLED` is `false`. This prevents visitors from being sent to Buttondown before the publication exists. If you choose a different username, replace the string.
+
+After the Buttondown publication is created and `https://buttondown.com/<username>` loads without a Not Found message, change:
+
+```js
+const BUTTONDOWN_ENABLED = true;
+```
+
+Save, commit, push.
 
 Once the username is in place:
 - The footer form, the `/newsletter` page, and the third-visit modal all start accepting submissions.
