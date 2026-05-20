@@ -13,6 +13,7 @@
     "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs"
   },
   "dependencies": {
+    "minisearch": "^7.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -27,7 +28,10 @@
     "source": "dist",
     "destination": "dist",
     "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "include": [
       "/",
       "/about",
