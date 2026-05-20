@@ -16,6 +16,14 @@
 
 export const WHATS_NEW = [
   {
+    id: "thought-experiment-picker",
+    date: "2026-05-20",
+    type: "feature",
+    title: "New tool: the Thought Experiment Picker",
+    blurb: "Answer three quick questions about grade, time, and topic — get three classroom-ready experiments that fit. No login. Designed for the Sunday planning block.",
+    url: "/picker",
+  },
+  {
     id: "sunday-dilemma-newsletter",
     date: "2026-05-20",
     type: "feature",
