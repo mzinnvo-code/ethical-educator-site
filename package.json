@@ -89,7 +89,8 @@
       "/terms",
       "/credits",
       "/newsletter",
-      "/whats-new"
+      "/whats-new",
+      "/stories"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false

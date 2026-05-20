@@ -74,6 +74,7 @@ const QualityLeadership = lazy(() => import("./pages/educators/QualityLeadership
 const HighPerformingSchools = lazy(() => import("./pages/educators/HighPerformingSchools.jsx"));
 const RTI = lazy(() => import("./pages/educators/RTI.jsx"));
 const Newsletter = lazy(() => import("./pages/Newsletter.jsx"));
+const Stories = lazy(() => import("./pages/Stories.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -146,6 +147,7 @@ const PAGE_MAP = {
   "rti": RTI,
   "newsletter": Newsletter,
   "whats-new": WhatsNew,
+  "stories": Stories,
 };
 
 const PAGE_META = {
@@ -378,6 +380,10 @@ const PAGE_META = {
   "whats-new": {
     title: "What's New — The Ethical Educator",
     description: "A reverse-chronological changelog of new thought experiments, research updates, features, and resources on The Ethical Educator.",
+  },
+  "stories": {
+    title: "From the Classroom — Stories from Educators — The Ethical Educator",
+    description: "Classroom stories and short notes from teachers, administrators, and parents who have used The Ethical Educator resources. Currently in placeholder mode — real stories replace the samples as they come in.",
   },
 };
 
