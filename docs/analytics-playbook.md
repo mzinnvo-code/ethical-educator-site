@@ -15,42 +15,103 @@ What to look at in Cloudflare Web Analytics each week, and what we can and canno
 
 **Cookieless, no consent banner required, no PII collected.** Cloudflare Web Analytics is GDPR/CCPA-clean by design.
 
-## What does NOT ship today (and why)
+## Custom events (via the `ethed-events` Worker)
 
-Cloudflare Web Analytics has no public custom-events API yet (per their FAQ as of May 2026). So these four metrics from the original plan are *captured in code* but *not visible in a dashboard yet*:
+For events Cloudflare Web Analytics can't capture — scroll depth, newsletter clicks, PDF downloads — we use a small Cloudflare Worker (`workers/events/`) that writes to the `tee_events` Workers Analytics Engine dataset. Cost: free up to 10M writes/month + 1M queries/month.
 
-- Scroll depth on long-form articles (25/50/75/100% milestones)
-- Outbound clicks on newsletter signup buttons (by placement: footer/inline/modal)
-- PDF downloads (by resource slug)
-- Any other custom events we want to add
+**Setup is one-time, ~5 min.** See `workers/events/README.md` for the full deploy steps. The short version:
 
-The instrumentation is live — every `track()` call in the app pushes an event to `window.__teeEvents` (visible in DevTools console). They will be flushed to a real backend once we add the Workers Analytics Engine follow-up (see below).
+```bash
+cd workers/events
+npm install
+npx wrangler login
+npm run deploy
+```
 
-## How to verify the instrumentation is wired up
+Copy the printed `*.workers.dev` URL into `src/lib/analytics.js` (replace `REPLACE_WITH_WORKER_URL`), commit, push. Done.
 
-1. Open the live site in a Chrome incognito window.
+## Verifying the instrumentation works
+
+**Before Worker deploy (buffer-only mode):**
+
+1. Open the site in a Chrome incognito window.
 2. Open DevTools → Console.
 3. Scroll a long-form page (e.g., `/moral-psych`) to 50%.
-4. Type `window.__teeEvents` in the console and press Enter.
-5. You should see an array including `{ name: "scroll_depth", properties: { page: "moral-psych", milestone: 50 }, ... }`.
+4. Type `window.__teeEvents` and Enter — you should see an array with `scroll_depth` events.
 
-If events show up there, the wiring is correct. When the Worker endpoint lands, those events will start appearing in the Cloudflare dashboard.
+**After Worker deploy (live mode):**
 
-## The follow-up: Workers Analytics Engine for custom events
+5. Same scroll test. In the Network tab, you should see POSTs to the Worker URL returning 204.
+6. Run `npm run tail` in `workers/events/` to see real-time Worker logs.
+7. After ~30 seconds (Analytics Engine flush delay), query the dataset via SQL (examples below).
 
-When you're ready (Session 2 or 3), here's the small lift to get custom events into a queryable dashboard:
+## Dataset schema
 
-1. Create a Worker (e.g., `ethed-events`) with an Analytics Engine binding:
-   ```toml
-   [[analytics_engine_datasets]]
-   binding = "EVENTS"
-   dataset = "tee_events"
-   ```
-2. The Worker accepts `POST /events` with a JSON body and calls `env.EVENTS.writeDataPoint({ blobs: [name, path], doubles: [milestone] })`.
-3. Replace the buffer in `src/lib/analytics.js` with a `fetch("/events", { method: "POST", body: JSON.stringify(event) })` call. The function signature stays the same, so no other code changes.
-4. Query the dataset via the Analytics Engine SQL API or hook it up to Grafana.
+Each event written to `tee_events` looks like:
 
-Cost: Workers Analytics Engine is free for the first 10M data points/month — far above what this site will use.
+| Field | Meaning |
+|---|---|
+| `index` | Event name (sampling key) |
+| `blob1` | Event name |
+| `blob2` | URL pathname |
+| `blob3` | `placement` (e.g. `"footer"`, `"inline"`, `"modal"` for newsletter) |
+| `blob4` | `page` / `slug` (e.g. `"moral-psych"` or a PDF slug) |
+| `blob5` | Country code (from `cf-ipcountry`) |
+| `double1` | Milestone percent (for `scroll_depth`) |
+| `double2` | `1` (count — use with `SUM(_sample_interval * double2)`) |
+| `timestamp` | Automatic |
+
+## Useful SQL queries
+
+You'll need an API token (Profile → API Tokens → Create Custom Token → Account Analytics → Read). Account ID is `00cbe989709cb5c738910120b128e8f5`.
+
+```bash
+export CF_ACCT=00cbe989709cb5c738910120b128e8f5
+export CF_TOKEN=…   # your read token
+
+cf_sql() {
+  curl -s "https://api.cloudflare.com/client/v4/accounts/$CF_ACCT/analytics_engine/sql" \
+    -H "Authorization: Bearer $CF_TOKEN" --data "$1"
+}
+```
+
+**Top events by volume, last 7 days:**
+
+```sql
+SELECT blob1 AS event, SUM(_sample_interval) AS count
+FROM tee_events
+WHERE timestamp > NOW() - INTERVAL '7' DAY
+GROUP BY event ORDER BY count DESC
+```
+
+**Scroll completion rate by page (last 7 days):**
+
+```sql
+SELECT blob4 AS page,
+       SUM(IF(double1 >= 75, _sample_interval, 0)) AS reached_75,
+       SUM(_sample_interval) AS total
+FROM tee_events
+WHERE blob1 = 'scroll_depth' AND timestamp > NOW() - INTERVAL '7' DAY
+GROUP BY page ORDER BY total DESC
+```
+
+**Newsletter signup clicks by placement (last 28 days):**
+
+```sql
+SELECT blob3 AS placement, SUM(_sample_interval) AS clicks
+FROM tee_events
+WHERE blob1 = 'newsletter_signup_click' AND timestamp > NOW() - INTERVAL '28' DAY
+GROUP BY placement ORDER BY clicks DESC
+```
+
+**Top downloaded PDFs (last 30 days):**
+
+```sql
+SELECT blob4 AS resource, SUM(_sample_interval) AS downloads
+FROM tee_events
+WHERE blob1 = 'pdf_download' AND timestamp > NOW() - INTERVAL '30' DAY
+GROUP BY resource ORDER BY downloads DESC LIMIT 20
+```
 
 ## Weekly review checklist
 
@@ -72,7 +133,7 @@ Open `https://dash.cloudflare.com/?to=/:account/web-analytics`, pick the site, a
 - INP (Interaction to Next Paint) — under 200ms on 75th percentile is "good"
 - Any page with LCP > 4s deserves an image-optimization look
 
-### Once Workers Analytics Engine is live
+### Custom events (via `cf_sql`, see above)
 - Scroll completion rate on long-form pages (% of visitors who reach 75%+)
 - Newsletter signup click-through by placement — which converts best: footer, inline, or modal?
 - Top downloaded PDFs — which printables are teachers actually using?
