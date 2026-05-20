@@ -79,7 +79,8 @@
       "/privacy",
       "/accessibility",
       "/terms",
-      "/credits"
+      "/credits",
+      "/newsletter"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
