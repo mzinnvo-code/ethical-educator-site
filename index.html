@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Telemetry buffer init — runs synchronously before any module script
+         so DevTools smoke checks (`window.__teeEvents`) return [] from the
+         very first paint, never undefined. The analytics module also inits
+         this lazily, but doing it inline guarantees the buffer exists even
+         if the module is in a separate chunk that hasn't loaded yet. -->
+    <script>window.__teeEvents = window.__teeEvents || [];</script>
+
     <!-- Font Loading (preconnect eliminates FOUT by fetching before React renders) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

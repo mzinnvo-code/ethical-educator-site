@@ -43,12 +43,21 @@ export function track(name, properties = {}) {
     ts: Date.now(),
   };
 
+  // Diagnostic globals — survive even if something elsewhere reassigns the
+  // buffer array. `window.__teeLastTrack` always carries the most recent
+  // event so DevTools can confirm a track() call ran end-to-end.
+  window.__teeLastTrack = event;
+  window.__teeTrackCount = (window.__teeTrackCount || 0) + 1;
+
   const buf = buffer();
   if (buf) {
     buf.push(event);
     if (buf.length > 200) buf.splice(0, buf.length - 200);
   }
-  if (import.meta.env?.DEV) {
+  // Always log via console.debug (hidden by default in DevTools, surfaces
+  // when verbose logging is enabled). Helps remote debugging without
+  // adding production noise.
+  if (typeof console !== "undefined" && console.debug) {
     console.debug("[analytics]", name, properties);
   }
 
