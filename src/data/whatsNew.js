@@ -16,6 +16,14 @@
 
 export const WHATS_NEW = [
   {
+    id: "ai-policy-builder",
+    date: "2026-05-21",
+    type: "feature",
+    title: "New tool: the AI Policy Builder",
+    blurb: "Nine questions about your school's stance on AI → a 1–2 page draft policy you can copy or download. Designed to give a leadership team a structured starting point in ten minutes, not to replace the work of writing the real thing with counsel and community.",
+    url: "/ai-policy",
+  },
+  {
     id: "ai-use-rubric",
     date: "2026-05-21",
     type: "feature",
