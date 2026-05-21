@@ -8,131 +8,219 @@ import { PhiloRef } from "../../experiments/ExperimentShared.jsx";
 import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
-import { EXPERIMENTS, getExperimentsByGrade } from "../../data/experiments.js";
+import { getExperimentsByGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 
-// Pick three "featured this week" — rotates by ISO week, deterministic.
-function featuredThisWeek() {
+function currentWeekNumber() {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 1);
-  const week = Math.floor((now - start) / (7 * 24 * 60 * 60 * 1000));
-  const pool = EXPERIMENTS.filter(e => e.tier === "scenario");
-  const out = [];
-  for (let i = 0; i < 3 && i < pool.length; i++) {
-    out.push(pool[(week * 3 + i) % pool.length]);
-  }
-  return out;
+  return Math.floor((now - start) / (7 * 24 * 60 * 60 * 1000));
+}
+
+function weeklyPick(pool, week, offset = 0) {
+  const eligible = pool.filter(experiment => experiment.tier === "scenario" && !experiment.customLayout);
+  if (!eligible.length) return null;
+  return eligible[(week + offset) % eligible.length];
+}
+
+// Pick one "featured this week" from each student-facing band.
+function featuredThisWeek() {
+  const week = currentWeekNumber();
+  return [
+    weeklyPick(getExperimentsByGrade("k-5"), week, 0),
+    weeklyPick(getExperimentsByGrade("6-8"), week, 3),
+    weeklyPick(getExperimentsByGrade("9-12"), week, 7),
+  ].filter(Boolean);
 }
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
 
-const JOURNEY_PREVIEWS = [
+const PATHWAY_CARDS = [
   {
+    route: "thought-experiments/k-5",
     label: "K-5",
     title: "Story choices",
+    desc: "A grade-by-grade elementary hub with storylike dilemmas, read-aloud support, and teacher kits.",
     image: getSceneIllustration("magic-toy", { stageId: "setup", visualVariant: "k-5" }),
     color: C.coral,
   },
   {
+    route: "thought-experiments/6-8",
     label: "6-8",
     title: "Dilemma turns",
+    desc: "Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions.",
     image: getSceneIllustration("deepfake-election", { stageId: "viral-clip", visualVariant: "6-8" }),
     color: C.gold,
   },
   {
+    route: "thought-experiments/9-12",
     label: "9-12",
     title: "Canon remixed",
+    desc: "The philosophical canon — Plato's Cave, Mary's Room, the Chinese Room — alongside the AI questions of our age.",
     image: getSceneIllustration("marys-room", { stageId: "room", visualVariant: "9-12" }),
     color: C.sky,
   },
   {
+    route: "thought-experiments/educators",
     label: "Educators",
     title: "Policy pressure",
+    desc: "Flagship multi-stage scenarios for the conversations you wish you'd had before the vendor demo. Built for staff meetings, leadership retreats, and policy work.",
     image: getSceneIllustration("the-shortcut", { stageId: "premise", visualVariant: "flagship" }),
     color: C.teal,
   },
 ];
 
-function JourneyPreviewStrip() {
+function PathwayCard({ item, index, navigate }) {
+  const [active, setActive] = useState(false);
+  const imageSrc = item.image?.src;
   return (
-    <FadeIn delay={0.08}>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-        gap: 10,
-        margin: "24px auto 30px",
-        maxWidth: 980,
-      }}>
-        {JOURNEY_PREVIEWS.map((item, index) => (
-          <figure
-            key={item.label}
-            style={{
-              position: "relative",
-              overflow: "hidden",
-              aspectRatio: "16 / 9",
-              borderRadius: 14,
-              margin: 0,
-              border: `1px solid ${item.color}32`,
-              background: `${item.color}12`,
-              boxShadow: `0 16px 42px rgba(0,0,0,0.18)`,
-            }}
-          >
-            {item.image?.src && (
-              <img
-                src={item.image.src}
-                alt={item.image.alt || `${item.label} thought experiment visual preview`}
-                loading={index === 0 ? "eager" : "lazy"}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  filter: "saturate(1.02) contrast(0.98)",
-                }}
-              />
-            )}
-            <span style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(180deg, rgba(8,18,32,0.05), rgba(8,18,32,0.72))",
-            }} />
-            <figcaption style={{
-              position: "absolute",
-              left: 12,
-              right: 12,
-              bottom: 11,
-            }}>
-              <p style={{
+    <FadeIn delay={0.08 + index * 0.04}>
+      <button
+        type="button"
+        onClick={() => navigate(item.route)}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
+        aria-label={`Open ${item.label} thought experiments`}
+        style={{
+          appearance: "none",
+          WebkitAppearance: "none",
+          position: "relative",
+          display: "block",
+          width: "100%",
+          minHeight: active ? 294 : 224,
+          overflow: "hidden",
+          borderRadius: 14,
+          margin: 0,
+          border: `1px solid ${active ? item.color + "75" : item.color + "32"}`,
+          background: `${item.color}12`,
+          boxShadow: active ? `0 22px 54px ${item.color}24` : "0 16px 42px rgba(0,0,0,0.18)",
+          cursor: "pointer",
+          textAlign: "left",
+          padding: 0,
+          transform: active ? "translateY(-6px) scale(1.015)" : "translateY(0) scale(1)",
+          transition: "min-height 0.34s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
+          outline: "none",
+        }}
+      >
+        {imageSrc && (
+          <span style={{
+            position: "absolute",
+            inset: 0,
+            display: "block",
+            transform: active ? "scale(1.06)" : "scale(1)",
+            transition: "transform 0.55s ease",
+          }}>
+            <img
+              src={imageSrc}
+              alt={item.image.alt || `${item.label} thought experiment visual preview`}
+              loading={index === 0 ? "eager" : "lazy"}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+                filter: active ? "saturate(1.08) contrast(1.02)" : "saturate(1.02) contrast(0.98)",
+              }}
+            />
+          </span>
+        )}
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "block",
+            background: active
+              ? "linear-gradient(180deg, rgba(8,18,32,0.08), rgba(8,18,32,0.92))"
+              : "linear-gradient(180deg, rgba(8,18,32,0.05), rgba(8,18,32,0.72))",
+            transition: "background 0.3s ease",
+          }}
+        />
+        <span style={{
+          position: "absolute",
+          left: 14,
+          right: 14,
+          bottom: 13,
+          display: "block",
+        }}>
+          <span style={{
+            color: item.color,
+            fontSize: "0.62rem",
+            fontWeight: 800,
+            letterSpacing: "0.13em",
+            textTransform: "uppercase",
+            marginBottom: 4,
+            display: "block",
+          }}>{item.label}</span>
+          <span style={{
+            color: C.textPrimary,
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontSize: active ? "1.12rem" : "0.98rem",
+            fontWeight: 700,
+            lineHeight: 1.2,
+            display: "block",
+            transition: "font-size 0.28s ease",
+          }}>{item.title}</span>
+          <span style={{
+            display: "grid",
+            gridTemplateRows: active ? "1fr" : "0fr",
+            transition: "grid-template-rows 0.32s ease",
+          }}>
+            <span style={{ overflow: "hidden", display: "block" }}>
+              <span style={{
+                display: "block",
+                color: C.textSecondary,
+                fontSize: "0.82rem",
+                lineHeight: 1.5,
+                marginTop: 9,
+              }}>{item.desc}</span>
+              <span style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
                 color: item.color,
-                fontSize: "0.62rem",
+                fontSize: "0.76rem",
                 fontWeight: 800,
-                letterSpacing: "0.13em",
+                letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                marginBottom: 3,
-              }}>{item.label}</p>
-              <p style={{
-                color: C.textPrimary,
-                fontFamily: "'Source Serif 4', Georgia, serif",
-                fontSize: "0.98rem",
-                fontWeight: 700,
-                lineHeight: 1.2,
-              }}>{item.title}</p>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+                marginTop: 11,
+              }}>Open section <span aria-hidden="true">-&gt;</span></span>
+            </span>
+          </span>
+        </span>
+      </button>
     </FadeIn>
+  );
+}
+
+function PathwayCardStrip({ navigate }) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
+      gap: 12,
+      margin: "24px auto 30px",
+      maxWidth: 980,
+      alignItems: "start",
+    }}>
+      {PATHWAY_CARDS.map((item, index) => (
+        <PathwayCard
+          key={item.route}
+          item={item}
+          index={index}
+          navigate={navigate}
+        />
+      ))}
+    </div>
   );
 }
 
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
-  const middleSchoolById = new Map(getExperimentsByGrade("6-8").map(experiment => [experiment.id, experiment]));
-  const featured = featuredThisWeek().map(experiment =>
-    experiment.gradeBands.includes("6-8") ? middleSchoolById.get(experiment.id) || experiment : experiment
-  );
-  const educatorFeature = getFeatureIllustration("thought-experiments/educators");
+  const featured = featuredThisWeek();
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -158,45 +246,11 @@ export default function Hub({ navigate }) {
           </Subtitle>
         </FadeIn>
 
-        <JourneyPreviewStrip />
+        <PathwayCardStrip navigate={navigate} />
 
         <Narrow>
-          {/* K-12 AUDIENCE TILES — three-up grid for the student-facing grade bands, separated from the For Educators section below. */}
-          <Divider label="Pick a grade band" />
-          <FadeIn>
-            <BodyText>
-              The student-facing material is organised by grade. K-5 leans on stories and read-aloud.
-              6-8 leans on dilemmas. 9-12 is the philosophical canon alongside the AI questions of our age.
-            </BodyText>
-          </FadeIn>
-          <div className="grid-3" style={{ marginTop: 18, marginBottom: 18 }}>
-            <TopicCard
-              icon="🧸" iconLabel="Teddy bear"
-              image={getFeatureIllustration("thought-experiments/k-5")}
-              title="K–5"
-              desc="A grade-by-grade elementary hub with storylike dilemmas, read-aloud support, and teacher kits."
-              onClick={() => navigate("thought-experiments/k-5")}
-              accent={C.coral} delay={0}
-            />
-            <TopicCard
-              icon="🚋" iconLabel="Trolley"
-              image={getFeatureIllustration("thought-experiments/6-8")}
-              title="Grades 6–8"
-              desc="Story-based dilemmas that connect AI ethics to identity, fairness, and the big questions."
-              onClick={() => navigate("thought-experiments/6-8")}
-              accent={C.gold} delay={0.05}
-            />
-            <TopicCard
-              icon="🕳️" iconLabel="Cave"
-              image={getFeatureIllustration("thought-experiments/9-12")}
-              title="Grades 9–12"
-              desc="The philosophical canon — Plato's Cave, Mary's Room, the Chinese Room — alongside the AI questions of our age."
-              onClick={() => navigate("thought-experiments/9-12")}
-              accent={C.ocean} delay={0.1}
-            />
-          </div>
-
-          {/* TOOLKIT + DECISION JOURNAL — two-up callout that lives between the grade picker and For Educators. */}
+          {/* TOOLKIT + DECISION JOURNAL — tools that support the four pathways above. */}
+          <Divider label="Tools for discussion" />
           <div className="grid-2" style={{ marginBottom: 32 }}>
             <TopicCard
               icon="🛠" iconLabel="Toolkit"
@@ -215,97 +269,6 @@ export default function Hub({ navigate }) {
               accent={C.gold} delay={0.05}
             />
           </div>
-
-          {/* FOR EDUCATORS — its own dedicated section, not in the K-12 audience grid. */}
-          <Divider label="For Educators" />
-          <FadeIn>
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={() => navigate("thought-experiments/educators")}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  navigate("thought-experiments/educators");
-                }
-              }}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(0, 1fr) auto",
-                gap: 22,
-                alignItems: "center",
-                padding: "26px 28px",
-                marginTop: 14,
-                marginBottom: 28,
-                background: `linear-gradient(135deg, ${C.teal}14, ${C.ocean}08)`,
-                border: `1px solid ${C.teal}30`,
-                borderLeft: `4px solid ${C.teal}`,
-                borderRadius: 14,
-                cursor: "pointer",
-                outline: "none",
-                transition: "all 0.24s",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 14px 32px ${C.teal}22`; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
-            >
-              <div>
-                <p style={{
-                  color: C.teal,
-                  fontSize: "0.68rem",
-                  fontWeight: 800,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                  marginBottom: 8,
-                }}>Adult dilemmas · For Staff PD</p>
-                <h3 style={{
-                  fontFamily: "'Source Serif 4', Georgia, serif",
-                  color: C.textPrimary,
-                  fontSize: "1.35rem",
-                  fontWeight: 700,
-                  lineHeight: 1.22,
-                  marginBottom: 8,
-                }}>For Educators</h3>
-                <p style={{
-                  color: C.textSecondary,
-                  fontSize: "0.94rem",
-                  lineHeight: 1.6,
-                  marginBottom: 12,
-                  maxWidth: 660,
-                }}>
-                  Four flagship multi-stage scenarios designed for the conversations you wish you'd had before
-                  the vendor demo. The Shortcut, the AI Authorship Quandary, the Reluctant Educator, the Digital
-                  Doppelgänger. Built for staff meetings, leadership retreats, and policy work.
-                </p>
-                <span style={{
-                  color: C.teal,
-                  fontSize: "0.84rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.04em",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}>Open the educator flagships <span aria-hidden="true">→</span></span>
-              </div>
-              <figure style={{
-                width: "clamp(92px, 16vw, 124px)",
-                aspectRatio: "1 / 1",
-                borderRadius: 18,
-                overflow: "hidden",
-                background: `linear-gradient(135deg, ${C.teal}30, ${C.ocean}18)`,
-                border: `1px solid ${C.teal}45`,
-                boxShadow: `0 16px 44px rgba(0,0,0,0.24), 0 0 28px ${C.teal}14`,
-                flexShrink: 0,
-                margin: 0,
-              }}>
-                <img
-                  src={educatorFeature?.src}
-                  alt={educatorFeature?.alt || ""}
-                  loading="lazy"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-              </figure>
-            </div>
-          </FadeIn>
 
           {/* WHAT IS A THOUGHT EXPERIMENT? — moved below the picker so it doesn't front-load text before the visitor's most useful first action. */}
           <Divider label="What is a thought experiment?" />
