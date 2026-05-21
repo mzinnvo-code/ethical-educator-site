@@ -105,12 +105,17 @@ export function getTypeColorKey(type) {
   return TYPE_COLOR[type] || "gold";
 }
 
-// Sort reverse-chron (newest first). Stable secondary sort by id for ties.
+// Sort reverse-chron (newest first). Secondary sort is source-array order
+// (insertion order) so curators can feature an entry within a same-date
+// group by moving it to the top of WHATS_NEW.
 export function getWhatsNewSorted() {
-  return [...WHATS_NEW].sort((a, b) => {
-    if (a.date !== b.date) return a.date < b.date ? 1 : -1;
-    return a.id < b.id ? -1 : 1;
-  });
+  return WHATS_NEW
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      if (a.item.date !== b.item.date) return a.item.date < b.item.date ? 1 : -1;
+      return a.index - b.index;
+    })
+    .map(({ item }) => item);
 }
 
 // True if the item shipped in the last `days` days. Used for "NEW" pills.
@@ -127,19 +132,26 @@ export function hasAnyFresh(days = 14) {
 
 // Pretty date for the date pill: "May 20" (short month + day, no year)
 // and "May 20, 2026" for the archive page.
+//
+// Why the `T12:00:00` suffix: `new Date("2026-05-20")` parses as UTC midnight,
+// which is the previous day's evening in any UTC-negative timezone. Noon-local
+// parsing never crosses a day boundary in any reasonable timezone, so the
+// displayed day stays correct.
 export function formatDateShort(iso) {
-  const d = new Date(iso);
+  const d = new Date(`${iso}T12:00:00`);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
 export function formatDateLong(iso) {
-  const d = new Date(iso);
+  const d = new Date(`${iso}T12:00:00`);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" });
 }
 
-// Group items by "YYYY-MM" for the archive page.
+// Group items by "YYYY-MM" for the archive page. Constructs the label date
+// with explicit local-tz numbers (no UTC parsing) so the month doesn't
+// shift back in UTC-negative timezones.
 export function groupByMonth(items) {
   const groups = new Map();
   for (const item of items) {
@@ -148,7 +160,9 @@ export function groupByMonth(items) {
     groups.get(key).push(item);
   }
   return Array.from(groups.entries()).map(([monthKey, monthItems]) => {
-    const d = new Date(`${monthKey}-01`);
+    const year = Number(monthKey.slice(0, 4));
+    const month = Number(monthKey.slice(5, 7));
+    const d = new Date(year, month - 1, 1);
     const label = d.toLocaleDateString(undefined, { month: "long", year: "numeric" });
     return { monthKey, label, items: monthItems };
   });
