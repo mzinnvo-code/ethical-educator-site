@@ -78,6 +78,7 @@ const Stories = lazy(() => import("./pages/Stories.jsx"));
 const Picker = lazy(() => import("./pages/Picker.jsx"));
 const AIRubric = lazy(() => import("./pages/AIRubric.jsx"));
 const AIPolicy = lazy(() => import("./pages/AIPolicy.jsx"));
+const FamilyConversations = lazy(() => import("./pages/FamilyConversations.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -154,6 +155,7 @@ const PAGE_MAP = {
   "picker": Picker,
   "ai-rubric": AIRubric,
   "ai-policy": AIPolicy,
+  "family-conversations": FamilyConversations,
 };
 
 const PAGE_META = {
@@ -402,6 +404,10 @@ const PAGE_META = {
   "ai-policy": {
     title: "AI Policy Builder — Draft your school's AI policy — The Ethical Educator",
     description: "Answer nine questions about your school's stance on AI; get a 1–2 page draft policy you can copy or download as the starting point for a board-ready document.",
+  },
+  "family-conversations": {
+    title: "Family Conversations — Five questions to start a family conversation about AI — The Ethical Educator",
+    description: "For parents and caregivers: pick your child's age and a topic about AI; get five dinner-table prompts that open the conversation without lecturing. No correct answers — just five questions that work.",
   },
 };
 

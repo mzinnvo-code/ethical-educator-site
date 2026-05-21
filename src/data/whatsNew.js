@@ -16,6 +16,14 @@
 
 export const WHATS_NEW = [
   {
+    id: "family-conversation-generator",
+    date: "2026-05-21",
+    type: "feature",
+    title: "New tool: the Family Conversation Generator",
+    blurb: "For parents and caregivers, not teachers. Pick your child's age and a topic — AI homework, deepfakes, AI friends, privacy, creativity, the future of work — and get five short prompts to start a conversation at dinner or in the car. The goal: hear what your kid thinks before you say what you think.",
+    url: "/family-conversations",
+  },
+  {
     id: "ai-policy-builder",
     date: "2026-05-21",
     type: "feature",

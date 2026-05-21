@@ -40,6 +40,10 @@ const TOP_LEVEL_SECTION = {
   "privacy": "Site",
   "terms": "Site",
   "newsletter": "Newsletter",
+  "picker": "Tools",
+  "ai-rubric": "Tools",
+  "ai-policy": "Tools",
+  "family-conversations": "Tools",
   "home": "Home",
 };
 
