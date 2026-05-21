@@ -777,9 +777,17 @@ export default function App() {
                 <a key={link.label} href={`/${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ color: C.textMuted, fontSize: "0.74rem", opacity: 0.6 }}>{link.label}</a>
               ))}
             </div>
-            <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.5, maxWidth: 640, margin: "0 auto 8px", lineHeight: 1.5 }}>
-              Educational and informational only. Not legal, medical, or psychological advice. Always consult qualified professionals before acting in your specific context.
-            </p>
+            <div style={{ maxWidth: 720, margin: "0 auto 12px", textAlign: "left" }}>
+              <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55, marginBottom: 8 }}>
+                <strong style={{ color: C.textSecondary }}>About this site.</strong> The Ethical Educator is the personal website of Matthew A. Zinn. All content, code, and tools published here are his own work, produced on personal time using personal resources. The views expressed are his alone and do not represent the views, policies, or positions of any current or former employer, school, district, or organization with which he is or has been affiliated.
+              </p>
+              <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55, marginBottom: 8 }}>
+                <strong style={{ color: C.textSecondary }}>Not advice.</strong> Tools and writing on this site are offered for general educational and informational purposes only. They are not a substitute for professional, legal, clinical, or institutional guidance. Educators and administrators should consult their own school's policies, legal counsel, and qualified specialists before applying any framework or output to a specific student, classroom, or institution.
+              </p>
+              <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55 }}>
+                <strong style={{ color: C.textSecondary }}>Trademarks &amp; content.</strong> "The Ethical Educator" and the original writing, illustrations, and code on this site are © Matthew A. Zinn. Third-party names, frameworks, and resources are credited where used and remain the property of their respective owners.
+              </p>
+            </div>
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
           </div>
         </div>
