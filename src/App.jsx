@@ -76,6 +76,7 @@ const RTI = lazy(() => import("./pages/educators/RTI.jsx"));
 const Newsletter = lazy(() => import("./pages/Newsletter.jsx"));
 const Stories = lazy(() => import("./pages/Stories.jsx"));
 const Picker = lazy(() => import("./pages/Picker.jsx"));
+const AIRubric = lazy(() => import("./pages/AIRubric.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -150,6 +151,7 @@ const PAGE_MAP = {
   "whats-new": WhatsNew,
   "stories": Stories,
   "picker": Picker,
+  "ai-rubric": AIRubric,
 };
 
 const PAGE_META = {
@@ -390,6 +392,10 @@ const PAGE_META = {
   "picker": {
     title: "Thought Experiment Picker — The Ethical Educator",
     description: "Answer three quick questions about grade, time, and topic — get three classroom-ready thought experiments that fit. No login, no algorithm.",
+  },
+  "ai-rubric": {
+    title: "AI Use Rubric — Should we use AI for this? — The Ethical Educator",
+    description: "A six-dimension scaffold for teachers and school leaders evaluating a proposed AI use. Pick a scenario, score each dimension, get a go / discuss / redesign recommendation with the rationale.",
   },
 };
 

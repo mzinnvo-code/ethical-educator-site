@@ -16,6 +16,14 @@
 
 export const WHATS_NEW = [
   {
+    id: "ai-use-rubric",
+    date: "2026-05-21",
+    type: "feature",
+    title: "New tool: the AI Use Rubric",
+    blurb: "Six dimensions — cognitive substitution, bias, privacy, authorship, equity, oversight — to score a proposed AI use before adopting it. Get a go / discuss / redesign recommendation with the rationale to take into your next leadership meeting.",
+    url: "/ai-rubric",
+  },
+  {
     id: "thought-experiment-picker",
     date: "2026-05-20",
     type: "feature",
