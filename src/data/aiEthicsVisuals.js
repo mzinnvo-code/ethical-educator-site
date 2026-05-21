@@ -71,6 +71,13 @@ export const AI_ETHICS_SECTION_VISUALS = {
     accent: C.ocean,
     points: ["Global guidance", "Traffic-light rules", "Human oversight"],
   },
+  globalPolicy: {
+    id: "ai-ethics-global-policy-frameworks",
+    image: `${base}/global-policy-frameworks.webp`,
+    imageAlt: "A painterly global AI policy desk with a world map, connected policy milestones, folders, a traffic-light signal, and classroom materials.",
+    caption: "Global AI guidance is becoming more concrete: rights language, high-risk regulation, competency frameworks, and district traffic-light rules now point educators toward specific decisions.",
+    accent: C.ocean,
+  },
   evidence: {
     id: "ai-ethics-evidence-balance",
     label: "Evidence Lens",

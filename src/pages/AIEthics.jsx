@@ -5,7 +5,6 @@ import {
   Narrow, PageContainer, BodyText, ResearchCallout, QuoteBlock, StatCounter,
   Timeline, ComparisonCard, Divider, ReadingTime, ContinueExploring
 } from "../components/shared.jsx";
-import { PolicyTimelineDiagram } from "../components/diagrams.jsx";
 import { AI_ETHICS_ARTICLES, AI_ETHICS_SECTION_VISUALS } from "../data/aiEthicsVisuals.js";
 
 function EthicsQuiz() {
@@ -140,25 +139,12 @@ function EthicsSectionVisual({ visual, delay = 0.06 }) {
     <FadeIn delay={delay}>
       <section
         id={visual.id}
-        style={{
-          margin: "28px 0 30px",
-          background: `linear-gradient(135deg, ${C.surface}, ${C.midnight})`,
-          border: `1px solid ${visual.accent}2e`,
-          borderRadius: 12,
-          overflow: "hidden",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          boxShadow: "0 18px 48px rgba(0,0,0,0.16)",
-          scrollMarginTop: 82,
-        }}
+        className="ai-ethics-section-visual"
+        style={{ borderColor: `${visual.accent}2e`, scrollMarginTop: 82 }}
       >
         <div
+          className="ai-ethics-section-visual-media"
           style={{
-            position: "relative",
-            minHeight: 0,
-            height: "100%",
-            aspectRatio: "16 / 9",
-            overflow: "hidden",
             background: `${visual.accent}10`,
           }}
         >
@@ -166,18 +152,15 @@ function EthicsSectionVisual({ visual, delay = 0.06 }) {
             src={visual.image}
             alt={visual.imageAlt}
             loading="lazy"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
           <div
+            className="ai-ethics-section-visual-scrim"
             style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(90deg, rgba(8,18,32,0.02), ${C.midnight}66)`,
-              pointerEvents: "none",
+              background: `linear-gradient(180deg, rgba(8,18,32,0.02), ${C.midnight}54)`,
             }}
           />
         </div>
-        <div style={{ padding: "clamp(22px, 4vw, 32px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div className="ai-ethics-section-visual-copy">
           <p style={{
             color: visual.accent,
             fontSize: "0.66rem",
@@ -186,15 +169,8 @@ function EthicsSectionVisual({ visual, delay = 0.06 }) {
             textTransform: "uppercase",
             marginBottom: 10,
           }}>{visual.label}</p>
-          <h3 style={{
-            color: C.textPrimary,
-            fontFamily: "'Source Serif 4', Georgia, serif",
-            fontSize: "clamp(1.28rem, 3vw, 1.72rem)",
-            lineHeight: 1.18,
-            fontWeight: 700,
-            marginBottom: 12,
-          }}>{visual.title}</h3>
-          <p style={{ color: C.textSecondary, fontSize: "0.91rem", lineHeight: 1.72 }}>{visual.desc}</p>
+          <h3>{visual.title}</h3>
+          <p>{visual.desc}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 18 }}>
             {visual.points.map((point) => (
               <span key={point} style={{
@@ -216,6 +192,17 @@ function EthicsSectionVisual({ visual, delay = 0.06 }) {
   );
 }
 
+function EthicsImageBanner({ visual, delay = 0.04 }) {
+  return (
+    <FadeIn delay={delay}>
+      <figure className="ai-ethics-image-banner" style={{ borderColor: `${visual.accent}2e` }}>
+        <img src={visual.image} alt={visual.imageAlt} loading="lazy" />
+        <figcaption>{visual.caption}</figcaption>
+      </figure>
+    </FadeIn>
+  );
+}
+
 export default function AIEthics({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
@@ -231,6 +218,73 @@ export default function AIEthics({ navigate }) {
           .ai-ethics-article-grid > * {
             min-width: 0;
           }
+          .ai-ethics-section-visual {
+            margin: 28px 0 30px;
+            background: linear-gradient(135deg, ${C.surface}, ${C.midnight});
+            border: 1px solid;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+          }
+          .ai-ethics-section-visual-media {
+            position: relative;
+            width: 100%;
+            min-width: 0;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+          }
+          .ai-ethics-section-visual-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+          .ai-ethics-section-visual-scrim {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+          }
+          .ai-ethics-section-visual-copy {
+            min-width: 0;
+            padding: clamp(20px, 4vw, 30px);
+          }
+          .ai-ethics-section-visual-copy h3 {
+            color: ${C.textPrimary};
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: clamp(1.22rem, 4vw, 1.62rem);
+            line-height: 1.18;
+            font-weight: 700;
+            margin-bottom: 12px;
+          }
+          .ai-ethics-section-visual-copy p {
+            color: ${C.textSecondary};
+            font-size: 0.91rem;
+            line-height: 1.72;
+          }
+          .ai-ethics-image-banner {
+            margin: 18px 0 24px;
+            background: ${C.surface};
+            border: 1px solid;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 16px 42px rgba(0,0,0,0.14);
+          }
+          .ai-ethics-image-banner img {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            object-fit: cover;
+            display: block;
+          }
+          .ai-ethics-image-banner figcaption {
+            padding: 12px 16px 14px;
+            color: ${C.textMuted};
+            font-size: 0.78rem;
+            line-height: 1.55;
+            font-style: italic;
+            border-top: 1px solid ${C.border};
+          }
           @media (min-width: 1080px) {
             .ai-ethics-article-grid {
               grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -242,6 +296,10 @@ export default function AIEthics({ navigate }) {
           @media (max-width: 560px) {
             .ai-ethics-article-grid {
               grid-template-columns: 1fr;
+            }
+            .ai-ethics-section-visual-media,
+            .ai-ethics-image-banner img {
+              aspect-ratio: 16 / 9;
             }
           }
         `}</style>
@@ -326,7 +384,7 @@ export default function AIEthics({ navigate }) {
 
             <Divider label="Global Policy Frameworks (2024–2026)" />
 
-            <FadeIn delay={0.04}><PolicyTimelineDiagram /></FadeIn>
+            <EthicsImageBanner visual={AI_ETHICS_SECTION_VISUALS.globalPolicy} />
 
             <FadeIn delay={0.06}>
               <Expandable title="UNESCO's 2024–2025 Frameworks Crystallize" color={C.teal} tag="Global Standard">
