@@ -32,10 +32,9 @@ export default function About({ navigate }) {
           </FadeIn>
           <FadeIn delay={0.12}>
             <BodyText><strong>I study how humans make moral judgments</strong> — and what that means for the way we build, teach, and govern artificial intelligence. My work sits at the intersection of moral psychology, normative ethics, philosophy of mind, and educational technology.</BodyText>
-            <BodyText>My journey began with a thesis on <strong>Joshua Greene's dual-process theory of moral judgment</strong> and F.M. Kamm's objections to it — asking whether neuroscience can tell us anything about which moral theories are correct. That question about the relationship between descriptive facts and normative claims has only grown more urgent in the age of AI.</BodyText>
-            <BodyText>As an educator, I've spent years in classrooms working with students from elementary through graduate school. I started my career working with students with special needs, which gave me a deep appreciation for individualized education — and for how much time teachers spend on tasks that could be automated so they can focus on what matters most: connecting with students.</BodyText>
-            <BodyText>Today, I focus on helping educators navigate the ethical complexities of AI integration — moving beyond vague appeals to "uphold ethics" toward concrete, philosophically grounded frameworks for decision-making. I've developed specialized GPTs for professional development, created interactive AI-in-education presentations used in school training, and written extensively about the philosophical foundations that should guide AI policy.</BodyText>
-            <BodyText>This site brings together my academic research, practical writing, and educational resources into one place. Whether you're a philosopher, teacher, administrator, or simply curious about the moral dimensions of our technological moment — I'm glad you're here.</BodyText>
+            <BodyText>My academic journey began with a master's thesis at the University of North Carolina at Charlotte on <strong>Joshua Greene's dual-process theory of moral judgment</strong> and F. M. Kamm's objections to it — asking whether neuroscience can tell us anything about which moral theories are correct. That question about the relationship between descriptive facts and normative claims has only grown more urgent in the age of AI.</BodyText>
+            <BodyText>As an educator, I've spent years in classrooms with students from elementary through graduate school, beginning my career in special education. That experience gave me a deep appreciation for individualized instruction — and for how much of a teacher's day is consumed by tasks that pull them away from what matters most: connecting with students.</BodyText>
+            <BodyText>This site is an independent personal project. Everything published here — the writing, the tools, the visual design, the code — represents my own views and is not affiliated with, endorsed by, or produced on behalf of any school, district, employer, or other organization. I share it freely because the questions matter, and because educators deserve frameworks that are philosophically grounded rather than performatively neutral.</BodyText>
           </FadeIn>
         </div>
 
@@ -89,7 +88,7 @@ export default function About({ navigate }) {
               <p>• <strong>Ethical frameworks for decision-making</strong> — translating normative ethics into practical guidance</p>
               <p>• <strong>Hands-on demonstrations</strong> — live walkthroughs of tools educators can use immediately</p>
               <p>• <strong>Policy development workshops</strong> — using thought experiments to surface the values that should guide your school's AI policy</p>
-              <p style={{ marginTop: 12 }}>The presentation has been used in school-level and district-level professional development sessions. The approach is always the same: start with values, test with scenarios, build toward policy that reflects genuine philosophical commitment rather than empty aspiration.</p>
+              <p style={{ marginTop: 12 }}>I've delivered the presentation in school-level and district-level professional development settings. The approach is always the same: start with values, test with scenarios, build toward policy that reflects genuine philosophical commitment rather than empty aspiration.</p>
             </Expandable>
           </FadeIn>
 
