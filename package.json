@@ -93,7 +93,8 @@
       "/stories",
       "/picker",
       "/ai-rubric",
-      "/ai-policy"
+      "/ai-policy",
+      "/family-conversations"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
