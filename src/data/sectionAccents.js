@@ -51,6 +51,7 @@ const SECTION_RULES = [
   { id: "whats-new", accent: C.gold, label: "Changelog" },
   { id: "stories", accent: C.gold, label: "From the Classroom" },
   { id: "picker", accent: C.coral, label: "Picker" },
+  { id: "ai-rubric", accent: C.teal, label: "AI Use Rubric" },
   { id: "about", accent: C.ocean, label: "About" },
 
   // Legal / site

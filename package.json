@@ -91,7 +91,8 @@
       "/newsletter",
       "/whats-new",
       "/stories",
-      "/picker"
+      "/picker",
+      "/ai-rubric"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
