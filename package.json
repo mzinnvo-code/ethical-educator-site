@@ -92,7 +92,8 @@
       "/whats-new",
       "/stories",
       "/picker",
-      "/ai-rubric"
+      "/ai-rubric",
+      "/ai-policy"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false

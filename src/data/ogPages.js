@@ -57,6 +57,7 @@ export const OG_PAGES = [
   { id: "stories", title: "From the Classroom — stories from educators", section: "Teacher voices", accent: OG_ACCENTS.gold },
   { id: "picker", title: "Find a thought experiment in three clicks", section: "Picker · Interactive tool", accent: OG_ACCENTS.coral },
   { id: "ai-rubric", title: "Should we use AI for this? A six-dimension rubric", section: "AI Use Rubric · Interactive tool", accent: OG_ACCENTS.teal },
+  { id: "ai-policy", title: "Draft your school's AI policy in ten minutes", section: "AI Policy Builder · Interactive tool", accent: OG_ACCENTS.ocean },
 
   // Audience hubs
   { id: "audiences/teacher", title: "For Teachers", section: "Classroom-ready scenarios + PD", accent: OG_ACCENTS.gold },

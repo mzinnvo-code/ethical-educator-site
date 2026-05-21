@@ -77,6 +77,7 @@ const Newsletter = lazy(() => import("./pages/Newsletter.jsx"));
 const Stories = lazy(() => import("./pages/Stories.jsx"));
 const Picker = lazy(() => import("./pages/Picker.jsx"));
 const AIRubric = lazy(() => import("./pages/AIRubric.jsx"));
+const AIPolicy = lazy(() => import("./pages/AIPolicy.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -152,6 +153,7 @@ const PAGE_MAP = {
   "stories": Stories,
   "picker": Picker,
   "ai-rubric": AIRubric,
+  "ai-policy": AIPolicy,
 };
 
 const PAGE_META = {
@@ -396,6 +398,10 @@ const PAGE_META = {
   "ai-rubric": {
     title: "AI Use Rubric — Should we use AI for this? — The Ethical Educator",
     description: "A six-dimension scaffold for teachers and school leaders evaluating a proposed AI use. Pick a scenario, score each dimension, get a go / discuss / redesign recommendation with the rationale.",
+  },
+  "ai-policy": {
+    title: "AI Policy Builder — Draft your school's AI policy — The Ethical Educator",
+    description: "Answer nine questions about your school's stance on AI; get a 1–2 page draft policy you can copy or download as the starting point for a board-ready document.",
   },
 };
 
