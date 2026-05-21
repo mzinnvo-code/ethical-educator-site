@@ -93,9 +93,17 @@ const GRADE_BAND_LABEL = {
   "educators": "Educator PD",
 };
 
+// Experiments that have their own dedicated standalone pages (NOT mounted
+// inside a grade page's ?experiment= deep-link). Routes here win over the
+// grade-page logic below. Mirror in src/pages/Picker.jsx if you add to this.
+const STANDALONE_PAGES = {
+  "explaining-red-k-2": "/thought-experiments/explaining-red-k-2",
+};
+
 // Pick the most specific grade-scoped URL for an experiment, then attach
 // the ?experiment= deep-link so the grade page opens the right scenario.
 function urlForExperiment(e) {
+  if (STANDALONE_PAGES[e.id]) return STANDALONE_PAGES[e.id];
   const grades = e.gradeBands || [];
   const k5Grade = grades.includes("k-5") ? e.gradeLevels?.[0] : null;
   let pathSlug;

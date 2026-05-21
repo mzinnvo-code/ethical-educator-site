@@ -14,6 +14,14 @@
 const ANALYTICS_ENDPOINT = "https://ethed-events.theethicaleducator.workers.dev/events";
 const BUFFER_KEY = "__teeEvents";
 
+// Eager-init the buffer at module load so `window.__teeEvents` is always an
+// array (even before the first track() call). This avoids a confusing "null"
+// result when smoke-checking telemetry from DevTools immediately after page
+// load.
+if (typeof window !== "undefined" && !window[BUFFER_KEY]) {
+  window[BUFFER_KEY] = [];
+}
+
 function buffer() {
   if (typeof window === "undefined") return null;
   if (!window[BUFFER_KEY]) window[BUFFER_KEY] = [];

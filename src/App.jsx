@@ -616,7 +616,7 @@ export default function App() {
         .page-enter{animation:pageIn 0.4s ease}
         @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes newPulse{0%,100%{opacity:1}50%{opacity:0.7}}
-        @media(max-width:1120px){.topbar-nav{display:none}.hamburger{display:block}}
+        @media(max-width:1280px){.topbar-nav{display:none}.hamburger{display:block}}
         @media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr !important}}
         @media(prefers-reduced-motion:reduce){
           :root{--motion-duration:0.01ms}

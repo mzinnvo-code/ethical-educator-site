@@ -357,7 +357,15 @@ function MultiQuestion({ title, hint, topics, selected, onToggle, onBack, onSubm
   );
 }
 
+const COUNT_HEADLINE = {
+  0: "No matches — try widening the filters.",
+  1: "One that fits.",
+  2: "Two that fit.",
+  3: "Three that fit.",
+};
+
 function Results({ picks, grade, time, onReset, navigate }) {
+  const headline = COUNT_HEADLINE[picks.length] ?? `${picks.length} that fit.`;
   return (
     <div style={{ marginTop: 12 }}>
       <FadeIn>
@@ -369,13 +377,7 @@ function Results({ picks, grade, time, onReset, navigate }) {
           fontFamily: "'Source Serif 4', Georgia, serif",
           color: C.textPrimary, fontSize: "1.6rem", fontWeight: 700,
           lineHeight: 1.2, marginBottom: 18,
-        }}>
-          {picks.length === 0
-            ? "No matches — try widening the filters."
-            : picks.length === 1
-              ? "One that fits."
-              : `Three that fit.`}
-        </h2>
+        }}>{headline}</h2>
       </FadeIn>
 
       {picks.length === 0 && (
@@ -401,6 +403,38 @@ function Results({ picks, grade, time, onReset, navigate }) {
           </FadeIn>
         ))}
       </div>
+
+      {grade === "educators" && (
+        <FadeIn delay={0.16}>
+          <aside
+            aria-label="Also worth a look for staff PD"
+            style={{
+              marginTop: 20,
+              padding: "16px 18px",
+              background: `${C.coral}0a`,
+              border: `1px solid ${C.coral}33`,
+              borderRadius: 12,
+            }}
+          >
+            <p style={{
+              fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.14em",
+              textTransform: "uppercase", color: C.coral, marginBottom: 6,
+            }}>Also worth a look for PD</p>
+            <p style={{ color: C.textSecondary, fontSize: "0.92rem", lineHeight: 1.6 }}>
+              The site's four flagship interactive experiments — The Shortcut, The AI Authorship Quandary, The Reluctant Educator, Digital Doppelganger — live on the{" "}
+              <a
+                href="/thought-experiments/educators"
+                onClick={(e) => {
+                  e.preventDefault();
+                  track("picker_flagships_callout_clicked", { page: "picker", placement: grade || "any" });
+                  navigate?.("thought-experiments/educators");
+                }}
+                style={{ color: C.coral, fontWeight: 600, borderBottom: `1px solid ${C.coral}66`, textDecoration: "none" }}
+              >Thought Experiments for Educators hub →</a>. They're longer, fully-narrated PD-grade dilemmas — better suited to a staff meeting or leadership retreat than a quick discussion block.
+            </p>
+          </aside>
+        </FadeIn>
+      )}
 
       <FadeIn delay={0.2}>
         <div style={{ marginTop: 26, display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -452,6 +486,18 @@ function RecommendationCard({ pick, grade, time, navigate }) {
       slug: pick.id,
       placement: grade || "any",
     });
+
+    // Standalone experiments that have their own dedicated routes (NOT
+    // mounted via ?experiment= on a grade page). Mirror in
+    // src/lib/searchDocs.js's STANDALONE_PAGES if you add to this.
+    const STANDALONE_PAGES = {
+      "explaining-red-k-2": "thought-experiments/explaining-red-k-2",
+    };
+    if (STANDALONE_PAGES[pick.id]) {
+      navigate?.(STANDALONE_PAGES[pick.id]);
+      return;
+    }
+
     // Route to the right grade page + open the experiment via ?experiment=.
     const k5 = pick.gradeBands?.includes("k-5");
     const k5Grade = k5 ? pick.gradeLevels?.[0] : null;
@@ -541,6 +587,7 @@ function RecommendationCard({ pick, grade, time, navigate }) {
       <button
         type="button"
         onClick={open}
+        aria-label={`Open ${pick.title}`}
         style={{
           padding: "9px 16px",
           background: `linear-gradient(135deg, ${accent}, ${C.ocean})`,
