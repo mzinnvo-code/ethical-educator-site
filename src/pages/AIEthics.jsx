@@ -6,6 +6,7 @@ import {
   Timeline, ComparisonCard, Divider, ReadingTime, ContinueExploring
 } from "../components/shared.jsx";
 import { PolicyTimelineDiagram } from "../components/diagrams.jsx";
+import { AI_ETHICS_ARTICLES, AI_ETHICS_SECTION_VISUALS } from "../data/aiEthicsVisuals.js";
 
 function EthicsQuiz() {
   const [current, setCurrent] = useState(0);
@@ -134,10 +135,116 @@ function EthicalMatrix() {
   );
 }
 
+function EthicsSectionVisual({ visual, delay = 0.06 }) {
+  return (
+    <FadeIn delay={delay}>
+      <section
+        id={visual.id}
+        style={{
+          margin: "28px 0 30px",
+          background: `linear-gradient(135deg, ${C.surface}, ${C.midnight})`,
+          border: `1px solid ${visual.accent}2e`,
+          borderRadius: 12,
+          overflow: "hidden",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          boxShadow: "0 18px 48px rgba(0,0,0,0.16)",
+          scrollMarginTop: 82,
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            minHeight: 0,
+            height: "100%",
+            aspectRatio: "16 / 9",
+            overflow: "hidden",
+            background: `${visual.accent}10`,
+          }}
+        >
+          <img
+            src={visual.image}
+            alt={visual.imageAlt}
+            loading="lazy"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(90deg, rgba(8,18,32,0.02), ${C.midnight}66)`,
+              pointerEvents: "none",
+            }}
+          />
+        </div>
+        <div style={{ padding: "clamp(22px, 4vw, 32px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <p style={{
+            color: visual.accent,
+            fontSize: "0.66rem",
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            marginBottom: 10,
+          }}>{visual.label}</p>
+          <h3 style={{
+            color: C.textPrimary,
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontSize: "clamp(1.28rem, 3vw, 1.72rem)",
+            lineHeight: 1.18,
+            fontWeight: 700,
+            marginBottom: 12,
+          }}>{visual.title}</h3>
+          <p style={{ color: C.textSecondary, fontSize: "0.91rem", lineHeight: 1.72 }}>{visual.desc}</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 18 }}>
+            {visual.points.map((point) => (
+              <span key={point} style={{
+                border: `1px solid ${visual.accent}36`,
+                borderRadius: 999,
+                padding: "5px 10px",
+                color: visual.accent,
+                background: `${visual.accent}0d`,
+                fontSize: "0.68rem",
+                fontWeight: 700,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+              }}>{point}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+  );
+}
+
 export default function AIEthics({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
+        <style>{`
+          .ai-ethics-article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 32px;
+            align-items: stretch;
+          }
+          .ai-ethics-article-grid > * {
+            min-width: 0;
+          }
+          @media (min-width: 1080px) {
+            .ai-ethics-article-grid {
+              grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+            .ai-ethics-article-grid > :last-child {
+              grid-column: 2 / span 2;
+            }
+          }
+          @media (max-width: 560px) {
+            .ai-ethics-article-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
         <FadeIn>
           <SectionLabel>Policy · Philosophy · Evidence</SectionLabel>
           <SectionTitle>AI Ethics in Education</SectionTitle>
@@ -153,13 +260,22 @@ export default function AIEthics({ navigate }) {
           <FadeIn delay={0.14}><StatCounter value={35} suffix="M €" label="Maximum EU AI Act fine" subtitle="or 7% of global turnover" color={C.coral} /></FadeIn>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18, marginTop: 32 }}>
-          <TopicCard icon="⚖️" title="From Ambiguity to Action" desc="Why 'uphold ethics' isn't a policy. Utilitarianism, deontology, virtue ethics, and thought experiments as policy tools — the funnel from value to practice." delay={0.06} accent={C.gold} onClick={() => navigate("ai-ambiguity-to-action")} />
-          <TopicCard icon="🤖" title="The Paradox of AI in Education" desc="Assume the harder version: AI has matched human teachers. The interesting question isn't whether the machine can teach — it's what schools are for if it can." delay={0.1} accent={C.gold} onClick={() => navigate("ai-paradox")} />
-          <TopicCard icon="📝" title="The AI Authorship Quandary" desc="A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. What good policy looks like — and the interactive scenario at the heart of it." delay={0.14} accent={C.gold} onClick={() => navigate("ai-authorship-quandary")} />
-          <TopicCard icon="🧠" title="The Consciousness Line" desc="Current AI is probably not conscious, but fuzzy boundaries, organoids, and synthetic biology make ethical humility worth teaching." delay={0.18} accent={C.ocean} onClick={() => navigate("ai-consciousness")} />
-          <TopicCard icon="👩‍🏫" title="Why AI Won't Replace Teachers — A Response" desc="A friendly disagreement with the standard defense. The conclusion is right, but capability arguments keep losing. The argument that survives the next iteration of the technology is values-based." delay={0.22} accent={C.gold} onClick={() => navigate("ai-replace-teachers")} />
-        </div>
+        <section className="ai-ethics-article-grid" aria-label="AI Ethics articles">
+          {AI_ETHICS_ARTICLES.map((article, index) => (
+            <TopicCard
+              key={article.id}
+              icon={article.icon}
+              iconLabel={article.iconLabel}
+              image={article.image}
+              imageAlt={article.imageAlt}
+              title={article.title}
+              desc={article.desc}
+              delay={0.06 + index * 0.04}
+              accent={article.accent}
+              onClick={() => navigate(article.route)}
+            />
+          ))}
+        </section>
 
         <Narrow>
           <div style={{ marginTop: 40 }}>
@@ -205,6 +321,8 @@ export default function AIEthics({ navigate }) {
                 <p style={{ marginTop: 12 }}>Subjectification is the "most misunderstood yet foundational dimension" — and it's exactly what's missing when AI bypasses the struggle of learning.</p>
               </Expandable>
             </FadeIn>
+
+            <EthicsSectionVisual visual={AI_ETHICS_SECTION_VISUALS.policy} />
 
             <Divider label="Global Policy Frameworks (2024–2026)" />
 
@@ -301,6 +419,8 @@ export default function AIEthics({ navigate }) {
                 <p style={{ marginTop: 12 }}>For U.S. educators, the EU Act foreshadows the direction global regulation is heading. Even where it doesn't directly apply, it provides the most mature regulatory framework worth studying.</p>
               </Expandable>
             </FadeIn>
+
+            <EthicsSectionVisual visual={AI_ETHICS_SECTION_VISUALS.evidence} delay={0.08} />
 
             <Divider label="The Evidence" />
 
@@ -621,6 +741,8 @@ export default function AIEthics({ navigate }) {
             {/* ═══════════════════════════════════════════════════
                 Foundations for Leadership Discussion — from Gamma #20 + #35
             ═══════════════════════════════════════════════════ */}
+
+            <EthicsSectionVisual visual={AI_ETHICS_SECTION_VISUALS.leadership} delay={0.08} />
 
             <Divider label="Foundations for Leadership Discussion" />
 
