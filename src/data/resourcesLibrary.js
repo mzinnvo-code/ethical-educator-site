@@ -32,8 +32,8 @@ const books = [
     author: "Joshua D. Greene",
     year: "2013",
     isbn: "9780143126058",
-    fallbackCoverIds: ["12433887"],
-    fallbackIsbns: ["9781594202605"],
+    suppressOpenLibraryCover: true,
+    verifiedCoverUrls: ["https://images1.penguinrandomhouse.com/cover/9780143126058"],
     featured: true,
     tags: ["moral-psychology", "philosophy"],
     desc: "The definitive book on dual-process moral psychology and its implications for resolving moral disagreements between communities.",
@@ -88,7 +88,7 @@ const books = [
     author: "Shannon Vallor",
     year: "2024",
     isbn: "9780197759066",
-    fallbackCoverIds: ["14600585"],
+    suppressOpenLibraryCover: true,
     featured: true,
     tags: ["ai-education", "philosophy"],
     desc: "How to reclaim our humanity in an age of machine thinking. Argues AI lacks practical wisdom (phrónēsis).",
@@ -207,6 +207,8 @@ const books = [
     author: "Joshua D. Greene",
     year: "2013",
     isbn: "9781594202605",
+    suppressOpenLibraryCover: true,
+    verifiedCoverUrls: ["https://images1.penguinrandomhouse.com/cover/9780143126058"],
     tags: ["moral-psychology", "philosophy"],
     desc: "The definitive book on dual-process moral psychology. Greene's vision of utilitarianism as 'deep pragmatism' for a diverse world.",
   },
@@ -230,17 +232,23 @@ const books = [
   },
 ];
 
-export const BOOK_RESOURCES = books.map((book) => ({
-  ...book,
-  coverSrc: openLibraryCover(book.isbn),
-  fallbackCoverSrcs: [
+export const BOOK_RESOURCES = books.map((book) => {
+  const coverSources = [
+    ...(book.verifiedCoverUrls || []),
+    ...(book.suppressOpenLibraryCover ? [] : [openLibraryCover(book.isbn)]),
     ...(book.fallbackIsbns || []).map((isbn) => openLibraryCover(isbn)),
     ...(book.fallbackCoverIds || []).map((id) => openLibraryCoverById(id)),
     ...(book.fallbackCoverUrls || []),
-  ],
-  imageAlt: `Cover of ${book.title}`,
-  url: openLibraryBookUrl(book.isbn),
-}));
+  ];
+
+  return {
+    ...book,
+    coverSrc: coverSources[0] || null,
+    fallbackCoverSrcs: coverSources.slice(1),
+    imageAlt: `Cover of ${book.title}`,
+    url: openLibraryBookUrl(book.isbn),
+  };
+});
 
 const reference = (title, tags, options = {}) => ({
   title,

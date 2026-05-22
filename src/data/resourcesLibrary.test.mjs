@@ -8,15 +8,27 @@ import {
   openLibraryBookUrl,
 } from "./resourcesLibrary.js";
 
-test("book resources include Open Library cover and link metadata", () => {
+test("book resources include safe cover and Open Library link metadata", () => {
   assert.equal(BOOK_RESOURCES.length, 20);
 
   for (const book of BOOK_RESOURCES) {
-    assert.match(book.coverSrc, /^https:\/\/covers\.openlibrary\.org\/b\/ISBN\/[0-9X]+-M\.jpg\?default=false$/);
+    assert.ok(book.coverSrc === null || /^https:\/\//.test(book.coverSrc));
     assert.equal(book.url, openLibraryBookUrl(book.isbn));
     assert.equal(book.imageAlt, `Cover of ${book.title}`);
     assert.ok(book.tags.length > 0);
   }
+});
+
+test("known-mismatched Open Library covers are not displayed", () => {
+  const moralTribes = BOOK_RESOURCES.find((book) => book.id === "moral-tribes-communities");
+  const aiMirror = BOOK_RESOURCES.find((book) => book.id === "the-ai-mirror");
+  const allMoralTribes = BOOK_RESOURCES.filter((book) => book.title === "Moral Tribes");
+
+  assert.equal(moralTribes.coverSrc, "https://images1.penguinrandomhouse.com/cover/9780143126058");
+  assert.ok(allMoralTribes.every((book) => book.coverSrc === "https://images1.penguinrandomhouse.com/cover/9780143126058"));
+  assert.ok(![moralTribes.coverSrc, ...moralTribes.fallbackCoverSrcs].some((src) => src?.includes("9780143126058-M.jpg")));
+  assert.equal(aiMirror.coverSrc, null);
+  assert.deepEqual(aiMirror.fallbackCoverSrcs, []);
 });
 
 test("guided categories expose the expected resource buckets", () => {
