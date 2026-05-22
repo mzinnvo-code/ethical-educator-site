@@ -79,6 +79,7 @@ const Picker = lazy(() => import("./pages/Picker.jsx"));
 const AIRubric = lazy(() => import("./pages/AIRubric.jsx"));
 const AIPolicy = lazy(() => import("./pages/AIPolicy.jsx"));
 const FamilyConversations = lazy(() => import("./pages/FamilyConversations.jsx"));
+const Tools = lazy(() => import("./pages/Tools.jsx"));
 
 function NotFound({ navigate }) {
   return (
@@ -156,6 +157,7 @@ const PAGE_MAP = {
   "ai-rubric": AIRubric,
   "ai-policy": AIPolicy,
   "family-conversations": FamilyConversations,
+  "tools": Tools,
 };
 
 const PAGE_META = {
@@ -409,6 +411,10 @@ const PAGE_META = {
     title: "Family Conversations — Five questions to start a family conversation about AI — The Ethical Educator",
     description: "For parents and caregivers: pick your child's age and a topic about AI; get five dinner-table prompts that open the conversation without lecturing. No correct answers — just five questions that work.",
   },
+  "tools": {
+    title: "Interactive Tools — The Ethical Educator",
+    description: "Four short, focused interactives that hand you a usable artifact in under ten minutes: the Thought Experiment Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator. No login, no data collection beyond cookieless event counts.",
+  },
 };
 
 function getPageFromPath() {
@@ -476,7 +482,8 @@ export default function App() {
 
   const isPageActive = (page) => (
     currentPage === page.id ||
-    (page.matchPrefix && currentPage.startsWith(page.matchPrefix))
+    (page.matchPrefix && currentPage.startsWith(page.matchPrefix)) ||
+    (Array.isArray(page.matchAny) && page.matchAny.includes(currentPage))
   );
 
   // Scroll-depth analytics: fires 25/50/75/100% milestone events per page.

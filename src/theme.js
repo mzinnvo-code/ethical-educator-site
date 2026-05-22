@@ -34,6 +34,7 @@ export const PAGES = [
   { id: "phil-education", label: "Philosophy in K–12" },
   { id: "ai-ethics", label: "AI & Ethics" },
   { id: "moral-psych", label: "Moral Psychology" },
+  { id: "tools", label: "Tools", matchAny: ["picker", "ai-rubric", "ai-policy", "family-conversations"] },
   { id: "resources", label: "Resources" },
   { id: "about", label: "About" },
 ];
