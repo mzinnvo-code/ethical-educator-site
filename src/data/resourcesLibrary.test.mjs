@@ -36,6 +36,7 @@ test("guided categories expose the expected resource buckets", () => {
     RESOURCE_CATEGORIES.map((category) => category.id),
     ["books", "research", "policy", "organizations", "media"],
   );
+  assert.equal(RESOURCE_CATEGORIES.find((category) => category.id === "books").kicker, "Core texts");
 });
 
 test("theme filtering keeps research and policy items discoverable", () => {

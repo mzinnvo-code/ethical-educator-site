@@ -494,7 +494,7 @@ export const RESOURCE_CATEGORIES = [
   {
     id: "books",
     label: "Books",
-    kicker: "Covers included",
+    kicker: "Core texts",
     desc: "Core texts on AI, moral psychology, education, and philosophy.",
     accent: C.gold,
     imageSrc: "/illustrations/reading-room.png",
