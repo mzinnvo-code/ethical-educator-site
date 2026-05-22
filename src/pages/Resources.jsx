@@ -3,7 +3,6 @@ import { C } from "../theme.js";
 import { FadeIn, PageContainer, ContinueExploring, ReadingTime } from "../components/shared.jsx";
 import { getFeatureIllustration } from "../data/illustrations.js";
 import {
-  BOOK_RESOURCES,
   MEDIA_RESOURCES,
   ORGANIZATION_RESOURCES,
   POLICY_RESOURCES,
@@ -167,32 +166,6 @@ function LinkResourceCard({ item }) {
         {item.desc && <p>{item.desc}</p>}
       </div>
     </article>
-  );
-}
-
-function FeaturedShelf({ navigate }) {
-  const featured = [
-    ...BOOK_RESOURCES.filter((item) => item.featured).slice(0, 4),
-    ...getResourcesForCategory("research").filter((item) => item.featured).slice(0, 2),
-  ];
-
-  return (
-    <FadeIn delay={0.08}>
-      <section className="resource-featured" aria-labelledby="featured-resources-title">
-        <div className="resource-section-heading">
-          <div>
-            <p className="resource-kicker" style={{ color: C.gold }}>Start here</p>
-            <h2 id="featured-resources-title">A shorter path into the library</h2>
-          </div>
-          <span>{featured.length} highlighted resources</span>
-        </div>
-        <div className="resource-featured-grid">
-          {featured.map((item) => (
-            item.isbn ? <BookCard key={item.id} book={item} /> : <TextReferenceCard key={item.title} item={item} navigate={navigate} />
-          ))}
-        </div>
-      </section>
-    </FadeIn>
   );
 }
 
@@ -381,16 +354,12 @@ export default function Resources({ navigate }) {
         .resources-body {
           margin-top: 34px;
         }
-        .resource-featured,
         .resource-panel {
           background: linear-gradient(135deg, rgba(18,37,61,0.92), rgba(8,18,32,0.62));
           border: 1px solid ${C.border};
           border-radius: 8px;
           padding: clamp(20px, 4vw, 30px);
           box-shadow: 0 18px 60px rgba(0,0,0,0.16);
-        }
-        .resource-featured {
-          margin-bottom: 28px;
         }
         .resource-section-heading {
           display: flex;
@@ -412,7 +381,6 @@ export default function Resources({ navigate }) {
           text-transform: uppercase;
           white-space: nowrap;
         }
-        .resource-featured-grid,
         .resource-book-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -710,7 +678,6 @@ export default function Resources({ navigate }) {
           .resource-link-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
-          .resource-featured-grid,
           .resource-book-grid {
             grid-template-columns: 1fr;
           }
@@ -777,8 +744,6 @@ export default function Resources({ navigate }) {
 
       <PageContainer>
         <div className="resources-body">
-          <FeaturedShelf navigate={navigate} />
-
           <FadeIn delay={0.1}>
             <div className="resource-category-grid" aria-label="Resource categories">
               {RESOURCE_CATEGORIES.map((category) => (
