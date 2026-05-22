@@ -2,9 +2,6 @@ import { C } from "../theme.js";
 import {
   FadeIn,
   Expandable,
-  SectionLabel,
-  SectionTitle,
-  Subtitle,
   Narrow,
   PageContainer,
   BodyText,
@@ -12,12 +9,15 @@ import {
   QuoteBlock,
   ComparisonCard,
   Divider,
-  ReadingTime,
   ContinueExploring,
   RefItem,
   EducatorsFooter,
+  ImagePageHeader,
 } from "../components/shared.jsx";
 import ReluctantEducatorExperiment from "../experiments/ReluctantEducator.jsx";
+import { AI_ETHICS_ARTICLE_BY_ROUTE } from "../data/aiEthicsVisuals.js";
+
+const articleVisual = AI_ETHICS_ARTICLE_BY_ROUTE["ai-paradox"];
 
 const links = {
   wpOrigin: "https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/",
@@ -236,14 +236,15 @@ export default function AIParadox({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Philosophy · Education · Community</SectionLabel>
-          <SectionTitle>The Paradox of AI in Education</SectionTitle>
-          <Subtitle>
-            Assume the harder version of the question: AI has matched or exceeded what a human teacher can do. Personalization, mentorship, the simulation of warmth — all of it. The interesting question isn't whether the machine can teach. It's whether teaching, as we have understood it, is the kind of thing that can be done by a machine at all.
-          </Subtitle>
-          <ReadingTime minutes={15} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Philosophy · Education · Community"
+          title="The Paradox of AI in Education"
+          subtitle="Assume the harder version of the question: AI has matched or exceeded what a human teacher can do. Personalization, mentorship, the simulation of warmth — all of it. The interesting question isn't whether the machine can teach. It's whether teaching, as we have understood it, is the kind of thing that can be done by a machine at all."
+          minutes={15}
+          image={articleVisual.image}
+          imageAlt={articleVisual.imageAlt}
+          accent={articleVisual.accent}
+        />
 
         <Narrow>
           <FadeIn delay={0.05}>

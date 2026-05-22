@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { C } from "../theme.js";
 import {
-  FadeIn, Expandable, VideoEmbed, useAudio, SectionLabel, SectionTitle, Subtitle,
+  FadeIn, Expandable, VideoEmbed, useAudio,
   Narrow, PageContainer, BodyText, RefItem, ResearchCallout, QuoteBlock, StatCounter,
-  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring, ReadingTime
+  Timeline, ComparisonCard, FigureCard, Divider, SectionHeading, ContinueExploring, ImagePageHeader
 } from "../components/shared.jsx";
 import { DualProcessDiagram } from "../components/diagrams.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
 // ─── Interactive Trolley Experiment ───
 function TrolleyExperiment() {
@@ -79,12 +80,14 @@ export default function MoralPsychology({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Thesis Research · Updated with 2023–2026 Developments</SectionLabel>
-          <SectionTitle>Moral Psychology & Normative Ethics</SectionTitle>
-          <Subtitle>Can neuroscience tell us what's morally right? My thesis on Joshua Greene's dual-process theory and F.M. Kamm's objections — now expanded with the BBS exchange, Bammel's modularity critique, the Cosmides compromise-judgments challenge, the 2024 meta-analysis, and the new frontier where moral psychology meets AI alignment.</Subtitle>
-          <ReadingTime minutes={18} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Thesis Research · Updated with 2023–2026 Developments"
+          title="Moral Psychology & Normative Ethics"
+          subtitle="Can neuroscience tell us what's morally right? My thesis on Joshua Greene's dual-process theory and F.M. Kamm's objections — now expanded with the BBS exchange, Bammel's modularity critique, the Cosmides compromise-judgments challenge, the 2024 meta-analysis, and the new frontier where moral psychology meets AI alignment."
+          minutes={18}
+          image={getFeatureIllustration("moral-psych")}
+          accent={C.teal}
+        />
 
         <div style={{ marginTop: 32 }}><FadeIn delay={0.08}><TrolleyExperiment /></FadeIn></div>
 

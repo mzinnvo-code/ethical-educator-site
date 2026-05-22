@@ -3,6 +3,7 @@ import GradePage from "./GradePage.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import { C } from "../../theme.js";
 import { HIGH_SCHOOL_THEME_COPY, HIGH_SCHOOL_THEME_ORDER } from "../../data/highSchoolScenarioCopy.js";
+import { getFeatureIllustration } from "../../data/illustrations.js";
 
 const THEME_COLORS = {
   values: C.gold,
@@ -230,6 +231,8 @@ export default function High({ navigate }) {
       label="Grades 9–12"
       title="The Philosophical Canon"
       blurb="Classic thought experiments and contemporary AI dilemmas, organised around four philosophical themes: values, knowledge, reality, and reasoning. Each scenario carries arguments and counterarguments, fallacy spotting, argument repair, and room for student-built variations."
+      heroImage={getFeatureIllustration("thought-experiments/9-12")}
+      heroAccent={C.ocean}
       preExperiments={({ experiments, filterApi }) => (
         <HighThemeGuide
           experiments={experiments}

@@ -99,3 +99,7 @@ export const AI_ETHICS_SECTION_VISUALS = {
     points: ["Stakeholders", "Trade-offs", "Practice cases"],
   },
 };
+
+export const AI_ETHICS_ARTICLE_BY_ROUTE = Object.fromEntries(
+  AI_ETHICS_ARTICLES.map((article) => [article.route, article])
+);

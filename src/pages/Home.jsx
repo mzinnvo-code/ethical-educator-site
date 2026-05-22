@@ -137,17 +137,6 @@ function HomeStyles() {
         background-size:cover;
         background-position:center right;
       }
-      .home-hero::before{
-        content:"";
-        position:absolute;
-        inset:0;
-        background:
-          linear-gradient(90deg,rgba(224,220,208,0.035) 1px,transparent 1px),
-          linear-gradient(0deg,rgba(224,220,208,0.025) 1px,transparent 1px);
-        background-size:56px 56px;
-        mask-image:linear-gradient(90deg,transparent 0%,black 38%,black 100%);
-        pointer-events:none;
-      }
       .home-hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto}
       .home-eyebrow{
         color:${C.sand};
