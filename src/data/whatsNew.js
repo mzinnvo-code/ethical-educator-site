@@ -16,6 +16,14 @@
 
 export const WHATS_NEW = [
   {
+    id: "tools-hub",
+    date: "2026-05-22",
+    type: "feature",
+    title: "New hub: all four interactive tools in one place",
+    blurb: "The Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator now live together at /tools — with a clear note on who each one is for and when to reach for it. The 'Tools' link in the topbar nav is the new entry point.",
+    url: "/tools",
+  },
+  {
     id: "family-conversation-generator",
     date: "2026-05-21",
     type: "feature",

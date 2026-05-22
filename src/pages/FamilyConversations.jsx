@@ -365,7 +365,7 @@ function Result({ age, topic, prompts, onReset, navigate }) {
         <div style={{ marginTop: 26, display: "flex", gap: 14, flexWrap: "wrap" }}>
           <button
             type="button"
-            onClick={() => navigate?.("audiences/parents")}
+            onClick={() => navigate?.("audiences/parent")}
             style={{
               padding: "10px 18px",
               background: "transparent",

@@ -54,6 +54,7 @@ const SECTION_RULES = [
   { id: "ai-rubric", accent: C.teal, label: "AI Use Rubric" },
   { id: "ai-policy", accent: C.ocean, label: "AI Policy Builder" },
   { id: "family-conversations", accent: C.coral, label: "Family Conversations" },
+  { id: "tools", accent: C.gold, label: "Tools" },
   { id: "about", accent: C.ocean, label: "About" },
 
   // Legal / site

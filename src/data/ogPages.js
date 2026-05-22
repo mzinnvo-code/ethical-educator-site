@@ -59,6 +59,7 @@ export const OG_PAGES = [
   { id: "ai-rubric", title: "Should we use AI for this? A six-dimension rubric", section: "AI Use Rubric · Interactive tool", accent: OG_ACCENTS.teal },
   { id: "ai-policy", title: "Draft your school's AI policy in ten minutes", section: "AI Policy Builder · Interactive tool", accent: OG_ACCENTS.ocean },
   { id: "family-conversations", title: "Five questions to start a family conversation about AI", section: "Family Conversations · For parents", accent: OG_ACCENTS.coral },
+  { id: "tools", title: "Four interactive tools — Picker, Rubric, Policy Builder, Family Conversations", section: "Interactive Tools · Hub", accent: OG_ACCENTS.gold },
 
   // Audience hubs
   { id: "audiences/teacher", title: "For Teachers", section: "Classroom-ready scenarios + PD", accent: OG_ACCENTS.gold },

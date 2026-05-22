@@ -94,7 +94,8 @@
       "/picker",
       "/ai-rubric",
       "/ai-policy",
-      "/family-conversations"
+      "/family-conversations",
+      "/tools"
     ],
     "skipThirdPartyRequests": true,
     "inlineCss": false
