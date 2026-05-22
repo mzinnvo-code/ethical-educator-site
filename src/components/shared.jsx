@@ -264,6 +264,83 @@ export function EducatorHero({ label, title, subtitle, image, imageAlt, accent =
   );
 }
 
+export function ImagePageHeader({
+  label,
+  title,
+  subtitle,
+  image,
+  imageAlt,
+  accent = C.gold,
+  minutes = null,
+  readingLabel = null,
+  imagePosition = "center",
+}) {
+  const imageSrc = typeof image === "string" ? image : image?.src;
+  const alt = imageAlt || image?.alt || "";
+
+  return (
+    <FadeIn>
+      <section style={{
+        display: "flex",
+        gap: "clamp(24px, 5vw, 48px)",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        marginBottom: 18,
+      }}>
+        <div style={{ flex: "1 1 460px", minWidth: 0 }}>
+          {label && <SectionLabel>{label}</SectionLabel>}
+          <h2 style={{
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            fontSize: "clamp(1.9rem, 4.8vw, 3.35rem)",
+            color: C.textPrimary,
+            fontWeight: 700,
+            lineHeight: 1.1,
+            marginBottom: 16,
+            overflowWrap: "break-word",
+          }}>{title}</h2>
+          {subtitle && (
+            <p style={{
+              color: C.textMuted,
+              fontSize: "clamp(0.98rem, 1.7vw, 1.08rem)",
+              lineHeight: 1.72,
+              maxWidth: 680,
+              marginBottom: minutes ? 18 : 0,
+            }}>{subtitle}</p>
+          )}
+          {minutes && <ReadingTime minutes={minutes} label={readingLabel} />}
+        </div>
+        {imageSrc && (
+          <figure style={{
+            flex: "0 1 340px",
+            width: "min(100%, 340px)",
+            aspectRatio: "1.36 / 1",
+            margin: 0,
+            borderRadius: 14,
+            overflow: "hidden",
+            border: `1px solid ${accent}33`,
+            background: `linear-gradient(135deg, ${accent}14, ${C.midnight})`,
+            boxShadow: `0 22px 70px rgba(0,0,0,0.28), 0 0 46px ${accent}12`,
+          }}>
+            <img
+              src={imageSrc}
+              alt={alt}
+              loading="eager"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: imagePosition,
+                display: "block",
+              }}
+            />
+          </figure>
+        )}
+      </section>
+    </FadeIn>
+  );
+}
+
 export function ResearchCallout({ year, title, finding, citation, color = C.teal }) {
   return (
     <div style={{
@@ -417,7 +494,19 @@ export function Divider({ label }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "32px 0 20px" }}>
       <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, transparent, ${C.border}, transparent)` }} />
-      {label && <span style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: C.textMuted, whiteSpace: "nowrap" }}>{label}</span>}
+      {label && (
+        <span style={{
+          flex: "0 1 auto",
+          maxWidth: "100%",
+          fontSize: "0.7rem",
+          letterSpacing: 0,
+          lineHeight: 1.35,
+          textAlign: "center",
+          textTransform: "uppercase",
+          color: C.textMuted,
+          overflowWrap: "anywhere",
+        }}>{label}</span>
+      )}
       <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, transparent, ${C.border}, transparent)` }} />
     </div>
   );

@@ -3,9 +3,6 @@ import {
   FadeIn,
   Expandable,
   VideoEmbed,
-  SectionLabel,
-  SectionTitle,
-  Subtitle,
   Narrow,
   PageContainer,
   BodyText,
@@ -13,11 +10,14 @@ import {
   QuoteBlock,
   ComparisonCard,
   Divider,
-  ReadingTime,
   ContinueExploring,
   RefItem,
+  ImagePageHeader,
 } from "../components/shared.jsx";
 import { getSceneIllustration } from "../data/sceneIllustrations.js";
+import { AI_ETHICS_ARTICLE_BY_ROUTE } from "../data/aiEthicsVisuals.js";
+
+const articleVisual = AI_ETHICS_ARTICLE_BY_ROUTE["ai-consciousness"];
 
 const links = {
   sethTed: "https://www.ted.com/talks/anil_seth_why_ai_is_unlikely_to_become_conscious",
@@ -1511,14 +1511,15 @@ export default function AIConsciousness({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>AI Ethics · Philosophy of Mind · Moral Caution</SectionLabel>
-          <SectionTitle>The Consciousness Line</SectionTitle>
-          <Subtitle>
-            Anil Seth is right to warn that current AI is probably not conscious, and that fluent language is not inner life. But his own call for humility opens a deeper educational question: how should we reason when the boundaries of consciousness are uncertain, our labels carry moral force, and future systems may not fit our inherited categories?
-          </Subtitle>
-          <ReadingTime minutes={21} />
-        </FadeIn>
+        <ImagePageHeader
+          label="AI Ethics · Philosophy of Mind · Moral Caution"
+          title="The Consciousness Line"
+          subtitle="Anil Seth is right to warn that current AI is probably not conscious, and that fluent language is not inner life. But his own call for humility opens a deeper educational question: how should we reason when the boundaries of consciousness are uncertain, our labels carry moral force, and future systems may not fit our inherited categories?"
+          minutes={21}
+          image={articleVisual.image}
+          imageAlt={articleVisual.imageAlt}
+          accent={articleVisual.accent}
+        />
 
         <Narrow>
           <FadeIn delay={0.05}>

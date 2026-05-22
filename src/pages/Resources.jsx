@@ -1,11 +1,20 @@
 import { C } from "../theme.js";
-import { FadeIn, Expandable, SectionLabel, SectionTitle, Narrow, PageContainer, RefItem, ContinueExploring, ReadingTime } from "../components/shared.jsx";
+import { FadeIn, Expandable, Narrow, PageContainer, RefItem, ContinueExploring, ImagePageHeader } from "../components/shared.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
 export default function Resources({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn><SectionLabel>Library</SectionLabel><SectionTitle>Essential Reading & Resources</SectionTitle><ReadingTime minutes={6} label="6 min browsable" /></FadeIn>
+        <ImagePageHeader
+          label="Library"
+          title="Essential Reading & Resources"
+          subtitle="Curated books, papers, organizations, policy frameworks, and podcasts for deeper work in moral psychology, AI ethics, and philosophy of education."
+          minutes={6}
+          readingLabel="6 min browsable"
+          image={getFeatureIllustration("resources")}
+          accent={C.gold}
+        />
         <Narrow>
           <FadeIn delay={0.06}>
             <Expandable title="Books" color={C.gold} defaultOpen>

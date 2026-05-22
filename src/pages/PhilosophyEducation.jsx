@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { C } from "../theme.js";
 import {
-  FadeIn, Expandable, SectionLabel, SectionTitle, Subtitle, Narrow, PageContainer,
-  BodyText, ResearchCallout, QuoteBlock, StatCounter, ComparisonCard, Divider, FigureCard, RefItem, ReadingTime
+  FadeIn, Expandable, Narrow, PageContainer,
+  BodyText, ResearchCallout, QuoteBlock, StatCounter, ComparisonCard, Divider, FigureCard, RefItem, ImagePageHeader
 } from "../components/shared.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
 // ─── Interactive Schedule Viewer ───
 function ScheduleViewer({ level }) {
@@ -168,12 +169,14 @@ export default function PhilosophyEducation({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Research · Proposal · Curriculum</SectionLabel>
-          <SectionTitle>Philosophy in K–12 Education</SectionTitle>
-          <Subtitle>Philosophy is not an abstract luxury — it is a survival skill for the modern world. The research evidence is clear: teaching philosophical thinking in K–12 produces measurable gains in academic performance, critical reasoning, social-emotional development, and long-term life outcomes. In the age of AI, these skills are more urgent than ever.</Subtitle>
-          <ReadingTime minutes={18} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Research · Proposal · Curriculum"
+          title="Philosophy in K–12 Education"
+          subtitle="Philosophy is not an abstract luxury — it is a survival skill for the modern world. The research evidence is clear: teaching philosophical thinking in K–12 produces measurable gains in academic performance, critical reasoning, social-emotional development, and long-term life outcomes. In the age of AI, these skills are more urgent than ever."
+          minutes={18}
+          image={getFeatureIllustration("phil-education")}
+          accent={C.coral}
+        />
 
         {/* ─── KEY STATS ─── */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, marginTop: 32 }}>

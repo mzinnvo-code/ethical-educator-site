@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "../../theme.js";
 import {
-  FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring,
+  FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring, ImagePageHeader,
 } from "../../components/shared.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
@@ -64,6 +64,9 @@ export default function GradePage({
   renderResults = null,   // optional ({experiments, filterApi, all, onSelect, emptyMessage}) => JSX,
                           // used to override the default flat ExperimentGrid (e.g. themed grouping at 9-12)
   emptyMessage,
+  heroImage = null,
+  heroImageAlt = "",
+  heroAccent = C.gold,
 }) {
   const all = getExperimentsByGrade(band);
   const filterApi = useExperimentFilter(all);
@@ -126,16 +129,27 @@ export default function GradePage({
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
       <PageContainer>
-        <FadeIn>
-          <p style={{
-            fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.15em",
-            textTransform: "uppercase", color: C.gold, marginBottom: 10,
-          }}>
-            Thought Experiments · {label}
-          </p>
-          <SectionTitle>{title}</SectionTitle>
-          {blurb && <Subtitle>{blurb}</Subtitle>}
-        </FadeIn>
+        {heroImage ? (
+          <ImagePageHeader
+            label={`Thought Experiments · ${label}`}
+            title={title}
+            subtitle={blurb}
+            image={heroImage}
+            imageAlt={heroImageAlt}
+            accent={heroAccent}
+          />
+        ) : (
+          <FadeIn>
+            <p style={{
+              fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.15em",
+              textTransform: "uppercase", color: C.gold, marginBottom: 10,
+            }}>
+              Thought Experiments · {label}
+            </p>
+            <SectionTitle>{title}</SectionTitle>
+            {blurb && <Subtitle>{blurb}</Subtitle>}
+          </FadeIn>
+        )}
 
         <Narrow>
           {/* Optional pre-content (e.g. flagships block) */}

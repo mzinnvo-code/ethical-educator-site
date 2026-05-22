@@ -2,9 +2,6 @@ import { C } from "../theme.js";
 import {
   FadeIn,
   Expandable,
-  SectionLabel,
-  SectionTitle,
-  Subtitle,
   Narrow,
   PageContainer,
   BodyText,
@@ -12,12 +9,15 @@ import {
   QuoteBlock,
   ComparisonCard,
   Divider,
-  ReadingTime,
   ContinueExploring,
   RefItem,
   EducatorsFooter,
+  ImagePageHeader,
 } from "../components/shared.jsx";
 import AuthorshipExperiment from "../experiments/Authorship.jsx";
+import { AI_ETHICS_ARTICLE_BY_ROUTE } from "../data/aiEthicsVisuals.js";
+
+const articleVisual = AI_ETHICS_ARTICLE_BY_ROUTE["ai-authorship-quandary"];
 
 const links = {
   wpOrigin: "https://ethicalaiedu.wordpress.com/2024/02/14/the-ai-authorship-quandary/",
@@ -260,14 +260,15 @@ export default function AIAuthorship({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Academic Integrity · Policy · Practice</SectionLabel>
-          <SectionTitle>The AI Authorship Quandary</SectionTitle>
-          <Subtitle>
-            A student turns in an AI-assisted essay that demonstrates real understanding. The teacher flags it. The parent defends it. The syllabus is silent. Every person in the room is right about something, and no two of them are right about the same thing. This is what good policy is supposed to prevent — and what the absence of policy keeps producing.
-          </Subtitle>
-          <ReadingTime minutes={16} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Academic Integrity · Policy · Practice"
+          title="The AI Authorship Quandary"
+          subtitle="A student turns in an AI-assisted essay that demonstrates real understanding. The teacher flags it. The parent defends it. The syllabus is silent. Every person in the room is right about something, and no two of them are right about the same thing. This is what good policy is supposed to prevent — and what the absence of policy keeps producing."
+          minutes={16}
+          image={articleVisual.image}
+          imageAlt={articleVisual.imageAlt}
+          accent={articleVisual.accent}
+        />
 
         <Narrow>
           <FadeIn delay={0.06}>

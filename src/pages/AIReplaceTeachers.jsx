@@ -2,9 +2,6 @@ import { C } from "../theme.js";
 import {
   FadeIn,
   Expandable,
-  SectionLabel,
-  SectionTitle,
-  Subtitle,
   Narrow,
   PageContainer,
   BodyText,
@@ -12,13 +9,16 @@ import {
   QuoteBlock,
   ComparisonCard,
   Divider,
-  ReadingTime,
   ContinueExploring,
   RefItem,
   VideoEmbed,
   EducatorsFooter,
+  ImagePageHeader,
 } from "../components/shared.jsx";
 import DoppelgangerExperiment from "../experiments/Doppelganger.jsx";
+import { AI_ETHICS_ARTICLE_BY_ROUTE } from "../data/aiEthicsVisuals.js";
+
+const articleVisual = AI_ETHICS_ARTICLE_BY_ROUTE["ai-replace-teachers"];
 
 const links = {
   wpOrigin: "https://ethicalaiedu.wordpress.com/2024/02/14/response-to-why-ai-wont-replace-teachers/",
@@ -218,14 +218,15 @@ export default function AIReplaceTeachers({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Response · Philosophy of Mind · Education</SectionLabel>
-          <SectionTitle>Why AI Won't Replace Teachers — A Response</SectionTitle>
-          <Subtitle>
-            A friendly disagreement with a popular video. The conclusion (teachers shouldn't be replaced) is right. The argument (AI can't do what teachers do) is the wrong way to defend it — and is going to keep losing. Here's the argument that actually survives the next iteration of the technology.
-          </Subtitle>
-          <ReadingTime minutes={15} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Response · Philosophy of Mind · Education"
+          title="Why AI Won't Replace Teachers — A Response"
+          subtitle="A friendly disagreement with a popular video. The conclusion (teachers shouldn't be replaced) is right. The argument (AI can't do what teachers do) is the wrong way to defend it — and is going to keep losing. Here's the argument that actually survives the next iteration of the technology."
+          minutes={15}
+          image={articleVisual.image}
+          imageAlt={articleVisual.imageAlt}
+          accent={articleVisual.accent}
+        />
 
         <Narrow>
           <FadeIn delay={0.05}>

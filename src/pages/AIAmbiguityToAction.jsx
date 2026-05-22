@@ -2,9 +2,6 @@ import { C } from "../theme.js";
 import {
   FadeIn,
   Expandable,
-  SectionLabel,
-  SectionTitle,
-  Subtitle,
   Narrow,
   PageContainer,
   BodyText,
@@ -12,11 +9,14 @@ import {
   QuoteBlock,
   ComparisonCard,
   Divider,
-  ReadingTime,
   ContinueExploring,
   RefItem,
   EducatorsFooter,
+  ImagePageHeader,
 } from "../components/shared.jsx";
+import { AI_ETHICS_ARTICLE_BY_ROUTE } from "../data/aiEthicsVisuals.js";
+
+const articleVisual = AI_ETHICS_ARTICLE_BY_ROUTE["ai-ambiguity-to-action"];
 
 const links = {
   wpOrigin: "https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/",
@@ -230,14 +230,15 @@ export default function AIAmbiguityToAction({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bgAlt }}>
       <PageContainer>
-        <FadeIn>
-          <SectionLabel>Ethics · Frameworks · Policy</SectionLabel>
-          <SectionTitle>From Ambiguity to Action</SectionTitle>
-          <Subtitle>
-            "Uphold ethics" is not a policy. It's a placeholder where a policy should be. This piece walks through the normative frameworks educators actually need — utilitarianism, deontology, virtue ethics — and the thought experiments that translate them into rules a sixteen-year-old can quote back at you.
-          </Subtitle>
-          <ReadingTime minutes={18} />
-        </FadeIn>
+        <ImagePageHeader
+          label="Ethics · Frameworks · Policy"
+          title="From Ambiguity to Action"
+          subtitle="&quot;Uphold ethics&quot; is not a policy. It's a placeholder where a policy should be. This piece walks through the normative frameworks educators actually need — utilitarianism, deontology, virtue ethics — and the thought experiments that translate them into rules a sixteen-year-old can quote back at you."
+          minutes={18}
+          image={articleVisual.image}
+          imageAlt={articleVisual.imageAlt}
+          accent={articleVisual.accent}
+        />
 
         <Narrow>
           <FadeIn delay={0.06}>

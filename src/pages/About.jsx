@@ -1,11 +1,19 @@
 import { C } from "../theme.js";
-import { FadeIn, Expandable, SectionLabel, SectionTitle, BodyText, PageContainer, Narrow, Divider, QuoteBlock, ReadingTime } from "../components/shared.jsx";
+import { FadeIn, Expandable, BodyText, PageContainer, Narrow, Divider, QuoteBlock, ImagePageHeader } from "../components/shared.jsx";
+import { getFeatureIllustration } from "../data/illustrations.js";
 
 export default function About({ navigate }) {
   return (
     <div style={{ padding: "80px 0", background: C.bg }}>
       <PageContainer>
-        <FadeIn><SectionLabel>About</SectionLabel><SectionTitle>Matthew A. Zinn</SectionTitle><ReadingTime minutes={8} /></FadeIn>
+        <ImagePageHeader
+          label="About"
+          title="Matthew A. Zinn"
+          subtitle="Philosopher, educator, and technologist working where moral psychology, AI ethics, and classroom reality meet."
+          minutes={8}
+          image={getFeatureIllustration("site-symbol")}
+          accent={C.teal}
+        />
         <div className="grid-2" style={{ marginTop: 28, alignItems: "start" }}>
           <FadeIn delay={0.08}>
             <div style={{ background: `linear-gradient(135deg, rgba(26,138,122,0.06), rgba(200,152,48,0.04))`, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28, textAlign: "center" }}>
