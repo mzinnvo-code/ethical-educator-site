@@ -752,6 +752,7 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
           positions={stage.positions || []}
           stages={stages}
           mode={mode}
+          onRestart={onRestart}
         />
       )}
 
