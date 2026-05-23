@@ -7,7 +7,7 @@
 //   npm run audio:generate -- --scenario=magic-toy
 //   npm run audio:generate -- --force          # ignore cache
 //
-// Required env (load via `node --env-file=.env.local ...` — wired in package.json):
+// Required env (load via `node --env-file-if-exists=.env.local ...` — wired in package.json):
 //   ELEVENLABS_API_KEY    your ElevenLabs API key
 //   ELEVENLABS_VOICE_ID   optional; defaults to Hope, falls back to Charlotte
 
@@ -24,6 +24,7 @@ import {
   resolveStaticPrompt,
   resolveStaticStorySections,
 } from "../src/lib/readAloudText.js";
+import { enumerateSynthesisAudioItems } from "../src/lib/k5SynthesisAudioText.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, "..");
@@ -193,6 +194,15 @@ const TONE_TEXT = {
   "lab-bigidea": ({ text }) => `[wise, gentle, like sharing a small secret] ${text}`,
   "lab-trythis": ({ text }) => `[playful, inviting] ${text}`,
   "lab-spottheslip": ({ text }) => `[curious, alert] ${text}`,
+  "student-story": ({ text }, grade) => {
+    const tag = (grade === "k" || grade === "1")
+      ? "[warm, gentle storybook payoff]"
+      : "[warm, reflective story payoff]";
+    return `${tag} ${text}`;
+  },
+  "path-recap": ({ text }) => `[warmly, encouraging reflection] ${text}`,
+  "student-position": ({ text }) => `[curious, like sharing a big idea with a child] ${text}`,
+  "student-reference": ({ text }) => `[gentle, inviting wonder] ${text}`,
 };
 
 // ──────────────── CLI ────────────────
@@ -254,7 +264,7 @@ function stripEmphasis(text) {
 
 async function elevenlabsTTS(toneText) {
   const apiKey = process.env.ELEVENLABS_API_KEY;
-  if (!apiKey) throw new Error("ELEVENLABS_API_KEY is not set. Add it to .env.local.");
+  if (!apiKey) throw new Error("ELEVENLABS_API_KEY is not set. Set it in the process environment or .env.local.");
 
   const url = `${API_BASE}/${VOICE_ID}?output_format=${OUTPUT_FORMAT}`;
   const body = JSON.stringify({
@@ -377,6 +387,16 @@ function* enumerateChunks(scenarios) {
     if (lab.bigIdea)     yield { scenarioId, slot: "lab-bigidea",      type: "lab-bigidea",      parts: { text: lab.bigIdea },     plainText: lab.bigIdea };
     if (lab.tryThis)     yield { scenarioId, slot: "lab-trythis",      type: "lab-trythis",      parts: { text: lab.tryThis },     plainText: lab.tryThis };
     if (lab.spotTheSlip) yield { scenarioId, slot: "lab-spottheslip",  type: "lab-spottheslip",  parts: { text: lab.spotTheSlip }, plainText: lab.spotTheSlip };
+
+    for (const item of enumerateSynthesisAudioItems({ [scenarioId]: scenario })) {
+      yield {
+        scenarioId: item.scenarioId,
+        slot: item.slot,
+        type: item.type,
+        parts: { text: item.text },
+        plainText: item.text,
+      };
+    }
   }
 }
 

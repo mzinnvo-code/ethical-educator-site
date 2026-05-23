@@ -2,8 +2,17 @@ import { useState } from "react";
 import { C } from "../theme.js";
 import { EthicalLensTag, FurtherReadingList } from "../experiments/ExperimentShared.jsx";
 import { TOPIC_BY_ID } from "../data/topics.js";
+import { lensNameKid } from "../data/kidLensNames.js";
 import useDecisionJournal from "../hooks/useDecisionJournal.js";
 import ReadAloudButton from "./ReadAloudButton.jsx";
+import {
+  buildPathRecapParts,
+  buildPathRecapSpeechText,
+  buildStudentPositionSpeechText,
+  buildStudentReferenceSpeechText,
+  buildStudentStorySpeechText,
+  choiceKeyFromChoices,
+} from "../lib/k5SynthesisAudioText.js";
 
 // Age-appropriate K-5 lab. Softer label and looser tone than the 9-12
 // PhilosophyLab. Renders only the fields the scenario provides:
@@ -186,13 +195,14 @@ function PhilosophyLab({ lab, accent }) {
 // renders it as a warm payoff card. The key is the choice labels joined by a
 // hyphen (e.g. "A-B", "C-C"). Hides silently if no story is found for the
 // path or no stories are authored for this scenario.
-function PersonalizedStory({ stories, chose, accent }) {
+function PersonalizedStory({ stories, chose, accent, scenarioId }) {
   if (!stories) return null;
-  const key = (chose || []).map(o => o?.label).filter(Boolean).join("-");
+  const key = choiceKeyFromChoices(chose);
   const story = key ? stories[key] : null;
   if (!story) return null;
   const paragraphs = Array.isArray(story.body) ? story.body : [story.body].filter(Boolean);
   if (!paragraphs.length) return null;
+  const speechText = buildStudentStorySpeechText(story);
   return (
     <div style={{
       background: `linear-gradient(135deg, ${accent}18, ${accent}06)`,
@@ -201,13 +211,21 @@ function PersonalizedStory({ stories, chose, accent }) {
       padding: "18px 20px",
       marginBottom: 14,
     }}>
-      <p style={{
-        color: accent, fontSize: "0.7rem", fontWeight: 800,
-        letterSpacing: "0.14em", textTransform: "uppercase",
-        marginBottom: 8,
-      }}>
-        Your story
-      </p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 8 }}>
+        <p style={{
+          color: accent, fontSize: "0.7rem", fontWeight: 800,
+          letterSpacing: "0.14em", textTransform: "uppercase",
+          margin: 0,
+        }}>
+          Your story
+        </p>
+        <ReadAloudButton
+          text={speechText}
+          audioKey={{ scenarioId, slot: `student-story-${key}` }}
+          variant="icon"
+          label="Read your story aloud"
+        />
+      </div>
       {story.title && (
         <h4 style={{
           color: C.textPrimary,
@@ -275,7 +293,7 @@ function TryAgainPanel({ onRestart, accent }) {
 // Kid-voice paraphrases of the philosopher positions. Mirrors the adult
 // "What philosophers say" block but without dates, citations, or schools, and
 // with the gold accent and rounded type the kid mode uses elsewhere.
-function StudentPositions({ positions, accent }) {
+function StudentPositions({ positions, accent, scenarioId }) {
   if (!positions?.length) return null;
   return (
     <div style={{
@@ -292,39 +310,53 @@ function StudentPositions({ positions, accent }) {
       }}>
         What thinkers wondered
       </p>
-      {positions.map((p, i) => (
-        <div key={i} style={{
-          padding: "10px 0",
-          borderBottom: i < positions.length - 1 ? `1px solid ${accent}20` : "none",
-        }}>
-          {p.name && (
-            <p style={{
-              color: C.textPrimary, fontSize: "0.94rem", fontWeight: 700,
-              fontFamily: "'Source Serif 4', Georgia, serif",
-              marginBottom: 4,
-            }}>
-              {p.name}
-            </p>
-          )}
-          <p style={{
-            color: C.textSecondary, fontSize: "0.94rem", lineHeight: 1.65,
-            fontFamily: "'Source Serif 4', Georgia, serif",
-            margin: 0,
+      {positions.map((p, i) => {
+        const speechText = buildStudentPositionSpeechText(p);
+        return (
+          <div key={i} style={{
+            padding: "10px 0",
+            borderBottom: i < positions.length - 1 ? `1px solid ${accent}20` : "none",
           }}>
-            {p.view}
-          </p>
-        </div>
-      ))}
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
+              <div style={{ flex: 1 }}>
+                {p.name && (
+                  <p style={{
+                    color: C.textPrimary, fontSize: "0.94rem", fontWeight: 700,
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    marginBottom: 4,
+                  }}>
+                    {p.name}
+                  </p>
+                )}
+                <p style={{
+                  color: C.textSecondary, fontSize: "0.94rem", lineHeight: 1.65,
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  margin: 0,
+                }}>
+                  {p.view}
+                </p>
+              </div>
+              <ReadAloudButton
+                text={speechText}
+                audioKey={{ scenarioId, slot: `student-position-${i + 1}` }}
+                variant="icon"
+                label={`Read ${p.name || "this thinker"} aloud`}
+              />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 // Kid-voice origin block. Mirrors the adult "Where this idea comes from" but
 // without years or citations — one short paragraph the child can carry.
-function StudentReference({ reference, accent }) {
+function StudentReference({ reference, accent, scenarioId }) {
   if (!reference) return null;
   const { concept, blurb } = reference;
   if (!concept && !blurb) return null;
+  const speechText = buildStudentReferenceSpeechText(reference);
   return (
     <div style={{
       background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
@@ -333,13 +365,21 @@ function StudentReference({ reference, accent }) {
       padding: "16px 18px",
       marginBottom: 14,
     }}>
-      <p style={{
-        color: accent, fontSize: "0.7rem", fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "uppercase",
-        marginBottom: 8,
-      }}>
-        Where this idea comes from
-      </p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 8 }}>
+        <p style={{
+          color: accent, fontSize: "0.7rem", fontWeight: 700,
+          letterSpacing: "0.14em", textTransform: "uppercase",
+          margin: 0,
+        }}>
+          Where this idea comes from
+        </p>
+        <ReadAloudButton
+          text={speechText}
+          audioKey={{ scenarioId, slot: "student-reference" }}
+          variant="icon"
+          label="Read where this idea comes from aloud"
+        />
+      </div>
       {concept && (
         <p style={{
           color: C.textPrimary,
@@ -473,37 +513,31 @@ function PathTraversedBlock({ chose = [], experiment, accent }) {
 // no analytical summary, just the choice texts and one warm sentence derived
 // from the dominant lens(es). Renders only in K-5 kid mode, between the
 // personalized story and the try-again CTA.
-function WarmPathRecap({ chose = [], accent }) {
-  const recorded = (chose || []).filter(Boolean);
+function WarmPathRecap({ chose = [], accent, scenarioId }) {
+  const { recorded, topLens, secondLens, isTied, choicePhrase } = buildPathRecapParts(chose);
   if (!recorded.length) return null;
 
-  const lensCounts = recorded.reduce((acc, opt) => {
-    if (opt?.lens) acc[opt.lens] = (acc[opt.lens] || 0) + 1;
-    return acc;
-  }, {});
-  const sortedLenses = Object.entries(lensCounts).sort((a, b) => b[1] - a[1]);
-  const top = sortedLenses[0];
-  const second = sortedLenses[1];
-  const isTied = top && second && top[1] === second[1];
-
   let summary = null;
-  if (top) {
-    if (isTied) {
+  if (topLens) {
+    if (isTied && secondLens) {
       summary = (
         <>
-          Today, you blended <strong style={{ color: accent }}>{lensNameKid(top[0])}</strong> and{" "}
-          <strong style={{ color: accent }}>{lensNameKid(second[0])}</strong> together.
+          Today, you blended <strong style={{ color: accent }}>{lensNameKid(topLens)}</strong> and{" "}
+          <strong style={{ color: accent }}>{lensNameKid(secondLens)}</strong> together.
         </>
       );
     } else {
       summary = (
         <>
-          Today, you leaned into <strong style={{ color: accent }}>{lensNameKid(top[0])}</strong>{" "}
-          — and you carried it through both choices.
+          Today, you leaned into <strong style={{ color: accent }}>{lensNameKid(topLens)}</strong>{" "}
+          and you carried it through {choicePhrase}.
         </>
       );
     }
   }
+
+  const key = choiceKeyFromChoices(recorded);
+  const speechText = buildPathRecapSpeechText(recorded);
 
   return (
     <div style={{
@@ -511,18 +545,26 @@ function WarmPathRecap({ chose = [], accent }) {
       border: `1px solid ${accent}30`,
       borderRadius: 12, padding: "16px 18px", marginBottom: 14,
     }}>
-      <p style={{
-        color: accent, fontSize: "0.7rem", fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "uppercase",
-        marginBottom: 10,
-      }}>
-        Your choices today
-      </p>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 10 }}>
+        <p style={{
+          color: accent, fontSize: "0.7rem", fontWeight: 700,
+          letterSpacing: "0.14em", textTransform: "uppercase",
+          margin: 0,
+        }}>
+          Your choices today
+        </p>
+        <ReadAloudButton
+          text={speechText}
+          audioKey={{ scenarioId, slot: `path-recap-${key}` }}
+          variant="icon"
+          label="Read your choices aloud"
+        />
+      </div>
       <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {chose.map((opt, i) => (
+        {recorded.map((opt, i) => (
           <li key={i} style={{
             display: "flex", alignItems: "flex-start", gap: 10,
-            padding: "8px 0", borderBottom: i < chose.length - 1 ? `1px solid ${accent}15` : "none",
+            padding: "8px 0", borderBottom: i < recorded.length - 1 ? `1px solid ${accent}15` : "none",
           }}>
             <span style={{
               flexShrink: 0, width: 22, height: 22, borderRadius: "50%",
@@ -577,8 +619,9 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
             stories={experiment?.studentStories}
             chose={chose}
             accent={accent}
+            scenarioId={experiment?.id}
           />
-          <WarmPathRecap chose={chose} accent={accent} />
+          <WarmPathRecap chose={chose} accent={accent} scenarioId={experiment?.id} />
           {experiment?.studentStories && (
             <TryAgainPanel onRestart={onRestart} accent={accent} />
           )}
@@ -590,10 +633,12 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
           <StudentPositions
             positions={experiment?.studentPositions}
             accent={accent}
+            scenarioId={experiment?.id}
           />
           <StudentReference
             reference={experiment?.studentReference}
             accent={accent}
+            scenarioId={experiment?.id}
           />
           {(positions.length > 0 || experiment?.reference) && (
             <AdultCornerIntro accent={accent} />
@@ -723,82 +768,6 @@ const LENS_NAMES = {
   rationalist: "rationalist (let reason decide)",
 };
 function lensName(id) { return LENS_NAMES[id] || id?.replace(/-/g, " "); }
-
-// Kid-voice noun phrases for the warm path recap shown in K-5 synthesis.
-// Each entry should read naturally inside the sentence templates used by
-// WarmPathRecap (e.g. "you leaned into {kindness}" / "you blended
-// {kindness} and {fairness} together"). Covers every lens currently used
-// across the K-5 scenarios; falls back to a humanised lens id otherwise.
-const LENS_NAMES_KID = {
-  // K-grade lenses
-  care: "kindness",
-  realism: "clear thinking",
-  inquiry: "asking good questions",
-  stewardship: "taking care of things",
-  fairness: "fairness",
-  creative: "clever new ideas",
-  need: "what each friend needed",
-  responsibility: "speaking up when it mattered",
-  curiosity: "watching carefully",
-  repair: "fixing what got broken",
-  accountability: "knowing who had the biggest job",
-  ritual: "marking what mattered",
-  continuity: "the story that keeps going",
-  "material-identity": "looking closely at what's there",
-  pluralist: "holding two ideas at once",
-  // Grade 1-5 lenses
-  agency: "choosing for yourself",
-  audit: "checking the work",
-  authenticity: "what is real and earned",
-  authority: "listening to who is in charge",
-  avoidance: "stepping back from harm",
-  balance: "finding the middle",
-  complexity: "noticing that it is complicated",
-  consent: "asking before doing",
-  contextual: "looking at what is really happening",
-  credit: "giving credit where it is due",
-  degrees: "noticing how big or small a thing is",
-  deliberation: "thinking it through together",
-  democratic: "letting everyone have a say",
-  deontological: "doing what is right because it is right",
-  design: "how something is built",
-  dignity: "treating people with respect",
-  distinction: "telling two things apart",
-  duty: "doing what you said you would",
-  education: "learning the way that helps you grow",
-  efficiency: "getting it done well",
-  egoism: "what is best for you",
-  equity: "giving what each person needs",
-  evidence: "looking at what we know",
-  expertise: "trusting people who know more",
-  growth: "getting a little better next time",
-  honesty: "telling the truth",
-  "human-judgment": "letting people decide",
-  integrity: "being the same person inside and out",
-  intent: "what you meant to do",
-  justice: "what is fair for everyone",
-  loyalty: "sticking with a friend",
-  "moral-courage": "doing the brave right thing",
-  outcome: "what actually happened",
-  phenomenology: "what it feels like from inside",
-  precautionary: "being careful, just in case",
-  privacy: "what belongs only to you",
-  "psychological-continuity": "the memories that keep you you",
-  recognition: "seeing the person in front of you",
-  reform: "changing how things work",
-  "rule-following": "following the rules",
-  safety: "keeping people safe",
-  scaffolding: "help that lets you grow",
-  "self-interest": "what you want for yourself",
-  "shared-responsibility": "sharing the work",
-  "technical-fix": "fixing it with a better tool",
-  transparency: "being clear about what is happening",
-  trust: "trust between people",
-  truthfulness: "saying what is really true",
-  utilitarian: "what helps the most people",
-  virtue: "being the kind of person you want to be",
-};
-function lensNameKid(id) { return LENS_NAMES_KID[id] || id?.replace(/-/g, " "); }
 
 // Pulls the option text the student chose at a given stage; falls back gracefully.
 function chosenLabelFor(opt) {
@@ -1082,4 +1051,3 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
     </>
   );
 }
-

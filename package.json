@@ -10,8 +10,8 @@
     "visuals:check": "node scripts/check-stage-visuals.mjs",
     "prerender": "react-snap",
     "preview": "vite preview",
-    "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
-    "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",
+    "audio:generate": "node --env-file-if-exists=.env.local scripts/generate-k5-audio.mjs",
+    "audio:scene": "node --env-file-if-exists=.env.local scripts/generate-scene-audio.mjs",
     "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
