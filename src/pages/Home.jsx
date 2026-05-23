@@ -1,325 +1,252 @@
 import { C } from "../theme.js";
 import { FadeIn } from "../components/shared.jsx";
-import WhatsNewModule from "../components/WhatsNewModule.jsx";
 import { getFeatureIllustration } from "../data/illustrations.js";
 
 const audiences = [
   {
-    label: "I'm a student",
-    desc: "Try the thought experiments first. Built to argue with, not memorize.",
+    label: "Students",
+    desc: "Start with stories and dilemmas built to argue with, not memorize.",
     page: "audiences/student",
+    action: "Find your grade path",
     color: C.teal,
   },
   {
-    label: "I'm a teacher",
-    desc: "Classroom-ready scenarios by grade band and PD resources for the work itself.",
+    label: "Teachers",
+    desc: "Pick a classroom-ready discussion, then use the toolkit to run it well.",
     page: "audiences/teacher",
+    action: "Plan a class conversation",
     color: C.gold,
   },
   {
-    label: "I'm an administrator",
-    desc: "Policy frameworks and decision tools for AI in schools.",
+    label: "Administrators",
+    desc: "Use ethical frameworks and scenarios before AI policy becomes guesswork.",
     page: "audiences/administrator",
+    action: "Frame a policy discussion",
     color: C.ocean,
   },
   {
-    label: "I'm a parent or family member",
-    desc: "Conversations to have at the kitchen table. Stories to read together.",
+    label: "Parents & families",
+    desc: "Find kitchen-table questions for AI, homework, fairness, and judgment.",
     page: "audiences/parent",
+    action: "Start a family conversation",
     color: C.coral,
   },
 ];
 
-const pathways = [
+const taskRoutes = [
   {
-    number: "01",
-    eyebrow: "For classroom discussion",
-    title: "Start with a dilemma students can enter.",
-    desc: "Use grade-band thought experiments about fairness, authorship, identity, AI tools, and moral choice.",
-    action: "Explore scenarios",
+    kicker: "Classroom discussion",
+    title: "Run a dilemma students can enter.",
+    desc: "Open the interactive library by grade band, with teacher kits, read-aloud support, and discussion paths.",
     page: "thought-experiments",
+    action: "Open the library",
     color: C.teal,
     image: getFeatureIllustration("thought-experiments"),
   },
   {
-    number: "02",
-    eyebrow: "For teaching practice",
-    title: "Find practical educator resources.",
-    desc: "Browse self-paced professional development on feedback, engagement, online teaching, leadership, and RTI.",
-    action: "Browse educator resources",
-    page: "for-educators",
+    kicker: "PD & policy",
+    title: "Surface the values behind AI decisions.",
+    desc: "Use educator-facing scenarios for staff meetings, leadership retreats, and policy conversations.",
+    page: "thought-experiments/educators",
+    action: "Open educator dilemmas",
     color: C.gold,
-    image: getFeatureIllustration("for-educators"),
+    image: getFeatureIllustration("thought-experiments/educators"),
   },
   {
-    number: "03",
-    eyebrow: "For deeper grounding",
-    title: "Connect practice to research and philosophy.",
-    desc: "Read the evidence and ethical frameworks behind AI use, philosophy in K-12, and moral psychology.",
-    action: "Read research foundations",
+    kicker: "AI evidence",
+    title: "Understand what AI is changing in schools.",
+    desc: "Read the research tour on tutoring, personalization, feedback, classroom tools, and practical risks.",
+    page: "ai-education",
+    action: "Read the evidence",
+    color: C.ocean,
+    image: getFeatureIllustration("ai-in-education"),
+  },
+  {
+    kicker: "Foundations",
+    title: "Go deeper when practice gets philosophical.",
+    desc: "Connect classroom choices to philosophy in K-12, AI ethics, and moral psychology.",
     page: "phil-education",
+    action: "Read the foundations",
     color: C.coral,
     image: getFeatureIllustration("research-foundations"),
   },
 ];
 
-const practicalResources = [
+const experienceLinks = [
   {
-    label: "Interactive",
-    title: "Thought Experiments",
-    desc: "Classroom-ready scenarios for K-5, middle school, high school, and educator PD. Each path is built to help people reason out loud before policy or practice hardens too quickly.",
-    items: ["AI authorship and grading dilemmas", "Classic philosophy adapted for students", "Discussion guides, read-aloud support, and teacher kits"],
-    action: "Open the hub",
-    page: "thought-experiments",
-    color: C.teal,
-    image: getFeatureIllustration("dialogue-toolkit"),
-  },
-  {
-    label: "Professional practice",
-    title: "For Educators",
-    desc: "A practical library for teachers and leaders who want concrete moves they can use in coaching, planning, feedback, engagement, and school improvement work.",
-    items: ["Academic feedback and student engagement", "Online learning and AV resources", "Leadership, high-performing schools, and RTI"],
-    action: "Browse resources",
-    page: "for-educators",
-    color: C.gold,
-    image: getFeatureIllustration("educator-resources"),
-  },
-  {
-    label: "AI in schools",
-    title: "AI in Education",
-    desc: "A clear research tour of AI tutors, personalization, classroom tools, and what educators should watch carefully as automation enters the learning process.",
-    items: ["Evidence on tutoring and personalization", "Learning science and neuroscience connections", "Practical questions for classroom adoption"],
-    action: "Read the guide",
-    page: "ai-education",
-    color: C.ocean,
-    image: getFeatureIllustration("ai-in-education"),
-  },
-];
-
-const researchFoundations = [
-  {
-    title: "Philosophy in K-12",
-    desc: "Research evidence, curriculum possibilities, and the case for philosophy as a practical way to strengthen reasoning in the AI era.",
-    page: "phil-education",
+    label: "K-5",
+    title: "Story choices",
+    desc: "Elementary stories, read-aloud support, and grade-specific teacher kits.",
+    page: "thought-experiments/k-5",
     color: C.coral,
-    image: getFeatureIllustration("phil-education"),
+    image: getFeatureIllustration("thought-experiments/k-5"),
   },
   {
-    title: "AI & Ethics",
-    desc: "Normative ethics translated into school-facing decisions: policy, transparency, fairness, privacy, and what it means to use AI responsibly.",
-    page: "ai-ethics",
+    label: "6-8",
+    title: "Dilemma turns",
+    desc: "Middle-school scenarios about identity, fairness, AI, and trust.",
+    page: "thought-experiments/6-8",
     color: C.gold,
-    image: getFeatureIllustration("ai-ethics"),
+    image: getFeatureIllustration("thought-experiments/6-8"),
   },
   {
-    title: "Moral Psychology",
-    desc: "The deeper research spine: dual-process theory, moral judgment, the is/ought gap, and what those debates reveal about AI alignment.",
-    page: "moral-psych",
+    label: "9-12",
+    title: "Canon remixed",
+    desc: "Plato, Mary's Room, the Chinese Room, and current AI dilemmas.",
+    page: "thought-experiments/9-12",
+    color: C.sky,
+    image: getFeatureIllustration("thought-experiments/9-12"),
+  },
+  {
+    label: "Educators",
+    title: "Policy pressure",
+    desc: "Adult scenarios for staff PD, leadership teams, and AI policy work.",
+    page: "thought-experiments/educators",
     color: C.teal,
-    image: getFeatureIllustration("moral-psych"),
+    image: getFeatureIllustration("thought-experiments/educators"),
+  },
+  {
+    label: "Toolkit",
+    title: "Run dialogue well",
+    desc: "Norms, sentence stems, Socratic moves, and protocols.",
+    page: "thought-experiments/toolkit",
+    color: C.gold,
+    image: getFeatureIllustration("thought-experiments/toolkit"),
+  },
+  {
+    label: "Journal",
+    title: "Track reasoning",
+    desc: "A private, browser-only decision journal with export.",
+    page: "thought-experiments/journal",
+    color: C.ocean,
+    image: getFeatureIllustration("thought-experiments/journal"),
   },
 ];
 
 function HomeStyles() {
   return (
     <style>{`
-      .home-page{background:${C.bg};overflow:hidden}
+      .home-page{
+        background:${C.bg};
+        overflow:hidden;
+      }
       .home-hero{
-        min-height:clamp(640px,calc(100svh - 220px),760px);
+        min-height:clamp(610px,calc(100svh - 80px),760px);
         display:flex;
         align-items:center;
-        padding:clamp(72px,8vw,112px) 24px clamp(56px,7vw,88px);
+        padding:clamp(72px,8vw,112px) 24px clamp(54px,7vw,82px);
         position:relative;
         background:
-          linear-gradient(115deg,rgba(8,18,32,0.98) 0%,rgba(11,22,34,0.94) 44%,rgba(11,22,34,0.58) 100%),
-          linear-gradient(0deg,rgba(8,18,32,0.72),rgba(8,18,32,0.08)),
+          linear-gradient(115deg,rgba(8,18,32,0.99) 0%,rgba(11,22,34,0.94) 43%,rgba(11,22,34,0.58) 100%),
+          linear-gradient(0deg,rgba(8,18,32,0.76),rgba(8,18,32,0.08)),
           url('/illustrations/home-hero.png');
         background-size:cover;
         background-position:center right;
       }
-      .home-hero-inner{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto}
+      .home-hero-inner{
+        position:relative;
+        z-index:1;
+        width:min(1180px,100%);
+        margin:0 auto;
+      }
+      .home-hero-content{
+        width:min(720px,100%);
+        max-width:100%;
+      }
       .home-eyebrow{
         color:${C.sand};
         font-size:0.72rem;
-        font-weight:700;
-        letter-spacing:0.16em;
+        font-weight:800;
+        letter-spacing:0.15em;
         text-transform:uppercase;
         margin-bottom:18px;
+        max-width:100%;
+        overflow-wrap:break-word;
       }
       .home-hero h1{
         color:${C.textPrimary};
         font-family:'Source Serif 4',Georgia,serif;
-        font-size:clamp(2.45rem,5.8vw,5rem);
+        font-size:clamp(2.7rem,6vw,5rem);
         line-height:1.02;
         letter-spacing:0;
-        max-width:780px;
-        margin-bottom:22px;
+        max-width:100%;
+        margin-bottom:24px;
+        overflow-wrap:break-word;
       }
       .home-hero-copy{
         color:${C.textSecondary};
-        font-size:clamp(1rem,1.5vw,1.18rem);
-        line-height:1.72;
-        max-width:670px;
-        margin-bottom:16px;
-      }
-      .home-hero-question{
-        color:${C.textPrimary};
-        font-family:'Source Serif 4',Georgia,serif;
-        font-size:clamp(1.05rem,1.7vw,1.3rem);
-        line-height:1.45;
-        max-width:620px;
+        font-size:clamp(1rem,1.5vw,1.16rem);
+        line-height:1.74;
+        max-width:660px;
         margin-bottom:30px;
+        overflow-wrap:break-word;
       }
-      .home-cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+      .home-cta-row{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        align-items:center;
+        max-width:100%;
+      }
       .home-button{
         min-height:48px;
         border-radius:8px;
         padding:13px 20px;
         border:1px solid ${C.borderHover};
         cursor:pointer;
-        font-weight:700;
+        font-weight:800;
         font-size:0.92rem;
         letter-spacing:0;
         display:inline-flex;
         align-items:center;
         justify-content:center;
         gap:8px;
+        max-width:100%;
         transition:transform 0.24s ease,border-color 0.24s ease,background 0.24s ease,color 0.24s ease,box-shadow 0.24s ease;
       }
-      .home-button:hover{transform:translateY(-2px)}
-      .home-button.primary{border-color:transparent;background:linear-gradient(135deg,${C.teal},${C.ocean});color:#fff;box-shadow:0 14px 34px rgba(26,138,122,0.22)}
-      .home-button.secondary{background:rgba(224,220,208,0.06);color:${C.textPrimary};border-color:rgba(224,220,208,0.14)}
-      .home-button.ghost{background:transparent;color:${C.gold};border-color:${C.borderHover}}
-      .home-button .button-mark{font-size:1rem;line-height:1;transition:transform 0.24s ease}
-      .home-button:hover .button-mark{transform:translateX(3px)}
-      .hero-scene{position:relative;z-index:1;min-height:470px}
-      .scene-board{
-        position:absolute;
-        inset:4% 0 auto 2%;
-        height:58%;
-        border-radius:8px;
-        background:
-          linear-gradient(145deg,rgba(14,42,49,0.92),rgba(8,18,32,0.86)),
-          repeating-linear-gradient(0deg,rgba(224,220,208,0.05),rgba(224,220,208,0.05) 1px,transparent 1px,transparent 28px);
-        border:1px solid rgba(212,184,104,0.22);
-        box-shadow:0 28px 80px rgba(0,0,0,0.34);
+      .home-button:hover,.home-button:focus-visible{
+        transform:translateY(-2px);
+        outline:none;
       }
-      .scene-board::before{
-        content:"";
-        position:absolute;
-        left:8%;
-        right:22%;
-        top:28%;
-        height:2px;
-        background:linear-gradient(90deg,${C.gold},transparent);
-        box-shadow:0 46px 0 rgba(224,220,208,0.13),0 92px 0 rgba(224,220,208,0.1);
+      .home-button.primary{
+        border-color:transparent;
+        background:linear-gradient(135deg,${C.teal},${C.ocean});
+        color:#fff;
+        box-shadow:0 14px 34px rgba(26,138,122,0.22);
       }
-      .scene-board::after{
-        content:"?";
-        position:absolute;
-        right:10%;
-        top:18%;
+      .home-button.secondary{
+        background:rgba(224,220,208,0.06);
+        color:${C.textPrimary};
+        border-color:rgba(224,220,208,0.16);
+      }
+      .home-button.ghost{
+        background:transparent;
         color:${C.gold};
-        font-family:'Source Serif 4',Georgia,serif;
-        font-size:clamp(5rem,10vw,8rem);
+        border-color:${C.borderHover};
+      }
+      .home-button .button-mark{
+        font-size:1rem;
         line-height:1;
-        opacity:0.5;
+        transition:transform 0.24s ease;
       }
-      .scene-desk{
-        position:absolute;
-        left:2%;
-        right:4%;
-        bottom:8%;
-        height:24%;
-        border-radius:8px;
-        background:linear-gradient(135deg,rgba(200,152,48,0.18),rgba(192,112,64,0.16));
-        border:1px solid rgba(212,184,104,0.2);
-        box-shadow:0 24px 70px rgba(0,0,0,0.26);
+      .home-button:hover .button-mark,.home-button:focus-visible .button-mark{
+        transform:translateX(3px);
       }
-      .scene-laptop{
-        position:absolute;
-        right:9%;
-        bottom:18%;
-        width:34%;
-        height:25%;
-        border-radius:8px 8px 4px 4px;
-        background:linear-gradient(160deg,rgba(26,90,138,0.9),rgba(11,22,34,0.96));
-        border:1px solid rgba(224,220,208,0.22);
-        box-shadow:0 0 35px rgba(42,136,192,0.18);
+      .home-section{
+        padding:clamp(52px,7vw,82px) 24px;
+        position:relative;
       }
-      .scene-laptop::before{
-        content:"AI";
-        position:absolute;
-        inset:0;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:rgba(224,220,208,0.58);
-        font-family:'Source Serif 4',Georgia,serif;
-        font-weight:700;
-        font-size:2.4rem;
+      .home-section.alt{
+        background:linear-gradient(180deg,rgba(14,30,48,0.72),rgba(11,22,34,0));
       }
-      .scene-laptop::after{
-        content:"";
-        position:absolute;
-        left:-8%;
-        right:-8%;
-        bottom:-14%;
-        height:11px;
-        border-radius:999px;
-        background:rgba(224,220,208,0.18);
+      .home-container{
+        width:min(1120px,100%);
+        margin:0 auto;
       }
-      .scene-note{
-        position:absolute;
-        width:22%;
-        min-width:86px;
-        aspect-ratio:1.15;
-        border-radius:8px;
-        background:linear-gradient(145deg,rgba(224,184,72,0.96),rgba(212,184,104,0.76));
-        box-shadow:0 18px 42px rgba(0,0,0,0.22);
-        transform:rotate(-5deg);
-      }
-      .scene-note.one{left:8%;bottom:20%}
-      .scene-note.two{left:35%;bottom:16%;background:linear-gradient(145deg,rgba(26,138,122,0.8),rgba(42,136,192,0.62));transform:rotate(4deg)}
-      .scene-note::before,.scene-note::after{
-        content:"";
-        position:absolute;
-        left:16%;
-        right:16%;
-        height:2px;
-        background:rgba(8,18,32,0.28);
-        border-radius:2px;
-      }
-      .scene-note::before{top:36%}
-      .scene-note::after{top:56%}
-      .scene-orbit{
-        position:absolute;
-        left:22%;
-        top:12%;
-        width:64%;
-        aspect-ratio:1.55;
-        border:1px solid rgba(200,152,48,0.24);
-        border-radius:50%;
-        transform:rotate(-10deg);
-      }
-      .scene-dot{
-        position:absolute;
-        width:10px;
-        height:10px;
-        border-radius:50%;
-        background:${C.coral};
-        box-shadow:0 0 22px rgba(192,112,64,0.55);
-      }
-      .scene-dot.a{left:19%;top:17%}
-      .scene-dot.b{right:14%;top:37%;background:${C.teal};box-shadow:0 0 22px rgba(26,138,122,0.5)}
-      .scene-dot.c{left:48%;bottom:27%;background:${C.gold};box-shadow:0 0 22px rgba(200,152,48,0.5)}
-      .home-section{padding:clamp(56px,8vw,88px) 24px;position:relative}
-      .home-section.alt{background:linear-gradient(180deg,rgba(14,30,48,0.72),rgba(11,22,34,0))}
-      .home-container{max-width:1120px;margin:0 auto}
       .section-kicker{
         color:${C.gold};
         font-size:0.7rem;
-        font-weight:700;
+        font-weight:800;
         letter-spacing:0.16em;
         text-transform:uppercase;
         margin-bottom:10px;
@@ -327,10 +254,11 @@ function HomeStyles() {
       .section-heading{
         color:${C.textPrimary};
         font-family:'Source Serif 4',Georgia,serif;
-        font-size:clamp(1.8rem,3.2vw,2.7rem);
+        font-size:clamp(1.75rem,3.2vw,2.55rem);
         line-height:1.14;
         letter-spacing:0;
         margin-bottom:12px;
+        overflow-wrap:break-word;
       }
       .section-copy{
         color:${C.textMuted};
@@ -338,179 +266,312 @@ function HomeStyles() {
         line-height:1.7;
         max-width:720px;
       }
-      .centered{text-align:center}
-      .centered .section-copy{margin:0 auto}
-      .audience-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
-      .audience-card{
-        border-radius:12px;
-        border:1px solid ${C.border};
-        background:${C.surface};
-        padding:18px;
-        cursor:pointer;
-        outline:none;
-        transition:transform 0.24s ease,border-color 0.24s ease,background 0.24s ease,box-shadow 0.24s ease;
-        display:flex;
-        flex-direction:column;
-        gap:8px;
-        min-height:148px;
+      .centered{
+        text-align:center;
       }
-      .audience-card:hover,.audience-card:focus-visible{
-        transform:translateY(-3px);
-        border-color:var(--accent);
-        background:linear-gradient(135deg,var(--accent-soft),rgba(18,37,61,0.96));
-        box-shadow:0 14px 32px rgba(0,0,0,0.16);
+      .centered .section-copy{
+        margin:0 auto;
       }
-      .audience-label{
-        font-family:'Source Serif 4',Georgia,serif;
-        color:${C.textPrimary};
-        font-size:1.04rem;
-        font-weight:700;
-        line-height:1.28;
+      .role-grid{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:12px;
+        margin-top:26px;
       }
-      .audience-desc{color:${C.textMuted};font-size:0.84rem;line-height:1.55}
-      .audience-action{margin-top:auto;color:var(--accent);font-size:0.78rem;font-weight:700;letter-spacing:0.04em}
-      .pathway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}
-      .pathway-card,.feature-card,.research-card,.resource-card,.about-band{
+      .role-card,.task-card,.experience-link,.closing-band{
         border-radius:8px;
         border:1px solid ${C.border};
         background:${C.surface};
-        box-shadow:none;
       }
-      .pathway-card,.feature-card,.research-card,.resource-card{
+      .role-card,.task-card,.experience-link{
         width:100%;
         color:inherit;
         text-align:left;
         cursor:pointer;
         outline:none;
-        transition:transform 0.26s ease,border-color 0.26s ease,background 0.26s ease,box-shadow 0.26s ease;
+        transition:transform 0.24s ease,border-color 0.24s ease,background 0.24s ease,box-shadow 0.24s ease;
       }
-      .pathway-card:hover,.feature-card:hover,.research-card:hover,.resource-card:hover,
-      .pathway-card:focus-visible,.feature-card:focus-visible,.research-card:focus-visible,.resource-card:focus-visible{
-        transform:translateY(-4px);
+      .role-card:hover,.role-card:focus-visible,
+      .task-card:hover,.task-card:focus-visible,
+      .experience-link:hover,.experience-link:focus-visible{
+        transform:translateY(-3px);
         border-color:var(--accent);
         background:linear-gradient(135deg,var(--accent-soft),rgba(18,37,61,0.96));
-        box-shadow:0 18px 44px rgba(0,0,0,0.18);
+        box-shadow:0 16px 36px rgba(0,0,0,0.16);
       }
-      .pathway-card{padding:18px;min-height:340px;display:flex;flex-direction:column}
+      .role-card{
+        padding:20px 18px;
+        min-height:176px;
+        display:flex;
+        flex-direction:column;
+        gap:9px;
+      }
+      .role-label,.card-title,.experience-title,.closing-band h2{
+        font-family:'Source Serif 4',Georgia,serif;
+        color:${C.textPrimary};
+        font-weight:700;
+        letter-spacing:0;
+      }
+      .role-label{
+        font-size:1.12rem;
+        line-height:1.24;
+      }
+      .role-desc,.card-desc,.experience-desc{
+        color:${C.textMuted};
+        font-size:0.88rem;
+        line-height:1.58;
+      }
+      .role-action,.card-action,.experience-action{
+        margin-top:auto;
+        color:var(--accent);
+        font-size:0.78rem;
+        font-weight:800;
+        letter-spacing:0.04em;
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+      }
+      .task-grid{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:14px;
+        margin-top:30px;
+      }
+      .task-card{
+        padding:16px;
+        min-height:386px;
+        display:flex;
+        flex-direction:column;
+      }
       .home-card-visual{
         width:100%;
-        aspect-ratio:1.62;
+        aspect-ratio:1.55;
         border-radius:8px;
         overflow:hidden;
         border:1px solid rgba(224,220,208,0.08);
         background:rgba(224,220,208,0.04);
-        margin-bottom:18px;
+        margin-bottom:16px;
       }
-      .home-card-visual img{width:100%;height:100%;object-fit:cover;display:block}
-      .pathway-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:22px}
-      .pathway-number{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:0.78rem;font-weight:700}
-      .pathway-eyebrow{color:${C.textMuted};font-size:0.67rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;line-height:1.4;text-align:right}
-      .card-title{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:1.18rem;line-height:1.28;margin-bottom:10px}
-      .card-desc{color:${C.textSecondary};font-size:0.9rem;line-height:1.64}
-      .card-action{margin-top:auto;padding-top:22px;color:var(--accent);font-size:0.84rem;font-weight:700;display:inline-flex;align-items:center;gap:6px}
-      .feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
-      .feature-card{padding:18px;min-height:510px;display:flex;flex-direction:column}
-      .feature-label{color:var(--accent);font-size:0.68rem;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;margin-bottom:12px}
-      .feature-card ul{list-style:none;padding:0;margin:20px 0 0}
-      .feature-card li{color:${C.textMuted};font-size:0.83rem;line-height:1.55;padding:9px 0;border-top:1px solid rgba(224,220,208,0.06)}
-      .research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}
-      .research-card{padding:18px;min-height:360px;display:flex;flex-direction:column}
-      .research-card .card-title{font-size:1.08rem}
-      .research-note{
-        margin-top:34px;
-        padding:24px;
+      .home-card-visual img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+      }
+      .card-kicker{
+        color:var(--accent);
+        font-size:0.66rem;
+        font-weight:800;
+        letter-spacing:0.13em;
+        text-transform:uppercase;
+        margin-bottom:10px;
+        line-height:1.35;
+      }
+      .card-title{
+        font-size:1.1rem;
+        line-height:1.26;
+        margin-bottom:9px;
+      }
+      .card-desc{
+        color:${C.textSecondary};
+      }
+      .card-action{
+        padding-top:18px;
+      }
+      .experience-layout{
+        display:grid;
+        grid-template-columns:minmax(280px,0.86fr) minmax(0,1.14fr);
+        gap:28px;
+        align-items:start;
+        margin-top:32px;
+      }
+      .experience-feature{
+        min-height:460px;
         border-radius:8px;
-        border:1px solid rgba(200,152,48,0.18);
-        background:linear-gradient(135deg,rgba(200,152,48,0.08),rgba(26,138,122,0.05));
+        overflow:hidden;
+        position:relative;
+        background:
+          linear-gradient(180deg,rgba(8,18,32,0.08),rgba(8,18,32,0.88)),
+          url('/illustrations/classroom-crossroads.png');
+        background-size:cover;
+        background-position:center;
+        border:1px solid rgba(26,138,122,0.22);
+        box-shadow:0 22px 60px rgba(0,0,0,0.18);
       }
-      .research-note p{
+      .experience-feature-copy{
+        position:absolute;
+        left:22px;
+        right:22px;
+        bottom:22px;
+      }
+      .experience-feature-copy p:first-child{
+        color:${C.teal};
+        font-size:0.68rem;
+        font-weight:800;
+        letter-spacing:0.14em;
+        text-transform:uppercase;
+        margin-bottom:8px;
+      }
+      .experience-feature-copy h3{
         color:${C.textPrimary};
         font-family:'Source Serif 4',Georgia,serif;
-        font-size:clamp(1.05rem,2vw,1.28rem);
-        line-height:1.58;
-        max-width:860px;
+        font-size:clamp(1.55rem,3vw,2.1rem);
+        line-height:1.14;
+        margin-bottom:10px;
       }
-      .resource-card{
+      .experience-feature-copy p:last-child{
+        color:${C.textSecondary};
+        font-size:0.92rem;
+        line-height:1.62;
+      }
+      .experience-grid{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+      }
+      .experience-link{
+        min-height:204px;
+        padding:14px;
+        display:flex;
+        flex-direction:column;
+      }
+      .experience-link .home-card-visual{
+        aspect-ratio:1.9;
+        margin-bottom:12px;
+      }
+      .experience-label{
+        color:var(--accent);
+        font-size:0.64rem;
+        font-weight:800;
+        letter-spacing:0.13em;
+        text-transform:uppercase;
+        margin-bottom:5px;
+      }
+      .experience-title{
+        font-size:1.02rem;
+        line-height:1.24;
+        margin-bottom:6px;
+      }
+      .experience-desc{
+        font-size:0.82rem;
+        line-height:1.5;
+      }
+      .experience-action{
+        padding-top:12px;
+      }
+      .closing-band{
         display:grid;
         grid-template-columns:minmax(0,1fr) auto;
-        gap:24px;
+        gap:22px;
         align-items:center;
-        padding:28px;
-        margin-top:28px;
+        padding:clamp(24px,4vw,34px);
+        background:linear-gradient(135deg,rgba(26,138,122,0.08),rgba(200,152,48,0.06));
       }
-      .resource-main{
-        display:grid;
-        grid-template-columns:minmax(0,220px) minmax(0,1fr);
-        gap:20px;
-        align-items:center;
+      .closing-band h2{
+        font-size:clamp(1.3rem,2.8vw,1.85rem);
+        line-height:1.22;
+        margin-bottom:9px;
       }
-      .resource-card .home-card-visual{
-        width:min(220px,100%);
-        aspect-ratio:1.32;
-        margin-bottom:0;
-      }
-      .resource-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-      .resource-pill{
+      .closing-band p{
         color:${C.textSecondary};
-        border:1px solid rgba(224,220,208,0.12);
-        border-radius:999px;
-        padding:6px 10px;
-        font-size:0.75rem;
+        font-size:0.94rem;
+        line-height:1.68;
+        max-width:780px;
       }
-      .about-band{
-        display:grid;
-        grid-template-columns:auto minmax(0,1fr) auto;
-        gap:18px;
-        align-items:center;
-        padding:24px;
-        background:linear-gradient(135deg,rgba(26,138,122,0.08),rgba(200,152,48,0.05));
-      }
-      .about-mark{
-        width:54px;
-        height:54px;
-        border-radius:14px;
+      .closing-actions{
         display:flex;
-        align-items:center;
-        justify-content:center;
-        flex-shrink:0;
-        overflow:hidden;
-        background:linear-gradient(135deg,${C.teal},${C.ocean});
-        border:1px solid rgba(224,220,208,0.1);
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
       }
-      .about-mark img{width:100%;height:100%;object-fit:cover;display:block}
-      .about-band h3{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:1.08rem;margin-bottom:4px}
-      .about-band p{color:${C.textMuted};font-size:0.88rem;line-height:1.62}
+      @media(max-width:1100px){
+        .task-grid{
+          grid-template-columns:repeat(2,minmax(0,1fr));
+        }
+      }
       @media(max-width:980px){
         .home-hero{
-          display:block;
-          min-height:calc(100svh - 126px);
+          min-height:auto;
+          align-items:flex-start;
+          padding-top:clamp(64px,12vw,92px);
         }
-        .home-hero-inner{display:block;position:relative}
-        .hero-scene{
-          position:absolute;
-          right:-22%;
-          bottom:-24%;
-          width:min(520px,82vw);
-          min-height:300px;
-          opacity:0.38;
-          pointer-events:none;
+        .role-grid{
+          grid-template-columns:repeat(2,minmax(0,1fr));
         }
-        .audience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-        .pathway-grid,.feature-grid,.research-grid{grid-template-columns:1fr}
-        .feature-card,.pathway-card,.research-card{min-height:auto}
+        .experience-layout{
+          grid-template-columns:1fr;
+        }
+        .experience-feature{
+          min-height:340px;
+        }
       }
       @media(max-width:680px){
-        .home-hero{padding:60px 18px 46px}
-        .home-cta-row,.home-button{width:100%}
-        .home-section{padding:48px 18px}
-        .hero-scene{right:-34%;bottom:-18%;width:96vw;min-height:250px}
-        .audience-grid{grid-template-columns:1fr}
-        .audience-card{min-height:auto}
-        .resource-card,.about-band{grid-template-columns:1fr}
-        .resource-card{padding:22px}
-        .resource-main{grid-template-columns:1fr}
-        .resource-card .home-card-visual{margin-bottom:2px}
-        .about-band{align-items:start}
+        .home-hero{
+          padding:58px 18px 44px;
+          background-position:center;
+        }
+        .home-hero-inner,.home-container,.home-hero-content{
+          width:100%;
+          max-width:calc(100vw - 36px);
+          margin-left:auto;
+          margin-right:auto;
+        }
+        .home-eyebrow{
+          font-size:0.67rem;
+          letter-spacing:0.12em;
+          line-height:1.55;
+        }
+        .home-hero h1{
+          font-size:clamp(2.08rem,12vw,2.9rem);
+          line-height:1.04;
+        }
+        .home-hero-copy{
+          font-size:0.98rem;
+          line-height:1.7;
+          margin-bottom:26px;
+        }
+        .home-cta-row,.home-button{
+          width:100%;
+        }
+        .home-button{
+          padding-left:16px;
+          padding-right:16px;
+        }
+        .home-section{
+          padding:46px 18px;
+        }
+        .section-heading{
+          font-size:clamp(1.58rem,9vw,2.15rem);
+        }
+        .role-grid,.task-grid,.experience-grid{
+          grid-template-columns:1fr;
+        }
+        .role-card,.task-card,.experience-link{
+          min-height:auto;
+        }
+        .task-card{
+          padding:16px;
+        }
+        .experience-feature{
+          min-height:300px;
+        }
+        .experience-feature-copy{
+          left:18px;
+          right:18px;
+          bottom:18px;
+        }
+        .closing-band{
+          grid-template-columns:1fr;
+        }
+        .closing-actions{
+          justify-content:stretch;
+        }
+      }
+      @media(max-width:430px){
+        .home-hero-inner,.home-container,.home-hero-content{
+          width:min(100%,354px);
+          max-width:354px;
+        }
       }
     `}</style>
   );
@@ -526,11 +587,12 @@ function HomeButton({ children, onClick, variant = "primary" }) {
 }
 
 function CardVisual({ image }) {
-  if (!image) return null;
+  const imageSrc = typeof image === "string" ? image : image?.src;
+  if (!imageSrc) return null;
   return (
     <div className="home-card-visual" aria-hidden="true">
       <img
-        src={image.src}
+        src={imageSrc}
         alt=""
         loading="lazy"
         onError={(event) => {
@@ -559,43 +621,42 @@ function SectionIntro({ kicker, title, children, centered = false }) {
   );
 }
 
-function AudienceCard({ item, delay, navigate }) {
+function RoleCard({ item, delay, navigate }) {
   const openPage = () => navigate(item.page);
   return (
     <FadeIn delay={delay}>
       <div
         role="button"
         tabIndex={0}
-        className="audience-card"
+        className="role-card"
         style={{ "--accent": item.color, "--accent-soft": `${item.color}14` }}
+        aria-label={`${item.label}: ${item.action}`}
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
-        <p className="audience-label">{item.label}</p>
-        <p className="audience-desc">{item.desc}</p>
-        <span className="audience-action" aria-hidden="true">Open <span style={{ marginLeft: 4 }}>-&gt;</span></span>
+        <p className="role-label">{item.label}</p>
+        <p className="role-desc">{item.desc}</p>
+        <span className="role-action">{item.action} <span aria-hidden="true">-&gt;</span></span>
       </div>
     </FadeIn>
   );
 }
 
-function PathwayCard({ item, delay, navigate }) {
+function TaskCard({ item, delay, navigate }) {
   const openPage = () => navigate(item.page);
   return (
     <FadeIn delay={delay}>
       <div
         role="button"
         tabIndex={0}
-        className="pathway-card"
-        style={{ "--accent": item.color, "--accent-soft": `${item.color}14` }}
+        className="task-card"
+        style={{ "--accent": item.color, "--accent-soft": `${item.color}12` }}
+        aria-label={`${item.title} ${item.action}`}
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
         <CardVisual image={item.image} />
-        <div className="pathway-top">
-          <span className="pathway-number">{item.number}</span>
-          <span className="pathway-eyebrow">{item.eyebrow}</span>
-        </div>
+        <p className="card-kicker">{item.kicker}</p>
         <h3 className="card-title">{item.title}</h3>
         <p className="card-desc">{item.desc}</p>
         <span className="card-action">{item.action} <span aria-hidden="true">-&gt;</span></span>
@@ -604,53 +665,34 @@ function PathwayCard({ item, delay, navigate }) {
   );
 }
 
-function FeatureCard({ item, delay, navigate }) {
+function ExperienceLink({ item, delay, navigate }) {
   const openPage = () => navigate(item.page);
   return (
     <FadeIn delay={delay}>
       <div
         role="button"
         tabIndex={0}
-        className="feature-card"
+        className="experience-link"
         style={{ "--accent": item.color, "--accent-soft": `${item.color}12` }}
+        aria-label={`Open ${item.label}: ${item.title}`}
         onClick={openPage}
         onKeyDown={event => handleCardKeyDown(event, openPage)}
       >
         <CardVisual image={item.image} />
-        <p className="feature-label">{item.label}</p>
-        <h3 className="card-title">{item.title}</h3>
-        <p className="card-desc">{item.desc}</p>
-        <ul>
-          {item.items.map(point => <li key={point}>{point}</li>)}
-        </ul>
-        <span className="card-action">{item.action} <span aria-hidden="true">-&gt;</span></span>
-      </div>
-    </FadeIn>
-  );
-}
-
-function ResearchCard({ item, delay, navigate }) {
-  const openPage = () => navigate(item.page);
-  return (
-    <FadeIn delay={delay}>
-      <div
-        role="button"
-        tabIndex={0}
-        className="research-card"
-        style={{ "--accent": item.color, "--accent-soft": `${item.color}12` }}
-        onClick={openPage}
-        onKeyDown={event => handleCardKeyDown(event, openPage)}
-      >
-        <CardVisual image={item.image} />
-        <h3 className="card-title">{item.title}</h3>
-        <p className="card-desc">{item.desc}</p>
-        <span className="card-action">Read this section <span aria-hidden="true">-&gt;</span></span>
+        <p className="experience-label">{item.label}</p>
+        <h3 className="experience-title">{item.title}</h3>
+        <p className="experience-desc">{item.desc}</p>
+        <span className="experience-action">Open <span aria-hidden="true">-&gt;</span></span>
       </div>
     </FadeIn>
   );
 }
 
 export default function Home({ navigate }) {
+  const scrollToRoleSection = () => {
+    document.getElementById("role-doorways")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="home-page">
       <HomeStyles />
@@ -658,42 +700,35 @@ export default function Home({ navigate }) {
       <section className="home-hero">
         <div className="home-hero-inner">
           <FadeIn>
-            <div>
-              <p className="home-eyebrow">For teachers, school leaders, and curious thinkers</p>
-              <h1>Make AI ethics usable in the classroom.</h1>
+            <div className="home-hero-content">
+              <p className="home-eyebrow">For educators, students, school leaders, and families</p>
+              <h1>Make AI ethics usable.</h1>
               <p className="home-hero-copy">
-                AI can write, grade, tutor, and advise. This site helps educators decide what to preserve,
-                what to question, and what to redesign with classroom-ready thought experiments, practical
-                professional resources, and research-grounded philosophy.
-              </p>
-              <p className="home-hero-question">
-                Start with a dilemma, a teaching need, or the research behind better decisions.
+                The Ethical Educator helps people reason through AI, learning, fairness, authorship,
+                identity, and judgment with classroom-ready thought experiments, practical educator
+                resources, and research-grounded philosophy.
               </p>
               <div className="home-cta-row">
-                <HomeButton onClick={() => navigate("thought-experiments")}>Explore Thought Experiments</HomeButton>
-                <HomeButton variant="secondary" onClick={() => navigate("for-educators")}>Browse Educator Resources</HomeButton>
-                <HomeButton variant="ghost" onClick={() => navigate("phil-education")}>Read Research</HomeButton>
+                <HomeButton onClick={scrollToRoleSection}>Start with your role</HomeButton>
+                <HomeButton variant="secondary" onClick={() => navigate("thought-experiments")}>Explore Thought Experiments</HomeButton>
               </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      <WhatsNewModule navigate={navigate} />
-
-      <section className="home-section alt">
+      <section id="role-doorways" className="home-section alt">
         <div className="home-container">
           <SectionIntro
-            kicker="Who are you visiting as?"
-            title="Find the doorway built for you"
+            kicker="Choose your doorway"
+            title="Find the path built for how you arrived"
             centered
           >
-            The same routes underneath, a different framing on top. Pick whichever fits — and you can always
-            switch later.
+            The site has guided journeys for different visitors. Pick the role closest to yours, then switch paths whenever the work calls for it.
           </SectionIntro>
-          <div className="audience-grid">
+          <div className="role-grid">
             {audiences.map((item, index) => (
-              <AudienceCard key={item.label} item={item} delay={0.04 * index} navigate={navigate} />
+              <RoleCard key={item.label} item={item} delay={0.04 * index} navigate={navigate} />
             ))}
           </div>
         </div>
@@ -702,16 +737,15 @@ export default function Home({ navigate }) {
       <section className="home-section">
         <div className="home-container">
           <SectionIntro
-            kicker="Start with what you need"
-            title="Three ways into the work"
+            kicker="Start by task"
+            title="Use the site for the work in front of you"
             centered
           >
-            Whether you are planning a classroom conversation, building professional development, or looking
-            for the research behind AI policy, the site is organized around useful next steps.
+            The deeper hubs do the heavy lifting. This page points you to the right one before the options start to blur together.
           </SectionIntro>
-          <div className="pathway-grid">
-            {pathways.map((item, index) => (
-              <PathwayCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
+          <div className="task-grid">
+            {taskRoutes.map((item, index) => (
+              <TaskCard key={item.title} item={item} delay={0.05 * index} navigate={navigate} />
             ))}
           </div>
         </div>
@@ -720,100 +754,47 @@ export default function Home({ navigate }) {
       <section className="home-section alt">
         <div className="home-container">
           <SectionIntro
-            kicker="Practical resources"
-            title="Use philosophy as a classroom tool, not a wall of theory"
+            kicker="Featured experience"
+            title="Thought experiments are the center of gravity"
           >
-            The most prominent sections are built for educators who need discussion-ready materials,
-            practical strategies, and enough ethical grounding to make confident choices about AI.
+            The library turns AI ethics and philosophy into moments people can discuss: a story, a choice, a counterexample, and a better question.
           </SectionIntro>
-          <div className="feature-grid">
-            {practicalResources.map((item, index) => (
-              <FeatureCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-section">
-        <div className="home-container">
-          <SectionIntro
-            kicker="Research foundations"
-            title="Go deeper when the practical questions get philosophical"
-          >
-            The research side of the site connects classroom decisions to philosophy of education, AI ethics,
-            and moral psychology without losing sight of the educator's everyday work.
-          </SectionIntro>
-          <div className="research-grid">
-            {researchFoundations.map((item, index) => (
-              <ResearchCard key={item.title} item={item} delay={0.06 * index} navigate={navigate} />
-            ))}
-          </div>
-          <FadeIn delay={0.18}>
-            <div className="research-note">
-              <p>
-                The central question is not only what AI can make easier. It is what students become through
-                the work of learning, reasoning, revising, and explaining their choices.
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      <section className="home-section alt">
-        <div className="home-container">
-          <SectionIntro
-            kicker="Reading room"
-            title="Follow the sources"
-          >
-            The resources section gathers books, papers, policy documents, organizations, podcasts, and
-            frameworks cited across the site so readers can keep building their own map.
-          </SectionIntro>
-          <FadeIn delay={0.08}>
-            <div
-              role="button"
-              tabIndex={0}
-              className="resource-card"
-              style={{ "--accent": C.gold, "--accent-soft": `${C.gold}12` }}
-              onClick={() => navigate("resources")}
-              onKeyDown={event => handleCardKeyDown(event, () => navigate("resources"))}
-            >
-              <div className="resource-main">
-                <CardVisual image={getFeatureIllustration("resources")} />
-                <div>
-                  <h3 className="card-title">Resources & Reading List</h3>
-                  <p className="card-desc">
-                    A curated trail through moral psychology, AI ethics, education research, classroom philosophy,
-                    and policy guidance for educators who want more than a quick answer.
+          <div className="experience-layout">
+            <FadeIn>
+              <div className="experience-feature" aria-hidden="true">
+                <div className="experience-feature-copy">
+                  <p>Interactive library</p>
+                  <h3>Start with a dilemma, then let the reasoning unfold.</h3>
+                  <p>
+                    Choose by age band, run a staff scenario, open the toolkit, or keep a private record of how your thinking changes.
                   </p>
-                  <div className="resource-meta" aria-hidden="true">
-                    <span className="resource-pill">Books</span>
-                    <span className="resource-pill">Academic papers</span>
-                    <span className="resource-pill">Policy frameworks</span>
-                    <span className="resource-pill">Organizations</span>
-                  </div>
                 </div>
               </div>
-              <span className="card-action">Open resources <span aria-hidden="true">-&gt;</span></span>
+            </FadeIn>
+            <div className="experience-grid">
+              {experienceLinks.map((item, index) => (
+                <ExperienceLink key={item.page} item={item} delay={0.04 * index} navigate={navigate} />
+              ))}
             </div>
-          </FadeIn>
+          </div>
         </div>
       </section>
 
       <section className="home-section">
         <div className="home-container">
           <FadeIn>
-            <div className="about-band">
-              <div className="about-mark" aria-hidden="true">
-                <img src={getFeatureIllustration("site-symbol").src} alt="" loading="lazy" />
-              </div>
+            <div className="closing-band">
               <div>
-                <h3>Built by Matthew A. Zinn</h3>
+                <p className="section-kicker">Why this exists</p>
+                <h2>The question is not only what AI can make easier.</h2>
                 <p>
-                  Educator, philosopher, and AI ethics researcher. The biography is here for context, but the
-                  site is designed to move visitors toward useful materials first.
+                  It is what students become through learning, reasoning, revising, and explaining their choices. The site is built to keep that question visible while schools make practical decisions.
                 </p>
               </div>
-              <HomeButton variant="ghost" onClick={() => navigate("about")}>About Matthew</HomeButton>
+              <div className="closing-actions">
+                <HomeButton variant="ghost" onClick={() => navigate("about")}>About Matthew</HomeButton>
+                <HomeButton variant="secondary" onClick={() => navigate("resources")}>Follow the sources</HomeButton>
+              </div>
             </div>
           </FadeIn>
         </div>
