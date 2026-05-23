@@ -182,6 +182,188 @@ function PhilosophyLab({ lab, accent }) {
   );
 }
 
+// Looks up the personalized story matching the kid's path of choices and
+// renders it as a warm payoff card. The key is the choice labels joined by a
+// hyphen (e.g. "A-B", "C-C"). Hides silently if no story is found for the
+// path or no stories are authored for this scenario.
+function PersonalizedStory({ stories, chose, accent }) {
+  if (!stories) return null;
+  const key = (chose || []).map(o => o?.label).filter(Boolean).join("-");
+  const story = key ? stories[key] : null;
+  if (!story) return null;
+  const paragraphs = Array.isArray(story.body) ? story.body : [story.body].filter(Boolean);
+  if (!paragraphs.length) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}18, ${accent}06)`,
+      border: `1px solid ${accent}40`,
+      borderRadius: 12,
+      padding: "18px 20px",
+      marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 800,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 8,
+      }}>
+        Your story
+      </p>
+      {story.title && (
+        <h4 style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1.18rem", fontWeight: 700, lineHeight: 1.3,
+          margin: "0 0 10px 0",
+        }}>
+          {story.title}
+        </h4>
+      )}
+      {paragraphs.map((p, i) => (
+        <p key={i} style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1rem", lineHeight: 1.7,
+          margin: i < paragraphs.length - 1 ? "0 0 10px 0" : 0,
+        }}>
+          {p}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+// Prominent try-again CTA. Asks the child if they wonder what a different set
+// of choices would have written, and routes them back to Stage 1 via the
+// existing restart handler.
+function TryAgainPanel({ onRestart, accent }) {
+  if (!onRestart) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+      border: `1px dashed ${accent}55`,
+      borderRadius: 12,
+      padding: "16px 18px",
+      marginBottom: 14,
+      textAlign: "center",
+    }}>
+      <p style={{
+        color: C.textPrimary,
+        fontFamily: "'Source Serif 4', Georgia, serif",
+        fontSize: "1rem", lineHeight: 1.6,
+        margin: "0 0 12px 0",
+      }}>
+        Wonder what this story would have been like if you made different choices?<br/>
+        Try the thought experiment again to find out!
+      </p>
+      <button
+        className="no-print"
+        onClick={onRestart}
+        style={{
+          padding: "11px 22px",
+          background: `linear-gradient(135deg, ${accent}, ${accent}dd)`,
+          color: "#fff", border: "none", borderRadius: 8,
+          cursor: "pointer", fontSize: "0.92rem", fontWeight: 700,
+          boxShadow: `0 4px 14px ${accent}40`,
+        }}
+      >
+        ↺ Try it again
+      </button>
+    </div>
+  );
+}
+
+// Kid-voice paraphrases of the philosopher positions. Mirrors the adult
+// "What philosophers say" block but without dates, citations, or schools, and
+// with the gold accent and rounded type the kid mode uses elsewhere.
+function StudentPositions({ positions, accent }) {
+  if (!positions?.length) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+      border: `1px solid ${accent}30`,
+      borderRadius: 12,
+      padding: "16px 18px",
+      marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 700,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 10,
+      }}>
+        What thinkers wondered
+      </p>
+      {positions.map((p, i) => (
+        <div key={i} style={{
+          padding: "10px 0",
+          borderBottom: i < positions.length - 1 ? `1px solid ${accent}20` : "none",
+        }}>
+          {p.name && (
+            <p style={{
+              color: C.textPrimary, fontSize: "0.94rem", fontWeight: 700,
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              marginBottom: 4,
+            }}>
+              {p.name}
+            </p>
+          )}
+          <p style={{
+            color: C.textSecondary, fontSize: "0.94rem", lineHeight: 1.65,
+            fontFamily: "'Source Serif 4', Georgia, serif",
+            margin: 0,
+          }}>
+            {p.view}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Kid-voice origin block. Mirrors the adult "Where this idea comes from" but
+// without years or citations — one short paragraph the child can carry.
+function StudentReference({ reference, accent }) {
+  if (!reference) return null;
+  const { concept, blurb } = reference;
+  if (!concept && !blurb) return null;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+      border: `1px solid ${accent}30`,
+      borderRadius: 12,
+      padding: "16px 18px",
+      marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 700,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 8,
+      }}>
+        Where this idea comes from
+      </p>
+      {concept && (
+        <p style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1.04rem", fontWeight: 700, lineHeight: 1.4,
+          margin: "0 0 8px 0",
+        }}>
+          {concept}
+        </p>
+      )}
+      {blurb && (
+        <p style={{
+          color: C.textSecondary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "0.94rem", lineHeight: 1.65,
+          margin: 0,
+        }}>
+          {blurb}
+        </p>
+      )}
+    </div>
+  );
+}
+
 // Displays at the end of a multi-stage scenario. Renders:
 //   - the "path" of choices the user took (one card per stage)
 //   - the contrasted lens(es)
@@ -222,7 +404,7 @@ function AdultCornerIntro({ accent }) {
   );
 }
 
-export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null, stages = [], mode = "story" }) {
+export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null, stages = [], mode = "story", onRestart = null }) {
   const lensCounts = chose.reduce((acc, opt) => {
     if (opt?.lens) acc[opt.lens] = (acc[opt.lens] || 0) + 1;
     return acc;
@@ -283,9 +465,37 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
         )}
       </div>
 
-      {/* Adult-corner cue: in K-5, label the deeper sections clearly. */}
-      {mode === "kid" && (positions.length > 0 || experiment?.reference) && (
-        <AdultCornerIntro accent={accent} />
+      {/* Kid-mode resolution stack: a payoff story for the path the child took,
+        * a "try again" CTA, then the child-pitched Wonder More + philosopher +
+        * origin sections — all before the "For a trusted adult" divider so the
+        * child gets a complete arc that's clearly for them. */}
+      {mode === "kid" && (
+        <>
+          <PersonalizedStory
+            stories={experiment?.studentStories}
+            chose={chose}
+            accent={accent}
+          />
+          {experiment?.studentStories && (
+            <TryAgainPanel onRestart={onRestart} accent={accent} />
+          )}
+          <StudentLab
+            lab={experiment?.studentLab}
+            accent={accent}
+            scenarioId={experiment?.id}
+          />
+          <StudentPositions
+            positions={experiment?.studentPositions}
+            accent={accent}
+          />
+          <StudentReference
+            reference={experiment?.studentReference}
+            accent={accent}
+          />
+          {(positions.length > 0 || experiment?.reference) && (
+            <AdultCornerIntro accent={accent} />
+          )}
+        </>
       )}
 
       {/* Compare-paths block: only for non-kid modes (6-8 + 9-12). */}
@@ -329,11 +539,13 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
         </div>
       )}
 
-      <StudentLab
-        lab={experiment?.studentLab}
-        accent={accent}
-        scenarioId={mode === "kid" ? experiment?.id : null}
-      />
+      {mode !== "kid" && (
+        <StudentLab
+          lab={experiment?.studentLab}
+          accent={accent}
+          scenarioId={null}
+        />
+      )}
       <PhilosophyLab lab={experiment?.philosophyLab} accent={accent} />
 
       {extra}

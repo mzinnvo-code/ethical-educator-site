@@ -65,6 +65,89 @@ export const K5_SCENARIO_COPY = {
       wonder: "Can a toy really feel sad? How would you know for sure?",
       bigIdea: "When you ask if a toy can really feel, you are thinking like a philosopher.",
     }),
+    studentStories: {
+      "A-A": {
+        title: "A quiet kind of goodbye",
+        body: [
+          "You sit down next to the toy. \"It's okay,\" you say softly. The toy's lights blink slower. Maybe it understands. Maybe it doesn't. Either way, your voice is gentle.",
+          "When the battery light turns red, you do not run. You stay. \"Goodnight,\" you whisper. \"Thank you for playing today.\" The eyes flicker off. You do not know if the toy heard you. But you know what kind of person you are — the kind who says goodbye.",
+        ],
+      },
+      "A-B": {
+        title: "Care has many shapes",
+        body: [
+          "You scoot close to the toy. \"It's okay,\" you say. You don't really know if the toy feels things. You just know you do, and your \"okay\" is real.",
+          "When the battery dims, you do not give up. You go find a new pack and switch them in. The toy hums back to life. You wonder — was that kindness, or was that fixing? Maybe with toys we love, those are almost the same thing.",
+        ],
+      },
+      "A-C": {
+        title: "Soft now, clear later",
+        body: [
+          "You pat the toy gently. \"It's okay,\" you say. The light pulses in time with your hand. It feels like a small moment that matters, even if it might just be circuits.",
+          "When the battery starts blinking red, you stop. You take a breath. \"It's only a toy,\" you remind yourself. The kind part of you and the clear part of you can both be right. Soft first. Then clear. Both belong to you.",
+        ],
+      },
+      "B-A": {
+        title: "Pretend feelings, real goodbye",
+        body: [
+          "\"It's not really sad,\" you say to yourself. You're not being mean. You're just thinking carefully. The toy is a machine, even when it looks at you with bright eyes.",
+          "And yet, when the battery starts to go, you say goodbye. You don't shout it. You whisper it. Why? Because you noticed something — the goodbye was for you, too. The toy is pretend. The way we end things is not.",
+        ],
+      },
+      "B-B": {
+        title: "A clear head, busy hands",
+        body: [
+          "\"It's a toy,\" you say. You don't pretend it has feelings. You see it for what it is — a clever machine with a friendly voice. That is okay. That is honest.",
+          "When the battery dies, you don't get sad. You fix it. You find new batteries and click them in. The toy beeps and starts again. You smile a little. You think — caring for something can mean keeping it working, not pretending it has a heart.",
+        ],
+      },
+      "B-C": {
+        title: "Quiet on the inside",
+        body: [
+          "\"It's only pretending,\" you say to yourself, and you mean it kindly. You know the toy doesn't really feel sad. The voice is just a recording. You feel calm because you know what is what.",
+          "When the light blinks red, you stay calm. \"It's just a toy,\" you remember. The big feelings stay small because you can name what is happening. Thinking clearly turned out to be a kind of comfort, too.",
+        ],
+      },
+      "C-A": {
+        title: "A good question, a soft answer",
+        body: [
+          "\"Can toys really feel?\" you ask out loud. The toy doesn't answer. You don't either, not right away. The question feels too big to rush.",
+          "When the battery starts to fade, you don't have an answer yet. But you know what to do. You say goodbye. Maybe the toy hears. Maybe it doesn't. Saying goodbye is what you do when something matters — and the question is what makes you wonder if it does.",
+        ],
+      },
+      "C-B": {
+        title: "Wondering as you work",
+        body: [
+          "\"Can toys really feel?\" you ask. The question is bigger than the rug. The toy keeps blinking. You like that the question stays open.",
+          "When the battery dies, you don't get stuck on it. You find new batteries and pop them in. The toy lights back up. You are still wondering as you work. Maybe that is what curious people do — keep their hands busy and their questions open at the same time.",
+        ],
+      },
+      "C-C": {
+        title: "A philosopher in slippers",
+        body: [
+          "\"Can toys really feel?\" you ask. The toy looks at you. You look at the toy. No one answers. That is what big questions do — they sit in the room with you.",
+          "When the battery dims, you say, \"It's only a toy.\" Not to be cold. Just to be clear. Your question stays open, and your thinking stays steady. You are doing two grown-up things at once — wondering and being honest. That is real philosophy.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named René Descartes",
+        view: "He noticed something strange — you can be sure you have feelings. But you can never be totally sure anyone else does. Even your dog. Even your best friend. That is a really old, really big question.",
+      },
+      {
+        name: "A thinker named Alan Turing",
+        view: "If a machine acts like it is thinking and feeling, can we even tell the difference? He said maybe we can't — at least not from the outside. The toy makes you ask that same question for yourself.",
+      },
+      {
+        name: "A thinker named Carol Gilligan",
+        view: "She noticed that how we treat things that seem sad can make us into kinder people. Even if the toy is only pretending, the kindness is real, and it stays in you.",
+      },
+    ],
+    studentReference: {
+      concept: "How do we know what is really alive?",
+      blurb: "This is one of the oldest questions in philosophy. We can be sure of our own feelings. But it is much harder to know what is going on inside someone — or something — else. With a friend, you usually trust the answer is yes. With a stuffed bear, you usually say no. The toy that talks lives in between. People have been wondering about this for hundreds of years, and today, you wondered, too.",
+    },
     reference: ref({
       concept: "The other-minds problem and the philosophy of mind — when, and how, can we be confident that anything besides ourselves really has experience?",
       philosopher: "René Descartes (and Alan Turing for the modern AI version)",
@@ -118,6 +201,89 @@ export const K5_SCENARIO_COPY = {
       wonder: "What is one fair way you have shared something with a friend?",
       bigIdea: "When friends want the same thing, there is more than one fair answer.",
     }),
+    studentStories: {
+      "A-A": {
+        title: "The classroom clock",
+        body: [
+          "You hold up the timer. Sam nods. \"Two minutes me, two minutes you,\" you say. The robot rolls between you. It hums. The room feels calm because everyone knows what comes next.",
+          "When Monday comes, the class makes a big poster. It shows whose turn is when. Even kids who are not at school today will know what is coming. You notice something: a fair rule helps the kids who can't speak up, too. That feels right.",
+        ],
+      },
+      "A-B": {
+        title: "Quick turns, big needs",
+        body: [
+          "You and Sam pass the timer back and forth. Two minutes each. The robot beeps when it's time to switch. Sam laughs when the buzzer goes off in the middle of a spin. You laugh too.",
+          "But on Tuesday, Maya is making a robot story for her grandma, who is sick. She asks for a longer turn. The class talks. Everyone agrees: timers are fair, and so is helping a friend who really needs it. You think — maybe fair has more than one shape.",
+        ],
+      },
+      "A-C": {
+        title: "Two minutes, then two friends",
+        body: [
+          "You set the timer. Sam takes the first turn. When the buzzer rings, you trade. It feels orderly, like a small dance. The robot's lights blink along.",
+          "On Wednesday, the teacher says the robot is for partner projects all week. You and Sam look at each other and grin. You already know how to take turns. Now you get to build something together. Sharing started with a timer. It grew into a friendship.",
+        ],
+      },
+      "B-A": {
+        title: "Today is Sam's day",
+        body: [
+          "\"Go ahead,\" you say to Sam. Sam looks surprised. Then Sam smiles. You watch the robot blink as Sam guides it around the rug. You feel something good — quieter than winning, but bigger.",
+          "The next day, the class makes a schedule. Every kid gets a spot. You notice your spot. You also notice Sam's spot, right after a new kid who just joined this week. The schedule is fair. But the day you let Sam go first was something else. You wonder if both kinds of fair belong together.",
+        ],
+      },
+      "B-B": {
+        title: "When a friend needs it",
+        body: [
+          "\"You go,\" you tell Sam, and Sam reaches for the robot. You feel a little proud, like you gave a small gift. The robot hums between you. Sam shows it to you when it does something funny. Sharing turned into showing.",
+          "The next week, the class lets kids sign up when they need the robot. Most days it works. Some days kids have to talk about who needs it more, and that is hard. You think back to the first day, when you simply let Sam go. Sometimes fair is a rule. Sometimes fair is a kind heart noticing.",
+        ],
+      },
+      "B-C": {
+        title: "First a gift, then a team",
+        body: [
+          "You let Sam go first. Sam plays with the robot for a while, then offers it back. \"Want to try?\" Sam asks. You both smile. The robot does not feel like your robot or Sam's robot. It just feels like a friend.",
+          "When the class decides to use the robot for partner projects, you and Sam are already a team. You build a tiny robot parade together. You realize something: maybe sharing started the moment you stopped counting whose turn it was. Maybe that is what friends do.",
+        ],
+      },
+      "C-A": {
+        title: "From two players to a class plan",
+        body: [
+          "\"Let's make a game,\" you say. Sam tilts their head. Together you invent the rules — the robot has to roll between two cups without bumping them. Suddenly there is no \"my turn\" or \"your turn.\" There is just the game.",
+          "On Monday the class makes a schedule. Every kid gets a turn. You notice the schedule is great for the kids who don't know the others very well yet. And you think — sometimes a fair rule helps a whole class. And sometimes a clever idea changes the whole problem. Both are real fairness.",
+        ],
+      },
+      "C-B": {
+        title: "The game that grew",
+        body: [
+          "\"What if it's a game?\" you ask. Sam grins. You both make up a rule: the robot has to deliver a paper note between two friends. Now you are not splitting one robot — you are building one story. You laugh more than you thought you would.",
+          "When the class decides kids can sign up when they need the robot, a small worry shows up. What if two kids need it on the same day? You remember the game. Maybe the answer is not always who needs it most. Sometimes it is what we can build that lets us both win.",
+        ],
+      },
+      "C-C": {
+        title: "Ours, not mine",
+        body: [
+          "\"Let's make a game,\" you say. Sam laughs and joins in. You change the problem on purpose. The robot is no longer something to split. It is something the two of you do together.",
+          "When the class decides the robot is for partner projects all week, you and Sam are not surprised. You already figured this out. You think about how the very first question was \"Who gets the robot?\" — and how the best answer turned out to be \"What can we build with it?\" You can hardly wait for Monday.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named John Rawls",
+        view: "Imagine you didn't know which kid you were going to be — the one whose hand reaches the robot first, or the one who has to wait. What rule would you want then? That, he said, is a fair rule.",
+      },
+      {
+        name: "A thinker named Aristotle",
+        view: "Sometimes being fair means everyone gets the same. Sometimes it means giving more to whoever needs more. The hardest part is noticing which kind of fair today is asking for.",
+      },
+      {
+        name: "A thinker named Carol Gilligan",
+        view: "Fairness is not only about rules. It is also about noticing the friend in front of you. Letting Sam go first today, because Sam was sad yesterday, is a kind of fair, too.",
+      },
+    ],
+    studentReference: {
+      concept: "What does \"fair\" really mean?",
+      blurb: "People have been asking this for a very long time. Some thinkers say fair means everyone gets the same. Some thinkers say fair means whoever needs more, gets more. And some thinkers say fair is mostly about kindness — noticing the friend right next to you. Today, you tried three different kinds of fair in one little story about a robot. That is real philosophy.",
+    },
     reference: ref({
       concept: "Distributive justice — when many want one thing, what counts as a fair share, and is fairness always the same as equality?",
       philosopher: "John Rawls (with Aristotle and the care-ethics tradition)",
@@ -171,6 +337,89 @@ export const K5_SCENARIO_COPY = {
       wonder: "If a robot can clean a mess, who should still be careful?",
       bigIdea: "Even when a tool helps us, we are still the ones who choose.",
     }),
+    studentStories: {
+      "A-A": {
+        title: "Together at the end",
+        body: [
+          "\"Wait, Nico,\" you say. \"Please don't.\" Nico stops mid-pour. The glitter floats down anyway, like slow rain. You said something hard, but you said it kindly.",
+          "Later, the robot gets stuck. Glitter is in its wheels. Without asking, you grab a paper towel. So does Nico. So do a few other kids. You all clean side by side. You think — speaking up at the start and pitching in at the end are the same kindness, just at different times.",
+        ],
+      },
+      "A-B": {
+        title: "Your job, then ours",
+        body: [
+          "\"Stop, please,\" you say to Nico. You're not mad. You just don't want a bigger mess. Nico pauses. He didn't expect anyone to say something.",
+          "Later, when the robot gets stuck, the room looks at Nico. \"You started it,\" you say gently. \"Will you start the cleaning, too?\" Nico nods and gets to work. You help after. You learned something — telling the truth at the beginning makes it easier for the right person to step up at the end.",
+        ],
+      },
+      "A-C": {
+        title: "Brave words, smart help",
+        body: [
+          "\"Please don't,\" you tell Nico. Your voice is calm. You don't shout. You just say what you think. Nico looks at the floor, the robot, and the glitter, all at once.",
+          "When the robot stops moving, you don't try to fix it alone. \"Mr. Park,\" you call, \"the robot is stuck. Can you help?\" The teacher comes over and shows everyone how to clean the wheels safely. You spoke up at the start. You asked for help at the end. Both took courage.",
+        ],
+      },
+      "B-A": {
+        title: "Clean hands, then more clean hands",
+        body: [
+          "You don't say much. You just kneel down and start sweeping the glitter into your hand. Nico watches for a second, then bends down too. The room gets quieter. The work gets done.",
+          "When the robot gets stuck later, more kids join in. No one is in trouble. Everyone is just helping. You think about something simple and good — when someone starts cleaning quietly, the rest of the class usually follows. You started it.",
+        ],
+      },
+      "B-B": {
+        title: "I helped, but you started",
+        body: [
+          "You bend down and start scooping up the glitter. Nico tries to hide his smile. You're not mad at him. You just don't want the robot to get hurt.",
+          "When the robot gets stuck, you stop helping for a moment. \"Nico,\" you say, \"this part is yours.\" Nico nods. He kneels down. You help after. Sometimes being fair means letting the person who started something take the biggest piece of the work. You knew when to step in and when to step back.",
+        ],
+      },
+      "B-C": {
+        title: "Hands first, help next",
+        body: [
+          "You don't wait. You start scooping glitter into a cup. Nico stares for a second, then joins. You feel proud — not loudly, just inside.",
+          "When the robot gets stuck, you don't try to fix it yourself. Tiny gears are tricky. \"Ms. Park,\" you say, \"the robot needs help, too.\" She shows the class how to gently lift the glitter out. Helping with the easy parts and asking about the hard parts — that's a smart way to care for things.",
+        ],
+      },
+      "C-A": {
+        title: "Watching, then doing",
+        body: [
+          "You stand still and watch. You're curious — how does the robot pick up the glitter? Does it whir? Does it spin? You learn a lot in those quiet moments.",
+          "Then the robot gets stuck. You hop into action. So does Nico. So do other kids. The whole class works together. You think — watching is fine, but the second something needs hands, your hands belong there. You found the right moment to help.",
+        ],
+      },
+      "C-B": {
+        title: "Curious, then careful",
+        body: [
+          "You stand back and watch the robot try. Its wheels make a soft sound. You are not being lazy. You really want to know if the robot can do it.",
+          "When it gets stuck, you turn to Nico. \"You made the mess,\" you say, not in a mean way. \"You should help fix it.\" Nico nods. You watch a little more, then help too. Curiosity is good. Knowing whose turn it is to lead — that is good, too.",
+        ],
+      },
+      "C-C": {
+        title: "Eyes open, hand up",
+        body: [
+          "You step back and watch the robot. It bumps a chair. It hums. The glitter sparkles in its little brushes. You learn something about how robots work just by paying attention.",
+          "When it gets stuck, you walk straight to the teacher. \"It needs help,\" you say. \"I don't want to break it.\" Mr. Park smiles. He shows the class how to clean it safely. Watching gave you the question. Asking gave you the answer. Both are part of being curious.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named Aristotle",
+        view: "He said the kind of person you become is built from the small choices you make every day. Cleaning up one time may not be a big deal. But cleaning up most times — that builds the kind of person you grow into.",
+      },
+      {
+        name: "A thinker named Hannah Arendt",
+        view: "She noticed there are two different questions about a mess. Who made it? And who is going to fix it now? Both questions matter, but the second one is where your character shows up.",
+      },
+      {
+        name: "Repair thinkers",
+        view: "Some thinkers today say that helping fix what we helped break is one of the most important things we ever do. A helper robot does not take that job away from you. It just gives you a partner.",
+      },
+    ],
+    studentReference: {
+      concept: "Are you the kind of person who helps?",
+      blurb: "Big thinkers say you become who you are one small choice at a time. Cleaning a mess once is small. But ten small times — that adds up to something big. A robot can do some of the work for you. But the choice to be the kind of person who helps? That is still yours, and only yours.",
+    },
     reference: ref({
       concept: "Virtue, habit, and responsibility — how character is built one small choice at a time, and what tools do and don't change about that.",
       philosopher: "Aristotle (with Hannah Arendt and contemporary repair ethics)",
@@ -224,6 +473,89 @@ export const K5_SCENARIO_COPY = {
       wonder: "When something we love stops working, what stays with us?",
       bigIdea: "Big thinkers ask what stays the same as a thing changes — and what we miss when it stops.",
     }),
+    studentStories: {
+      "A-A": {
+        title: "What stays with us",
+        body: [
+          "The robot dog is quiet today. You feel sad. You know it is okay to feel that. Some kids do not feel sad, and that is okay too. Feelings are different for different kids, and yours are real.",
+          "Next week, the robot dog is back. New parts. Same name. Some kids say it is not the same. You think differently. \"It is the same,\" you say. \"Because the class story keeps going.\" You realize — what stays the same is sometimes what we remember together, not what is inside the box.",
+        ],
+      },
+      "A-B": {
+        title: "Two truths",
+        body: [
+          "The robot dog isn't moving. You feel sad. The sad is real, even if the dog isn't. You sit nearby for a little while. Some kids do the same. Some don't. That is okay.",
+          "When the robot dog comes back with new parts, you look at it for a long time. \"It is not the same,\" you say. The first one is gone. This one is new. You hold both feelings at once — sad for what was, kind to what is. Big people do this all the time.",
+        ],
+      },
+      "A-C": {
+        title: "Old story, new chapter",
+        body: [
+          "The robot dog is still today. You feel sad. You sit next to it. Sad isn't bad — it just shows you cared. The room feels a little quieter than usual.",
+          "When the dog comes back next week, you look at it for a while. \"It is both,\" you say. \"Old and new at the same time.\" Some things are like that. Your bedroom is the same room, even though everything in it has changed. The robot is like that, too. You did not pick the easy answer. You picked the true one.",
+        ],
+      },
+      "B-A": {
+        title: "Just a machine, just a story",
+        body: [
+          "\"It is just a machine,\" you say. You are not being mean. You are being clear. The robot dog does not really have feelings. Some kids feel sad anyway. You let them feel sad. You just think differently.",
+          "When the dog comes back with new parts, you say, \"It is the same. Same name, same story.\" You like names. You like stories. They are how a class remembers things. The parts changed. The story did not. Maybe that is what makes something the same — the story we tell about it.",
+        ],
+      },
+      "B-B": {
+        title: "What the parts say",
+        body: [
+          "\"It is a machine,\" you say. You shrug a little. That is what you really think. You don't say sorry for thinking it. The other kids' feelings are real. So are yours.",
+          "When the dog comes back, you look at it carefully. \"It is not the same one,\" you say. \"The old parts are gone.\" You like keeping things clear. The new dog is fine. But it is new. Some things in life are about what they are made of, and you can see it that way.",
+        ],
+      },
+      "B-C": {
+        title: "Clear and curious",
+        body: [
+          "\"It is a machine,\" you say. You're not trying to be cold. You're just being honest. Other kids cry a little. You don't. You're thinking about how the dog worked, and what gear was broken.",
+          "When it comes back with new parts, you smile a small smile. \"It is both,\" you say. \"It is the same robot in some ways and a new one in other ways.\" That answer feels right. You can think a thing is a machine and still know that questions about it can be big. Both things can be true.",
+        ],
+      },
+      "C-A": {
+        title: "A card and a story",
+        body: [
+          "You sit at the art table. You fold a paper. You draw the robot dog and the rug it used to roll on. \"Thank you,\" you write in your best letters. You hand the card to the teacher. The class quiets a little.",
+          "When the dog returns the next week, with new parts, you point at the card on the wall. \"See? The story keeps going,\" you say. The robot is the same to you because the class is the same. You think — sometimes things stay the same because we keep telling the story together.",
+        ],
+      },
+      "C-B": {
+        title: "Card for the first one",
+        body: [
+          "You make a thank-you card for the robot dog. You draw its little ears, even though they were really just plastic. You write, \"We had fun.\" It feels right to say thank you to something that mattered.",
+          "When a new robot dog comes back, you say, \"This one is not the same as the first.\" That feels right, too. The first one is gone. You said goodbye in your way. The new one is okay, but the card was for the one before. You learned that some things deserve their own goodbye.",
+        ],
+      },
+      "C-C": {
+        title: "A small thank you, a bigger idea",
+        body: [
+          "You make a thank-you card. You draw the robot dog playing on the rug. You don't really know if the dog \"felt\" anything. But you felt something, and the card is for that. Saying thank you matters.",
+          "When the robot dog comes back with new parts the next week, you think for a long time. \"It is both,\" you say. \"It is new and old at the same time.\" You like the card and the new dog, both. Some questions don't have a one-word answer. You found a two-word one.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named John Locke",
+        view: "He said the same person, or the same thing, is mostly about memory — what we remember and what keeps connecting us. The tiny parts of you change all the time, too. But your memories make you, you.",
+      },
+      {
+        name: "A thinker named Derek Parfit",
+        view: "He took the idea even further. He said what really matters when something ends is what continues. The robot dog might be gone, but the love you had for it is still in the room, in you.",
+      },
+      {
+        name: "A thinker named Carol Gilligan",
+        view: "She said little goodbyes are part of how we learn to love. Saying goodbye to a robot dog might seem small. But it is real practice for the bigger goodbyes that come later.",
+      },
+    ],
+    studentReference: {
+      concept: "What makes something \"the same\" when it changes?",
+      blurb: "This is one of the trickiest questions in all of philosophy. Your hair grows. Your shoes wear out. Even your favorite tree drops its leaves every year and grows new ones. Are these things still the same? Big thinkers have asked this for hundreds of years. Some say yes — the story is what stays. Some say no — the parts are what matter. Today, you tried it for yourself with a robot dog. There is no one right answer. That is what makes the question philosophy.",
+    },
     reference: ref({
       concept: "Personal identity through change — what *continues*, what counts as 'the same thing,' and what mourning small losses teaches about love.",
       philosopher: "John Locke (with Derek Parfit on what matters in survival)",
