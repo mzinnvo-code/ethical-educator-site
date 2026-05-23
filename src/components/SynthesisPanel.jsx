@@ -727,9 +727,10 @@ function lensName(id) { return LENS_NAMES[id] || id?.replace(/-/g, " "); }
 // Kid-voice noun phrases for the warm path recap shown in K-5 synthesis.
 // Each entry should read naturally inside the sentence templates used by
 // WarmPathRecap (e.g. "you leaned into {kindness}" / "you blended
-// {kindness} and {fairness} together"). Covers the 15 lenses used by the
-// K-grade scenarios; falls back to a humanised lens id for anything else.
+// {kindness} and {fairness} together"). Covers every lens currently used
+// across the K-5 scenarios; falls back to a humanised lens id otherwise.
 const LENS_NAMES_KID = {
+  // K-grade lenses
   care: "kindness",
   realism: "clear thinking",
   inquiry: "asking good questions",
@@ -745,6 +746,57 @@ const LENS_NAMES_KID = {
   continuity: "the story that keeps going",
   "material-identity": "looking closely at what's there",
   pluralist: "holding two ideas at once",
+  // Grade 1-5 lenses
+  agency: "choosing for yourself",
+  audit: "checking the work",
+  authenticity: "what is real and earned",
+  authority: "listening to who is in charge",
+  avoidance: "stepping back from harm",
+  balance: "finding the middle",
+  complexity: "noticing that it is complicated",
+  consent: "asking before doing",
+  contextual: "looking at what is really happening",
+  credit: "giving credit where it is due",
+  degrees: "noticing how big or small a thing is",
+  deliberation: "thinking it through together",
+  democratic: "letting everyone have a say",
+  deontological: "doing what is right because it is right",
+  design: "how something is built",
+  dignity: "treating people with respect",
+  distinction: "telling two things apart",
+  duty: "doing what you said you would",
+  education: "learning the way that helps you grow",
+  efficiency: "getting it done well",
+  egoism: "what is best for you",
+  equity: "giving what each person needs",
+  evidence: "looking at what we know",
+  expertise: "trusting people who know more",
+  growth: "getting a little better next time",
+  honesty: "telling the truth",
+  "human-judgment": "letting people decide",
+  integrity: "being the same person inside and out",
+  intent: "what you meant to do",
+  justice: "what is fair for everyone",
+  loyalty: "sticking with a friend",
+  "moral-courage": "doing the brave right thing",
+  outcome: "what actually happened",
+  phenomenology: "what it feels like from inside",
+  precautionary: "being careful, just in case",
+  privacy: "what belongs only to you",
+  "psychological-continuity": "the memories that keep you you",
+  recognition: "seeing the person in front of you",
+  reform: "changing how things work",
+  "rule-following": "following the rules",
+  safety: "keeping people safe",
+  scaffolding: "help that lets you grow",
+  "self-interest": "what you want for yourself",
+  "shared-responsibility": "sharing the work",
+  "technical-fix": "fixing it with a better tool",
+  transparency: "being clear about what is happening",
+  trust: "trust between people",
+  truthfulness: "saying what is really true",
+  utilitarian: "what helps the most people",
+  virtue: "being the kind of person you want to be",
 };
 function lensNameKid(id) { return LENS_NAMES_KID[id] || id?.replace(/-/g, " "); }
 

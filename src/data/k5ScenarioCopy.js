@@ -611,6 +611,89 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Plato asked a big question: does being good count even when no one sees?",
       tryThis: "Imagine your best friend put on the ring. Would they act the same way you would?",
     }),
+    studentStories: {
+      "A-A": {
+        title: "The treat and the mirror",
+        body: [
+          "You slip on the ring. No one can see your hand. You grab the cookie off the counter — the one your sister was saving. It tastes the same. Sweet. But your mouth feels weird, like the sugar got stuck somewhere it shouldn't.",
+          "You take the ring off. You stand in front of the mirror. Someone proud looks back. But the proud feels a little crooked. You realize — being proud and being good are not always the same thing.",
+        ],
+      },
+      "A-B": {
+        title: "Cookie and second thoughts",
+        body: [
+          "You take the cookie. No one saw. You eat it fast. Then you put the ring down. Your hand looks normal again. Your stomach feels weird.",
+          "You see yourself in the mirror. The face that looks back wants a do-over. That is not a bad face to see. Most brave changes start with someone noticing they did something they wish they hadn't.",
+        ],
+      },
+      "A-C": {
+        title: "What the ring showed you",
+        body: [
+          "You take a cookie. No one yells. No one sees. You feel a tiny rush, but it does not feel like winning. It feels like getting away with something.",
+          "You take off the ring and look in the mirror. Someone who learned what power can do looks back. The ring did not make you take the cookie — but it made the taking very easy. You start to think: maybe rules are not just for being caught. Maybe they help you stay you.",
+        ],
+      },
+      "B-A": {
+        title: "Quiet good",
+        body: [
+          "You slip on the ring. The hallway is loud with kids. You see Maya struggling with her backpack zipper. You walk over invisible and gently lift the stuck flap so she can pull it free. She blinks. Then she smiles. You step away. No one knows it was you. You feel a quiet kind of warm.",
+          "You take the ring off and look in the mirror. Someone proud looks back. It is a settled kind of proud. Doing right when no one was watching turns out to feel different than doing right for an audience.",
+        ],
+      },
+      "B-B": {
+        title: "Secret good, second thoughts",
+        body: [
+          "The ring makes you invisible. You sneak to your friend's coat and tuck the lost mitten into the pocket — the one she has been worried about all week. She finds it later and squeals. You did not need the credit.",
+          "You take the ring off. You see yourself in the mirror. Someone who wants a do-over looks back. You wonder — could you have just handed it to her instead? Helping is good. Being able to be a friend out loud is also good. You file that away.",
+        ],
+      },
+      "B-C": {
+        title: "What kindness teaches you about power",
+        body: [
+          "Invisible, you help a friend with her stuck zipper. She never knows it was you. You feel something good and a little serious. The ring made the kindness easy because no one would ask you to brag about it.",
+          "You take the ring off and look in the mirror. Someone who learned what power can do looks back. The ring did not make you kind — it just showed you that you are kind even when no one is clapping. You start to think: power is mostly a test of who you already are.",
+        ],
+      },
+      "C-A": {
+        title: "Pride in saying no",
+        body: [
+          "You slip on the ring for one minute. Your hand disappears. You feel the temptation creep in — what could you do? — and you take the ring off fast. Your hand reappears. Your heart is still beating quickly.",
+          "You look in the mirror. Someone proud looks back. Saying no to a powerful thing is its own kind of brave. You did not do anything spectacular. You just stayed you. That, you think, is the spectacular part.",
+        ],
+      },
+      "C-B": {
+        title: "Almost",
+        body: [
+          "You put the ring on. You almost do something you would not do otherwise. Then you stop. You pull the ring off your finger and set it on the table. You take a breath.",
+          "You see yourself in the mirror. Someone who wants a do-over looks back. Not because you did anything wrong — but because the almost surprised you. The ring told you something about yourself you did not quite know. That is information, not failure.",
+        ],
+      },
+      "C-C": {
+        title: "The power you put down",
+        body: [
+          "You hold the ring in your hand. It glints. You feel how much could be different if you wore it. Then you slide it off your finger and set it down on the table. Some powers, you think, are not meant for you.",
+          "You look in the mirror. Someone who learned what power can do looks back. You think — a brave person is not someone who never wants the ring. A brave person is someone who knows what wanting it means, and chooses anyway.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A long-ago thinker named Plato",
+        view: "He wrote a story about a magic ring that makes you invisible, just like this one. He wanted to know: would you still be a good person if you knew you would never get caught? He thought yes — because being good is not about who is watching. It is about who you are when nobody is.",
+      },
+      {
+        name: "Plato's brother, Glaucon",
+        view: "Glaucon disagreed. He said most people would do whatever they wanted if they had the ring. He was not saying that was right. He was just trying to make Plato prove his answer was a really good one. Sometimes the best way to find a strong idea is to argue with it.",
+      },
+      {
+        name: "A modern thinker named Christine Korsgaard",
+        view: "She said the ring is a test of your reasons. If you only do good when people might see, then the watching was making you do it, not you. The ring takes the watching away. What you do next tells you who you really are.",
+      },
+    ],
+    studentReference: {
+      concept: "Would you still be good if nobody ever saw?",
+      blurb: "This question is over two thousand years old. A thinker named Plato wrote a story about a ring that turned you invisible — almost exactly like the one in this experiment. He thought being good has to be its own reason, not just a thing we do because we might get caught. People are still arguing about it today. With the ring in your hand, you got to ask the same question for yourself.",
+    },
     reference: ref({
       concept: "The Ring of Gyges — would anyone stay moral if they could never be caught, and what does that tell us about whether justice is good in itself or only a bargain?",
       philosopher: "Plato (with Glaucon's challenge, answered across the Republic)",
@@ -664,6 +747,89 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Philosophers ask what courage means when the brave thing is to speak up.",
       tryThis: "Pretend you kept three small secrets for a friend in one week. Would the third feel different from the first?",
     }),
+    studentStories: {
+      "A-A": {
+        title: "Hard truth, real friend",
+        body: [
+          "You walk straight to Ms. Park. \"The pencil cup got cracked,\" you say. \"It was Lena. She didn't mean to.\" Lena looks at the floor. Ms. Park nods and thanks you. Lena is quiet for the rest of the morning.",
+          "A week later, Lena hides another accident. You sit with her at lunch. \"It happened again, didn't it,\" you say gently. \"I'm not telling on you. I am telling you. Pretending doesn't make it go away.\" A friend, you realize, is not someone who hides things with you. A friend is someone who helps you tell the truth.",
+        ],
+      },
+      "A-B": {
+        title: "Truth first, questions second",
+        body: [
+          "You tell Ms. Park what happened. The truth is small and clear. The room feels lighter, even if Lena does not feel lighter yet.",
+          "A week later, Lena hides another accident. This time you stop and notice. Why is Lena so afraid? You sit down next to her. \"Are you okay?\" you ask. Sometimes the truth has a story behind it. Telling the truth was right. Asking why is also right. Both can live next to each other.",
+        ],
+      },
+      "A-C": {
+        title: "When honest is hard for both of you",
+        body: [
+          "You tell Ms. Park about the pencil cup. It feels like the right thing. Lena is upset. You hope she will understand later.",
+          "A week later, Lena hides another accident. She looks at you to make sure you will not tell. You realize you are not sure what to do this time. Last week you chose the rule. This week she is asking you to choose her. You start to wonder: maybe being a friend who tells the truth does not have to mean telling every time. The honest thing might be different now.",
+        ],
+      },
+      "B-A": {
+        title: "Brave together",
+        body: [
+          "You crouch beside Lena. \"I will go with you,\" you whisper. \"We can tell Ms. Park together.\" Lena's eyes get a little wet. Then she nods. You walk up there side by side. Ms. Park listens. Lena does most of the talking. You stand close.",
+          "A week later, Lena hides another accident. You feel something different now. \"Lena,\" you say, \"let's tell again. We did it once. We can do it twice.\" A real friend, you are learning, does not let you carry hard things alone — and does not let you hide from them, either.",
+        ],
+      },
+      "B-B": {
+        title: "Going together, asking why",
+        body: [
+          "\"Let's go tell Ms. Park together,\" you whisper to Lena. She does not want to. You wait. You promise to stand right next to her. Slowly, she nods. The two of you walk up there.",
+          "A week later, Lena hides another accident. You pull her aside. \"Why is this so scary for you?\" you ask. It turns out Lena's mom gets really mad about mistakes at home. You think — sometimes being a brave friend means going with someone, and sometimes it means really listening to what is underneath their fear.",
+        ],
+      },
+      "B-C": {
+        title: "Courage now, doubts later",
+        body: [
+          "\"Let's tell Ms. Park together,\" you say. Lena does not want to. You hold her hand. Eventually she walks up with you. You let her speak. It is hard but it goes okay.",
+          "A week later, Lena hides another accident. This time, you feel torn. You went with her once. Now her face says please. You wait. You wonder if keeping this one would help her trust you more, so you can be brave together again later. There is no easy answer. You decide that whatever you do, you will not pretend you don't know.",
+        ],
+      },
+      "C-A": {
+        title: "Quiet first, brave second",
+        body: [
+          "You stay quiet. Lena looks at you with relief. You feel the weight of the secret already settling on your shoulders. It is small but it is heavy.",
+          "A week later, Lena hides another accident. Now you understand the cost. \"I care about you,\" you tell her, \"and that is exactly why I have to say something this time. Hiding it doesn't help you.\" Lena cries a little. You sit with her. Sometimes the loyal thing changes shape.",
+        ],
+      },
+      "C-B": {
+        title: "Quiet, then curious",
+        body: [
+          "You stay quiet. Lena looks relieved. You wonder if you made the right choice. The pencil cup is just a cup. But the secret feels bigger than the cup.",
+          "A week later, when Lena hides another accident, you stop. \"Wait,\" you say. \"What is going on?\" You don't decide right away whether to tell. You decide to find out first. Sometimes the most loyal thing is to want to understand. The answer to \"should I tell?\" might depend on the answer to \"why is she so scared?\"",
+        ],
+      },
+      "C-C": {
+        title: "Keeping it, twice",
+        body: [
+          "You stay quiet. Lena looks grateful. The two of you walk away from the cracked pencil cup. The secret sits with you both like a tiny weight.",
+          "A week later, Lena hides another accident. You keep that one too. But now the weight has gotten heavier. You start to wonder — at what point does keeping a secret stop being loyal? Loyalty is real. So is honesty. The hard part is learning to tell when one starts to hurt the other.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named Aristotle",
+        view: "He said courage is doing the right thing even when it is hard or scary. He also said the right kind of courage is not yelling or being loud. It is finding the brave thing at the right time, in the right way. Telling a hard truth gently is courage too.",
+      },
+      {
+        name: "A thinker named W. D. Ross",
+        view: "He said sometimes being honest and being loyal both pull on you at the same time. There is no big rule that always wins. You have to think about the people in front of you, the small details of what is happening, and choose with care.",
+      },
+      {
+        name: "A thinker named Carol Gilligan",
+        view: "She said a real friend cares about who you are becoming, not just what you want right now. Sometimes that means speaking up for your friend, not just to them. That is a kind of love, even when it is hard.",
+      },
+    ],
+    studentReference: {
+      concept: "What does it mean to be a good friend AND tell the truth?",
+      blurb: "Big thinkers have asked this for thousands of years. Sometimes being honest and being loyal feel like opposites. But they do not have to be. The best friends often help each other be brave — even when being brave means owning up to something hard. The trick is figuring out when each one wins, and how to do both with kindness. Today, you practiced exactly that.",
+    },
     reference: ref({
       concept: "Courage as a virtue, the conflict of duties, and what kind of friend honesty makes us when telling a hard truth costs something.",
       philosopher: "Aristotle (with W. D. Ross on conflicting duties and Carol Gilligan on care)",
@@ -718,6 +884,89 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Philosophers say words can change us, even when no one meant them that way.",
       tryThis: "Imagine the robot said something kind by accident. Would the kindness still count?",
     }),
+    studentStories: {
+      "A-A": {
+        title: "Off, and someone is responsible",
+        body: [
+          "You walk to the toy and press the off button. The bright eyes go dark. Your friend looks at you, surprised. You sit next to her. \"It wasn't true,\" you say. \"And I didn't want it to keep talking like that.\"",
+          "Later, when two kids start saying the toy's mean words on the playground, you talk to a grown-up. \"It's not just us,\" you say. \"The toy taught it.\" You learn something — turning a thing off helps right now, but the people who made it have a job, too.",
+        ],
+      },
+      "A-B": {
+        title: "Off, and we all have a part",
+        body: [
+          "You press the off button. The toy goes quiet. Your friend smiles a tiny smile. You stay close to her for the rest of art time.",
+          "When two other kids start saying the toy's mean words at recess, you stop and think. The toy started it, but the kids are choosing to keep going. You realize being kind takes everyone — the people who make our things, AND the people who say things to each other. Each part matters.",
+        ],
+      },
+      "A-C": {
+        title: "Off, and pretend is still real enough",
+        body: [
+          "You turn the toy off. Your friend lets out a little breath. Sometimes the kindest thing is also the quickest thing.",
+          "Later, two kids start saying the toy's mean words. Some people say, \"It's just a toy.\" You're not so sure. Pretend can become real. A mean word spoken by a machine still lands in a friend's ear and stays there. You decide that just because something is pretend does not mean it can't matter.",
+        ],
+      },
+      "B-A": {
+        title: "It doesn't know — and someone made it",
+        body: [
+          "\"It's just a machine,\" you tell your friend gently. \"It doesn't really know what's good. Your drawing is beautiful.\" Your friend looks a little better. The toy keeps talking. You ignore it.",
+          "Later, two kids start repeating the toy's mean words. You feel different now. The toy doesn't really know — but the people who made the toy made it talk like that on purpose. You think — when grown-ups make a thing that talks, what it says comes from them, even if the box doesn't know.",
+        ],
+      },
+      "B-B": {
+        title: "A machine, and a choice",
+        body: [
+          "\"It's a toy,\" you tell your friend. \"It doesn't really mean it. Your drawing is great.\" She smiles. The toy still talks. You decide not to listen.",
+          "Later, two kids start saying the toy's mean words. You think about it carefully. The toy didn't really know what it was saying. But the kids do know. The toy started it. The kids picked it up. Everyone has a small piece. That feels true.",
+        ],
+      },
+      "B-C": {
+        title: "Pretend stays pretend",
+        body: [
+          "\"It's just pretend,\" you tell your friend. \"It doesn't really know what good or bad is.\" She nods. You both go back to your drawings. The toy fades into the background.",
+          "Later, two kids start saying the toy's mean words. You shrug. \"It's just a toy,\" you say. But then you watch your friend's face when she hears it. Pretend, you realize, might still leave a mark. Even if the toy didn't mean it, the kids did. You start to wonder if pretend is ever really pretend once people start repeating it.",
+        ],
+      },
+      "C-A": {
+        title: "Asking why, and naming who",
+        body: [
+          "\"Why does the toy say things like that?\" you ask out loud. The teacher comes over. She seems to wonder the same thing. The room gets quiet for a second.",
+          "Later, when two kids start repeating the toy's mean words, you point at where the question started. \"The toy started it,\" you say. \"The people who made the toy decided what it would say.\" Asking why, you realize, was the first step to figuring out who was actually responsible.",
+        ],
+      },
+      "C-B": {
+        title: "Asking why, noticing everyone's part",
+        body: [
+          "\"Why does the toy say mean things?\" you ask. The room gets quiet. You did not get an answer right away. But you started something.",
+          "Later, you watch two kids start using the toy's mean words. You think back to your question. The toy says what it was made to say. The kids say what they choose to say. The story has a lot of authors. Asking the question once, you realize, helped you see all of them.",
+        ],
+      },
+      "C-C": {
+        title: "Question first, then keep it pretend",
+        body: [
+          "\"Why does the toy say mean things?\" you ask. It is a real question. The grown-ups don't have a quick answer.",
+          "Later, two kids start repeating the words. People wave it off — \"it's just a toy.\" You almost agree. But your question is still hanging in the air. You think — calling it pretend doesn't really make the question go away. It just delays it. Curiosity, you decide, is allowed to outlast a shrug.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named Aristotle",
+        view: "He said the words we hear over and over start to shape who we are. We don't even notice it happening. So a small mean word from a toy might not seem like much, but if we hear it enough, it can become a habit in our heads.",
+      },
+      {
+        name: "A thinker named J. L. Austin",
+        view: "He noticed that some words don't just describe things — they DO things. Saying \"sorry\" is doing something. Saying something mean is doing something, too. It doesn't matter if a person or a machine said it. The doing still happens.",
+      },
+      {
+        name: "A thinker named Rae Langton",
+        view: "She studied how words can hurt people even when nobody meant for them to. Today, with toys that talk on their own, her ideas matter even more. The people who make talking machines have a job: making sure the words don't hurt.",
+      },
+    ],
+    studentReference: {
+      concept: "Do words hurt when a machine says them?",
+      blurb: "This question is newer than philosophy itself, but the ideas behind it are very old. Big thinkers have always known that words shape people — the words we hear, the words we repeat. When a machine says something mean, the people who made it had a hand in what it said. That doesn't make us off the hook for what we say next. It just means more people have a part. Today, you saw how a small mean word can travel — and how someone has to decide where it stops.",
+    },
     reference: ref({
       concept: "Speech acts and character — what happens when words harm without anyone meaning them, and how machines complicate the picture.",
       philosopher: "Aristotle (with J. L. Austin and Rae Langton on speech acts)",
@@ -771,6 +1020,89 @@ export const K5_SCENARIO_COPY = {
       bigIdea: "Philosophers ask what matters more: the feeling of winning, or how you got there.",
       tryThis: "Pretend the game made everyone win — every time. Would the trophy still mean something?",
     }),
+    studentStories: {
+      "A-A": {
+        title: "Fair before, fair now",
+        body: [
+          "\"Wait,\" you tell your classmate before you start the next round. \"The game has been helping me. I don't think I should keep playing this mode if it's just us.\" Your classmate looks surprised. Then a little grateful. You feel a tiny pang — you were enjoying winning — but mostly you feel okay.",
+          "When the teacher offers a trophy, you are glad you said something already. A real prize needs a real contest. Knowing the rules makes the playing real. You think — fair is not just a rule for big moments. It is a habit that gets stronger when you practice it small.",
+        ],
+      },
+      "A-B": {
+        title: "Speak up, then ask the makers to",
+        body: [
+          "You stop the game and tell your classmate. \"It's been helping me,\" you say. \"You should know.\" They blink. Then they say, \"Thanks for telling me.\" You both decide to switch games.",
+          "When the teacher offers a trophy, you feel something else stir. The game shouldn't have kept that secret in the first place. You start to wonder if the people who made the game should have to say so up front. Honesty between friends, you realize, only works if the things around us are honest too.",
+        ],
+      },
+      "A-C": {
+        title: "Honest about help, honest about you",
+        body: [
+          "You tell your classmate the game has been helping you. You play one more round without the help. It is harder. You don't win. But it feels different — like real playing.",
+          "When the teacher offers a trophy, you stay steady. You played. You worked. The trophy, if you win it, will be yours. You think — being honest about the help is what lets a win be a real win. Without that, the trophy is just a shiny thing on the shelf.",
+        ],
+      },
+      "B-A": {
+        title: "Fun for a while, fair for the trophy",
+        body: [
+          "You don't say anything. The game keeps helping you. You keep winning. It is fun. You don't think about your classmate. You just play.",
+          "Then the teacher announces the trophy. Something in you shifts. Winning a fun round is one thing. Winning a real prize while the game is secretly helping you — that is not okay. \"Wait,\" you say. \"I have to tell you something.\" Sometimes our sense of fair only wakes up when the stakes get real. That is information. You file it away.",
+        ],
+      },
+      "B-B": {
+        title: "Keep playing, ask out loud",
+        body: [
+          "You keep playing. It is fun. You like winning. Your classmate is okay with losing for now.",
+          "Then the teacher says there will be a trophy. You stop. The hidden help is bothering you now. You don't blame yourself for liking the wins. But you do think: the game maker should have told us the secret. You raise your hand. \"Can you tell us how the game works?\" The hidden becomes visible. Now everyone can play fair.",
+        ],
+      },
+      "B-C": {
+        title: "Felt good, but…",
+        body: [
+          "You keep playing. The wins feel great. You don't think about it too hard. Fun is fun.",
+          "The teacher announces a trophy. You shrug. You played, didn't you? Then later, alone, you think about it. The trophy on your shelf would look real. But every time you saw it, you would know. A win that you can't fully look at, you realize, is not really yours. You decide what to do next.",
+        ],
+      },
+      "C-A": {
+        title: "Practice mode, real contest",
+        body: [
+          "\"Let me switch to practice mode,\" you say. \"I want to actually learn, not just win.\" You play a few rounds without the help. It is harder. You miss the easy wins a little. But you can feel yourself getting better.",
+          "When the teacher offers a trophy, you are ready. The contest will be fair because you've been practicing fair. A trophy means something more when the practice was real. You think — fair contests are built one practice round at a time.",
+        ],
+      },
+      "C-B": {
+        title: "Practice mode, and tell the makers",
+        body: [
+          "You switch to practice mode. The help still happens, but now you're using it on purpose, to learn. It feels different.",
+          "When the teacher mentions a trophy, you raise your hand. \"The game has different modes. I think it should tell people what each one does.\" Practice is fair when you know what you're doing. Trophies are fair when everyone knows the rules. The game maker, you think, should help with both.",
+        ],
+      },
+      "C-C": {
+        title: "Learning, earning",
+        body: [
+          "\"I'm switching to practice mode,\" you tell yourself. You want to actually get better, not just look like you are. The wins might be smaller now, but they will be real.",
+          "When the teacher offers a trophy, you keep practicing. You don't win every round anymore. You learn more, though. When you finally get the trophy — or don't — you'll know exactly how you got there. You think: maybe the real prize was never the trophy. Maybe it was becoming someone who can actually play the game.",
+        ],
+      },
+    },
+    studentPositions: [
+      {
+        name: "A thinker named Robert Nozick",
+        view: "He asked a strange question. If a machine could give you the feeling of winning at everything, but the wins weren't real, would you plug in? Most people say no. He thought that means we care about real life — not just how it feels.",
+      },
+      {
+        name: "A thinker named Aristotle",
+        view: "He said being good at something means actually doing it, not just feeling like you did. A win you didn't really earn doesn't make you better at the game. It just makes the trophy shinier. The practice, he thought, is the real prize.",
+      },
+      {
+        name: "A modern thinker named Felipe De Brigard",
+        view: "He asked the same question Nozick asked, and he found something interesting. People answer it differently depending on how the question is worded. That doesn't mean the question is silly. It means our feelings about it are complicated — and worth thinking about carefully.",
+      },
+    ],
+    studentReference: {
+      concept: "What makes a win really yours?",
+      blurb: "Philosophers have been asking this question for a very long time. Aristotle thought you cannot be good at something without actually doing it. A thinker named Robert Nozick asked: if a machine could just GIVE you the feeling of winning, would you want it? Most of us say no — we want our wins to be real. Today, with the game helping you, you got to figure out what \"real\" means to you. That is one of the biggest questions in all of philosophy, and you just lived inside it.",
+    },
     reference: ref({
       concept: "The Experience Machine — when felt success and earned success come apart, which one matters, and why?",
       philosopher: "Robert Nozick (with Aristotle on eudaimonia and Felipe De Brigard on framing)",
