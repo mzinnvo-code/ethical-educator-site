@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp dist/index.html dist/404.html && node scripts/generate-feeds.mjs && node scripts/generate-og-images.mjs",
+    "build": "vite build && npm run prerender && cp dist/index.html dist/404.html && node scripts/generate-feeds.mjs && node scripts/generate-og-images.mjs",
+    "test:crawlability": "node scripts/check-crawlability.mjs",
     "og:generate": "node scripts/generate-og-images.mjs",
     "visuals:check": "node scripts/check-stage-visuals.mjs",
-    "prerender": "react-snap",
+    "prerender": "node scripts/prerender-site.mjs",
     "preview": "vite preview",
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
     "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",
@@ -31,11 +32,12 @@
   "reactSnap": {
     "source": "dist",
     "destination": "dist",
-    "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox"
     ],
+    "crawl": false,
+    "waitFor": 500,
     "include": [
       "/",
       "/about",
@@ -66,8 +68,6 @@
       "/thought-experiments/6-8",
       "/thought-experiments/9-12",
       "/thought-experiments/explaining-red-k-2",
-      "/thought-experiments/explaining-red-6-8",
-      "/thought-experiments/explaining-red-9-12",
       "/thought-experiments/toolkit",
       "/thought-experiments/journal",
       "/audiences/student",

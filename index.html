@@ -22,13 +22,13 @@
     <meta name="author" content="Matthew A. Zinn" />
     <meta name="keywords" content="philosophy, AI ethics, education, moral psychology, pedagogy, philosophy of education" />
     <meta name="theme-color" content="#0b1622" />
-    <link rel="canonical" href="https://theethicaleducator.com" />
+    <link rel="canonical" href="https://theethicaleducator.com/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="The Ethical Educator" />
     <meta property="og:description" content="Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education." />
     <meta property="og:image" content="/illustrations/home-hero.png" />
-    <meta property="og:url" content="https://theethicaleducator.com" />
+    <meta property="og:url" content="https://theethicaleducator.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="The Ethical Educator" />
     <meta property="og:locale" content="en_US" />
@@ -46,53 +46,91 @@
     <link rel="alternate" type="application/rss+xml" title="The Ethical Educator — What's New (RSS)" href="/feed.xml" />
     <link rel="alternate" type="application/feed+json" title="The Ethical Educator — What's New (JSON Feed)" href="/feed.json" />
 
-    <!-- Structured Data: Person -->
+    <!-- Structured Data: official site identity -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Matthew A. Zinn",
-      "jobTitle": "Philosopher and Educator",
-      "description": "Researcher in moral psychology, AI ethics, and philosophy of education",
-      "url": "https://theethicaleducator.com",
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "University of North Carolina at Charlotte"
-      },
-      "sameAs": [
-        "https://ethicalaiedu.wordpress.com",
-        "https://innovateedai.com"
-      ]
-    }
-    </script>
-
-    <!-- Structured Data: WebSite -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "The Ethical Educator",
-      "url": "https://theethicaleducator.com",
-      "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders."
-    }
-    </script>
-
-    <!-- Structured Data: Organization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "The Ethical Educator",
-      "url": "https://theethicaleducator.com",
-      "logo": "https://theethicaleducator.com/favicon.svg",
-      "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
-      "founder": {
-        "@type": "Person",
-        "name": "Matthew A. Zinn"
-      },
-      "sameAs": [
-        "https://ethicalaiedu.wordpress.com",
-        "https://innovateedai.com"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://theethicaleducator.com/#matthew-zinn",
+          "name": "Matthew A. Zinn",
+          "jobTitle": "Philosopher and Educator",
+          "description": "Researcher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.",
+          "url": "https://theethicaleducator.com/about",
+          "email": "hello@theethicaleducator.com",
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of North Carolina at Charlotte"
+          },
+          "knowsAbout": [
+            "AI ethics in education",
+            "Moral psychology",
+            "Philosophy of education",
+            "K-12 thought experiments",
+            "Educational technology"
+          ],
+          "sameAs": [
+            "https://ethicalaiedu.wordpress.com",
+            "https://innovateedai.com"
+          ]
+        },
+        {
+          "@type": ["Organization", "EducationalOrganization"],
+          "@id": "https://theethicaleducator.com/#organization",
+          "name": "The Ethical Educator",
+          "url": "https://theethicaleducator.com/",
+          "logo": "https://theethicaleducator.com/favicon.svg",
+          "email": "hello@theethicaleducator.com",
+          "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
+          "founder": {
+            "@id": "https://theethicaleducator.com/#matthew-zinn"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@theethicaleducator.com",
+            "contactType": "site contact"
+          },
+          "sameAs": [
+            "https://ethicalaiedu.wordpress.com",
+            "https://innovateedai.com"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://theethicaleducator.com/#website",
+          "name": "The Ethical Educator",
+          "url": "https://theethicaleducator.com/",
+          "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders.",
+          "publisher": {
+            "@id": "https://theethicaleducator.com/#organization"
+          },
+          "creator": {
+            "@id": "https://theethicaleducator.com/#matthew-zinn"
+          },
+          "inLanguage": "en-US",
+          "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+          "audience": [
+            { "@type": "EducationalAudience", "educationalRole": "teacher" },
+            { "@type": "EducationalAudience", "educationalRole": "administrator" },
+            { "@type": "EducationalAudience", "educationalRole": "student" },
+            { "@type": "Audience", "audienceType": "parents and families" }
+          ],
+          "about": [
+            "AI ethics in education",
+            "K-12 philosophy",
+            "Classroom thought experiments",
+            "Moral psychology",
+            "School AI policy"
+          ],
+          "hasPart": [
+            { "@type": "WebPage", "name": "About Matthew A. Zinn", "url": "https://theethicaleducator.com/about" },
+            { "@type": "WebPage", "name": "Interactive Thought Experiments", "url": "https://theethicaleducator.com/thought-experiments" },
+            { "@type": "WebPage", "name": "Interactive Tools", "url": "https://theethicaleducator.com/tools" },
+            { "@type": "WebPage", "name": "AI in Education", "url": "https://theethicaleducator.com/ai-education" },
+            { "@type": "WebPage", "name": "Research Resources", "url": "https://theethicaleducator.com/resources" }
+          ]
+        }
       ]
     }
     </script>

@@ -38,6 +38,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify crawler-facing HTML
+        run: npm run test:crawlability
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
