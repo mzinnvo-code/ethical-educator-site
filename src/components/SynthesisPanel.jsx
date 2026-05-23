@@ -404,66 +404,168 @@ function AdultCornerIntro({ accent }) {
   );
 }
 
-export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null, stages = [], mode = "story", onRestart = null }) {
+// The original "Path you took" block — numbered choices with lens tag chips
+// and the analytical "your reasoning leaned X" summary. Pitched at an adult
+// (researcher, teacher, parent, or older student). In K-5 kid mode this
+// renders below the "For a trusted adult" divider; in every other mode it
+// renders at the top of the synthesis, exactly as before.
+function PathTraversedBlock({ chose = [], experiment, accent }) {
   const lensCounts = chose.reduce((acc, opt) => {
     if (opt?.lens) acc[opt.lens] = (acc[opt.lens] || 0) + 1;
     return acc;
   }, {});
   const dominant = Object.entries(lensCounts).sort((a, b) => b[1] - a[1])[0]?.[0];
   const topicLabel = TOPIC_BY_ID[experiment?.topics?.[0]]?.label;
+  return (
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+      border: `1px solid ${accent}30`,
+      borderRadius: 12, padding: "16px 18px", marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 700,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 10,
+      }}>
+        The path you took
+      </p>
+      <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {chose.map((opt, i) => (
+          <li key={i} style={{
+            display: "flex", alignItems: "flex-start", gap: 10,
+            padding: "8px 0", borderBottom: i < chose.length - 1 ? `1px solid ${accent}15` : "none",
+          }}>
+            <span style={{
+              flexShrink: 0, width: 22, height: 22, borderRadius: "50%",
+              background: accent, color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.74rem", fontWeight: 700,
+            }}>{i + 1}</span>
+            <div style={{ flex: 1 }}>
+              <p style={{
+                color: C.textPrimary, fontSize: "0.92rem",
+                fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.5,
+                marginBottom: 4,
+              }}>
+                {opt?.text || <em style={{ color: C.textMuted }}>(no choice recorded)</em>}
+              </p>
+              {opt?.lens && <EthicalLensTag lens={opt.lens} color={accent} />}
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {dominant && (
+        <p style={{
+          color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.6,
+          marginTop: 12, paddingTop: 12, borderTop: `1px dashed ${accent}30`,
+          fontStyle: "italic",
+        }}>
+          Across this experiment your reasoning leaned <strong style={{ color: accent }}>{lensName(dominant)}</strong>
+          {topicLabel ? ` on a question about ${topicLabel.toLowerCase()}.` : "."}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Warm, kid-pitched recap of the choices the child made — no lens chips and
+// no analytical summary, just the choice texts and one warm sentence derived
+// from the dominant lens(es). Renders only in K-5 kid mode, between the
+// personalized story and the try-again CTA.
+function WarmPathRecap({ chose = [], accent }) {
+  const recorded = (chose || []).filter(Boolean);
+  if (!recorded.length) return null;
+
+  const lensCounts = recorded.reduce((acc, opt) => {
+    if (opt?.lens) acc[opt.lens] = (acc[opt.lens] || 0) + 1;
+    return acc;
+  }, {});
+  const sortedLenses = Object.entries(lensCounts).sort((a, b) => b[1] - a[1]);
+  const top = sortedLenses[0];
+  const second = sortedLenses[1];
+  const isTied = top && second && top[1] === second[1];
+
+  let summary = null;
+  if (top) {
+    if (isTied) {
+      summary = (
+        <>
+          Today, you blended <strong style={{ color: accent }}>{lensNameKid(top[0])}</strong> and{" "}
+          <strong style={{ color: accent }}>{lensNameKid(second[0])}</strong> together.
+        </>
+      );
+    } else {
+      summary = (
+        <>
+          Today, you leaned into <strong style={{ color: accent }}>{lensNameKid(top[0])}</strong>{" "}
+          — and you carried it through both choices.
+        </>
+      );
+    }
+  }
 
   return (
-    <div style={{ marginTop: 12 }}>
-      {/* Path traversed */}
-      <div style={{
-        background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
-        border: `1px solid ${accent}30`,
-        borderRadius: 12, padding: "16px 18px", marginBottom: 14,
+    <div style={{
+      background: `linear-gradient(135deg, ${accent}10, ${accent}04)`,
+      border: `1px solid ${accent}30`,
+      borderRadius: 12, padding: "16px 18px", marginBottom: 14,
+    }}>
+      <p style={{
+        color: accent, fontSize: "0.7rem", fontWeight: 700,
+        letterSpacing: "0.14em", textTransform: "uppercase",
+        marginBottom: 10,
       }}>
-        <p style={{
-          color: accent, fontSize: "0.7rem", fontWeight: 700,
-          letterSpacing: "0.14em", textTransform: "uppercase",
-          marginBottom: 10,
-        }}>
-          The path you took
-        </p>
-        <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
-          {chose.map((opt, i) => (
-            <li key={i} style={{
-              display: "flex", alignItems: "flex-start", gap: 10,
-              padding: "8px 0", borderBottom: i < chose.length - 1 ? `1px solid ${accent}15` : "none",
-            }}>
-              <span style={{
-                flexShrink: 0, width: 22, height: 22, borderRadius: "50%",
-                background: accent, color: "#fff",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "0.74rem", fontWeight: 700,
-              }}>{i + 1}</span>
-              <div style={{ flex: 1 }}>
-                <p style={{
-                  color: C.textPrimary, fontSize: "0.92rem",
-                  fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.5,
-                  marginBottom: 4,
-                }}>
-                  {opt?.text || <em style={{ color: C.textMuted }}>(no choice recorded)</em>}
-                </p>
-                {opt?.lens && <EthicalLensTag lens={opt.lens} color={accent} />}
-              </div>
-            </li>
-          ))}
-        </ol>
-
-        {dominant && (
-          <p style={{
-            color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.6,
-            marginTop: 12, paddingTop: 12, borderTop: `1px dashed ${accent}30`,
-            fontStyle: "italic",
+        Your choices today
+      </p>
+      <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        {chose.map((opt, i) => (
+          <li key={i} style={{
+            display: "flex", alignItems: "flex-start", gap: 10,
+            padding: "8px 0", borderBottom: i < chose.length - 1 ? `1px solid ${accent}15` : "none",
           }}>
-            Across this experiment your reasoning leaned <strong style={{ color: accent }}>{lensName(dominant)}</strong>
-            {topicLabel ? ` on a question about ${topicLabel.toLowerCase()}.` : "."}
-          </p>
-        )}
-      </div>
+            <span style={{
+              flexShrink: 0, width: 22, height: 22, borderRadius: "50%",
+              background: accent, color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.74rem", fontWeight: 700,
+            }}>{i + 1}</span>
+            <div style={{ flex: 1 }}>
+              <p style={{
+                color: C.textPrimary, fontSize: "0.96rem",
+                fontFamily: "'Source Serif 4', Georgia, serif", lineHeight: 1.55,
+                margin: 0,
+              }}>
+                {opt?.text || <em style={{ color: C.textMuted }}>(no choice recorded)</em>}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {summary && (
+        <p style={{
+          color: C.textSecondary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "0.94rem", lineHeight: 1.6,
+          marginTop: 12, paddingTop: 12,
+          borderTop: `1px dashed ${accent}30`,
+          marginBottom: 0,
+        }}>
+          {summary}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export default function SynthesisPanel({ chose = [], experiment, accent = C.gold, positions = [], extra = null, stages = [], mode = "story", onRestart = null }) {
+  return (
+    <div style={{ marginTop: 12 }}>
+      {/* Path traversed — at the top for non-kid modes (6-8, 9-12, educator).
+        * In kid mode it relocates below the adult divider; see below. */}
+      {mode !== "kid" && (
+        <PathTraversedBlock chose={chose} experiment={experiment} accent={accent} />
+      )}
 
       {/* Kid-mode resolution stack: a payoff story for the path the child took,
         * a "try again" CTA, then the child-pitched Wonder More + philosopher +
@@ -476,6 +578,7 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
             chose={chose}
             accent={accent}
           />
+          <WarmPathRecap chose={chose} accent={accent} />
           {experiment?.studentStories && (
             <TryAgainPanel onRestart={onRestart} accent={accent} />
           )}
@@ -495,6 +598,10 @@ export default function SynthesisPanel({ chose = [], experiment, accent = C.gold
           {(positions.length > 0 || experiment?.reference) && (
             <AdultCornerIntro accent={accent} />
           )}
+          {/* Adult-pitched path block: lens chips + analytical summary line.
+            * In non-kid modes this sits at the top; in kid mode it relocates
+            * here, alongside the other adult-facing sections. */}
+          <PathTraversedBlock chose={chose} experiment={experiment} accent={accent} />
         </>
       )}
 
@@ -616,6 +723,30 @@ const LENS_NAMES = {
   rationalist: "rationalist (let reason decide)",
 };
 function lensName(id) { return LENS_NAMES[id] || id?.replace(/-/g, " "); }
+
+// Kid-voice noun phrases for the warm path recap shown in K-5 synthesis.
+// Each entry should read naturally inside the sentence templates used by
+// WarmPathRecap (e.g. "you leaned into {kindness}" / "you blended
+// {kindness} and {fairness} together"). Covers the 15 lenses used by the
+// K-grade scenarios; falls back to a humanised lens id for anything else.
+const LENS_NAMES_KID = {
+  care: "kindness",
+  realism: "clear thinking",
+  inquiry: "asking good questions",
+  stewardship: "taking care of things",
+  fairness: "fairness",
+  creative: "clever new ideas",
+  need: "what each friend needed",
+  responsibility: "speaking up when it mattered",
+  curiosity: "watching carefully",
+  repair: "fixing what got broken",
+  accountability: "knowing who had the biggest job",
+  ritual: "marking what mattered",
+  continuity: "the story that keeps going",
+  "material-identity": "looking closely at what's there",
+  pluralist: "holding two ideas at once",
+};
+function lensNameKid(id) { return LENS_NAMES_KID[id] || id?.replace(/-/g, " "); }
 
 // Pulls the option text the student chose at a given stage; falls back gracefully.
 function chosenLabelFor(opt) {
