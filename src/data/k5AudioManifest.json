@@ -102,6 +102,138 @@
         "hash": "78d89c8c1935af58",
         "chars": 75,
         "bytes": 97010
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/magic-toy/student-story-A-A.mp3",
+        "hash": "a09d96d3b11aee8d",
+        "chars": 446,
+        "bytes": 672958
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/magic-toy/path-recap-A-A.mp3",
+        "hash": "b00576c3a148a524",
+        "chars": 163,
+        "bytes": 275061
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/magic-toy/student-story-A-B.mp3",
+        "hash": "f19975fb9f628110",
+        "chars": 399,
+        "bytes": 556765
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/magic-toy/path-recap-A-B.mp3",
+        "hash": "093cbd55373121b8",
+        "chars": 157,
+        "bytes": 260850
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/magic-toy/student-story-A-C.mp3",
+        "hash": "ae52d05164bf00e5",
+        "chars": 415,
+        "bytes": 588530
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/magic-toy/path-recap-A-C.mp3",
+        "hash": "a4706b3c873bb982",
+        "chars": 146,
+        "bytes": 262104
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/magic-toy/student-story-B-A.mp3",
+        "hash": "880312d2a26d948f",
+        "chars": 417,
+        "bytes": 615279
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/magic-toy/path-recap-B-A.mp3",
+        "hash": "6a3e4f588dbe33cc",
+        "chars": 152,
+        "bytes": 232847
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/magic-toy/student-story-B-B.mp3",
+        "hash": "bda1384ea5f90507",
+        "chars": 433,
+        "bytes": 588530
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/magic-toy/path-recap-B-B.mp3",
+        "hash": "b24f9476f689f808",
+        "chars": 168,
+        "bytes": 249565
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/magic-toy/student-story-B-C.mp3",
+        "hash": "bafbb06499b9b6f4",
+        "chars": 419,
+        "bytes": 511626
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/magic-toy/path-recap-B-C.mp3",
+        "hash": "50de9dbbc0eff953",
+        "chars": 173,
+        "bytes": 267119
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/magic-toy/student-story-C-A.mp3",
+        "hash": "c3210a7cc8f262a8",
+        "chars": 431,
+        "bytes": 601487
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/magic-toy/path-recap-C-A.mp3",
+        "hash": "3d54c38e5dd233ad",
+        "chars": 165,
+        "bytes": 270045
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/magic-toy/student-story-C-B.mp3",
+        "hash": "11ee8a7721fc4d5b",
+        "chars": 421,
+        "bytes": 553839
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/magic-toy/path-recap-C-B.mp3",
+        "hash": "f92036de2e21b47a",
+        "chars": 181,
+        "bytes": 267119
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/magic-toy/student-story-C-C.mp3",
+        "hash": "8f0971a64a286d7a",
+        "chars": 432,
+        "bytes": 603995
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/magic-toy/path-recap-C-C.mp3",
+        "hash": "dd37364b23141805",
+        "chars": 170,
+        "bytes": 271299
+      },
+      "student-position-1": {
+        "file": "/audio/k5/magic-toy/student-position-1.mp3",
+        "hash": "5d4ae53e76206dca",
+        "chars": 229,
+        "bytes": 337755
+      },
+      "student-position-2": {
+        "file": "/audio/k5/magic-toy/student-position-2.mp3",
+        "hash": "d3c826dfebafe7d7",
+        "chars": 222,
+        "bytes": 294287
+      },
+      "student-position-3": {
+        "file": "/audio/k5/magic-toy/student-position-3.mp3",
+        "hash": "3622b3bca294bae9",
+        "chars": 192,
+        "bytes": 258342
+      },
+      "student-reference": {
+        "file": "/audio/k5/magic-toy/student-reference.mp3",
+        "hash": "8cde7ff2a8c53425",
+        "chars": 456,
+        "bytes": 598979
       }
     },
     "ai-grading-mistake": {
@@ -352,6 +484,138 @@
         "hash": "edc0a907a03a5be1",
         "chars": 69,
         "bytes": 77784
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/robot-friend-turn/student-story-A-A.mp3",
+        "hash": "d7c81a38e692b273",
+        "chars": 440,
+        "bytes": 606502
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-A-A.mp3",
+        "hash": "e530b030b6c8abc1",
+        "chars": 153,
+        "bytes": 224906
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/robot-friend-turn/student-story-A-B.mp3",
+        "hash": "19e66184ca9678cc",
+        "chars": 463,
+        "bytes": 593546
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-A-B.mp3",
+        "hash": "406fdf9364210a95",
+        "chars": 169,
+        "bytes": 239116
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/robot-friend-turn/student-story-A-C.mp3",
+        "hash": "e2983aef33dfa928",
+        "chars": 440,
+        "bytes": 555511
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-A-C.mp3",
+        "hash": "fcc46acea9ae26a4",
+        "chars": 163,
+        "bytes": 250819
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/robot-friend-turn/student-story-B-A.mp3",
+        "hash": "244d2cf43f94e687",
+        "chars": 504,
+        "bytes": 690930
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-B-A.mp3",
+        "hash": "18b3b2cf7bd2c210",
+        "chars": 130,
+        "bytes": 241624
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/robot-friend-turn/student-story-B-B.mp3",
+        "hash": "300349a817bcccaa",
+        "chars": 537,
+        "bytes": 676719
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-B-B.mp3",
+        "hash": "739ed3da42c5b55c",
+        "chars": 168,
+        "bytes": 240370
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/robot-friend-turn/student-story-B-C.mp3",
+        "hash": "973dd5c8f02e8a8b",
+        "chars": 505,
+        "bytes": 643701
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-B-C.mp3",
+        "hash": "630b5245b77e4f3b",
+        "chars": 162,
+        "bytes": 250819
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/robot-friend-turn/student-story-C-A.mp3",
+        "hash": "3b748e291c90f1f0",
+        "chars": 546,
+        "bytes": 710156
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-C-A.mp3",
+        "hash": "8195ca4c559665ee",
+        "chars": 145,
+        "bytes": 242878
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/robot-friend-turn/student-story-C-B.mp3",
+        "hash": "95d3ade7e5a7f413",
+        "chars": 528,
+        "bytes": 700125
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-C-B.mp3",
+        "hash": "410be6cbc0d8e0a3",
+        "chars": 183,
+        "bytes": 253327
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/robot-friend-turn/student-story-C-C.mp3",
+        "hash": "78761609a290600c",
+        "chars": 505,
+        "bytes": 625728
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/robot-friend-turn/path-recap-C-C.mp3",
+        "hash": "485c54c5be27cd34",
+        "chars": 191,
+        "bytes": 283838
+      },
+      "student-position-1": {
+        "file": "/audio/k5/robot-friend-turn/student-position-1.mp3",
+        "hash": "7c579dc0d2922908",
+        "chars": 217,
+        "bytes": 276315
+      },
+      "student-position-2": {
+        "file": "/audio/k5/robot-friend-turn/student-position-2.mp3",
+        "hash": "21bb6e29fcfdc8dd",
+        "chars": 199,
+        "bytes": 262104
+      },
+      "student-position-3": {
+        "file": "/audio/k5/robot-friend-turn/student-position-3.mp3",
+        "hash": "fa17322d314cdd7d",
+        "chars": 201,
+        "bytes": 259596
+      },
+      "student-reference": {
+        "file": "/audio/k5/robot-friend-turn/student-reference.mp3",
+        "hash": "77f4349f7c4e0ee8",
+        "chars": 420,
+        "bytes": 582261
       }
     },
     "messy-robot": {
@@ -450,6 +714,138 @@
         "hash": "0879b4313a6bc837",
         "chars": 60,
         "bytes": 76530
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/messy-robot/student-story-A-A.mp3",
+        "hash": "a6d116538108265b",
+        "chars": 461,
+        "bytes": 664181
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/messy-robot/path-recap-A-A.mp3",
+        "hash": "d2b40ce7f704cfac",
+        "chars": 176,
+        "bytes": 264612
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/messy-robot/student-story-A-B.mp3",
+        "hash": "7a0acce7af2cdee3",
+        "chars": 461,
+        "bytes": 656239
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/messy-robot/path-recap-A-B.mp3",
+        "hash": "9710bbc4661e196b",
+        "chars": 175,
+        "bytes": 298048
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/messy-robot/student-story-A-C.mp3",
+        "hash": "1954516a234cbbd5",
+        "chars": 467,
+        "bytes": 660419
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/messy-robot/path-recap-A-C.mp3",
+        "hash": "32b3a2413b4e29f5",
+        "chars": 186,
+        "bytes": 291779
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/messy-robot/student-story-B-A.mp3",
+        "hash": "58acd44d63c41a13",
+        "chars": 461,
+        "bytes": 623221
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/messy-robot/path-recap-B-A.mp3",
+        "hash": "49a8a7b0c919c3f0",
+        "chars": 186,
+        "bytes": 270045
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/messy-robot/student-story-B-B.mp3",
+        "hash": "052715e3c4867ef5",
+        "chars": 474,
+        "bytes": 603995
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/messy-robot/path-recap-B-B.mp3",
+        "hash": "48599c8e83ec55f7",
+        "chars": 185,
+        "bytes": 270045
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/messy-robot/student-story-B-C.mp3",
+        "hash": "ed25878de7c33ea0",
+        "chars": 460,
+        "bytes": 631998
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/messy-robot/path-recap-B-C.mp3",
+        "hash": "7ac5670d7f31a298",
+        "chars": 196,
+        "bytes": 267119
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/messy-robot/student-story-C-A.mp3",
+        "hash": "3b4709c6d5d0647d",
+        "chars": 425,
+        "bytes": 578499
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/messy-robot/path-recap-C-A.mp3",
+        "hash": "d928961d3105861d",
+        "chars": 174,
+        "bytes": 244132
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/messy-robot/student-story-C-B.mp3",
+        "hash": "f516de7e0c95e7aa",
+        "chars": 412,
+        "bytes": 569304
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/messy-robot/path-recap-C-B.mp3",
+        "hash": "1dbd808e5b7b5148",
+        "chars": 173,
+        "bytes": 245386
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/messy-robot/student-story-C-C.mp3",
+        "hash": "8171ba9f67b9d6dc",
+        "chars": 464,
+        "bytes": 634506
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/messy-robot/path-recap-C-C.mp3",
+        "hash": "7445e5d2c0a512c3",
+        "chars": 184,
+        "bytes": 281330
+      },
+      "student-position-1": {
+        "file": "/audio/k5/messy-robot/student-position-1.mp3",
+        "hash": "0e75c6dea1f48110",
+        "chars": 234,
+        "bytes": 280076
+      },
+      "student-position-2": {
+        "file": "/audio/k5/messy-robot/student-position-2.mp3",
+        "hash": "e15314a28740b7d0",
+        "chars": 210,
+        "bytes": 260850
+      },
+      "student-position-3": {
+        "file": "/audio/k5/messy-robot/student-position-3.mp3",
+        "hash": "a14a0e23ea558d12",
+        "chars": 207,
+        "bytes": 249565
+      },
+      "student-reference": {
+        "file": "/audio/k5/messy-robot/student-reference.mp3",
+        "hash": "7b8bddc691b6284a",
+        "chars": 345,
+        "bytes": 442662
       }
     },
     "robot-pet-goodbye": {
@@ -548,6 +944,138 @@
         "hash": "9df5072e2efeca52",
         "chars": 89,
         "bytes": 137970
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-A-A.mp3",
+        "hash": "080bc9bebc1dbd24",
+        "chars": 501,
+        "bytes": 703887
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-A-A.mp3",
+        "hash": "49c2a35b42baddd6",
+        "chars": 171,
+        "bytes": 285092
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-A-B.mp3",
+        "hash": "44913324a39e77b6",
+        "chars": 438,
+        "bytes": 671704
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-A-B.mp3",
+        "hash": "e5bca93882b5464b",
+        "chars": 172,
+        "bytes": 248311
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-A-C.mp3",
+        "hash": "bfcd15727d8bb587",
+        "chars": 489,
+        "bytes": 707648
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-A-C.mp3",
+        "hash": "8837c6d188748610",
+        "chars": 154,
+        "bytes": 268791
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-B-A.mp3",
+        "hash": "ab79f73f3340cd14",
+        "chars": 516,
+        "bytes": 720605
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-B-A.mp3",
+        "hash": "f3e18f6845c74806",
+        "chars": 181,
+        "bytes": 270045
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-B-B.mp3",
+        "hash": "f7f1515dc5aa3b6e",
+        "chars": 456,
+        "bytes": 625728
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-B-B.mp3",
+        "hash": "2899d614f7842217",
+        "chars": 182,
+        "bytes": 287599
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-B-C.mp3",
+        "hash": "ebba3486fcd63ca7",
+        "chars": 501,
+        "bytes": 654986
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-B-C.mp3",
+        "hash": "02f890d2099d3252",
+        "chars": 164,
+        "bytes": 290525
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-C-A.mp3",
+        "hash": "6c8f16ee6b7e1279",
+        "chars": 508,
+        "bytes": 660419
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-C-A.mp3",
+        "hash": "a4b661d9f7a0b6ee",
+        "chars": 190,
+        "bytes": 276315
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-C-B.mp3",
+        "hash": "3b17b2bcbb688a63",
+        "chars": 506,
+        "bytes": 596471
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-C-B.mp3",
+        "hash": "576f2f65b02278c1",
+        "chars": 191,
+        "bytes": 257088
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/robot-pet-goodbye/student-story-C-C.mp3",
+        "hash": "ced9c4f7b5286aed",
+        "chars": 500,
+        "bytes": 671704
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/robot-pet-goodbye/path-recap-C-C.mp3",
+        "hash": "2a5450b58de97237",
+        "chars": 173,
+        "bytes": 252073
+      },
+      "student-position-1": {
+        "file": "/audio/k5/robot-pet-goodbye/student-position-1.mp3",
+        "hash": "76a125daa8da6ce8",
+        "chars": 223,
+        "bytes": 330231
+      },
+      "student-position-2": {
+        "file": "/audio/k5/robot-pet-goodbye/student-position-2.mp3",
+        "hash": "a2aace310b472819",
+        "chars": 213,
+        "bytes": 289271
+      },
+      "student-position-3": {
+        "file": "/audio/k5/robot-pet-goodbye/student-position-3.mp3",
+        "hash": "ea4cc938d4296884",
+        "chars": 202,
+        "bytes": 240370
+      },
+      "student-reference": {
+        "file": "/audio/k5/robot-pet-goodbye/student-reference.mp3",
+        "hash": "03161a6602ec7bd9",
+        "chars": 537,
+        "bytes": 700125
       }
     },
     "invisible-ring": {
@@ -652,6 +1180,138 @@
         "hash": "910c51280707b673",
         "chars": 80,
         "bytes": 99518
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/invisible-ring/student-story-A-A.mp3",
+        "hash": "ecde2735149289b0",
+        "chars": 451,
+        "bytes": 600233
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/invisible-ring/path-recap-A-A.mp3",
+        "hash": "664d1f19bf73a808",
+        "chars": 176,
+        "bytes": 268791
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/invisible-ring/student-story-A-B.mp3",
+        "hash": "a18b22ef7f27c951",
+        "chars": 366,
+        "bytes": 458127
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/invisible-ring/path-recap-A-B.mp3",
+        "hash": "0cef2af3f3c4322b",
+        "chars": 184,
+        "bytes": 259596
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/invisible-ring/student-story-A-C.mp3",
+        "hash": "11f403f993bb9e51",
+        "chars": 449,
+        "bytes": 593546
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/invisible-ring/path-recap-A-C.mp3",
+        "hash": "7136bac4f5e7af2c",
+        "chars": 197,
+        "bytes": 290525
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/invisible-ring/student-story-B-A.mp3",
+        "hash": "3e86774ae31f0977",
+        "chars": 507,
+        "bytes": 651224
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/invisible-ring/path-recap-B-A.mp3",
+        "hash": "a1c3b4c08ab55c00",
+        "chars": 180,
+        "bytes": 268791
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/invisible-ring/student-story-B-B.mp3",
+        "hash": "456389bf03a0eff1",
+        "chars": 491,
+        "bytes": 623221
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/invisible-ring/path-recap-B-B.mp3",
+        "hash": "5549a61b165017af",
+        "chars": 197,
+        "bytes": 282584
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/invisible-ring/student-story-B-C.mp3",
+        "hash": "38817751c4fc5e09",
+        "chars": 517,
+        "bytes": 623221
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/invisible-ring/path-recap-B-C.mp3",
+        "hash": "36f62862c5a5cd78",
+        "chars": 210,
+        "bytes": 308079
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/invisible-ring/student-story-C-A.mp3",
+        "hash": "01430203df46570c",
+        "chars": 441,
+        "bytes": 634506
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/invisible-ring/path-recap-C-A.mp3",
+        "hash": "42468342fc2d1a5b",
+        "chars": 176,
+        "bytes": 267119
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/invisible-ring/student-story-C-B.mp3",
+        "hash": "765d7b7adc79e736",
+        "chars": 432,
+        "bytes": 597725
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/invisible-ring/path-recap-C-B.mp3",
+        "hash": "eaabda458372f718",
+        "chars": 184,
+        "bytes": 252073
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/invisible-ring/student-story-C-C.mp3",
+        "hash": "044213ea12d81f39",
+        "chars": 462,
+        "bytes": 671704
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/invisible-ring/path-recap-C-C.mp3",
+        "hash": "15a9be4bb3855120",
+        "chars": 191,
+        "bytes": 293033
+      },
+      "student-position-1": {
+        "file": "/audio/k5/invisible-ring/student-position-1.mp3",
+        "hash": "0ea9a5737f258230",
+        "chars": 310,
+        "bytes": 415913
+      },
+      "student-position-2": {
+        "file": "/audio/k5/invisible-ring/student-position-2.mp3",
+        "hash": "fa24ab9982f31711",
+        "chars": 288,
+        "bytes": 311005
+      },
+      "student-position-3": {
+        "file": "/audio/k5/invisible-ring/student-position-3.mp3",
+        "hash": "ec2345e13838692c",
+        "chars": 260,
+        "bytes": 331485
+      },
+      "student-reference": {
+        "file": "/audio/k5/invisible-ring/student-reference.mp3",
+        "hash": "62bc8b9121dbcc57",
+        "chars": 457,
+        "bytes": 523328
       }
     },
     "honesty-protection": {
@@ -756,6 +1416,138 @@
         "hash": "6acf3f48f937fb43",
         "chars": 109,
         "bytes": 119998
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/honesty-protection/student-story-A-A.mp3",
+        "hash": "36a1362256745e8e",
+        "chars": 551,
+        "bytes": 743593
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/honesty-protection/path-recap-A-A.mp3",
+        "hash": "d0ca209fa1a0a387",
+        "chars": 175,
+        "bytes": 264612
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/honesty-protection/student-story-A-B.mp3",
+        "hash": "c7ed01dbb207f3fc",
+        "chars": 448,
+        "bytes": 652478
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/honesty-protection/path-recap-A-B.mp3",
+        "hash": "3a44db512231a6a5",
+        "chars": 207,
+        "bytes": 295541
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/honesty-protection/student-story-A-C.mp3",
+        "hash": "468dc72665428818",
+        "chars": 530,
+        "bytes": 647462
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/honesty-protection/path-recap-A-C.mp3",
+        "hash": "f10c62080056b7d6",
+        "chars": 180,
+        "bytes": 296795
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/honesty-protection/student-story-B-A.mp3",
+        "hash": "3f63659d4f6b6b05",
+        "chars": 532,
+        "bytes": 726875
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/honesty-protection/path-recap-B-A.mp3",
+        "hash": "d710fb02b5604d5e",
+        "chars": 171,
+        "bytes": 280076
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/honesty-protection/student-story-B-B.mp3",
+        "hash": "161873b47b260a03",
+        "chars": 525,
+        "bytes": 725621
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/honesty-protection/path-recap-B-B.mp3",
+        "hash": "14da9f370454f53c",
+        "chars": 203,
+        "bytes": 295541
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/honesty-protection/student-story-B-C.mp3",
+        "hash": "f733b0f46b7d64fd",
+        "chars": 530,
+        "bytes": 724367
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/honesty-protection/path-recap-B-C.mp3",
+        "hash": "ec085b21ad7a3a6e",
+        "chars": 176,
+        "bytes": 299302
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/honesty-protection/student-story-C-A.mp3",
+        "hash": "64b71163569a3088",
+        "chars": 458,
+        "bytes": 647462
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/honesty-protection/path-recap-C-A.mp3",
+        "hash": "4bce43c1045ecf8f",
+        "chars": 159,
+        "bytes": 253327
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/honesty-protection/student-story-C-B.mp3",
+        "hash": "2c1aaea882d31b2e",
+        "chars": 494,
+        "bytes": 678391
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/honesty-protection/path-recap-C-B.mp3",
+        "hash": "df275fb42bfebe21",
+        "chars": 191,
+        "bytes": 305572
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/honesty-protection/student-story-C-C.mp3",
+        "hash": "4dce345ea83b5676",
+        "chars": 452,
+        "bytes": 629490
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/honesty-protection/path-recap-C-C.mp3",
+        "hash": "f7fb1039feea0c36",
+        "chars": 172,
+        "bytes": 282584
+      },
+      "student-position-1": {
+        "file": "/audio/k5/honesty-protection/student-position-1.mp3",
+        "hash": "9e018d565b27343b",
+        "chars": 277,
+        "bytes": 367012
+      },
+      "student-position-2": {
+        "file": "/audio/k5/honesty-protection/student-position-2.mp3",
+        "hash": "3a84153b7cf2b809",
+        "chars": 261,
+        "bytes": 332739
+      },
+      "student-position-3": {
+        "file": "/audio/k5/honesty-protection/student-position-3.mp3",
+        "hash": "5890cd710f3c0e1c",
+        "chars": 235,
+        "bytes": 319782
+      },
+      "student-reference": {
+        "file": "/audio/k5/honesty-protection/student-reference.mp3",
+        "hash": "b5fdb6a762dc5a97",
+        "chars": 447,
+        "bytes": 586022
       }
     },
     "rude-toy": {
@@ -860,6 +1652,138 @@
         "hash": "6b38d4794136481c",
         "chars": 82,
         "bytes": 102026
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/rude-toy/student-story-A-A.mp3",
+        "hash": "f8281a4ae17844fb",
+        "chars": 501,
+        "bytes": 664181
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/rude-toy/path-recap-A-A.mp3",
+        "hash": "7dbb45a6045368ce",
+        "chars": 165,
+        "bytes": 255835
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/rude-toy/student-story-A-B.mp3",
+        "hash": "a2e490af6b4d5e25",
+        "chars": 448,
+        "bytes": 587276
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/rude-toy/path-recap-A-B.mp3",
+        "hash": "6da786600a7280d9",
+        "chars": 159,
+        "bytes": 250819
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/rude-toy/student-story-A-C.mp3",
+        "hash": "d23cc33c7a7bd402",
+        "chars": 457,
+        "bytes": 629490
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/rude-toy/path-recap-A-C.mp3",
+        "hash": "a8e8bdba955628aa",
+        "chars": 150,
+        "bytes": 252073
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/rude-toy/student-story-B-A.mp3",
+        "hash": "9d8c315b72ef067f",
+        "chars": 526,
+        "bytes": 666688
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/rude-toy/path-recap-B-A.mp3",
+        "hash": "1f4c6d98fc3b0058",
+        "chars": 193,
+        "bytes": 272553
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/rude-toy/student-story-B-B.mp3",
+        "hash": "464ee20c14d3e59d",
+        "chars": 420,
+        "bytes": 628236
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/rude-toy/path-recap-B-B.mp3",
+        "hash": "cf1e0dd499781b37",
+        "chars": 187,
+        "bytes": 273807
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/rude-toy/student-story-B-C.mp3",
+        "hash": "098dd77838570ea7",
+        "chars": 529,
+        "bytes": 688422
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/rude-toy/path-recap-B-C.mp3",
+        "hash": "7e29808337929e2b",
+        "chars": 194,
+        "bytes": 290525
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/rude-toy/student-story-C-A.mp3",
+        "hash": "f4b4a305acf2cf90",
+        "chars": 469,
+        "bytes": 587276
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/rude-toy/path-recap-C-A.mp3",
+        "hash": "e9a8488514cafdb2",
+        "chars": 194,
+        "bytes": 298048
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/rude-toy/student-story-C-B.mp3",
+        "hash": "3f21da96e24b0a3a",
+        "chars": 447,
+        "bytes": 616951
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/rude-toy/path-recap-C-B.mp3",
+        "hash": "913a8009dc01957d",
+        "chars": 188,
+        "bytes": 263358
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/rude-toy/student-story-C-C.mp3",
+        "hash": "dbc1dcefcda71585",
+        "chars": 451,
+        "bytes": 593546
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/rude-toy/path-recap-C-C.mp3",
+        "hash": "20f5c9a3f44bd36c",
+        "chars": 179,
+        "bytes": 276315
+      },
+      "student-position-1": {
+        "file": "/audio/k5/rude-toy/student-position-1.mp3",
+        "hash": "4a712e1195615dbc",
+        "chars": 247,
+        "bytes": 309751
+      },
+      "student-position-2": {
+        "file": "/audio/k5/rude-toy/student-position-2.mp3",
+        "hash": "2751f18ba7ea9ea0",
+        "chars": 259,
+        "bytes": 368266
+      },
+      "student-position-3": {
+        "file": "/audio/k5/rude-toy/student-position-3.mp3",
+        "hash": "d3bf5a3141598340",
+        "chars": 253,
+        "bytes": 322290
+      },
+      "student-reference": {
+        "file": "/audio/k5/rude-toy/student-reference.mp3",
+        "hash": "f45f94d968068c20",
+        "chars": 526,
+        "bytes": 623221
       }
     },
     "winning-game": {
@@ -964,6 +1888,138 @@
         "hash": "ff4609ef59874405",
         "chars": 87,
         "bytes": 98264
+      },
+      "student-story-A-A": {
+        "file": "/audio/k5/winning-game/student-story-A-A.mp3",
+        "hash": "be9c9a04f7ab0409",
+        "chars": 592,
+        "bytes": 751116
+      },
+      "path-recap-A-A": {
+        "file": "/audio/k5/winning-game/path-recap-A-A.mp3",
+        "hash": "586cbd3435466f52",
+        "chars": 173,
+        "bytes": 268791
+      },
+      "student-story-A-B": {
+        "file": "/audio/k5/winning-game/student-story-A-B.mp3",
+        "hash": "c063217d72c94d65",
+        "chars": 522,
+        "bytes": 661673
+      },
+      "path-recap-A-B": {
+        "file": "/audio/k5/winning-game/path-recap-A-B.mp3",
+        "hash": "2d90930cc4b93f3e",
+        "chars": 191,
+        "bytes": 273807
+      },
+      "student-story-A-C": {
+        "file": "/audio/k5/winning-game/student-story-A-C.mp3",
+        "hash": "22f9a77d24f5b05e",
+        "chars": 469,
+        "bytes": 596471
+      },
+      "path-recap-A-C": {
+        "file": "/audio/k5/winning-game/path-recap-A-C.mp3",
+        "hash": "293a8c5f99dd51a5",
+        "chars": 156,
+        "bytes": 257088
+      },
+      "student-story-B-A": {
+        "file": "/audio/k5/winning-game/student-story-B-A.mp3",
+        "hash": "6c635ffdb76ca00c",
+        "chars": 516,
+        "bytes": 695946
+      },
+      "path-recap-B-A": {
+        "file": "/audio/k5/winning-game/path-recap-B-A.mp3",
+        "hash": "d16ed1c4290abceb",
+        "chars": 191,
+        "bytes": 280076
+      },
+      "student-story-B-B": {
+        "file": "/audio/k5/winning-game/student-story-B-B.mp3",
+        "hash": "6865ee95c218a083",
+        "chars": 449,
+        "bytes": 569304
+      },
+      "path-recap-B-B": {
+        "file": "/audio/k5/winning-game/path-recap-B-B.mp3",
+        "hash": "a7572a5de4e2066e",
+        "chars": 209,
+        "bytes": 275061
+      },
+      "student-story-B-C": {
+        "file": "/audio/k5/winning-game/student-story-B-C.mp3",
+        "hash": "822b4539cef5acb5",
+        "chars": 402,
+        "bytes": 551332
+      },
+      "path-recap-B-C": {
+        "file": "/audio/k5/winning-game/path-recap-B-C.mp3",
+        "hash": "a73b404dfcebb321",
+        "chars": 174,
+        "bytes": 286346
+      },
+      "student-story-C-A": {
+        "file": "/audio/k5/winning-game/student-story-C-A.mp3",
+        "hash": "5f257931590e8b46",
+        "chars": 488,
+        "bytes": 623221
+      },
+      "path-recap-C-A": {
+        "file": "/audio/k5/winning-game/path-recap-C-A.mp3",
+        "hash": "3a009e60b3ea83f2",
+        "chars": 194,
+        "bytes": 282584
+      },
+      "student-story-C-B": {
+        "file": "/audio/k5/winning-game/student-story-C-B.mp3",
+        "hash": "0413540c7cc00b33",
+        "chars": 453,
+        "bytes": 561781
+      },
+      "path-recap-C-B": {
+        "file": "/audio/k5/winning-game/path-recap-C-B.mp3",
+        "hash": "a1c454c79d870619",
+        "chars": 212,
+        "bytes": 270045
+      },
+      "student-story-C-C": {
+        "file": "/audio/k5/winning-game/student-story-C-C.mp3",
+        "hash": "669e958dc28026e3",
+        "chars": 511,
+        "bytes": 597725
+      },
+      "path-recap-C-C": {
+        "file": "/audio/k5/winning-game/path-recap-C-C.mp3",
+        "hash": "823b2d2ad922bd03",
+        "chars": 177,
+        "bytes": 260850
+      },
+      "student-position-1": {
+        "file": "/audio/k5/winning-game/student-position-1.mp3",
+        "hash": "8d14fef00024cafa",
+        "chars": 261,
+        "bytes": 360742
+      },
+      "student-position-2": {
+        "file": "/audio/k5/winning-game/student-position-2.mp3",
+        "hash": "9a03dfda63018049",
+        "chars": 258,
+        "bytes": 321036
+      },
+      "student-position-3": {
+        "file": "/audio/k5/winning-game/student-position-3.mp3",
+        "hash": "a7edf84f975a8aee",
+        "chars": 313,
+        "bytes": 333993
+      },
+      "student-reference": {
+        "file": "/audio/k5/winning-game/student-reference.mp3",
+        "hash": "b79da3e1101c04c6",
+        "chars": 533,
+        "bytes": 666688
       }
     },
     "ai-art-help": {
@@ -1110,6 +2166,354 @@
         "hash": "a34eadf25af53e73",
         "chars": 89,
         "bytes": 100772
+      },
+      "student-story-A-A-A": {
+        "file": "/audio/k5/ai-art-help/student-story-A-A-A.mp3",
+        "hash": "1d97f1a7ce4a5fca",
+        "chars": 530,
+        "bytes": 672958
+      },
+      "path-recap-A-A-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-A-A.mp3",
+        "hash": "4c27948aa156576d",
+        "chars": 299,
+        "bytes": 482368
+      },
+      "student-story-A-A-B": {
+        "file": "/audio/k5/ai-art-help/student-story-A-A-B.mp3",
+        "hash": "2160c236b66c3a9e",
+        "chars": 416,
+        "bytes": 579753
+      },
+      "path-recap-A-A-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-A-B.mp3",
+        "hash": "f46efde08687733c",
+        "chars": 268,
+        "bytes": 383730
+      },
+      "student-story-A-A-C": {
+        "file": "/audio/k5/ai-art-help/student-story-A-A-C.mp3",
+        "hash": "e033161b277d2820",
+        "chars": 397,
+        "bytes": 523328
+      },
+      "path-recap-A-A-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-A-C.mp3",
+        "hash": "c3ffb44892b932b1",
+        "chars": 266,
+        "bytes": 386238
+      },
+      "student-story-A-B-A": {
+        "file": "/audio/k5/ai-art-help/student-story-A-B-A.mp3",
+        "hash": "b542156ba761f96d",
+        "chars": 444,
+        "bytes": 624475
+      },
+      "path-recap-A-B-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-B-A.mp3",
+        "hash": "46b28a88316edbfb",
+        "chars": 305,
+        "bytes": 450186
+      },
+      "student-story-A-B-B": {
+        "file": "/audio/k5/ai-art-help/student-story-A-B-B.mp3",
+        "hash": "84f3d437d1a6c89c",
+        "chars": 407,
+        "bytes": 527090
+      },
+      "path-recap-A-B-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-B-B.mp3",
+        "hash": "d6c2c30cd0e4253c",
+        "chars": 250,
+        "bytes": 395433
+      },
+      "student-story-A-B-C": {
+        "file": "/audio/k5/ai-art-help/student-story-A-B-C.mp3",
+        "hash": "b0f0722d8212cc10",
+        "chars": 377,
+        "bytes": 494071
+      },
+      "path-recap-A-B-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-B-C.mp3",
+        "hash": "96cdd8a4d8d09a68",
+        "chars": 254,
+        "bytes": 428452
+      },
+      "student-story-A-C-A": {
+        "file": "/audio/k5/ai-art-help/student-story-A-C-A.mp3",
+        "hash": "0ab41a5c4304fffa",
+        "chars": 376,
+        "bytes": 486130
+      },
+      "path-recap-A-C-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-C-A.mp3",
+        "hash": "ee7337793f89aaeb",
+        "chars": 278,
+        "bytes": 430959
+      },
+      "student-story-A-C-B": {
+        "file": "/audio/k5/ai-art-help/student-story-A-C-B.mp3",
+        "hash": "78d1d1b0a01107d9",
+        "chars": 343,
+        "bytes": 500341
+      },
+      "path-recap-A-C-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-C-B.mp3",
+        "hash": "b3692136bb05b98c",
+        "chars": 229,
+        "bytes": 392925
+      },
+      "student-story-A-C-C": {
+        "file": "/audio/k5/ai-art-help/student-story-A-C-C.mp3",
+        "hash": "4e41522caf942444",
+        "chars": 423,
+        "bytes": 529598
+      },
+      "path-recap-A-C-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-A-C-C.mp3",
+        "hash": "ec8972af8c746eb5",
+        "chars": 233,
+        "bytes": 372445
+      },
+      "student-story-B-A-A": {
+        "file": "/audio/k5/ai-art-help/student-story-B-A-A.mp3",
+        "hash": "000e4cb74713c2df",
+        "chars": 537,
+        "bytes": 777866
+      },
+      "path-recap-B-A-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-A-A.mp3",
+        "hash": "b88288ff0aa97908",
+        "chars": 289,
+        "bytes": 419675
+      },
+      "student-story-B-A-B": {
+        "file": "/audio/k5/ai-art-help/student-story-B-A-B.mp3",
+        "hash": "35117ecdc66918ac",
+        "chars": 413,
+        "bytes": 564288
+      },
+      "path-recap-B-A-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-A-B.mp3",
+        "hash": "2cdad79095fff71f",
+        "chars": 264,
+        "bytes": 374953
+      },
+      "student-story-B-A-C": {
+        "file": "/audio/k5/ai-art-help/student-story-B-A-C.mp3",
+        "hash": "2dca7a2b5f7657fb",
+        "chars": 377,
+        "bytes": 501595
+      },
+      "path-recap-B-A-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-A-C.mp3",
+        "hash": "3c51f7a3e326be5d",
+        "chars": 256,
+        "bytes": 381222
+      },
+      "student-story-B-B-A": {
+        "file": "/audio/k5/ai-art-help/student-story-B-B-A.mp3",
+        "hash": "4152a27f847b7631",
+        "chars": 425,
+        "bytes": 541301
+      },
+      "path-recap-B-B-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-B-A.mp3",
+        "hash": "c6f5a03305e98a8b",
+        "chars": 277,
+        "bytes": 428452
+      },
+      "student-story-B-B-B": {
+        "file": "/audio/k5/ai-art-help/student-story-B-B-B.mp3",
+        "hash": "38984de7ed3abcfb",
+        "chars": 431,
+        "bytes": 555511
+      },
+      "path-recap-B-B-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-B-B.mp3",
+        "hash": "b65e6c0542b5f452",
+        "chars": 240,
+        "bytes": 407972
+      },
+      "student-story-B-B-C": {
+        "file": "/audio/k5/ai-art-help/student-story-B-B-C.mp3",
+        "hash": "7c0351812bf5023f",
+        "chars": 380,
+        "bytes": 559273
+      },
+      "path-recap-B-B-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-B-C.mp3",
+        "hash": "cdb574f0290c8f80",
+        "chars": 244,
+        "bytes": 391671
+      },
+      "student-story-B-C-A": {
+        "file": "/audio/k5/ai-art-help/student-story-B-C-A.mp3",
+        "hash": "9c39a809f061dc5a",
+        "chars": 411,
+        "bytes": 532106
+      },
+      "path-recap-B-C-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-C-A.mp3",
+        "hash": "baa96855216bca27",
+        "chars": 256,
+        "bytes": 384984
+      },
+      "student-story-B-C-B": {
+        "file": "/audio/k5/ai-art-help/student-story-B-C-B.mp3",
+        "hash": "d34eb88f0ed52a92",
+        "chars": 365,
+        "bytes": 532106
+      },
+      "path-recap-B-C-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-C-B.mp3",
+        "hash": "4e1c88bc46f019d3",
+        "chars": 219,
+        "bytes": 365758
+      },
+      "student-story-B-C-C": {
+        "file": "/audio/k5/ai-art-help/student-story-B-C-C.mp3",
+        "hash": "c8efcff5e6f169e9",
+        "chars": 461,
+        "bytes": 643701
+      },
+      "path-recap-B-C-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-B-C-C.mp3",
+        "hash": "b7200e3ee238b819",
+        "chars": 223,
+        "bytes": 328559
+      },
+      "student-story-C-A-A": {
+        "file": "/audio/k5/ai-art-help/student-story-C-A-A.mp3",
+        "hash": "06bc516309eaa7f4",
+        "chars": 424,
+        "bytes": 559273
+      },
+      "path-recap-C-A-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-A-A.mp3",
+        "hash": "f31bf913d4d3cad2",
+        "chars": 272,
+        "bytes": 400448
+      },
+      "student-story-C-A-B": {
+        "file": "/audio/k5/ai-art-help/student-story-C-A-B.mp3",
+        "hash": "693401eff620ee21",
+        "chars": 420,
+        "bytes": 540047
+      },
+      "path-recap-C-A-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-A-B.mp3",
+        "hash": "6a92a056c94dac4b",
+        "chars": 249,
+        "bytes": 344024
+      },
+      "student-story-C-A-C": {
+        "file": "/audio/k5/ai-art-help/student-story-C-A-C.mp3",
+        "hash": "37f6b58b3b0df45a",
+        "chars": 370,
+        "bytes": 470666
+      },
+      "path-recap-C-A-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-A-C.mp3",
+        "hash": "aed3c0b6c4eb0f1d",
+        "chars": 239,
+        "bytes": 376207
+      },
+      "student-story-C-B-A": {
+        "file": "/audio/k5/ai-art-help/student-story-C-B-A.mp3",
+        "hash": "192993aa845aa1eb",
+        "chars": 383,
+        "bytes": 497833
+      },
+      "path-recap-C-B-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-B-A.mp3",
+        "hash": "383f2a4eca2ea4ba",
+        "chars": 260,
+        "bytes": 404210
+      },
+      "student-story-C-B-B": {
+        "file": "/audio/k5/ai-art-help/student-story-C-B-B.mp3",
+        "hash": "c741118020522135",
+        "chars": 368,
+        "bytes": 481115
+      },
+      "path-recap-C-B-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-B-B.mp3",
+        "hash": "804e9ef925d6d8bf",
+        "chars": 223,
+        "bytes": 368266
+      },
+      "student-story-C-B-C": {
+        "file": "/audio/k5/ai-art-help/student-story-C-B-C.mp3",
+        "hash": "d0af41d4073a4939",
+        "chars": 407,
+        "bytes": 603995
+      },
+      "path-recap-C-B-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-B-C.mp3",
+        "hash": "a6d221890bd72a50",
+        "chars": 227,
+        "bytes": 364504
+      },
+      "student-story-C-C-A": {
+        "file": "/audio/k5/ai-art-help/student-story-C-C-A.mp3",
+        "hash": "d5260b0accce43e7",
+        "chars": 437,
+        "bytes": 607756
+      },
+      "path-recap-C-C-A": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-C-A.mp3",
+        "hash": "004d2e4c3d848419",
+        "chars": 239,
+        "bytes": 382476
+      },
+      "student-story-C-C-B": {
+        "file": "/audio/k5/ai-art-help/student-story-C-C-B.mp3",
+        "hash": "72b2220955d7a44b",
+        "chars": 356,
+        "bytes": 495325
+      },
+      "path-recap-C-C-B": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-C-B.mp3",
+        "hash": "d1bcf0dae947ba9b",
+        "chars": 202,
+        "bytes": 321036
+      },
+      "student-story-C-C-C": {
+        "file": "/audio/k5/ai-art-help/student-story-C-C-C.mp3",
+        "hash": "fbdf3e7781234770",
+        "chars": 388,
+        "bytes": 540047
+      },
+      "path-recap-C-C-C": {
+        "file": "/audio/k5/ai-art-help/path-recap-C-C-C.mp3",
+        "hash": "386e6ddb0737ed19",
+        "chars": 206,
+        "bytes": 324798
+      },
+      "student-position-1": {
+        "file": "/audio/k5/ai-art-help/student-position-1.mp3",
+        "hash": "41948d437e0e8976",
+        "chars": 293,
+        "bytes": 363250
+      },
+      "student-position-2": {
+        "file": "/audio/k5/ai-art-help/student-position-2.mp3",
+        "hash": "6f4ca8e217ed0348",
+        "chars": 290,
+        "bytes": 374953
+      },
+      "student-position-3": {
+        "file": "/audio/k5/ai-art-help/student-position-3.mp3",
+        "hash": "f2c366009c7920a0",
+        "chars": 282,
+        "bytes": 351965
+      },
+      "student-reference": {
+        "file": "/audio/k5/ai-art-help/student-reference.mp3",
+        "hash": "1d12c8298a7e9fc4",
+        "chars": 543,
+        "bytes": 671704
       }
     },
     "rules-vs-helping": {
@@ -1256,6 +2660,354 @@
         "hash": "5e41906811bd9ad2",
         "chars": 69,
         "bytes": 102026
+      },
+      "student-story-A-A-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-A-A.mp3",
+        "hash": "0df54d16582ffee0",
+        "chars": 396,
+        "bytes": 598979
+      },
+      "path-recap-A-A-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-A-A.mp3",
+        "hash": "d83c4a427f545d79",
+        "chars": 270,
+        "bytes": 404210
+      },
+      "student-story-A-A-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-A-B.mp3",
+        "hash": "3fad7c0103b44cfd",
+        "chars": 377,
+        "bytes": 577245
+      },
+      "path-recap-A-A-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-A-B.mp3",
+        "hash": "d4cba262fd9b9af8",
+        "chars": 232,
+        "bytes": 360742
+      },
+      "student-story-A-A-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-A-C.mp3",
+        "hash": "bb3fc14371507e32",
+        "chars": 386,
+        "bytes": 584768
+      },
+      "path-recap-A-A-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-A-C.mp3",
+        "hash": "4f4dbd960f033b05",
+        "chars": 239,
+        "bytes": 384984
+      },
+      "student-story-A-B-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-B-A.mp3",
+        "hash": "f1d31331d264051f",
+        "chars": 356,
+        "bytes": 524582
+      },
+      "path-recap-A-B-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-B-A.mp3",
+        "hash": "39851a62f9ed4313",
+        "chars": 227,
+        "bytes": 365758
+      },
+      "student-story-A-B-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-B-B.mp3",
+        "hash": "047b5232165af44e",
+        "chars": 377,
+        "bytes": 500341
+      },
+      "path-recap-A-B-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-B-B.mp3",
+        "hash": "943af234d23c5a32",
+        "chars": 216,
+        "bytes": 363250
+      },
+      "student-story-A-B-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-B-C.mp3",
+        "hash": "10bb30164764bfcc",
+        "chars": 354,
+        "bytes": 463142
+      },
+      "path-recap-A-B-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-B-C.mp3",
+        "hash": "911760723e92b97e",
+        "chars": 223,
+        "bytes": 372445
+      },
+      "student-story-A-C-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-C-A.mp3",
+        "hash": "8287b551f38fbae8",
+        "chars": 357,
+        "bytes": 560527
+      },
+      "path-recap-A-C-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-C-A.mp3",
+        "hash": "56216d0f6e43665e",
+        "chars": 255,
+        "bytes": 404210
+      },
+      "student-story-A-C-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-C-B.mp3",
+        "hash": "e23fdf9893e4494a",
+        "chars": 351,
+        "bytes": 458127
+      },
+      "path-recap-A-C-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-C-B.mp3",
+        "hash": "3e7ab96da5850536",
+        "chars": 244,
+        "bytes": 402956
+      },
+      "student-story-A-C-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-A-C-C.mp3",
+        "hash": "258c357395b0fb18",
+        "chars": 339,
+        "bytes": 532106
+      },
+      "path-recap-A-C-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-A-C-C.mp3",
+        "hash": "2a82a74e2a5f50cd",
+        "chars": 251,
+        "bytes": 396687
+      },
+      "student-story-B-A-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-A-A.mp3",
+        "hash": "de0ecfd2296dedc8",
+        "chars": 387,
+        "bytes": 494071
+      },
+      "path-recap-B-A-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-A-A.mp3",
+        "hash": "43ca660c85a83b58",
+        "chars": 274,
+        "bytes": 407972
+      },
+      "student-story-B-A-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-A-B.mp3",
+        "hash": "f24d1ce26cf5d09f",
+        "chars": 336,
+        "bytes": 440155
+      },
+      "path-recap-B-A-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-A-B.mp3",
+        "hash": "2ea5355c9275b775",
+        "chars": 244,
+        "bytes": 371191
+      },
+      "student-story-B-A-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-A-C.mp3",
+        "hash": "8588b265aa113e79",
+        "chars": 315,
+        "bytes": 404210
+      },
+      "path-recap-B-A-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-A-C.mp3",
+        "hash": "7f8790fba32bdde8",
+        "chars": 251,
+        "bytes": 395433
+      },
+      "student-story-B-B-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-B-A.mp3",
+        "hash": "0741c3646537ebf5",
+        "chars": 370,
+        "bytes": 548824
+      },
+      "path-recap-B-B-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-B-A.mp3",
+        "hash": "f8efd44e9161ebcb",
+        "chars": 212,
+        "bytes": 396687
+      },
+      "student-story-B-B-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-B-B.mp3",
+        "hash": "6923715c03a16dd1",
+        "chars": 342,
+        "bytes": 465650
+      },
+      "path-recap-B-B-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-B-B.mp3",
+        "hash": "40551b3915287b05",
+        "chars": 201,
+        "bytes": 360742
+      },
+      "student-story-B-B-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-B-C.mp3",
+        "hash": "bf87cb8ebc46995e",
+        "chars": 271,
+        "bytes": 392925
+      },
+      "path-recap-B-B-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-B-C.mp3",
+        "hash": "a3ecf3f8bb30ddbe",
+        "chars": 208,
+        "bytes": 355727
+      },
+      "student-story-B-C-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-C-A.mp3",
+        "hash": "d45b42bb754f6f72",
+        "chars": 306,
+        "bytes": 415913
+      },
+      "path-recap-B-C-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-C-A.mp3",
+        "hash": "349d4a2bbaef33b2",
+        "chars": 267,
+        "bytes": 394179
+      },
+      "student-story-B-C-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-C-B.mp3",
+        "hash": "9e5c853a188583a0",
+        "chars": 265,
+        "bytes": 371191
+      },
+      "path-recap-B-C-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-C-B.mp3",
+        "hash": "b166bab73673e145",
+        "chars": 256,
+        "bytes": 404210
+      },
+      "student-story-B-C-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-B-C-C.mp3",
+        "hash": "f91d5ae6ad0008f3",
+        "chars": 263,
+        "bytes": 332739
+      },
+      "path-recap-B-C-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-B-C-C.mp3",
+        "hash": "f8fed81113551aa7",
+        "chars": 263,
+        "bytes": 427198
+      },
+      "student-story-C-A-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-A-A.mp3",
+        "hash": "f263fbd3a45b366e",
+        "chars": 384,
+        "bytes": 545062
+      },
+      "path-recap-C-A-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-A-A.mp3",
+        "hash": "dd7b3ab929a76fcb",
+        "chars": 272,
+        "bytes": 412151
+      },
+      "student-story-C-A-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-A-B.mp3",
+        "hash": "0bb82d856df6884c",
+        "chars": 318,
+        "bytes": 441408
+      },
+      "path-recap-C-A-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-A-B.mp3",
+        "hash": "6abb570c10566fd2",
+        "chars": 245,
+        "bytes": 401702
+      },
+      "student-story-C-A-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-A-C.mp3",
+        "hash": "e8ac85431cee50e1",
+        "chars": 266,
+        "bytes": 415913
+      },
+      "path-recap-C-A-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-A-C.mp3",
+        "hash": "958dd24cb4ed13a8",
+        "chars": 252,
+        "bytes": 410479
+      },
+      "student-story-C-B-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-B-A.mp3",
+        "hash": "7cc70e0dca7a4832",
+        "chars": 307,
+        "bytes": 415913
+      },
+      "path-recap-C-B-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-B-A.mp3",
+        "hash": "0c87153260c8b88f",
+        "chars": 213,
+        "bytes": 379968
+      },
+      "student-story-C-B-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-B-B.mp3",
+        "hash": "ff655f4a1d7a55cd",
+        "chars": 298,
+        "bytes": 419675
+      },
+      "path-recap-C-B-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-B-B.mp3",
+        "hash": "a0406b20a7943d05",
+        "chars": 202,
+        "bytes": 358235
+      },
+      "student-story-C-B-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-B-C.mp3",
+        "hash": "f422aac65a3b5213",
+        "chars": 266,
+        "bytes": 351965
+      },
+      "path-recap-C-B-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-B-C.mp3",
+        "hash": "0acc7b681c20af3d",
+        "chars": 209,
+        "bytes": 359488
+      },
+      "student-story-C-C-A": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-C-A.mp3",
+        "hash": "1f0d1588e73466da",
+        "chars": 275,
+        "bytes": 436393
+      },
+      "path-recap-C-C-A": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-C-A.mp3",
+        "hash": "5ecb216a38a173f9",
+        "chars": 268,
+        "bytes": 419675
+      },
+      "student-story-C-C-B": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-C-B.mp3",
+        "hash": "2b6e6d90781300a9",
+        "chars": 300,
+        "bytes": 410479
+      },
+      "path-recap-C-C-B": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-C-B.mp3",
+        "hash": "b6760082336dd0ef",
+        "chars": 257,
+        "bytes": 399195
+      },
+      "student-story-C-C-C": {
+        "file": "/audio/k5/rules-vs-helping/student-story-C-C-C.mp3",
+        "hash": "3501edbff3edb93e",
+        "chars": 299,
+        "bytes": 409226
+      },
+      "path-recap-C-C-C": {
+        "file": "/audio/k5/rules-vs-helping/path-recap-C-C-C.mp3",
+        "hash": "362e39c97f5d22fd",
+        "chars": 264,
+        "bytes": 394179
+      },
+      "student-position-1": {
+        "file": "/audio/k5/rules-vs-helping/student-position-1.mp3",
+        "hash": "4f23a0cd64a79cb7",
+        "chars": 269,
+        "bytes": 327306
+      },
+      "student-position-2": {
+        "file": "/audio/k5/rules-vs-helping/student-position-2.mp3",
+        "hash": "8d2b7f735100e008",
+        "chars": 243,
+        "bytes": 326052
+      },
+      "student-position-3": {
+        "file": "/audio/k5/rules-vs-helping/student-position-3.mp3",
+        "hash": "d01bc2a050958dff",
+        "chars": 258,
+        "bytes": 294287
+      },
+      "student-reference": {
+        "file": "/audio/k5/rules-vs-helping/student-reference.mp3",
+        "hash": "e2582c4d6b9d1bfa",
+        "chars": 530,
+        "bytes": 635759
       }
     },
     "always-agreeable-ai-friend": {
