@@ -38,10 +38,10 @@ export function ExplainingRedK_2({ navigate }) {
   useEffect(() => {
     const sync = () => setRefresh((n) => n + 1);
     window.addEventListener("popstate", sync);
-    window.addEventListener("ethed:route", sync);
+    window.addEventListener("examined-classroom:route", sync);
     return () => {
       window.removeEventListener("popstate", sync);
-      window.removeEventListener("ethed:route", sync);
+      window.removeEventListener("examined-classroom:route", sync);
     };
   }, []);
 

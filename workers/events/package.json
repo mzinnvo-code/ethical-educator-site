@@ -1,8 +1,8 @@
 {
-  "name": "ethed-events",
+  "name": "examined-classroom-events",
   "private": true,
   "version": "1.0.0",
-  "description": "Cloudflare Worker that writes custom events from theethicaleducator.com to Workers Analytics Engine.",
+  "description": "Cloudflare Worker that writes custom events from examinedclassroom.com to Workers Analytics Engine.",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",

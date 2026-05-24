@@ -15,9 +15,9 @@ What to look at in Cloudflare Web Analytics each week, and what we can and canno
 
 **Cookieless, no consent banner required, no PII collected.** Cloudflare Web Analytics is GDPR/CCPA-clean by design.
 
-## Custom events (via the `ethed-events` Worker)
+## Custom events (via the `examined-classroom-events` Worker)
 
-For events Cloudflare Web Analytics can't capture — scroll depth, newsletter clicks, PDF downloads — we use a small Cloudflare Worker (`workers/events/`) that writes to the `tee_events` Workers Analytics Engine dataset. Cost: free up to 10M writes/month + 1M queries/month.
+For events Cloudflare Web Analytics can't capture — scroll depth, newsletter clicks, PDF downloads — we use a small Cloudflare Worker (`workers/events/`) that writes to the `examined_classroom_events` Workers Analytics Engine dataset. Cost: free up to 10M writes/month + 1M queries/month.
 
 **Setup is one-time, ~5 min.** See `workers/events/README.md` for the full deploy steps. The short version:
 
@@ -37,7 +37,7 @@ Copy the printed `*.workers.dev` URL into `src/lib/analytics.js` (replace `REPLA
 1. Open the site in a Chrome incognito window.
 2. Open DevTools → Console.
 3. Scroll a long-form page (e.g., `/moral-psych`) to 50%.
-4. Type `window.__teeEvents` and Enter — you should see an array with `scroll_depth` events.
+4. Type `window.__examinedClassroomEvents` and Enter — you should see an array with `scroll_depth` events.
 
 **After Worker deploy (live mode):**
 
@@ -47,7 +47,7 @@ Copy the printed `*.workers.dev` URL into `src/lib/analytics.js` (replace `REPLA
 
 ## Dataset schema
 
-Each event written to `tee_events` looks like:
+Each event written to `examined_classroom_events` looks like:
 
 | Field | Meaning |
 |---|---|
@@ -79,7 +79,7 @@ cf_sql() {
 
 ```sql
 SELECT blob1 AS event, SUM(_sample_interval) AS count
-FROM tee_events
+FROM examined_classroom_events
 WHERE timestamp > NOW() - INTERVAL '7' DAY
 GROUP BY event ORDER BY count DESC
 ```
@@ -90,7 +90,7 @@ GROUP BY event ORDER BY count DESC
 SELECT blob4 AS page,
        SUM(IF(double1 >= 75, _sample_interval, 0)) AS reached_75,
        SUM(_sample_interval) AS total
-FROM tee_events
+FROM examined_classroom_events
 WHERE blob1 = 'scroll_depth' AND timestamp > NOW() - INTERVAL '7' DAY
 GROUP BY page ORDER BY total DESC
 ```
@@ -99,7 +99,7 @@ GROUP BY page ORDER BY total DESC
 
 ```sql
 SELECT blob3 AS placement, SUM(_sample_interval) AS clicks
-FROM tee_events
+FROM examined_classroom_events
 WHERE blob1 = 'newsletter_signup_click' AND timestamp > NOW() - INTERVAL '28' DAY
 GROUP BY placement ORDER BY clicks DESC
 ```
@@ -108,7 +108,7 @@ GROUP BY placement ORDER BY clicks DESC
 
 ```sql
 SELECT blob4 AS resource, SUM(_sample_interval) AS downloads
-FROM tee_events
+FROM examined_classroom_events
 WHERE blob1 = 'pdf_download' AND timestamp > NOW() - INTERVAL '30' DAY
 GROUP BY resource ORDER BY downloads DESC LIMIT 20
 ```

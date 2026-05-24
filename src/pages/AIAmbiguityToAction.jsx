@@ -412,7 +412,7 @@ export default function AIAmbiguityToAction({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="Verified sources used in this article" color={C.ocean} tag="Sources">
-              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "From Ambiguity to Action: Navigating Ethical Challenges in AI-Enhanced Education." The Ethical Educator, July 12, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "From Ambiguity to Action: Navigating Ethical Challenges in AI-Enhanced Education." The Examined Classroom, July 12, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
               <RefItem><LinkOut href={links.foot}>Philippa Foot. "The Problem of Abortion and the Doctrine of the Double Effect." Oxford Review 5, 1967.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.thomson}>Judith Jarvis Thomson. "The Trolley Problem." Yale Law Journal 94(6), 1985, 1395–1415.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.millUtilitarianism}>Stanford Encyclopedia of Philosophy. "John Stuart Mill." Substantive revision 2022.</LinkOut></RefItem>

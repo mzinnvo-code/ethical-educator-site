@@ -86,10 +86,10 @@ export default function GradePage({
 
     syncExperimentFromHash();
     window.addEventListener("popstate", syncExperimentFromHash);
-    window.addEventListener("ethed:route", syncExperimentFromHash);
+    window.addEventListener("examined-classroom:route", syncExperimentFromHash);
     return () => {
       window.removeEventListener("popstate", syncExperimentFromHash);
-      window.removeEventListener("ethed:route", syncExperimentFromHash);
+      window.removeEventListener("examined-classroom:route", syncExperimentFromHash);
     };
   }, [band]);
 

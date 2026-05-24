@@ -4,8 +4,8 @@ The site publishes two feeds of the "What's New" changelog so teachers using rea
 
 | Format | URL | Spec |
 |---|---|---|
-| RSS 2.0 | `https://theethicaleducator.com/feed.xml` | [rss-specifications.com](https://www.rssboard.org/rss-specification) |
-| JSON Feed 1.1 | `https://theethicaleducator.com/feed.json` | [jsonfeed.org/version/1.1](https://www.jsonfeed.org/version/1.1/) |
+| RSS 2.0 | `https://examinedclassroom.com/feed.xml` | [rss-specifications.com](https://www.rssboard.org/rss-specification) |
+| JSON Feed 1.1 | `https://examinedclassroom.com/feed.json` | [jsonfeed.org/version/1.1](https://www.jsonfeed.org/version/1.1/) |
 
 Both are advertised via `<link rel="alternate">` tags in `index.html` so reader apps and browser extensions discover them automatically when a visitor lands on any page.
 
@@ -36,7 +36,7 @@ Validate the RSS feed externally with [validator.w3.org/feed](https://validator.
 ## Auto-discovery test
 
 ```bash
-curl -s https://theethicaleducator.com | grep -E 'alternate.*(rss|feed\+json)'
+curl -s https://examinedclassroom.com | grep -E 'alternate.*(rss|feed\+json)'
 ```
 
 Should return both `<link>` tags.

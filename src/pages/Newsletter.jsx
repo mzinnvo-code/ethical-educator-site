@@ -82,7 +82,7 @@ export default function Newsletter() {
               Every issue includes a one-click unsubscribe link at the bottom. No questions, no friction.
             </Expandable>
             <Expandable title="Can I read past issues?">
-              Once a few weeks of issues exist, an archive will live at <code style={{ color: C.gold, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.88em" }}>buttondown.com/theethicaleducator/archive</code> — link will appear here after launch.
+              Once a few weeks of issues exist, an archive will live at <code style={{ color: C.gold, fontFamily: "'JetBrains Mono', monospace", fontSize: "0.88em" }}>buttondown.com/examinedclassroom/archive</code> — link will appear here after launch.
             </Expandable>
           </FadeIn>
 

@@ -134,7 +134,7 @@ export function entriesToMarkdown(entries) {
   const lines = [
     "# Decision Journal",
     "",
-    `Exported from The Ethical Educator on ${new Date().toLocaleDateString()}.`,
+    `Exported from The Examined Classroom on ${new Date().toLocaleDateString()}.`,
     "",
     `${entries.length} ${entries.length === 1 ? "entry" : "entries"}.`,
     "",

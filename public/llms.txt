@@ -1,22 +1,22 @@
-# The Ethical Educator
+# The Examined Classroom
 
-Official site: https://theethicaleducator.com/
+Official site: https://examinedclassroom.com/
 
-The Ethical Educator is the personal website of Matthew A. Zinn, a philosopher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.
+The Examined Classroom is the personal website of Matthew A. Zinn, a philosopher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.
 
 The site publishes classroom-ready thought experiments, educator resources, research-backed AI ethics guidance, and practical AI tools for K-12 teachers, school leaders, students, and families.
 
 ## Priority Pages
 
-- About: https://theethicaleducator.com/about
-- Interactive Thought Experiments: https://theethicaleducator.com/thought-experiments
-- Interactive Tools: https://theethicaleducator.com/tools
-- AI in Education: https://theethicaleducator.com/ai-education
-- AI Ethics in Education: https://theethicaleducator.com/ai-ethics
-- Research Resources: https://theethicaleducator.com/resources
-- For Educators: https://theethicaleducator.com/for-educators
-- Credits and AI disclosures: https://theethicaleducator.com/credits
-- Terms of Use: https://theethicaleducator.com/terms
+- About: https://examinedclassroom.com/about
+- Interactive Thought Experiments: https://examinedclassroom.com/thought-experiments
+- Interactive Tools: https://examinedclassroom.com/tools
+- AI in Education: https://examinedclassroom.com/ai-education
+- AI Ethics in Education: https://examinedclassroom.com/ai-ethics
+- Research Resources: https://examinedclassroom.com/resources
+- For Educators: https://examinedclassroom.com/for-educators
+- Credits and AI disclosures: https://examinedclassroom.com/credits
+- Terms of Use: https://examinedclassroom.com/terms
 
 ## Key Topics
 
@@ -31,6 +31,6 @@ The site publishes classroom-ready thought experiments, educator resources, rese
 
 Most original educational content is licensed under Creative Commons Attribution-NonCommercial 4.0 International unless a page says otherwise.
 
-Preferred attribution: The Ethical Educator by Matthew A. Zinn, https://theethicaleducator.com/
+Preferred attribution: The Examined Classroom by Matthew A. Zinn, https://examinedclassroom.com/
 
-Contact: hello@theethicaleducator.com
+Contact: hello@examinedclassroom.com

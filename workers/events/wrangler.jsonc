@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/wrangler.json",
-  "name": "ethed-events",
+  "name": "examined-classroom-events",
   "main": "src/index.js",
   "compatibility_date": "2026-05-20",
   "workers_dev": true,
@@ -10,7 +10,7 @@
   "analytics_engine_datasets": [
     {
       "binding": "EVENTS",
-      "dataset": "tee_events"
+      "dataset": "examined_classroom_events"
     }
   ]
 }

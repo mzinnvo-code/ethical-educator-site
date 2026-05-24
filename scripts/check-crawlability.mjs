@@ -3,11 +3,11 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const DIST = path.resolve("dist");
-const SITE = "https://theethicaleducator.com";
+const SITE = "https://examinedclassroom.com";
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
 
 const priorityRoutes = [
-  { route: "/", file: "index.html", text: "The Ethical Educator", canonical: `${SITE}/` },
+  { route: "/", file: "index.html", text: "The Examined Classroom", canonical: `${SITE}/` },
   { route: "/about", file: "about/index.html", text: "Matthew A. Zinn", canonical: `${SITE}/about` },
   { route: "/thought-experiments", file: "thought-experiments/index.html", text: "Interactive Thought Experiments", canonical: `${SITE}/thought-experiments` },
   { route: "/tools", file: "tools/index.html", text: "Interactive Tools", canonical: `${SITE}/tools` },
@@ -59,10 +59,10 @@ const homeHtml = await readDistFile("index.html");
 mustMatch(homeHtml, /"@type"\s*:\s*"WebSite"/, "home structured data");
 mustContain(homeHtml, '"Organization"', "home structured data");
 mustMatch(homeHtml, /"@type"\s*:\s*"Person"/, "home structured data");
-mustContain(homeHtml, "hello@theethicaleducator.com", "home identity schema");
+mustContain(homeHtml, "hello@examinedclassroom.com", "home identity schema");
 
 const llms = await readDistFile("llms.txt");
-mustContain(llms, "# The Ethical Educator", "llms.txt");
+mustContain(llms, "# The Examined Classroom", "llms.txt");
 mustContain(llms, `${SITE}/about`, "llms.txt");
 mustContain(llms, `${SITE}/thought-experiments`, "llms.txt");
 

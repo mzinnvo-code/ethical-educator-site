@@ -55,11 +55,11 @@ function sectionFor(pageId) {
   return TOP_LEVEL_SECTION[pageId] || "Pages";
 }
 
-// Strip the "— The Ethical Educator" suffix that appears in PAGE_META titles
+// Strip the "— The Examined Classroom" suffix that appears in PAGE_META titles
 // so the search results aren't visually noisy.
 function trimTitle(title) {
   if (!title) return "";
-  return title.replace(/\s*[—-]\s*The Ethical Educator\s*$/i, "").trim();
+  return title.replace(/\s*[—-]\s*The Examined Classroom\s*$/i, "").trim();
 }
 
 export function buildSearchDocs(pageMeta) {

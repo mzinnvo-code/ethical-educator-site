@@ -14,18 +14,19 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getWhatsNewSorted, getTypeLabel } from "../src/data/whatsNew.js";
+import { SITE } from "../src/siteConfig.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(REPO_ROOT, "dist");
 
-const SITE_URL = "https://theethicaleducator.com";
-const SITE_TITLE = "The Ethical Educator — What's New";
+const SITE_URL = SITE.origin;
+const SITE_TITLE = `${SITE.brandName} — What's New`;
 const SITE_DESCRIPTION =
-  "Updates to The Ethical Educator: new thought experiments, research, features, and resources for K–12 teachers, school leaders, and parents.";
-const AUTHOR_NAME = "Matthew A. Zinn";
-const AUTHOR_EMAIL = "hello@theethicaleducator.com";
+  `Updates to ${SITE.brandName}: new thought experiments, research, features, and resources for K–12 teachers, school leaders, and parents.`;
+const AUTHOR_NAME = SITE.authorName;
+const AUTHOR_EMAIL = SITE.publicEmail;
 
 function escapeXml(s) {
   return String(s ?? "")

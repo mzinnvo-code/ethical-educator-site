@@ -37,11 +37,11 @@ track("pdf_download", {
 })
 ```
 
-Once the `ethed-events` Worker is deployed (PR #54), these events land in the `tee_events` Workers Analytics Engine dataset. Query the most-printed kits:
+Once the `examined-classroom-events` Worker is deployed (PR #54), these events land in the `examined_classroom_events` Workers Analytics Engine dataset. Query the most-printed kits:
 
 ```sql
 SELECT blob4 AS kit_slug, SUM(_sample_interval) AS prints
-FROM tee_events
+FROM examined_classroom_events
 WHERE blob1 = 'pdf_download' AND timestamp > NOW() - INTERVAL '30' DAY
 GROUP BY kit_slug ORDER BY prints DESC LIMIT 20
 ```

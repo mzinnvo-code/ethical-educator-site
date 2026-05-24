@@ -15,7 +15,7 @@ export default function Accessibility({ navigate }) {
           <div style={{ marginTop: 32, color: C.textSecondary, lineHeight: 1.8, fontSize: "0.94rem" }}>
 
             <FadeIn delay={0.06}>
-              <p>The Ethical Educator is committed to making this site accessible to everyone, including people with disabilities. We target <strong style={{ color: C.textPrimary }}>WCAG 2.1 Level AA</strong> conformance.</p>
+              <p>The Examined Classroom is committed to making this site accessible to everyone, including people with disabilities. We target <strong style={{ color: C.textPrimary }}>WCAG 2.1 Level AA</strong> conformance.</p>
             </FadeIn>
 
             <FadeIn delay={0.08}>
@@ -41,7 +41,7 @@ export default function Accessibility({ navigate }) {
 
             <FadeIn delay={0.12}>
               <Divider label="Reporting Issues" />
-              <p>If you encounter an accessibility barrier on this site, please describe the issue and the page or feature where you found it, and send the details to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>. We aim to respond within ten business days.</p>
+              <p>If you encounter an accessibility barrier on this site, please describe the issue and the page or feature where you found it, and send the details to <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>. We aim to respond within ten business days.</p>
             </FadeIn>
 
             <FadeIn delay={0.14}>

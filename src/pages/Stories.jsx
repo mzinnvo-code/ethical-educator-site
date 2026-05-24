@@ -27,7 +27,7 @@ export default function Stories({ navigate }) {
         <Narrow>
           <FadeIn>
             <SectionLabel>From the classroom</SectionLabel>
-            <SectionTitle>How educators are using The Ethical Educator</SectionTitle>
+            <SectionTitle>How educators are using The Examined Classroom</SectionTitle>
             <Subtitle>
               Short quotes and longer classroom stories from teachers, administrators, and parents who have used resources here. The point isn't testimonials in the marketing sense — it's other educators showing what worked, what surprised them, and what they'd do differently.
             </Subtitle>
@@ -115,7 +115,7 @@ function PlaceholderBanner({ navigate }) {
       <p style={{ color: C.textSecondary, fontSize: "0.92rem", lineHeight: 1.65 }}>
         If you've used a resource here in your classroom and would be willing to share a short note or a longer story,{" "}
         <a
-          href="mailto:hello@theethicaleducator.com?subject=From%20the%20classroom"
+          href="mailto:hello@examinedclassroom.com?subject=From%20the%20classroom"
           style={{ color: C.gold, fontWeight: 600 }}
         >we'd love to feature you</a>. Real stories replace the samples on the next deploy.
       </p>
@@ -257,7 +257,7 @@ function SubmitCta() {
         We're gathering real classroom stories to replace the samples on this page. A short paragraph or a few minutes of a longer story is enough. You retain attribution however you'd like — full name, first name and grade, or fully anonymous.
       </p>
       <a
-        href="mailto:hello@theethicaleducator.com?subject=From%20the%20classroom&body=Hi%20Matt%2C%0A%0AI%20used%20%5Bresource%5D%20with%20my%20%5Bgrade%2Fsubject%5D%20class%20and%20...%0A%0A"
+        href="mailto:hello@examinedclassroom.com?subject=From%20the%20classroom&body=Hi%20Matt%2C%0A%0AI%20used%20%5Bresource%5D%20with%20my%20%5Bgrade%2Fsubject%5D%20class%20and%20...%0A%0A"
         style={{
           display: "inline-block",
           padding: "10px 18px",

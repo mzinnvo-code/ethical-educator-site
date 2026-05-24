@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Telemetry buffer init — runs synchronously before any module script
-         so DevTools smoke checks (`window.__teeEvents`) return [] from the
+         so DevTools smoke checks (`window.__examinedClassroomEvents`) return [] from the
          very first paint, never undefined. The analytics module also inits
          this lazily, but doing it inline guarantees the buffer exists even
          if the module is in a separate chunk that hasn't loaded yet. -->
-    <script>window.__teeEvents = window.__teeEvents || [];</script>
+    <script>window.__examinedClassroomEvents = window.__examinedClassroomEvents || [];</script>
 
     <!-- Font Loading (preconnect eliminates FOUT by fetching before React renders) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,25 +17,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap">
 
     <!-- Primary Meta -->
-    <title>The Ethical Educator</title>
+    <title>The Examined Classroom</title>
     <meta name="description" content="Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education." />
     <meta name="author" content="Matthew A. Zinn" />
     <meta name="keywords" content="philosophy, AI ethics, education, moral psychology, pedagogy, philosophy of education" />
     <meta name="theme-color" content="#0b1622" />
-    <link rel="canonical" href="https://theethicaleducator.com/" />
+    <link rel="canonical" href="https://examinedclassroom.com/" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="The Ethical Educator" />
+    <meta property="og:title" content="The Examined Classroom" />
     <meta property="og:description" content="Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education." />
     <meta property="og:image" content="/illustrations/home-hero.png" />
-    <meta property="og:url" content="https://theethicaleducator.com/" />
+    <meta property="og:url" content="https://examinedclassroom.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="The Ethical Educator" />
+    <meta property="og:site_name" content="The Examined Classroom" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="The Ethical Educator" />
+    <meta name="twitter:title" content="The Examined Classroom" />
     <meta name="twitter:description" content="Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education." />
     <meta name="twitter:image" content="/illustrations/home-hero.png" />
 
@@ -43,8 +43,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Syndication feeds (changelog of new thought experiments, research, features) -->
-    <link rel="alternate" type="application/rss+xml" title="The Ethical Educator — What's New (RSS)" href="/feed.xml" />
-    <link rel="alternate" type="application/feed+json" title="The Ethical Educator — What's New (JSON Feed)" href="/feed.json" />
+    <link rel="alternate" type="application/rss+xml" title="The Examined Classroom — What's New (RSS)" href="/feed.xml" />
+    <link rel="alternate" type="application/feed+json" title="The Examined Classroom — What's New (JSON Feed)" href="/feed.json" />
 
     <!-- Structured Data: official site identity -->
     <script type="application/ld+json">
@@ -53,12 +53,12 @@
       "@graph": [
         {
           "@type": "Person",
-          "@id": "https://theethicaleducator.com/#matthew-zinn",
+          "@id": "https://examinedclassroom.com/#matthew-zinn",
           "name": "Matthew A. Zinn",
           "jobTitle": "Philosopher and Educator",
           "description": "Researcher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.",
-          "url": "https://theethicaleducator.com/about",
-          "email": "hello@theethicaleducator.com",
+          "url": "https://examinedclassroom.com/about",
+          "email": "hello@examinedclassroom.com",
           "alumniOf": {
             "@type": "CollegeOrUniversity",
             "name": "University of North Carolina at Charlotte"
@@ -77,18 +77,18 @@
         },
         {
           "@type": ["Organization", "EducationalOrganization"],
-          "@id": "https://theethicaleducator.com/#organization",
-          "name": "The Ethical Educator",
-          "url": "https://theethicaleducator.com/",
-          "logo": "https://theethicaleducator.com/favicon.svg",
-          "email": "hello@theethicaleducator.com",
+          "@id": "https://examinedclassroom.com/#organization",
+          "name": "The Examined Classroom",
+          "url": "https://examinedclassroom.com/",
+          "logo": "https://examinedclassroom.com/favicon.svg",
+          "email": "hello@examinedclassroom.com",
           "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
           "founder": {
-            "@id": "https://theethicaleducator.com/#matthew-zinn"
+            "@id": "https://examinedclassroom.com/#matthew-zinn"
           },
           "contactPoint": {
             "@type": "ContactPoint",
-            "email": "hello@theethicaleducator.com",
+            "email": "hello@examinedclassroom.com",
             "contactType": "site contact"
           },
           "sameAs": [
@@ -98,15 +98,15 @@
         },
         {
           "@type": "WebSite",
-          "@id": "https://theethicaleducator.com/#website",
-          "name": "The Ethical Educator",
-          "url": "https://theethicaleducator.com/",
+          "@id": "https://examinedclassroom.com/#website",
+          "name": "The Examined Classroom",
+          "url": "https://examinedclassroom.com/",
           "description": "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders.",
           "publisher": {
-            "@id": "https://theethicaleducator.com/#organization"
+            "@id": "https://examinedclassroom.com/#organization"
           },
           "creator": {
-            "@id": "https://theethicaleducator.com/#matthew-zinn"
+            "@id": "https://examinedclassroom.com/#matthew-zinn"
           },
           "inLanguage": "en-US",
           "license": "https://creativecommons.org/licenses/by-nc/4.0/",
@@ -124,11 +124,11 @@
             "School AI policy"
           ],
           "hasPart": [
-            { "@type": "WebPage", "name": "About Matthew A. Zinn", "url": "https://theethicaleducator.com/about" },
-            { "@type": "WebPage", "name": "Interactive Thought Experiments", "url": "https://theethicaleducator.com/thought-experiments" },
-            { "@type": "WebPage", "name": "Interactive Tools", "url": "https://theethicaleducator.com/tools" },
-            { "@type": "WebPage", "name": "AI in Education", "url": "https://theethicaleducator.com/ai-education" },
-            { "@type": "WebPage", "name": "Research Resources", "url": "https://theethicaleducator.com/resources" }
+            { "@type": "WebPage", "name": "About Matthew A. Zinn", "url": "https://examinedclassroom.com/about" },
+            { "@type": "WebPage", "name": "Interactive Thought Experiments", "url": "https://examinedclassroom.com/thought-experiments" },
+            { "@type": "WebPage", "name": "Interactive Tools", "url": "https://examinedclassroom.com/tools" },
+            { "@type": "WebPage", "name": "AI in Education", "url": "https://examinedclassroom.com/ai-education" },
+            { "@type": "WebPage", "name": "Research Resources", "url": "https://examinedclassroom.com/resources" }
           ]
         }
       ]
@@ -138,7 +138,7 @@
     <!-- Cloudflare Web Analytics
          Cookieless, GDPR-clean, no PII. Setup steps: docs/cloudflare-runbook.md
          Replace REPLACE_WITH_CLOUDFLARE_TOKEN with the token from
-         dash.cloudflare.com → Web Analytics → Add a site → theethicaleducator.com.
+         dash.cloudflare.com → Web Analytics → Add a site → examinedclassroom.com.
          The "spa": true flag tells the beacon to report on SPA route changes. -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
             data-cf-beacon='{"token": "510341a8a120458f8fe313de1c65aa52", "spa": true}'></script>

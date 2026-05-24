@@ -704,7 +704,7 @@ export default function Home({ navigate }) {
               <p className="home-eyebrow">For educators, students, school leaders, and families</p>
               <h1>Make AI ethics usable.</h1>
               <p className="home-hero-copy">
-                The Ethical Educator helps people reason through AI, learning, fairness, authorship,
+                The Examined Classroom helps people reason through AI, learning, fairness, authorship,
                 identity, and judgment with classroom-ready thought experiments, practical educator
                 resources, and research-grounded philosophy.
               </p>

@@ -1,5 +1,5 @@
-// ethed-events — receives custom event POSTs from the site and writes them
-// to the `tee_events` Workers Analytics Engine dataset. Pageview/Core Web
+// examined-classroom-events — receives custom event POSTs from the site and writes them
+// to the `examined_classroom_events` Workers Analytics Engine dataset. Pageview/Core Web
 // Vitals tracking is handled separately by the Cloudflare Web Analytics
 // beacon in index.html — this Worker only handles app-specific events that
 // CWA can't capture (scroll depth, newsletter clicks, PDF downloads, etc.).
@@ -17,14 +17,14 @@
 // Query examples in docs/analytics-playbook.md.
 
 const ALLOWED_ORIGINS = new Set([
-  "https://theethicaleducator.com",
-  "https://www.theethicaleducator.com",
+  "https://examinedclassroom.com",
+  "https://www.examinedclassroom.com",
   "http://localhost:5173",
   "http://localhost:4173",
 ]);
 
 function corsHeaders(origin) {
-  const allow = ALLOWED_ORIGINS.has(origin) ? origin : "https://theethicaleducator.com";
+  const allow = ALLOWED_ORIGINS.has(origin) ? origin : "https://examinedclassroom.com";
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -64,7 +64,7 @@ export default {
 
     if (request.method === "OPTIONS") return noContent(origin);
     if (request.method === "GET") {
-      return new Response("ethed-events ok", { status: 200, headers: corsHeaders(origin) });
+      return new Response("examined-classroom-events ok", { status: 200, headers: corsHeaders(origin) });
     }
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", { status: 405, headers: corsHeaders(origin) });

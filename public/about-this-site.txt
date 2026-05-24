@@ -1,16 +1,16 @@
-The Ethical Educator
+The Examined Classroom
 
-Official site: https://theethicaleducator.com/
+Official site: https://examinedclassroom.com/
 Creator: Matthew A. Zinn
-Contact: hello@theethicaleducator.com
+Contact: hello@examinedclassroom.com
 
-The Ethical Educator is a personal education site for classroom-ready thought experiments, AI ethics guidance, and practical educator resources. It is written for K-12 teachers, school leaders, students, and families.
+The Examined Classroom is a personal education site for classroom-ready thought experiments, AI ethics guidance, and practical educator resources. It is written for K-12 teachers, school leaders, students, and families.
 
 Core sections:
-- Interactive Thought Experiments: https://theethicaleducator.com/thought-experiments
-- Interactive Tools: https://theethicaleducator.com/tools
-- AI in Education: https://theethicaleducator.com/ai-education
-- Research Resources: https://theethicaleducator.com/resources
-- About Matthew A. Zinn: https://theethicaleducator.com/about
+- Interactive Thought Experiments: https://examinedclassroom.com/thought-experiments
+- Interactive Tools: https://examinedclassroom.com/tools
+- AI in Education: https://examinedclassroom.com/ai-education
+- Research Resources: https://examinedclassroom.com/resources
+- About Matthew A. Zinn: https://examinedclassroom.com/about
 
-The site's original educational content is generally available under CC BY-NC 4.0 unless otherwise noted. See https://theethicaleducator.com/terms and https://theethicaleducator.com/credits for details.
+The site's original educational content is generally available under CC BY-NC 4.0 unless otherwise noted. See https://examinedclassroom.com/terms and https://examinedclassroom.com/credits for details.

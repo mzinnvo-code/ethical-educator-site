@@ -29,7 +29,7 @@ export default function WhatsNew({ navigate }) {
         <Narrow>
           <FadeIn>
             <SectionLabel>Changelog</SectionLabel>
-            <SectionTitle>What's new on The Ethical Educator</SectionTitle>
+            <SectionTitle>What's new on The Examined Classroom</SectionTitle>
             <Subtitle>
               Every meaningful update to the site — new thought experiments, new research, new tools — in reverse-chronological order. New items in the last 14 days carry a "NEW" pill.
             </Subtitle>

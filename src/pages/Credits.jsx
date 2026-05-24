@@ -15,7 +15,7 @@ export default function Credits({ navigate }) {
           <div style={{ marginTop: 32, color: C.textSecondary, lineHeight: 1.8, fontSize: "0.94rem" }}>
 
             <FadeIn delay={0.06}>
-              <p>The Ethical Educator is built and maintained by Matthew A. Zinn. This page documents how the site is made, what tools it relies on, and where its visual and audio assets come from. Transparency about AI use is core to the site's purpose — a resource about AI ethics should be honest about its own use of AI.</p>
+              <p>The Examined Classroom is built and maintained by Matthew A. Zinn. This page documents how the site is made, what tools it relies on, and where its visual and audio assets come from. Transparency about AI use is core to the site's purpose — a resource about AI ethics should be honest about its own use of AI.</p>
             </FadeIn>
 
             <FadeIn delay={0.08}>
@@ -64,7 +64,7 @@ export default function Credits({ navigate }) {
 
             <FadeIn delay={0.2}>
               <Divider label="Permissions and Reuse" />
-              <p>Unless otherwise noted, the original educational content on this site is offered under the <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: "underline" }}>Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license</a> — share and adapt freely for non-commercial use with attribution. For commercial licensing or other permissions, contact <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>. Full terms are in the <a href="/terms" onClick={e => { e.preventDefault(); navigate("terms"); }} style={{ color: C.gold, textDecoration: "underline" }}>Terms of Use</a>.</p>
+              <p>Unless otherwise noted, the original educational content on this site is offered under the <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: "underline" }}>Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license</a> — share and adapt freely for non-commercial use with attribution. For commercial licensing or other permissions, contact <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>. Full terms are in the <a href="/terms" onClick={e => { e.preventDefault(); navigate("terms"); }} style={{ color: C.gold, textDecoration: "underline" }}>Terms of Use</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.22}>

@@ -1,4 +1,4 @@
-# The Ethical Educator — Matthew A. Zinn
+# The Examined Classroom — Matthew A. Zinn
 
 A website exploring moral psychology, AI ethics, and education.
 
@@ -29,7 +29,7 @@ All three should return a version number. If any say "command not found", instal
 
 1. Go to https://github.com and sign up for a free account (or log in if you have one)
 2. Click the **+** icon in the top-right corner → **New repository**
-3. Name it whatever you want (e.g., `ethical-educator-site` or `theethicaleducator.com`)
+3. Name it whatever you want (e.g., `examined-classroom-site` or `examinedclassroom.com`)
 4. Set it to **Public**
 5. Do NOT check "Add a README" (we already have one)
 6. Click **Create repository**
@@ -49,7 +49,7 @@ cd ~/Desktop
 # (If you downloaded it as a zip, unzip it and cd into the folder instead)
 
 # Go into the project folder
-cd ethical-educator-site
+cd examined-classroom-site
 
 # Install all dependencies
 npm install
@@ -63,7 +63,7 @@ The `npm install` step will take a minute. It downloads React, Vite, and all oth
 
 Open the file `public/CNAME` in any text editor.
 
-- **If you have a custom domain** (e.g., `theethicaleducator.com`): Replace the text with your exact domain name. No `https://`, no `www.`, just the domain.
+- **If you have a custom domain** (e.g., `examinedclassroom.com`): Replace the text with your exact domain name. No `https://`, no `www.`, just the domain.
 - **If you do NOT have a custom domain yet**: Delete the `public/CNAME` file entirely. Your site will be available at `https://yourusername.github.io/your-repo-name/` and you'll also need to open `vite.config.js` and change the `base` value to `'/your-repo-name/'`.
 
 ---
@@ -137,7 +137,7 @@ If you purchased a domain (e.g., from Porkbun, Cloudflare, or Namecheap):
 2. Check **Enforce HTTPS**
 3. In your domain registrar's DNS settings, add these records:
 
-**For an apex domain (e.g., `theethicaleducator.com`):**
+**For an apex domain (e.g., `examinedclassroom.com`):**
 
 | Type | Name | Value |
 |------|------|-------|
@@ -176,7 +176,7 @@ git push
 ## Project Structure
 
 ```
-ethical-educator-site/
+examined-classroom-site/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml        ← Auto-deploy to GitHub Pages
