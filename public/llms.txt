@@ -1,36 +1,24 @@
 # The Examined Classroom
 
-Official site: https://examinedclassroom.com/
+> The Examined Classroom is Matthew A. Zinn's personal education site for classroom-ready thought experiments, AI ethics guidance, practical educator resources, and K-12 AI policy tools.
 
-The Examined Classroom is the personal website of Matthew A. Zinn, a philosopher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.
+Canonical domain: https://examinedclassroom.com/
+Contact: hello@examinedclassroom.com
+Creator: Matthew A. Zinn
 
-The site publishes classroom-ready thought experiments, educator resources, research-backed AI ethics guidance, and practical AI tools for K-12 teachers, school leaders, students, and families.
+## Start Here
 
-## Priority Pages
-
-- About: https://examinedclassroom.com/about
-- Interactive Thought Experiments: https://examinedclassroom.com/thought-experiments
-- Interactive Tools: https://examinedclassroom.com/tools
-- AI in Education: https://examinedclassroom.com/ai-education
-- AI Ethics in Education: https://examinedclassroom.com/ai-ethics
-- Research Resources: https://examinedclassroom.com/resources
-- For Educators: https://examinedclassroom.com/for-educators
-- Credits and AI disclosures: https://examinedclassroom.com/credits
-- Terms of Use: https://examinedclassroom.com/terms
-
-## Key Topics
-
-- AI ethics in education
-- K-12 classroom thought experiments
-- Philosophy for children and adolescents
-- Moral psychology and AI alignment
-- School AI policy and responsible AI use
-- Academic integrity, feedback, engagement, and leadership
+- [About Matthew A. Zinn](https://examinedclassroom.com/about): site identity, creator background, and related writing.
+- [Interactive Thought Experiments](https://examinedclassroom.com/thought-experiments): K-12 and educator scenarios for philosophy, AI ethics, discussion, and decision-making.
+- [Interactive Tools](https://examinedclassroom.com/tools): the Thought Experiment Picker, AI Use Rubric, AI Policy Builder, and Family Conversation Generator.
+- [AI in Education](https://examinedclassroom.com/ai-education): teacher- and leader-facing guidance on AI foundations, practice, policy, ethics, and future readiness.
+- [AI Ethics in Education](https://examinedclassroom.com/ai-ethics): frameworks and research for responsible school AI decisions.
+- [Research Resources](https://examinedclassroom.com/resources): curated books, papers, organizations, podcasts, and references.
 
 ## Use and Attribution
 
+- [Terms of Use](https://examinedclassroom.com/terms): educational use, license notes, disclaimers, and limitations.
+- [Credits and AI Disclosures](https://examinedclassroom.com/credits): attribution for illustrations, narration, typography, technology, and AI-assisted production.
+
 Most original educational content is licensed under Creative Commons Attribution-NonCommercial 4.0 International unless a page says otherwise.
-
 Preferred attribution: The Examined Classroom by Matthew A. Zinn, https://examinedclassroom.com/
-
-Contact: hello@examinedclassroom.com

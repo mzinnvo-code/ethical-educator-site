@@ -394,7 +394,7 @@ export default function AIParadox({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="Verified sources used in this article" color={C.ocean} tag="Sources">
-              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "The Paradox of AI in Education." The Examined Classroom, February 13, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "The Paradox of AI in Education." Matthew A. Zinn's AI education blog, February 13, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
               <RefItem><LinkOut href={links.republic}>Plato. The Republic. Translation by Benjamin Jowett, c. 390 BCE.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sparrowFlenady}>Robert Sparrow and Gavin Flenady. "Bullshit Universities: The Future of Automated Education." AI & Society 40, 2025, 5285–5296.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.biestaBook}>Gert Biesta. The Beautiful Risk of Education. Routledge, 2014.</LinkOut></RefItem>
