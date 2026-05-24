@@ -505,7 +505,7 @@ export default function AIAuthorship({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="Verified sources used in this article" color={C.ocean} tag="Sources">
-              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "The AI Authorship Quandary." The Examined Classroom, February 14, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "The AI Authorship Quandary." Matthew A. Zinn's AI education blog, February 14, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
               <RefItem><LinkOut href={links.liangPatterns}>Weixin Liang, Mert Yuksekgonul, Yining Mao, Eric Wu, James Zou. "GPT detectors are biased against non-native English writers." Patterns 4(7), July 2023. DOI: 10.1016/j.patter.2023.100779.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.vanderbiltOff}>Vanderbilt University Brightspace. "Guidance on AI Detection and Why We're Disabling Turnitin's AI Detector." August 16, 2023.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.nycPolicy}>New York City Public Schools. "Guidance on Artificial Intelligence." Released March 24, 2026.</LinkOut></RefItem>

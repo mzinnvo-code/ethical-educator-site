@@ -586,7 +586,7 @@ export default function AIEthics({ navigate }) {
                 <p style={{ marginTop: 12 }}><strong>3. Accept imperfection.</strong> Like the English language, your policy will never be perfect. Let go of the illusion that achieving perfection is possible and begin working with your team on common goals. As I tell my students: "We made it all up and we never have been and likely never will be perfect."</p>
                 <p style={{ marginTop: 12 }}><strong>4. Involve stakeholders</strong> — educators, students, parents, and technology experts. NYC's 2026 AI policy went through 25 rounds of feedback with 1,000+ stakeholders. Multiple perspectives strengthen the framework.</p>
                 <p style={{ marginTop: 12 }}><strong>5. Review continuously.</strong> Technology evolves faster than policy. Your policy must keep pace.</p>
-                <p style={{ marginTop: 12 }}><a href="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" target="_blank" rel="noopener noreferrer">Read my full analysis on The Examined Classroom →</a></p>
+                <p style={{ marginTop: 12 }}><a href="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" target="_blank" rel="noopener noreferrer">Read my full analysis on Matthew A. Zinn's AI education blog →</a></p>
               </Expandable>
             </FadeIn>
 

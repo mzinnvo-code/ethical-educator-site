@@ -222,31 +222,31 @@ const PAGE_META = {
   },
   "ai-consciousness": {
     title: "The Consciousness Line — The Examined Classroom",
-    description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
+    description: "A philosophical continuation of Anil Seth's AI consciousness caution, with synthetic biology, organoids, Nagel, Austin, and ethical humility.",
     datePublished: "2026-05-09",
     dateModified: "2026-05-12",
   },
   "ai-authorship-quandary": {
     title: "The AI Authorship Quandary — The Examined Classroom",
-    description: "A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. The interactive scenario, the evidence on AI detectors, and what good school policy actually looks like.",
+    description: "A student turns in AI-assisted work. Explore the scenario, AI detector evidence, competing values, and what sound school policy requires.",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
   "ai-ambiguity-to-action": {
     title: "From Ambiguity to Action — The Examined Classroom",
-    description: "Why \"uphold ethics\" isn't a policy. Utilitarianism, deontology, virtue ethics, and thought experiments as policy tools. The funnel from value to practice for AI in education.",
+    description: "Why vague AI ethics policies fail, and how values, normative theory, and thought experiments can guide school AI practice.",
     datePublished: "2024-07-12",
     dateModified: "2026-05-13",
   },
   "ai-paradox": {
     title: "The Paradox of AI in Education — The Examined Classroom",
-    description: "Assume the harder version: AI has matched human teachers. The interesting question is whether teaching, as we have understood it, can be done by a machine at all — and what schools are for if it can.",
+    description: "If AI matched human teachers, what would schools still be for? A values-based argument about teaching, learning, and human formation.",
     datePublished: "2024-02-13",
     dateModified: "2026-05-13",
   },
   "ai-replace-teachers": {
-    title: "Why AI Won't Replace Teachers — A Response — The Examined Classroom",
-    description: "A friendly disagreement with the standard defense of human teachers. The conclusion is right but the capability arguments keep losing. The argument that survives the next iteration of the technology is values-based, not technical.",
+    title: "Why AI Won't Replace Teachers — The Examined Classroom",
+    description: "A response to capability-based defenses of teachers, arguing that the strongest case for human teaching is values-based, not technical.",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
@@ -300,17 +300,17 @@ const PAGE_META = {
   },
   "thought-experiments/explaining-red-k-2": {
     title: "Explaining Red — K–2 Classroom Scene — The Examined Classroom",
-    description: "A new student named Ada joins the class while everyone is learning about colors. A gentle multi-character scene about how to share what red is — even with someone who has never seen it.",
+    description: "A gentle K-2 scene about Ada, color, and how classmates might explain red to someone who has never seen it.",
     datePublished: "2026-05-13",
     dateModified: "2026-05-13",
   },
   "thought-experiments/toolkit": {
     title: "Dialogue Toolkit — The Examined Classroom",
-    description: "Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students who want to run philosophy well.",
+    description: "Norms, sentence stems, protocols, Socratic moves, a decision tree, and a global canon for running classroom philosophy well.",
   },
   "thought-experiments/journal": {
     title: "Decision Journal — The Examined Classroom",
-    description: "A private, browser-only record of your reasoning across thought experiments. Notes, paths, dominant lenses, and a one-click Markdown export. Nothing leaves your device.",
+    description: "A private, browser-only record of your reasoning across thought experiments, with notes, paths, lenses, and Markdown export.",
   },
   "audiences/student": {
     title: "For Students — The Examined Classroom",
@@ -342,19 +342,19 @@ const PAGE_META = {
   },
   "terms": {
     title: "Terms of Use — The Examined Classroom",
-    description: "Terms of use for The Examined Classroom: educational use only, no professional advice, content licensed CC BY-NC 4.0, standard limitation of liability and warranty disclaimers.",
+    description: "Terms for educational use, no professional advice, CC BY-NC 4.0 content, warranty disclaimers, and liability limits.",
   },
   "credits": {
     title: "Credits & AI Disclosures — The Examined Classroom",
-    description: "Attribution for illustrations (OpenAI DALL·E), audio narration (ElevenLabs), typography (Google Fonts), and technology stack. Transparency about AI use across the site.",
+    description: "Attribution for illustrations, narration, typography, technology, and transparent AI use across The Examined Classroom.",
   },
   "for-educators": {
-    title: "For Educators — Professional Development Resources — The Examined Classroom",
+    title: "For Educators — PD Resources — The Examined Classroom",
     description: "Practical guidance for K–12 teachers and leaders: academic feedback, student engagement, and school leadership.",
   },
   "teaching-feedback": {
     title: "Effective Academic Feedback — The Examined Classroom",
-    description: "A practitioner's guide to personalized, instructional feedback: research-based standards, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
+    description: "Personalized feedback guidance: research-based standards, the 5 R's, the 4C reflection model, and 1:1 conferencing.",
   },
   "enhancing-feedback": {
     title: "Enhancing Academic Feedback — The Examined Classroom",
@@ -362,11 +362,11 @@ const PAGE_META = {
   },
   "enhancing-engagement": {
     title: "Enhancing Student Engagement — The Examined Classroom",
-    description: "Theoretical frameworks and practical models for student engagement: behavioral, cognitive, and emotional dimensions; the 4Cs model; active learning; motivation levers.",
+    description: "Practical models for behavioral, cognitive, and emotional engagement, including the 4Cs, active learning, and motivation levers.",
   },
   "async-engagement": {
     title: "Asynchronous Learning Engagement — The Examined Classroom",
-    description: "Engagement strategies for online and async settings: course design principles, isolation and time-management challenges, reflective practices, and engagement metrics.",
+    description: "Online and async engagement strategies for course design, isolation, time management, reflection, and learning metrics.",
   },
   "av-resources": {
     title: "AV Resources for Online Teaching — The Examined Classroom",
@@ -378,7 +378,7 @@ const PAGE_META = {
   },
   "high-performing-schools": {
     title: "High-Performing K-12 Schools — The Examined Classroom",
-    description: "What separates consistently excellent K–12 schools: data-driven decisions, intensive teacher training, rigorous instruction with embedded test prep, and a supportive culture.",
+    description: "What separates excellent K-12 schools: data-driven decisions, teacher training, rigorous instruction, and supportive culture.",
   },
   "rti": {
     title: "Response to Intervention (RTI) — The Examined Classroom",
@@ -393,30 +393,229 @@ const PAGE_META = {
     description: "A reverse-chronological changelog of new thought experiments, research updates, features, and resources on The Examined Classroom.",
   },
   "stories": {
-    title: "From the Classroom — Stories from Educators — The Examined Classroom",
-    description: "Classroom stories and short notes from teachers, administrators, and parents who have used The Examined Classroom resources. Currently in placeholder mode — real stories replace the samples as they come in.",
+    title: "Classroom Stories — The Examined Classroom",
+    description: "Short notes from teachers, administrators, and parents using The Examined Classroom resources. Sample stories are placeholders.",
   },
   "picker": {
     title: "Thought Experiment Picker — The Examined Classroom",
     description: "Answer three quick questions about grade, time, and topic — get three classroom-ready thought experiments that fit. No login, no algorithm.",
   },
   "ai-rubric": {
-    title: "AI Use Rubric — Should we use AI for this? — The Examined Classroom",
-    description: "A six-dimension scaffold for teachers and school leaders evaluating a proposed AI use. Pick a scenario, score each dimension, get a go / discuss / redesign recommendation with the rationale.",
+    title: "AI Use Rubric — The Examined Classroom",
+    description: "A six-dimension scaffold for teachers and leaders evaluating AI use, with go, discuss, or redesign recommendations.",
   },
   "ai-policy": {
-    title: "AI Policy Builder — Draft your school's AI policy — The Examined Classroom",
-    description: "Answer nine questions about your school's stance on AI; get a 1–2 page draft policy you can copy or download as the starting point for a board-ready document.",
+    title: "AI Policy Builder — The Examined Classroom",
+    description: "Answer nine questions about your school's AI stance and generate a 1-2 page draft policy for local review.",
   },
   "family-conversations": {
-    title: "Family Conversations — Five questions to start a family conversation about AI — The Examined Classroom",
-    description: "For parents and caregivers: pick your child's age and a topic about AI; get five dinner-table prompts that open the conversation without lecturing. No correct answers — just five questions that work.",
+    title: "Family AI Conversations — The Examined Classroom",
+    description: "Pick a child's age and AI topic to get five dinner-table prompts that invite conversation without lecturing.",
   },
   "tools": {
     title: "Interactive Tools — The Examined Classroom",
-    description: "Four short, focused interactives that hand you a usable artifact in under ten minutes: the Thought Experiment Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator. No login, no data collection beyond cookieless event counts.",
+    description: "Four focused interactives: Thought Experiment Picker, AI Use Rubric, AI Policy Builder, and Family Conversation Generator.",
   },
 };
+
+const ARTICLE_PAGES = new Set([
+  "moral-psych",
+  "ai-ethics",
+  "ai-consciousness",
+  "ai-authorship-quandary",
+  "ai-ambiguity-to-action",
+  "ai-paradox",
+  "ai-replace-teachers",
+  "phil-education",
+  "teaching-feedback",
+  "enhancing-feedback",
+  "enhancing-engagement",
+  "async-engagement",
+  "av-resources",
+  "quality-leadership",
+  "high-performing-schools",
+  "rti",
+  "whats-new",
+]);
+
+const COLLECTION_PAGES = new Set([
+  "thought-experiments",
+  "thought-experiments/educators",
+  "thought-experiments/k-5",
+  "thought-experiments/6-8",
+  "thought-experiments/9-12",
+  "ai-education",
+  "ai-education/foundations",
+  "ai-education/classroom-practice",
+  "ai-education/student-tools",
+  "ai-education/policy-ethics",
+  "ai-education/future-readiness",
+  "ai-education/tools-resources",
+  "resources",
+  "for-educators",
+]);
+
+const LEARNING_RESOURCE_PAGES = new Set([
+  "thought-experiments/kindergarten",
+  "thought-experiments/grade-1",
+  "thought-experiments/grade-2",
+  "thought-experiments/grade-3",
+  "thought-experiments/grade-4",
+  "thought-experiments/grade-5",
+  "thought-experiments/explaining-red-k-2",
+  "thought-experiments/toolkit",
+  "thought-experiments/journal",
+]);
+
+const WEB_APPLICATION_PAGES = new Set([
+  "picker",
+  "ai-rubric",
+  "ai-policy",
+  "family-conversations",
+  "tools",
+]);
+
+function canonicalUrlForPage(pageId) {
+  return pageId === "home" ? `${SITE.origin}/` : `${SITE.origin}/${pageId}`;
+}
+
+function titleWithoutBrand(title) {
+  return title.replace(` — ${SITE.brandName}`, "");
+}
+
+function schemaTypeForPage(pageId) {
+  if (pageId === "about") return "ProfilePage";
+  if (ARTICLE_PAGES.has(pageId)) return "Article";
+  if (COLLECTION_PAGES.has(pageId)) return "CollectionPage";
+  if (LEARNING_RESOURCE_PAGES.has(pageId)) return "LearningResource";
+  if (WEB_APPLICATION_PAGES.has(pageId)) return "WebApplication";
+  return "WebPage";
+}
+
+function educationalLevelForPage(pageId) {
+  if (pageId.includes("kindergarten")) return "Kindergarten";
+  if (pageId.includes("grade-1")) return "Grade 1";
+  if (pageId.includes("grade-2")) return "Grade 2";
+  if (pageId.includes("grade-3")) return "Grade 3";
+  if (pageId.includes("grade-4")) return "Grade 4";
+  if (pageId.includes("grade-5")) return "Grade 5";
+  if (pageId.includes("k-5") || pageId.includes("explaining-red-k-2")) return "K-5";
+  if (pageId.includes("6-8")) return "Grades 6-8";
+  if (pageId.includes("9-12")) return "Grades 9-12";
+  return "K-12";
+}
+
+function buildBreadcrumbSchema(pageId) {
+  if (pageId === "home" || !pageId.includes("/")) return null;
+
+  const crumbs = [
+    { name: "Home", item: `${SITE.origin}/` },
+  ];
+  let partial = "";
+  for (const segment of pageId.split("/")) {
+    partial = partial ? `${partial}/${segment}` : segment;
+    if (!PAGE_META[partial] && partial !== pageId) continue;
+
+    const meta = PAGE_META[partial] || PAGE_META[pageId];
+    crumbs.push({
+      name: titleWithoutBrand(meta.title),
+      item: canonicalUrlForPage(partial),
+    });
+  }
+
+  return {
+    "@type": "BreadcrumbList",
+    "itemListElement": crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.name,
+      "item": crumb.item,
+    })),
+  };
+}
+
+function buildPageSchema(pageId, meta, canonicalUrl) {
+  const type = schemaTypeForPage(pageId);
+  const common = {
+    "@type": type,
+    "@id": `${canonicalUrl}#webpage`,
+    "name": titleWithoutBrand(meta.title),
+    "description": meta.description,
+    "url": canonicalUrl,
+    "inLanguage": "en-US",
+    "isPartOf": {
+      "@id": `${SITE.origin}/#website`,
+    },
+  };
+
+  if (type === "ProfilePage") {
+    return {
+      ...common,
+      "mainEntity": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+      "about": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+    };
+  }
+
+  if (type === "Article") {
+    return {
+      ...common,
+      "headline": titleWithoutBrand(meta.title),
+      "mainEntityOfPage": canonicalUrl,
+      "author": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+      "publisher": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+      "datePublished": meta.datePublished || "2024-01-01",
+      "dateModified": meta.dateModified || "2026-05-24",
+    };
+  }
+
+  if (type === "LearningResource") {
+    return {
+      ...common,
+      "learningResourceType": pageId.includes("journal") ? "Decision journal" : "Thought experiment",
+      "educationalUse": "Discussion",
+      "educationalLevel": educationalLevelForPage(pageId),
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": pageId.includes("educators") ? "teacher" : "student",
+      },
+      "creator": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+      "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+    };
+  }
+
+  if (type === "WebApplication") {
+    return {
+      ...common,
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "creator": {
+        "@id": `${SITE.origin}/#matthew-zinn`,
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+      },
+    };
+  }
+
+  return {
+    ...common,
+    "creator": {
+      "@id": `${SITE.origin}/#matthew-zinn`,
+    },
+  };
+}
 
 function getPageFromPath() {
   if (typeof window === "undefined") return "home";
@@ -510,13 +709,15 @@ export default function App() {
     };
   }, []);
 
-  // Dynamic title, meta description, and Article schema per page
+  // Dynamic title, meta description, and route-specific schema per page
   useEffect(() => {
     const isNotFoundPage = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
 
-    // Always remove stale article schema first
-    const existing = document.getElementById("article-schema");
-    if (existing) existing.remove();
+    // Always remove stale page schema first.
+    for (const id of ["article-schema", "page-schema"]) {
+      const existing = document.getElementById(id);
+      if (existing) existing.remove();
+    }
 
     if (isNotFoundPage) {
       document.title = `Page Not Found — ${SITE.brandName}`;
@@ -538,9 +739,7 @@ export default function App() {
     descEl.setAttribute("content", meta.description);
 
     // Canonical link for the current path (so each route advertises its own URL).
-    const canonicalUrl = currentPage === "home"
-      ? `${SITE.origin}/`
-      : `${SITE.origin}/${currentPage}`;
+    const canonicalUrl = canonicalUrlForPage(currentPage);
     let canonicalEl = document.querySelector('link[rel="canonical"]');
     if (!canonicalEl) {
       canonicalEl = document.createElement("link");
@@ -570,29 +769,18 @@ export default function App() {
     const twitterDescEl = document.querySelector('meta[name="twitter:description"]');
     if (twitterDescEl) twitterDescEl.setAttribute("content", meta.description);
 
-    // Article schema for content pages (not home)
+    // Route-aware schema for content pages (not home). The home page keeps
+    // the durable site identity graph in index.html.
     if (currentPage !== "home") {
+      const pageSchema = buildPageSchema(currentPage, meta, canonicalUrl);
+      const breadcrumbSchema = buildBreadcrumbSchema(currentPage);
+      const schemaGraph = breadcrumbSchema ? [pageSchema, breadcrumbSchema] : [pageSchema];
       const script = document.createElement("script");
       script.type = "application/ld+json";
-      script.id = "article-schema";
+      script.id = "page-schema";
       script.text = JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": meta.title,
-        "url": canonicalUrl,
-        "mainEntityOfPage": canonicalUrl,
-        "author": {
-          "@type": "Person",
-          "name": SITE.authorName,
-          "url": SITE.origin,
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": SITE.brandName,
-          "url": SITE.origin,
-        },
-        "datePublished": meta.datePublished || "2024-01-01",
-        "dateModified": meta.dateModified || "2026-05-13",
+        "@graph": schemaGraph,
       });
       document.head.appendChild(script);
     }
