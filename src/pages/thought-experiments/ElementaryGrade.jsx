@@ -9,6 +9,7 @@ import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { audioBus } from "../../lib/audioBus.js";
+import { getElementaryExperimentRoute } from "./elementaryRouting.js";
 
 export const ELEMENTARY_GRADES = [
   {
@@ -101,6 +102,13 @@ export function ElementaryGradePage({ navigate, gradeId }) {
       audioBus.stop();
       const id = experimentIdFromHash();
       const target = id ? getExperimentsByElementaryGrade(grade.id).find(experiment => experiment.id === id) : null;
+      const route = getElementaryExperimentRoute(target);
+      if (route) {
+        setActive(null);
+        setLensChoices([]);
+        navigate?.(route);
+        return;
+      }
       setActive(target || null);
       setLensChoices([]);
     };
@@ -126,13 +134,23 @@ export function ElementaryGradePage({ navigate, gradeId }) {
   }, [active]);
 
   const closeActive = () => { audioBus.stop(); setActive(null); };
+  const openExperiment = (experiment) => {
+    audioBus.stop();
+    const route = getElementaryExperimentRoute(experiment);
+    if (route) {
+      setActive(null);
+      setLensChoices([]);
+      navigate?.(route);
+      return;
+    }
+    setActive(experiment);
+  };
 
   const pickRelated = (current, pool) => {
     if (!current || !pool?.length) return null;
     const currentTopics = new Set(current.topics || []);
     return pool.find(e => e.id !== current.id && (e.topics || []).some(t => currentTopics.has(t))) || null;
   };
-  const handlePickRelated = (next) => { audioBus.stop(); setActive(next); };
 
   const recordChoice = (lens) => setLensChoices(prev => [...prev, lens]);
   return (
@@ -155,7 +173,7 @@ export function ElementaryGradePage({ navigate, gradeId }) {
               <Divider label={`${grade.label} stories`} />
               <ExperimentGrid
                 experiments={experiments}
-                onSelect={(experiment) => setActive(experiment)}
+                onSelect={openExperiment}
                 emptyMessage={`No ${grade.label} experiments are ready yet.`}
                 visualVariant="k-5"
               />
@@ -198,7 +216,7 @@ export function ElementaryGradePage({ navigate, gradeId }) {
                 onClose={closeActive}
                 onRecordChoice={recordChoice}
                 relatedExperiment={pickRelated(active, experiments)}
-                onPickRelated={handlePickRelated}
+                onPickRelated={openExperiment}
               />
             </div>
           )}
