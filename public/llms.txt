@@ -1,0 +1,36 @@
+# The Ethical Educator
+
+Official site: https://theethicaleducator.com/
+
+The Ethical Educator is the personal website of Matthew A. Zinn, a philosopher and educator working across moral psychology, AI ethics, philosophy of education, and educational technology.
+
+The site publishes classroom-ready thought experiments, educator resources, research-backed AI ethics guidance, and practical AI tools for K-12 teachers, school leaders, students, and families.
+
+## Priority Pages
+
+- About: https://theethicaleducator.com/about
+- Interactive Thought Experiments: https://theethicaleducator.com/thought-experiments
+- Interactive Tools: https://theethicaleducator.com/tools
+- AI in Education: https://theethicaleducator.com/ai-education
+- AI Ethics in Education: https://theethicaleducator.com/ai-ethics
+- Research Resources: https://theethicaleducator.com/resources
+- For Educators: https://theethicaleducator.com/for-educators
+- Credits and AI disclosures: https://theethicaleducator.com/credits
+- Terms of Use: https://theethicaleducator.com/terms
+
+## Key Topics
+
+- AI ethics in education
+- K-12 classroom thought experiments
+- Philosophy for children and adolescents
+- Moral psychology and AI alignment
+- School AI policy and responsible AI use
+- Academic integrity, feedback, engagement, and leadership
+
+## Use and Attribution
+
+Most original educational content is licensed under Creative Commons Attribution-NonCommercial 4.0 International unless a page says otherwise.
+
+Preferred attribution: The Ethical Educator by Matthew A. Zinn, https://theethicaleducator.com/
+
+Contact: hello@theethicaleducator.com
