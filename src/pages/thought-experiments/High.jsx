@@ -231,6 +231,7 @@ export default function High({ navigate }) {
       label="Grades 9–12"
       title="The Philosophical Canon"
       blurb="Classic thought experiments and contemporary AI dilemmas, organised around four philosophical themes: values, knowledge, reality, and reasoning. Each scenario carries arguments and counterarguments, fallacy spotting, argument repair, and room for student-built variations."
+      introComicKey="thought-experiments/9-12"
       heroImage={getFeatureIllustration("thought-experiments/9-12")}
       heroAccent={C.ocean}
       preExperiments={({ experiments, filterApi }) => (

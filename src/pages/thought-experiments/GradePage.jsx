@@ -4,12 +4,14 @@ import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring, ImagePageHeader,
 } from "../../components/shared.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
+import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import TopicFilter from "../../components/TopicFilter.jsx";
 import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { useExperimentFilter } from "../../hooks/useExperimentFilter.js";
 import { getExperimentsByGrade, getTopicIdsForGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { getIntroComic } from "../../data/introComics.js";
 import { audioBus } from "../../lib/audioBus.js";
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
@@ -63,6 +65,7 @@ export default function GradePage({
   preExperiments = null,  // optional content before the grid (e.g. flagship cards on educators)
   renderResults = null,   // optional ({experiments, filterApi, all, onSelect, emptyMessage}) => JSX,
                           // used to override the default flat ExperimentGrid (e.g. themed grouping at 9-12)
+  introComicKey = null,
   emptyMessage,
   heroImage = null,
   heroImageAlt = "",
@@ -125,6 +128,7 @@ export default function GradePage({
   const preExperimentContent = typeof preExperiments === "function"
     ? preExperiments({ experiments: all, filterApi })
     : preExperiments;
+  const introComic = introComicKey ? getIntroComic(introComicKey) : null;
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -149,6 +153,10 @@ export default function GradePage({
             <SectionTitle>{title}</SectionTitle>
             {blurb && <Subtitle>{blurb}</Subtitle>}
           </FadeIn>
+        )}
+
+        {!active && introComic && (
+          <IntroComicStrip comic={introComic} />
         )}
 
         <Narrow>

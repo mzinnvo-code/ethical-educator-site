@@ -2,9 +2,11 @@ import { C } from "../../theme.js";
 import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, TopicCard, ContinueExploring,
 } from "../../components/shared.jsx";
+import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import { ELEMENTARY_GRADES } from "./ElementaryGrade.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { getIntroComic } from "../../data/introComics.js";
 import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 import FeaturedRedBanner from "./FeaturedRedBanner.jsx";
 
@@ -33,6 +35,8 @@ export default function K5({ navigate }) {
             Twenty-four grade-specific stories that turn ethics, AI, friendship, fairness, and knowledge into moments students can picture, discuss, and revisit.
           </Subtitle>
         </FadeIn>
+
+        <IntroComicStrip comic={getIntroComic("thought-experiments/k-5")} />
 
         <Narrow>
           <FadeIn>

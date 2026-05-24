@@ -4,10 +4,12 @@ import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, ContinueExploring,
 } from "../../components/shared.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
+import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import ReasoningProfile from "../../components/ReasoningProfile.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { getIntroComic } from "../../data/introComics.js";
 import { audioBus } from "../../lib/audioBus.js";
 import { getElementaryExperimentRoute } from "./elementaryRouting.js";
 
@@ -168,6 +170,10 @@ export function ElementaryGradePage({ navigate, gradeId }) {
         </FadeIn>
 
         <Narrow>
+          {!active && (
+            <IntroComicStrip comic={getIntroComic(grade.route)} />
+          )}
+
           {!active && (
             <>
               <Divider label={`${grade.label} stories`} />

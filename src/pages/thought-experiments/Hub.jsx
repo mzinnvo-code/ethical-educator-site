@@ -7,9 +7,11 @@ import {
 import { PhiloRef } from "../../experiments/ExperimentShared.jsx";
 import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
+import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import { getExperimentsByGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
+import { getIntroComic } from "../../data/introComics.js";
 import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 
 function currentWeekNumber() {
@@ -245,6 +247,10 @@ export default function Hub({ navigate }) {
             None have right answers. All of them help us think.
           </Subtitle>
         </FadeIn>
+
+        {!active && (
+          <IntroComicStrip comic={getIntroComic("thought-experiments")} />
+        )}
 
         <PathwayCardStrip navigate={navigate} />
 
