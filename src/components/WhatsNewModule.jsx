@@ -47,7 +47,7 @@ export default function WhatsNewModule({ navigate, count = 3 }) {
                 fontSize: "clamp(1.4rem, 3vw, 1.85rem)",
                 fontWeight: 700,
                 lineHeight: 1.2,
-              }}>What's new on The Ethical Educator</h2>
+              }}>What's new on The Examined Classroom</h2>
             </div>
             <a
               href="/whats-new"

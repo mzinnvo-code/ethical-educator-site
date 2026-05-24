@@ -987,7 +987,7 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
   const goToJournal = () => {
     if (typeof window !== "undefined") {
       window.history.pushState(null, "", "/thought-experiments/journal");
-      window.dispatchEvent(new Event("ethed:route"));
+      window.dispatchEvent(new Event("examined-classroom:route"));
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };

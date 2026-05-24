@@ -4,10 +4,10 @@ import NewsletterSignup from "./NewsletterSignup.jsx";
 
 // Show the signup modal on the visitor's 3rd page load, but only once.
 // Suppressed forever if the user has dismissed it or already subscribed.
-const VISITS_KEY = "tee:visits";
-const DISMISSED_KEY = "tee:newsletterModalDismissed";
-const SUBSCRIBED_KEY = "tee:newsletterSubscribed";
-const SHOWN_SESSION_KEY = "tee:newsletterModalShownSession";
+const VISITS_KEY = "examined-classroom:visits";
+const DISMISSED_KEY = "examined-classroom:newsletterModalDismissed";
+const SUBSCRIBED_KEY = "examined-classroom:newsletterSubscribed";
+const SHOWN_SESSION_KEY = "examined-classroom:newsletterModalShownSession";
 const TRIGGER_AT_VISIT = 3;
 
 function getStorage(kind) {
@@ -114,7 +114,7 @@ export default function NewsletterModal({ routeKey }) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="tee-newsletter-modal-title"
+      aria-labelledby="examined-classroom-newsletter-modal-title"
       onClick={(e) => { if (e.target === e.currentTarget) dismiss(); }}
       style={{
         position: "fixed",
@@ -158,7 +158,7 @@ export default function NewsletterModal({ routeKey }) {
           }}
         >×</button>
         <div style={{ padding: "30px 28px 22px" }}>
-          <p id="tee-newsletter-modal-title" style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.gold, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
+          <p id="examined-classroom-newsletter-modal-title" style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.gold, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>
             For teachers
           </p>
           <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.6rem", fontWeight: 700, lineHeight: 1.2, marginBottom: 10 }}>

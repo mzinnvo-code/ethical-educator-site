@@ -50,7 +50,7 @@ export const AI_EDUCATION_PAGES = {
           "For most teachers, \"AI\" arrived as a single word with a specific face — ChatGPT, in late 2022 — and has expanded ever since to describe everything from spellcheck to artificial superintelligence. The categories on this page are not a technical primer for engineers. They are a working vocabulary for a teacher who has to decide what to allow in their classroom, answer the student who asks what AI actually is, and read a vendor's marketing without taking it at face value.",
           "For school use, AI is best understood as software that performs tasks associated with human thinking: finding patterns, classifying information, making predictions, generating content, or responding to prompts. This definition is intentionally broad. A scheduling system, adaptive practice platform, predictive dashboard, chatbot, image generator, and speech-to-text tool can all involve AI, but they do not carry the same risks.",
           "Generative AI is the subset that changed the public conversation because it creates new outputs. A teacher can ask for a lesson draft, a family letter, a rubric, an explanation, a song, a study guide, or a set of practice questions. That creative fluency is useful, but it also creates new concerns about accuracy, authorship, privacy, intellectual property, bias, and whether students are doing the thinking that learning requires.",
-          "The Ethical Educator stance is explicit: AI can support human judgment, but it does not understand students, hold educational values, or exercise professional responsibility. That distinction keeps every recommendation here aligned with the site's Terms of Use and with current school-system guidance.",
+          "The Examined Classroom stance is explicit: AI can support human judgment, but it does not understand students, hold educational values, or exercise professional responsibility. That distinction keeps every recommendation here aligned with the site's Terms of Use and with current school-system guidance.",
           "This vocabulary also matters when students ask. A ninth grader who is told \"AI is just fancy autocomplete\" learns to dismiss it. A ninth grader who is told \"AI can mean a classifier, a generator, a predictor, or a system that infers emotions from a face — each built differently and behaving differently\" has the start of a real mental model. The categories below are the version teachers can use for both audiences.",
         ],
         cards: [
@@ -191,7 +191,7 @@ export const AI_EDUCATION_PAGES = {
         color: C.coral,
         paragraphs: [
           "AI can help draft comments, compare work to rubric language, identify unclear feedback, summarize trends, or suggest what a student might try next. That is feedback support. It becomes a different category when the system makes the grade, determines mastery, or becomes the evidence of what a student knows.",
-          "Current policy guidance draws this line clearly: AI-generated data can be advisory, but the educator of record determines what the student knows. That boundary is central on The Ethical Educator because it protects both learning and due process.",
+          "Current policy guidance draws this line clearly: AI-generated data can be advisory, but the educator of record determines what the student knows. That boundary is central on The Examined Classroom because it protects both learning and due process.",
           "Administrative uses can also be strong: scheduling, formatting, summarizing non-sensitive information, drafting routine communications, or synthesizing operational data. Leaders still need data privacy review, especially when student records, grades, attendance, disability status, or family information are involved.",
         ],
         sources: [
@@ -754,7 +754,7 @@ export const AI_EDUCATION_PAGES = {
         color: C.coral,
         paragraphs: [
           "Seven resources form a core reading pathway for educators going deeper. Each pairs a single book or framework with the question it answers best. Tools date quickly. Ethical reasoning ages better.",
-          "The list should also point back into The Ethical Educator's own AI ethics and thought-experiment pages, because those pages are now the site's strongest differentiated contribution.",
+          "The list should also point back into The Examined Classroom's own AI ethics and thought-experiment pages, because those pages are now the site's strongest differentiated contribution.",
         ],
         listTitle: "A core reading pathway:",
         list: [

@@ -5,7 +5,7 @@ import { track } from "../lib/analytics.js";
 // Buttondown username — set this once after creating the Buttondown account
 // at https://buttondown.com. Keep BUTTONDOWN_ENABLED false until the
 // publication exists, otherwise visitors hit Buttondown's Not Found page.
-const BUTTONDOWN_USERNAME = "theethicaleducator";
+const BUTTONDOWN_USERNAME = "examinedclassroom";
 const BUTTONDOWN_ENABLED = false;
 
 function isConfigured() {
@@ -39,7 +39,7 @@ export default function NewsletterSignup({
     track("newsletter_signup_click", { placement });
     // Open Buttondown confirmation in a popup so the user stays on our page.
     if (typeof window !== "undefined") {
-      window.open(profileUrl(), "tee-newsletter-popup", "width=560,height=720");
+      window.open(profileUrl(), "examined-classroom-newsletter-popup", "width=560,height=720");
     }
     setSubmitted(true);
     // Let the browser submit the form to the popup target normally.
@@ -89,7 +89,7 @@ function FooterForm({ configured, submitted, onSubmit, buttonLabel }) {
     <form
       action={configured ? submitUrl() : "#"}
       method="post"
-      target="tee-newsletter-popup"
+      target="examined-classroom-newsletter-popup"
       onSubmit={onSubmit}
       style={{ marginTop: 12 }}
     >
@@ -105,9 +105,9 @@ function FooterForm({ configured, submitted, onSubmit, buttonLabel }) {
         </p>
       ) : (
         <div style={{ display: "flex", gap: 6, alignItems: "stretch", flexWrap: "wrap" }}>
-          <label htmlFor="tee-footer-email" style={{ position: "absolute", left: -9999 }}>Email address</label>
+          <label htmlFor="examined-classroom-footer-email" style={{ position: "absolute", left: -9999 }}>Email address</label>
           <input
-            id="tee-footer-email"
+            id="examined-classroom-footer-email"
             type="email"
             name="email"
             placeholder="you@school.edu"
@@ -181,7 +181,7 @@ function InlineForm({ configured, submitted, onSubmit, headline, subhead, button
         <form
           action={configured ? submitUrl() : "#"}
           method="post"
-          target="tee-newsletter-popup"
+          target="examined-classroom-newsletter-popup"
           onSubmit={onSubmit}
           style={{ display: "flex", gap: 10, alignItems: "stretch", flexWrap: "wrap" }}
         >

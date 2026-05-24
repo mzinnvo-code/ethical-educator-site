@@ -222,7 +222,7 @@ function Result({ age, topic, prompts, onReset, navigate }) {
   const copyText = useMemo(() => {
     const header = `Five family-conversation prompts about ${topic.label} (${age.short})`;
     const body = prompts.map((p, i) => `${i + 1}. ${p}`).join("\n\n");
-    const footer = `From The Ethical Educator — theethicaleducator.com/family-conversations`;
+    const footer = `From The Examined Classroom — examinedclassroom.com/family-conversations`;
     return `${header}\n\n${body}\n\n— ${footer}`;
   }, [age, topic, prompts]);
 

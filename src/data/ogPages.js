@@ -4,18 +4,19 @@
 //
 // Shape: { id, title, section, accent }
 //   id      — matches the route slug used in PAGE_MAP / PAGE_META
-//   title   — short title for the card (trim any "— The Ethical Educator")
+//   title   — short title for the card (trim any "— The Examined Classroom")
 //   section — eyebrow / category label
 //   accent  — hex color used for the brand stripe and section pill
 //
 // Colors mirror the theme tokens in src/theme.js. Hard-coded here so the
 // build-time script (running in node) doesn't have to import the React-y
 // theme module.
+import { SITE } from "../siteConfig.js";
 
 export const BRAND = {
-  name: "The Ethical Educator",
-  author: "Matthew A. Zinn",
-  url: "theethicaleducator.com",
+  name: SITE.brandName,
+  author: SITE.authorName,
+  url: SITE.domain,
   bg: "#0b1622",
   bgAlt: "#0e1e30",
   textPrimary: "#e0dcd0",
@@ -53,7 +54,7 @@ export const OG_PAGES = [
 
   // Newsletter + What's New
   { id: "newsletter", title: "The Sunday Dilemma — a weekly newsletter for teachers", section: "Free · One issue a week", accent: OG_ACCENTS.teal },
-  { id: "whats-new", title: "What's new on The Ethical Educator", section: "Changelog", accent: OG_ACCENTS.gold },
+  { id: "whats-new", title: "What's new on The Examined Classroom", section: "Changelog", accent: OG_ACCENTS.gold },
   { id: "stories", title: "From the Classroom — stories from educators", section: "Teacher voices", accent: OG_ACCENTS.gold },
   { id: "picker", title: "Find a thought experiment in three clicks", section: "Picker · Interactive tool", accent: OG_ACCENTS.coral },
   { id: "ai-rubric", title: "Should we use AI for this? A six-dimension rubric", section: "AI Use Rubric · Interactive tool", accent: OG_ACCENTS.teal },

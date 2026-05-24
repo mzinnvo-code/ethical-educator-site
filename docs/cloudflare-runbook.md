@@ -11,7 +11,7 @@ Once you've done this, the analytics beacon is live and pageviews/Core Web Vital
 1. Go to https://dash.cloudflare.com and log in.
 2. In the left sidebar (or top nav, depending on dashboard version), open **Analytics & Logs → Web Analytics**.
 3. Click **Add a site**.
-4. **Hostname**: `theethicaleducator.com`
+4. **Hostname**: `examinedclassroom.com`
 5. **Automatic setup** options will appear. Since GitHub Pages is the actual origin (we're DNS-only, not proxied), choose **"Enable, with JS Snippet installation"** — this gives you a manual snippet to paste into our HTML.
    - (If Cloudflare only offers Automatic for proxied sites and you're DNS-only, you'll just be asked for a hostname and given the snippet directly — that's expected.)
 6. Click **Done**.
@@ -47,7 +47,7 @@ Replace `REPLACE_WITH_CLOUDFLARE_TOKEN` with the token from Step 1. Save, commit
 
 After the deploy finishes:
 
-1. Visit https://theethicaleducator.com in a fresh incognito window.
+1. Visit https://examinedclassroom.com in a fresh incognito window.
 2. Click through 2–3 pages.
 3. Open https://dash.cloudflare.com/?to=/:account/web-analytics → select your site.
 4. Within 1–2 minutes, you should see pageviews tick up. Wait 24 hours for the full dashboard (referrers, top pages, Core Web Vitals) to populate meaningfully.
@@ -56,7 +56,7 @@ After the deploy finishes:
 
 ---
 
-## Step 4 — Deploy the `ethed-events` Worker (5 min)
+## Step 4 — Deploy the `examined-classroom-events` Worker (5 min)
 
 This unlocks the custom events (scroll depth, newsletter clicks, PDF downloads) that Cloudflare Web Analytics can't capture on its own. Full details in `workers/events/README.md`; the short version:
 
@@ -69,8 +69,8 @@ npm run deploy
 
 Wrangler prints something like:
 ```
-Published ethed-events
-  https://ethed-events.<your-subdomain>.workers.dev
+Published examined-classroom-events
+  https://examined-classroom-events.<your-subdomain>.workers.dev
 ```
 
 Copy that URL. Open `src/lib/analytics.js` at the repo root and replace:
@@ -82,10 +82,10 @@ const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
 with the URL (including the `/events` path):
 
 ```js
-const ANALYTICS_ENDPOINT = "https://ethed-events.your-subdomain.workers.dev/events";
+const ANALYTICS_ENDPOINT = "https://examined-classroom-events.your-subdomain.workers.dev/events";
 ```
 
-Commit, push, GitHub Actions redeploys. Custom events start landing in the `tee_events` Analytics Engine dataset within a few seconds of the first user interaction.
+Commit, push, GitHub Actions redeploys. Custom events start landing in the `examined_classroom_events` Analytics Engine dataset within a few seconds of the first user interaction.
 
 To verify: run `npm run tail` in `workers/events/`, then visit the live site and scroll a long-form page — you'll see request entries stream into the terminal. Query the dataset with SQL examples in `docs/analytics-playbook.md`.
 

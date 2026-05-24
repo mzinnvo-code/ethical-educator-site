@@ -18,7 +18,7 @@ If you prefer Kit (ConvertKit), Beehiiv, or Substack, the swap is small — repl
 
 1. Go to https://buttondown.com and sign up.
 2. Choose a username — this becomes part of your public URL (`buttondown.com/<username>`) and the subscribe endpoint.
-3. Suggested: `theethicaleducator` (matches the brand and stays predictable). Confirm it's available.
+3. Suggested: `examinedclassroom` (matches the brand and stays predictable). Confirm it's available.
 4. Set your sender name to "Matthew A. Zinn" and reply-to to your real address.
 5. Skip the paid plan; the free tier is fine until you cross 100 subscribers.
 
@@ -27,11 +27,11 @@ If you prefer Kit (ConvertKit), Beehiiv, or Substack, the swap is small — repl
 Open `src/components/NewsletterSignup.jsx` at the repo root. Find:
 
 ```js
-const BUTTONDOWN_USERNAME = "theethicaleducator";
+const BUTTONDOWN_USERNAME = "examinedclassroom";
 const BUTTONDOWN_ENABLED = false;
 ```
 
-The site is currently reserved for `theethicaleducator`, but submissions stay disabled while `BUTTONDOWN_ENABLED` is `false`. This prevents visitors from being sent to Buttondown before the publication exists. If you choose a different username, replace the string.
+The site is currently reserved for `examinedclassroom`, but submissions stay disabled while `BUTTONDOWN_ENABLED` is `false`. This prevents visitors from being sent to Buttondown before the publication exists. If you choose a different username, replace the string.
 
 After the Buttondown publication is created and `https://buttondown.com/<username>` loads without a Not Found message, change:
 
@@ -73,11 +73,11 @@ Every newsletter submission fires:
 track("newsletter_signup_click", { placement })
 ```
 
-Where `placement` is one of `footer`, `inline`, `modal`, or `landing`. Once the `ethed-events` Worker is deployed (see `workers/events/README.md`), this lands in the `tee_events` dataset and you can query conversion rates by placement:
+Where `placement` is one of `footer`, `inline`, `modal`, or `landing`. Once the `examined-classroom-events` Worker is deployed (see `workers/events/README.md`), this lands in the `examined_classroom_events` dataset and you can query conversion rates by placement:
 
 ```sql
 SELECT blob3 AS placement, SUM(_sample_interval) AS clicks
-FROM tee_events
+FROM examined_classroom_events
 WHERE blob1 = 'newsletter_signup_click' AND timestamp > NOW() - INTERVAL '28' DAY
 GROUP BY placement ORDER BY clicks DESC
 ```
@@ -94,7 +94,7 @@ const TRIGGER_AT_VISIT = 3;
 
 Raise it (5, 7) if you think 3 is too eager; lower it (2) if you want to convert faster. Once a visitor dismisses the modal, it is suppressed permanently for that browser (via `localStorage`). A submitted form shows an in-page confirmation, but the modal is not permanently suppressed until dismissal because Buttondown confirmation happens outside the site.
 
-To reset for testing: open DevTools → Application → Local Storage → clear the `tee:visits` and `tee:newsletterModalDismissed` keys, then `sessionStorage` `tee:newsletterModalShownSession`.
+To reset for testing: open DevTools → Application → Local Storage → clear the `examined-classroom:visits` and `examined-classroom:newsletterModalDismissed` keys, then `sessionStorage` `examined-classroom:newsletterModalShownSession`.
 
 ## Switching providers later
 

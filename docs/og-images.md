@@ -2,7 +2,7 @@
 
 Tier 2 #14. Every page listed in `src/data/ogPages.js` gets its own 1200×630 social-share card emitted at build time. Pages NOT listed fall back to the default site OG image (set in `index.html`).
 
-When someone shares `theethicaleducator.com/moral-psych` on Twitter/X, LinkedIn, Slack, iMessage, or any social tool, the preview now shows a branded card with the page's title and section — not a generic stock image.
+When someone shares `examinedclassroom.com/moral-psych` on Twitter/X, LinkedIn, Slack, iMessage, or any social tool, the preview now shows a branded card with the page's title and section — not a generic stock image.
 
 ## What ships
 
@@ -19,7 +19,7 @@ When someone shares `theethicaleducator.com/moral-psych` on Twitter/X, LinkedIn,
 - Section eyebrow in uppercase letterspacing
 - Big serif title (auto-wrapped to 4 lines max)
 - Author byline (italic, bottom-left)
-- `theethicaleducator.com` domain in monospace (bottom-right)
+- `examinedclassroom.com` domain in monospace (bottom-right)
 
 Per-card size: ~60–105KB PNG. Total for all 25 cards: ~2MB.
 

@@ -27,7 +27,7 @@ export default function Terms({ navigate }) {
 
             <FadeIn delay={0.06}>
               <Divider label="1. Agreement" />
-              <p>These Terms of Use ("Terms") govern your access to and use of the website located at theethicaleducator.com and any related subdomains and pages (the "Site"). The Site is operated by Matthew A. Zinn ("we," "us," or "the operator"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.</p>
+              <p>These Terms of Use ("Terms") govern your access to and use of the website located at examinedclassroom.com and any related subdomains and pages (the "Site"). The Site is operated by Matthew A. Zinn ("we," "us," or "the operator"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree, please do not use the Site.</p>
             </FadeIn>
 
             <FadeIn delay={0.08}>
@@ -46,8 +46,8 @@ export default function Terms({ navigate }) {
               <Divider label="4. Intellectual Property" />
               <p>Except where otherwise noted, all original text, structure, visual design, illustrations, audio narration, code, and other materials on the Site are the intellectual property of the operator, protected by copyright and other applicable laws.</p>
               <p style={{ marginTop: 10 }}><strong style={{ color: C.textPrimary }}>License to you.</strong> Unless a specific item is marked with a different license, the operator licenses the educational content of the Site to you under the <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: "underline" }}>Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license</a>. You may share, adapt, and remix the content for any non-commercial purpose, provided that you give appropriate credit, indicate any changes, and do not suggest the operator endorses you or your use.</p>
-              <p style={{ marginTop: 10 }}>This license does not extend to: (a) the site's name, logo, branding, or "The Ethical Educator" mark; (b) third-party content reproduced under fair use, license, or other permissions, which remain governed by their own terms; or (c) any use that misrepresents authorship, removes attribution, or implies endorsement.</p>
-              <p style={{ marginTop: 10 }}>For permissions beyond this license — including commercial use, paid distribution, or institutional licensing — please contact <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>.</p>
+              <p style={{ marginTop: 10 }}>This license does not extend to: (a) the site's name, logo, branding, or "The Examined Classroom" mark; (b) third-party content reproduced under fair use, license, or other permissions, which remain governed by their own terms; or (c) any use that misrepresents authorship, removes attribution, or implies endorsement.</p>
+              <p style={{ marginTop: 10 }}>For permissions beyond this license — including commercial use, paid distribution, or institutional licensing — please contact <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.14}>
@@ -75,7 +75,7 @@ export default function Terms({ navigate }) {
 
             <FadeIn delay={0.2}>
               <Divider label="8. Copyright Complaints (DMCA)" />
-              <p>The operator respects the intellectual property rights of others. If you believe that material on the Site infringes a copyright you own or control, please send a written notice to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a> that includes:</p>
+              <p>The operator respects the intellectual property rights of others. If you believe that material on the Site infringes a copyright you own or control, please send a written notice to <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a> that includes:</p>
               <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
                 <li>identification of the copyrighted work claimed to have been infringed;</li>
                 <li>identification of the material on the Site you claim is infringing, with enough detail to locate it (a URL is best);</li>
@@ -119,7 +119,7 @@ export default function Terms({ navigate }) {
 
             <FadeIn delay={0.34}>
               <Divider label="15. Contact" />
-              <p>Questions about these Terms may be sent to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>.</p>
+              <p>Questions about these Terms may be sent to <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.36}>

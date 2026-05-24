@@ -242,7 +242,7 @@ export function buildPolicy(answers) {
   const schoolName = (answers.schoolName || "").trim() || "[School name]";
 
   return `# AI Use Policy — ${schoolName}\n\n` +
-    `*Draft generated ${dateStr} via the AI Policy Builder at theethicaleducator.com/ai-policy. This is a starting point, not a finished document — please review with counsel, the community, and the board before adopting.*\n\n` +
+    `*Draft generated ${dateStr} via the AI Policy Builder at examinedclassroom.com/ai-policy. This is a starting point, not a finished document — please review with counsel, the community, and the board before adopting.*\n\n` +
     `## 1. Purpose\n\n${purposeSection(answers)}\n\n` +
     `## 2. Definitions\n\n${definitionsSection(answers)}\n\n` +
     `## 3. Student use\n\n${studentUseSection(answers)}\n\n` +
@@ -252,5 +252,5 @@ export function buildPolicy(answers) {
     `## 7. Equity of access\n\n${equitySection(answers)}\n\n` +
     `## 8. Review and amendment\n\n${reviewSection(answers)}\n\n` +
     `---\n\n` +
-    `*This draft was assembled from a fixed-choice questionnaire. Any final policy must be reviewed by counsel, vetted with the school community, and adopted through your normal governance process. The Ethical Educator does not provide legal advice.*\n`;
+    `*This draft was assembled from a fixed-choice questionnaire. Any final policy must be reviewed by counsel, vetted with the school community, and adopted through your normal governance process. The Examined Classroom does not provide legal advice.*\n`;
 }

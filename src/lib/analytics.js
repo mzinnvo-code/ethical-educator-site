@@ -9,12 +9,12 @@
 // To enable real reporting:
 //   1. Deploy the Worker — see workers/events/README.md.
 //   2. Replace REPLACE_WITH_WORKER_URL below with the deployed URL.
-// Until then, events buffer to window.__teeEvents for DevTools inspection.
+// Until then, events buffer to window.__examinedClassroomEvents for DevTools inspection.
 
-const ANALYTICS_ENDPOINT = "https://ethed-events.theethicaleducator.workers.dev/events";
-const BUFFER_KEY = "__teeEvents";
+const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
+const BUFFER_KEY = "__examinedClassroomEvents";
 
-// Eager-init the buffer at module load so `window.__teeEvents` is always an
+// Eager-init the buffer at module load so `window.__examinedClassroomEvents` is always an
 // array (even before the first track() call). This avoids a confusing "null"
 // result when smoke-checking telemetry from DevTools immediately after page
 // load.
@@ -44,10 +44,10 @@ export function track(name, properties = {}) {
   };
 
   // Diagnostic globals — survive even if something elsewhere reassigns the
-  // buffer array. `window.__teeLastTrack` always carries the most recent
+  // buffer array. `window.__examinedClassroomLastTrack` always carries the most recent
   // event so DevTools can confirm a track() call ran end-to-end.
-  window.__teeLastTrack = event;
-  window.__teeTrackCount = (window.__teeTrackCount || 0) + 1;
+  window.__examinedClassroomLastTrack = event;
+  window.__examinedClassroomTrackCount = (window.__examinedClassroomTrackCount || 0) + 1;
 
   const buf = buffer();
   if (buf) {

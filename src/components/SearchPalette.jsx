@@ -4,7 +4,7 @@ import { useSearch } from "../hooks/useSearch.js";
 
 // Cmd+K / Ctrl+K modal search palette. Lightweight: input + ranked result
 // rows + keyboard navigation. Opens on the keyboard shortcut or any "search"
-// trigger button anywhere in the app (via the global `ethed:openSearch` event).
+// trigger button anywhere in the app (via the global `examined-classroom:openSearch` event).
 //
 // First-cut scope (v1): page-level results only — all 50+ routes searchable
 // by title / description / section. v2 will add experiment-level docs and
@@ -35,10 +35,10 @@ export default function SearchPalette({ pageMeta, onNavigate }) {
     }
     function onCustom() { setOpen(true); }
     window.addEventListener("keydown", onKey);
-    window.addEventListener("ethed:openSearch", onCustom);
+    window.addEventListener("examined-classroom:openSearch", onCustom);
     return () => {
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("ethed:openSearch", onCustom);
+      window.removeEventListener("examined-classroom:openSearch", onCustom);
     };
   }, []);
 

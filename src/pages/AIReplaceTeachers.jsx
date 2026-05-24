@@ -362,7 +362,7 @@ export default function AIReplaceTeachers({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="Verified sources used in this article" color={C.ocean} tag="Sources">
-              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "Response to Why AI Won't Replace Teachers." The Ethical Educator, February 14, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
+              <RefItem><LinkOut href={links.wpOrigin}>Matthew A. Zinn. "Response to Why AI Won't Replace Teachers." The Examined Classroom, February 14, 2024. (Original publication; this article is the expanded internal treatment.)</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sourceVideo}>Source video being responded to. YouTube ID dH1OBxYjUm0.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.sparrowFlenady}>Robert Sparrow and Gavin Flenady. "Bullshit Universities: The Future of Automated Education." AI & Society 40, 2025, 5285–5296.</LinkOut></RefItem>
               <RefItem><LinkOut href={links.biestaBook}>Gert Biesta. The Beautiful Risk of Education. Routledge, 2014.</LinkOut></RefItem>

@@ -99,10 +99,10 @@ function FlagshipsBlock() {
 
     syncFlagshipFromHash();
     window.addEventListener("popstate", syncFlagshipFromHash);
-    window.addEventListener("ethed:route", syncFlagshipFromHash);
+    window.addEventListener("examined-classroom:route", syncFlagshipFromHash);
     return () => {
       window.removeEventListener("popstate", syncFlagshipFromHash);
-      window.removeEventListener("ethed:route", syncFlagshipFromHash);
+      window.removeEventListener("examined-classroom:route", syncFlagshipFromHash);
     };
   }, []);
 

@@ -96,7 +96,7 @@ function renderSvg({ title, section, accent }) {
   <!-- Brand mark + name (top-left) -->
   <g transform="translate(96, 80)">
     <rect x="0" y="0" width="44" height="44" rx="10" fill="${accent}" fill-opacity="0.18" stroke="${accent}" stroke-opacity="0.4" stroke-width="1"/>
-    <text x="22" y="29" fill="${accent}" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" text-anchor="middle">TE</text>
+    <text x="22" y="29" fill="${accent}" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" text-anchor="middle">EC</text>
     <text x="62" y="29" fill="${BRAND.textPrimary}" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="600">${escapeXml(BRAND.name)}</text>
   </g>
 

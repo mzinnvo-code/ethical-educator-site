@@ -143,7 +143,7 @@ function Intro({ onStart }) {
           A markdown-formatted draft policy with eight sections: purpose, definitions, student use, staff use, privacy, attribution, equity, review cadence. The wording adapts to your answers so each section reflects the stance you picked.
         </p>
         <p style={{ color: C.textMuted, fontSize: "0.86rem", lineHeight: 1.65, marginBottom: 14, fontStyle: "italic" }}>
-          This is a starting point, not a finished document. Final policies need legal review, community input, and board approval — the draft says so up front. The Ethical Educator does not provide legal advice.
+          This is a starting point, not a finished document. Final policies need legal review, community input, and board approval — the draft says so up front. The Examined Classroom does not provide legal advice.
         </p>
         <button
           type="button"

@@ -358,7 +358,7 @@ export const REFERENCE_GROUPS = [
     title: "AI Consciousness & Moral Status",
     accent: C.coral,
     items: [
-      reference("The Consciousness Line. The Ethical Educator article connecting current AI, biological naturalism, organoids, Nagel, Austin, and classroom discussion.", ["ai-education", "philosophy"], {
+      reference("The Consciousness Line. The Examined Classroom article connecting current AI, biological naturalism, organoids, Nagel, Austin, and classroom discussion.", ["ai-education", "philosophy"], {
         featured: true,
         internalId: "ai-consciousness",
         imageSrc: "/article-art/ai-ethics/consciousness-line.webp",
@@ -477,8 +477,8 @@ export const MEDIA_RESOURCES = [
     accent: C.ocean,
   },
   {
-    id: "ethical-educator-blog",
-    title: "The Ethical Educator Blog",
+    id: "matthew-zinn-ai-education-blog",
+    title: "Matthew A. Zinn's AI education blog",
     author: "Matthew's blog",
     desc: "Matthew's blog exploring ethics, philosophy, and AI in education.",
     url: "https://ethicalaiedu.wordpress.com",

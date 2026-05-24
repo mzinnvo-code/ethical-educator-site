@@ -727,7 +727,7 @@ export default function Resources({ navigate }) {
               <h1>Essential Reading & Resources</h1>
               <p>
                 A curated library for teachers, school leaders, and curious readers who want the books,
-                research, policy frameworks, organizations, and ongoing conversations behind The Ethical Educator.
+                research, policy frameworks, organizations, and ongoing conversations behind The Examined Classroom.
               </p>
               <ReadingTime minutes={6} label="6 min browsable" />
               <div className="resource-hero-actions" aria-label="Jump to resource categories">

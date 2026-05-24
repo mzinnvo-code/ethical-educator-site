@@ -1,5 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from "react";
 import { C, PAGES, hasAnyNewExperiments } from "./theme.js";
+import { SITE } from "./siteConfig.js";
 import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./components/shared.jsx";
 import { useScrollDepth } from "./hooks/useScrollDepth.js";
 import { OG_PAGES_BY_ID } from "./data/ogPages.js";
@@ -162,257 +163,257 @@ const PAGE_MAP = {
 
 const PAGE_META = {
   "home": {
-    title: "The Ethical Educator",
+    title: SITE.brandName,
     description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
   },
   "about": {
-    title: "About Matthew A. Zinn — The Ethical Educator",
+    title: "About Matthew A. Zinn — The Examined Classroom",
     description: "Philosopher, educator, and researcher at the intersection of moral psychology, AI ethics, and educational technology. MA Ethics & Applied Philosophy, UNC Charlotte.",
   },
   "moral-psych": {
-    title: "Moral Psychology & AI Alignment — The Ethical Educator",
+    title: "Moral Psychology & AI Alignment — The Examined Classroom",
     description: "Joshua Greene's dual-process theory, F.M. Kamm's objections, the 2024 meta-analysis, and how moral psychology illuminates the AI alignment problem.",
   },
   "ai-ethics": {
-    title: "AI Ethics in Education — The Ethical Educator",
+    title: "AI Ethics in Education — The Examined Classroom",
     description: "The is/ought problem, UNESCO frameworks, the EU AI Act, NYC's traffic-light policy, and actionable ethical frameworks for educators navigating AI.",
   },
   "ai-education": {
-    title: "AI in Education — The Ethical Educator",
+    title: "AI in Education — The Examined Classroom",
     description: "A practical hub for teachers and school leaders covering AI foundations, classroom practice, student tools, policy, ethics, future readiness, and resources.",
     datePublished: "2024-02-13",
     dateModified: "2026-05-17",
   },
   "ai-education/foundations": {
-    title: "Foundations & AI Landscape — The Ethical Educator",
+    title: "Foundations & AI Landscape — The Examined Classroom",
     description: "A teacher-friendly orientation to generative AI, realized AI, emerging capabilities, and the vocabulary educators need before making classroom decisions.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-education/classroom-practice": {
-    title: "AI Classroom Practice — The Ethical Educator",
+    title: "AI Classroom Practice — The Examined Classroom",
     description: "Instructional routines for planning, differentiation, feedback, accessibility, and educator judgment when using AI in teaching and learning.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-education/student-tools": {
-    title: "Student Learning Tools — The Ethical Educator",
+    title: "Student Learning Tools — The Examined Classroom",
     description: "Guidance for AI tutors, study supports, creative tools, missed-lesson help, and student-facing guardrails that keep learning visible.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-education/policy-ethics": {
-    title: "AI Policy & Ethics for Schools — The Ethical Educator",
+    title: "AI Policy & Ethics for Schools — The Examined Classroom",
     description: "Practical AI policy, academic integrity, privacy, equity, implementation ethics, and traffic-light guidance for school communities.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-education/future-readiness": {
-    title: "Future Readiness & AI Literacy — The Ethical Educator",
+    title: "Future Readiness & AI Literacy — The Examined Classroom",
     description: "AI literacy, PISA 2029 media and AI literacy, UNESCO teacher competencies, and the future-facing capacities students need.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-education/tools-resources": {
-    title: "AI Tools & Resources for Educators — The Ethical Educator",
+    title: "AI Tools & Resources for Educators — The Examined Classroom",
     description: "Curated AI tools, custom GPT guidance, case-study templates, professional reading, and implementation resources for teachers and leaders.",
     datePublished: "2026-05-17",
     dateModified: "2026-05-17",
   },
   "ai-consciousness": {
-    title: "The Consciousness Line — The Ethical Educator",
+    title: "The Consciousness Line — The Examined Classroom",
     description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
     datePublished: "2026-05-09",
     dateModified: "2026-05-12",
   },
   "ai-authorship-quandary": {
-    title: "The AI Authorship Quandary — The Ethical Educator",
+    title: "The AI Authorship Quandary — The Examined Classroom",
     description: "A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. The interactive scenario, the evidence on AI detectors, and what good school policy actually looks like.",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
   "ai-ambiguity-to-action": {
-    title: "From Ambiguity to Action — The Ethical Educator",
+    title: "From Ambiguity to Action — The Examined Classroom",
     description: "Why \"uphold ethics\" isn't a policy. Utilitarianism, deontology, virtue ethics, and thought experiments as policy tools. The funnel from value to practice for AI in education.",
     datePublished: "2024-07-12",
     dateModified: "2026-05-13",
   },
   "ai-paradox": {
-    title: "The Paradox of AI in Education — The Ethical Educator",
+    title: "The Paradox of AI in Education — The Examined Classroom",
     description: "Assume the harder version: AI has matched human teachers. The interesting question is whether teaching, as we have understood it, can be done by a machine at all — and what schools are for if it can.",
     datePublished: "2024-02-13",
     dateModified: "2026-05-13",
   },
   "ai-replace-teachers": {
-    title: "Why AI Won't Replace Teachers — A Response — The Ethical Educator",
+    title: "Why AI Won't Replace Teachers — A Response — The Examined Classroom",
     description: "A friendly disagreement with the standard defense of human teachers. The conclusion is right but the capability arguments keep losing. The argument that survives the next iteration of the technology is values-based, not technical.",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
   "phil-education": {
-    title: "Philosophy in K–12 Education — The Ethical Educator",
+    title: "Philosophy in K–12 Education — The Examined Classroom",
     description: "Why teaching philosophy correlates with student success. Research evidence, a full K–12 curriculum proposal, and interactive weekly schedules for the AI era.",
   },
   "thought-experiments": {
-    title: "Interactive Thought Experiments — The Ethical Educator",
+    title: "Interactive Thought Experiments — The Examined Classroom",
     description: "Forty interactive scenarios for K–12 and educators, from Plato's Cave to AI policy dilemmas. Read-aloud, philosophical citations, and discussion guides.",
   },
   "thought-experiments/educators": {
-    title: "Thought Experiments for Educators — The Ethical Educator",
+    title: "Thought Experiments for Educators — The Examined Classroom",
     description: "Adult dilemmas about AI in your classroom: surveillance, AI detectors, grading tools, admissions algorithms. Plus four flagship interactive experiments for staff PD.",
   },
   "thought-experiments/k-5": {
-    title: "K–5 Thought Experiments — The Ethical Educator",
+    title: "K–5 Thought Experiments — The Examined Classroom",
     description: "A grade-by-grade elementary hub with 24 storylike thought experiments, read-aloud support, and teacher kits for K–5 ethics and AI discussions.",
   },
   "thought-experiments/kindergarten": {
-    title: "Kindergarten Thought Experiments — The Ethical Educator",
+    title: "Kindergarten Thought Experiments — The Examined Classroom",
     description: "Four gentle read-aloud dilemmas about toys, robots, sharing, care, and the first language of ethical reflection.",
   },
   "thought-experiments/grade-1": {
-    title: "Grade 1 Thought Experiments — The Ethical Educator",
+    title: "Grade 1 Thought Experiments — The Examined Classroom",
     description: "Four simple classroom dilemmas about honesty, loyalty, fairness, invisible choices, and becoming the kind of person students want to be.",
   },
   "thought-experiments/grade-2": {
-    title: "Grade 2 Thought Experiments — The Ethical Educator",
+    title: "Grade 2 Thought Experiments — The Examined Classroom",
     description: "Four cause-and-effect stories about AI help, friendship, identity, rules, and age-appropriate perspective taking.",
   },
   "thought-experiments/grade-3": {
-    title: "Grade 3 Thought Experiments — The Ethical Educator",
+    title: "Grade 3 Thought Experiments — The Examined Classroom",
     description: "Four storylike dilemmas about AI authorship, GPS shortcuts, privacy, adaptive learning, fairness, and trust.",
   },
   "thought-experiments/grade-4": {
-    title: "Grade 4 Thought Experiments — The Ethical Educator",
+    title: "Grade 4 Thought Experiments — The Examined Classroom",
     description: "Four richer elementary dilemmas about conflicting AI answers, robot rules, self-driving choices, and AI-assisted science projects.",
   },
   "thought-experiments/grade-5": {
-    title: "Grade 5 Thought Experiments — The Ethical Educator",
+    title: "Grade 5 Thought Experiments — The Examined Classroom",
     description: "Four mature elementary scenarios about AI friendship, homework help, classroom bias, grading mistakes, fairness, and human judgment.",
   },
   "thought-experiments/6-8": {
-    title: "Grades 6–8 Thought Experiments — The Ethical Educator",
+    title: "Grades 6–8 Thought Experiments — The Examined Classroom",
     description: "Story-based dilemmas connecting AI ethics, identity, and fairness to questions philosophers have wrestled with for centuries.",
   },
   "thought-experiments/9-12": {
-    title: "Grades 9–12 Thought Experiments — The Ethical Educator",
+    title: "Grades 9–12 Thought Experiments — The Examined Classroom",
     description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
   },
   "thought-experiments/explaining-red-k-2": {
-    title: "Explaining Red — K–2 Classroom Scene — The Ethical Educator",
+    title: "Explaining Red — K–2 Classroom Scene — The Examined Classroom",
     description: "A new student named Ada joins the class while everyone is learning about colors. A gentle multi-character scene about how to share what red is — even with someone who has never seen it.",
     datePublished: "2026-05-13",
     dateModified: "2026-05-13",
   },
   "thought-experiments/toolkit": {
-    title: "Dialogue Toolkit — The Ethical Educator",
+    title: "Dialogue Toolkit — The Examined Classroom",
     description: "Norms, sentence stems, twelve protocols, five Socratic moves, a 'what do I do when…' decision tree, and a parallel global canon. For teachers, families, and students who want to run philosophy well.",
   },
   "thought-experiments/journal": {
-    title: "Decision Journal — The Ethical Educator",
+    title: "Decision Journal — The Examined Classroom",
     description: "A private, browser-only record of your reasoning across thought experiments. Notes, paths, dominant lenses, and a one-click Markdown export. Nothing leaves your device.",
   },
   "audiences/student": {
-    title: "For Students — The Ethical Educator",
+    title: "For Students — The Examined Classroom",
     description: "If you're a student, start with the thought experiments. Branching scenarios, AI ethics dilemmas, and the questions that don't have a single right answer.",
   },
   "audiences/teacher": {
-    title: "For Teachers — The Ethical Educator",
+    title: "For Teachers — The Examined Classroom",
     description: "Classroom-ready thought experiments by grade band, practical PD on feedback and engagement, and a Dialogue Toolkit for running the conversation well.",
   },
   "audiences/administrator": {
-    title: "For Administrators & School Leaders — The Ethical Educator",
+    title: "For Administrators & School Leaders — The Examined Classroom",
     description: "Research-grounded AI ethics frameworks, decision tools for leadership teams, and operational leadership resources for K–12 school leaders.",
   },
   "audiences/parent": {
-    title: "For Parents & Families — The Ethical Educator",
+    title: "For Parents & Families — The Examined Classroom",
     description: "Stories to read with your kids, short essays for parents, and a Decision Journal that lives only on your device. Conversations to have at the kitchen table.",
   },
   "resources": {
-    title: "Research Resources & Reading List — The Ethical Educator",
+    title: "Research Resources & Reading List — The Examined Classroom",
     description: "Curated books, academic papers, policy documents, organizations, and podcasts on moral psychology, AI ethics, and philosophy of education.",
   },
   "privacy": {
-    title: "Privacy Policy — The Ethical Educator",
+    title: "Privacy Policy — The Examined Classroom",
     description: "This site collects no personal data, sets no cookies, and embeds no third-party tracking. Interactive thought experiment responses stay in browser memory only.",
   },
   "accessibility": {
-    title: "Accessibility Statement — The Ethical Educator",
-    description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to hello@theethicaleducator.com.",
+    title: "Accessibility Statement — The Examined Classroom",
+    description: "WCAG 2.1 AA target. Keyboard navigation, screen reader support, reduced motion, and responsive layout. Report issues to hello@examinedclassroom.com.",
   },
   "terms": {
-    title: "Terms of Use — The Ethical Educator",
-    description: "Terms of use for The Ethical Educator: educational use only, no professional advice, content licensed CC BY-NC 4.0, standard limitation of liability and warranty disclaimers.",
+    title: "Terms of Use — The Examined Classroom",
+    description: "Terms of use for The Examined Classroom: educational use only, no professional advice, content licensed CC BY-NC 4.0, standard limitation of liability and warranty disclaimers.",
   },
   "credits": {
-    title: "Credits & AI Disclosures — The Ethical Educator",
+    title: "Credits & AI Disclosures — The Examined Classroom",
     description: "Attribution for illustrations (OpenAI DALL·E), audio narration (ElevenLabs), typography (Google Fonts), and technology stack. Transparency about AI use across the site.",
   },
   "for-educators": {
-    title: "For Educators — Professional Development Resources — The Ethical Educator",
+    title: "For Educators — Professional Development Resources — The Examined Classroom",
     description: "Practical guidance for K–12 teachers and leaders: academic feedback, student engagement, and school leadership.",
   },
   "teaching-feedback": {
-    title: "Effective Academic Feedback — The Ethical Educator",
+    title: "Effective Academic Feedback — The Examined Classroom",
     description: "A practitioner's guide to personalized, instructional feedback: research-based standards, the 5 R's of action feedback, the 4C reflection model, and 1:1 conferencing.",
   },
   "enhancing-feedback": {
-    title: "Enhancing Academic Feedback — The Ethical Educator",
+    title: "Enhancing Academic Feedback — The Examined Classroom",
     description: "Advanced feedback strategies: the four-pillar framework, performance levels, multimodal delivery, assessment integrity, and a personal action plan.",
   },
   "enhancing-engagement": {
-    title: "Enhancing Student Engagement — The Ethical Educator",
+    title: "Enhancing Student Engagement — The Examined Classroom",
     description: "Theoretical frameworks and practical models for student engagement: behavioral, cognitive, and emotional dimensions; the 4Cs model; active learning; motivation levers.",
   },
   "async-engagement": {
-    title: "Asynchronous Learning Engagement — The Ethical Educator",
+    title: "Asynchronous Learning Engagement — The Examined Classroom",
     description: "Engagement strategies for online and async settings: course design principles, isolation and time-management challenges, reflective practices, and engagement metrics.",
   },
   "av-resources": {
-    title: "AV Resources for Online Teaching — The Ethical Educator",
+    title: "AV Resources for Online Teaching — The Examined Classroom",
     description: "Audio and video tools for K–12 virtual classrooms: comprehension, accessibility commitments, personalized learning, collaborative AV, and the four-category toolkit.",
   },
   "quality-leadership": {
-    title: "Quality Leadership & Instruction — The Ethical Educator",
+    title: "Quality Leadership & Instruction — The Examined Classroom",
     description: "Educational leadership styles, instructional pillars, school culture, change management, and five reflection scenarios drawn from real principal challenges.",
   },
   "high-performing-schools": {
-    title: "High-Performing K-12 Schools — The Ethical Educator",
+    title: "High-Performing K-12 Schools — The Examined Classroom",
     description: "What separates consistently excellent K–12 schools: data-driven decisions, intensive teacher training, rigorous instruction with embedded test prep, and a supportive culture.",
   },
   "rti": {
-    title: "Response to Intervention (RTI) — The Ethical Educator",
+    title: "Response to Intervention (RTI) — The Examined Classroom",
     description: "The tiered intervention framework — Tier 1, 2, and 3 — for early identification and support. Components, benefits, implementation challenges, and where to begin.",
   },
   "newsletter": {
-    title: "The Sunday Dilemma Newsletter — The Ethical Educator",
+    title: "The Sunday Dilemma Newsletter — The Examined Classroom",
     description: "One classroom-ready thought experiment, one printable, and one research finding for K–12 teachers — every Sunday morning. Free, no spam, unsubscribe in one click.",
   },
   "whats-new": {
-    title: "What's New — The Ethical Educator",
-    description: "A reverse-chronological changelog of new thought experiments, research updates, features, and resources on The Ethical Educator.",
+    title: "What's New — The Examined Classroom",
+    description: "A reverse-chronological changelog of new thought experiments, research updates, features, and resources on The Examined Classroom.",
   },
   "stories": {
-    title: "From the Classroom — Stories from Educators — The Ethical Educator",
-    description: "Classroom stories and short notes from teachers, administrators, and parents who have used The Ethical Educator resources. Currently in placeholder mode — real stories replace the samples as they come in.",
+    title: "From the Classroom — Stories from Educators — The Examined Classroom",
+    description: "Classroom stories and short notes from teachers, administrators, and parents who have used The Examined Classroom resources. Currently in placeholder mode — real stories replace the samples as they come in.",
   },
   "picker": {
-    title: "Thought Experiment Picker — The Ethical Educator",
+    title: "Thought Experiment Picker — The Examined Classroom",
     description: "Answer three quick questions about grade, time, and topic — get three classroom-ready thought experiments that fit. No login, no algorithm.",
   },
   "ai-rubric": {
-    title: "AI Use Rubric — Should we use AI for this? — The Ethical Educator",
+    title: "AI Use Rubric — Should we use AI for this? — The Examined Classroom",
     description: "A six-dimension scaffold for teachers and school leaders evaluating a proposed AI use. Pick a scenario, score each dimension, get a go / discuss / redesign recommendation with the rationale.",
   },
   "ai-policy": {
-    title: "AI Policy Builder — Draft your school's AI policy — The Ethical Educator",
+    title: "AI Policy Builder — Draft your school's AI policy — The Examined Classroom",
     description: "Answer nine questions about your school's stance on AI; get a 1–2 page draft policy you can copy or download as the starting point for a board-ready document.",
   },
   "family-conversations": {
-    title: "Family Conversations — Five questions to start a family conversation about AI — The Ethical Educator",
+    title: "Family Conversations — Five questions to start a family conversation about AI — The Examined Classroom",
     description: "For parents and caregivers: pick your child's age and a topic about AI; get five dinner-table prompts that open the conversation without lecturing. No correct answers — just five questions that work.",
   },
   "tools": {
-    title: "Interactive Tools — The Ethical Educator",
+    title: "Interactive Tools — The Examined Classroom",
     description: "Four short, focused interactives that hand you a usable artifact in under ten minutes: the Thought Experiment Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator. No login, no data collection beyond cookieless event counts.",
   },
 };
@@ -477,7 +478,7 @@ export default function App() {
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Notify in-page listeners (e.g. grade pages syncing ?experiment=).
-    window.dispatchEvent(new Event("ethed:route"));
+    window.dispatchEvent(new Event("examined-classroom:route"));
   };
 
   const isPageActive = (page) => (
@@ -490,7 +491,7 @@ export default function App() {
   useScrollDepth(currentPage);
 
   // Handle browser back/forward, direct URL entry, and in-app pushState calls
-  // that bypass navigate() (rare, but supported via ethed:route event).
+  // that bypass navigate() (rare, but supported via examined-classroom:route event).
   useEffect(() => {
     const sync = () => {
       reconcileLegacyUrls();
@@ -502,10 +503,10 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
     window.addEventListener("popstate", syncFromBrowser);
-    window.addEventListener("ethed:route", sync);
+    window.addEventListener("examined-classroom:route", sync);
     return () => {
       window.removeEventListener("popstate", syncFromBrowser);
-      window.removeEventListener("ethed:route", sync);
+      window.removeEventListener("examined-classroom:route", sync);
     };
   }, []);
 
@@ -518,7 +519,7 @@ export default function App() {
     if (existing) existing.remove();
 
     if (isNotFoundPage) {
-      document.title = "Page Not Found — The Ethical Educator";
+      document.title = `Page Not Found — ${SITE.brandName}`;
       return;
     }
 
@@ -538,8 +539,8 @@ export default function App() {
 
     // Canonical link for the current path (so each route advertises its own URL).
     const canonicalUrl = currentPage === "home"
-      ? "https://theethicaleducator.com/"
-      : `https://theethicaleducator.com/${currentPage}`;
+      ? `${SITE.origin}/`
+      : `${SITE.origin}/${currentPage}`;
     let canonicalEl = document.querySelector('link[rel="canonical"]');
     if (!canonicalEl) {
       canonicalEl = document.createElement("link");
@@ -552,8 +553,8 @@ export default function App() {
     // the page isn't in OG_PAGES (only the most-shareable surfaces get a card).
     const ogCard = OG_PAGES_BY_ID[currentPage];
     const ogImageUrl = ogCard
-      ? `https://theethicaleducator.com/og/${currentPage.replace(/\//g, "_")}.png`
-      : "https://theethicaleducator.com/illustrations/home-hero.png";
+      ? `${SITE.origin}/og/${currentPage.replace(/\//g, "_")}.png`
+      : `${SITE.origin}/illustrations/home-hero.png`;
     for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
       const el = document.querySelector(selector);
       if (el) el.setAttribute("content", ogImageUrl);
@@ -582,13 +583,13 @@ export default function App() {
         "mainEntityOfPage": canonicalUrl,
         "author": {
           "@type": "Person",
-          "name": "Matthew A. Zinn",
-          "url": "https://theethicaleducator.com",
+          "name": SITE.authorName,
+          "url": SITE.origin,
         },
         "publisher": {
           "@type": "Organization",
-          "name": "The Ethical Educator",
-          "url": "https://theethicaleducator.com",
+          "name": SITE.brandName,
+          "url": SITE.origin,
         },
         "datePublished": meta.datePublished || "2024-01-01",
         "dateModified": meta.dateModified || "2026-05-13",
@@ -664,7 +665,7 @@ export default function App() {
           <span className="brand-mark" aria-hidden="true">
             <img src="/favicon.svg" alt="" />
           </span>
-          <span>The Ethical Educator</span>
+          <span>{SITE.brandName}</span>
         </div>
         <ul className="topbar-nav">
           {PAGES.map(p => (
@@ -683,7 +684,7 @@ export default function App() {
           type="button"
           className="topbar-search"
           aria-label="Open search (Cmd+K)"
-          onClick={() => window.dispatchEvent(new Event("ethed:openSearch"))}
+          onClick={() => window.dispatchEvent(new Event("examined-classroom:openSearch"))}
         >
           <span aria-hidden="true">⌕</span>
           <span className="topbar-search-label">Search</span>
@@ -760,7 +761,7 @@ export default function App() {
             </div>
             <div>
               <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Writing</p>
-              <a href="https://ethicalaiedu.wordpress.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>The Ethical Educator Blog</a>
+              <a href={SITE.blogUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>{SITE.blogLabel}</a>
               <a href="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>From Ambiguity to Action</a>
               <a href="https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>The Paradox of AI in Education</a>
               <a href="https://innovateedai.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>InnovateEdAI Presentation</a>
@@ -786,16 +787,16 @@ export default function App() {
             </div>
             <div style={{ maxWidth: 720, margin: "0 auto 12px", textAlign: "left" }}>
               <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55, marginBottom: 8 }}>
-                <strong style={{ color: C.textSecondary }}>About this site.</strong> The Ethical Educator is the personal website of Matthew A. Zinn. All content, code, and tools published here are his own work, produced on personal time using personal resources. The views expressed are his alone and do not represent the views, policies, or positions of any current or former employer, school, district, or organization with which he is or has been affiliated.
+                <strong style={{ color: C.textSecondary }}>About this site.</strong> {SITE.brandName} is the personal website of {SITE.authorName}. All content, code, and tools published here are his own work, produced on personal time using personal resources. The views expressed are his alone and do not represent the views, policies, or positions of any current or former employer, school, district, or organization with which he is or has been affiliated.
               </p>
               <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55, marginBottom: 8 }}>
                 <strong style={{ color: C.textSecondary }}>Not advice.</strong> Tools and writing on this site are offered for general educational and informational purposes only. They are not a substitute for professional, legal, clinical, or institutional guidance. Educators and administrators should consult their own school's policies, legal counsel, and qualified specialists before applying any framework or output to a specific student, classroom, or institution.
               </p>
               <p style={{ color: C.textMuted, fontSize: "0.7rem", opacity: 0.6, lineHeight: 1.55 }}>
-                <strong style={{ color: C.textSecondary }}>Trademarks &amp; content.</strong> "The Ethical Educator" and the original writing, illustrations, and code on this site are © Matthew A. Zinn. Third-party names, frameworks, and resources are credited where used and remain the property of their respective owners.
+                <strong style={{ color: C.textSecondary }}>Trademarks &amp; content.</strong> "{SITE.brandName}" and the original writing, illustrations, and code on this site are © {SITE.authorName}. Third-party names, frameworks, and resources are credited where used and remain the property of their respective owners.
               </p>
             </div>
-            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} The Ethical Educator · Matthew A. Zinn · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
+            <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} {SITE.brandName} · {SITE.authorName} · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
           </div>
         </div>
       </footer>

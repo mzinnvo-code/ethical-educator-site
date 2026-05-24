@@ -44,7 +44,7 @@ export default function Privacy({ navigate }) {
             <FadeIn delay={0.16}>
               <Divider label="Children's Privacy" />
               <p>The site includes content designed for use with children — including thought experiments tagged for kindergarten through grade five — but is intended to be presented to children by a parent, teacher, or other supervising adult, not for independent use by children.</p>
-              <p style={{ marginTop: 10 }}>We do not knowingly collect personal information from any visitor, including children under 13. The optional Decision Journal feature stores entries only in the user's own browser via <code>localStorage</code> and never transmits them. If you believe a child has provided information through any future feature in a way that conflicts with this policy, please contact <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>.</p>
+              <p style={{ marginTop: 10 }}>We do not knowingly collect personal information from any visitor, including children under 13. The optional Decision Journal feature stores entries only in the user's own browser via <code>localStorage</code> and never transmits them. If you believe a child has provided information through any future feature in a way that conflicts with this policy, please contact <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.18}>
@@ -56,7 +56,7 @@ export default function Privacy({ navigate }) {
                 <li><strong style={{ color: C.textPrimary }}>Right to opt out of sale or sharing:</strong> we do not sell or share personal information.</li>
                 <li><strong style={{ color: C.textPrimary }}>Right to non-discrimination:</strong> we will not deny service for exercising any of these rights.</li>
               </ul>
-              <p style={{ marginTop: 10 }}>Questions or requests may be sent to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>.</p>
+              <p style={{ marginTop: 10 }}>Questions or requests may be sent to <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.2}>
@@ -71,7 +71,7 @@ export default function Privacy({ navigate }) {
 
             <FadeIn delay={0.24}>
               <Divider label="Contact" />
-              <p>Questions about this Privacy Policy may be sent to <a href="mailto:hello@theethicaleducator.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@theethicaleducator.com</a>.</p>
+              <p>Questions about this Privacy Policy may be sent to <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.26}>

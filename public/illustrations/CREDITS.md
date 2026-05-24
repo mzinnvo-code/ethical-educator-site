@@ -4,7 +4,7 @@ All PNG and WebP files in this directory and its subdirectories (`educators/`, `
 
 ## License and ownership
 
-Per OpenAI's Terms of Use in effect at the time of generation, ownership of generated outputs is assigned to the account that created them. The author holds the rights to use these illustrations on theethicaleducator.com and in derivative works.
+Per OpenAI's Terms of Use in effect at the time of generation, ownership of generated outputs is assigned to the account that created them. The author holds the rights to use these illustrations on examinedclassroom.com and in derivative works.
 
 The illustrations are made available to site visitors under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license, consistent with the Terms of Use, unless an individual asset is marked otherwise.
 
@@ -14,4 +14,4 @@ This note exists so that the provenance of every visual asset on the site is doc
 
 ## Audio and other AI-generated media
 
-Audio narration is generated separately via ElevenLabs (paid commercial-use plan) by the scripts in `/scripts/generate-k5-audio.mjs` and `/scripts/generate-scene-audio.mjs`. See [/credits](https://theethicaleducator.com/credits) for the public-facing disclosure.
+Audio narration is generated separately via ElevenLabs (paid commercial-use plan) by the scripts in `/scripts/generate-k5-audio.mjs` and `/scripts/generate-scene-audio.mjs`. See [/credits](https://examinedclassroom.com/credits) for the public-facing disclosure.

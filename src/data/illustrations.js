@@ -43,7 +43,7 @@ export const EXPERIMENT_ILLUSTRATIONS = {
 };
 
 export const FEATURE_ILLUSTRATIONS = {
-  "site-symbol": illustration("site-symbol", "The Ethical Educator visual symbol."),
+  "site-symbol": illustration("site-symbol", "The Examined Classroom visual symbol."),
   "home-hero": illustration("home-hero", "An ethical compass, open book, and AI nodes on a classroom board."),
   "classroom-crossroads": illustration("classroom-crossroads", "A classroom crossroads with discussion, practice, and research paths."),
   "reading-room": illustration("reading-room", "Books, policy papers, and a glowing compass on a reading table."),
