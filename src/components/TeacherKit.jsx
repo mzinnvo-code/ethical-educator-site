@@ -110,6 +110,11 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
     track("pdf_download", { slug, type: "kit", placement: "teacher_kit" });
     window.print();
   };
+  const packetHref = kit.packetSlug ? `/thought-experiments/packet/${kit.packetSlug}` : null;
+  const handlePacketOpen = () => {
+    const slug = kit.packetSlug || experiment?.id || "unknown-packet";
+    track("packet_open", { slug, type: "classroom_packet", placement: "teacher_kit" });
+  };
 
   return (
     <>
@@ -128,14 +133,38 @@ export default function TeacherKit({ kit, experiment, accent = C.gold }) {
               {experiment.title}
             </h3>
           </div>
-          <button className="no-print" onClick={handlePrint} style={{
-            padding: "7px 14px",
-            background: `${accent}15`, color: accent,
-            border: `1px solid ${accent}40`, borderRadius: 8,
-            cursor: "pointer", fontSize: "0.78rem", fontWeight: 600,
-          }} aria-label="Print this lesson plan">
-            🖨 Print this kit
-          </button>
+          <div className="no-print" style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+            {packetHref && (
+              <a
+                href={packetHref}
+                onClick={handlePacketOpen}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: "8px 15px",
+                  background: `linear-gradient(135deg, ${C.gold}, ${C.coral})`,
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: 8,
+                  cursor: "pointer",
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  boxShadow: `0 8px 22px ${C.gold}24`,
+                }}
+                aria-label="Open classroom packet"
+              >
+                Open classroom packet
+              </a>
+            )}
+            <button onClick={handlePrint} style={{
+              padding: "7px 14px",
+              background: `${accent}15`, color: accent,
+              border: `1px solid ${accent}40`, borderRadius: 8,
+              cursor: "pointer", fontSize: "0.78rem", fontWeight: 600,
+            }} aria-label="Print this lesson plan">
+              🖨 Print this kit
+            </button>
+          </div>
         </div>
 
         {/* Top-line: big question + times */}
