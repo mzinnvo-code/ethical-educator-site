@@ -72,6 +72,70 @@ function SourceLink({ href, children }) {
   );
 }
 
+function LessonPacketIcon() {
+  return (
+    <svg viewBox="0 0 74 74" aria-hidden="true" style={{ width: 48, height: 48, display: "block", flex: "0 0 48px" }}>
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 18 H46 C51 18 55 22 55 27 V58 H25 C20 58 16 54 16 49 V20 C16 19 17 18 18 18Z" stroke={C.gold} strokeWidth="3" />
+        <path d="M25 18 V58" stroke={C.gold} strokeWidth="3" />
+        <path d="M31 29 C31 23 36 20 41 20 C47 20 51 24 51 29 C51 34 47 37 43 37 H39 C35 37 31 33 31 29Z" stroke={C.teal} strokeWidth="3" />
+        <path d="M34 46 C37 43 45 43 48 46" stroke={C.teal} strokeWidth="3" />
+        <path d="M37 27 H45 M41 23 V34" stroke={C.teal} strokeWidth="2.4" />
+      </g>
+    </svg>
+  );
+}
+
+function LessonPlanCTA({ navigate }) {
+  return (
+    <section style={{
+      display: "flex",
+      alignItems: "center",
+      gap: 16,
+      flexWrap: "wrap",
+      border: `1px solid ${C.gold}32`,
+      borderRadius: 12,
+      padding: "16px clamp(14px, 3vw, 20px)",
+      margin: "22px 0 30px",
+      background: `linear-gradient(135deg, ${C.gold}0d, ${C.ocean}0a)`,
+    }}>
+      <LessonPacketIcon />
+      <div style={{ flex: "1 1 280px", minWidth: 0 }}>
+        <h3 style={{
+          color: C.textPrimary,
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontSize: "1.16rem",
+          lineHeight: 1.25,
+          fontWeight: 700,
+          marginBottom: 5,
+        }}>Bring This Essay Into Your Classroom</h3>
+        <p style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.6 }}>
+          Two ready-to-teach lesson packets for grades 6-8 and 9-12, with leveled text, vocabulary, activities, standards, and assessments.
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={() => navigate("ai-consciousness/lesson-plans")}
+        style={{
+          flex: "0 0 auto",
+          padding: "10px 14px",
+          border: `1px solid ${C.gold}48`,
+          borderRadius: 8,
+          background: `${C.gold}18`,
+          color: C.gold,
+          cursor: "pointer",
+          fontWeight: 700,
+          fontSize: "0.82rem",
+          fontFamily: "inherit",
+          whiteSpace: "nowrap",
+        }}
+      >
+        Open the Lesson Packets
+      </button>
+    </section>
+  );
+}
+
 function StepList({ items }) {
   return (
     <div style={{ margin: "16px 0" }}>
@@ -1536,6 +1600,10 @@ export default function AIConsciousness({ navigate }) {
             <BodyText>
               I agree with that caution. This article is not an argument that today's chatbots have secret inner lives. It is an invitation to stay with the harder question Seth also helps open: what should we do when the science is unfinished, the boundary is unstable, and our categories carry moral consequences?
             </BodyText>
+          </FadeIn>
+
+          <FadeIn delay={0.09}>
+            <LessonPlanCTA navigate={navigate} />
           </FadeIn>
 
           <FadeIn delay={0.09}>

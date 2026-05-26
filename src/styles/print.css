@@ -85,9 +85,30 @@
   /* Expandables: force open so printed kits don't lose hidden content */
   .expandable-content,
   .kit-section-body,
+  .lesson-packet-section-body,
   details {
     display: block !important;
     max-height: none !important;
+  }
+
+  .print-section-heading {
+    display: block !important;
+  }
+
+  .lesson-packet-print,
+  .lesson-packet-print section {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .lesson-packet-print + .lesson-packet-print {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .lesson-packet-print table {
+    min-width: 0 !important;
+    font-size: 9pt !important;
   }
 
   /* Command controls don't print, but content-bearing buttons do. */

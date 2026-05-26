@@ -37,6 +37,7 @@ const AIEducationPolicyEthics = lazy(() => import("./pages/ai-education/SectionP
 const AIEducationStudentTools = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationStudentTools })));
 const AIEducationToolsResources = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationToolsResources })));
 const AIConsciousness = lazy(() => import("./pages/AIConsciousness.jsx"));
+const AIConsciousnessLessonPlans = lazy(() => import("./pages/AIConsciousnessLessonPlans.jsx"));
 const AIAuthorship = lazy(() => import("./pages/AIAuthorship.jsx"));
 const AIAmbiguityToAction = lazy(() => import("./pages/AIAmbiguityToAction.jsx"));
 const AIParadox = lazy(() => import("./pages/AIParadox.jsx"));
@@ -115,6 +116,7 @@ const PAGE_MAP = {
   "ai-education/future-readiness": AIEducationFutureReadiness,
   "ai-education/tools-resources": AIEducationToolsResources,
   "ai-consciousness": AIConsciousness,
+  "ai-consciousness/lesson-plans": AIConsciousnessLessonPlans,
   "ai-authorship-quandary": AIAuthorship,
   "ai-ambiguity-to-action": AIAmbiguityToAction,
   "ai-paradox": AIParadox,
@@ -226,7 +228,13 @@ const PAGE_META = {
     title: "The Consciousness Line — The Examined Classroom",
     description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
     datePublished: "2026-05-09",
-    dateModified: "2026-05-12",
+    dateModified: "2026-05-26",
+  },
+  "ai-consciousness/lesson-plans": {
+    title: "The Consciousness Line Lesson Packets — The Examined Classroom",
+    description: "Ready-to-teach lesson packets for The Consciousness Line, with grade 6-8 and 9-12 versions, leveled readings, vocabulary, standards, activities, assessments, and rubrics.",
+    datePublished: "2026-05-26",
+    dateModified: "2026-05-26",
   },
   "ai-authorship-quandary": {
     title: "The AI Authorship Quandary — The Examined Classroom",

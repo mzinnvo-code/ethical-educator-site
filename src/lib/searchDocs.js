@@ -9,6 +9,7 @@
 const SECTION_BY_PREFIX = [
   { prefix: "thought-experiments/", section: "Thought Experiments" },
   { prefix: "ai-education/", section: "AI in Education" },
+  { prefix: "ai-consciousness/", section: "AI & Ethics" },
   { prefix: "audiences/", section: "By Audience" },
 ];
 

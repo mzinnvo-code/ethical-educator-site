@@ -47,6 +47,7 @@ export const OG_PAGES = [
 
   // AI Ethics essays
   { id: "ai-consciousness", title: "The Consciousness Line", section: "AI & Ethics", accent: OG_ACCENTS.coral },
+  { id: "ai-consciousness/lesson-plans", title: "The Consciousness Line Lesson Packets", section: "Ready-to-teach AI ethics lessons", accent: OG_ACCENTS.ocean },
   { id: "ai-authorship-quandary", title: "The AI Authorship Quandary", section: "AI & Ethics", accent: OG_ACCENTS.gold },
   { id: "ai-ambiguity-to-action", title: "From Ambiguity to Action", section: "AI & Ethics", accent: OG_ACCENTS.teal },
   { id: "ai-paradox", title: "The Paradox of AI in Education", section: "AI & Ethics", accent: OG_ACCENTS.ocean },
