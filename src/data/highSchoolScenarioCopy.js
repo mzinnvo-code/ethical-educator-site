@@ -18,6 +18,7 @@ const lab = ({ discussion, fallacySpotting, argumentRepair, variationPrompt, rel
 
 const kit = ({
   theme,
+  packetSlug,
   objectives,
   warmUp,
   discussionPrompts,
@@ -29,6 +30,7 @@ const kit = ({
   crossCurricular,
 }) => ({
   philosophicalTheme: theme,
+  packetSlug,
   objectives,
   warmUp,
   discussionPrompts,
@@ -1285,6 +1287,7 @@ export const HIGH_SCHOOL_SCENARIO_COPY = {
     }),
     teacherKit: kit({
       theme: "Reasoning - goals, metrics, and unintended consequences",
+      packetSlug: "paperclip-maximizer",
       objectives: [
         "Students will explain the paperclip maximizer as a goal-specification and instrumental-convergence warning.",
         "Students will distinguish literal prediction from conceptual caution.",

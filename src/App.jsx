@@ -52,6 +52,7 @@ const ThoughtExperimentsGrade4 = lazy(() => import("./pages/thought-experiments/
 const ThoughtExperimentsGrade5 = lazy(() => import("./pages/thought-experiments/ElementaryGrade.jsx").then(m => ({ default: m.Grade5 })));
 const ThoughtExperimentsMiddle = lazy(() => import("./pages/thought-experiments/Middle.jsx"));
 const ThoughtExperimentsHigh = lazy(() => import("./pages/thought-experiments/High.jsx"));
+const ThoughtExperimentsPaperclipPacket = lazy(() => import("./pages/thought-experiments/ClassroomPacket.jsx"));
 const ThoughtExperimentsToolkit = lazy(() => import("./pages/thought-experiments/Toolkit.jsx"));
 const ThoughtExperimentsJournal = lazy(() => import("./pages/thought-experiments/Journal.jsx"));
 const ThoughtExperimentsExplainingRedK2 = lazy(() => import("./pages/thought-experiments/ExplainingRed.jsx").then(m => ({ default: m.ExplainingRedK_2 })));
@@ -130,6 +131,7 @@ const PAGE_MAP = {
   "thought-experiments/grade-5": ThoughtExperimentsGrade5,
   "thought-experiments/6-8": ThoughtExperimentsMiddle,
   "thought-experiments/9-12": ThoughtExperimentsHigh,
+  "thought-experiments/packet/paperclip-maximizer": ThoughtExperimentsPaperclipPacket,
   "thought-experiments/explaining-red-k-2": ThoughtExperimentsExplainingRedK2,
   "thought-experiments/toolkit": ThoughtExperimentsToolkit,
   "thought-experiments/journal": ThoughtExperimentsJournal,
@@ -297,6 +299,10 @@ const PAGE_META = {
   "thought-experiments/9-12": {
     title: "Grades 9–12 Thought Experiments — The Examined Classroom",
     description: "Plato's Cave. Mary's Room. The Chinese Room. The classical thought experiments alongside the AI ethics dilemmas of our age.",
+  },
+  "thought-experiments/packet/paperclip-maximizer": {
+    title: "The Paperclip Maximizer Classroom Packet — The Examined Classroom",
+    description: "A polished teacher guide, student optimizer audit, discussion tracker, exit ticket, supports, and extension materials for the Paperclip Maximizer thought experiment.",
   },
   "thought-experiments/explaining-red-k-2": {
     title: "Explaining Red — K–2 Classroom Scene — The Examined Classroom",
