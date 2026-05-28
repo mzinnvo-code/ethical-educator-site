@@ -4,6 +4,8 @@ Updated: 2026-05-28
 
 Use this dashboard rhythm for the no-paid-ads SEO plan. The goal is qualified teacher and school-leader traffic that opens classroom resources, tools, packets, or the newsletter.
 
+Baseline before Search Console/Bing/associated-property backlink access: `docs/search-visibility-baseline.md`.
+
 ## Weekly Review
 
 Pull these from Google Search Console, Bing Webmaster Tools, Cloudflare Web Analytics, and the custom event dataset when available.
