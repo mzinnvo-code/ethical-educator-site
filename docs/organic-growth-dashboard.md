@@ -8,6 +8,8 @@ Baseline before Search Console/Bing/associated-property backlink access: `docs/s
 
 Run `npm run seo:offsite-check` during weekly review to verify the public sitemap, IndexNow key, analytics Worker, associated-property backlinks, and InnovateEdAI hosting signal. Use `npm run seo:offsite-check -- --strict-backlinks` after the WordPress and Gamma edits are complete.
 
+Use `docs/weekly-seo-review-template.md` to capture the weekly review and convert dashboard data into title/meta updates, internal links, resource expansion, and outreach actions.
+
 ## Weekly Review
 
 Pull these from Google Search Console, Bing Webmaster Tools, Cloudflare Web Analytics, and the custom event dataset when available.
