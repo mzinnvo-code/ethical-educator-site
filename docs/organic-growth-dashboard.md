@@ -6,6 +6,8 @@ Use this dashboard rhythm for the no-paid-ads SEO plan. The goal is qualified te
 
 Baseline before Search Console/Bing/associated-property backlink access: `docs/search-visibility-baseline.md`.
 
+Run `npm run seo:offsite-check` during weekly review to verify the public sitemap, IndexNow key, analytics Worker, associated-property backlinks, and InnovateEdAI hosting signal. Use `npm run seo:offsite-check -- --strict-backlinks` after the WordPress and Gamma edits are complete.
+
 ## Weekly Review
 
 Pull these from Google Search Console, Bing Webmaster Tools, Cloudflare Web Analytics, and the custom event dataset when available.
@@ -19,6 +21,7 @@ Pull these from Google Search Console, Bing Webmaster Tools, Cloudflare Web Anal
 - Print, download, copy, and tool-open events where available.
 - SEO pathway clicks: `seo_landing_click`, `teaching_resource_click`, and `related_resource_rail_click`.
 - Mobile Core Web Vitals, especially LCP and INP.
+- Public off-site check result from `npm run seo:offsite-check`.
 
 ## Monthly Decisions
 

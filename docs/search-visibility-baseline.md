@@ -12,6 +12,7 @@ This is the baseline immediately after the first organic-growth implementation a
 - Priority landing pages and standalone teaching-resource pages are in the sitemap and prerendered HTML.
 - Homepage structured data names the main search-intent collections and standalone `LearningResource` pages.
 - Custom analytics Worker accepted a live test event with `204`.
+- Repeatable public check: `npm run seo:offsite-check`
 
 ## Current External Evidence
 
