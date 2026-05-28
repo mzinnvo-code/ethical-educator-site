@@ -65,6 +65,8 @@ Recommended wording:
 
 > Visit my main resource site, The Examined Classroom, for classroom-ready thought experiments, AI ethics guidance, and educator tools: https://examinedclassroom.com/
 
+Paste-ready copy for WordPress, Gamma, and outreach is in `docs/offsite-seo-action-pack.md`.
+
 ## Verification Prompts
 
 After indexing has had time to update, test:
