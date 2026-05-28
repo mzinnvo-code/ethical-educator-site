@@ -41,6 +41,14 @@ Inspect or resubmit these after deployment:
 - `https://examinedclassroom.com/teaching-resources/ai-authorship-discussion`
 - `https://examinedclassroom.com/teaching-resources/ai-detector-false-positive`
 
+## IndexNow Check
+
+After a deployment that adds or materially changes priority pages:
+
+- Confirm `https://examinedclassroom.com/6a7ee777-5ff8-42b6-af77-abed93f2db29.txt` returns the IndexNow key.
+- Run `npm run seo:indexnow`.
+- Record the response code. `200` means submitted; `202` means received and key validation is pending.
+
 ## No-Cost Distribution
 
 - Add visible links from `ethicalaiedu.wordpress.com` and `innovateedai.com`.

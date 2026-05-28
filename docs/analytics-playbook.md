@@ -19,9 +19,15 @@ For the organic search program, pair this with `docs/organic-growth-dashboard.md
 
 ## Custom events (via the `examined-classroom-events` Worker)
 
-For events Cloudflare Web Analytics can't capture — scroll depth, newsletter clicks, PDF downloads — we use a small Cloudflare Worker (`workers/events/`) that writes to the `examined_classroom_events` Workers Analytics Engine dataset. Cost: free up to 10M writes/month + 1M queries/month.
+For events Cloudflare Web Analytics can't capture — scroll depth, newsletter clicks, PDF downloads, and SEO pathway clicks — we use a small Cloudflare Worker (`workers/events/`) that writes to the `examined_classroom_events` Workers Analytics Engine dataset. Cost: free up to 10M writes/month + 1M queries/month.
 
-**Setup is one-time, ~5 min.** See `workers/events/README.md` for the full deploy steps. The short version:
+**The Worker is deployed and the site is wired to it.** Endpoint shape:
+
+```text
+https://examined-classroom-events.<account-subdomain>.workers.dev/events
+```
+
+For future redeploys, see `workers/events/README.md`. The short version:
 
 ```bash
 cd workers/events
@@ -30,11 +36,11 @@ npx wrangler login
 npm run deploy
 ```
 
-Copy the printed `*.workers.dev` URL into `src/lib/analytics.js` (replace `REPLACE_WITH_WORKER_URL`), commit, push. Done.
+Confirm the printed `*.workers.dev` URL still matches `src/lib/analytics.js`, commit, push. Done.
 
 ## Verifying the instrumentation works
 
-**Before Worker deploy (buffer-only mode):**
+**Browser buffer check:**
 
 1. Open the site in a private browser window, the Codex in-app Browser, or use local `curl`/static checks when browser automation is not needed.
 2. Open DevTools → Console.

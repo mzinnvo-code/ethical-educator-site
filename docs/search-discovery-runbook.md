@@ -42,7 +42,17 @@ Submit or inspect these first:
 2. Add `https://examinedclassroom.com/` or import the verified property from Google Search Console.
 3. Submit sitemap: `https://examinedclassroom.com/sitemap.xml`.
 4. Use URL Submission for the priority URLs.
-5. Check the IndexNow tab after future deployments if IndexNow is enabled later.
+5. Check the IndexNow tab after future deployments.
+
+## IndexNow
+
+IndexNow is wired as a no-cost supplement for search engines that support the protocol. It does not replace Google Search Console or Bing Webmaster Tools, but it gives Bing and other participating engines a fresh-content signal after releases.
+
+- Key file: `https://examinedclassroom.com/6a7ee777-5ff8-42b6-af77-abed93f2db29.txt`
+- Submission script: `npm run seo:indexnow`
+- Dry run: `npm run seo:indexnow -- --dry-run`
+
+Run the submission script only after the key file and updated pages are live.
 
 ## Cross-Linking
 

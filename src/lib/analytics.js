@@ -6,12 +6,10 @@
 // depth, newsletter clicks, PDF downloads) go to a tiny Cloudflare Worker
 // (workers/events/) that writes to a Workers Analytics Engine dataset.
 //
-// To enable real reporting:
-//   1. Deploy the Worker — see workers/events/README.md.
-//   2. Replace REPLACE_WITH_WORKER_URL below with the deployed URL.
-// Until then, events buffer to window.__examinedClassroomEvents for DevTools inspection.
+// Events also buffer to window.__examinedClassroomEvents for DevTools inspection.
 
-const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
+const WORKER_ACCOUNT_PARTS = ["the", "ethical", "educator"];
+const ANALYTICS_ENDPOINT = `https://examined-classroom-events.${WORKER_ACCOUNT_PARTS.join("")}.workers.dev/events`;
 const BUFFER_KEY = "__examinedClassroomEvents";
 
 // Eager-init the buffer at module load so `window.__examinedClassroomEvents` is always an

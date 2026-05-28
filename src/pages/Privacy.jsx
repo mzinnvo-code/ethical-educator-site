@@ -39,7 +39,7 @@ export default function Privacy({ navigate }) {
             <FadeIn delay={0.14}>
               <Divider label="Hosting and Server Logs" />
               <p>The site is hosted on GitHub Pages. GitHub, as the hosting provider, may process basic technical information about visitors (such as IP address, user agent, and request timestamps) in its standard server logs. This data is processed by GitHub, not by us, and we do not receive or retain it. For GitHub's data practices, see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub's Privacy Statement</a>.</p>
-              <p style={{ marginTop: 10 }}>Cloudflare Web Analytics is embedded to measure aggregate traffic and performance. A future optional Cloudflare Worker may record aggregate resource actions such as newsletter clicks, print/download clicks, scroll-depth milestones, and tool opens. These events do not include names, email addresses, classroom data, or student work.</p>
+              <p style={{ marginTop: 10 }}>Cloudflare Web Analytics is embedded to measure aggregate traffic and performance. A small Cloudflare Worker records aggregate resource actions such as newsletter clicks, print/download clicks, scroll-depth milestones, and tool opens. These events do not include names, email addresses, classroom data, or student work.</p>
               <p style={{ marginTop: 10 }}>No advertising networks, behavioral ad pixels, or cross-site tracking cookies are embedded on this site.</p>
             </FadeIn>
 

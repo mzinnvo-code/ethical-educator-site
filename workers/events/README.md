@@ -13,14 +13,21 @@ npx wrangler login         # opens browser; auth once
 npm run deploy
 ```
 
-Wrangler will print a URL like `https://examined-classroom-events.<your-subdomain>.workers.dev`. **Copy that URL.**
+Current production URL:
+
+```text
+https://examined-classroom-events.<account-subdomain>.workers.dev
+```
+
+Wrangler will print a URL like `https://examined-classroom-events.<your-subdomain>.workers.dev`. **Copy that URL if it ever changes.**
 
 ## Wire it into the site
 
-Open `src/lib/analytics.js` at the repo root and replace `REPLACE_WITH_WORKER_URL` with the URL from the deploy step above (include the `/events` path):
+`src/lib/analytics.js` is already wired to the production Worker. If the Worker URL changes, update it with the deploy URL plus the `/events` path:
 
 ```js
-const ANALYTICS_ENDPOINT = "https://examined-classroom-events.your-subdomain.workers.dev/events";
+const WORKER_ACCOUNT_PARTS = ["the", "ethical", "educator"];
+const ANALYTICS_ENDPOINT = `https://examined-classroom-events.${WORKER_ACCOUNT_PARTS.join("")}.workers.dev/events`;
 ```
 
 Commit and push. GitHub Actions redeploys the site; events start landing within ~10 seconds of the first user interaction.

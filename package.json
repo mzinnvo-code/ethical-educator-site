@@ -11,6 +11,7 @@
     "og:generate": "node scripts/generate-og-images.mjs",
     "visuals:check": "node scripts/check-stage-visuals.mjs",
     "prerender": "node scripts/prerender-site.mjs",
+    "seo:indexnow": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
     "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",

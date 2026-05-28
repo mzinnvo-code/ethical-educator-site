@@ -58,7 +58,9 @@ After the deploy finishes:
 
 ## Step 4 — Deploy the `examined-classroom-events` Worker (5 min)
 
-This unlocks the custom events (scroll depth, newsletter clicks, PDF downloads) that Cloudflare Web Analytics can't capture on its own. Full details in `workers/events/README.md`; the short version:
+This custom event Worker is deployed at the `examined-classroom-events` `workers.dev` URL printed by Wrangler. It unlocks the custom events (scroll depth, newsletter clicks, PDF downloads, SEO pathway clicks) that Cloudflare Web Analytics can't capture on its own. Full details in `workers/events/README.md`.
+
+For future redeploys, the short version is:
 
 ```bash
 cd workers/events
@@ -73,16 +75,11 @@ Published examined-classroom-events
   https://examined-classroom-events.<your-subdomain>.workers.dev
 ```
 
-Copy that URL. Open `src/lib/analytics.js` at the repo root and replace:
+If the Worker URL changes, update `src/lib/analytics.js` at the repo root. The current value is built from the Worker name and Cloudflare account subdomain parts:
 
 ```js
-const ANALYTICS_ENDPOINT = "REPLACE_WITH_WORKER_URL";
-```
-
-with the URL (including the `/events` path):
-
-```js
-const ANALYTICS_ENDPOINT = "https://examined-classroom-events.your-subdomain.workers.dev/events";
+const WORKER_ACCOUNT_PARTS = ["the", "ethical", "educator"];
+const ANALYTICS_ENDPOINT = `https://examined-classroom-events.${WORKER_ACCOUNT_PARTS.join("")}.workers.dev/events`;
 ```
 
 Commit, push, GitHub Actions redeploys. Custom events start landing in the `examined_classroom_events` Analytics Engine dataset within a few seconds of the first user interaction.

@@ -44,6 +44,8 @@ Improve organic discovery without paid services, advertising, purchased backlink
 - Preserved existing crawlability checks so sitemap and prerender coverage stay aligned.
 - Replaced the old browser-driven prerender dependency with a browserless static prerender script so production builds no longer launch bundled Chromium.
 - Added custom event hooks for the new SEO landing-page clicks, standalone teaching-resource clicks, and related-resource rail clicks.
+- Deployed the custom event Worker and wired the site to the `examined-classroom-events` Workers endpoint.
+- Added a no-cost IndexNow key file and `npm run seo:indexnow` submission script for Bing and other participating search engines.
 
 ## Next No-Cost Iterations
 
@@ -57,5 +59,6 @@ Improve organic discovery without paid services, advertising, purchased backlink
 - Confirm Google can crawl `/sitemap.xml` and the new landing page.
 - Track Search Console impressions/clicks for the target clusters above.
 - Watch Cloudflare analytics for organic landing-page traffic and second-click paths into lesson packets, thought experiments, and tools.
-- Watch custom events: `seo_landing_click`, `teaching_resource_click`, and `related_resource_rail_click` once the event Worker endpoint is configured.
+- Watch custom events: `seo_landing_click`, `teaching_resource_click`, and `related_resource_rail_click` in the Cloudflare Workers Analytics Engine dataset.
+- Run `npm run seo:indexnow` after deployment when priority URLs are added or substantially updated.
 - Re-run local build and crawlability checks before deployment.
