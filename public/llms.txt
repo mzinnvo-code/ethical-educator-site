@@ -12,6 +12,12 @@ The site publishes classroom-ready thought experiments, educator resources, rese
 - Interactive Thought Experiments: https://examinedclassroom.com/thought-experiments
 - Interactive Tools: https://examinedclassroom.com/tools
 - AI in Education: https://examinedclassroom.com/ai-education
+- AI Ethics Lesson Plans: https://examinedclassroom.com/ai-ethics-lesson-plans
+- Thought Experiments for Kids: https://examinedclassroom.com/thought-experiments-for-kids
+- AI Literacy Activities: https://examinedclassroom.com/ai-literacy-activities
+- School AI Policy Tools: https://examinedclassroom.com/school-ai-policy-tools
+- AI Academic Integrity Discussions: https://examinedclassroom.com/academic-integrity-ai-discussions
+- Philosophy for Kids: https://examinedclassroom.com/philosophy-for-kids
 - AI Ethics in Education: https://examinedclassroom.com/ai-ethics
 - Research Resources: https://examinedclassroom.com/resources
 - For Educators: https://examinedclassroom.com/for-educators
@@ -21,11 +27,25 @@ The site publishes classroom-ready thought experiments, educator resources, rese
 ## Key Topics
 
 - AI ethics in education
+- AI ethics lesson plans for K-12 teachers
+- AI literacy activities for K-12 classrooms
 - K-12 classroom thought experiments
+- thought experiments for kids
 - Philosophy for children and adolescents
 - Moral psychology and AI alignment
 - School AI policy and responsible AI use
 - Academic integrity, feedback, engagement, and leadership
+
+## Teacher Resource Pages
+
+- Paperclip Maximizer classroom packet: https://examinedclassroom.com/teaching-resources/paperclip-maximizer
+- The Consciousness Line lesson packets: https://examinedclassroom.com/teaching-resources/consciousness-line
+- AI authorship classroom discussion: https://examinedclassroom.com/teaching-resources/ai-authorship-discussion
+- AI detector false positive discussion: https://examinedclassroom.com/teaching-resources/ai-detector-false-positive
+- Biased classroom robot discussion: https://examinedclassroom.com/teaching-resources/biased-classroom-robot
+- School surveillance scenario: https://examinedclassroom.com/teaching-resources/school-surveillance
+- AI grading mistake scenario: https://examinedclassroom.com/teaching-resources/ai-grading-mistake
+- AI policy design staff activity: https://examinedclassroom.com/teaching-resources/ai-policy-design-staff-activity
 
 ## Use and Attribution
 

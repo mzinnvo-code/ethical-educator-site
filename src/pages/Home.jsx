@@ -710,6 +710,7 @@ export default function Home({ navigate }) {
               </p>
               <div className="home-cta-row">
                 <HomeButton onClick={scrollToRoleSection}>Start with your role</HomeButton>
+                <HomeButton variant="secondary" onClick={() => navigate("ai-ethics-lesson-plans")}>Browse Lesson Plans</HomeButton>
                 <HomeButton variant="secondary" onClick={() => navigate("thought-experiments")}>Explore Thought Experiments</HomeButton>
               </div>
             </div>
@@ -792,6 +793,7 @@ export default function Home({ navigate }) {
                 </p>
               </div>
               <div className="closing-actions">
+                <HomeButton variant="secondary" onClick={() => navigate("ai-ethics-lesson-plans")}>AI ethics lesson plans</HomeButton>
                 <HomeButton variant="ghost" onClick={() => navigate("about")}>About Matthew</HomeButton>
                 <HomeButton variant="secondary" onClick={() => navigate("resources")}>Follow the sources</HomeButton>
               </div>

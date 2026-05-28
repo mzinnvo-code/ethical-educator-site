@@ -16,7 +16,8 @@ export default function Privacy({ navigate }) {
 
             <FadeIn delay={0.06}>
               <Divider label="What We Collect" />
-              <p>This site collects no personal data. There are no accounts, no forms that submit data to a server, and no analytics services embedded on any page.</p>
+              <p>This site does not collect account profiles, classroom rosters, student work, or personal information through site forms. There are no user accounts, no advertising trackers, and no sale or sharing of visitor data.</p>
+              <p style={{ marginTop: 10 }}>The site uses privacy-preserving Cloudflare Web Analytics for aggregate pageview, referrer, country-level, device, and Core Web Vitals reporting. It is used to understand which classroom resources are useful, not to identify individual visitors.</p>
             </FadeIn>
 
             <FadeIn delay={0.08}>
@@ -38,7 +39,8 @@ export default function Privacy({ navigate }) {
             <FadeIn delay={0.14}>
               <Divider label="Hosting and Server Logs" />
               <p>The site is hosted on GitHub Pages. GitHub, as the hosting provider, may process basic technical information about visitors (such as IP address, user agent, and request timestamps) in its standard server logs. This data is processed by GitHub, not by us, and we do not receive or retain it. For GitHub's data practices, see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub's Privacy Statement</a>.</p>
-              <p style={{ marginTop: 10 }}>No third-party analytics, advertising, or tracking services are embedded on this site.</p>
+              <p style={{ marginTop: 10 }}>Cloudflare Web Analytics is embedded to measure aggregate traffic and performance. A future optional Cloudflare Worker may record aggregate resource actions such as newsletter clicks, print/download clicks, scroll-depth milestones, and tool opens. These events do not include names, email addresses, classroom data, or student work.</p>
+              <p style={{ marginTop: 10 }}>No advertising networks, behavioral ad pixels, or cross-site tracking cookies are embedded on this site.</p>
             </FadeIn>
 
             <FadeIn delay={0.16}>
@@ -49,7 +51,7 @@ export default function Privacy({ navigate }) {
 
             <FadeIn delay={0.18}>
               <Divider label="Your Rights" />
-              <p>Because the site does not collect or retain personal information about visitors, most data-subject rights under privacy laws (such as the EU General Data Protection Regulation and the California Consumer Privacy Act / California Privacy Rights Act) have no records to apply to. For completeness:</p>
+              <p>Because the site does not collect or retain account-level personal information about visitors, most data-subject rights under privacy laws (such as the EU General Data Protection Regulation and the California Consumer Privacy Act / California Privacy Rights Act) have no user record to apply to. For completeness:</p>
               <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
                 <li><strong style={{ color: C.textPrimary }}>Right to know / access:</strong> we do not hold personal data about you.</li>
                 <li><strong style={{ color: C.textPrimary }}>Right to delete / erasure:</strong> you can clear your browser's site data to erase any locally stored Decision Journal entries.</li>

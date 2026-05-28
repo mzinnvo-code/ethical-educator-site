@@ -17,6 +17,7 @@ const SECTION_RULES = [
   // Prefix matches first (longest wins via sort below)
   { prefix: "ai-education/", accent: C.ocean, label: "AI in Education" },
   { prefix: "thought-experiments/", accent: C.teal, label: "Thought Experiments" },
+  { prefix: "teaching-resources/", accent: C.gold, label: "Teaching Resources" },
   { prefix: "audiences/", accent: C.gold, label: "By Audience" },
 
   // Exact matches
@@ -25,6 +26,12 @@ const SECTION_RULES = [
   { id: "for-educators", accent: C.gold, label: "For Educators" },
   { id: "ai-education", accent: C.ocean, label: "AI in Education" },
   { id: "ai-ethics", accent: C.coral, label: "AI & Ethics" },
+  { id: "ai-ethics-lesson-plans", accent: C.teal, label: "AI & Ethics" },
+  { id: "thought-experiments-for-kids", accent: C.gold, label: "Thought Experiments" },
+  { id: "ai-literacy-activities", accent: C.ocean, label: "AI in Education" },
+  { id: "school-ai-policy-tools", accent: C.gold, label: "AI Policy Tools" },
+  { id: "academic-integrity-ai-discussions", accent: C.coral, label: "AI & Ethics" },
+  { id: "philosophy-for-kids", accent: C.green, label: "Philosophy" },
   { id: "ai-consciousness", accent: C.coral, label: "AI & Ethics" },
   { id: "ai-authorship-quandary", accent: C.coral, label: "AI & Ethics" },
   { id: "ai-ambiguity-to-action", accent: C.coral, label: "AI & Ethics" },

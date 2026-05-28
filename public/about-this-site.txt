@@ -10,7 +10,15 @@ Core sections:
 - Interactive Thought Experiments: https://examinedclassroom.com/thought-experiments
 - Interactive Tools: https://examinedclassroom.com/tools
 - AI in Education: https://examinedclassroom.com/ai-education
+- AI Ethics Lesson Plans: https://examinedclassroom.com/ai-ethics-lesson-plans
+- Thought Experiments for Kids: https://examinedclassroom.com/thought-experiments-for-kids
+- AI Literacy Activities: https://examinedclassroom.com/ai-literacy-activities
+- School AI Policy Tools: https://examinedclassroom.com/school-ai-policy-tools
+- AI Academic Integrity Discussions: https://examinedclassroom.com/academic-integrity-ai-discussions
+- Philosophy for Kids: https://examinedclassroom.com/philosophy-for-kids
 - Research Resources: https://examinedclassroom.com/resources
 - About Matthew A. Zinn: https://examinedclassroom.com/about
+
+Teacher resource pages include standalone classroom-ready pages for the Paperclip Maximizer, The Consciousness Line, AI authorship, AI detector false positives, biased classroom robot scenarios, school surveillance, AI grading mistakes, and AI policy design staff activities.
 
 The site's original educational content is generally available under CC BY-NC 4.0 unless otherwise noted. See https://examinedclassroom.com/terms and https://examinedclassroom.com/credits for details.

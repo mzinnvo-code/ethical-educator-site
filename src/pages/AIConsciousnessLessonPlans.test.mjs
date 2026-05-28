@@ -10,7 +10,7 @@ const sitemap = readFileSync("public/sitemap.xml", "utf8");
 test("consciousness lesson plans route is registered for app, prerender, and sitemap", () => {
   assert.match(appSource, /AIConsciousnessLessonPlans/);
   assert.match(appSource, /"ai-consciousness\/lesson-plans"/);
-  assert.ok(packageJson.reactSnap.include.includes("/ai-consciousness/lesson-plans"));
+  assert.ok(packageJson.prerender.include.includes("/ai-consciousness/lesson-plans"));
   assert.match(sitemap, /https:\/\/examinedclassroom\.com\/ai-consciousness\/lesson-plans/);
 });
 

@@ -16,6 +16,22 @@
 
 export const WHATS_NEW = [
   {
+    id: "organic-growth-resource-library",
+    date: "2026-05-28",
+    type: "feature",
+    title: "New resource pages for AI ethics lesson planning",
+    blurb: "The site now has search-friendly teacher entry pages for AI ethics lesson plans, thought experiments for kids, AI literacy activities, school AI policy tools, academic integrity discussions, and philosophy for kids.",
+    url: "/ai-ethics-lesson-plans",
+  },
+  {
+    id: "standalone-teacher-resources",
+    date: "2026-05-28",
+    type: "feature",
+    title: "Eight standalone teacher-resource pages are now live",
+    blurb: "Classroom-ready pages now exist for the Paperclip Maximizer, The Consciousness Line, AI authorship, detector false positives, biased classroom robots, school surveillance, AI grading mistakes, and AI policy design.",
+    url: "/teaching-resources/paperclip-maximizer",
+  },
+  {
     id: "tools-hub",
     date: "2026-05-22",
     type: "feature",

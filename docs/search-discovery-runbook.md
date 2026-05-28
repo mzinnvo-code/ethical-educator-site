@@ -15,6 +15,14 @@ Submit or inspect these first:
 - `https://examinedclassroom.com/thought-experiments`
 - `https://examinedclassroom.com/tools`
 - `https://examinedclassroom.com/ai-education`
+- `https://examinedclassroom.com/ai-ethics-lesson-plans`
+- `https://examinedclassroom.com/thought-experiments-for-kids`
+- `https://examinedclassroom.com/ai-literacy-activities`
+- `https://examinedclassroom.com/school-ai-policy-tools`
+- `https://examinedclassroom.com/academic-integrity-ai-discussions`
+- `https://examinedclassroom.com/philosophy-for-kids`
+- `https://examinedclassroom.com/teaching-resources/paperclip-maximizer`
+- `https://examinedclassroom.com/teaching-resources/consciousness-line`
 - `https://examinedclassroom.com/resources`
 - `https://examinedclassroom.com/llms.txt`
 - `https://examinedclassroom.com/about-this-site.txt`

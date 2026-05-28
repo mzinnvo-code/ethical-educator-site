@@ -44,10 +44,10 @@ export default function Credits({ navigate }) {
               <Divider label="Technology" />
               <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
                 <li><strong style={{ color: C.textPrimary }}>React</strong> and <strong style={{ color: C.textPrimary }}>Vite</strong> — the SPA framework and build tool.</li>
-                <li><strong style={{ color: C.textPrimary }}>react-snap</strong> — pre-renders pages to static HTML at build time for SEO and accessibility.</li>
+                <li><strong style={{ color: C.textPrimary }}>Browserless static prerender script</strong> — writes crawlable route HTML at build time for SEO and accessibility without launching Chrome or Chromium.</li>
                 <li><strong style={{ color: C.textPrimary }}>GitHub Pages</strong> — static hosting.</li>
               </ul>
-              <p style={{ marginTop: 10 }}>The site uses no analytics services, no advertising networks, no third-party trackers, and no cookies. See the <a href="/privacy" onClick={e => { e.preventDefault(); navigate("privacy"); }} style={{ color: C.gold, textDecoration: "underline" }}>Privacy Policy</a> for details.</p>
+              <p style={{ marginTop: 10 }}>The site uses privacy-preserving Cloudflare Web Analytics for aggregate traffic and performance measurement. It uses no advertising networks, behavioral ad trackers, or cookies. See the <a href="/privacy" onClick={e => { e.preventDefault(); navigate("privacy"); }} style={{ color: C.gold, textDecoration: "underline" }}>Privacy Policy</a> for details.</p>
             </FadeIn>
 
             <FadeIn delay={0.16}>

@@ -5,6 +5,7 @@ import { NewBadge, PageContainer, Narrow, SectionTitle, SectionLabel } from "./c
 import { useScrollDepth } from "./hooks/useScrollDepth.js";
 import { OG_PAGES_BY_ID } from "./data/ogPages.js";
 import { getSectionAccent } from "./data/sectionAccents.js";
+import { buildRouteSchema, ogTypeFor } from "./lib/seoSchema.js";
 
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
@@ -15,10 +16,16 @@ import Home from "./pages/Home.jsx";
 // so the footer doesn't pop in. Modal renders null until visit-count triggers
 // so it's safe to lazy-load.
 import NewsletterSignup from "./components/NewsletterSignup.jsx";
+import TeachingResourceRail from "./components/TeachingResourceRail.jsx";
 
 // SearchPalette is the Cmd+K modal — its keyboard listener has to be live
 // the moment the page loads, so it stays eager (small + globally needed).
 import SearchPalette from "./components/SearchPalette.jsx";
+import {
+  GROWTH_PAGE_META,
+  SEARCH_LANDING_ROUTES,
+  TEACHING_RESOURCE_ROUTES,
+} from "./data/growthPages.js";
 
 const NewsletterModal = lazy(() => import("./components/NewsletterModal.jsx"));
 const WhatsNew = lazy(() => import("./pages/WhatsNew.jsx"));
@@ -36,6 +43,8 @@ const AIEducationFutureReadiness = lazy(() => import("./pages/ai-education/Secti
 const AIEducationPolicyEthics = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationPolicyEthics })));
 const AIEducationStudentTools = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationStudentTools })));
 const AIEducationToolsResources = lazy(() => import("./pages/ai-education/SectionPage.jsx").then(m => ({ default: m.AIEducationToolsResources })));
+const SearchLandingPage = lazy(() => import("./pages/SearchLandingPage.jsx"));
+const TeachingResourcePage = lazy(() => import("./pages/TeachingResourcePage.jsx"));
 const AIConsciousness = lazy(() => import("./pages/AIConsciousness.jsx"));
 const AIConsciousnessLessonPlans = lazy(() => import("./pages/AIConsciousnessLessonPlans.jsx"));
 const AIAuthorship = lazy(() => import("./pages/AIAuthorship.jsx"));
@@ -115,6 +124,8 @@ const PAGE_MAP = {
   "ai-education/policy-ethics": AIEducationPolicyEthics,
   "ai-education/future-readiness": AIEducationFutureReadiness,
   "ai-education/tools-resources": AIEducationToolsResources,
+  ...Object.fromEntries(SEARCH_LANDING_ROUTES.map((route) => [route, SearchLandingPage])),
+  ...Object.fromEntries(TEACHING_RESOURCE_ROUTES.map((route) => [route, TeachingResourcePage])),
   "ai-consciousness": AIConsciousness,
   "ai-consciousness/lesson-plans": AIConsciousnessLessonPlans,
   "ai-authorship-quandary": AIAuthorship,
@@ -181,6 +192,8 @@ const PAGE_META = {
   "ai-ethics": {
     title: "AI Ethics in Education — The Examined Classroom",
     description: "The is/ought problem, UNESCO frameworks, the EU AI Act, NYC's traffic-light policy, and actionable ethical frameworks for educators navigating AI.",
+    about: ["AI ethics in education", "school AI policy", "educator decision-making"],
+    audience: ["teacher", "administrator"],
   },
   "ai-education": {
     title: "AI in Education — The Examined Classroom",
@@ -227,6 +240,7 @@ const PAGE_META = {
   "ai-consciousness": {
     title: "The Consciousness Line — The Examined Classroom",
     description: "A philosophically grounded continuation of Anil Seth's AI consciousness caution, with synthetic biology, octopuses, organoids, Nagel, Austin, and ethical humility under uncertainty.",
+    contentType: "article",
     datePublished: "2026-05-09",
     dateModified: "2026-05-26",
   },
@@ -239,24 +253,28 @@ const PAGE_META = {
   "ai-authorship-quandary": {
     title: "The AI Authorship Quandary — The Examined Classroom",
     description: "A student turns in AI-assisted work. The teacher flags it. The parent defends it. The syllabus is silent. The interactive scenario, the evidence on AI detectors, and what good school policy actually looks like.",
+    contentType: "article",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
   "ai-ambiguity-to-action": {
     title: "From Ambiguity to Action — The Examined Classroom",
     description: "Why \"uphold ethics\" isn't a policy. Utilitarianism, deontology, virtue ethics, and thought experiments as policy tools. The funnel from value to practice for AI in education.",
+    contentType: "article",
     datePublished: "2024-07-12",
     dateModified: "2026-05-13",
   },
   "ai-paradox": {
     title: "The Paradox of AI in Education — The Examined Classroom",
     description: "Assume the harder version: AI has matched human teachers. The interesting question is whether teaching, as we have understood it, can be done by a machine at all — and what schools are for if it can.",
+    contentType: "article",
     datePublished: "2024-02-13",
     dateModified: "2026-05-13",
   },
   "ai-replace-teachers": {
     title: "Why AI Won't Replace Teachers — A Response — The Examined Classroom",
     description: "A friendly disagreement with the standard defense of human teachers. The conclusion is right but the capability arguments keep losing. The argument that survives the next iteration of the technology is values-based, not technical.",
+    contentType: "article",
     datePublished: "2024-02-14",
     dateModified: "2026-05-13",
   },
@@ -430,6 +448,7 @@ const PAGE_META = {
     title: "Interactive Tools — The Examined Classroom",
     description: "Four short, focused interactives that hand you a usable artifact in under ten minutes: the Thought Experiment Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator. No login, no data collection beyond cookieless event counts.",
   },
+  ...GROWTH_PAGE_META,
 };
 
 function getPageFromPath() {
@@ -524,12 +543,12 @@ export default function App() {
     };
   }, []);
 
-  // Dynamic title, meta description, and Article schema per page
+  // Dynamic title, meta description, and route-level schema per page
   useEffect(() => {
     const isNotFoundPage = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
 
-    // Always remove stale article schema first
-    const existing = document.getElementById("article-schema");
+    // Always remove stale route schema first
+    const existing = document.getElementById("route-schema");
     if (existing) existing.remove();
 
     if (isNotFoundPage) {
@@ -583,33 +602,15 @@ export default function App() {
     if (ogDescEl) ogDescEl.setAttribute("content", meta.description);
     const twitterDescEl = document.querySelector('meta[name="twitter:description"]');
     if (twitterDescEl) twitterDescEl.setAttribute("content", meta.description);
+    const ogTypeEl = document.querySelector('meta[property="og:type"]');
+    if (ogTypeEl) ogTypeEl.setAttribute("content", ogTypeFor(meta));
 
-    // Article schema for content pages (not home)
-    if (currentPage !== "home") {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.id = "article-schema";
-      script.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": meta.title,
-        "url": canonicalUrl,
-        "mainEntityOfPage": canonicalUrl,
-        "author": {
-          "@type": "Person",
-          "name": SITE.authorName,
-          "url": SITE.origin,
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": SITE.brandName,
-          "url": SITE.origin,
-        },
-        "datePublished": meta.datePublished || "2024-01-01",
-        "dateModified": meta.dateModified || "2026-05-13",
-      });
-      document.head.appendChild(script);
-    }
+    const routeSchema = buildRouteSchema({ currentPage, meta, canonicalUrl, imageUrl: ogImageUrl });
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "route-schema";
+    script.text = JSON.stringify(routeSchema);
+    document.head.appendChild(script);
   }, [currentPage]);
 
   const isNotFound = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
@@ -743,6 +744,7 @@ export default function App() {
             : <PageComponent navigate={navigate} />}
         </Suspense>
       </main>
+      <TeachingResourceRail currentPage={currentPage} navigate={navigate} />
 
       {/* FOOTER */}
       <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
@@ -779,6 +781,24 @@ export default function App() {
               <a href="https://ethicalaiedu.wordpress.com/2024/07/12/from-ambiguity-to-action-navigating-ethical-challenges-in-ai-enhanced-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>From Ambiguity to Action</a>
               <a href="https://ethicalaiedu.wordpress.com/2024/02/13/the-paradox-of-ai-in-education/" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>The Paradox of AI in Education</a>
               <a href="https://innovateedai.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0" }}>InnovateEdAI Presentation</a>
+            </div>
+            <div>
+              <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Teaching Resources</p>
+              {[
+                { label: "AI Ethics Lesson Plans", id: "ai-ethics-lesson-plans" },
+                { label: "Thought Experiments for Kids", id: "thought-experiments-for-kids" },
+                { label: "AI Literacy Activities", id: "ai-literacy-activities" },
+                { label: "School AI Policy Tools", id: "school-ai-policy-tools" },
+                { label: "Academic Integrity + AI", id: "academic-integrity-ai-discussions" },
+                { label: "Philosophy for Kids", id: "philosophy-for-kids" },
+                { label: "Paperclip Classroom Packet", id: "teaching-resources/paperclip-maximizer" },
+                { label: "Thought Experiment Picker", id: "picker" },
+                { label: "AI Use Rubric", id: "ai-rubric" },
+                { label: "AI Policy Builder", id: "ai-policy" },
+              ].map(link => (
+                <a key={link.id} href={`/${link.id}`} onClick={e => { e.preventDefault(); navigate(link.id); }} style={{ display: "block", color: C.textMuted, fontSize: "0.78rem", padding: "4px 0", transition: "color 0.2s" }}
+                  onMouseOver={e => e.currentTarget.style.color = C.gold} onMouseOut={e => e.currentTarget.style.color = C.textMuted}>{link.label}</a>
+              ))}
             </div>
             <div>
               <p style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "0.9rem", fontWeight: 600, marginBottom: 12 }}>Key Resources</p>

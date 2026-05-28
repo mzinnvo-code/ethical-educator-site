@@ -10,6 +10,7 @@ const SECTION_BY_PREFIX = [
   { prefix: "thought-experiments/", section: "Thought Experiments" },
   { prefix: "ai-education/", section: "AI in Education" },
   { prefix: "ai-consciousness/", section: "AI & Ethics" },
+  { prefix: "teaching-resources/", section: "Teaching Resources" },
   { prefix: "audiences/", section: "By Audience" },
 ];
 
@@ -18,6 +19,12 @@ const TOP_LEVEL_SECTION = {
   "thought-experiments": "Thought Experiments",
   "ai-education": "AI in Education",
   "ai-ethics": "AI & Ethics",
+  "ai-ethics-lesson-plans": "AI & Ethics",
+  "thought-experiments-for-kids": "Thought Experiments",
+  "ai-literacy-activities": "AI in Education",
+  "school-ai-policy-tools": "Tools",
+  "academic-integrity-ai-discussions": "AI & Ethics",
+  "philosophy-for-kids": "Philosophy",
   "ai-consciousness": "AI & Ethics",
   "ai-authorship-quandary": "AI & Ethics",
   "ai-ambiguity-to-action": "AI & Ethics",

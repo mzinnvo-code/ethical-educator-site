@@ -28,13 +28,13 @@ export const C = {
 
 export const PAGES = [
   { id: "home", label: "Home" },
-  { id: "thought-experiments", label: "Thought Experiments" },
+  { id: "thought-experiments", label: "Thought Experiments", matchAny: ["thought-experiments-for-kids"] },
   { id: "for-educators", label: "For Educators" },
-  { id: "ai-education", label: "AI in Education", matchPrefix: "ai-education/" },
-  { id: "phil-education", label: "Philosophy in K–12" },
-  { id: "ai-ethics", label: "AI & Ethics" },
+  { id: "ai-education", label: "AI in Education", matchPrefix: "ai-education/", matchAny: ["ai-literacy-activities"] },
+  { id: "phil-education", label: "Philosophy in K–12", matchAny: ["philosophy-for-kids"] },
+  { id: "ai-ethics", label: "AI & Ethics", matchAny: ["ai-ethics-lesson-plans", "academic-integrity-ai-discussions"] },
   { id: "moral-psych", label: "Moral Psychology" },
-  { id: "tools", label: "Tools", matchAny: ["picker", "ai-rubric", "ai-policy", "family-conversations"] },
+  { id: "tools", label: "Tools", matchAny: ["picker", "ai-rubric", "ai-policy", "family-conversations", "school-ai-policy-tools"] },
   { id: "resources", label: "Resources" },
   { id: "about", label: "About" },
 ];

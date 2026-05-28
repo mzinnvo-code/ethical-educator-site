@@ -26,19 +26,10 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "react-snap": "^1.23.0",
     "sharp": "^0.34.5",
     "vite": "^5.4.0"
   },
-  "reactSnap": {
-    "source": "dist",
-    "destination": "dist",
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ],
-    "crawl": false,
-    "waitFor": 500,
+  "prerender": {
     "include": [
       "/",
       "/about",
@@ -51,6 +42,20 @@
       "/ai-education/policy-ethics",
       "/ai-education/future-readiness",
       "/ai-education/tools-resources",
+      "/ai-ethics-lesson-plans",
+      "/thought-experiments-for-kids",
+      "/ai-literacy-activities",
+      "/school-ai-policy-tools",
+      "/academic-integrity-ai-discussions",
+      "/philosophy-for-kids",
+      "/teaching-resources/paperclip-maximizer",
+      "/teaching-resources/consciousness-line",
+      "/teaching-resources/ai-authorship-discussion",
+      "/teaching-resources/ai-detector-false-positive",
+      "/teaching-resources/biased-classroom-robot",
+      "/teaching-resources/school-surveillance",
+      "/teaching-resources/ai-grading-mistake",
+      "/teaching-resources/ai-policy-design-staff-activity",
       "/ai-consciousness",
       "/ai-consciousness/lesson-plans",
       "/ai-authorship-quandary",
@@ -99,8 +104,6 @@
       "/ai-policy",
       "/family-conversations",
       "/tools"
-    ],
-    "skipThirdPartyRequests": true,
-    "inlineCss": false
+    ]
   }
 }

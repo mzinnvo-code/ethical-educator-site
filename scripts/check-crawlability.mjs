@@ -12,6 +12,11 @@ const priorityRoutes = [
   { route: "/thought-experiments", file: "thought-experiments/index.html", text: "Interactive Thought Experiments", canonical: `${SITE}/thought-experiments` },
   { route: "/tools", file: "tools/index.html", text: "Interactive Tools", canonical: `${SITE}/tools` },
   { route: "/ai-education", file: "ai-education/index.html", text: "AI in Education", canonical: `${SITE}/ai-education` },
+  { route: "/ai-ethics-lesson-plans", file: "ai-ethics-lesson-plans/index.html", text: "AI ethics lesson plans", canonical: `${SITE}/ai-ethics-lesson-plans` },
+  { route: "/thought-experiments-for-kids", file: "thought-experiments-for-kids/index.html", text: "Thought Experiments for Kids", canonical: `${SITE}/thought-experiments-for-kids` },
+  { route: "/ai-literacy-activities", file: "ai-literacy-activities/index.html", text: "AI Literacy Activities", canonical: `${SITE}/ai-literacy-activities` },
+  { route: "/school-ai-policy-tools", file: "school-ai-policy-tools/index.html", text: "School AI Policy Tools", canonical: `${SITE}/school-ai-policy-tools` },
+  { route: "/teaching-resources/paperclip-maximizer", file: "teaching-resources/paperclip-maximizer/index.html", text: "Paperclip Maximizer Classroom Packet", canonical: `${SITE}/teaching-resources/paperclip-maximizer` },
   { route: "/resources", file: "resources/index.html", text: "Research Resources", canonical: `${SITE}/resources` },
 ];
 
@@ -71,7 +76,9 @@ mustContain(about, "Official site:", "about-this-site.txt");
 mustContain(about, "Matthew A. Zinn", "about-this-site.txt");
 
 const sitemap = await readDistFile("sitemap.xml");
-for (const route of packageJson.reactSnap.include) {
+const prerenderRoutes = packageJson.prerender?.include || [];
+
+for (const route of prerenderRoutes) {
   const file = route === "/" ? "index.html" : `${route.replace(/^\//, "")}/index.html`;
   await readDistFile(file);
   const canonical = route === "/" ? `${SITE}/` : `${SITE}${route}`;
@@ -85,4 +92,4 @@ for (const page of priorityRoutes) {
 const robots = await readDistFile("robots.txt");
 mustContain(robots, `Sitemap: ${SITE}/sitemap.xml`, "robots.txt");
 
-console.log(`Crawlability check passed for ${priorityRoutes.length} priority routes and ${packageJson.reactSnap.include.length} prerendered routes.`);
+console.log(`Crawlability check passed for ${priorityRoutes.length} priority routes and ${prerenderRoutes.length} prerendered routes.`);

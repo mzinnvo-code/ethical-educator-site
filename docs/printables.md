@@ -1,6 +1,6 @@
 # Printables — print + Save as PDF
 
-Phase C v1 of the roadmap: any page can be printed (or "Save as PDF") with site chrome hidden and prose reformatted for paper. Teacher kits get a one-click button. The full puppeteer pre-generation path (so each kit has its own static `.pdf` URL) is documented at the bottom as the v2 follow-up.
+Phase C v1 of the roadmap: any page can be printed (or "Save as PDF") with site chrome hidden and prose reformatted for paper. Teacher kits get a one-click button. A future static PDF pre-generation path (so each kit has its own static `.pdf` URL) is documented at the bottom as the v2 follow-up.
 
 ## What v1 ships
 
@@ -52,7 +52,7 @@ That number tells you which lessons are actually getting into classrooms, which 
 
 The plan called for pre-generated PDFs (each kit as a static `.pdf` file in `public/printables/`, downloadable without invoking the browser print dialog). That's a more polished UX but a bigger lift:
 
-- A `scripts/generate-printables.mjs` script that uses Puppeteer to load each kit URL in headless Chrome and call `page.pdf()`.
+- A `scripts/generate-printables.mjs` script that renders each kit without adding Puppeteer, bundled Chromium, or a Chrome-based build dependency. If browser rendering becomes unavoidable, get explicit approval first and prefer a CI-safe renderer over a local Chrome/Chromium launch.
 - Output to `public/printables/<slug>.pdf`, ~5–15MB per kit (illustrations + fonts embedded).
 - Wired into `package.json`'s build chain so a fresh build emits the latest PDFs.
 - A "Download PDF" button alongside the existing "Print this kit" button on each TeacherKit.
@@ -63,6 +63,6 @@ Estimated effort for v2: half a day. Recommend doing it after we have data from 
 ## Limitations of v1
 
 - **Color illustrations print as grayscale.** Most home/school printers are mono; the print stylesheet is paper-first, not glossy. If a teacher wants color, the "Save as PDF" path preserves it for digital sharing.
-- **Long kits may span multiple pages.** That's fine for paper; not ideal for a single-page PDF. v2's puppeteer pipeline can paginate more deliberately.
+- **Long kits may span multiple pages.** That's fine for paper; not ideal for a single-page PDF. A future static PDF pipeline can paginate more deliberately without reintroducing local Chromium crashes.
 - **The whole article around the kit also prints.** A teacher on a scenario page who clicks "Print this kit" gets the kit *plus* the scenario context above it. That's usually fine (more context = more useful), but if you want the kit alone, the v1 workaround is: open the kit in a new tab via the scenario URL, scroll past the scenario to the kit, then Cmd+P. v2 scoped-print fixes this.
 - **Tracking only fires for the "Print this kit" button**, not for general Cmd+P prints. We can't reliably hook the browser's print event from JS, so general Cmd+P prints are invisible in analytics. That's fine — the kit button is the canonical "I want this resource" signal.

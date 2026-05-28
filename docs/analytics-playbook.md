@@ -2,6 +2,8 @@
 
 What to look at in Cloudflare Web Analytics each week, and what we can and cannot measure today.
 
+For the organic search program, pair this with `docs/organic-growth-dashboard.md`.
+
 ## What ships in Session 1
 
 **Live as soon as you create the Web Analytics site in the Cloudflare dashboard and paste the token into `index.html`:**
@@ -34,7 +36,7 @@ Copy the printed `*.workers.dev` URL into `src/lib/analytics.js` (replace `REPLA
 
 **Before Worker deploy (buffer-only mode):**
 
-1. Open the site in a Chrome incognito window.
+1. Open the site in a private browser window, the Codex in-app Browser, or use local `curl`/static checks when browser automation is not needed.
 2. Open DevTools → Console.
 3. Scroll a long-form page (e.g., `/moral-psych`) to 50%.
 4. Type `window.__examinedClassroomEvents` and Enter — you should see an array with `scroll_depth` events.
@@ -102,6 +104,16 @@ SELECT blob3 AS placement, SUM(_sample_interval) AS clicks
 FROM examined_classroom_events
 WHERE blob1 = 'newsletter_signup_click' AND timestamp > NOW() - INTERVAL '28' DAY
 GROUP BY placement ORDER BY clicks DESC
+```
+
+**SEO resource pathway clicks (last 28 days):**
+
+```sql
+SELECT blob1 AS event, blob3 AS placement, blob4 AS page, SUM(_sample_interval) AS clicks
+FROM examined_classroom_events
+WHERE blob1 IN ('seo_landing_click', 'teaching_resource_click', 'related_resource_rail_click')
+  AND timestamp > NOW() - INTERVAL '28' DAY
+GROUP BY event, placement, page ORDER BY clicks DESC
 ```
 
 **Top downloaded PDFs (last 30 days):**
