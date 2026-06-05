@@ -7,6 +7,7 @@ import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import ReasoningProfile from "../../components/ReasoningProfile.jsx";
+import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { getIntroComic } from "../../data/introComics.js";
@@ -176,6 +177,13 @@ export function ElementaryGradePage({ navigate, gradeId }) {
 
           {!active && (
             <>
+              <ThoughtProgressPanel
+                variant="intro"
+                navigate={navigate}
+                accent={grade.accent}
+                title="Ari's Goal Tracker"
+                experimentIds={experiments.map((experiment) => experiment.id)}
+              />
               <Divider label={`${grade.label} stories`} />
               <ExperimentGrid
                 experiments={experiments}

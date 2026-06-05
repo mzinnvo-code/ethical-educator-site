@@ -9,6 +9,7 @@ import { ConvergenceDiagram } from "../../components/diagrams.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
+import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import { getExperimentsByGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { getIntroComic } from "../../data/introComics.js";
@@ -223,6 +224,11 @@ function PathwayCardStrip({ navigate }) {
 export default function Hub({ navigate }) {
   const [active, setActive] = useState(null);
   const featured = featuredThisWeek();
+  const trackerExperimentIds = [
+    ...getExperimentsByGrade("k-5"),
+    ...getExperimentsByGrade("6-8"),
+    ...getExperimentsByGrade("9-12"),
+  ].map((experiment) => experiment.id);
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -255,6 +261,15 @@ export default function Hub({ navigate }) {
         <PathwayCardStrip navigate={navigate} />
 
         <Narrow>
+          {!active && (
+            <ThoughtProgressPanel
+              variant="intro"
+              navigate={navigate}
+              accent={C.teal}
+              experimentIds={trackerExperimentIds}
+            />
+          )}
+
           {/* TOOLKIT + DECISION JOURNAL — tools that support the four pathways above. */}
           <Divider label="Tools for discussion" />
           <div className="grid-2" style={{ marginBottom: 32 }}>

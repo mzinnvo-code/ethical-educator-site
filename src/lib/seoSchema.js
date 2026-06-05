@@ -65,6 +65,7 @@ const SECTION_CRUMBS = [
       "teaching-feedback",
       "enhancing-feedback",
       "enhancing-engagement",
+      "gamification-in-education",
       "async-engagement",
       "av-resources",
       "quality-leadership",

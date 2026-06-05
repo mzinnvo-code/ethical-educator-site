@@ -43,6 +43,16 @@ export const EDUCATOR_RESOURCES = {
     imageAlt: "Educators' and students' hands arranging discussion cards and puzzle pieces around a glowing learning idea.",
     accent: C.teal,
   },
+  "gamification-in-education": {
+    id: "gamification-in-education",
+    title: "Gamification in Education",
+    sectionLabel: "For Educators · Student Engagement",
+    desc: "A research-backed guide to gamification, attention spans, student engagement, and how gameful design can make Thought Experiments feel rewarding without making learning shallow.",
+    shortDesc: "Gamification, attention-span myths, motivation research, mastery badges, and the browser-only Thought Experiments progress model.",
+    image: `${base}/enhancing-student-engagement.webp`,
+    imageAlt: "Educators' and students' hands arranging discussion cards and puzzle pieces around a glowing learning idea.",
+    accent: C.coral,
+  },
   "async-engagement": {
     id: "async-engagement",
     title: "Asynchronous Learning Engagement",
@@ -108,7 +118,7 @@ export const EDUCATOR_RESOURCE_GROUPS = [
     kicker: "Design for Participation",
     desc: "Build learning experiences that hold attention across classroom, online, asynchronous, audio, and video settings.",
     accent: C.gold,
-    ids: ["enhancing-engagement", "async-engagement", "av-resources"],
+    ids: ["enhancing-engagement", "gamification-in-education", "async-engagement", "av-resources"],
   },
   {
     label: "School Leadership & Performance",

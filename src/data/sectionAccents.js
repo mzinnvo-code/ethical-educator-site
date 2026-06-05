@@ -46,6 +46,7 @@ const SECTION_RULES = [
   { id: "teaching-feedback", accent: C.gold, label: "For Educators" },
   { id: "enhancing-feedback", accent: C.gold, label: "For Educators" },
   { id: "enhancing-engagement", accent: C.gold, label: "For Educators" },
+  { id: "gamification-in-education", accent: C.gold, label: "For Educators" },
   { id: "async-engagement", accent: C.gold, label: "For Educators" },
   { id: "av-resources", accent: C.gold, label: "For Educators" },
   { id: "quality-leadership", accent: C.gold, label: "For Educators" },
