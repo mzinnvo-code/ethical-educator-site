@@ -16,7 +16,7 @@ test("grade-band intro comic renders at the wide page-container level", () => {
   );
 });
 
-test("grade-band Ari intro hands off to Ari's Goal Tracker before browsing experiments", () => {
+test("6-8 Ari intro hands off to Ari's Goal Tracker before browsing experiments", () => {
   const source = readFileSync("src/pages/thought-experiments/GradePage.jsx", "utf8");
 
   const introRenderIndex = source.indexOf("<IntroComicStrip comic={introComic} />");
@@ -24,6 +24,8 @@ test("grade-band Ari intro hands off to Ari's Goal Tracker before browsing exper
   const narrowWrapperIndex = source.indexOf("<Narrow>");
   const browseDividerIndex = source.indexOf("<Divider label=\"Browse the bank\" />");
 
+  assert.match(source, /const showGoalTracker = band === "6-8"/);
+  assert.match(source, /!\s*active && showGoalTracker/);
   assert.ok(trackerRenderIndex > introRenderIndex, "Goal tracker should be introduced after Ari's comic.");
   assert.ok(trackerRenderIndex < narrowWrapperIndex, "Goal tracker should render at comic width before the narrow experiment-bank wrapper.");
   assert.ok(trackerRenderIndex < browseDividerIndex, "Goal tracker should appear before the experiment bank.");

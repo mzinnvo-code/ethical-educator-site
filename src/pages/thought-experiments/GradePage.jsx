@@ -131,6 +131,7 @@ export default function GradePage({
     : preExperiments;
   const introComic = introComicKey ? getIntroComic(introComicKey) : null;
   const isDeepfakeActive = active?.id === "deepfake-election" && mode === "story";
+  const showGoalTracker = band === "6-8";
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -161,7 +162,7 @@ export default function GradePage({
           <IntroComicStrip comic={introComic} />
         )}
 
-        {!active && (
+        {!active && showGoalTracker && (
           <div
             className="thought-progress-wide-wrap"
             style={{
