@@ -5,6 +5,7 @@ import {
   Divider, ContinueExploring,
 } from "../../components/shared.jsx";
 import EducatorResourceNav from "../../components/EducatorResourceNav.jsx";
+import GamificationAriVisual from "../../components/GamificationAriVisual.jsx";
 import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import { EDUCATOR_RESOURCES, educatorLink } from "../../data/educatorResources.js";
 import { getExperimentsByGrade } from "../../data/experiments.js";
@@ -77,6 +78,7 @@ export default function GamificationInEducation({ navigate }) {
           image={resource.image}
           imageAlt={resource.imageAlt}
           accent={resource.accent}
+          visual={<GamificationAriVisual accent={resource.accent} />}
         />
         <EducatorResourceNav currentId={resource.id} navigate={navigate} />
 

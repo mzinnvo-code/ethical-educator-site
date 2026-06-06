@@ -49,8 +49,8 @@ export const EDUCATOR_RESOURCES = {
     sectionLabel: "For Educators · Student Engagement",
     desc: "A research-backed guide to gamification, attention spans, student engagement, and how gameful design can make Thought Experiments feel rewarding without making learning shallow.",
     shortDesc: "Gamification, attention-span myths, motivation research, mastery badges, and the browser-only Thought Experiments progress model.",
-    image: `${base}/enhancing-student-engagement.webp`,
-    imageAlt: "Educators' and students' hands arranging discussion cards and puzzle pieces around a glowing learning idea.",
+    image: `${base}/gamification-in-education.webp`,
+    imageAlt: "Ari studies at a gameful learning desk with mastery badges, feedback meters, and a glowing progress screen.",
     accent: C.coral,
   },
   "async-engagement": {

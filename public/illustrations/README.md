@@ -79,6 +79,7 @@ These generated assets live in `public/illustrations/educators/` and are wired t
 | `effective-academic-feedback.webp` | Annotated student work, red pen, rubrics, sticky notes, and teacher laptop |
 | `enhancing-academic-feedback.webp` | Multimodal feedback system with rubrics, revision bridge, and assessment tools |
 | `enhancing-student-engagement.webp` | Collaborative active-learning table with discussion cards and puzzle pieces |
+| `gamification-in-education.webp` | 16-bit Ari learning at a gameful feedback desk with mastery badges and progress cues |
 | `asynchronous-learning-engagement.webp` | Online course workspace with modular learning path and instructor presence cues |
 | `av-resources-online-teaching.webp` | Camera, microphone, headphones, video panes, and accessibility cues |
 | `quality-leadership-instruction.webp` | School improvement map, compass, model school, and strategy tiles |
