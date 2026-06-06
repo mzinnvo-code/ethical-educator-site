@@ -3,6 +3,7 @@ import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, TopicCard, ContinueExploring,
 } from "../../components/shared.jsx";
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
+import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import { ELEMENTARY_GRADES } from "./ElementaryGrade.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
@@ -18,6 +19,14 @@ function getGradeImage(gradeId) {
   const [firstExperiment] = getExperimentsByElementaryGrade(gradeId);
   return getSceneIllustration(firstExperiment) || getFeatureIllustration("thought-experiments/k-5");
 }
+
+const trackerExperimentIds = [
+  ...new Set(
+    ELEMENTARY_GRADES.flatMap((grade) => getExperimentsByElementaryGrade(grade.id))
+      .filter((experiment) => !experiment.customLayout)
+      .map((experiment) => experiment.id),
+  ),
+];
 
 export default function K5({ navigate }) {
   return (
@@ -37,6 +46,21 @@ export default function K5({ navigate }) {
         </FadeIn>
 
         <IntroComicStrip comic={getIntroComic("thought-experiments/k-5")} />
+
+        <div
+          className="thought-progress-wide-wrap"
+          style={{ maxWidth: 1080, margin: "18px auto 28px" }}
+        >
+          <ThoughtProgressPanel
+            variant="intro"
+            trackerTheme="k5"
+            badgeSetId="k5"
+            title="Ari's Wonder Workshop"
+            accent={C.coral}
+            experimentIds={trackerExperimentIds}
+            achievementIds={[]}
+          />
+        </div>
 
         <Narrow>
           <FadeIn>

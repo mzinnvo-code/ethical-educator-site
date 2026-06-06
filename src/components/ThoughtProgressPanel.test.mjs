@@ -4,7 +4,7 @@ import test from "node:test";
 import sharp from "sharp";
 
 import * as deepfakeGameAssets from "../data/deepfakeGameAssets.js";
-import { BADGES } from "../lib/thoughtProgress.js";
+import { BADGES, K5_BADGES } from "../lib/thoughtProgress.js";
 
 const {
   MASTERY_BADGE_ASSETS,
@@ -14,6 +14,12 @@ const {
   PROGRESS_ROOM_BACKDROPS,
   PROGRESS_ROOM_DOOR_ASSETS,
   PROGRESS_ROOM_STAT_ASSETS,
+  K5_BRAIN_PROGRESS_ASSETS,
+  K5_MASTERY_BADGE_ASSETS,
+  K5_PROGRESS_ROOM_ARI_INVITE_FRAMES,
+  K5_PROGRESS_ROOM_BACKDROPS,
+  K5_PROGRESS_ROOM_DOOR_ASSETS,
+  K5_PROGRESS_ROOM_STAT_ASSETS,
 } = deepfakeGameAssets;
 
 function webpDimensions(path) {
@@ -403,6 +409,56 @@ test("ThoughtProgressPanel intro keeps rewards out of the main grade page by def
   assert.match(source, /ProgressRoomModal/);
   assert.doesNotMatch(source, /\{\(isFull \|\| isIntro\) && \(\s*<MasteryBadgeTrophyRoom/);
   assert.doesNotMatch(source, /\{\(isFull \|\| isIntro\) && \(\s*<GameAchievementsSection/);
+});
+
+test("ThoughtProgressPanel supports a K-5 Wonder Workshop skin without showing game achievements", () => {
+  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+
+  assert.match(source, /TRACKER_THEMES/);
+  assert.match(source, /trackerTheme = "middle"/);
+  assert.match(source, /badgeSetId = "middle"/);
+  assert.match(source, /Ari's Wonder Workshop/);
+  assert.match(source, /Your thinking lights are turning on/);
+  assert.match(source, /Open the workshop to see what you.ve earned/);
+  assert.match(source, /showAchievementsTab/);
+  assert.match(source, /theme\.showAchievementsTab/);
+  assert.match(source, /K5_PROGRESS_ROOM_ARI_INVITE_FRAMES/);
+  assert.match(source, /K5_PROGRESS_ROOM_DOOR_ASSETS/);
+  assert.match(source, /K5_BRAIN_PROGRESS_ASSETS/);
+  assert.match(source, /getBadgeStatus\(progress, \{ badgeSetId, experimentIds \}\)/);
+});
+
+test("K-5 Wonder Workshop asset registries reference project-local bitmap art", () => {
+  assert.equal(K5_BRAIN_PROGRESS_ASSETS.length, 6);
+  assert.equal(K5_PROGRESS_ROOM_BACKDROPS.length, 5);
+  assert.equal(K5_PROGRESS_ROOM_ARI_INVITE_FRAMES.length >= 12, true);
+  assert.deepEqual(Object.keys(K5_PROGRESS_ROOM_DOOR_ASSETS).sort(), ["closed", "crack", "glow", "open"]);
+  assert.deepEqual(Object.keys(K5_PROGRESS_ROOM_STAT_ASSETS).sort(), ["badges", "brain", "finished", "skills"]);
+  assert.deepEqual(Object.keys(K5_MASTERY_BADGE_ASSETS).sort(), K5_BADGES.map((badge) => badge.id).sort());
+
+  for (const [index, src] of K5_BRAIN_PROGRESS_ASSETS.entries()) {
+    assert.match(src, /progress-brain-k5\/wonder-light-\d\.webp$/);
+    assert.equal(existsSync(`public${src}`), true, `K-5 brain/light state ${index} should exist`);
+    const { width, height } = webpDimensions(`public${src}`);
+    assert.equal(width, 260, `K-5 brain/light state ${index} width`);
+    assert.equal(height, 190, `K-5 brain/light state ${index} height`);
+  }
+
+  for (const [index, src] of K5_PROGRESS_ROOM_BACKDROPS.entries()) {
+    assert.match(src, /progress-room-k5\/workshop-room-\d\.webp$/);
+    assert.equal(existsSync(`public${src}`), true, `K-5 workshop room ${index} should exist`);
+    const { width, height } = webpDimensions(`public${src}`);
+    assert.equal(width, 1280, `K-5 workshop room ${index} width`);
+    assert.equal(height, 720, `K-5 workshop room ${index} height`);
+  }
+
+  for (const [id, src] of Object.entries(K5_MASTERY_BADGE_ASSETS)) {
+    assert.match(src, /progress-badges-k5\/badge-.+\.webp$/);
+    assert.equal(existsSync(`public${src}`), true, `${id} K-5 badge art should exist`);
+    const { width, height } = webpDimensions(`public${src}`);
+    assert.equal(width, 220, `${id} K-5 badge width`);
+    assert.equal(height, 220, `${id} K-5 badge height`);
+  }
 });
 
 test("ThoughtProgressPanel keeps HUD compact while reserving full criteria for intro and full variants", () => {

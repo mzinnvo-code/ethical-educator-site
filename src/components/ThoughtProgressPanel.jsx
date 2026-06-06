@@ -2,6 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   BRAIN_PROGRESS_ASSETS,
   DEEPFAKE_GAME_ASSETS,
+  K5_BRAIN_PROGRESS_ASSETS,
+  K5_MASTERY_BADGE_ASSETS,
+  K5_PROGRESS_ROOM_ARI_INVITE_ASSETS,
+  K5_PROGRESS_ROOM_ARI_INVITE_FRAMES,
+  K5_PROGRESS_ROOM_BACKDROPS,
+  K5_PROGRESS_ROOM_DOOR_ASSETS,
+  K5_PROGRESS_ROOM_STAT_ASSETS,
   MASTERY_BADGE_ASSETS,
   PROGRESS_ROOM_ARI_INVITE_ASSETS,
   PROGRESS_ROOM_ARI_INVITE_FRAMES,
@@ -39,6 +46,95 @@ const roomSlots = [
   { id: "topic-wanderer", left: "82%", top: "49%" },
   { id: "consistent-thinker", left: "50%", top: "32%" },
 ];
+
+const k5RoomSlots = [
+  { id: "k5-first-wonder", left: "18%", top: "64%" },
+  { id: "k5-story-explorer", left: "31%", top: "50%" },
+  { id: "k5-kind-thinker", left: "43%", top: "64%" },
+  { id: "k5-question-asker", left: "55%", top: "48%" },
+  { id: "k5-rule-helper", left: "68%", top: "63%" },
+  { id: "k5-try-again-explorer", left: "79%", top: "47%" },
+  { id: "k5-topic-trailblazer", left: "50%", top: "31%" },
+];
+
+const TRACKER_THEMES = {
+  middle: {
+    key: "middle",
+    eyebrow: "Ari's progress map",
+    defaultTitle: "Ari's Goal Tracker",
+    introCopy: "Ari is watching for the thinking moves that make your reasoning stronger.",
+    fullCopy: "Finish dilemmas, practice verification, save reflections, and light up the brain network one careful move at a time.",
+    nextLabel: "Next goal",
+    hudLabel: "Ari's Goal Tracker",
+    hudSkillLabel: "Deepfake skills earned",
+    modalEyebrow: "Ari's Goal Tracker",
+    modalTitle: "Progress Room",
+    modalCopy: "Your thinking room is starting to light up. The more carefully you test ideas, check evidence, and explain your choices, the more this room fills in.",
+    invitationEyebrow: "Ari left you a room key",
+    invitationCopy: "Your room is lighting up.",
+    invitationCounts: ({ earnedBadges, totalBadges, earnedAchievements, totalAchievements }) => (
+      `${earnedBadges.length}/${totalBadges} trophies · ${earnedAchievements.length}/${totalAchievements} skills. Open the room to see what you've unlocked.`
+    ),
+    doorLabel: "Open Progress Room",
+    roomReadyLabel: "Room ready",
+    showAchievementsTab: true,
+    roomSlots,
+    assets: {
+      brainProgress: BRAIN_PROGRESS_ASSETS,
+      badges: MASTERY_BADGE_ASSETS,
+      roomBackdrops: PROGRESS_ROOM_BACKDROPS,
+      ariFrames: PROGRESS_ROOM_ARI_INVITE_FRAMES,
+      ariAssets: PROGRESS_ROOM_ARI_INVITE_ASSETS,
+      ariSequence: PROGRESS_ROOM_ARI_INVITE_SEQUENCE,
+      door: PROGRESS_ROOM_DOOR_ASSETS,
+      stats: PROGRESS_ROOM_STAT_ASSETS,
+    },
+    stats: ({ summary, earnedBadges, earnedAchievements, achievements, brain }) => [
+      { label: "Done", value: summary.completedExperiments, color: C.teal, icon: "finished" },
+      { label: "Trophies", value: earnedBadges.length, color: C.gold, icon: "badges" },
+      { label: "Skills", value: `${earnedAchievements.length}/${achievements.length}`, color: C.coral, icon: "skills" },
+      { label: "Brain", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.ocean, icon: "brain" },
+    ],
+  },
+  k5: {
+    key: "k5",
+    eyebrow: "Ari's Wonder Workshop",
+    defaultTitle: "Ari's Wonder Workshop",
+    introCopy: "Your thinking lights are turning on as you try stories, ask questions, and help classmates think kindly.",
+    fullCopy: "Try stories, explain your choices, ask good questions, and light up the Wonder Workshop one careful idea at a time.",
+    nextLabel: "Next spark",
+    hudLabel: "Ari's Wonder Workshop",
+    hudSkillLabel: "wonder skills earned",
+    modalEyebrow: "Ari's Wonder Workshop",
+    modalTitle: "Wonder Workshop",
+    modalCopy: "Your thinking lights are turning on. Each story you finish and each kind thinking move you practice adds more color to the workshop.",
+    invitationEyebrow: "Ari saved you a workshop key",
+    invitationCopy: "Your Wonder Workshop is waking up.",
+    invitationCounts: ({ earnedBadges, totalBadges }) => (
+      `${earnedBadges.length}/${totalBadges} trophies. Open the workshop to see what you've earned.`
+    ),
+    doorLabel: "Open Workshop",
+    roomReadyLabel: "Workshop ready",
+    showAchievementsTab: false,
+    roomSlots: k5RoomSlots,
+    assets: {
+      brainProgress: K5_BRAIN_PROGRESS_ASSETS,
+      badges: K5_MASTERY_BADGE_ASSETS,
+      roomBackdrops: K5_PROGRESS_ROOM_BACKDROPS,
+      ariFrames: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES,
+      ariAssets: K5_PROGRESS_ROOM_ARI_INVITE_ASSETS,
+      ariSequence: PROGRESS_ROOM_ARI_INVITE_SEQUENCE,
+      door: K5_PROGRESS_ROOM_DOOR_ASSETS,
+      stats: K5_PROGRESS_ROOM_STAT_ASSETS,
+    },
+    stats: ({ summary, earnedBadges, brain }) => [
+      { label: "Stories", value: summary.completedExperiments, color: C.teal, icon: "finished" },
+      { label: "Trophies", value: earnedBadges.length, color: C.gold, icon: "badges" },
+      { label: "Tries", value: summary.replayCount, color: C.coral, icon: "skills" },
+      { label: "Lights", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.ocean, icon: "brain" },
+    ],
+  },
+};
 
 const SFX_STORAGE_KEY = "thoughtProgressRoomSfxMuted";
 const DOOR_OPEN_DELAY_MS = 560;
@@ -153,9 +249,10 @@ function PixelAssetFrame({ kind, className, children, size = "medium", earned = 
   );
 }
 
-function BrainProgressIcon({ brain, size = "large" }) {
+function BrainProgressIcon({ brain, size = "large", theme = TRACKER_THEMES.middle }) {
   const index = Math.min(5, Math.max(0, brain.level ? brain.level - 1 : 0));
   const isHud = size === "hud";
+  const brainAssets = theme.assets?.brainProgress || BRAIN_PROGRESS_ASSETS;
   return (
     <div style={{ textAlign: "center", flexShrink: 0 }}>
       <PixelAssetFrame
@@ -165,7 +262,7 @@ function BrainProgressIcon({ brain, size = "large" }) {
         earned={brain.percent >= 100}
       >
         <img
-          src={BRAIN_PROGRESS_ASSETS[index]}
+          src={brainAssets[index]}
           alt={`Pixel brain progress ${brain.percent}% complete`}
           style={{
             width: "100%",
@@ -191,8 +288,8 @@ function BrainProgressIcon({ brain, size = "large" }) {
   );
 }
 
-function PixelTrackerStat({ label, value, color, icon }) {
-  const asset = PROGRESS_ROOM_STAT_ASSETS[icon];
+function PixelTrackerStat({ label, value, color, icon, statAssets = PROGRESS_ROOM_STAT_ASSETS }) {
+  const asset = statAssets[icon];
   return (
     <div
       className="progress-room-pixel-stat"
@@ -232,8 +329,8 @@ function PixelTrackerStat({ label, value, color, icon }) {
   );
 }
 
-function MiniPixelTrackerStat({ label, value, color, icon }) {
-  const asset = PROGRESS_ROOM_STAT_ASSETS[icon];
+function MiniPixelTrackerStat({ label, value, color, icon, statAssets = PROGRESS_ROOM_STAT_ASSETS }) {
+  const asset = statAssets[icon];
   return (
     <div
       className="progress-room-mini-stat"
@@ -449,8 +546,8 @@ function GameAchievementsSection({ achievements, compactCards, accent, sfx }) {
   );
 }
 
-function TrophyBadgeCard({ badge, onOpen, sfx }) {
-  const asset = MASTERY_BADGE_ASSETS[badge.id];
+function TrophyBadgeCard({ badge, onOpen, sfx, theme = TRACKER_THEMES.middle }) {
+  const asset = theme.assets?.badges?.[badge.id] || MASTERY_BADGE_ASSETS[badge.id];
   return (
     <button
       type="button"
@@ -509,9 +606,11 @@ function TrophyBadgeCard({ badge, onOpen, sfx }) {
   );
 }
 
-function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx }) {
+function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_THEMES.middle }) {
   const badgesById = Object.fromEntries(badges.map((badge) => [badge.id, badge]));
-  const backdrop = PROGRESS_ROOM_BACKDROPS[roomTier] || PROGRESS_ROOM_BACKDROPS[0];
+  const roomBackdrops = theme.assets?.roomBackdrops || PROGRESS_ROOM_BACKDROPS;
+  const backdrop = roomBackdrops[roomTier] || roomBackdrops[0];
+  const slots = theme.roomSlots || roomSlots;
   return (
     <div
       data-testid="progress-room-stage"
@@ -537,10 +636,10 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx }) {
           background: "radial-gradient(circle at 50% 38%, rgba(44,211,200,0.12), transparent 34%), linear-gradient(180deg, transparent 52%, rgba(5,12,24,0.32))",
         }}
       />
-      {roomSlots.map((slot) => {
+      {slots.map((slot) => {
         const badge = badgesById[slot.id];
         if (!badge) return null;
-        const asset = MASTERY_BADGE_ASSETS[badge.id];
+        const asset = theme.assets?.badges?.[badge.id] || MASTERY_BADGE_ASSETS[badge.id];
         return (
           <button
             key={slot.id}
@@ -590,7 +689,7 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx }) {
   );
 }
 
-function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx }) {
+function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx, theme = TRACKER_THEMES.middle }) {
   const earnedBadges = badges.filter((badge) => badge.earned);
   return (
     <section
@@ -654,10 +753,10 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           {earnedBadges.length}/{badges.length}
         </span>
       </div>
-      <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} />
+      <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10, marginTop: 12 }}>
         {badges.map((badge) => (
-          <TrophyBadgeCard key={badge.id} badge={badge} onOpen={onOpenBadge} sfx={sfx} />
+          <TrophyBadgeCard key={badge.id} badge={badge} onOpen={onOpenBadge} sfx={sfx} theme={theme} />
         ))}
       </div>
       {selectedBadge && (
@@ -686,11 +785,14 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
   );
 }
 
-function AnimatedAriInvite() {
+function AnimatedAriInvite({ theme = TRACKER_THEMES.middle }) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const sequenceStep = PROGRESS_ROOM_ARI_INVITE_SEQUENCE[activeStepIndex] || PROGRESS_ROOM_ARI_INVITE_SEQUENCE[0];
+  const sequence = theme.assets?.ariSequence || PROGRESS_ROOM_ARI_INVITE_SEQUENCE;
+  const ariFrames = theme.assets?.ariFrames || PROGRESS_ROOM_ARI_INVITE_FRAMES;
+  const ariAssets = theme.assets?.ariAssets || PROGRESS_ROOM_ARI_INVITE_ASSETS;
+  const sequenceStep = sequence[activeStepIndex] || sequence[0];
   const activeFrameIndex = sequenceStep?.frame || 0;
-  const activeFrame = PROGRESS_ROOM_ARI_INVITE_FRAMES[activeFrameIndex] || PROGRESS_ROOM_ARI_INVITE_ASSETS.idle1;
+  const activeFrame = ariFrames[activeFrameIndex] || ariAssets.idle1;
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return undefined;
@@ -700,7 +802,7 @@ function AnimatedAriInvite() {
       return undefined;
     }
     const timer = window.setTimeout(() => {
-      setActiveStepIndex((index) => (index + 1) % PROGRESS_ROOM_ARI_INVITE_SEQUENCE.length);
+      setActiveStepIndex((index) => (index + 1) % sequence.length);
     }, sequenceStep.holdMs);
     return () => window.clearTimeout(timer);
   }, [activeStepIndex, sequenceStep.holdMs]);
@@ -787,12 +889,13 @@ function AnimatedAriInvite() {
   );
 }
 
-function ProgressRoomDoorButton({ onOpen, opening }) {
+function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES.middle }) {
+  const doorAssets = theme.assets?.door || PROGRESS_ROOM_DOOR_ASSETS;
   const doorFrames = [
-    { id: "closed", src: PROGRESS_ROOM_DOOR_ASSETS.closed },
-    { id: "crack", src: PROGRESS_ROOM_DOOR_ASSETS.crack },
-    { id: "open", src: PROGRESS_ROOM_DOOR_ASSETS.open },
-    { id: "glow", src: PROGRESS_ROOM_DOOR_ASSETS.glow },
+    { id: "closed", src: doorAssets.closed },
+    { id: "crack", src: doorAssets.crack },
+    { id: "open", src: doorAssets.open },
+    { id: "glow", src: doorAssets.glow },
   ];
   return (
     <button
@@ -800,7 +903,7 @@ function ProgressRoomDoorButton({ onOpen, opening }) {
       className={`progress-room-door-button ${opening ? "progress-room-door-opening" : ""}`}
       data-testid="progress-room-modal-trigger"
       onClick={onOpen}
-      aria-label="Open Progress Room"
+      aria-label={theme.doorLabel || "Open Progress Room"}
       style={{
         position: "relative",
         display: "grid",
@@ -856,7 +959,7 @@ function ProgressRoomDoorButton({ onOpen, opening }) {
         ))}
       </span>
       <span style={{ color: C.midnight, background: C.gold, borderRadius: 5, padding: "5px 7px", fontSize: "0.68rem", fontWeight: 900, lineHeight: 1.05 }}>
-        Open Progress Room
+        {theme.doorLabel || "Open Progress Room"}
       </span>
       <span
         className="progress-room-ready-caption"
@@ -872,13 +975,13 @@ function ProgressRoomDoorButton({ onOpen, opening }) {
           opacity: 0,
         }}
       >
-        Room ready
+        {theme.roomReadyLabel || "Room ready"}
       </span>
     </button>
   );
 }
 
-function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements, totalAchievements, onOpen, accent, opening }) {
+function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements, totalAchievements, onOpen, accent, opening, theme = TRACKER_THEMES.middle }) {
   return (
     <div
       className="progress-room-invitation"
@@ -905,19 +1008,19 @@ function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements,
         pointerEvents: "none",
         opacity: 0.35,
       }} />
-      <AnimatedAriInvite />
+      <AnimatedAriInvite theme={theme} />
       <div>
         <p className="progress-room-invitation-eyebrow" style={{ color: C.gold, fontSize: "0.68rem", fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>
-          Ari left you a room key
+          {theme.invitationEyebrow}
         </p>
         <p className="progress-room-invitation-copy" style={{ color: C.textPrimary, fontWeight: 900, lineHeight: 1.25, marginBottom: 4 }}>
-          Your room is lighting up.
+          {theme.invitationCopy}
         </p>
         <p className="progress-room-invitation-counts" style={{ color: C.textSecondary, fontSize: "0.78rem", lineHeight: 1.45, margin: 0 }}>
-          {earnedBadges.length}/{totalBadges} trophies · {earnedAchievements.length}/{totalAchievements} skills. Open the room to see what you've unlocked.
+          {theme.invitationCounts({ earnedBadges, totalBadges, earnedAchievements, totalAchievements })}
         </p>
       </div>
-      <ProgressRoomDoorButton onOpen={onOpen} opening={opening} />
+      <ProgressRoomDoorButton onOpen={onOpen} opening={opening} theme={theme} />
     </div>
   );
 }
@@ -957,6 +1060,7 @@ function ProgressRoomModal({
   onOpenBadge,
   selectedBadge,
   sfx,
+  theme = TRACKER_THEMES.middle,
 }) {
   const [activeTab, setActiveTab] = useState("trophies");
   const modalBodyRef = useRef(null);
@@ -964,6 +1068,12 @@ function ProgressRoomModal({
   const roomTier = getProgressRoomTier({ brain, badges, achievements });
   const earnedBadges = badges.filter((badge) => badge.earned);
   const earnedAchievements = achievements.filter((achievement) => achievement.earned);
+  const tabs = [
+    { id: "trophies", label: "Trophy Room", count: `${earnedBadges.length}/${badges.length}` },
+    ...(theme.showAchievementsTab && achievements.length
+      ? [{ id: "achievements", label: "Game Achievements", count: `${earnedAchievements.length}/${achievements.length}` }]
+      : []),
+  ];
 
   useEffect(() => {
     if (!open) return undefined;
@@ -976,8 +1086,8 @@ function ProgressRoomModal({
   }, [open]);
 
   useEffect(() => {
-    if (open) setActiveTab("trophies");
-  }, [open]);
+    if (open || !theme.showAchievementsTab) setActiveTab("trophies");
+  }, [open, theme.showAchievementsTab]);
 
   if (!open) return null;
 
@@ -1096,13 +1206,13 @@ function ProgressRoomModal({
         >
           <div>
             <p style={{ color: accent, fontSize: "0.68rem", fontWeight: 900, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 5 }}>
-              Ari's Goal Tracker
+              {theme.modalEyebrow}
             </p>
             <h2 id="progress-room-title" style={{ color: C.textPrimary, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "1.55rem", lineHeight: 1.15, margin: 0 }}>
-              Progress Room
+              {theme.modalTitle}
             </h2>
             <p style={{ color: C.textSecondary, fontSize: "0.84rem", lineHeight: 1.55, marginTop: 7, maxWidth: 680 }}>
-              Your thinking room is starting to light up. The more carefully you test ideas, check evidence, and explain your choices, the more this room fills in.
+              {theme.modalCopy}
             </p>
           </div>
           <ProgressRoomSoundToggle muted={sfx.muted} onToggle={sfx.toggleMuted} />
@@ -1132,10 +1242,7 @@ function ProgressRoomModal({
             className="progress-room-tabs"
             style={{ display: "flex", gap: 8, flexWrap: "wrap", gridColumn: "1 / -1" }}
           >
-            {[
-              { id: "trophies", label: "Trophy Room", count: `${earnedBadges.length}/${badges.length}` },
-              { id: "achievements", label: "Game Achievements", count: `${earnedAchievements.length}/${achievements.length}` },
-            ].map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
@@ -1179,6 +1286,7 @@ function ProgressRoomModal({
                 selectedBadge={selectedBadge}
                 roomTier={roomTier}
                 sfx={sfx}
+                theme={theme}
               />
             </div>
           ) : (
@@ -1203,19 +1311,32 @@ export default function ThoughtProgressPanel({
   accent = C.gold,
   experimentIds = [],
   achievementIds = ACHIEVEMENT_IDS,
+  trackerTheme = "middle",
+  badgeSetId = "middle",
 }) {
   const { progress, summary, reset, recordEvent } = useThoughtProgress();
+  const theme = TRACKER_THEMES[trackerTheme] || TRACKER_THEMES.middle;
+  const panelTitle = title || theme.defaultTitle;
   const [selectedBadge, setSelectedBadge] = useState(null);
   const [progressRoomOpen, setProgressRoomOpen] = useState(false);
   const [doorOpening, setDoorOpening] = useState(false);
   const previousFocusRef = useRef(null);
   const doorTimerRef = useRef(null);
   const sfx = useProgressRoomSfx();
-  const achievements = getAchievementStatus(progress, achievementIds);
+  const achievements = theme.showAchievementsTab ? getAchievementStatus(progress, achievementIds) : [];
   const brain = getBrainProgress(progress, { experimentIds, achievementIds });
-  const badgeStatus = getBadgeStatus(progress);
+  const badgeStatus = getBadgeStatus(progress, { badgeSetId, experimentIds });
   const earnedBadges = badgeStatus.filter((badge) => badge.earned);
   const earnedAchievements = achievements.filter((achievement) => achievement.earned);
+  const scopedSummary = experimentIds.length
+    ? {
+      ...summary,
+      completedExperiments: experimentIds.filter((id) => progress.experiments[id]?.completed).length,
+      replayCount: experimentIds.reduce((total, id) => total + (progress.experiments[id]?.restarts || 0), 0),
+      totalChoices: experimentIds.reduce((total, id) => total + (progress.experiments[id]?.choiceCount || 0), 0),
+    }
+    : summary;
+  const statItems = theme.stats({ summary: scopedSummary, earnedBadges, earnedAchievements, achievements, brain });
   const isFull = variant === "full";
   const isHud = variant === "hud";
   const isIntro = variant === "intro";
@@ -1286,13 +1407,13 @@ export default function ThoughtProgressPanel({
           boxShadow: "0 10px 30px rgba(0,0,0,0.24)",
         }}
       >
-        <BrainProgressIcon brain={brain} size="hud" />
+          <BrainProgressIcon brain={brain} size="hud" theme={theme} />
         <div style={{ minWidth: 0, overflowWrap: "anywhere" }}>
           <p style={{ color: accent, fontSize: "0.62rem", fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>
-            Ari's Goal Tracker
+            {theme.hudLabel}
           </p>
           <p style={{ color: C.textPrimary, fontSize: "0.78rem", fontWeight: 800, marginBottom: 5 }}>
-            {earnedAchievements.length}/{achievements.length} Deepfake skills earned
+            {earnedAchievements.length}/{achievements.length} {theme.hudSkillLabel}
           </p>
           <p style={{ color: C.textMuted, fontSize: "0.68rem", lineHeight: 1.35 }}>
             Next mission: {hudNextGoalText({ brain, badges: badgeStatus, achievements })}
@@ -1542,7 +1663,7 @@ export default function ThoughtProgressPanel({
               textTransform: "uppercase",
               marginBottom: 5,
             }}>
-              Ari's progress map
+              {theme.eyebrow}
             </p>
             <h3 style={{
               color: C.textPrimary,
@@ -1551,10 +1672,10 @@ export default function ThoughtProgressPanel({
               lineHeight: 1.2,
               margin: 0,
             }}>
-              {title}
+              {panelTitle}
             </h3>
             <p style={{ color: C.textSecondary, fontSize: "0.82rem", lineHeight: 1.5, marginTop: 7 }}>
-              Ari is watching for the thinking moves that make your reasoning stronger.
+              {theme.introCopy}
             </p>
             <p style={{
               color: C.textPrimary,
@@ -1566,7 +1687,7 @@ export default function ThoughtProgressPanel({
               border: `1px solid ${C.teal}30`,
               background: `${C.teal}0e`,
             }}>
-              <strong style={{ color: C.teal }}>Next goal:</strong> {hudNextGoalText({ brain, badges: badgeStatus, achievements })}
+              <strong style={{ color: C.teal }}>{theme.nextLabel}:</strong> {hudNextGoalText({ brain, badges: badgeStatus, achievements })}
             </p>
           </div>
           <div
@@ -1582,15 +1703,21 @@ export default function ThoughtProgressPanel({
               background: "rgba(6,16,29,0.5)",
             }}
           >
-            <BrainProgressIcon brain={brain} size="hud" />
+            <BrainProgressIcon brain={brain} size="hud" theme={theme} />
             <div
               className="thought-progress-intro-stats"
               style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8 }}
             >
-              <MiniPixelTrackerStat label="Done" value={summary.completedExperiments} color={C.teal} icon="finished" />
-              <MiniPixelTrackerStat label="Trophies" value={earnedBadges.length} color={C.gold} icon="badges" />
-              <MiniPixelTrackerStat label="Skills" value={`${earnedAchievements.length}/${achievements.length}`} color={C.coral} icon="skills" />
-              <MiniPixelTrackerStat label="Brain" value={`${brain.completedGoals}/${brain.totalGoals || 0}`} color={C.ocean} icon="brain" />
+              {statItems.map((item) => (
+                <MiniPixelTrackerStat
+                  key={item.label}
+                  label={item.label}
+                  value={item.value}
+                  color={item.color}
+                  icon={item.icon}
+                  statAssets={theme.assets.stats}
+                />
+              ))}
             </div>
           </div>
           <ProgressRoomInvitation
@@ -1601,6 +1728,7 @@ export default function ThoughtProgressPanel({
             onOpen={openProgressRoomDoor}
             accent={accent}
             opening={doorOpening}
+            theme={theme}
           />
         </div>
       ) : (
@@ -1615,7 +1743,7 @@ export default function ThoughtProgressPanel({
                 textTransform: "uppercase",
                 marginBottom: 5,
               }}>
-                Ari's progress map
+                {theme.eyebrow}
               </p>
               <h3 style={{
                 color: C.textPrimary,
@@ -1624,10 +1752,10 @@ export default function ThoughtProgressPanel({
                 lineHeight: 1.2,
                 margin: 0,
               }}>
-                {title}
+                {panelTitle}
               </h3>
               <p style={{ color: C.textSecondary, fontSize: "0.86rem", lineHeight: 1.6, marginTop: 7 }}>
-                Finish dilemmas, practice verification, save reflections, and light up the brain network one careful move at a time.
+                {theme.fullCopy}
               </p>
               <p style={{
                 color: C.textPrimary,
@@ -1639,17 +1767,23 @@ export default function ThoughtProgressPanel({
                 border: `1px solid ${C.teal}30`,
                 background: `${C.teal}0e`,
               }}>
-                <strong style={{ color: C.teal }}>Next goal:</strong> {nextGoalText({ brain, badges: badgeStatus, achievements })}
+                <strong style={{ color: C.teal }}>{theme.nextLabel}:</strong> {nextGoalText({ brain, badges: badgeStatus, achievements })}
               </p>
             </div>
-            <BrainProgressIcon brain={brain} />
+            <BrainProgressIcon brain={brain} theme={theme} />
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10, marginBottom: isFull ? 18 : 12 }}>
-            <PixelTrackerStat label="Finished" value={summary.completedExperiments} color={C.teal} icon="finished" />
-            <PixelTrackerStat label="Badges" value={earnedBadges.length} color={C.gold} icon="badges" />
-            <PixelTrackerStat label="Skills" value={`${earnedAchievements.length}/${achievements.length}`} color={C.coral} icon="skills" />
-            <PixelTrackerStat label="Brain" value={`${brain.completedGoals}/${brain.totalGoals || 0}`} color={C.ocean} icon="brain" />
+            {statItems.map((item) => (
+              <PixelTrackerStat
+                key={item.label}
+                label={item.label}
+                value={item.value}
+                color={item.color}
+                icon={item.icon}
+                statAssets={theme.assets.stats}
+              />
+            ))}
           </div>
 
           {isFull && (
@@ -1669,6 +1803,7 @@ export default function ThoughtProgressPanel({
               onOpen={openProgressRoomDoor}
               accent={accent}
               opening={doorOpening}
+              theme={theme}
             />
           )}
         </>
@@ -1686,6 +1821,7 @@ export default function ThoughtProgressPanel({
           selectedBadge={selectedBadge}
           roomTier={getProgressRoomTier({ brain, badges: badgeStatus, achievements })}
           sfx={sfx}
+          theme={theme}
         />
       )}
 
@@ -1747,6 +1883,7 @@ export default function ThoughtProgressPanel({
         onOpenBadge={openBadge}
         selectedBadge={selectedBadge}
         sfx={sfx}
+        theme={theme}
       />
     </section>
   );

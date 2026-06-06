@@ -75,6 +75,53 @@ export const BADGES = [
   },
 ];
 
+export const K5_BADGES = [
+  {
+    id: "k5-first-wonder",
+    label: "First Wonder",
+    desc: "You finished your first Wonder Workshop story.",
+    criteria: "Finish any K-5 thought experiment story.",
+  },
+  {
+    id: "k5-story-explorer",
+    label: "Story Explorer",
+    desc: "You explored more than one classroom story with Ari.",
+    criteria: "Finish two K-5 thought experiment stories.",
+  },
+  {
+    id: "k5-kind-thinker",
+    label: "Kind Thinker",
+    desc: "You used care, fairness, or kindness to think about someone else.",
+    criteria: "Choose a K-5 path that uses a care, kindness, fairness, or virtue lens.",
+  },
+  {
+    id: "k5-question-asker",
+    label: "Question Asker",
+    desc: "You slowed down and asked what we know, what we need, or how to check.",
+    criteria: "Choose a K-5 path that uses inquiry, evidence, knowledge, or transparency.",
+  },
+  {
+    id: "k5-rule-helper",
+    label: "Rule Helper",
+    desc: "You thought about rules, responsibility, and what helps the group work well.",
+    criteria: "Choose a K-5 path that uses rules, responsibility, duty, fairness, or human judgment.",
+  },
+  {
+    id: "k5-try-again-explorer",
+    label: "Try-Again Explorer",
+    desc: "You tried a story again to see what a different choice might show.",
+    criteria: "Restart a K-5 story after trying a path.",
+  },
+  {
+    id: "k5-topic-trailblazer",
+    label: "Topic Trailblazer",
+    desc: "You explored Wonder Workshop stories across different ideas.",
+    criteria: "Try K-5 thought experiments across three topic areas.",
+  },
+];
+
+export const K5_BADGE_IDS = K5_BADGES.map((badge) => badge.id);
+
 export const ACHIEVEMENTS = [
   {
     id: "source-checker",
@@ -99,7 +146,13 @@ export const ACHIEVEMENTS = [
   },
 ];
 
-const BADGE_BY_ID = Object.fromEntries(BADGES.map((badge) => [badge.id, badge]));
+const BADGE_SETS = {
+  middle: BADGES,
+  k5: K5_BADGES,
+};
+
+const ALL_BADGES = [...BADGES, ...K5_BADGES];
+const BADGE_BY_ID = Object.fromEntries(ALL_BADGES.map((badge) => [badge.id, badge]));
 const ACHIEVEMENT_BY_ID = Object.fromEntries(ACHIEVEMENTS.map((achievement) => [achievement.id, achievement]));
 
 export function createEmptyProgress() {
@@ -368,32 +421,107 @@ export function getProgressSummary(progress) {
   return getProgressSummaryFromSafe(normalizeProgress(progress));
 }
 
-function hasLens(progress, lensSet) {
-  return Object.keys(progress.lenses).some((lens) => lensSet.has(lens));
+function getBadgeSet(badgeSetId = "middle") {
+  return BADGE_SETS[badgeSetId] || BADGES;
 }
 
-function hasCarefulVerifier(progress) {
+function scopedExperiments(safe, { experimentIds = [], gradeBand = null } = {}) {
+  const visible = experimentIds.length ? new Set(experimentIds) : null;
+  return Object.values(safe.experiments).filter((experiment) => {
+    if (visible && !visible.has(experiment.id)) return false;
+    if (!visible && gradeBand && experiment.gradeBand !== gradeBand) return false;
+    return true;
+  });
+}
+
+function getScopedProgressSummaryFromSafe(safe, options = {}) {
+  const experiments = scopedExperiments(safe, options);
+  const lenses = {};
+  const topics = {};
+
+  for (const experiment of experiments) {
+    for (const [lens, count] of Object.entries(experiment.lenses)) {
+      lenses[lens] = (lenses[lens] || 0) + count;
+    }
+    for (const topicId of experiment.topicIds) {
+      topics[topicId] = (topics[topicId] || 0) + 1;
+    }
+  }
+
+  return {
+    completedExperiments: experiments.filter((experiment) => experiment.completed).length,
+    completionAttempts: experiments.reduce((total, experiment) => total + experiment.completionCount, 0),
+    completedStages: experiments.reduce(
+      (total, experiment) => total + Object.values(experiment.stages).filter((stage) => stage?.completed).length,
+      0,
+    ),
+    totalChoices: experiments.reduce((total, experiment) => total + experiment.choiceCount, 0),
+    lensCount: Object.keys(lenses).length,
+    topicCount: Object.keys(topics).length,
+    replayCount: experiments.reduce((total, experiment) => total + experiment.restarts, 0),
+    lenses,
+    topics,
+  };
+}
+
+function hasLens(progress, lensSet, options = {}) {
+  const lenses = options.experimentIds?.length || options.gradeBand
+    ? getScopedProgressSummaryFromSafe(progress, options).lenses
+    : progress.lenses;
+  return Object.keys(lenses).some((lens) => lensSet.has(lens));
+}
+
+function hasCarefulVerifier(progress, options = {}) {
+  if (options.experimentIds?.length && !options.experimentIds.includes("deepfake-election")) return false;
   const deepfake = progress.experiments["deepfake-election"];
   if (!deepfake?.completed) return false;
   return Object.keys(deepfake.lenses).some((lens) => CAREFUL_VERIFIER_LENSES.has(lens));
 }
 
-function getEarnedBadgeMap(safe) {
-  const summary = getProgressSummaryFromSafe(safe);
+const K5_KIND_LENSES = new Set(["care", "kindness", "fairness", "virtue", "stewardship", "loyalty"]);
+const K5_QUESTION_LENSES = new Set(["inquiry", "evidence", "knowledge", "transparency", "epistemic-care"]);
+const K5_RULE_LENSES = new Set(["rule-following", "responsibility", "duty", "fairness", "human-judgment", "procedural"]);
+
+function getEarnedMiddleBadgeMap(safe, options = {}) {
+  const summary = options.experimentIds?.length ? getScopedProgressSummaryFromSafe(safe, options) : getProgressSummaryFromSafe(safe);
   return {
     "first-dilemma": summary.completedExperiments >= 1,
-    "careful-verifier": hasCarefulVerifier(safe),
+    "careful-verifier": hasCarefulVerifier(safe, options),
     "steelman-builder": summary.steelmanSaveCount >= 1,
     "lens-explorer": summary.lensCount >= 3,
     "second-thought": summary.replayCount >= 1,
     "topic-wanderer": summary.topicCount >= 3,
-    "consistent-thinker": hasLens(safe, CONSISTENCY_LENSES),
+    "consistent-thinker": hasLens(safe, CONSISTENCY_LENSES, options),
   };
+}
+
+function getEarnedK5BadgeMap(safe, options = {}) {
+  const scope = {
+    ...options,
+    gradeBand: options.experimentIds?.length ? null : "k-5",
+  };
+  const summary = getScopedProgressSummaryFromSafe(safe, scope);
+  return {
+    "k5-first-wonder": summary.completedExperiments >= 1,
+    "k5-story-explorer": summary.completedExperiments >= 2,
+    "k5-kind-thinker": hasLens(safe, K5_KIND_LENSES, scope),
+    "k5-question-asker": hasLens(safe, K5_QUESTION_LENSES, scope),
+    "k5-rule-helper": hasLens(safe, K5_RULE_LENSES, scope),
+    "k5-try-again-explorer": summary.replayCount >= 1,
+    "k5-topic-trailblazer": summary.topicCount >= 3,
+  };
+}
+
+function getEarnedBadgeMap(safe, options = {}) {
+  return options.badgeSetId === "k5"
+    ? getEarnedK5BadgeMap(safe, options)
+    : getEarnedMiddleBadgeMap(safe, options);
 }
 
 function applyBadgeViewed(progress, badgeId, timestamp) {
   if (!BADGE_BY_ID[badgeId]) return progress;
-  const earnedById = getEarnedBadgeMap(progress);
+  const badgeSetId = K5_BADGE_IDS.includes(badgeId) ? "k5" : "middle";
+  const earnedById = getEarnedBadgeMap(progress, { badgeSetId });
   if (!earnedById[badgeId]) return progress;
   const current = progress.badgeViews[badgeId] || { id: badgeId, earnedAt: timestamp, viewedAt: null };
   progress.badgeViews = {
@@ -408,17 +536,20 @@ function applyBadgeViewed(progress, badgeId, timestamp) {
 }
 
 function syncNewBadgeViews(before, next, timestamp) {
-  const previousEarned = getEarnedBadgeMap(before);
-  const currentEarned = getEarnedBadgeMap(next);
   const updates = { ...next.badgeViews };
 
-  for (const [id, earned] of Object.entries(currentEarned)) {
-    if (!earned || updates[id]) continue;
-    updates[id] = {
-      id,
-      earnedAt: timestamp,
-      viewedAt: previousEarned[id] ? timestamp : null,
-    };
+  for (const badgeSetId of Object.keys(BADGE_SETS)) {
+    const previousEarned = getEarnedBadgeMap(before, { badgeSetId });
+    const currentEarned = getEarnedBadgeMap(next, { badgeSetId });
+
+    for (const [id, earned] of Object.entries(currentEarned)) {
+      if (!earned || updates[id]) continue;
+      updates[id] = {
+        id,
+        earnedAt: timestamp,
+        viewedAt: previousEarned[id] ? timestamp : null,
+      };
+    }
   }
 
   next.badgeViews = updates;
@@ -430,11 +561,14 @@ export function markBadgeViewed(progress, badgeId, timestamp = nowIso()) {
   return normalizeProgress(safe);
 }
 
-export function getBadgeStatus(progress) {
+export function getBadgeStatus(progress, {
+  badgeSetId = "middle",
+  experimentIds = [],
+} = {}) {
   const safe = normalizeProgress(progress);
-  const earnedById = getEarnedBadgeMap(safe);
+  const earnedById = getEarnedBadgeMap(safe, { badgeSetId, experimentIds });
 
-  return BADGES.map((badge) => ({
+  return getBadgeSet(badgeSetId).map((badge) => ({
     ...badge,
     earned: !!earnedById[badge.id],
     earnedAt: safe.badgeViews[badge.id]?.earnedAt || null,

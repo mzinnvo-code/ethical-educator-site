@@ -3,6 +3,8 @@ import test from "node:test";
 
 import {
   ACHIEVEMENTS,
+  K5_BADGE_IDS,
+  K5_BADGES,
   SCHEMA_VERSION,
   STORAGE_KEY,
   createEmptyProgress,
@@ -254,4 +256,72 @@ test("computes grade-scoped brain progress and only reaches 100 percent when exp
 
   assert.equal(complete.percent, 100);
   assert.equal(complete.level, 6);
+});
+
+test("K-5 mastery badges are scoped to K-5 story progress and do not borrow Deepfake criteria", () => {
+  assert.deepEqual(K5_BADGES.map((badge) => badge.label), [
+    "First Wonder",
+    "Story Explorer",
+    "Kind Thinker",
+    "Question Asker",
+    "Rule Helper",
+    "Try-Again Explorer",
+    "Topic Trailblazer",
+  ]);
+  assert.deepEqual(K5_BADGE_IDS, K5_BADGES.map((badge) => badge.id));
+
+  let progress = createEmptyProgress();
+  progress = recordThoughtEvent(progress, {
+    type: "choice_made",
+    experimentId: "magic-toy",
+    gradeBand: "k-5",
+    lens: "care",
+    topicIds: ["friendship"],
+  });
+  progress = recordThoughtEvent(progress, {
+    type: "experiment_completed",
+    experimentId: "magic-toy",
+    gradeBand: "k-5",
+    topicIds: ["friendship"],
+  });
+
+  const k5Status = getBadgeStatus(progress, {
+    badgeSetId: "k5",
+    experimentIds: ["magic-toy", "weather-bot"],
+  });
+  const middleStatus = getBadgeStatus(progress);
+
+  assert.equal(k5Status.find((badge) => badge.id === "k5-first-wonder").earned, true);
+  assert.equal(k5Status.find((badge) => badge.id === "k5-kind-thinker").earned, true);
+  assert.equal(k5Status.find((badge) => badge.id === "k5-story-explorer").earned, false);
+  assert.equal(middleStatus.find((badge) => badge.id === "careful-verifier").earned, false);
+});
+
+test("K-5 badge criteria count only the supplied K-5 experiment scope", () => {
+  let progress = createEmptyProgress();
+  const events = [
+    { type: "choice_made", experimentId: "magic-toy", gradeBand: "k-5", lens: "inquiry", topicIds: ["friendship"] },
+    { type: "experiment_completed", experimentId: "magic-toy", gradeBand: "k-5", topicIds: ["friendship"] },
+    { type: "choice_made", experimentId: "weather-bot", gradeBand: "k-5", lens: "rule-following", topicIds: ["ai-ethics"] },
+    { type: "experiment_completed", experimentId: "weather-bot", gradeBand: "k-5", topicIds: ["ai-ethics"] },
+    { type: "choice_made", experimentId: "deepfake-election", gradeBand: "6-8", lens: "civic-integrity", topicIds: ["justice"] },
+    { type: "experiment_completed", experimentId: "deepfake-election", gradeBand: "6-8", topicIds: ["justice"] },
+    { type: "experiment_restarted", experimentId: "weather-bot", gradeBand: "k-5" },
+  ];
+  for (const event of events) progress = recordThoughtEvent(progress, event);
+
+  const scoped = getBadgeStatus(progress, {
+    badgeSetId: "k5",
+    experimentIds: ["magic-toy", "weather-bot", "classroom-helper"],
+  });
+  const earned = scoped.filter((badge) => badge.earned).map((badge) => badge.id);
+
+  assert.deepEqual(earned, [
+    "k5-first-wonder",
+    "k5-story-explorer",
+    "k5-question-asker",
+    "k5-rule-helper",
+    "k5-try-again-explorer",
+  ]);
+  assert.equal(scoped.find((badge) => badge.id === "k5-topic-trailblazer").earned, false);
 });

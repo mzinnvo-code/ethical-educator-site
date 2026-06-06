@@ -1,6 +1,7 @@
 const ROOT = "/experiment-scenes/deepfake-game";
 const actStampFrames = (stageId) => [1, 2, 3].map((frame) => `${ROOT}/act-stamps/${stageId}-${frame}.webp`);
 const PROGRESS_ROOM_ROOT = "/experiment-scenes/progress-room";
+const K5_PROGRESS_ROOM_ROOT = "/experiment-scenes/progress-room-k5";
 
 export const DEEPFAKE_GAME_ASSETS = {
   backgrounds: {
@@ -137,6 +138,54 @@ export const PROGRESS_ROOM_STAT_ASSETS = {
   badges: `${PROGRESS_ROOM_ROOT}/stat-badges.webp`,
   skills: `${PROGRESS_ROOM_ROOT}/stat-skills.webp`,
   brain: `${PROGRESS_ROOM_ROOT}/stat-brain.webp`,
+};
+
+export const K5_BRAIN_PROGRESS_ASSETS = [
+  "/experiment-scenes/progress-brain-k5/wonder-light-0.webp",
+  "/experiment-scenes/progress-brain-k5/wonder-light-1.webp",
+  "/experiment-scenes/progress-brain-k5/wonder-light-2.webp",
+  "/experiment-scenes/progress-brain-k5/wonder-light-3.webp",
+  "/experiment-scenes/progress-brain-k5/wonder-light-4.webp",
+  "/experiment-scenes/progress-brain-k5/wonder-light-5.webp",
+];
+
+export const K5_MASTERY_BADGE_ASSETS = {
+  "k5-first-wonder": "/experiment-scenes/progress-badges-k5/badge-k5-first-wonder.webp",
+  "k5-story-explorer": "/experiment-scenes/progress-badges-k5/badge-k5-story-explorer.webp",
+  "k5-kind-thinker": "/experiment-scenes/progress-badges-k5/badge-k5-kind-thinker.webp",
+  "k5-question-asker": "/experiment-scenes/progress-badges-k5/badge-k5-question-asker.webp",
+  "k5-rule-helper": "/experiment-scenes/progress-badges-k5/badge-k5-rule-helper.webp",
+  "k5-try-again-explorer": "/experiment-scenes/progress-badges-k5/badge-k5-try-again-explorer.webp",
+  "k5-topic-trailblazer": "/experiment-scenes/progress-badges-k5/badge-k5-topic-trailblazer.webp",
+};
+
+export const K5_PROGRESS_ROOM_BACKDROPS = [0, 1, 2, 3, 4].map((tier) => `${K5_PROGRESS_ROOM_ROOT}/workshop-room-${tier}.webp`);
+
+export const K5_PROGRESS_ROOM_ARI_INVITE_FRAMES = Array.from(
+  { length: 36 },
+  (_, index) => `${K5_PROGRESS_ROOM_ROOT}/ari-invite-${String(index).padStart("2", "0")}.webp`,
+);
+
+export const K5_PROGRESS_ROOM_ARI_INVITE_ASSETS = {
+  idle1: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES[0],
+  blink: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES[2],
+  wave: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES[11],
+  point: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES[16],
+  sparkle: K5_PROGRESS_ROOM_ARI_INVITE_FRAMES[31],
+};
+
+export const K5_PROGRESS_ROOM_DOOR_ASSETS = {
+  closed: `${K5_PROGRESS_ROOM_ROOT}/progress-door-closed.webp`,
+  crack: `${K5_PROGRESS_ROOM_ROOT}/progress-door-crack.webp`,
+  open: `${K5_PROGRESS_ROOM_ROOT}/progress-door-open.webp`,
+  glow: `${K5_PROGRESS_ROOM_ROOT}/progress-door-glow.webp`,
+};
+
+export const K5_PROGRESS_ROOM_STAT_ASSETS = {
+  finished: `${K5_PROGRESS_ROOM_ROOT}/stat-finished.webp`,
+  badges: `${K5_PROGRESS_ROOM_ROOT}/stat-badges.webp`,
+  skills: `${K5_PROGRESS_ROOM_ROOT}/stat-skills.webp`,
+  brain: `${K5_PROGRESS_ROOM_ROOT}/stat-brain.webp`,
 };
 
 export function deepfakeBackgroundForStage(stageId) {
