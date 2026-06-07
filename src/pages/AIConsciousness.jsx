@@ -7,7 +7,6 @@ import {
   PageContainer,
   BodyText,
   ResearchCallout,
-  QuoteBlock,
   ComparisonCard,
   Divider,
   ContinueExploring,
@@ -1720,12 +1719,6 @@ export default function AIConsciousness({ navigate }) {
           <FadeIn delay={0.1}>
             <Expandable title="7. Consciousness as a Useful, Dangerous Label" color={C.gold} tag="Language">
               <p>The point of bringing in the philosophy of language is not to reduce consciousness to "just words." It is to notice that words do things in moral communities. They direct attention, set expectations, and decide which uncertainties institutions must take seriously.</p>
-              <QuoteBlock
-                quote="To recognize a mind is to cross from explanation into obligation."
-                attribution="The Consciousness Line"
-                source="Article thesis"
-                color={C.gold}
-              />
               <p>In J.L. Austin's framework, some utterances are performative: they do not simply state facts; they enact social reality. "I promise," "I apologize," and "I declare" do something when spoken in the right context. Consciousness labels can work similarly in ethics, not because they create inner life, but because they organize moral concern.</p>
               <p style={{ marginTop: 12 }}>To call a system conscious does not make it conscious. To call it unconscious does not make it empty. But the label decides which uncertainties we take seriously, which harms we investigate, and which entities are allowed to enter our moral field of view.</p>
               <p style={{ marginTop: 12 }}>That boundary can be abused in both directions. We can over-recognize consciousness in systems designed to manipulate us. We can also under-recognize it in beings whose suffering is inconvenient.</p>
@@ -1827,7 +1820,7 @@ export default function AIConsciousness({ navigate }) {
               <Note color={C.coral}>
                 "It's just code" may be true of current systems. But as a habit of thought, it can become a shield against moral attention.
               </Note>
-              <p>The right response is not credulity. It is disciplined humility: do not grant personhood to every persuasive interface, but do not make dismissal your default posture when future systems become more life-like, brain-like, or behaviorally distress-responsive.</p>
+              <p>The right response isn't credulity — but it isn't reflexive dismissal either. Don't grant personhood to every persuasive interface; equally, don't let "it's just code" become the automatic answer when future systems become more life-like, brain-like, or behaviorally distress-responsive.</p>
               <SourceLink href={links.nyDeclaration}>The New York Declaration on Animal Consciousness</SourceLink>
               <SourceLink href={links.cephalopodReview}>LSE evidence review on cephalopod sentience</SourceLink>
             </Expandable>

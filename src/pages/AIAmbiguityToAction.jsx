@@ -6,7 +6,6 @@ import {
   PageContainer,
   BodyText,
   ResearchCallout,
-  QuoteBlock,
   ComparisonCard,
   Divider,
   ContinueExploring,
@@ -259,11 +258,6 @@ export default function AIAmbiguityToAction({ navigate }) {
             <Expandable title="1. The slogan does no work" color={C.gold} tag="Foundation" defaultOpen>
               <p>Two teachers in the same building can hold opposite positions, sincerely, under the heading of "uphold ethics." One refuses to give AI-generated feedback because she believes it strips the human relationship out of evaluation. Another routinely uses AI to draft initial comments because she believes withholding faster, more consistent feedback fails her students. Both are appealing to ethics. The slogan settles nothing.</p>
               <p style={{ marginTop: 12 }}>That's not a flaw in either teacher. It's a flaw in the policy that handed them both the same one-line standard and expected the disagreement to resolve itself. The real disagreement isn't about whether to be ethical. It's about which values to prioritize when honest values point in different directions — and how to test those priorities against the cases that will actually walk through the classroom door.</p>
-              <QuoteBlock
-                quote="A school that has agreed to be ethical has not yet agreed on anything."
-                attribution="The article's working premise"
-                color={C.gold}
-              />
             </Expandable>
           </FadeIn>
 

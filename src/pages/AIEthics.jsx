@@ -16,12 +16,12 @@ function EthicsQuiz() {
     {
       q: "A student uses AI to summarize a lesson and then studies the summary deeply. Is this ethical?",
       opts: ["Yes — AI enhanced learning", "No — the student didn't do the work", "It depends on school policy", "Only if the teacher knows"],
-      explanation: "This aligns with using AI as a learning scaffold. The student engaged with material — AI served as a tool, not a replacement for thinking. But the answer depends on what values your school has explicitly committed to. A utilitarian perspective would focus on learning outcomes; a deontological perspective might emphasize the duty of transparency; virtue ethics would ask whether this cultivates intellectual honesty."
+      explanation: "My view: yes — this is a green-zone use. The student still did the thinking; AI replaced the note-taking, not the learning. The frameworks mostly agree here — a utilitarian counts the learning gain, a virtue ethicist sees honest effort — and where one balks, the deontologist worried about undisclosed use, the answer is disclosure, not prohibition. The real test isn't whether AI touched the work. It's whether the student would still understand the lesson with the summary taken away."
     },
     {
       q: "AI grading gives faster, more consistent feedback than a human teacher. Should schools mandate its use?",
       opts: ["Yes — students benefit from speed", "No — human judgment is irreplaceable", "Use both in parallel", "Let teachers decide"],
-      explanation: "A 2025 meta-analysis found moderate positive effects from AI-supported feedback (SMD = 0.45), but Microsoft Research (Oct 2025) cautioned that 'productivity gains from GenAI ≠ learning gains.' NYC's 2026 AI policy prohibits AI-driven decisions on grading (Red zone), while allowing AI as a feedback co-pilot (Green zone with review). Each option above reflects different values: efficiency, irreplaceable human connection, comprehensiveness, or teacher autonomy."
+      explanation: "My view: no — not as a mandate. A 2025 meta-analysis found moderate positive effects from AI-supported feedback (SMD = 0.45), but Microsoft Research (Oct 2025) cautioned that 'productivity gains from GenAI ≠ learning gains,' and NYC's 2026 policy puts AI-driven grading decisions in the Red zone while allowing AI as a review-checked feedback co-pilot (Green zone). 'Use both in parallel' is closest to right — capture the speed, keep a human accountable for the judgment. A mandate gets the order backwards: it makes the tool the decision-maker instead of the teacher."
     },
     {
       q: "An AI perfectly replicates a teacher's personality and teaching style. Should it replace the teacher?",
@@ -642,7 +642,7 @@ export default function AIEthics({ navigate }) {
 
             <FadeIn delay={0.08}>
               <Expandable title="Seven Principles for Ethical AI — Mapped to Philosophical Traditions" color={C.teal} tag="Framework">
-                <p>Rather than adopting a single ethical theory and applying it universally, a pluralistic approach maps each principle to the philosophical tradition that grounds it most naturally. This framework emerged from professional development work with K–12 educators and draws on classical and contemporary moral philosophy.</p>
+                <p>Rather than adopting a single ethical theory and applying it universally, a pluralistic approach maps each principle to a philosophical tradition that grounds it. This framework emerged from professional development work with K–12 educators and draws on classical and contemporary moral philosophy. The pairings below are heuristics, not the only homes for these ideas — privacy has consequentialist and Kantian defenses too, and "human oversight" doesn't belong to Sartre alone. Naming one tradition per principle isn't taxonomy; it's a way to force the commitment into the open instead of leaving "ethics" as a slogan.</p>
 
                 <div style={{ margin: "16px 0" }}>
                   {[
@@ -659,7 +659,7 @@ export default function AIEthics({ navigate }) {
                     { principle: "Human Oversight", tradition: "Existentialist Responsibility (Sartre, de Beauvoir)", color: C.gold,
                       desc: "Humans must retain meaningful decision-making authority over AI. Sartre's insistence that we are 'condemned to be free' — that we cannot abdicate responsibility for our choices — applies directly. Delegating educational judgment to an algorithm is a choice, and educators bear responsibility for making it." },
                     { principle: "Environmental Responsibility", tradition: "Sustainability Ethics", color: C.green || C.teal,
-                      desc: "The computational cost of AI — energy consumption, water usage for cooling data centers, electronic waste — must be weighed against its educational benefits. Training a single large language model can emit as much carbon as five cars over their lifetimes. This is an ethical consideration that belongs in the conversation." },
+                      desc: "The computational cost of AI — energy consumption, water usage for cooling data centers, electronic waste — must be weighed against its educational benefits. Training a single large language model can emit as much carbon as five cars over their lifetimes (Strubell et al., 2019 — an early, much-quoted estimate; the real figure varies enormously by model and has shifted since). This is an ethical consideration that belongs in the conversation." },
                   ].map((item, i) => (
                     <div key={i} style={{
                       background: `${item.color}08`, border: `1px solid ${item.color}25`,
@@ -725,7 +725,7 @@ export default function AIEthics({ navigate }) {
                 <ResearchCallout
                   year="2024"
                   title="Practice Up, Performance Down"
-                  finding="Students using unrestricted AI assistance increased their practice volume by 48–127%. But when tested without AI access, their performance dropped — suggesting the AI was doing the cognitive work, and the students were not building durable understanding."
+                  finding="With AI during practice, students' performance jumped — about 48% with a plain GPT-4 'base' tutor and 127% with a guardrailed 'tutor' version. But once the AI was removed for the test, the base-tutor group scored ~17% lower than peers who never had AI at all (the tutor version's safeguards largely prevented this) — the AI had been doing the cognitive work, not building durable understanding."
                   citation="Bastani et al. (2024)"
                   color={C.coral}
                 />

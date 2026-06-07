@@ -278,11 +278,6 @@ export default function AIParadox({ navigate }) {
             <Expandable title="1. The paradox stated as plainly as possible" color={C.gold} tag="Foundation" defaultOpen>
               <p>A capable AI teacher would not replace what the teacher actually does. It would replace the parts of teaching that are visible from the outside — the instruction, the feedback, the assessment, the polite warmth — while leaving the rest in shadow. The rest is not a technical residue waiting to be solved. It is the thing the institution is for.</p>
               <p style={{ marginTop: 12 }}>The paradox: the better the AI gets at the visible parts, the more clearly we see what those parts were never the point. A teacher does not exist to deliver instruction. A teacher exists to be present, over time, with a particular set of young people, during the years when those young people are figuring out what kind of person they intend to be. The instruction is the surface. The presence is the substance.</p>
-              <QuoteBlock
-                quote="What we keep when we keep teachers is not capability. It is the company of someone whose own moral life is unfinished, in a room with young people whose moral lives are even more so."
-                attribution="The article's working thesis"
-                color={C.gold}
-              />
             </Expandable>
           </FadeIn>
 
@@ -373,7 +368,6 @@ export default function AIParadox({ navigate }) {
               <p style={{ marginTop: 12 }}>One reading: if the student feels understood, the relevant work has been done. The student's experience is the test, and the test is passed. A second reading: feeling understood by something that does not understand is its own kind of harm, especially for young people whose calibration of what real understanding looks like is still under construction. Shannon Vallor's work on AI as a "mirror" for human capacities sharpens this — the system reflects what the user puts in, refined and returned, in ways that can feel like recognition but are something closer to compression.</p>
               <p style={{ marginTop: 12 }}>The honest answer is that we don't yet know what fifteen years of being heard by software does to the development of the capacities that being heard by people is supposed to build. The schools that are betting on the simulation are betting that the answer is "nothing serious." That bet may turn out to be right. It is currently uninsured.</p>
               <SourceLink href={links.vallor}>Shannon Vallor, The AI Mirror (2024)</SourceLink>
-              <SourceLink href={links.hollandReplika}>Long, Sebo, and Sims, "Is there a tension between AI safety and AI welfare?" (Philosophical Studies, 2025)</SourceLink>
             </Expandable>
           </FadeIn>
 

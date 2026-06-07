@@ -257,7 +257,7 @@ export default function PhilosophyEducation({ navigate }) {
 
           <FadeIn delay={0.06}>
             <Expandable title="The Paradigm Shift Demands Philosophical Thinking" color={C.gold} defaultOpen>
-              <p>We stand at the start of the most consequential paradigm shift humanity has ever experienced. AI will soon be capable of performing every task a human worker can perform — including creating text, video, and audio so realistic it cannot be determined to be AI-generated. This reality demands a fundamental rethinking of what education is for.</p>
+              <p>AI is now good enough at generating text, images, audio, and video that the line between human and machine output is blurring fast — and that alone is enough to force a rethinking of what education is for. We don't have to settle how far the technology will go to take the disruption seriously.</p>
 
               <QuoteBlock quote="While AI can do fantastic things, we must ensure it doesn't cause harm to individuals, to communities, to society as a whole." attribution="Sally Kornbluth" source="MIT President" color={C.teal} />
 
@@ -453,8 +453,7 @@ export default function PhilosophyEducation({ navigate }) {
               <p style={{ marginTop: 12 }}>The <strong>research evidence</strong> demonstrates measurable, durable benefits across academic performance, social-emotional development, critical reasoning, and long-term outcomes — with the largest effects precisely in the domains most threatened by AI disruption.</p>
               <p style={{ marginTop: 12 }}>The <strong>technological reality</strong> is accelerating: AI can now generate content indistinguishable from human output, and students are already using these tools without guidance. A <a href="https://www.rand.org/pubs/research_reports/RRA4742-1.html" target="_blank" rel="noopener noreferrer" style={{ color: C.teal }}>RAND study (2025)</a> found 62% of students use AI for homework, with 60% concerned about its impact on their own critical thinking. Students themselves are asking for help navigating this.</p>
               <p style={{ marginTop: 12 }}>The <strong>philosophical tradition</strong> — from Socrates to Dewey to the contemporary researchers cited throughout this site — provides exactly the tools students need. These are not new skills to invent but ancient practices to redeploy in an unprecedented context.</p>
-              <QuoteBlock quote="Philosophy is not an abstract luxury — it is a survival skill for the modern world. While AI may become adept at performing tasks, creating content, and analyzing data, it cannot yet reason ethically, define values, or navigate ambiguity the way a critically trained human can." attribution="Program Rationale" source="" color={C.gold} />
-              <p>By implementing this program, we ensure that our graduates carry forward not just knowledge but <strong>wisdom</strong> — the capacity to think critically, reason ethically, collaborate generously, and lead with values in a world that desperately needs all of these things.</p>
+              <p>By implementing this program, we help graduates carry forward not just knowledge but <strong>wisdom</strong> — the capacity to think critically, reason ethically, collaborate generously, and lead with values. Those capacities get scarcer, not more common, as generated content fills the world.</p>
             </Expandable>
           </FadeIn>
 
