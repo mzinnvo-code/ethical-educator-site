@@ -6,7 +6,6 @@ import {
   PageContainer,
   BodyText,
   ResearchCallout,
-  QuoteBlock,
   ComparisonCard,
   Divider,
   ContinueExploring,
@@ -307,11 +306,6 @@ export default function AIAuthorship({ navigate }) {
             <Expandable title="1. Three reasonable claims, all in conflict" color={C.gold} tag="Foundation" defaultOpen>
               <p>The teacher's claim is about a standard: a B-/C+ writer didn't produce graduate-level rhetoric over a weekend, and accepting the essay implicitly tells the rest of the class that the standard moved. The parent's claim is about fairness: the school never prohibited the tool, and punishing a student under a rule that didn't exist on Monday is exactly the kind of arbitrary authority parents are right to push back on. Alex's claim is about learning: the essay reflects work he genuinely did, even if the work looked like a two-hour back-and-forth with a model rather than four hours alone with a notebook.</p>
               <p style={{ marginTop: 12 }}>None of these is a bad-faith move. The teacher is enforcing a developmental promise — that the grade tracks what the student can do. The parent is enforcing a rule-of-law promise — that consequences require advance notice. The student is enforcing a learning promise — that engagement matters more than the route by which engagement happened. They are all correct, and the system gave them no way to all be correct at the same time.</p>
-              <QuoteBlock
-                quote="The dilemma isn't whether AI was used. It's that the school built no infrastructure for the conversation that follows."
-                attribution="The article's working thesis"
-                color={C.gold}
-              />
             </Expandable>
           </FadeIn>
 
@@ -389,11 +383,6 @@ export default function AIAuthorship({ navigate }) {
             <Expandable title="6. Disclosure as the minimum viable norm" color={C.gold} tag="Framework">
               <p>The simplest and most defensible rule a school can hold is this: AI use is allowed unless an assignment explicitly forbids it, and any AI use must be disclosed. The disclosure can be a short paragraph at the end of the work — what tool, for what purpose, with which prompts. It doesn't require new technology, doesn't require detection, and doesn't require the teacher to play forensic investigator. It does require a culture in which disclosure is the unremarkable default, not the confession that gets you in trouble.</p>
               <p style={{ marginTop: 12 }}>The schools getting this right are pairing the disclosure norm with two commitments. The first: students who disclose AI use honestly are evaluated on their work; they are not punished for the disclosure itself. The second: assignments where AI use would defeat the assignment's purpose are clearly marked as AI-restricted, with the reason explained ("this is a timed in-class essay because I am assessing your ability to think under pressure," not "no AI because cheating is bad"). That pairing changes the incentive structure. Concealment becomes the only path to trouble.</p>
-              <QuoteBlock
-                quote="Disclosure isn't the punishment for using the tool. Concealment is."
-                attribution="The article's working principle"
-                color={C.gold}
-              />
             </Expandable>
           </FadeIn>
 

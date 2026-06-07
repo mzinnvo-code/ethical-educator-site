@@ -38,7 +38,7 @@ export default function QualityLeadership({ navigate }) {
                     { attr: "Empowerment & Collaboration", color: C.gold, desc: "Successful leaders empower their team by delegating responsibilities and promoting autonomy. The result is a collaborative environment where staff feel motivated and accountable, unlocking creativity and innovation rather than compliance." },
                     { attr: "Visionary Leadership", color: C.ocean, desc: "Visionary leaders set a clear vision, communicate it effectively, and unite diverse perspectives toward it. They lead by example — demonstrating commitment to core values rather than just naming them." },
                     { attr: "Emotional Intelligence", color: C.coral, desc: "High emotional intelligence enables leaders to create supportive, empathetic environments. Strong relationships and recognition of achievement boost morale and motivation in ways structural changes cannot." },
-                    { attr: "Resilience", color: C.gold, desc: "Adaptability is non-negotiable in today's education landscape. Leaders must pivot in response to new challenges without abandoning the throughline of the school's mission." },
+                    { attr: "Resilience", color: C.gold, desc: "The work keeps changing — new mandates, new tools, new crises — and leaders have to adjust without losing the throughline of the school's mission. Resilience is holding that line while everything around it moves." },
                   ].map((row, i) => (
                     <div key={i} style={{
                       padding: "12px 16px", margin: "8px 0",
@@ -69,7 +69,7 @@ export default function QualityLeadership({ navigate }) {
                     { style: "Situational Leadership", color: C.coral, desc: "Effective leaders adapt their style based on context and team needs. Acknowledges that personality, career history, and organizational culture all shape what kind of leadership works in a given moment." },
                     { style: "Transformational Leadership", color: C.teal, desc: "Inspiring and motivating followers through idealized influence, inspirational motivation, intellectual stimulation, and individualized consideration. Fosters innovation and empowerment." },
                     { style: "Transformative Leadership", color: C.gold, desc: "Distinct from transformational. Focuses on addressing social injustices and promoting equity within the school system. Inclusive environments that cater to diverse student needs are the explicit goal, not a side effect." },
-                    { style: "Distributed Leadership", color: C.ocean, desc: "Shared leadership responsibilities across the school community — teachers, staff, sometimes students and families. Recognizes that leadership is collective and leverages multiple strengths to achieve school goals." },
+                    { style: "Distributed Leadership", color: C.ocean, desc: "Shared leadership responsibilities across the school community — teachers, staff, sometimes students and families. Recognizes that leadership is collective: the people closest to the work often see it most clearly." },
                   ].map((row, i) => (
                     <div key={i} style={{
                       padding: "10px 14px", margin: "6px 0",
@@ -257,7 +257,7 @@ export default function QualityLeadership({ navigate }) {
                     "Drive continuous improvement at scale",
                   ]} />
                   <ComparisonCard title="Adaptability & Resilience" color={C.coral} items={[
-                    "Pivot quickly to new challenges",
+                    "Adjust course as challenges shift",
                     "Build a growth mindset across the team",
                     "Sustain mission through change",
                   ]} />
