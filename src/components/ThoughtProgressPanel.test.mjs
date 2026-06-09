@@ -306,6 +306,56 @@ test("Wonder dashboard intro variant lays out as one overflow-proof game screen"
   assert.match(source, /hudNextGoalText\(\{ brain, badges, achievements \}\)/);
 });
 
+test("Wonder Workshop room grows: 24 memento shelf slots clear of trophy slots", async () => {
+  const layout = await import("./wonder/workshopLayout.js");
+  const slots = layout.K5_MEMENTO_SLOTS;
+
+  assert.equal(slots.length, 24);
+  const seen = new Set(slots.map((slot) => `${slot.left}|${slot.top}`));
+  assert.equal(seen.size, 24, "memento slots should not overlap each other");
+  for (const slot of slots) {
+    const top = Number.parseFloat(slot.top);
+    assert.ok(top <= 26 || top >= 80, `memento shelf at ${slot.top} must stay clear of the trophy band (31-64%)`);
+  }
+
+  const diff = layout.diffRoomEntrance({
+    seen: { tier: 1, completedIds: ["magic-toy"], badgeCount: 1 },
+    roomTier: 2,
+    completedIds: ["magic-toy", "rude-toy"],
+    badgeCount: 2,
+  });
+  assert.equal(diff.prevTier, 1);
+  assert.deepEqual(diff.newIds, ["rude-toy"]);
+  assert.equal(diff.shouldAnimate, true);
+
+  const same = layout.diffRoomEntrance({
+    seen: { tier: 2, completedIds: ["magic-toy", "rude-toy"], badgeCount: 2 },
+    roomTier: 2,
+    completedIds: ["magic-toy", "rude-toy"],
+    badgeCount: 2,
+  });
+  assert.equal(same.shouldAnimate, false);
+});
+
+test("Wonder Workshop room renders mementos, a lights-on entrance, and a focus trap", () => {
+  const source = readWonderSource();
+
+  assert.match(source, /function MementoSlot/);
+  assert.match(source, /data-testid="wonder-memento-slot"/);
+  assert.match(source, /data-testid="wonder-memento-counter"/);
+  assert.match(source, /data-testid="wonder-memento-detail"/);
+  assert.match(source, /Empty shelf spot: finish/);
+  assert.match(source, /ee:wonder-room-seen:v1/);
+  assert.match(source, /diffRoomEntrance/);
+  assert.match(source, /writeRoomSeen/);
+  assert.match(source, /wonder-room-prev/);
+  assert.match(source, /wonder-memento-pop/);
+  assert.match(source, /const trapFocus/);
+  assert.match(source, /event\.shiftKey && document\.activeElement === first/);
+  assert.match(source, /data-testid="progress-room-stats"/);
+  assert.match(source, /mementoItems=\{mementoItems\}/);
+});
+
 test("Progress Room door and stat assets exist as project-local bitmap UI art", () => {
   assert.deepEqual(Object.keys(PROGRESS_ROOM_DOOR_ASSETS).sort(), ["closed", "crack", "glow", "open"]);
   assert.deepEqual(Object.keys(PROGRESS_ROOM_STAT_ASSETS).sort(), ["badges", "brain", "finished", "skills"]);

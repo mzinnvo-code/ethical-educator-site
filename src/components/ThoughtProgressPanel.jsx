@@ -17,6 +17,7 @@ import {
   roomSlots,
 } from "./wonder/trackerThemes.js";
 import { hudNextGoalText, nextGoalText } from "./wonder/progressText.js";
+import { K5_MEMENTO_SLOTS, diffRoomEntrance, readRoomSeen, writeRoomSeen } from "./wonder/workshopLayout.js";
 import useProgressRoomSfx from "./wonder/useProgressRoomSfx.js";
 import { WONDER_CORE_CSS } from "./wonder/wonderStyles.js";
 import AnimatedAriInvite from "./wonder/AriSprite.jsx";
@@ -360,14 +361,76 @@ function TrophyBadgeCard({ badge, onOpen, sfx, theme = TRACKER_THEMES.middle }) 
   );
 }
 
-function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_THEMES.middle }) {
+function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
+  return (
+    <button
+      type="button"
+      data-testid="wonder-memento-slot"
+      className={`wonder-memento ${completed ? "wonder-memento-earned" : "wonder-memento-empty"} ${isNew ? "wonder-memento-new" : ""}`}
+      onClick={() => onOpen(item, completed)}
+      onPointerEnter={() => sfx?.play("trophyHover")}
+      onFocus={() => sfx?.play("trophyHover")}
+      aria-label={completed
+        ? `Workshop memento: ${item.title} (${item.gradeLabel} story, finished)`
+        : `Empty shelf spot: finish ${item.title} (${item.gradeLabel}) to add this memento`}
+      style={{
+        position: "absolute",
+        zIndex: 3,
+        left: slot.left,
+        top: slot.top,
+        width: "clamp(26px, 3.2vw, 42px)",
+        aspectRatio: "1 / 1",
+        transform: "translate(-50%, -50%)",
+        display: "grid",
+        justifyItems: "center",
+        alignContent: "end",
+        padding: 0,
+        border: "none",
+        background: "transparent",
+        cursor: "pointer",
+        "--pop-delay": `${Math.min(popIndex, 12) * 90}ms`,
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          fontSize: "clamp(15px, 1.9vw, 25px)",
+          lineHeight: 1,
+          filter: completed
+            ? `saturate(1.15) drop-shadow(0 0 7px ${item.accent || C.gold}aa) drop-shadow(0 2px 0 rgba(0,0,0,0.45))`
+            : "grayscale(1) brightness(0.5)",
+          opacity: completed ? 1 : 0.32,
+        }}
+      >
+        {item.emoji}
+      </span>
+      <span
+        aria-hidden="true"
+        style={{
+          width: "84%",
+          height: 5,
+          marginTop: 2,
+          borderTop: completed ? `1px solid ${C.gold}cc` : `1px dotted ${C.textMuted}66`,
+          background: completed
+            ? `linear-gradient(180deg, ${item.accent || C.gold}66, rgba(5,12,24,0.85))`
+            : "rgba(5,12,24,0.55)",
+          boxShadow: completed ? `0 2px 6px rgba(0,0,0,0.45), 0 0 8px ${item.accent || C.gold}33` : "none",
+        }}
+      />
+    </button>
+  );
+}
+
+function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_THEMES.middle, mementos = [], onOpenMemento, entrance = null }) {
   const badgesById = Object.fromEntries(badges.map((badge) => [badge.id, badge]));
   const roomBackdrops = theme.assets?.roomBackdrops || PROGRESS_ROOM_BACKDROPS;
   const backdrop = roomBackdrops[roomTier] || roomBackdrops[0];
+  const prevBackdrop = entrance ? (roomBackdrops[entrance.prevTier] || roomBackdrops[0]) : null;
   const slots = theme.roomSlots || roomSlots;
   return (
     <div
       data-testid="progress-room-stage"
+      className={entrance ? "wonder-room-entrance" : ""}
       style={{
         position: "relative",
         minHeight: 300,
@@ -382,14 +445,43 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
         boxShadow: `0 28px 80px rgba(0,0,0,0.34), inset 0 0 0 1px rgba(255,255,255,0.05)`,
       }}
     >
+      {entrance && prevBackdrop !== backdrop && (
+        <div
+          className="wonder-room-prev"
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `linear-gradient(180deg, rgba(5,12,24,0.08), rgba(5,12,24,0.2)), url(${prevBackdrop})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            imageRendering: "pixelated",
+            zIndex: 1,
+          }}
+        />
+      )}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
+          zIndex: 2,
+          pointerEvents: "none",
           background: "radial-gradient(circle at 50% 38%, rgba(44,211,200,0.12), transparent 34%), linear-gradient(180deg, transparent 52%, rgba(5,12,24,0.32))",
         }}
       />
+      {mementos.map(({ slot, item, completed, isNew }, index) => (
+        <MementoSlot
+          key={item.id}
+          slot={slot}
+          item={item}
+          completed={completed}
+          isNew={isNew}
+          popIndex={mementos.filter((entry, i) => entry.isNew && i < index).length}
+          onOpen={onOpenMemento}
+          sfx={sfx}
+        />
+      ))}
       {slots.map((slot) => {
         const badge = badgesById[slot.id];
         if (!badge) return null;
@@ -406,6 +498,7 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
             aria-label={`${badge.earned ? "Earned" : "Locked"} mastery badge: ${badge.label}`}
             style={{
               position: "absolute",
+              zIndex: 3,
               left: slot.left,
               top: slot.top,
               width: "clamp(54px, 7.4vw, 92px)",
@@ -443,8 +536,9 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
   );
 }
 
-function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx, theme = TRACKER_THEMES.middle }) {
+function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx, theme = TRACKER_THEMES.middle, mementos = [], onOpenMemento, selectedMemento, entrance = null }) {
   const earnedBadges = badges.filter((badge) => badge.earned);
+  const earnedMementos = mementos.filter((memento) => memento.completed);
   return (
     <section
       data-testid="mastery-badge-trophy-room"
@@ -475,9 +569,45 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           border-color: ${C.gold} !important;
           filter: saturate(1.12);
         }
+        .wonder-memento {
+          transition: transform 140ms steps(2, end);
+        }
+        .wonder-memento:hover,
+        .wonder-memento:focus-visible {
+          transform: translate(-50%, -50%) scale(1.18);
+        }
+        .wonder-memento:focus-visible {
+          outline: 2px solid ${C.gold};
+          outline-offset: 2px;
+        }
+        @keyframes wonder-room-prev-fade {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+        .wonder-room-entrance .wonder-room-prev {
+          animation: wonder-room-prev-fade 900ms steps(4, end) 380ms both;
+        }
+        @keyframes wonder-room-flash {
+          0% { filter: brightness(0.72); }
+          55% { filter: brightness(1.22) saturate(1.1); }
+          100% { filter: brightness(1); }
+        }
+        .wonder-room-entrance {
+          animation: wonder-room-flash 1400ms ease 380ms both;
+        }
+        @keyframes wonder-memento-pop {
+          0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+          60% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        .wonder-room-entrance .wonder-memento-new {
+          animation: wonder-memento-pop 460ms steps(3, end) both;
+          animation-delay: calc(900ms + var(--pop-delay, 0ms));
+        }
         @media (prefers-reduced-motion: reduce) {
           .thought-progress-badge-tile,
-          .thought-progress-room-slot {
+          .thought-progress-room-slot,
+          .wonder-memento {
             transition: none;
           }
           .thought-progress-badge-tile:hover {
@@ -486,28 +616,58 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           .thought-progress-room-slot:hover {
             transform: translate(-50%, -50%) !important;
           }
+          .wonder-memento:hover,
+          .wonder-memento:focus-visible {
+            transform: translate(-50%, -50%);
+          }
+          .wonder-room-entrance,
+          .wonder-room-entrance .wonder-room-prev,
+          .wonder-room-entrance .wonder-memento-new {
+            animation: none;
+          }
+          .wonder-room-entrance .wonder-room-prev {
+            opacity: 0;
+          }
         }
       `}</style>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 10 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 10, flexWrap: "wrap" }}>
         <p style={{ color: accent, fontSize: "0.68rem", fontWeight: 900, letterSpacing: "0.13em", textTransform: "uppercase", margin: 0 }}>
           Trophy Room
         </p>
-        <span
-          data-testid="mastery-badge-counter"
-          style={{
-            color: C.textPrimary,
-            fontSize: "0.78rem",
-            fontWeight: 900,
-            border: `1px solid ${C.teal}45`,
-            borderRadius: 999,
-            padding: "4px 8px",
-            background: `${C.teal}12`,
-          }}
-        >
-          {earnedBadges.length}/{badges.length}
+        <span style={{ display: "inline-flex", gap: 8, alignItems: "center" }}>
+          {mementos.length > 0 && (
+            <span
+              data-testid="wonder-memento-counter"
+              style={{
+                color: C.textPrimary,
+                fontSize: "0.78rem",
+                fontWeight: 900,
+                border: `1px solid ${C.gold}45`,
+                borderRadius: 999,
+                padding: "4px 8px",
+                background: `${C.gold}12`,
+              }}
+            >
+              {earnedMementos.length}/{mementos.length} mementos
+            </span>
+          )}
+          <span
+            data-testid="mastery-badge-counter"
+            style={{
+              color: C.textPrimary,
+              fontSize: "0.78rem",
+              fontWeight: 900,
+              border: `1px solid ${C.teal}45`,
+              borderRadius: 999,
+              padding: "4px 8px",
+              background: `${C.teal}12`,
+            }}
+          >
+            {earnedBadges.length}/{badges.length}
+          </span>
         </span>
       </div>
-      <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} />
+      <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} mementos={mementos} onOpenMemento={onOpenMemento} entrance={entrance} />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10, marginTop: 12 }}>
         {badges.map((badge) => (
           <TrophyBadgeCard key={badge.id} badge={badge} onOpen={onOpenBadge} sfx={sfx} theme={theme} />
@@ -533,6 +693,37 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           <p style={{ color: C.textMuted, fontSize: "0.74rem", lineHeight: 1.45 }}>
             <strong style={{ color: C.teal }}>How to unlock:</strong> {selectedBadge.criteria}
           </p>
+        </div>
+      )}
+      {!selectedBadge && selectedMemento && (
+        <div
+          data-testid="wonder-memento-detail"
+          aria-live="polite"
+          style={{
+            marginTop: 12,
+            borderRadius: 8,
+            border: `1px solid ${selectedMemento.completed ? (selectedMemento.item.accent || C.gold) + "66" : C.border}`,
+            background: selectedMemento.completed ? `${C.gold}10` : "rgba(255,255,255,0.025)",
+            padding: "11px 12px",
+            display: "grid",
+            gridTemplateColumns: "34px minmax(0, 1fr)",
+            gap: 10,
+            alignItems: "center",
+          }}
+        >
+          <span aria-hidden="true" style={{ fontSize: 26, lineHeight: 1, filter: selectedMemento.completed ? "none" : "grayscale(1) brightness(0.6)", opacity: selectedMemento.completed ? 1 : 0.5, textAlign: "center" }}>
+            {selectedMemento.item.emoji}
+          </span>
+          <span>
+            <p style={{ color: selectedMemento.completed ? C.gold : C.textPrimary, fontWeight: 900, marginBottom: 3 }}>
+              {selectedMemento.completed ? "Earned for finishing" : "Waiting on the shelf"}: {selectedMemento.item.title}
+            </p>
+            <p style={{ color: C.textSecondary, fontSize: "0.78rem", lineHeight: 1.5, margin: 0 }}>
+              {selectedMemento.completed
+                ? `This little keepsake appeared in the workshop when you finished the ${selectedMemento.item.gradeLabel} story.`
+                : `Play "${selectedMemento.item.title}" in ${selectedMemento.item.gradeLabel} and this spot fills in.`}
+            </p>
+          </span>
         </div>
       )}
     </section>
@@ -619,13 +810,28 @@ function ProgressRoomModal({
   selectedBadge,
   sfx,
   theme = TRACKER_THEMES.middle,
+  statItems = [],
+  mementoItems = [],
+  progress = null,
+  onOpenMemento,
+  selectedMemento,
 }) {
   const [activeTab, setActiveTab] = useState("trophies");
+  const [entrance, setEntrance] = useState(null);
   const modalBodyRef = useRef(null);
   const closeButtonRef = useRef(null);
   const roomTier = getProgressRoomTier({ brain, badges, achievements });
   const earnedBadges = badges.filter((badge) => badge.earned);
   const earnedAchievements = achievements.filter((achievement) => achievement.earned);
+  const completedIds = mementoItems
+    .filter((item) => progress?.experiments?.[item.id]?.completed)
+    .map((item) => item.id);
+  const mementos = mementoItems.map((item, index) => ({
+    slot: K5_MEMENTO_SLOTS[index % K5_MEMENTO_SLOTS.length],
+    item,
+    completed: completedIds.includes(item.id),
+    isNew: Boolean(entrance?.newIds?.includes(item.id)),
+  }));
   const tabs = [
     { id: "trophies", label: "Trophy Room", count: `${earnedBadges.length}/${badges.length}` },
     ...(theme.showAchievementsTab && achievements.length
@@ -643,11 +849,48 @@ function ProgressRoomModal({
     };
   }, [open]);
 
+  // Remember what the room looked like so the next visit can play a
+  // "lights coming on" entrance for anything earned in between.
+  useEffect(() => {
+    if (!open || !mementoItems.length) return undefined;
+    const seen = readRoomSeen();
+    const diff = diffRoomEntrance({ seen, roomTier, completedIds, badgeCount: earnedBadges.length });
+    const reducedMotion = typeof window !== "undefined"
+      && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    setEntrance(diff.shouldAnimate && !reducedMotion ? { prevTier: diff.prevTier, newIds: diff.newIds } : null);
+    return () => {
+      writeRoomSeen({ tier: roomTier, completedIds, badgeCount: earnedBadges.length });
+      setEntrance(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   useEffect(() => {
     if (open || !theme.showAchievementsTab) setActiveTab("trophies");
   }, [open, theme.showAchievementsTab]);
 
   if (!open) return null;
+
+  const trapFocus = (event) => {
+    if (event.key === "Escape") {
+      onClose();
+      return;
+    }
+    if (event.key !== "Tab" || !modalBodyRef.current) return;
+    const focusables = modalBodyRef.current.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   return (
     <div
@@ -656,9 +899,7 @@ function ProgressRoomModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="progress-room-title"
-      onKeyDown={(event) => {
-        if (event.key === "Escape") onClose();
-      }}
+      onKeyDown={trapFocus}
       style={{
         position: "fixed",
         inset: 0,
@@ -837,6 +1078,20 @@ function ProgressRoomModal({
               role="tabpanel"
               aria-labelledby="progress-room-tab-trophies"
             >
+              {statItems.length > 0 && (
+                <div data-testid="progress-room-stats" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10 }}>
+                  {statItems.map((item) => (
+                    <PixelTrackerStat
+                      key={item.label}
+                      label={item.label}
+                      value={item.value}
+                      color={item.color}
+                      icon={item.icon}
+                      statAssets={theme.assets.stats}
+                    />
+                  ))}
+                </div>
+              )}
               <MasteryBadgeTrophyRoom
                 badges={badges}
                 accent={accent}
@@ -845,6 +1100,10 @@ function ProgressRoomModal({
                 roomTier={roomTier}
                 sfx={sfx}
                 theme={theme}
+                mementos={mementos}
+                onOpenMemento={onOpenMemento}
+                selectedMemento={selectedMemento}
+                entrance={entrance}
               />
             </div>
           ) : (
@@ -871,11 +1130,13 @@ export default function ThoughtProgressPanel({
   achievementIds = ACHIEVEMENT_IDS,
   trackerTheme = "middle",
   badgeSetId = "middle",
+  mementoItems = [],
 }) {
   const { progress, summary, reset, recordEvent } = useThoughtProgress();
   const theme = TRACKER_THEMES[trackerTheme] || TRACKER_THEMES.middle;
   const panelTitle = title || theme.defaultTitle;
   const [selectedBadge, setSelectedBadge] = useState(null);
+  const [selectedMemento, setSelectedMemento] = useState(null);
   const [progressRoomOpen, setProgressRoomOpen] = useState(false);
   const [doorOpening, setDoorOpening] = useState(false);
   const previousFocusRef = useRef(null);
@@ -904,9 +1165,16 @@ export default function ThoughtProgressPanel({
   const openBadge = (badge) => {
     sfx.play(badge.isNew ? "newTrophyFanfare" : badge.earned ? "trophyEarned" : "lockedTrophy");
     setSelectedBadge(badge);
+    setSelectedMemento(null);
     if (badge.earned && badge.isNew) {
       recordEvent({ type: "badge_viewed", badgeId: badge.id });
     }
+  };
+
+  const openMemento = (item, completed) => {
+    sfx.play(completed ? "trophyEarned" : "lockedTrophy");
+    setSelectedMemento({ item, completed });
+    setSelectedBadge(null);
   };
 
   const openProgressRoom = () => {
@@ -1193,6 +1461,11 @@ export default function ThoughtProgressPanel({
         selectedBadge={selectedBadge}
         sfx={sfx}
         theme={theme}
+        statItems={statItems}
+        mementoItems={mementoItems}
+        progress={progress}
+        onOpenMemento={openMemento}
+        selectedMemento={selectedMemento}
       />
     </section>
   );

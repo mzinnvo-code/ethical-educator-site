@@ -22,6 +22,15 @@ const trackerExperimentIds = [
   ...new Set(mapZones.flatMap((zone) => zone.experiments.map((experiment) => experiment.id))),
 ];
 
+// Shelf order for the Wonder Workshop mementos: K -> 5, story by story.
+const mementoItems = mapZones.flatMap((zone) => zone.experiments.map((experiment) => ({
+  id: experiment.id,
+  title: experiment.title,
+  emoji: experiment.emoji,
+  gradeLabel: zone.grade.label,
+  accent: zone.grade.accent,
+})));
+
 export default function K5({ navigate }) {
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -53,6 +62,7 @@ export default function K5({ navigate }) {
             accent={C.coral}
             experimentIds={trackerExperimentIds}
             achievementIds={[]}
+            mementoItems={mementoItems}
           />
         </div>
 
