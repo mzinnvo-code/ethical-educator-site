@@ -15,8 +15,8 @@ export function ChoiceBtn({ children, onClick, color=C.teal }) {
   return <button onClick={onClick} onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{ padding:"12px 24px",background:h?`${color}18`:`${color}08`,border:`1px solid ${h?color+"50":color+"25"}`,borderRadius:8,color:C.textPrimary,cursor:"pointer",fontFamily:"'Source Serif 4',Georgia,serif",fontSize:"0.91rem",transition:"all 0.25s",transform:h?"translateY(-1px)":"none",textAlign:"left",lineHeight:1.4 }}>{children}</button>;
 }
 
-export function Shell({ children, animating, color=C.teal }) {
-  return <div style={{ background:`linear-gradient(180deg,${C.bgAlt},${C.bg})`,border:`1px solid ${color}18`,borderRadius:18,padding:"28px 24px",opacity:animating?0.4:1,transform:animating?"scale(0.98)":"scale(1)",transition:"all 0.3s ease" }}>{children}</div>;
+export function Shell({ children, animating, color=C.teal, compact=false }) {
+  return <div style={{ background:`linear-gradient(180deg,${C.bgAlt},${C.bg})`,border:`1px solid ${color}18`,borderRadius:compact?12:18,padding:compact?"18px 18px":"28px 24px",opacity:animating?0.4:1,transform:animating?"scale(0.98)":"scale(1)",transition:"all 0.3s ease" }}>{children}</div>;
 }
 
 export function ResultBox({ children, color=C.gold }) {

@@ -4,9 +4,17 @@ import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider,
   BodyText, ContinueExploring,
 } from "../../components/shared.jsx";
+import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
+import { getExperimentsByGrade } from "../../data/experiments.js";
 import useDecisionJournal, {
   entriesToMarkdown, downloadMarkdown,
 } from "../../hooks/useDecisionJournal.js";
+
+const STUDENT_EXPERIMENT_IDS = [
+  ...getExperimentsByGrade("k-5"),
+  ...getExperimentsByGrade("6-8"),
+  ...getExperimentsByGrade("9-12"),
+].map((experiment) => experiment.id);
 
 const SIBLING_LINKS = [
   { id: "thought-experiments", title: "Hub & explainer", desc: "Back to the library", color: C.teal },
@@ -272,6 +280,10 @@ export default function Journal({ navigate }) {
         </FadeIn>
 
         <Narrow>
+          <FadeIn>
+            <ThoughtProgressPanel variant="full" accent={C.gold} experimentIds={STUDENT_EXPERIMENT_IDS} />
+          </FadeIn>
+
           <Divider label={entries.length ? `${entries.length} ${entries.length === 1 ? "entry" : "entries"}` : "Empty"} />
 
           {entries.length > 0 && (

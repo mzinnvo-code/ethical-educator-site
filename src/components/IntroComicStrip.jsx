@@ -145,7 +145,7 @@ export default function IntroComicStrip({ comic }) {
           border: `1px solid ${accent}35`,
           background: `linear-gradient(135deg, ${accent}10, rgba(18,37,61,0.78))`,
           boxShadow: `0 22px 70px rgba(0,0,0,0.18), 0 0 42px ${accent}10`,
-          overflow: "hidden",
+          overflow: "visible",
         }}
       >
         <div style={{
@@ -153,10 +153,11 @@ export default function IntroComicStrip({ comic }) {
           gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
           minHeight: 310,
         }}>
-          <figure style={{
+          <figure className="intro-comic-art-frame" style={{
             margin: 0,
             position: "relative",
             minHeight: 280,
+            borderRadius: "8px 0 0 8px",
             background: `${accent}10`,
             overflow: "hidden",
           }}>

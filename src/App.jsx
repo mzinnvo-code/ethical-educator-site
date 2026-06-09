@@ -80,6 +80,7 @@ const ForEducators = lazy(() => import("./pages/ForEducators.jsx"));
 const TeachingFeedback = lazy(() => import("./pages/educators/TeachingFeedback.jsx"));
 const EnhancingFeedback = lazy(() => import("./pages/educators/EnhancingFeedback.jsx"));
 const EnhancingEngagement = lazy(() => import("./pages/educators/EnhancingEngagement.jsx"));
+const GamificationInEducation = lazy(() => import("./pages/educators/GamificationInEducation.jsx"));
 const AsyncEngagement = lazy(() => import("./pages/educators/AsyncEngagement.jsx"));
 const AVResources = lazy(() => import("./pages/educators/AVResources.jsx"));
 const QualityLeadership = lazy(() => import("./pages/educators/QualityLeadership.jsx"));
@@ -161,6 +162,7 @@ const PAGE_MAP = {
   "teaching-feedback": TeachingFeedback,
   "enhancing-feedback": EnhancingFeedback,
   "enhancing-engagement": EnhancingEngagement,
+  "gamification-in-education": GamificationInEducation,
   "async-engagement": AsyncEngagement,
   "av-resources": AVResources,
   "quality-leadership": QualityLeadership,
@@ -396,6 +398,12 @@ const PAGE_META = {
     title: "Enhancing Student Engagement — The Examined Classroom",
     description: "Theoretical frameworks and practical models for student engagement: behavioral, cognitive, and emotional dimensions; the 4Cs model; active learning; motivation levers.",
   },
+  "gamification-in-education": {
+    title: "Gamification in Education - The Examined Classroom",
+    description: "A research-backed guide to gamification, attention-span myths, student engagement, mastery badges, and the browser-only Thought Experiments progress model.",
+    datePublished: "2026-06-03",
+    dateModified: "2026-06-03",
+  },
   "async-engagement": {
     title: "Asynchronous Learning Engagement — The Examined Classroom",
     description: "Engagement strategies for online and async settings: course design principles, isolation and time-management challenges, reflective practices, and engagement metrics.",
@@ -621,8 +629,8 @@ export default function App() {
       <style>{`
         :root{--motion-duration:0.3s}
         *{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:'DM Sans',sans-serif;background:${C.bg};color:${C.textSecondary};overflow-x:hidden}
+        html{scroll-behavior:smooth;overflow-y:auto}
+        body{font-family:'DM Sans',sans-serif;background:${C.bg};color:${C.textSecondary}}
         ::selection{background:${C.gold};color:${C.midnight}}
         a{color:${C.gold};text-decoration:none;transition:opacity 0.2s}
         a:hover{opacity:0.8}

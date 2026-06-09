@@ -36,6 +36,7 @@ const TOP_LEVEL_SECTION = {
   "teaching-feedback": "For Educators",
   "enhancing-feedback": "For Educators",
   "enhancing-engagement": "For Educators",
+  "gamification-in-education": "For Educators",
   "async-engagement": "For Educators",
   "av-resources": "For Educators",
   "quality-leadership": "For Educators",
