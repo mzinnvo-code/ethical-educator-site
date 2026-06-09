@@ -232,6 +232,7 @@ export function ElementaryGradePage({ navigate, gradeId }) {
                 onRecordChoice={recordChoice}
                 relatedExperiment={pickRelated(active, experiments)}
                 onPickRelated={openExperiment}
+                onGoToHub={() => { audioBus.stop(); navigate?.("thought-experiments/k-5"); }}
               />
             </div>
           )}

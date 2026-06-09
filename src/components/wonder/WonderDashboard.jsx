@@ -20,6 +20,7 @@ export default function WonderDashboard({
   earnedBadges,
   onOpenDoor,
   doorOpening,
+  celebrate = false,
 }) {
   const sparkLabel = hudNextGoalText({ brain, badges, achievements });
   const sparkHint = nextSparkHint({ brain, badges, achievements });
@@ -27,7 +28,7 @@ export default function WonderDashboard({
   const eyebrow = theme.eyebrow === panelTitle ? "Level up your thinking" : theme.eyebrow;
 
   return (
-    <PixelFrame accent={accent} glow scanlines className="wonder-dashboard">
+    <PixelFrame accent={accent} glow scanlines className={`wonder-dashboard ${celebrate ? "wonder-dashboard-celebrate" : ""}`}>
       <style>{`
         .wonder-dashboard-inner {
           position: relative;
@@ -118,6 +119,36 @@ export default function WonderDashboard({
           from { opacity: 0; transform: translateY(4px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes wonder-cell-flash {
+          0%, 100% { filter: brightness(1); }
+          30%, 70% { filter: brightness(2); box-shadow: 0 0 18px ${C.gold}; }
+        }
+        .wonder-dashboard-celebrate .wonder-lights-cell-newest {
+          animation: wonder-cell-flash 1.1s steps(4, end) 600ms 3;
+        }
+        @keyframes wonder-door-sparkle {
+          0% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+          35% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+          100% { opacity: 0; transform: scale(0.7) rotate(90deg); }
+        }
+        .wonder-dashboard-door-sparkle {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          background: ${C.gold};
+          box-shadow: 0 0 14px ${C.gold};
+          pointer-events: none;
+          opacity: 0;
+        }
+        .wonder-dashboard-celebrate .wonder-dashboard-door-sparkle {
+          animation: wonder-door-sparkle 1.4s steps(5, end) both;
+        }
+        .wonder-dashboard-celebrate .wonder-dashboard-door-sparkle:nth-of-type(2) {
+          animation-delay: 500ms;
+        }
+        .wonder-dashboard-celebrate .wonder-dashboard-door-sparkle:nth-of-type(3) {
+          animation-delay: 1000ms;
+        }
         @media (max-width: 760px) {
           .wonder-dashboard-body { grid-template-columns: minmax(0, 1fr); }
           .wonder-dashboard-door { min-width: 0; }
@@ -130,6 +161,8 @@ export default function WonderDashboard({
         }
         @media (prefers-reduced-motion: reduce) {
           .wonder-dashboard-bubble { animation: none; }
+          .wonder-dashboard-celebrate .wonder-lights-cell-newest,
+          .wonder-dashboard-celebrate .wonder-dashboard-door-sparkle { animation: none; }
         }
       `}</style>
       <div className="wonder-dashboard-inner">
@@ -198,11 +231,18 @@ export default function WonderDashboard({
               </div>
             </div>
           </div>
-          <div className="wonder-dashboard-door">
+          <div className="wonder-dashboard-door" style={{ position: "relative" }}>
             <PixelText as="p" size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.12em", textAlign: "center", maxWidth: 140 }}>
               {theme.invitationEyebrow}
             </PixelText>
             <ProgressRoomDoorButton onOpen={onOpenDoor} opening={doorOpening} theme={theme} size="large" />
+            {celebrate && (
+              <>
+                <span className="wonder-dashboard-door-sparkle" aria-hidden="true" style={{ top: 18, right: 8 }} />
+                <span className="wonder-dashboard-door-sparkle" aria-hidden="true" style={{ top: 64, left: 2 }} />
+                <span className="wonder-dashboard-door-sparkle" aria-hidden="true" style={{ bottom: 26, right: 18 }} />
+              </>
+            )}
           </div>
         </div>
       </div>

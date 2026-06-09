@@ -1131,6 +1131,7 @@ export default function ThoughtProgressPanel({
   trackerTheme = "middle",
   badgeSetId = "middle",
   mementoItems = [],
+  celebrateExperimentId = null,
 }) {
   const { progress, summary, reset, recordEvent } = useThoughtProgress();
   const theme = TRACKER_THEMES[trackerTheme] || TRACKER_THEMES.middle;
@@ -1307,6 +1308,7 @@ export default function ThoughtProgressPanel({
           earnedBadges={earnedBadges}
           onOpenDoor={openProgressRoomDoor}
           doorOpening={doorOpening}
+          celebrate={Boolean(celebrateExperimentId)}
         />
       ) : (
         <>

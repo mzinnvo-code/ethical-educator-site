@@ -18,6 +18,7 @@ export default function AdventureMap({
   navigate,
   onSelectExperiment,
   showZoneHeaders = variant === "full",
+  celebrateExperimentId = null,
 }) {
   const { progress } = useThoughtProgress();
   const band = MAP_BAND[variant] || MAP_BAND.full;
@@ -173,6 +174,15 @@ export default function AdventureMap({
           0%, 100% { box-shadow: 0 0 10px ${C.gold}33, inset 0 0 0 1px ${C.gold}22; }
           50% { box-shadow: 0 0 20px ${C.gold}66, inset 0 0 0 1px ${C.gold}44; }
         }
+        @keyframes wonder-node-celebrate-pop {
+          0% { transform: scale(1); }
+          30% { transform: scale(1.4); }
+          60% { transform: scale(0.94); }
+          100% { transform: scale(1); }
+        }
+        .wonder-map-node-celebrate .wonder-map-tile {
+          animation: wonder-node-celebrate-pop 950ms steps(5, end) 400ms 2, wonder-node-glow 2.6s steps(2, end) infinite;
+        }
         .wonder-map-emoji {
           font-size: ${Math.round(band.tile * 0.46)}px;
           line-height: 1;
@@ -237,6 +247,7 @@ export default function AdventureMap({
         }
         @media (prefers-reduced-motion: reduce) {
           .wonder-map-node.is-done .wonder-map-tile { animation: none; }
+          .wonder-map-node-celebrate .wonder-map-tile { animation: none; }
           .wonder-map-tile { transition: none; }
           .wonder-map-node:hover .wonder-map-tile { transform: none; }
         }
@@ -354,7 +365,7 @@ export default function AdventureMap({
                           style={{ left: `calc(${position.x}% - 2px)`, top: stemTop, height: stemHeight }}
                         />
                         <a
-                          className={`wonder-map-node ${completed ? "is-done" : ""} ${isTopRow ? "is-top" : ""}`}
+                          className={`wonder-map-node ${completed ? "is-done" : ""} ${isTopRow ? "is-top" : ""} ${celebrateExperimentId === experiment.id ? "wonder-map-node-celebrate" : ""}`}
                           style={{ left: `${position.x}%`, top: isTopRow ? tileTop + band.tile : tileTop, pointerEvents: "auto" }}
                           href={`/${zone.grade.route}?experiment=${experiment.id}`}
                           onClick={(event) => handleNodeClick(event, zone, experiment)}

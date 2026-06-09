@@ -356,6 +356,38 @@ test("Wonder Workshop room renders mementos, a lights-on entrance, and a focus t
   assert.match(source, /mementoItems=\{mementoItems\}/);
 });
 
+test("K-5 stories celebrate completion and hand the +1 light back to the hub", () => {
+  const wonderSource = readWonderSource();
+  const scenarioSource = readFileSync("src/components/ScenarioCard.jsx", "utf8");
+  const hubSource = readFileSync("src/pages/thought-experiments/K5.jsx", "utf8");
+
+  // Overlay exists with confetti, trophy banners, and accessible dialog wiring.
+  assert.match(wonderSource, /function CelebrationOverlay/);
+  assert.match(wonderSource, /data-testid="wonder-celebration"/);
+  assert.match(wonderSource, /data-testid="wonder-celebration-trophy"/);
+  assert.match(wonderSource, /wonder-confetti-fall/);
+  assert.match(wonderSource, /\+1 wonder light/);
+  assert.match(wonderSource, /Back to the map/);
+  assert.match(wonderSource, /Play it again/);
+
+  // ScenarioCard diffs progress before/after the completion event, gates the
+  // overlay to kid mode, and guards StrictMode's double effect.
+  assert.match(scenarioSource, /const prev = readThoughtProgress\(\)/);
+  assert.match(scenarioSource, /const next = recordThoughtProgress\(/);
+  assert.match(scenarioSource, /diffCompletion\(prev, next, experiment\.id\)/);
+  assert.match(scenarioSource, /mode !== "kid" \|\| celebratedRef\.current/);
+  assert.match(scenarioSource, /writeCelebration\(\{ experimentId: experiment\.id \}\)/);
+  assert.match(scenarioSource, /onGoToHub=\{onGoToHub\}/);
+
+  // The hub consumes the handoff once and lights the meter + map node.
+  assert.match(wonderSource, /ee:wonder-celebrate:v1/);
+  assert.match(wonderSource, /readAndClearCelebration/);
+  assert.match(hubSource, /readAndClearCelebration\(\)/);
+  assert.match(hubSource, /celebrateExperimentId=\{celebrateExperimentId\}/);
+  assert.match(wonderSource, /wonder-map-node-celebrate/);
+  assert.match(wonderSource, /wonder-cell-flash/);
+});
+
 test("Progress Room door and stat assets exist as project-local bitmap UI art", () => {
   assert.deepEqual(Object.keys(PROGRESS_ROOM_DOOR_ASSETS).sort(), ["closed", "crack", "glow", "open"]);
   assert.deepEqual(Object.keys(PROGRESS_ROOM_STAT_ASSETS).sort(), ["badges", "brain", "finished", "skills"]);

@@ -14,6 +14,9 @@ import DeepfakeGameExperience from "./DeepfakeGameExperience.jsx";
 import { sectionsToSpeech, buildSpeechText as buildReadAloudText } from "../lib/readAloudText.js";
 import audioManifest from "../data/k5AudioManifest.json";
 import { recordThoughtProgress } from "../hooks/useThoughtProgress.js";
+import { readThoughtProgress } from "../lib/thoughtProgress.js";
+import { diffCompletion, writeCelebration } from "./wonder/useCelebration.js";
+import CelebrationOverlay from "./wonder/CelebrationOverlay.jsx";
 
 // For "Hear the choices": look up each option's audio file in the manifest.
 // If every option has an entry, return the ordered list of /audio/... URLs so
@@ -158,6 +161,7 @@ export default function ScenarioCard({
   onRecordChoice,
   relatedExperiment = null,
   onPickRelated = null,
+  onGoToHub = null,
 }) {
   const audio = useAudio();
   const stages = experiment.stages || synthesizeStages(experiment);
@@ -484,7 +488,7 @@ export default function ScenarioCard({
 
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} onGoToHub={onGoToHub}
             relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
         )}
       </Shell>
@@ -528,7 +532,7 @@ export default function ScenarioCard({
             onRestart={handleRestart}
             renderSynthesis={() => (
               <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} onGoToHub={onGoToHub}
                 relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
             )}
           />
@@ -613,7 +617,7 @@ export default function ScenarioCard({
 
             {isSynthesisStage && (
               <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} onGoToHub={onGoToHub}
                 relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
             )}
           </>
@@ -746,7 +750,7 @@ export default function ScenarioCard({
 
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+          onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} onGoToHub={onGoToHub}
             relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
       )}
     </Shell>
@@ -804,24 +808,50 @@ function NextOrFinish({ isLast, accent, onNext, onRestart }) {
   );
 }
 
-function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [], relatedExperiment = null, onPickRelated = null }) {
+function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, mode, stages = [], relatedExperiment = null, onPickRelated = null, onGoToHub = null }) {
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
+  const audio = useAudio();
+  const [celebration, setCelebration] = useState(null);
+  // StrictMode double-invokes this effect in dev; the ref keeps the
+  // celebration (and its sessionStorage handoff) to a single firing.
+  const celebratedRef = useRef(false);
 
   useEffect(() => {
     if (!experiment?.id) return;
-    recordThoughtProgress({
+    const prev = readThoughtProgress();
+    const next = recordThoughtProgress({
       type: "experiment_completed",
       experimentId: experiment.id,
       gradeBand: experiment.gradeBands?.[0] || mode,
       topicIds: experiment.topics || [],
       stageId: stage?.id || "synthesis",
     });
+    if (mode !== "kid" || celebratedRef.current) return;
+    celebratedRef.current = true;
+    const { firstCompletion, newBadges } = diffCompletion(prev, next, experiment.id);
+    setCelebration({ firstCompletion, newBadges });
+    if (firstCompletion) writeCelebration({ experimentId: experiment.id });
   }, [experiment?.id]);
 
   return (
     <div>
+      {celebration && (
+        <CelebrationOverlay
+          experiment={experiment}
+          firstCompletion={celebration.firstCompletion}
+          newBadges={celebration.newBadges}
+          accent={accent}
+          onDismiss={() => setCelebration(null)}
+          onRestart={() => {
+            setCelebration(null);
+            onRestart?.();
+          }}
+          onGoToHub={onGoToHub}
+          playSfx={(cue) => (cue === "trophy-fanfare" ? audio.playReveal() : audio.playChime())}
+        />
+      )}
       {stage.title && (
         <h3 style={{
           fontFamily: "'Source Serif 4', Georgia, serif",

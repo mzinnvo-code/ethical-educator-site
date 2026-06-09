@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { C } from "../../theme.js";
 import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring,
@@ -5,6 +6,7 @@ import {
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import AdventureMap from "../../components/wonder/AdventureMap.jsx";
+import { readAndClearCelebration } from "../../components/wonder/useCelebration.js";
 import { ELEMENTARY_GRADES } from "./ElementaryGrade.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
@@ -32,6 +34,11 @@ const mementoItems = mapZones.flatMap((zone) => zone.experiments.map((experiment
 })));
 
 export default function K5({ navigate }) {
+  // One-time "+1 wonder light" moment: a story page leaves a short-lived
+  // note when a story is first finished; consume it here so the meter and
+  // the matching map node light up exactly once on return.
+  const [celebration] = useState(() => readAndClearCelebration());
+  const celebrateExperimentId = celebration?.experimentId || null;
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
       <PageContainer>
@@ -63,6 +70,7 @@ export default function K5({ navigate }) {
             experimentIds={trackerExperimentIds}
             achievementIds={[]}
             mementoItems={mementoItems}
+            celebrateExperimentId={celebrateExperimentId}
           />
         </div>
 
@@ -80,7 +88,7 @@ export default function K5({ navigate }) {
             </BodyText>
           </FadeIn>
           <div style={{ marginTop: 18, marginBottom: 10 }}>
-            <AdventureMap zones={mapZones} variant="full" navigate={navigate} />
+            <AdventureMap zones={mapZones} variant="full" navigate={navigate} celebrateExperimentId={celebrateExperimentId} />
           </div>
           <p style={{ color: C.textMuted, fontSize: "0.8rem", lineHeight: 1.6, margin: "10px 0 28px" }}>
             Prefer a list? Jump straight to{" "}
