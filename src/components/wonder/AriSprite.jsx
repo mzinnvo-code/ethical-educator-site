@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { C } from "../../theme.js";
 import { TRACKER_THEMES } from "./trackerThemes.js";
 import {
@@ -12,12 +12,35 @@ import {
 // prefers-reduced-motion. Anchored as a portrait, never a floating sprite.
 export default function AnimatedAriInvite({ theme = TRACKER_THEMES.middle, size = 86 }) {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const containerRef = useRef(null);
+  const offscreenRef = useRef(false);
   const sequence = theme.assets?.ariSequence || PROGRESS_ROOM_ARI_INVITE_SEQUENCE;
   const ariFrames = theme.assets?.ariFrames || PROGRESS_ROOM_ARI_INVITE_FRAMES;
   const ariAssets = theme.assets?.ariAssets || PROGRESS_ROOM_ARI_INVITE_ASSETS;
   const sequenceStep = sequence[activeStepIndex] || sequence[0];
   const activeFrameIndex = sequenceStep?.frame || 0;
   const activeFrame = ariFrames[activeFrameIndex] || ariAssets.idle1;
+
+  // 36 frames at ~5fps is cheap, but not free: stop the timer entirely when
+  // the tab is hidden or Ari has scrolled offscreen, and resume on return.
+  useEffect(() => {
+    if (typeof document === "undefined") return undefined;
+    const sync = () => setPaused(document.hidden || offscreenRef.current);
+    document.addEventListener("visibilitychange", sync);
+    let observer = null;
+    if (typeof IntersectionObserver !== "undefined" && containerRef.current) {
+      observer = new IntersectionObserver((entries) => {
+        offscreenRef.current = !entries[0]?.isIntersecting;
+        sync();
+      });
+      observer.observe(containerRef.current);
+    }
+    return () => {
+      document.removeEventListener("visibilitychange", sync);
+      observer?.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return undefined;
@@ -26,15 +49,16 @@ export default function AnimatedAriInvite({ theme = TRACKER_THEMES.middle, size 
       setActiveStepIndex(0);
       return undefined;
     }
-    if (typeof document !== "undefined" && document.hidden) return undefined;
+    if (paused) return undefined;
     const timer = window.setTimeout(() => {
       setActiveStepIndex((index) => (index + 1) % sequence.length);
     }, sequenceStep.holdMs);
     return () => window.clearTimeout(timer);
-  }, [activeStepIndex, sequenceStep.holdMs, sequence.length]);
+  }, [activeStepIndex, sequenceStep.holdMs, sequence.length, paused]);
 
   return (
     <div
+      ref={containerRef}
       className="progress-room-ari-invite-frame"
       aria-hidden="true"
       style={{

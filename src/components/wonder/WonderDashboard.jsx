@@ -4,6 +4,8 @@ import { hudNextGoalText, nextSparkHint } from "./progressText.js";
 import { PixelFrame, PixelPill, PixelText, SegmentBar, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
 import AnimatedAriInvite from "./AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./DoorButton.jsx";
+import useImagePreload from "./useImagePreload.js";
+import { getProgressRoomTier } from "./trackerThemes.js";
 
 // The intro-variant "game screen": one cohesive pixel-framed status panel in
 // place of the old three-box grid. Ari talks, the lights meter shows one cell
@@ -26,6 +28,24 @@ export default function WonderDashboard({
   const sparkHint = nextSparkHint({ brain, badges, achievements });
   const allLit = brain.percent >= 100;
   const eyebrow = theme.eyebrow === panelTitle ? "Level up your thinking" : theme.eyebrow;
+
+  // Warm the first animation frames + the room tiers we're likely to show;
+  // hovering the door warms everything else before the modal can open.
+  const roomTier = getProgressRoomTier({ brain, badges, achievements });
+  const ariFrames = theme.assets?.ariFrames || [];
+  const backdrops = theme.assets?.roomBackdrops || [];
+  const warmRest = useImagePreload(
+    [
+      ...ariFrames.slice(0, 6),
+      backdrops[roomTier],
+      backdrops[Math.min(roomTier + 1, backdrops.length - 1)],
+    ],
+    [
+      ...ariFrames.slice(6),
+      ...Object.values(theme.assets?.door || {}),
+      ...Object.values(theme.assets?.badges || {}),
+    ],
+  );
 
   return (
     <PixelFrame accent={accent} glow scanlines className={`wonder-dashboard ${celebrate ? "wonder-dashboard-celebrate" : ""}`}>
@@ -231,7 +251,7 @@ export default function WonderDashboard({
               </div>
             </div>
           </div>
-          <div className="wonder-dashboard-door" style={{ position: "relative" }}>
+          <div className="wonder-dashboard-door" style={{ position: "relative" }} onPointerEnter={warmRest} onFocus={warmRest}>
             <PixelText as="p" size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.12em", textAlign: "center", maxWidth: 140 }}>
               {theme.invitationEyebrow}
             </PixelText>

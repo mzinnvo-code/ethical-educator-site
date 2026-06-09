@@ -434,7 +434,8 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
       className={entrance ? "wonder-room-entrance" : ""}
       style={{
         position: "relative",
-        minHeight: 300,
+        // Height derives from width via the aspect ratio; a fixed minHeight
+        // here used to force the stage wider than small phone viewports.
         aspectRatio: "16 / 9",
         borderRadius: 10,
         border: `2px solid ${C.gold}35`,
