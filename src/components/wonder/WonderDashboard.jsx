@@ -1,0 +1,211 @@
+import { C } from "../../theme.js";
+import { TRACKER_THEMES } from "./trackerThemes.js";
+import { hudNextGoalText, nextSparkHint } from "./progressText.js";
+import { PixelFrame, PixelPill, PixelText, SegmentBar, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
+import AnimatedAriInvite from "./AriSprite.jsx";
+import { ProgressRoomDoorButton } from "./DoorButton.jsx";
+
+// The intro-variant "game screen": one cohesive pixel-framed status panel in
+// place of the old three-box grid. Ari talks, the lights meter shows one cell
+// per story, and the door is the single call to action. Layout rules live in
+// the scoped <style> block (not inline) so media queries can restack rows
+// without !important fights.
+export default function WonderDashboard({
+  theme = TRACKER_THEMES.middle,
+  accent = C.gold,
+  panelTitle,
+  brain,
+  badges,
+  achievements,
+  earnedBadges,
+  onOpenDoor,
+  doorOpening,
+}) {
+  const sparkLabel = hudNextGoalText({ brain, badges, achievements });
+  const sparkHint = nextSparkHint({ brain, badges, achievements });
+  const allLit = brain.percent >= 100;
+  const eyebrow = theme.eyebrow === panelTitle ? "Level up your thinking" : theme.eyebrow;
+
+  return (
+    <PixelFrame accent={accent} glow scanlines className="wonder-dashboard">
+      <style>{`
+        .wonder-dashboard-inner {
+          position: relative;
+          z-index: 2;
+          display: grid;
+          gap: 12px;
+          padding: 14px 16px 16px;
+        }
+        .wonder-dashboard-header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .wonder-dashboard-body {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 14px;
+          align-items: stretch;
+        }
+        .wonder-dashboard-hero {
+          display: flex;
+          gap: 12px;
+          align-items: flex-end;
+        }
+        .wonder-dashboard-bubble {
+          position: relative;
+          flex: 1 1 auto;
+          min-width: 0;
+          clip-path: ${PIXEL_CLIP_SM};
+          border: 2px solid ${C.teal}55;
+          background: linear-gradient(180deg, ${C.teal}14, rgba(6,16,29,0.88));
+          padding: 10px 12px 11px;
+          animation: wonder-bubble-in 360ms steps(3, end) both;
+        }
+        .wonder-dashboard-bubble-tail {
+          position: absolute;
+          left: -10px;
+          bottom: 22px;
+          width: 0;
+          height: 0;
+        }
+        .wonder-dashboard-bubble-tail::before,
+        .wonder-dashboard-bubble-tail::after {
+          content: "";
+          position: absolute;
+          background: ${C.teal}88;
+        }
+        .wonder-dashboard-bubble-tail::before { left: -6px; top: 0; width: 6px; height: 6px; }
+        .wonder-dashboard-bubble-tail::after { left: 0; top: -4px; width: 6px; height: 14px; background: ${C.teal}55; }
+        .wonder-dashboard-meter {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          clip-path: ${PIXEL_CLIP_SM};
+          border: 2px solid rgba(255,255,255,0.12);
+          background: rgba(5,13,24,0.66);
+          padding: 9px 12px;
+        }
+        .wonder-dashboard-meter-brain {
+          width: clamp(58px, 7vw, 82px);
+          height: auto;
+          flex-shrink: 0;
+          image-rendering: pixelated;
+        }
+        .wonder-dashboard-meter-readout {
+          flex: 1 1 auto;
+          min-width: 0;
+          display: grid;
+          gap: 6px;
+        }
+        .wonder-dashboard-meter-labels {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 10px;
+          white-space: nowrap;
+        }
+        .wonder-dashboard-door {
+          display: grid;
+          align-content: center;
+          justify-items: center;
+          gap: 7px;
+          min-width: 140px;
+        }
+        @keyframes wonder-bubble-in {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 760px) {
+          .wonder-dashboard-body { grid-template-columns: minmax(0, 1fr); }
+          .wonder-dashboard-door { min-width: 0; }
+        }
+        @media (max-width: 430px) {
+          .wonder-dashboard-hero { flex-wrap: wrap; align-items: flex-start; }
+          .wonder-dashboard-bubble { flex-basis: 100%; }
+          .wonder-dashboard-bubble-tail { display: none; }
+          .wonder-dashboard-meter { flex-wrap: wrap; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wonder-dashboard-bubble { animation: none; }
+        }
+      `}</style>
+      <div className="wonder-dashboard-inner">
+        <header className="wonder-dashboard-header">
+          <div style={{ minWidth: 0 }}>
+            <PixelText as="p" size="0.6rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.14em", marginBottom: 4 }}>
+              {eyebrow}
+            </PixelText>
+            <h3 style={{ fontFamily: PIXEL_FONT, fontWeight: 600, color: C.textPrimary, fontSize: "1.34rem", lineHeight: 1.15, margin: 0, textShadow: `0 0 18px ${accent}33` }}>
+              {panelTitle}
+            </h3>
+            <p style={{ color: C.textSecondary, fontSize: "0.8rem", lineHeight: 1.5, marginTop: 5, maxWidth: "58ch" }}>
+              {theme.introCopy}
+            </p>
+          </div>
+          <PixelPill
+            icon={theme.assets?.stats?.badges}
+            label="Trophies"
+            value={`${earnedBadges.length}/${badges.length}`}
+            color={C.gold}
+            title={`${earnedBadges.length} of ${badges.length} trophies earned`}
+          />
+        </header>
+        <div className="wonder-dashboard-body">
+          <div style={{ display: "grid", gap: 12, minWidth: 0 }}>
+            <div className="wonder-dashboard-hero">
+              <AnimatedAriInvite theme={theme} size={84} />
+              <div className="wonder-dashboard-bubble" role="status">
+                <span className="wonder-dashboard-bubble-tail" aria-hidden="true" />
+                <PixelText as="p" size="0.62rem" color={allLit ? C.gold : C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 3 }}>
+                  {allLit ? "Workshop fully lit!" : theme.nextLabel}
+                </PixelText>
+                <p style={{ color: C.textPrimary, fontSize: "0.96rem", fontWeight: 800, lineHeight: 1.3, margin: 0 }}>
+                  {allLit ? "You lit every wonder light. Come see the workshop!" : sparkLabel}
+                </p>
+                {!allLit && sparkHint && (
+                  <p style={{ color: C.textSecondary, fontSize: "0.76rem", lineHeight: 1.45, margin: "4px 0 0" }}>
+                    {sparkHint}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="wonder-dashboard-meter">
+              <span className="thought-progress-brain-frame" style={{ display: "block", flexShrink: 0 }}>
+                <img
+                  className="wonder-dashboard-meter-brain"
+                  src={theme.assets.brainProgress[Math.min(5, Math.max(0, brain.level ? brain.level - 1 : 0))]}
+                  alt={`Pixel brain progress ${brain.percent}% complete`}
+                />
+              </span>
+              <div className="wonder-dashboard-meter-readout">
+                <div className="wonder-dashboard-meter-labels">
+                  <PixelText size="0.64rem" color={C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                    {theme.meterLabel}
+                  </PixelText>
+                  <PixelText size="0.86rem" color={allLit ? C.gold : C.textPrimary}>
+                    {brain.completedGoals}/{brain.totalGoals || 0}
+                  </PixelText>
+                </div>
+                <SegmentBar
+                  total={brain.totalGoals || 0}
+                  filled={brain.completedGoals}
+                  color={C.gold}
+                  ariaLabel={`${brain.completedGoals} of ${brain.totalGoals || 0} ${theme.meterLabel.toLowerCase()} lit`}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="wonder-dashboard-door">
+            <PixelText as="p" size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.12em", textAlign: "center", maxWidth: 140 }}>
+              {theme.invitationEyebrow}
+            </PixelText>
+            <ProgressRoomDoorButton onOpen={onOpenDoor} opening={doorOpening} theme={theme} size="large" />
+          </div>
+        </div>
+      </div>
+    </PixelFrame>
+  );
+}

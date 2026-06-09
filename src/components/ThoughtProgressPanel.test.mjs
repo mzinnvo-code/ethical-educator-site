@@ -1,7 +1,20 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 import sharp from "sharp";
+
+// The tracker UI is split across ThoughtProgressPanel.jsx (shell + modal) and
+// src/components/wonder/* (themes, sfx, dashboard, primitives). Source-level
+// assertions read the concatenation so they keep guarding behavior no matter
+// which module a piece lives in.
+function readWonderSource() {
+  const wonderDir = "src/components/wonder";
+  const wonderFiles = readdirSync(wonderDir)
+    .filter((file) => (file.endsWith(".js") || file.endsWith(".jsx")) && !file.endsWith(".test.mjs"))
+    .sort()
+    .map((file) => readFileSync(`${wonderDir}/${file}`, "utf8"));
+  return [readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8"), ...wonderFiles].join("\n");
+}
 
 import * as deepfakeGameAssets from "../data/deepfakeGameAssets.js";
 import { BADGES, K5_BADGES } from "../lib/thoughtProgress.js";
@@ -89,7 +102,7 @@ async function foregroundBounds(path) {
 }
 
 test("ThoughtProgressPanel introduces Ari's Goal Tracker with visible badge criteria", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /Ari's Goal Tracker/);
   assert.match(source, /How to earn/);
@@ -101,7 +114,7 @@ test("ThoughtProgressPanel introduces Ari's Goal Tracker with visible badge crit
 });
 
 test("ThoughtProgressPanel has a reusable Game Achievements section with counters and grouping", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /Game Achievements/);
   assert.doesNotMatch(source, /Deepfake game achievements/);
@@ -114,7 +127,7 @@ test("ThoughtProgressPanel has a reusable Game Achievements section with counter
 });
 
 test("ThoughtProgressPanel moves rewards into an accessible Progress Room modal", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /Open Progress Room/);
   assert.match(source, /data-testid="progress-room-modal-trigger"/);
@@ -133,7 +146,7 @@ test("ThoughtProgressPanel moves rewards into an accessible Progress Room modal"
 });
 
 test("Progress Room copy speaks to students instead of implementation notes", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /Your thinking room is starting to light up/);
   assert.match(source, /Ari left you a room key/);
@@ -147,7 +160,7 @@ test("Progress Room copy speaks to students instead of implementation notes", ()
 });
 
 test("Progress Room invitation uses a smooth Ari frame sequence instead of a plain button", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
   const assetSource = readFileSync("src/data/deepfakeGameAssets.js", "utf8");
 
   assert.match(source, /function AnimatedAriInvite/);
@@ -253,7 +266,7 @@ test("Progress Room invitation Ari sequence uses transitional frames instead of 
 });
 
 test("Progress Room invitation frames Ari as an anchored portrait rather than a floating sprite", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /progress-room-ari-portrait-base/);
   assert.match(source, /progress-room-ari-portrait-shadow/);
@@ -262,17 +275,35 @@ test("Progress Room invitation frames Ari as an anchored portrait rather than a 
   assert.doesNotMatch(source, /progress-room-ari-invite-frame[\s\S]{0,220}placeItems: "center"/);
 });
 
-test("ThoughtProgressPanel intro tracker gives brain and stat art stronger presence without widening overflow", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+test("Wonder dashboard intro variant lays out as one overflow-proof game screen", () => {
+  const source = readWonderSource();
 
-  assert.match(source, /thought-progress-intro-meter \.thought-progress-brain-frame \{\s*width: 106px !important;/);
-  assert.match(source, /gridTemplateColumns: "106px minmax\(0, 1fr\)"/);
-  assert.match(source, /gridTemplateColumns: "34px minmax\(0, 1fr\)"/);
-  assert.match(source, /width: 34,/);
-  assert.match(source, /height: 34,/);
-  assert.match(source, /minmax\(168px, 0\.62fr\) minmax\(334px, 1fr\) minmax\(300px, 1\.02fr\)/);
-  assert.match(source, /thought-progress-intro-stats \.progress-room-mini-stat/);
-  assert.match(source, /thought-progress-intro-stats \.progress-room-mini-stat img/);
+  // One cohesive pixel-framed panel renders the intro variant.
+  assert.match(source, /function WonderDashboard/);
+  assert.match(source, /className="wonder-dashboard-inner"/);
+  assert.match(source, /<WonderDashboard/);
+
+  // Layout rules live in the stylesheet (not inline) so media queries restack
+  // rows without !important overrides.
+  assert.match(source, /\.wonder-dashboard-body \{[\s\S]{0,200}grid-template-columns: minmax\(0, 1fr\) auto;/);
+  assert.match(source, /@media \(max-width: 760px\) \{\s*\.wonder-dashboard-body \{ grid-template-columns: minmax\(0, 1fr\); \}/);
+  assert.doesNotMatch(source, /\.thought-progress-intro-meter/);
+  assert.doesNotMatch(source, /\.thought-progress-intro-stats/);
+  assert.doesNotMatch(source, /minmax\(168px, 0\.62fr\) minmax\(334px, 1fr\) minmax\(300px, 1\.02fr\)/);
+
+  // The brain art scales fluidly (no fixed-width + aspect-ratio collision) and
+  // the percent label can no longer spill out of a fixed column.
+  assert.match(source, /\.wonder-dashboard-meter-brain \{[\s\S]{0,120}width: clamp\([\s\S]{0,80}height: auto;/);
+
+  // The lights meter renders one cell per goal instead of four duplicate stat cards.
+  assert.match(source, /function SegmentBar/);
+  assert.match(source, /repeat\(\$\{safeTotal\}, 1fr\)/);
+  assert.match(source, /wonder-lights-bar/);
+  assert.doesNotMatch(source, /function MiniPixelTrackerStat/);
+
+  // Ari speaks the next quest from the same helper the HUD uses.
+  assert.match(source, /wonder-dashboard-bubble/);
+  assert.match(source, /hudNextGoalText\(\{ brain, badges, achievements \}\)/);
 });
 
 test("Progress Room door and stat assets exist as project-local bitmap UI art", () => {
@@ -297,7 +328,7 @@ test("Progress Room door and stat assets exist as project-local bitmap UI art", 
 });
 
 test("Progress Room sound effects are user-initiated, toggleable, and event scoped", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /function useProgressRoomSfx/);
   assert.match(source, /thoughtProgressRoomSfxMuted/);
@@ -323,7 +354,7 @@ test("Progress Room sound effects are user-initiated, toggleable, and event scop
 });
 
 test("Progress Room door opening respects reduced motion and delays only for the animation", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /const DOOR_OPEN_DELAY_MS = 560/);
   assert.match(source, /window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches/);
@@ -333,7 +364,7 @@ test("Progress Room door opening respects reduced motion and delays only for the
 });
 
 test("Progress Room mobile modal remains internally scrollable while body scroll is locked", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /\.progress-room-shell \{\s*width: 100% !important;\s*height: 100vh !important;\s*max-height: 100vh !important;[\s\S]*overflow-y: auto !important;/);
   assert.doesNotMatch(source, /\.progress-room-shell \{[\s\S]{0,180}max-height: none !important;/);
@@ -341,7 +372,7 @@ test("Progress Room mobile modal remains internally scrollable while body scroll
 });
 
 test("ThoughtProgressPanel renders a mastery badge trophy room with persistent new badge state", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /Trophy Room/);
   assert.match(source, /data-testid="mastery-badge-trophy-room"/);
@@ -385,7 +416,7 @@ test("Progress Room backdrop assets exist as five 16:9 bitmap room states", () =
 });
 
 test("ThoughtProgressPanel presents generated reward art without cropping in modal frames", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /className="thought-progress-panel"/);
   assert.match(source, /className="thought-progress-brain-frame"/);
@@ -402,7 +433,7 @@ test("ThoughtProgressPanel presents generated reward art without cropping in mod
 });
 
 test("ThoughtProgressPanel intro keeps rewards out of the main grade page by default", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /const showRewardSectionsInline = false/);
   assert.match(source, /progressRoomOpen/);
@@ -412,7 +443,7 @@ test("ThoughtProgressPanel intro keeps rewards out of the main grade page by def
 });
 
 test("ThoughtProgressPanel supports a K-5 Wonder Workshop skin without showing game achievements", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /TRACKER_THEMES/);
   assert.match(source, /trackerTheme = "middle"/);
@@ -462,7 +493,7 @@ test("K-5 Wonder Workshop asset registries reference project-local bitmap art", 
 });
 
 test("ThoughtProgressPanel keeps HUD compact while reserving full criteria for intro and full variants", () => {
-  const source = readFileSync("src/components/ThoughtProgressPanel.jsx", "utf8");
+  const source = readWonderSource();
 
   assert.match(source, /hudNextGoalText/);
   assert.match(source, /Next mission:/);
