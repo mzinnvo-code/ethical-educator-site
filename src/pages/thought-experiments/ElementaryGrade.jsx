@@ -3,6 +3,7 @@ import { C } from "../../theme.js";
 import {
   FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, ContinueExploring,
 } from "../../components/shared.jsx";
+import AdventureMap from "../../components/wonder/AdventureMap.jsx";
 import ExperimentGrid from "../../components/ExperimentGrid.jsx";
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
@@ -177,6 +178,14 @@ export function ElementaryGradePage({ navigate, gradeId }) {
           {!active && (
             <>
               <Divider label={`${grade.label} stories`} />
+              <div style={{ margin: "16px 0 22px" }}>
+                <AdventureMap
+                  variant="strip"
+                  zones={[{ grade, experiments: experiments.filter((experiment) => !experiment.customLayout) }]}
+                  onSelectExperiment={openExperiment}
+                  showZoneHeaders={false}
+                />
+              </div>
               <ExperimentGrid
                 experiments={experiments}
                 onSelect={openExperiment}

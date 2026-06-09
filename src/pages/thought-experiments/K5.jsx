@@ -1,31 +1,25 @@
 import { C } from "../../theme.js";
 import {
-  FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, TopicCard, ContinueExploring,
+  FadeIn, SectionTitle, Subtitle, Narrow, PageContainer, Divider, BodyText, ContinueExploring,
 } from "../../components/shared.jsx";
 import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
+import AdventureMap from "../../components/wonder/AdventureMap.jsx";
 import { ELEMENTARY_GRADES } from "./ElementaryGrade.jsx";
 import { getExperimentsByElementaryGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
 import { getIntroComic } from "../../data/introComics.js";
-import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 import FeaturedRedBanner from "./FeaturedRedBanner.jsx";
 
 const withImage = (link) => ({ ...link, image: getFeatureIllustration(link.id) });
-const needsPunctuation = (text) => !/[.!?]$/.test(text);
-const gradeDescription = (grade) => `${grade.title}${needsPunctuation(grade.title) ? "." : ""} ${grade.blurb}`;
 
-function getGradeImage(gradeId) {
-  const [firstExperiment] = getExperimentsByElementaryGrade(gradeId);
-  return getSceneIllustration(firstExperiment) || getFeatureIllustration("thought-experiments/k-5");
-}
+const mapZones = ELEMENTARY_GRADES.map((grade) => ({
+  grade,
+  experiments: getExperimentsByElementaryGrade(grade.id).filter((experiment) => !experiment.customLayout),
+}));
 
 const trackerExperimentIds = [
-  ...new Set(
-    ELEMENTARY_GRADES.flatMap((grade) => getExperimentsByElementaryGrade(grade.id))
-      .filter((experiment) => !experiment.customLayout)
-      .map((experiment) => experiment.id),
-  ),
+  ...new Set(mapZones.flatMap((zone) => zone.experiments.map((experiment) => experiment.id))),
 ];
 
 export default function K5({ navigate }) {
@@ -66,30 +60,39 @@ export default function K5({ navigate }) {
           <FadeIn>
             <FeaturedRedBanner navigate={navigate} />
           </FadeIn>
+        </Narrow>
 
-          <Divider label="Choose a grade" />
+        <div style={{ maxWidth: 1080, margin: "0 auto" }}>
+          <Divider label="Pick your next story" />
           <FadeIn>
             <BodyText>
-              Younger students begin with concrete feelings and classroom choices. Older elementary students move into richer stories with tradeoffs, evidence, privacy, bias, and human judgment. Each grade has four polished scenarios, read-aloud support, and a teacher kit behind the classroom-facing story.
+              Follow the trail! Every story you finish turns its tile gold and lights another wonder light. Start anywhere — younger grades begin with feelings and sharing, older grades wrestle with evidence, fairness, and tricky tools.
             </BodyText>
           </FadeIn>
-
-          <div className="grid-2" style={{ marginTop: 20, marginBottom: 28 }}>
-            {ELEMENTARY_GRADES.map((grade, index) => (
-              <TopicCard
-                key={grade.id}
-                icon={grade.short}
-                iconLabel={grade.label}
-                image={getGradeImage(grade.id)}
-                title={grade.label}
-                desc={gradeDescription(grade)}
-                onClick={() => navigate(grade.route)}
-                accent={grade.accent}
-                delay={index * 0.04}
-              />
-            ))}
+          <div style={{ marginTop: 18, marginBottom: 10 }}>
+            <AdventureMap zones={mapZones} variant="full" navigate={navigate} />
           </div>
+          <p style={{ color: C.textMuted, fontSize: "0.8rem", lineHeight: 1.6, margin: "10px 0 28px" }}>
+            Prefer a list? Jump straight to{" "}
+            {ELEMENTARY_GRADES.map((grade, index) => (
+              <span key={grade.id}>
+                <a
+                  href={`/${grade.route}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigate(grade.route);
+                  }}
+                  style={{ color: grade.accent, fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}
+                >
+                  {grade.label}
+                </a>
+                {index < ELEMENTARY_GRADES.length - 1 ? " · " : "."}
+              </span>
+            ))}
+          </p>
+        </div>
 
+        <Narrow>
           <FadeIn>
             <ContinueExploring
               navigate={navigate}
