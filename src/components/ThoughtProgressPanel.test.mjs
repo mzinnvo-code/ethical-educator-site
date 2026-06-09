@@ -388,6 +388,43 @@ test("K-5 stories celebrate completion and hand the +1 light back to the hub", (
   assert.match(wonderSource, /wonder-cell-flash/);
 });
 
+test("Wonder Workshop audio uses generated samples with synth fallback and a music loop", async () => {
+  const wonderSource = readWonderSource();
+  const scenarioSource = readFileSync("src/components/ScenarioCard.jsx", "utf8");
+  const audioLib = readFileSync("src/lib/wonderAudio.js", "utf8");
+  const script = readFileSync("scripts/generate-workshop-audio.mjs", "utf8");
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+
+  // The generation script mirrors the k5 audio conventions.
+  assert.match(script, /WORKSHOP_AUDIO_CATALOG/);
+  assert.match(script, /--dry-run/);
+  assert.match(script, /sound-generation/);
+  assert.match(script, /workshopAudioManifest\.json/);
+  assert.equal(pkg.scripts["audio:workshop"], "node --env-file=.env.local scripts/generate-workshop-audio.mjs");
+
+  // Catalog ids cover every cue the runtime maps.
+  const { WORKSHOP_AUDIO_CATALOG } = await import("../../scripts/generate-workshop-audio.mjs");
+  const catalogIds = new Set(WORKSHOP_AUDIO_CATALOG.map((entry) => entry.id));
+  for (const id of ["choice-blip", "choice-deep", "stage-turn", "story-complete", "trophy-fanfare", "light-on", "lights-on-sweep", "door-open", "room-close", "memento-pop", "badge-locked", "ui-tap", "workshop-music"]) {
+    assert.ok(catalogIds.has(id), `catalog should include ${id}`);
+  }
+
+  // Runtime degrades gracefully and keeps music separate from narration.
+  assert.match(audioLib, /export function playWonderSfx/);
+  assert.match(audioLib, /return false/);
+  assert.match(audioLib, /wonderMusic/);
+  assert.match(audioLib, /loop = true/);
+  assert.match(audioLib, /typeof Audio !== "undefined"/);
+
+  // Cues try samples first, then fall back to synth tones; music respects mute.
+  assert.match(wonderSource, /SAMPLE_BY_CUE/);
+  assert.match(wonderSource, /if \(sampleId && playWonderSfx\(sampleId\)\) return;/);
+  assert.match(wonderSource, /wonderMusic\.start\(\)/);
+  assert.match(wonderSource, /\[open, sfx\.muted\]/);
+  assert.match(scenarioSource, /playWonderSfx\("choice-blip"\)/);
+  assert.match(scenarioSource, /playWonderSfx\("stage-turn"\)/);
+});
+
 test("Progress Room door and stat assets exist as project-local bitmap UI art", () => {
   assert.deepEqual(Object.keys(PROGRESS_ROOM_DOOR_ASSETS).sort(), ["closed", "crack", "glow", "open"]);
   assert.deepEqual(Object.keys(PROGRESS_ROOM_STAT_ASSETS).sort(), ["badges", "brain", "finished", "skills"]);

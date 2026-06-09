@@ -1,7 +1,25 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SFX_STORAGE_KEY } from "./trackerThemes.js";
+import { playWonderSfx, primeWonderAudio } from "../../lib/wonderAudio.js";
 
-// Retro synth cues for the Wonder Workshop / Progress Room. All playback is
+// Which generated sample stands in for each legacy synth cue. Missing samples
+// fall through to the synth tones below, so audio works with or without the
+// generated files.
+const SAMPLE_BY_CUE = {
+  roomEnter: "lights-on-sweep",
+  roomClose: "room-close",
+  tab: "ui-tap",
+  trophyHover: "ui-tap",
+  trophyEarned: "light-on",
+  newTrophyFanfare: "trophy-fanfare",
+  lockedTrophy: "badge-locked",
+  achievementPlaque: "light-on",
+  doorOpen: "door-open",
+  mementoPop: "memento-pop",
+};
+
+// Retro cues for the Wonder Workshop / Progress Room: generated chiptune
+// samples when available, WebAudio synth tones otherwise. All playback is
 // user-initiated (hasInteractedRef) and the mute choice persists per browser.
 export default function useProgressRoomSfx() {
   const [muted, setMuted] = useState(() => {
@@ -19,6 +37,7 @@ export default function useProgressRoomSfx() {
 
   const markInteracted = useCallback(() => {
     hasInteractedRef.current = true;
+    primeWonderAudio();
   }, []);
 
   const tone = useCallback((frequency, delay, duration, type = "square", gain = 0.035) => {
@@ -42,6 +61,8 @@ export default function useProgressRoomSfx() {
 
   const play = useCallback((cue, options = {}) => {
     if ((muted && !options.force) || !hasInteractedRef.current) return;
+    const sampleId = SAMPLE_BY_CUE[cue];
+    if (sampleId && playWonderSfx(sampleId)) return;
     const cues = {
       roomEnter: [[262, 0, 0.06, "triangle", 0.028], [392, 0.07, 0.08], [523, 0.15, 0.08], [784, 0.24, 0.12]],
       roomClose: [[247, 0, 0.07, "triangle", 0.025], [196, 0.08, 0.09, "triangle", 0.02]],

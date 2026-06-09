@@ -15,6 +15,7 @@ import { sectionsToSpeech, buildSpeechText as buildReadAloudText } from "../lib/
 import audioManifest from "../data/k5AudioManifest.json";
 import { recordThoughtProgress } from "../hooks/useThoughtProgress.js";
 import { readThoughtProgress } from "../lib/thoughtProgress.js";
+import { playWonderSfx, primeWonderAudio } from "../lib/wonderAudio.js";
 import { diffCompletion, writeCelebration } from "./wonder/useCelebration.js";
 import CelebrationOverlay from "./wonder/CelebrationOverlay.jsx";
 
@@ -249,8 +250,12 @@ export default function ScenarioCard({
     });
     audioBus.stop(); // stop any in-flight voice-over so the chime is alone
     setStageChoiceIdx(idx);
-    if (stage.weighty) audio.playDeep();
-    else audio.playChime();
+    primeWonderAudio();
+    if (stage.weighty) {
+      if (mode !== "kid" || !playWonderSfx("choice-deep")) audio.playDeep();
+    } else if (mode !== "kid" || !playWonderSfx("choice-blip")) {
+      audio.playChime();
+    }
     scrollToReflection();
   };
 
@@ -277,7 +282,7 @@ export default function ScenarioCard({
       setChose(prev => [...prev, null]);
     }
     setStageChoiceIdx(null);
-    audio.playReveal();
+    if (mode !== "kid" || !playWonderSfx("stage-turn")) audio.playReveal();
     setStageIdx(i => Math.min(i + 1, stages.length - 1));
     scrollToCardTop();
   };
@@ -849,7 +854,12 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
             onRestart?.();
           }}
           onGoToHub={onGoToHub}
-          playSfx={(cue) => (cue === "trophy-fanfare" ? audio.playReveal() : audio.playChime())}
+          playSfx={(cue) => {
+            if (!playWonderSfx(cue)) {
+              if (cue === "trophy-fanfare") audio.playReveal();
+              else audio.playChime();
+            }
+          }}
         />
       )}
       {stage.title && (

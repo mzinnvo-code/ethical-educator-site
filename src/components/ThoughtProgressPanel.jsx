@@ -19,6 +19,7 @@ import {
 import { hudNextGoalText, nextGoalText } from "./wonder/progressText.js";
 import { K5_MEMENTO_SLOTS, diffRoomEntrance, readRoomSeen, writeRoomSeen } from "./wonder/workshopLayout.js";
 import useProgressRoomSfx from "./wonder/useProgressRoomSfx.js";
+import { wonderMusic } from "../lib/wonderAudio.js";
 import { WONDER_CORE_CSS } from "./wonder/wonderStyles.js";
 import AnimatedAriInvite from "./wonder/AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./wonder/DoorButton.jsx";
@@ -848,6 +849,17 @@ function ProgressRoomModal({
       document.body.style.overflow = previousOverflow;
     };
   }, [open]);
+
+  // Ambient workshop loop: the door click that opened the modal satisfies
+  // autoplay policy; mute (toggled live or persisted) silences it.
+  useEffect(() => {
+    if (!open || sfx.muted) {
+      wonderMusic.stop();
+      return undefined;
+    }
+    wonderMusic.start();
+    return () => wonderMusic.stop();
+  }, [open, sfx.muted]);
 
   // Remember what the room looked like so the next visit can play a
   // "lights coming on" entrance for anything earned in between.
