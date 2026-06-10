@@ -109,11 +109,24 @@ export default function WonderDashboard({
           background: rgba(5,13,24,0.66);
           padding: 9px 12px;
         }
-        .wonder-dashboard-meter-brain {
-          width: clamp(58px, 7vw, 82px);
-          height: auto;
+        .wonder-brain-halo {
+          display: grid;
+          place-items: center;
           flex-shrink: 0;
+          clip-path: ${PIXEL_CLIP_SM};
+          padding: 6px 8px;
+          background:
+            radial-gradient(circle at 50% 45%, ${C.gold}38, rgba(44,211,200,0.16) 55%, transparent 78%),
+            linear-gradient(180deg, rgba(20,40,66,0.9), rgba(10,22,38,0.92));
+          border: 2px solid rgba(255,255,255,0.1);
+        }
+        .wonder-dashboard-meter-brain {
+          width: clamp(54px, 6.5vw, 76px);
+          height: auto;
           image-rendering: pixelated;
+        }
+        .wonder-dashboard-meter-brain.is-dim {
+          filter: brightness(1.55) contrast(1.05) drop-shadow(0 0 8px rgba(42,136,192,0.7));
         }
         .wonder-dashboard-meter-readout {
           flex: 1 1 auto;
@@ -226,9 +239,9 @@ export default function WonderDashboard({
               </div>
             </div>
             <div className="wonder-dashboard-meter">
-              <span className="thought-progress-brain-frame" style={{ display: "block", flexShrink: 0 }}>
+              <span className="thought-progress-brain-frame wonder-brain-halo">
                 <img
-                  className="wonder-dashboard-meter-brain"
+                  className={`wonder-dashboard-meter-brain ${brain.level <= 1 ? "is-dim" : ""}`}
                   src={theme.assets.brainProgress[Math.min(5, Math.max(0, brain.level ? brain.level - 1 : 0))]}
                   alt={`Pixel brain progress ${brain.percent}% complete`}
                 />

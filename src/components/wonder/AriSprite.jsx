@@ -110,13 +110,12 @@ export default function AnimatedAriInvite({ theme = TRACKER_THEMES.middle, size 
         aria-hidden="true"
         style={{
           position: "absolute",
-          left: "16%",
-          right: "16%",
-          bottom: 10,
-          height: 8,
-          borderRadius: "50%",
-          background: "rgba(0,0,0,0.34)",
-          filter: "blur(1px)",
+          left: "18%",
+          right: "18%",
+          bottom: 12,
+          height: 3,
+          background: "rgba(4,9,18,0.55)",
+          boxShadow: "4px 0 0 rgba(4,9,18,0.3), -4px 0 0 rgba(4,9,18,0.3)",
           zIndex: 2,
         }}
       />
@@ -125,14 +124,14 @@ export default function AnimatedAriInvite({ theme = TRACKER_THEMES.middle, size 
         aria-hidden="true"
         style={{
           position: "absolute",
-          left: 5,
-          right: 5,
-          bottom: 5,
-          height: 10,
-          borderRadius: 4,
-          border: `1px solid ${C.gold}44`,
-          background: `linear-gradient(180deg, ${C.gold}28, rgba(5,12,24,0.94))`,
-          boxShadow: `0 -4px 12px rgba(5,12,24,0.5), 0 0 10px ${C.gold}16`,
+          left: 4,
+          right: 4,
+          bottom: 4,
+          height: 9,
+          background: "#0a1626",
+          borderTop: "3px solid #1d3050",
+          boxShadow: `inset 0 2px 0 ${C.gold}88, inset 0 -2px 0 rgba(0,0,0,0.5)`,
+          clipPath: "polygon(0 3px, 3px 3px, 3px 0, calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px, 100% 100%, 0 100%)",
           zIndex: 3,
         }}
       />

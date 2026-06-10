@@ -20,6 +20,7 @@ import { hudNextGoalText, nextGoalText } from "./wonder/progressText.js";
 import { K5_MEMENTO_SLOTS, diffRoomEntrance, readRoomSeen, writeRoomSeen } from "./wonder/workshopLayout.js";
 import useProgressRoomSfx from "./wonder/useProgressRoomSfx.js";
 import { wonderMusic } from "../lib/wonderAudio.js";
+import { PIXEL_CLIP_SM, PIXEL_FONT } from "./wonder/PixelFrame.jsx";
 import { WONDER_CORE_CSS } from "./wonder/wonderStyles.js";
 import AnimatedAriInvite from "./wonder/AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./wonder/DoorButton.jsx";
@@ -50,6 +51,7 @@ function PixelAssetFrame({ kind, className, children, size = "medium", earned = 
   const frame = sizes[size] || sizes.medium;
   return (
     <div className={className} style={{
+      position: "relative",
       width: frame.width,
       aspectRatio: PIXEL_FRAME_RATIOS[kind],
       flexShrink: 0,
@@ -76,16 +78,28 @@ function BrainProgressIcon({ brain, size = "large", theme = TRACKER_THEMES.middl
         size={isHud ? "brainHud" : "brainLarge"}
         earned={brain.percent >= 100}
       >
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(circle at 50% 45%, ${C.gold}30, rgba(44,211,200,0.14) 55%, transparent 78%)`,
+            pointerEvents: "none",
+          }}
+        />
         <img
           src={brainAssets[index]}
           alt={`Pixel brain progress ${brain.percent}% complete`}
           style={{
+            position: "relative",
             width: "100%",
             height: "100%",
             display: "block",
             objectFit: "contain",
             imageRendering: "pixelated",
-            filter: brain.percent >= 100 ? `drop-shadow(0 0 18px ${C.gold}55)` : `drop-shadow(0 0 12px ${C.teal}25)`,
+            filter: brain.level <= 1
+              ? `brightness(1.55) contrast(1.05) drop-shadow(0 0 8px rgba(42,136,192,0.7))`
+              : brain.percent >= 100 ? `drop-shadow(0 0 18px ${C.gold}55)` : `drop-shadow(0 0 12px ${C.teal}25)`,
           }}
         />
       </PixelAssetFrame>
@@ -392,19 +406,39 @@ function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
         "--pop-delay": `${Math.min(popIndex, 12) * 90}ms`,
       }}
     >
-      <span
-        aria-hidden="true"
-        style={{
-          fontSize: "clamp(15px, 1.9vw, 25px)",
-          lineHeight: 1,
-          filter: completed
-            ? `saturate(1.15) drop-shadow(0 0 7px ${item.accent || C.gold}aa) drop-shadow(0 2px 0 rgba(0,0,0,0.45))`
-            : "grayscale(1) brightness(0.5)",
-          opacity: completed ? 1 : 0.32,
-        }}
-      >
-        {item.emoji}
-      </span>
+      {completed ? (
+        <span
+          aria-hidden="true"
+          style={{
+            fontSize: "clamp(15px, 1.9vw, 25px)",
+            lineHeight: 1,
+            filter: `saturate(1.15) drop-shadow(0 0 7px ${item.accent || C.gold}aa) drop-shadow(0 2px 0 rgba(0,0,0,0.45))`,
+          }}
+        >
+          {item.emoji}
+        </span>
+      ) : (
+        <span
+          className="wonder-memento-question"
+          aria-hidden="true"
+          style={{
+            display: "grid",
+            placeItems: "center",
+            width: "clamp(16px, 2vw, 26px)",
+            aspectRatio: "1 / 1",
+            clipPath: PIXEL_CLIP_SM,
+            border: `2px dotted ${C.gold}55`,
+            background: "rgba(10,22,38,0.85)",
+            color: C.teal,
+            fontFamily: PIXEL_FONT,
+            fontWeight: 600,
+            fontSize: "clamp(11px, 1.3vw, 16px)",
+            lineHeight: 1,
+          }}
+        >
+          ?
+        </span>
+      )}
       <span
         aria-hidden="true"
         style={{
@@ -442,7 +476,6 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
         backgroundImage: `linear-gradient(180deg, rgba(5,12,24,0.08), rgba(5,12,24,0.2)), url(${backdrop})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        imageRendering: "pixelated",
         overflow: "hidden",
         boxShadow: `0 28px 80px rgba(0,0,0,0.34), inset 0 0 0 1px rgba(255,255,255,0.05)`,
       }}
@@ -457,7 +490,6 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
             backgroundImage: `linear-gradient(180deg, rgba(5,12,24,0.08), rgba(5,12,24,0.2)), url(${prevBackdrop})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            imageRendering: "pixelated",
             zIndex: 1,
           }}
         />
@@ -578,6 +610,19 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
         .wonder-memento:focus-visible {
           transform: translate(-50%, -50%) scale(1.18);
         }
+        @keyframes wonder-question-pulse {
+          0%, 100% { border-color: ${C.gold}55; color: ${C.teal}; }
+          50% { border-color: ${C.gold}99; color: ${C.gold}; }
+        }
+        .wonder-memento-question {
+          animation: wonder-question-pulse 6s steps(2, end) infinite;
+        }
+        .wonder-memento:hover .wonder-memento-question,
+        .wonder-memento:focus-visible .wonder-memento-question {
+          border-color: ${C.gold};
+          color: ${C.gold};
+          animation: none;
+        }
         .wonder-memento:focus-visible {
           outline: 2px solid ${C.gold};
           outline-offset: 2px;
@@ -624,7 +669,8 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           }
           .wonder-room-entrance,
           .wonder-room-entrance .wonder-room-prev,
-          .wonder-room-entrance .wonder-memento-new {
+          .wonder-room-entrance .wonder-memento-new,
+          .wonder-memento-question {
             animation: none;
           }
           .wonder-room-entrance .wonder-room-prev {
