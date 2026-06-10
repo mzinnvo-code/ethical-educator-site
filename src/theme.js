@@ -16,6 +16,13 @@ export const C = {
   green: "#2a6a38",
   greenLight: "#48884a",
   coral: "#c07040",
+  // Text-safe accent variants. The base ocean/teal/coral/sky hues pass 3:1 for
+  // borders and large type but fail AA 4.5:1 as small text on bg/surface —
+  // use these whenever the accent colors words, keep the base hues for rules.
+  oceanText: "#5aa9dc",
+  tealText: "#2fae9a",
+  coralText: "#d08a58",
+  skyText: "#4d9fd6",
   textPrimary: "#e0dcd0",
   textSecondary: "#90a0b0",
   // Bumped from #607080 (5.2:1 on bg, marginal AA, fails on tinted card bg)
