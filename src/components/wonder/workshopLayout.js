@@ -15,6 +15,25 @@ export const K5_MEMENTO_SLOTS = [
   ...FLOOR_XS.map((x) => ({ left: `${x}%`, top: "85%" })),
 ];
 
+// Where the stage inspector card sits relative to a clicked slot. Pure so
+// node tests can exercise the flip/clamp logic without a DOM. Slots above
+// 48% of the stage height open the card below themselves; lower slots open
+// it above. The card clamps inside the stage while the caret keeps pointing
+// at the true anchor. Stages narrower than 520px get a centered card.
+export function computeInspectorPlacement(slot, stageWidth) {
+  const top = Number.parseFloat(slot.top);
+  const left = Number.parseFloat(slot.left);
+  if (!stageWidth || stageWidth < 520) {
+    return { centered: true, width: Math.min(320, Math.round((stageWidth || 360) * 0.88)) };
+  }
+  const width = Math.min(320, Math.round(stageWidth * 0.88));
+  const halfPct = ((width / 2) / stageWidth) * 100;
+  const clampedLeft = Math.min(98 - halfPct, Math.max(2 + halfPct, left));
+  const caretLeftPct = Math.min(94, Math.max(6, ((left - (clampedLeft - halfPct)) / (halfPct * 2)) * 100));
+  const opensBelow = top < 48;
+  return { centered: false, width, leftPct: clampedLeft, caretLeftPct, opensBelow, slotTopPct: top };
+}
+
 export const ROOM_SEEN_KEY = "ee:wonder-room-seen:v1";
 
 export function readRoomSeen() {

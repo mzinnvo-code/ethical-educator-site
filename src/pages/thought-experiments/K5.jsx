@@ -31,6 +31,7 @@ const mementoItems = mapZones.flatMap((zone) => zone.experiments.map((experiment
   emoji: experiment.emoji,
   gradeLabel: zone.grade.label,
   accent: zone.grade.accent,
+  route: zone.grade.route,
 })));
 
 export default function K5({ navigate }) {
@@ -63,6 +64,7 @@ export default function K5({ navigate }) {
         >
           <ThoughtProgressPanel
             variant="intro"
+            navigate={navigate}
             trackerTheme="k5"
             badgeSetId="k5"
             title="Ari's Wonder Workshop"

@@ -24,6 +24,8 @@ import { PIXEL_CLIP_SM, PIXEL_FONT } from "./wonder/PixelFrame.jsx";
 import { WONDER_CORE_CSS } from "./wonder/wonderStyles.js";
 import AnimatedAriInvite from "./wonder/AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./wonder/DoorButton.jsx";
+import StageInspector from "./wonder/StageInspector.jsx";
+import CollectionDrawer from "./wonder/CollectionDrawer.jsx";
 import WonderDashboard from "./wonder/WonderDashboard.jsx";
 
 const DIMENSIONS = [
@@ -316,66 +318,6 @@ function GameAchievementsSection({ achievements, compactCards, accent, sfx }) {
   );
 }
 
-function TrophyBadgeCard({ badge, onOpen, sfx, theme = TRACKER_THEMES.middle }) {
-  const asset = theme.assets?.badges?.[badge.id] || MASTERY_BADGE_ASSETS[badge.id];
-  return (
-    <button
-      type="button"
-      className={`thought-progress-badge-tile ${badge.earned ? "thought-progress-badge-earned" : "thought-progress-badge-locked"} ${badge.isNew ? "thought-progress-badge-new" : ""}`}
-      onClick={() => onOpen(badge)}
-      onPointerEnter={() => sfx.play("trophyHover")}
-      onFocus={() => sfx?.play("trophyHover")}
-      style={{
-        display: "grid",
-        gridTemplateColumns: "96px 1fr",
-        gap: 12,
-        alignItems: "center",
-        textAlign: "left",
-        width: "100%",
-        minHeight: 122,
-        padding: "12px 13px",
-        borderRadius: 8,
-        borderWidth: 2,
-        borderStyle: badge.earned ? "solid" : "dotted",
-        borderColor: badge.earned ? C.gold + "70" : C.textMuted + "70",
-        background: badge.earned ? `${C.gold}12` : "rgba(255,255,255,0.018)",
-        color: C.textPrimary,
-        cursor: "pointer",
-        boxShadow: badge.isNew ? `0 0 24px ${C.gold}45, inset 0 0 0 1px ${C.gold}25` : "inset 0 0 0 1px rgba(255,255,255,0.03)",
-      }}
-    >
-      <PixelAssetFrame kind="badge" size="badgeTrophy" earned={badge.earned}>
-        <img
-          src={asset}
-          alt=""
-          aria-hidden="true"
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
-            objectFit: "contain",
-            borderRadius: 6,
-            imageRendering: "pixelated",
-            opacity: badge.earned ? 1 : 0.44,
-            filter: badge.earned ? `drop-shadow(0 0 16px ${C.gold}55)` : "grayscale(1) brightness(0.35) contrast(1.2)",
-          }}
-        />
-      </PixelAssetFrame>
-      <div>
-        <p style={{ color: badge.earned ? C.gold : C.textPrimary, fontSize: "0.9rem", fontWeight: 900, marginBottom: 4 }}>
-          {badge.label}
-        </p>
-        <p style={{ color: C.textSecondary, fontSize: "0.74rem", lineHeight: 1.45, marginBottom: 6 }}>
-          {badge.earned ? badge.desc : `Still waiting for you: ${badge.criteria}`}
-        </p>
-        <p style={{ color: badge.isNew ? C.gold : C.teal, fontSize: "0.68rem", fontWeight: 900, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-          {badge.isNew ? "New trophy" : badge.earned ? "Earned" : "How to earn"}
-        </p>
-      </div>
-    </button>
-  );
-}
-
 function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
   return (
     <button
@@ -570,9 +512,38 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
   );
 }
 
-function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx, theme = TRACKER_THEMES.middle, mementos = [], onOpenMemento, selectedMemento, entrance = null }) {
+function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, roomTier, sfx, theme = TRACKER_THEMES.middle, mementos = [], onOpenMemento, selectedMemento, entrance = null, statItems = [], onClearSelection, onGoPlay }) {
   const earnedBadges = badges.filter((badge) => badge.earned);
   const earnedMementos = mementos.filter((memento) => memento.completed);
+  const stageWrapRef = useRef(null);
+  const [stageWidth, setStageWidth] = useState(0);
+
+  useEffect(() => {
+    const measure = () => setStageWidth(stageWrapRef.current?.clientWidth || 0);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // The inspector anchors to whichever stage slot was clicked (or picked in
+  // the drawer): badges live in the theme slot map, mementos carry their own.
+  const slots = theme.roomSlots || roomSlots;
+  const inspected = selectedBadge
+    ? { type: "badge", id: selectedBadge.id, badge: selectedBadge }
+    : selectedMemento
+      ? { type: "memento", id: selectedMemento.item.id, memento: selectedMemento }
+      : null;
+  const inspectedSlot = selectedBadge
+    ? slots.find((slot) => slot.id === selectedBadge.id)
+    : selectedMemento
+      ? mementos.find((memento) => memento.item.id === selectedMemento.item.id)?.slot
+      : null;
+
+  const inspectFromDrawer = (open) => {
+    open();
+    stageWrapRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  };
+
   return (
     <section
       data-testid="mastery-badge-trophy-room"
@@ -627,6 +598,13 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           outline: 2px solid ${C.gold};
           outline-offset: 2px;
         }
+        @keyframes wonder-inspector-pop {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .wonder-stage-inspector {
+          animation: wonder-inspector-pop 160ms steps(3, end) both;
+        }
         @keyframes wonder-room-prev-fade {
           from { opacity: 1; }
           to { opacity: 0; }
@@ -670,7 +648,8 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           .wonder-room-entrance,
           .wonder-room-entrance .wonder-room-prev,
           .wonder-room-entrance .wonder-memento-new,
-          .wonder-memento-question {
+          .wonder-memento-question,
+          .wonder-stage-inspector {
             animation: none;
           }
           .wonder-room-entrance .wonder-room-prev {
@@ -715,65 +694,31 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           </span>
         </span>
       </div>
-      <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} mementos={mementos} onOpenMemento={onOpenMemento} entrance={entrance} />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10, marginTop: 12 }}>
-        {badges.map((badge) => (
-          <TrophyBadgeCard key={badge.id} badge={badge} onOpen={onOpenBadge} sfx={sfx} theme={theme} />
-        ))}
+      <div ref={stageWrapRef} style={{ position: "relative" }}>
+        <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} mementos={mementos} onOpenMemento={onOpenMemento} entrance={entrance} />
+        {inspected && inspectedSlot && (
+          <StageInspector
+            inspected={inspected}
+            slot={inspectedSlot}
+            stageWidth={stageWidth}
+            accent={accent}
+            theme={theme}
+            onClose={onClearSelection}
+            onGoPlay={onGoPlay}
+          />
+        )}
       </div>
-      {selectedBadge && (
-        <div
-          aria-live="polite"
-          style={{
-            marginTop: 12,
-            borderRadius: 8,
-            border: `1px solid ${selectedBadge.earned ? C.gold + "55" : C.border}`,
-            background: selectedBadge.earned ? `${C.gold}10` : "rgba(255,255,255,0.025)",
-            padding: "11px 12px",
-          }}
-        >
-          <p style={{ color: selectedBadge.earned ? C.gold : C.textPrimary, fontWeight: 900, marginBottom: 4 }}>
-            {selectedBadge.earned ? "You earned this" : "Still waiting for you"}: {selectedBadge.label}
-          </p>
-          <p style={{ color: C.textSecondary, fontSize: "0.78rem", lineHeight: 1.5, marginBottom: 5 }}>
-            {selectedBadge.desc}
-          </p>
-          <p style={{ color: C.textMuted, fontSize: "0.74rem", lineHeight: 1.45 }}>
-            <strong style={{ color: C.teal }}>How to unlock:</strong> {selectedBadge.criteria}
-          </p>
-        </div>
-      )}
-      {!selectedBadge && selectedMemento && (
-        <div
-          data-testid="wonder-memento-detail"
-          aria-live="polite"
-          style={{
-            marginTop: 12,
-            borderRadius: 8,
-            border: `1px solid ${selectedMemento.completed ? (selectedMemento.item.accent || C.gold) + "66" : C.border}`,
-            background: selectedMemento.completed ? `${C.gold}10` : "rgba(255,255,255,0.025)",
-            padding: "11px 12px",
-            display: "grid",
-            gridTemplateColumns: "34px minmax(0, 1fr)",
-            gap: 10,
-            alignItems: "center",
-          }}
-        >
-          <span aria-hidden="true" style={{ fontSize: 26, lineHeight: 1, filter: selectedMemento.completed ? "none" : "grayscale(1) brightness(0.6)", opacity: selectedMemento.completed ? 1 : 0.5, textAlign: "center" }}>
-            {selectedMemento.item.emoji}
-          </span>
-          <span>
-            <p style={{ color: selectedMemento.completed ? C.gold : C.textPrimary, fontWeight: 900, marginBottom: 3 }}>
-              {selectedMemento.completed ? "Earned for finishing" : "Waiting on the shelf"}: {selectedMemento.item.title}
-            </p>
-            <p style={{ color: C.textSecondary, fontSize: "0.78rem", lineHeight: 1.5, margin: 0 }}>
-              {selectedMemento.completed
-                ? `This little keepsake appeared in the workshop when you finished the ${selectedMemento.item.gradeLabel} story.`
-                : `Play "${selectedMemento.item.title}" in ${selectedMemento.item.gradeLabel} and this spot fills in.`}
-            </p>
-          </span>
-        </div>
-      )}
+      <CollectionDrawer
+        badges={badges}
+        mementos={mementos}
+        statItems={statItems}
+        statAssets={theme.assets?.stats}
+        badgeAssets={theme.assets?.badges}
+        accent={accent}
+        sfx={sfx}
+        onInspectBadge={(badge) => inspectFromDrawer(() => onOpenBadge(badge))}
+        onInspectMemento={(memento) => inspectFromDrawer(() => onOpenMemento(memento.item, memento.completed))}
+      />
     </section>
   );
 }
@@ -863,6 +808,8 @@ function ProgressRoomModal({
   progress = null,
   onOpenMemento,
   selectedMemento,
+  onClearSelection,
+  onGoPlay,
 }) {
   const [activeTab, setActiveTab] = useState("trophies");
   const [entrance, setEntrance] = useState(null);
@@ -932,6 +879,12 @@ function ProgressRoomModal({
 
   const trapFocus = (event) => {
     if (event.key === "Escape") {
+      // Layered dismissal: a first Escape closes the open inspector and
+      // returns focus to its slot; only a second Escape closes the room.
+      if (selectedBadge || selectedMemento) {
+        onClearSelection?.();
+        return;
+      }
       onClose();
       return;
     }
@@ -1137,20 +1090,6 @@ function ProgressRoomModal({
               role="tabpanel"
               aria-labelledby="progress-room-tab-trophies"
             >
-              {statItems.length > 0 && (
-                <div data-testid="progress-room-stats" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10 }}>
-                  {statItems.map((item) => (
-                    <PixelTrackerStat
-                      key={item.label}
-                      label={item.label}
-                      value={item.value}
-                      color={item.color}
-                      icon={item.icon}
-                      statAssets={theme.assets.stats}
-                    />
-                  ))}
-                </div>
-              )}
               <MasteryBadgeTrophyRoom
                 badges={badges}
                 accent={accent}
@@ -1163,6 +1102,9 @@ function ProgressRoomModal({
                 onOpenMemento={onOpenMemento}
                 selectedMemento={selectedMemento}
                 entrance={entrance}
+                statItems={statItems}
+                onClearSelection={onClearSelection}
+                onGoPlay={onGoPlay}
               />
             </div>
           ) : (
@@ -1200,6 +1142,7 @@ export default function ThoughtProgressPanel({
   const [progressRoomOpen, setProgressRoomOpen] = useState(false);
   const [doorOpening, setDoorOpening] = useState(false);
   const previousFocusRef = useRef(null);
+  const inspectorReturnRef = useRef(null);
   const doorTimerRef = useRef(null);
   const sfx = useProgressRoomSfx();
   const achievements = theme.showAchievementsTab ? getAchievementStatus(progress, achievementIds) : [];
@@ -1224,6 +1167,7 @@ export default function ThoughtProgressPanel({
 
   const openBadge = (badge) => {
     sfx.play(badge.isNew ? "newTrophyFanfare" : badge.earned ? "trophyEarned" : "lockedTrophy");
+    if (typeof document !== "undefined") inspectorReturnRef.current = document.activeElement;
     setSelectedBadge(badge);
     setSelectedMemento(null);
     if (badge.earned && badge.isNew) {
@@ -1233,8 +1177,26 @@ export default function ThoughtProgressPanel({
 
   const openMemento = (item, completed) => {
     sfx.play(completed ? "trophyEarned" : "lockedTrophy");
+    if (typeof document !== "undefined") inspectorReturnRef.current = document.activeElement;
     setSelectedMemento({ item, completed });
     setSelectedBadge(null);
+  };
+
+  // Close the stage inspector and hand focus back to the slot that opened it.
+  const clearSelection = () => {
+    setSelectedBadge(null);
+    setSelectedMemento(null);
+    if (typeof window !== "undefined") {
+      window.setTimeout(() => inspectorReturnRef.current?.focus?.(), 0);
+    }
+  };
+
+  // "Go play it" inside a locked memento: leave the room, open the story.
+  const goPlayMemento = (item) => {
+    if (!navigate || !item?.route) return;
+    clearSelection();
+    setProgressRoomOpen(false);
+    navigate(`${item.route}?experiment=${item.id}`);
   };
 
   const openProgressRoom = () => {
@@ -1527,6 +1489,8 @@ export default function ThoughtProgressPanel({
         progress={progress}
         onOpenMemento={openMemento}
         selectedMemento={selectedMemento}
+        onClearSelection={clearSelection}
+        onGoPlay={goPlayMemento}
       />
     </section>
   );

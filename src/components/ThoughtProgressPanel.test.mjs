@@ -343,7 +343,7 @@ test("Wonder Workshop room renders mementos, a lights-on entrance, and a focus t
   assert.match(source, /function MementoSlot/);
   assert.match(source, /data-testid="wonder-memento-slot"/);
   assert.match(source, /data-testid="wonder-memento-counter"/);
-  assert.match(source, /data-testid="wonder-memento-detail"/);
+  assert.match(source, /wonder-memento-detail/);
   assert.match(source, /Empty shelf spot: finish/);
   assert.match(source, /ee:wonder-room-seen:v1/);
   assert.match(source, /diffRoomEntrance/);
@@ -423,6 +423,36 @@ test("Wonder Workshop audio uses generated samples with synth fallback and a mus
   assert.match(wonderSource, /\[open, sfx\.muted\]/);
   assert.match(scenarioSource, /playWonderSfx\("choice-blip"\)/);
   assert.match(scenarioSource, /playWonderSfx\("stage-turn"\)/);
+});
+
+test("Trophy room inspects items in place with an anchored popover and collection drawer", async () => {
+  const source = readWonderSource();
+
+  // Inspector: anchored at the clicked slot, layered Escape, focus return.
+  assert.match(source, /function StageInspector/);
+  assert.match(source, /computeInspectorPlacement/);
+  assert.match(source, /data-testid="wonder-stage-inspector"/);
+  assert.match(source, /Layered dismissal/);
+  assert.match(source, /inspectorReturnRef/);
+  assert.match(source, /Go play it/);
+
+  // Drawer: tabbed collection replaces the old card list + scroll-away strips.
+  assert.match(source, /function CollectionDrawer/);
+  assert.match(source, /wonder-drawer-tab/);
+  assert.match(source, /wonder-drawer-panel-mementos/);
+  assert.doesNotMatch(source, /function TrophyBadgeCard/);
+
+  // Placement math is pure and node-testable.
+  const { computeInspectorPlacement } = await import("./wonder/workshopLayout.js");
+  const below = computeInspectorPlacement({ left: "18%", top: "11.5%" }, 1000);
+  assert.equal(below.opensBelow, true, "top-shelf slots open below");
+  const above = computeInspectorPlacement({ left: "50%", top: "85%" }, 1000);
+  assert.equal(above.opensBelow, false, "floor slots open above");
+  const clamped = computeInspectorPlacement({ left: "4%", top: "60%" }, 1000);
+  assert.ok(clamped.leftPct > 4, "edge slots clamp the card inside the stage");
+  assert.ok(clamped.caretLeftPct < 50, "caret still points back toward the anchor");
+  const centered = computeInspectorPlacement({ left: "50%", top: "50%" }, 400);
+  assert.equal(centered.centered, true, "small stages get the centered card");
 });
 
 test("Workshop art pipeline catalog is consistent and its pure helpers behave", async () => {
