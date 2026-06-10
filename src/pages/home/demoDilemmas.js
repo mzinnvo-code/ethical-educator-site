@@ -49,7 +49,7 @@ export const DEMO_DILEMMAS = {
       text: "Three voices respond. AP Lit teacher: \"Won't this kill the writing?\" Superintendent: \"Will this hold up at the board?\" A parent at the next meeting: \"What about equity for students without home AI access?\" Re-decide?",
     },
     cta: { label: "Open the school policy tools", page: "school-ai-policy-tools" },
-    reference: "Adapted from NYC DOE traffic-light AI guidance and field practice",
+    reference: "Adapted from Garnet Valley School District's traffic-light AI protocol and post-ban NYC Public Schools practice",
   },
   family: {
     chip: "I'm a parent",
