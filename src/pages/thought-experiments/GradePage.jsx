@@ -8,6 +8,7 @@ import IntroComicStrip from "../../components/IntroComicStrip.jsx";
 import ScenarioCard from "../../components/ScenarioCard.jsx";
 import TopicFilter from "../../components/TopicFilter.jsx";
 import ReasoningProfile from "../../components/ReasoningProfile.jsx";
+import ThoughtProgressPanel from "../../components/ThoughtProgressPanel.jsx";
 import { useExperimentFilter } from "../../hooks/useExperimentFilter.js";
 import { getExperimentsByGrade, getTopicIdsForGrade } from "../../data/experiments.js";
 import { getFeatureIllustration } from "../../data/illustrations.js";
@@ -129,6 +130,8 @@ export default function GradePage({
     ? preExperiments({ experiments: all, filterApi })
     : preExperiments;
   const introComic = introComicKey ? getIntroComic(introComicKey) : null;
+  const isDeepfakeActive = active?.id === "deepfake-election" && mode === "story";
+  const showGoalTracker = band === "6-8";
 
   return (
     <div style={{ padding: "80px 0 100px", background: C.bg }}>
@@ -157,6 +160,24 @@ export default function GradePage({
 
         {!active && introComic && (
           <IntroComicStrip comic={introComic} />
+        )}
+
+        {!active && showGoalTracker && (
+          <div
+            className="thought-progress-wide-wrap"
+            style={{
+              maxWidth: 1080,
+              margin: "18px auto 28px",
+            }}
+          >
+            <ThoughtProgressPanel
+              variant="intro"
+              navigate={navigate}
+              accent={heroAccent}
+              title="Ari's Goal Tracker"
+              experimentIds={all.map((experiment) => experiment.id)}
+            />
+          </div>
         )}
 
         <Narrow>
@@ -195,7 +216,17 @@ export default function GradePage({
           )}
 
           {active && (
-            <div ref={activeWrapperRef} style={{ marginTop: 20, scrollMarginTop: 80 }}>
+            <div
+              ref={activeWrapperRef}
+              style={{
+                marginTop: 20,
+                scrollMarginTop: 80,
+                width: isDeepfakeActive ? "min(1040px, calc(100vw - 48px))" : "100%",
+                maxWidth: isDeepfakeActive ? 1040 : 740,
+                marginLeft: isDeepfakeActive ? "50%" : 0,
+                transform: isDeepfakeActive ? "translateX(-50%)" : "none",
+              }}
+            >
               <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16, flexWrap: "wrap" }}>
                 <button
                   onClick={closeActive}
@@ -225,6 +256,7 @@ export default function GradePage({
               <ScenarioCard
                 key={active.id}
                 experiment={active}
+                experimentIds={all.map((experiment) => experiment.id)}
                 mode={mode}
                 visualVariant={visualVariant}
                 onClose={closeActive}
@@ -239,6 +271,7 @@ export default function GradePage({
             choices={lensChoices}
             onSuggestTopic={suggestTopic}
             onReset={resetProfile}
+            sticky={!isDeepfakeActive}
           />
 
           {!active && SIBLING_LINKS[band] && (

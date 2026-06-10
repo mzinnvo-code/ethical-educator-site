@@ -3,6 +3,7 @@ import { C } from "../theme.js";
 import { EthicalLensTag, FurtherReadingList } from "../experiments/ExperimentShared.jsx";
 import { TOPIC_BY_ID } from "../data/topics.js";
 import useDecisionJournal from "../hooks/useDecisionJournal.js";
+import { recordThoughtProgress } from "../hooks/useThoughtProgress.js";
 import ReadAloudButton from "./ReadAloudButton.jsx";
 
 // Age-appropriate K-5 lab. Softer label and looser tone than the 9-12
@@ -941,6 +942,7 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
   const [phase, setPhase] = useState("idle"); // idle | confirming | saved
   const [savedId, setSavedId] = useState(null);
   const [steelmanDraft, setSteelmanDraft] = useState("");
+  const [steelmanRecorded, setSteelmanRecorded] = useState(false);
 
   if (!experiment) return null;
   const recordedChoices = (chose || []).filter(Boolean);
@@ -971,6 +973,21 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
 
   const handleSave = () => {
     const id = journal.addEntry(buildEntry());
+    recordThoughtProgress({
+      type: "journal_saved",
+      experimentId: experiment.id,
+      gradeBand: experiment.gradeBands?.[0] || mode,
+      topicIds: experiment.topics || [],
+    });
+    if (steelmanDraft.trim() && !steelmanRecorded) {
+      recordThoughtProgress({
+        type: "steelman_saved",
+        experimentId: experiment.id,
+        gradeBand: experiment.gradeBands?.[0] || mode,
+        topicIds: experiment.topics || [],
+      });
+      setSteelmanRecorded(true);
+    }
     setSavedId(id);
     setPhase("saved");
   };
@@ -982,6 +999,15 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
 
   const commitSteelmanIfSaved = () => {
     if (savedId) journal.updateSteelman(savedId, steelmanDraft);
+    if (savedId && steelmanDraft.trim() && !steelmanRecorded) {
+      recordThoughtProgress({
+        type: "steelman_saved",
+        experimentId: experiment.id,
+        gradeBand: experiment.gradeBands?.[0] || mode,
+        topicIds: experiment.topics || [],
+      });
+      setSteelmanRecorded(true);
+    }
   };
 
   const goToJournal = () => {
@@ -1082,4 +1108,3 @@ function WriteAndSaveBlock({ chose, experiment, stages, accent, mode }) {
     </>
   );
 }
-

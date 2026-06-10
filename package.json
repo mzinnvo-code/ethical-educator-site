@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run prerender && cp dist/index.html dist/404.html && node scripts/generate-feeds.mjs && node scripts/generate-og-images.mjs",
+    "test": "node --test src/data/*.test.mjs src/pages/home/*.test.mjs",
     "test:rebrand": "node scripts/check-rebrand.mjs",
     "test:crawlability": "node scripts/check-crawlability.mjs",
     "og:generate": "node scripts/generate-og-images.mjs",
@@ -13,6 +14,7 @@
     "prerender": "node scripts/prerender-site.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs",
     "seo:offsite-check": "node scripts/check-offsite-seo.mjs",
+    "report:site": "node scripts/site-review.mjs",
     "preview": "vite preview",
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
     "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",
@@ -21,6 +23,7 @@
   "dependencies": {
     "gsap": "^3.15.0",
     "minisearch": "^7.2.0",
+    "motion": "^12.40.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "three": "^0.184.0"
@@ -90,6 +93,7 @@
       "/teaching-feedback",
       "/enhancing-feedback",
       "/enhancing-engagement",
+      "/gamification-in-education",
       "/async-engagement",
       "/av-resources",
       "/quality-leadership",

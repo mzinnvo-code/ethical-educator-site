@@ -10,6 +10,15 @@ test("intro comic initially renders as an Ari launcher, not a full panel grid", 
   assert.doesNotMatch(source, /String\(index \+ 1\)\.padStart\(2, "0"\)} \/ {panel\.caption}/);
 });
 
+test("intro comic launcher does not trap page scroll at the section level", () => {
+  const source = readFileSync("src/components/IntroComicStrip.jsx", "utf8");
+
+  assert.match(source, /className="intro-comic-strip"/);
+  assert.doesNotMatch(source, /className="intro-comic-strip"[\s\S]{0,420}overflow: "hidden"/);
+  assert.match(source, /className="intro-comic-art-frame"/);
+  assert.match(source, /overflow: "hidden"/);
+});
+
 test("intro comic source includes an accessible pop-out reader contract", () => {
   const source = readFileSync("src/components/IntroComicStrip.jsx", "utf8");
 

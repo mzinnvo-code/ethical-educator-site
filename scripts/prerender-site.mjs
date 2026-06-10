@@ -197,6 +197,14 @@ function renderRoute(template, route) {
     "</head>",
     `    <script id="route-schema" type="application/ld+json">${JSON.stringify(schema)}</script>\n  </head>`
   );
+  if (route === "/") {
+    // The hero illustration is the home page's LCP element; preload only there
+    // so other routes don't fetch an image they never show.
+    html = html.replace(
+      "</head>",
+      `    <link rel="preload" as="image" href="/illustrations/home-hero.webp" type="image/webp" fetchpriority="high" />\n  </head>`
+    );
+  }
   html = html.replace('<div id="root"></div>', `<div id="root">\n${staticFallback(pageId, meta)}\n    </div>`);
   return html;
 }

@@ -1,8 +1,16 @@
 // All copy for the scroll-driven landing ("The Question").
 //
-// PURE DATA ONLY — no JSX, no browser APIs, no theme imports. This module is
-// also imported by scripts/prerender-site.mjs in Node to inject crawlable
-// landing copy into the prerendered home document.
+// PURE DATA ONLY — no JSX, no browser APIs. This module is also imported by
+// scripts/prerender-site.mjs in Node to inject crawlable landing copy into
+// the prerendered home document. Every displayed number derives from
+// src/data/siteStats.js (CI-asserted against the heavy source modules) so the
+// landing can never drift from the home page's own claims.
+import {
+  EXPERIMENT_COUNT,
+  TEACHER_KIT_COUNT,
+  PROTOCOL_COUNT,
+  CURATED_RESOURCE_COUNT,
+} from "../../data/siteStats.js";
 
 export const SCENE_VOID = {
   id: "void",
@@ -45,27 +53,32 @@ export const SCENE_CHOICE = {
         "How do you know? You can't see anyone's feelings — only what they do. That's the other-minds problem, and it's older than robots.",
     },
   ],
-  closing: "No answer key — just a better conversation. There are 109 of these, one for every classroom.",
+  closing: `No answer key — just a better conversation. There are ${EXPERIMENT_COUNT} of these, one for every classroom.`,
 };
+
+// Constellation cluster weights (sum to EXPERIMENT_COUNT) — drives the
+// particle layout. Proportions approximate the library's grade-band split.
+const CLUSTER_K = Math.max(2, Math.round(EXPERIMENT_COUNT * 0.08));
+const CLUSTER_ELEM = Math.round(EXPERIMENT_COUNT * 0.35);
+const CLUSTER_MIDDLE = Math.round(EXPERIMENT_COUNT * 0.27);
 
 export const SCENE_LIBRARY = {
   id: "library",
   kicker: "The library",
-  headline: "109 scenarios. Every grade. No answer keys.",
+  headline: `${EXPERIMENT_COUNT} scenarios. Every grade. No answer keys.`,
   body:
     "From a kindergartner's talking toy to Plato's Cave with a VR headset — each one classroom-ready, with teacher kits, read-aloud audio, and standards alignment.",
   stats: [
-    { value: 109, suffix: "", label: "interactive thought experiments" },
-    { value: 4, suffix: "", label: "free planning tools" },
-    { value: 40, suffix: "+", label: "curated books & readings" },
-    { value: null, text: "K–12", label: "a path for every grade band" },
+    { value: EXPERIMENT_COUNT, suffix: "", label: "interactive thought experiments" },
+    { value: TEACHER_KIT_COUNT, suffix: "", label: "printable teacher kits" },
+    { value: PROTOCOL_COUNT, suffix: "", label: "discussion protocols" },
+    { value: CURATED_RESOURCE_COUNT, suffix: "", label: "curated books & resources" },
   ],
-  // Constellation cluster weights (sums to 109) — drives the particle layout.
   clusters: [
-    { label: "K", count: 8 },
-    { label: "1–5", count: 38 },
-    { label: "6–8", count: 30 },
-    { label: "9–12", count: 33 },
+    { label: "K", count: CLUSTER_K },
+    { label: "1–5", count: CLUSTER_ELEM },
+    { label: "6–8", count: CLUSTER_MIDDLE },
+    { label: "9–12", count: EXPERIMENT_COUNT - CLUSTER_K - CLUSTER_ELEM - CLUSTER_MIDDLE },
   ],
 };
 
@@ -139,7 +152,7 @@ export const LANDING_SEO_TEXT = [
   SCENE_DILEMMA.body,
   SCENE_LIBRARY.headline,
   SCENE_LIBRARY.body,
-  "109 interactive thought experiments. 4 free planning tools. 40+ curated books and readings. A path for every grade band, K–12.",
+  `${EXPERIMENT_COUNT} interactive thought experiments. ${TEACHER_KIT_COUNT} printable teacher kits. ${PROTOCOL_COUNT} discussion protocols. ${CURATED_RESOURCE_COUNT} curated books and resources. A path for every grade band, K–12.`,
   "For students: stories and dilemmas built to argue with, not memorize. For teachers: classroom-ready discussions with a toolkit to run them well. For administrators: ethical frameworks and scenarios before AI policy becomes guesswork. For parents and families: kitchen-table questions for AI, homework, fairness, and judgment.",
   "Tools: the Thought Experiment Picker, the AI Use Rubric, the AI Policy Builder, and the Family Conversation Generator.",
   SCENE_HANDOFF.headline,

@@ -172,8 +172,13 @@ export function TopicCard({ icon, iconLabel, image = null, imageAlt = "", title,
   );
 }
 
-export function EducatorHero({ label, title, subtitle, image, imageAlt, accent = C.gold, variant = "split" }) {
+export function EducatorHero({ label, title, subtitle, image, imageAlt, accent = C.gold, variant = "split", visual = null }) {
   const imageSrc = typeof image === "string" ? image : image?.src;
+  const visualNode = visual || (imageSrc ? (
+    <img src={imageSrc} alt={imageAlt || ""} loading="eager" style={{
+      width: "100%", height: "100%", objectFit: "cover", display: "block",
+    }} />
+  ) : null);
 
   if (variant === "background" && imageSrc) {
     return (
@@ -246,7 +251,7 @@ export function EducatorHero({ label, title, subtitle, image, imageAlt, accent =
           <SectionTitle>{title}</SectionTitle>
           <Subtitle>{subtitle}</Subtitle>
         </div>
-        {imageSrc && (
+        {visualNode && (
           <figure style={{
             flex: "0 1 292px", width: "min(100%, 292px)", aspectRatio: "1 / 1",
             margin: "4px auto 0", borderRadius: 18, overflow: "hidden",
@@ -254,9 +259,7 @@ export function EducatorHero({ label, title, subtitle, image, imageAlt, accent =
             background: `linear-gradient(135deg, ${accent}14, ${C.midnight})`,
             boxShadow: `0 22px 70px rgba(0,0,0,0.28), 0 0 46px ${accent}12`,
           }}>
-            <img src={imageSrc} alt={imageAlt || ""} loading="eager" style={{
-              width: "100%", height: "100%", objectFit: "cover", display: "block",
-            }} />
+            {visualNode}
           </figure>
         )}
       </section>

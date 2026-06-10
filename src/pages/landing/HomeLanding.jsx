@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Home from "../Home.jsx";
+import Home from "../home/index.jsx";
 import { track } from "../../lib/analytics.js";
 import { useMotionTier } from "./useMotionTier.js";
 import { SKIP_LABEL } from "./sceneCopy.js";
@@ -174,6 +174,7 @@ export default function HomeLanding({ navigate }) {
   };
 
   if (mode === "skipped") {
+    // No landing scenes on screen, so the home hero keeps its own <h1>.
     return (
       <div style={{ paddingTop: 59 }}>
         <Home navigate={navigate} />
@@ -189,7 +190,7 @@ export default function HomeLanding({ navigate }) {
         <SceneDilemma />
         <SceneLibrary mode="static" />
         <div id="home-content">
-          <Home navigate={navigate} />
+          <Home navigate={navigate} embedded />
         </div>
       </div>
     );
@@ -215,7 +216,7 @@ export default function HomeLanding({ navigate }) {
         </div>
       </div>
       <div id="home-content">
-        <Home navigate={navigate} />
+        <Home navigate={navigate} embedded />
       </div>
     </div>
   );

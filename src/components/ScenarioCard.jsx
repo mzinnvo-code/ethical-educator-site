@@ -10,8 +10,10 @@ import ReadAloudButton from "./ReadAloudButton.jsx";
 import StageNav from "./StageNav.jsx";
 import SynthesisPanel from "./SynthesisPanel.jsx";
 import TeacherKit from "./TeacherKit.jsx";
+import DeepfakeGameExperience from "./DeepfakeGameExperience.jsx";
 import { sectionsToSpeech, buildSpeechText as buildReadAloudText } from "../lib/readAloudText.js";
 import audioManifest from "../data/k5AudioManifest.json";
+import { recordThoughtProgress } from "../hooks/useThoughtProgress.js";
 
 // For "Hear the choices": look up each option's audio file in the manifest.
 // If every option has an entry, return the ordered list of /audio/... URLs so
@@ -149,6 +151,7 @@ function TeacherToggle({ active, onToggle, accent }) {
 
 export default function ScenarioCard({
   experiment,
+  experimentIds = [],
   mode = "story",
   visualVariant,
   onClose,
@@ -201,6 +204,12 @@ export default function ScenarioCard({
   const elementaryGrade = experiment.gradeLevels?.[0];
   const useShortKidPrompt = mode === "kid" && (elementaryGrade === "k" || elementaryGrade === "1");
   const storySections = resolveStorySections(stage, chose, mode);
+  const isDeepfakeStoryGame = mode === "story" && experiment.id === "deepfake-election";
+  const progressBase = {
+    experimentId: experiment.id,
+    gradeBand: experiment.gradeBands?.[0] || mode,
+    topicIds: experiment.topics || [],
+  };
 
   // K-1 keeps very short read-aloud prompts. Older elementary students see
   // the fuller scenario copy, with optional sectioned story beats.
@@ -215,9 +224,25 @@ export default function ScenarioCard({
 
   const choiceForStage = stageChoiceIdx != null ? stage.options?.[stageChoiceIdx] : null;
 
+  useEffect(() => {
+    if (!experiment?.id || isSynthesisStage) return;
+    recordThoughtProgress({
+      type: "stage_started",
+      ...progressBase,
+      stageId: stage.id,
+    });
+  }, [experiment?.id, stage?.id, isSynthesisStage]);
+
   const handleChoose = (idx) => {
     if (!stage.options) return;
     if (stageChoiceIdx != null) return; // debounce — already chose for this stage
+    const opt = stage.options[idx];
+    recordThoughtProgress({
+      type: "choice_made",
+      ...progressBase,
+      stageId: stage.id,
+      lens: opt?.lens || null,
+    });
     audioBus.stop(); // stop any in-flight voice-over so the chime is alone
     setStageChoiceIdx(idx);
     if (stage.weighty) audio.playDeep();
@@ -229,11 +254,22 @@ export default function ScenarioCard({
     audioBus.stop();
     if (stageChoiceIdx != null) {
       const opt = stage.options[stageChoiceIdx];
+      recordThoughtProgress({
+        type: "stage_completed",
+        ...progressBase,
+        stageId: stage.id,
+        lens: opt?.lens || null,
+      });
       // Record this stage's choice
       const newChose = [...chose, opt];
       setChose(newChose);
       if (opt?.lens) onRecordChoice?.(opt.lens, experiment.id);
     } else {
+      recordThoughtProgress({
+        type: "stage_completed",
+        ...progressBase,
+        stageId: stage.id,
+      });
       setChose(prev => [...prev, null]);
     }
     setStageChoiceIdx(null);
@@ -261,10 +297,22 @@ export default function ScenarioCard({
   const handleRestart = () => {
     audioBus.stop();
     audio.playClick();
+    recordThoughtProgress({
+      type: "experiment_restarted",
+      ...progressBase,
+    });
     setStageIdx(0);
     setChose([]);
     setStageChoiceIdx(null);
     scrollToCardTop();
+  };
+
+  const handlePickRelated = (next) => {
+    recordThoughtProgress({
+      type: "related_opened",
+      ...progressBase,
+    });
+    onPickRelated?.(next);
   };
 
   // Header bar: kicker, stage indicator + teacher kit toggle
@@ -437,7 +485,7 @@ export default function ScenarioCard({
         {isSynthesisStage && (
           <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
             onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
-            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
+            relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -449,7 +497,7 @@ export default function ScenarioCard({
   if (mode === "story") {
     return (
       <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
-      <Shell color={accent}>
+      <Shell color={accent} compact={isDeepfakeStoryGame}>
         <div style={{ display: "flex", alignItems: "flex-start", gap: 14, marginBottom: 14, flexWrap: "wrap" }}>
           <div style={{ flex: 1, minWidth: 220 }}>
             <h2 style={{ fontFamily: "'Source Serif 4', Georgia, serif", color: C.textPrimary, fontSize: "1.55rem", fontWeight: 700, marginBottom: 6 }}>
@@ -461,87 +509,114 @@ export default function ScenarioCard({
 
         <HeaderBar />
 
-        {Scene && (
-          <Scene
-            stage={stageIdx}
-            stageId={stage.id}
-            stageTitle={stage.title || stage.kicker}
-            stageCount={stages.length}
-            visualVariant={sceneVariant}
-            chose={chose}
-            mode={mode}
+        {isDeepfakeStoryGame ? (
+          <DeepfakeGameExperience
+            stageIdx={stageIdx}
+            stage={stage}
+            stages={stages}
+            experiment={experiment}
+            storySections={storySections}
+            promptText={promptText}
+            readAloudText={readAloudText}
+            experimentIds={experimentIds}
+            gameWide={isDeepfakeStoryGame}
+            choiceForStage={choiceForStage}
+            stageChoiceIdx={stageChoiceIdx}
+            isSynthesisStage={isSynthesisStage}
+            onChoose={handleChoose}
+            onNext={handleNext}
+            onRestart={handleRestart}
+            renderSynthesis={() => (
+              <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
+                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+                relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
+            )}
           />
-        )}
-
-        {!isSynthesisStage && (
+        ) : (
           <>
-            {stage.title && stage.title !== experiment.title && (
-              <h3 style={{
-                fontFamily: "'Source Serif 4', Georgia, serif",
-                color: accent, fontSize: "1.1rem", fontWeight: 700,
-                marginBottom: 8,
-              }}>{stage.title}</h3>
+            {Scene && (
+              <Scene
+                stage={stageIdx}
+                stageId={stage.id}
+                stageTitle={stage.title || stage.kicker}
+                stageCount={stages.length}
+                visualVariant={sceneVariant}
+                chose={chose}
+                mode={mode}
+              />
             )}
 
-            <StorySections sections={storySections} accent={accent} />
-
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 18 }}>
-              <ReadAloudButton text={readAloudText} variant="icon" rate={0.95} />
-              {storySections.length ? (
-                <div style={{
-                  flex: 1,
-                  padding: "13px 15px",
-                  borderRadius: 12,
-                  background: `${accent}10`,
-                  border: `1px solid ${accent}28`,
-                }}>
-                  <p style={{
-                    color: accent,
-                    fontSize: "0.62rem",
-                    fontWeight: 800,
-                    letterSpacing: "0.13em",
-                    textTransform: "uppercase",
-                    marginBottom: 5,
-                  }}>
-                    The question
-                  </p>
-                  <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif", margin: 0 }}>
-                    {promptText}
-                  </p>
-                </div>
-              ) : (
-                <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
-                  {promptText}
-                </p>
-              )}
-            </div>
-
-            {stageChoiceIdx == null ? (
+            {!isSynthesisStage && (
               <>
-                <SteelmanRule />
-                <div style={{ display: "grid", gap: 10 }}>
-                  {stage.options?.map((opt, i) => (
-                    <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
-                      <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
-                      {opt.text}
-                    </ChoiceBtn>
-                  ))}
+                {stage.title && stage.title !== experiment.title && (
+                  <h3 style={{
+                    fontFamily: "'Source Serif 4', Georgia, serif",
+                    color: accent, fontSize: "1.1rem", fontWeight: 700,
+                    marginBottom: 8,
+                  }}>{stage.title}</h3>
+                )}
+
+                <StorySections sections={storySections} accent={accent} />
+
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 18 }}>
+                  <ReadAloudButton text={readAloudText} variant="icon" rate={0.95} />
+                  {storySections.length ? (
+                    <div style={{
+                      flex: 1,
+                      padding: "13px 15px",
+                      borderRadius: 12,
+                      background: `${accent}10`,
+                      border: `1px solid ${accent}28`,
+                    }}>
+                      <p style={{
+                        color: accent,
+                        fontSize: "0.62rem",
+                        fontWeight: 800,
+                        letterSpacing: "0.13em",
+                        textTransform: "uppercase",
+                        marginBottom: 5,
+                      }}>
+                        The question
+                      </p>
+                      <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif", margin: 0 }}>
+                        {promptText}
+                      </p>
+                    </div>
+                  ) : (
+                    <p style={{ color: C.textPrimary, fontSize: "1rem", lineHeight: 1.7, fontFamily: "'Source Serif 4', Georgia, serif" }}>
+                      {promptText}
+                    </p>
+                  )}
                 </div>
+
+                {stageChoiceIdx == null ? (
+                  <>
+                    <SteelmanRule />
+                    <div style={{ display: "grid", gap: 10 }}>
+                      {stage.options?.map((opt, i) => (
+                        <ChoiceBtn key={i} onClick={() => handleChoose(i)} color={accent}>
+                          <span style={{ color: accent, fontWeight: 700, marginRight: 8 }}>{opt.label}.</span>
+                          {opt.text}
+                        </ChoiceBtn>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
+                    <ReflectionPanel option={choiceForStage} color={accent} />
+                    {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
+                    <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
+                  </div>
+                )}
               </>
-            ) : (
-              <div ref={reflectionRef} role="region" aria-live="polite" aria-label="Your reflection">
-                <ReflectionPanel option={choiceForStage} color={accent} />
-                {stage.counterpoint && <CounterArgument color={C.coral}>{stage.counterpoint}</CounterArgument>}
-                <NextOrFinish isLast={isLastStage} accent={accent} onNext={handleNext} onRestart={handleRestart} />
-              </div>
+            )}
+
+            {isSynthesisStage && (
+              <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
+                onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
+                relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
             )}
           </>
-        )}
-
-        {isSynthesisStage && (
-          <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
-            onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
-            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
         )}
       </Shell>
       <TeacherKitBelow />
@@ -672,7 +747,7 @@ export default function ScenarioCard({
       {isSynthesisStage && (
         <SynthesisStage stage={stage} chose={chose} experiment={experiment} accent={accent}
           onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages}
-            relatedExperiment={relatedExperiment} onPickRelated={onPickRelated} />
+            relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
       )}
     </Shell>
     <TeacherKitBelow />
@@ -733,6 +808,17 @@ function SynthesisStage({ stage, chose, experiment, accent, onRestart, onClose, 
   const customSynthesis = typeof stage.synthesis === "function"
     ? stage.synthesis({ chose, experiment, accent, mode })
     : null;
+
+  useEffect(() => {
+    if (!experiment?.id) return;
+    recordThoughtProgress({
+      type: "experiment_completed",
+      experimentId: experiment.id,
+      gradeBand: experiment.gradeBands?.[0] || mode,
+      topicIds: experiment.topics || [],
+      stageId: stage?.id || "synthesis",
+    });
+  }, [experiment?.id]);
 
   return (
     <div>

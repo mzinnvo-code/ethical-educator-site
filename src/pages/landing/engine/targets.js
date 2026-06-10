@@ -50,8 +50,8 @@ export function forkTargets(count, width, height) {
   return out;
 }
 
-// 109-node library: four grade-band clusters, color-coherent via `groups`
-// (0 gold, 1 teal, 2 sky, 3 coral). Dust orbits its cluster center.
+// The library constellation: four grade-band clusters, color-coherent via
+// `groups` (0 gold, 1 teal, 2 sky, 3 coral). Dust orbits its cluster center.
 export function constellationTargets(count, width, height, groups) {
   const centers = [
     [-0.34, 0.1],

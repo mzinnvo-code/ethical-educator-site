@@ -20,7 +20,7 @@ const LENS_INFO = {
   realism: { label: "Realist", blurb: "You insist on the difference between how things appear and how they are.", suggest: "knowledge" },
 };
 
-export default function ReasoningProfile({ choices = [], onSuggestTopic, onReset }) {
+export default function ReasoningProfile({ choices = [], onSuggestTopic, onReset, sticky = true }) {
   const [collapsed, setCollapsed] = useState(false);
 
   const lensCounts = choices.reduce((acc, l) => {
@@ -44,7 +44,9 @@ export default function ReasoningProfile({ choices = [], onSuggestTopic, onReset
       aria-live="polite"
       aria-label="Your reasoning profile this session"
       style={{
-        position: "sticky", bottom: 16, marginTop: 32,
+        position: sticky ? "sticky" : "static",
+        bottom: sticky ? 16 : "auto",
+        marginTop: 32,
         background: `linear-gradient(135deg, ${C.surface}, ${C.bgAlt})`,
         border: `1px solid ${C.gold}40`,
         borderRadius: 14,

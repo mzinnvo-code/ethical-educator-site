@@ -8,7 +8,7 @@ export default function Privacy({ navigate }) {
         <FadeIn>
           <SectionLabel>Legal</SectionLabel>
           <SectionTitle>Privacy Policy</SectionTitle>
-          <p style={{ color: C.textMuted, fontSize: "0.8rem", marginTop: 8 }}>Last updated: May 2026</p>
+              <p style={{ color: C.textMuted, fontSize: "0.8rem", marginTop: 8 }}>Last updated: June 2026</p>
         </FadeIn>
 
         <Narrow>
@@ -28,7 +28,7 @@ export default function Privacy({ navigate }) {
             <FadeIn delay={0.1}>
               <Divider label="Interactive Features" />
               <p>By default, the interactive thought experiments on this site store your in-session choices in browser memory only (JavaScript variables). This data is never transmitted anywhere and disappears the moment you close or refresh the page.</p>
-              <p style={{ marginTop: 10 }}>If you opt in to the <strong>Decision Journal</strong> by clicking <em>Save to journal</em> at the end of any thought experiment, your saved entries are written to your browser's <code>localStorage</code> on this device only. Nothing is transmitted to any server, and no account is created. You can export your journal as a Markdown file or clear it at any time from the Decision Journal page. Clearing your browser's site data also erases the journal.</p>
+              <p style={{ marginTop: 10 }}>If you opt in to the <strong>Decision Journal</strong> by clicking <em>Save to journal</em> at the end of any thought experiment, your saved entries are written to your browser's <code>localStorage</code> on this device only. The optional Thought Experiments progress panel also stores local progress signals, such as completed dilemmas, reasoning lenses, replays, and earned mastery badges, in <code>localStorage</code>. Nothing is transmitted to any server, and no account is created. You can export your journal as a Markdown file, clear journal entries from the Decision Journal page, or reset progress from the progress panel. Clearing your browser's site data also erases both local features.</p>
             </FadeIn>
 
             <FadeIn delay={0.12}>
@@ -46,7 +46,7 @@ export default function Privacy({ navigate }) {
             <FadeIn delay={0.16}>
               <Divider label="Children's Privacy" />
               <p>The site includes content designed for use with children — including thought experiments tagged for kindergarten through grade five — but is intended to be presented to children by a parent, teacher, or other supervising adult, not for independent use by children.</p>
-              <p style={{ marginTop: 10 }}>We do not knowingly collect personal information from any visitor, including children under 13. The optional Decision Journal feature stores entries only in the user's own browser via <code>localStorage</code> and never transmits them. If you believe a child has provided information through any future feature in a way that conflicts with this policy, please contact <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
+              <p style={{ marginTop: 10 }}>We do not knowingly collect personal information from any visitor, including children under 13. The optional Decision Journal and Thought Experiments progress features store entries and progress only in the user's own browser via <code>localStorage</code> and never transmit them. If you believe a child has provided information through any future feature in a way that conflicts with this policy, please contact <a href="mailto:hello@examinedclassroom.com" style={{ color: C.gold, textDecoration: "underline" }}>hello@examinedclassroom.com</a>.</p>
             </FadeIn>
 
             <FadeIn delay={0.18}>
@@ -54,7 +54,7 @@ export default function Privacy({ navigate }) {
               <p>Because the site does not collect or retain account-level personal information about visitors, most data-subject rights under privacy laws (such as the EU General Data Protection Regulation and the California Consumer Privacy Act / California Privacy Rights Act) have no user record to apply to. For completeness:</p>
               <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
                 <li><strong style={{ color: C.textPrimary }}>Right to know / access:</strong> we do not hold personal data about you.</li>
-                <li><strong style={{ color: C.textPrimary }}>Right to delete / erasure:</strong> you can clear your browser's site data to erase any locally stored Decision Journal entries.</li>
+                <li><strong style={{ color: C.textPrimary }}>Right to delete / erasure:</strong> you can clear your browser's site data to erase any locally stored Decision Journal entries and Thought Experiments progress.</li>
                 <li><strong style={{ color: C.textPrimary }}>Right to opt out of sale or sharing:</strong> we do not sell or share personal information.</li>
                 <li><strong style={{ color: C.textPrimary }}>Right to non-discrimination:</strong> we will not deny service for exercising any of these rights.</li>
               </ul>

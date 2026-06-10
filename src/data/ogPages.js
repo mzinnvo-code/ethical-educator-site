@@ -83,6 +83,9 @@ export const OG_PAGES = [
   { id: "audiences/parent", title: "For Parents & Families", section: "Conversations to have at home", accent: OG_ACCENTS.coral },
   { id: "audiences/student", title: "For Students", section: "Branching scenarios + AI dilemmas", accent: OG_ACCENTS.teal },
 
+  // Educator resources
+  { id: "gamification-in-education", title: "Gamification in Education", section: "Student engagement without shallow rewards", accent: OG_ACCENTS.coral },
+
   // Thought experiment hubs
   { id: "thought-experiments/educators", title: "Thought Experiments for Educators", section: "Adult dilemmas for staff PD", accent: OG_ACCENTS.gold },
   { id: "thought-experiments/k-5", title: "K–5 Thought Experiments", section: "Storylike dilemmas for elementary classrooms", accent: OG_ACCENTS.teal },
