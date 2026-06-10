@@ -425,6 +425,57 @@ test("Wonder Workshop audio uses generated samples with synth fallback and a mus
   assert.match(scenarioSource, /playWonderSfx\("stage-turn"\)/);
 });
 
+test("Workshop art pipeline catalog is consistent and its pure helpers behave", async () => {
+  const art = await import("../../scripts/generate-workshop-art.mjs");
+  const catalog = art.WORKSHOP_ART_CATALOG;
+
+  const ids = catalog.map((entry) => entry.dropId);
+  assert.equal(new Set(ids).size, ids.length, "dropIds must be unique");
+  assert.equal(catalog.filter((entry) => !entry.optional).length, 13);
+  assert.equal(art.MEMENTO_OBJECTS.length, 24);
+
+  for (const entry of catalog) {
+    assert.match(entry.requestSize, /^(1024x1024|1536x1024|1024x1536)$/, `${entry.dropId} must use a ChatGPT-supported size`);
+    const targets = entry.kind === "sheet" ? entry.cells.map((cell) => cell.target) : [entry.target];
+    for (const target of targets) {
+      assert.match(target, /^public\/experiment-scenes\//, `${entry.dropId} target ${target}`);
+      assert.match(target, /\.webp$/);
+    }
+    if (entry.kind === "sheet") {
+      const cellCount = entry.grid.cols * entry.grid.rows;
+      for (const cell of entry.cells) {
+        assert.ok(cell.cell >= 0 && cell.cell < cellCount, `${entry.dropId} cell ${cell.cell} in range`);
+      }
+    }
+  }
+
+  // Catalog dims agree with the runtime registries' current contracts.
+  const roomEntryT4 = catalog.find((entry) => entry.dropId === "room-tier-4");
+  assert.deepEqual(roomEntryT4.dims, [1920, 1080]);
+  const badgeSheet = catalog.find((entry) => entry.dropId === "badges-sheet");
+  assert.equal(badgeSheet.cells.length, K5_BADGES.length);
+  assert.deepEqual(badgeSheet.cells.map((cell) => cell.id).sort(), K5_BADGES.map((badge) => badge.id).sort());
+  for (const cell of badgeSheet.cells) assert.deepEqual(cell.dims, [220, 220]);
+  const brainSheet = catalog.find((entry) => entry.dropId === "brain-states-sheet");
+  for (const cell of brainSheet.cells) assert.deepEqual(cell.dims, [260, 190]);
+
+  // Pure helpers: grid math on the three supported canvases.
+  const cells = art.gridCells(1024, 1024, { cols: 3, rows: 3 });
+  assert.equal(cells.length, 9);
+  assert.equal(cells[0].left, Math.round(341 * 0.03));
+  assert.ok(cells[8].left + cells[8].width <= 1024);
+  const bands = art.gridCells(1536, 1024, { cols: 1, rows: 2 });
+  assert.equal(bands.length, 2);
+  assert.ok(bands[1].top > 512);
+
+  // Drop-file matching: case-insensitive, extension-agnostic, "(1)" tolerant.
+  const plan = art.planIngest(["Badges-Sheet.PNG", "room-tier-4 (1).png", "mystery.png"], catalog);
+  assert.deepEqual(plan.matches.map((match) => match.entry.dropId).sort(), ["badges-sheet", "room-tier-4"]);
+  assert.deepEqual(plan.unmatched, ["mystery.png"]);
+  assert.ok(plan.missing.includes("brain-states-sheet"));
+  assert.ok(!plan.missing.includes("ari-cheer-sheet"), "optional entries are not 'missing'");
+});
+
 test("Progress Room door and stat assets exist as project-local bitmap UI art", () => {
   assert.deepEqual(Object.keys(PROGRESS_ROOM_DOOR_ASSETS).sort(), ["closed", "crack", "glow", "open"]);
   assert.deepEqual(Object.keys(PROGRESS_ROOM_STAT_ASSETS).sort(), ["badges", "brain", "finished", "skills"]);

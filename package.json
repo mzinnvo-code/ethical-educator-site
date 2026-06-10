@@ -18,7 +18,10 @@
     "audio:generate": "node --env-file=.env.local scripts/generate-k5-audio.mjs",
     "audio:scene": "node --env-file=.env.local scripts/generate-scene-audio.mjs",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "audio:workshop": "node --env-file=.env.local scripts/generate-workshop-audio.mjs"
+    "audio:workshop": "node --env-file=.env.local scripts/generate-workshop-audio.mjs",
+    "art:prompts": "node scripts/generate-workshop-art.mjs --prompts",
+    "art:ingest": "node --env-file-if-exists=.env.local scripts/generate-workshop-art.mjs --ingest",
+    "art:normalize": "node scripts/generate-workshop-art.mjs --normalize"
   },
   "dependencies": {
     "minisearch": "^7.2.0",
