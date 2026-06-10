@@ -10,7 +10,7 @@ const DOOR_SIZES = {
 // The pixel door into the Progress Room / Wonder Workshop. The four stacked
 // door frames are stepped through by the .progress-room-door-opening
 // keyframes (see wonderStyles.js) before the modal opens.
-export function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES.middle, size = "default" }) {
+export function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES.middle, size = "default", buttonRef = null }) {
   const doorAssets = theme.assets?.door || PROGRESS_ROOM_DOOR_ASSETS;
   const dims = DOOR_SIZES[size] || DOOR_SIZES.default;
   const doorFrames = [
@@ -21,6 +21,7 @@ export function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES
   ];
   return (
     <button
+      ref={buttonRef}
       type="button"
       className={`progress-room-door-button ${opening ? "progress-room-door-opening" : ""}`}
       data-testid="progress-room-modal-trigger"

@@ -26,6 +26,7 @@ import AnimatedAriInvite from "./wonder/AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./wonder/DoorButton.jsx";
 import StageInspector from "./wonder/StageInspector.jsx";
 import CollectionDrawer from "./wonder/CollectionDrawer.jsx";
+import useIrisTransition, { IrisOverlay } from "./wonder/useIrisTransition.jsx";
 import WonderDashboard from "./wonder/WonderDashboard.jsx";
 
 const DIMENSIONS = [
@@ -723,7 +724,7 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
   );
 }
 
-function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements, totalAchievements, onOpen, accent, opening, theme = TRACKER_THEMES.middle }) {
+function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements, totalAchievements, onOpen, accent, opening, theme = TRACKER_THEMES.middle, doorAnchorRef = null }) {
   return (
     <div
       className="progress-room-invitation"
@@ -762,7 +763,7 @@ function ProgressRoomInvitation({ earnedBadges, totalBadges, earnedAchievements,
           {theme.invitationCounts({ earnedBadges, totalBadges, earnedAchievements, totalAchievements })}
         </p>
       </div>
-      <ProgressRoomDoorButton onOpen={onOpen} opening={opening} theme={theme} />
+      <ProgressRoomDoorButton onOpen={onOpen} opening={opening} theme={theme} buttonRef={doorAnchorRef} />
     </div>
   );
 }
@@ -1144,6 +1145,8 @@ export default function ThoughtProgressPanel({
   const previousFocusRef = useRef(null);
   const inspectorReturnRef = useRef(null);
   const doorTimerRef = useRef(null);
+  const doorAnchorRef = useRef(null);
+  const { iris, run: runIris } = useIrisTransition();
   const sfx = useProgressRoomSfx();
   const achievements = theme.showAchievementsTab ? getAchievementStatus(progress, achievementIds) : [];
   const brain = getBrainProgress(progress, { experimentIds, achievementIds });
@@ -1221,7 +1224,8 @@ export default function ThoughtProgressPanel({
     if (doorTimerRef.current) window.clearTimeout(doorTimerRef.current);
     doorTimerRef.current = window.setTimeout(() => {
       setDoorOpening(false);
-      openProgressRoom();
+      // Iris wipe: the workshop swallows the screen from the door outward.
+      runIris(doorAnchorRef.current, openProgressRoom);
     }, DOOR_OPEN_DELAY_MS);
   };
 
@@ -1330,6 +1334,7 @@ export default function ThoughtProgressPanel({
           onOpenDoor={openProgressRoomDoor}
           doorOpening={doorOpening}
           celebrate={Boolean(celebrateExperimentId)}
+          doorAnchorRef={doorAnchorRef}
         />
       ) : (
         <>
@@ -1404,6 +1409,7 @@ export default function ThoughtProgressPanel({
               accent={accent}
               opening={doorOpening}
               theme={theme}
+              doorAnchorRef={doorAnchorRef}
             />
           )}
         </>
@@ -1492,6 +1498,7 @@ export default function ThoughtProgressPanel({
         onClearSelection={clearSelection}
         onGoPlay={goPlayMemento}
       />
+      <IrisOverlay iris={iris} />
     </section>
   );
 }

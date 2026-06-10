@@ -112,11 +112,21 @@ export default function CelebrationOverlay({
         .wonder-celebrate-trophy img {
           animation: wonder-trophy-shine 1.6s steps(2, end) infinite;
         }
+        @keyframes wonder-trophy-stamp {
+          0% { opacity: 0; transform: scale(1.6); }
+          55% { opacity: 1; transform: scale(0.96); filter: brightness(2); }
+          75% { transform: scale(1.04); filter: brightness(1); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+        .wonder-celebrate-trophy {
+          animation: wonder-trophy-stamp 420ms steps(4, end) 700ms both;
+        }
         @media (prefers-reduced-motion: reduce) {
           .wonder-confetti span,
           .wonder-celebrate-card,
           .wonder-celebrate-emoji,
           .wonder-light-pip,
+          .wonder-celebrate-trophy,
           .wonder-celebrate-trophy img {
             animation: none !important;
             opacity: 1 !important;

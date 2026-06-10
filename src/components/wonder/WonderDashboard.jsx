@@ -23,6 +23,7 @@ export default function WonderDashboard({
   onOpenDoor,
   doorOpening,
   celebrate = false,
+  doorAnchorRef = null,
 }) {
   const sparkLabel = hudNextGoalText({ brain, badges, achievements });
   const sparkHint = nextSparkHint({ brain, badges, achievements });
@@ -268,7 +269,7 @@ export default function WonderDashboard({
             <PixelText as="p" size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.12em", textAlign: "center", maxWidth: 140 }}>
               {theme.invitationEyebrow}
             </PixelText>
-            <ProgressRoomDoorButton onOpen={onOpenDoor} opening={doorOpening} theme={theme} size="large" />
+            <ProgressRoomDoorButton onOpen={onOpenDoor} opening={doorOpening} theme={theme} size="large" buttonRef={doorAnchorRef} />
             {celebrate && (
               <>
                 <span className="wonder-dashboard-door-sparkle" aria-hidden="true" style={{ top: 18, right: 8 }} />

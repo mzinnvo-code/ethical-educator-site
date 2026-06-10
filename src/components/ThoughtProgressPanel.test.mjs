@@ -455,6 +455,24 @@ test("Trophy room inspects items in place with an anchored popover and collectio
   assert.equal(centered.centered, true, "small stages get the centered card");
 });
 
+test("Wonder Workshop transitions are steps()-timed and reduced-motion guarded", () => {
+  const source = readWonderSource();
+  const scenarioSource = readFileSync("src/components/ScenarioCard.jsx", "utf8");
+
+  // Door iris wipe grows from the clicked door and respects reduced motion.
+  assert.match(source, /function useIrisTransition/);
+  assert.match(source, /wonder-iris-cover/);
+  assert.match(source, /clip-path: circle\(0px at var\(--iris-x\) var\(--iris-y\)\)/);
+  assert.match(source, /runIris\(doorAnchorRef\.current, openProgressRoom\)/);
+  assert.match(source, /prefers-reduced-motion: reduce.*\n.*onCovered\(\)|reducedMotion\) \{\s*onCovered\(\);/);
+
+  // Story stages dissolve in kid mode; trophy banner stamps in.
+  assert.match(scenarioSource, /wonder-stage-enter/);
+  assert.match(scenarioSource, /<div key=\{stageIdx\} className="wonder-stage-enter">/);
+  assert.match(source, /wonder-trophy-stamp/);
+  assert.match(source, /wonder-door-glint/);
+});
+
 test("Workshop art pipeline catalog is consistent and its pure helpers behave", async () => {
   const art = await import("../../scripts/generate-workshop-art.mjs");
   const catalog = art.WORKSHOP_ART_CATALOG;
@@ -559,7 +577,8 @@ test("Progress Room door opening respects reduced motion and delays only for the
   assert.match(source, /const DOOR_OPEN_DELAY_MS = 560/);
   assert.match(source, /window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches/);
   assert.match(source, /setDoorOpening\(true\)/);
-  assert.match(source, /window\.setTimeout\(\(\) => \{\s*setDoorOpening\(false\);\s*openProgressRoom\(\);\s*\}, DOOR_OPEN_DELAY_MS\)/);
+  assert.match(source, /window\.setTimeout\(\(\) => \{\s*setDoorOpening\(false\);[\s\S]{0,240}DOOR_OPEN_DELAY_MS\)/);
+  assert.match(source, /runIris\(doorAnchorRef\.current, openProgressRoom\)/);
   assert.match(source, /if \(reducedMotion\) \{\s*openProgressRoom\(\);\s*return;\s*\}/);
 });
 

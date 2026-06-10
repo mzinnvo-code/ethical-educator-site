@@ -354,7 +354,20 @@ export default function ScenarioCard({
   if (mode === "kid") {
     return (
       <div ref={cardTopRef} style={{ scrollMarginTop: 80 }}>
+      <style>{`
+        @keyframes wonder-stage-enter {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .wonder-stage-enter {
+          animation: wonder-stage-enter 240ms steps(3, end) both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wonder-stage-enter { animation: none; }
+        }
+      `}</style>
       <Shell color={accent}>
+        <div key={stageIdx} className="wonder-stage-enter">
         <HeaderBar />
 
         {Scene && (
@@ -496,6 +509,7 @@ export default function ScenarioCard({
             onRestart={handleRestart} onClose={handleAdvanceFromSynthesis} mode={mode} stages={stages} onGoToHub={onGoToHub}
             relatedExperiment={relatedExperiment} onPickRelated={handlePickRelated} />
         )}
+        </div>
       </Shell>
       <TeacherKitBelow />
       </div>

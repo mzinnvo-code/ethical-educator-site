@@ -42,6 +42,26 @@ export const WONDER_CORE_CSS = `
   .progress-room-key-glint {
     animation: key-glint 6.4s steps(1, end) infinite;
   }
+  @keyframes wonder-door-glint {
+    0%, 86%, 100% { left: -28%; opacity: 0; }
+    88% { opacity: 0.55; }
+    96% { left: 110%; opacity: 0.4; }
+    97% { opacity: 0; }
+  }
+  .progress-room-door-frame {
+    overflow: hidden;
+  }
+  .progress-room-door-frame::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -28%;
+    width: 16%;
+    background: linear-gradient(105deg, transparent, ${C.gold}88, transparent);
+    animation: wonder-door-glint 7s steps(6, end) infinite;
+    pointer-events: none;
+  }
   .progress-room-door-beam {
     animation: door-beam 6.4s steps(1, end) infinite;
   }
@@ -86,6 +106,7 @@ export const WONDER_CORE_CSS = `
     .progress-room-ari-portrait-shadow,
     .progress-room-door-beam,
     .progress-room-door-img,
+    .progress-room-door-frame::after,
     .thought-progress-brain-frame img {
       animation: none !important;
     }
