@@ -10,7 +10,7 @@ import { buildRouteSchema, ogTypeFor } from "./lib/seoSchema.js";
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
 // via React.lazy so a fresh visit only loads what it needs.
-import Home from "./pages/Home.jsx";
+import Home from "./pages/home/index.jsx";
 
 // NewsletterSignup is used in the footer of every page — needs to be eager
 // so the footer doesn't pop in. Modal renders null until visit-count triggers
