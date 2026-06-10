@@ -10,7 +10,9 @@ import { buildRouteSchema, ogTypeFor } from "./lib/seoSchema.js";
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
 // via React.lazy so a fresh visit only loads what it needs.
-import Home from "./pages/Home.jsx";
+// HomeLanding wraps Home with the scroll-driven landing cinematic; the
+// GSAP/Three.js engine inside it stays lazy (loaded on idle/first input).
+import HomeLanding from "./pages/landing/HomeLanding.jsx";
 
 // NewsletterSignup is used in the footer of every page — needs to be eager
 // so the footer doesn't pop in. Modal renders null until visit-count triggers
@@ -113,7 +115,7 @@ function NotFound({ navigate }) {
 }
 
 const PAGE_MAP = {
-  "home": Home,
+  "home": HomeLanding,
   "about": About,
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
@@ -614,7 +616,7 @@ export default function App() {
   }, [currentPage]);
 
   const isNotFound = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
-  const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || Home);
+  const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || HomeLanding);
 
   return (
     <>
@@ -633,7 +635,9 @@ export default function App() {
         .skip-link{position:absolute;left:12px;top:-44px;z-index:10000;padding:10px 16px;background:${C.gold};color:${C.midnight};font-weight:600;font-size:0.85rem;border-radius:6px;text-decoration:none;transition:top 0.2s}
         .skip-link:focus{top:12px;opacity:1}
         #main:focus{outline:none}
-        .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
+        .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border};transition:opacity 0.6s ease,transform 0.6s ease}
+        html[data-landing-intro] .topbar{opacity:0;pointer-events:none;transform:translateY(-10px)}
+        html[data-landing-intro] .section-stripe{opacity:0}
         .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
         .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
         .brand-mark img{width:20px;height:20px;display:block}
@@ -724,6 +728,7 @@ export default function App() {
           the fixed topbar. Color shifts to match the current section. */}
       <div
         aria-hidden="true"
+        className="section-stripe"
         style={{
           position: "fixed",
           top: 56,
@@ -732,12 +737,21 @@ export default function App() {
           height: 3,
           background: getSectionAccent(currentPage),
           zIndex: 999,
-          transition: "background 0.4s ease",
+          transition: "background 0.4s ease, opacity 0.6s ease",
         }}
       />
 
       {/* PAGE CONTENT */}
-      <main id="main" tabIndex={-1} style={{ paddingTop: 59 }} className="page-enter" key={currentPage}>
+      {/* The home route hosts the landing cinematic: no top padding (scene 1
+          is full-bleed under the hidden TopBar) and no page-enter animation
+          (a transformed ancestor would break ScrollTrigger pinning). */}
+      <main
+        id="main"
+        tabIndex={-1}
+        style={{ paddingTop: currentPage === "home" ? 0 : 59 }}
+        className={currentPage === "home" ? undefined : "page-enter"}
+        key={currentPage}
+      >
         <Suspense fallback={null}>
           {isNotFound
             ? <NotFound navigate={navigate} />

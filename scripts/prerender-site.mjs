@@ -5,6 +5,7 @@ import { SITE } from "../src/siteConfig.js";
 import { GROWTH_PAGE_META, SEARCH_LANDING_PAGE_BY_ROUTE, TEACHING_RESOURCE_PAGE_BY_ROUTE } from "../src/data/growthPages.js";
 import { OG_PAGES_BY_ID } from "../src/data/ogPages.js";
 import { buildRouteSchema, cleanTitle, ogTypeFor } from "../src/lib/seoSchema.js";
+import { LANDING_SEO_TEXT } from "../src/pages/landing/sceneCopy.js";
 
 const DIST = path.resolve("dist");
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
@@ -14,7 +15,13 @@ const STATIC_ROUTE_META = {
   home: {
     title: SITE.brandName,
     description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
-    text: ["The Examined Classroom", "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance."],
+    // First two entries are load-bearing for test:crawlability; the rest is
+    // the landing cinematic's copy so "/" stays fully crawlable without JS.
+    text: [
+      "The Examined Classroom",
+      "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance.",
+      ...LANDING_SEO_TEXT,
+    ],
     links: [
       { label: "Interactive Thought Experiments", href: "/thought-experiments" },
       { label: "AI Ethics Lesson Plans", href: "/ai-ethics-lesson-plans" },

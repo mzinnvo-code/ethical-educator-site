@@ -163,7 +163,7 @@ function HomeStyles() {
         max-width:100%;
         overflow-wrap:break-word;
       }
-      .home-hero h1{
+      .home-hero h1,.home-hero h2{
         color:${C.textPrimary};
         font-family:'Source Serif 4',Georgia,serif;
         font-size:clamp(2.7rem,6vw,5rem);
@@ -521,7 +521,7 @@ function HomeStyles() {
           letter-spacing:0.12em;
           line-height:1.55;
         }
-        .home-hero h1{
+        .home-hero h1,.home-hero h2{
           font-size:clamp(2.08rem,12vw,2.9rem);
           line-height:1.04;
         }
@@ -702,7 +702,8 @@ export default function Home({ navigate }) {
           <FadeIn>
             <div className="home-hero-content">
               <p className="home-eyebrow">For educators, students, school leaders, and families</p>
-              <h1>Make AI ethics usable.</h1>
+              {/* h2, not h1: the landing's opening scene owns the page h1. */}
+              <h2>Make AI ethics usable.</h2>
               <p className="home-hero-copy">
                 The Examined Classroom helps people reason through AI, learning, fairness, authorship,
                 identity, and judgment with classroom-ready thought experiments, practical educator
