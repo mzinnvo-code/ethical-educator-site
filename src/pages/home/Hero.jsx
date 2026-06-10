@@ -5,7 +5,10 @@ import { HomeButton } from "./parts.jsx";
 
 const PARALLAX_SPRING = { stiffness: 50, damping: 20, mass: 0.6 };
 
-export default function Hero({ navigate }) {
+export default function Hero({ navigate, embedded = false }) {
+  // Under the landing cinematic the page <h1> lives in the opening scene;
+  // the hero demotes itself to keep the heading outline valid.
+  const Heading = embedded ? "h2" : "h1";
   const reducedMotion = useReducedMotion();
   const pointerFine = usePointerFine();
   const parallaxOn = pointerFine && !reducedMotion;
@@ -80,14 +83,14 @@ export default function Hero({ navigate }) {
           <m.p className="home-eyebrow" variants={fadeRise}>
             For teachers, school leaders, and families
           </m.p>
-          <h1>
+          <Heading>
             <span className="hero-line">
               <m.span className="hero-line-inner" variants={maskRiseLine}>Make AI ethics</m.span>
             </span>{" "}
             <span className="hero-line">
               <m.span className="hero-line-inner" variants={maskRiseLine}><em className="hero-accent-word">usable.</em></m.span>
             </span>
-          </h1>
+          </Heading>
           <m.p className="home-hero-copy" variants={fadeRise}>
             Classroom-ready thought experiments, lesson plans, and research-grounded philosophy —
             so the students in front of you learn to reason about AI, not just comply with it.

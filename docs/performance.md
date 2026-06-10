@@ -8,6 +8,7 @@ Every page on the site lazy-loads via `React.lazy()` + `<Suspense>`. The main bu
 - `App.jsx` (the router + chrome)
 - `theme.js`, `shared.jsx`, hooks, `analytics.js`
 - `Home.jsx` (the entry-point page — eager so the LCP isn't blocked on a chunk fetch)
+- `pages/landing/` shell (`HomeLanding.jsx`, scenes markup + styles — the landing cinematic's static layer; +~6KB gz)
 - `NewsletterSignup.jsx` (footer signup form, used on every page)
 
 Everything else — 50+ page components, the experiment scenes, the scenario copy files (`k5ScenarioCopy.js` ~131KB, `highSchoolScenarioCopy.js` ~169KB, `teacherKits.js` ~132KB), `ScenarioCard.jsx` and its dependencies — lives in per-route chunks fetched only when the user navigates there.
@@ -25,7 +26,12 @@ Everything else — 50+ page components, the experiment scenes, the scenario cop
 | `MoralPsychology.*.js` | 52KB | 17KB | `/moral-psych` |
 | `AIConsciousness.*.js` | 53KB | 16KB | `/ai-consciousness` |
 | `aiEducationResources.*.js` | 56KB | 19KB | First visit to an AI-Education sub-page |
+| `vendor-gsap.*.js` | 112KB | 45KB | Landing cinematic only — on idle/first input at "/" (never under reduced motion) |
+| `vendor-three.*.js` | 483KB | 124KB | Landing cinematic only — "gl" tier devices with WebGL (skipped on low-power/save-data) |
+| `initLandingEngine.*.js` + `particleScene.*.js` | ~18KB | ~6KB | With the chunks above |
 | Each other page | 10–35KB | 4–13KB | When navigated to |
+
+The landing engine chunks are dynamic-imported from `HomeLanding.jsx` after first paint (requestIdleCallback raced against first scroll/input), so "/"'s LCP — now the scene-1 headline text — never waits on them. `vite.config.js` pins gsap/three into named `vendor-*` chunks via `manualChunks`.
 
 Vite emits a warning that `experiments.*.js` is over 500KB — that's intentional. It's the consolidated scenes + scenario-copy bundle, only loaded when someone actually navigates to a thought experiment page. Splitting it further would require carving up `src/data/experiments.js`, which is the source-of-truth file for the whole experiment library. Not worth doing for marginal gains.
 

@@ -129,7 +129,7 @@ export default function HomeStyles() {
         max-width:100%;
         overflow-wrap:break-word;
       }
-      .home-hero h1{
+      .home-hero h1,.home-hero h2{
         color:${C.textPrimary};
         font-family:'Source Serif 4',Georgia,serif;
         font-size:clamp(3rem,7vw,5.5rem);
@@ -1024,7 +1024,7 @@ export default function HomeStyles() {
           letter-spacing:0.12em;
           line-height:1.55;
         }
-        .home-hero h1{
+        .home-hero h1,.home-hero h2{
           font-size:clamp(2.2rem,12vw,3rem);
           line-height:1.08;
         }
