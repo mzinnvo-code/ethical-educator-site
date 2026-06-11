@@ -60,6 +60,39 @@ async function webpHasAlpha(path) {
   return false;
 }
 
+async function imageDimensions(path) {
+  const metadata = await sharp(path).metadata();
+  return { width: metadata.width, height: metadata.height };
+}
+
+async function alphaBounds(path, region) {
+  let image = sharp(path).ensureAlpha();
+  if (region) image = image.extract(region);
+  const { data, info } = await image.raw().toBuffer({ resolveWithObject: true });
+  let minX = info.width;
+  let minY = info.height;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < info.height; y += 1) {
+    for (let x = 0; x < info.width; x += 1) {
+      const alpha = data[(y * info.width + x) * info.channels + 3];
+      if (alpha > 8) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  assert.ok(maxX >= minX && maxY >= minY, `${path} should contain opaque sprite pixels`);
+  return {
+    width: maxX - minX + 1,
+    height: maxY - minY + 1,
+  };
+}
+
 async function brightPixelCount(path, region) {
   const { data, info } = await sharp(path)
     .extract(region)
@@ -352,13 +385,19 @@ test("gamification rooms stage Ari with purposeful left-lane entry, exit, and ce
   }
 });
 
-test("gamification Phaser runtime keeps overworld Ari small but rooms use authored scale", () => {
+test("gamification Phaser runtime keeps overworld Ari small but swaps to the room sprite sheet in rooms", () => {
   const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
 
-  assert.match(game, /WORLD_ARI_SCALE = 0\.46/);
+  assert.match(game, /ARI_WORLD_TEXTURE = "ari-teacher-world"/);
+  assert.match(game, /ARI_ROOM_TEXTURE = "ari-teacher-room"/);
+  assert.match(game, /this\.load\.spritesheet\(ARI_WORLD_TEXTURE/);
+  assert.match(game, /this\.load\.spritesheet\(ARI_ROOM_TEXTURE/);
+  assert.match(game, /setAriSpriteMode\(mode\)/);
+  assert.match(game, /this\.setAriSpriteMode\("world"\)/);
+  assert.match(game, /this\.setAriSpriteMode\("room"\)/);
   assert.match(game, /roomScale = nextRoom\.ariScale/);
   assert.match(game, /this\.ari\.setScale\(roomScale\)/);
-  assert.doesNotMatch(game, /this\.ari\.setScale\(0\.78\)/);
+  assert.doesNotMatch(game, /this\.load\.spritesheet\("ari-teacher"/);
 });
 
 test("gamification dialogue is deep enough for adult teacher learning", () => {
@@ -448,10 +487,23 @@ test("gamification Phaser assets include room backgrounds, HUD pieces, and sprit
     assert.match(src, /^\/experiment-scenes\/gamification-article\/map-node-.+\.(webp|png)$/);
     assert.equal(existsSync(`public${src}`), true, `${src} should exist`);
   }
-  assert.equal(GAMIFICATION_PHASER_ASSETS.ari.sheet, "/experiment-scenes/gamification-article/ari-teacher-sheet.png");
-  assert.deepEqual(GAMIFICATION_PHASER_ASSETS.ari.frame, { width: 128, height: 192 });
+  assert.equal(GAMIFICATION_PHASER_ASSETS.ari.world.sheet, "/experiment-scenes/gamification-article/ari-teacher-sheet.png");
+  assert.deepEqual(GAMIFICATION_PHASER_ASSETS.ari.world.frame, { width: 128, height: 192 });
+  assert.equal(GAMIFICATION_PHASER_ASSETS.ari.world.scale, 0.46);
+  assert.equal(GAMIFICATION_PHASER_ASSETS.ari.room.sheet, "/experiment-scenes/gamification-article/ari-teacher-room-sheet.png");
+  assert.deepEqual(GAMIFICATION_PHASER_ASSETS.ari.room.frame, { width: 192, height: 288 });
+  assert.equal(GAMIFICATION_PHASER_ASSETS.ari.room.scale, 1.08);
   assert.ok(GAMIFICATION_PHASER_ASSETS.ari.animations.idle.frames.length >= 1);
   assert.ok(GAMIFICATION_PHASER_ASSETS.ari.animations.walk.frames.length >= 2);
+
+  assert.deepEqual(await imageDimensions(`public${GAMIFICATION_PHASER_ASSETS.ari.world.sheet}`), { width: 1024, height: 192 });
+  assert.deepEqual(await imageDimensions(`public${GAMIFICATION_PHASER_ASSETS.ari.room.sheet}`), { width: 1536, height: 288 });
+  assert.equal(await webpHasAlpha(`public${GAMIFICATION_PHASER_ASSETS.ari.world.sheet}`), true, "world Ari sheet should preserve transparency");
+  assert.equal(await webpHasAlpha(`public${GAMIFICATION_PHASER_ASSETS.ari.room.sheet}`), true, "room Ari sheet should preserve transparency");
+  const worldIdleBounds = await alphaBounds(`public${GAMIFICATION_PHASER_ASSETS.ari.world.sheet}`, { left: 0, top: 0, width: 128, height: 192 });
+  const roomIdleBounds = await alphaBounds(`public${GAMIFICATION_PHASER_ASSETS.ari.room.sheet}`, { left: 0, top: 0, width: 192, height: 288 });
+  const roomHeightRatio = roomIdleBounds.height / worldIdleBounds.height;
+  assert.ok(roomHeightRatio >= 1.45 && roomHeightRatio <= 1.55, `room Ari should be about 50% taller than world Ari, got ${roomHeightRatio}`);
 
   for (const [roomId, src] of Object.entries(GAMIFICATION_PHASER_ASSETS.rooms)) {
     assert.match(src, /^\/experiment-scenes\/gamification-article\/room-.+\.(webp|png)$/);
@@ -486,5 +538,6 @@ test("gamification game assets include transparent Ari sprites and four visible 
     assert.equal(existsSync(`public${src}`), true, `${src} should exist`);
     assert.equal(await webpHasAlpha(`public${src}`), true, `${src} should preserve transparency`);
   }
-  assert.equal(existsSync(`public${GAMIFICATION_PHASER_ASSETS.ari.sheet}`), true, "Ari Phaser sprite sheet should exist");
+  assert.equal(existsSync(`public${GAMIFICATION_PHASER_ASSETS.ari.world.sheet}`), true, "Ari Phaser world sprite sheet should exist");
+  assert.equal(existsSync(`public${GAMIFICATION_PHASER_ASSETS.ari.room.sheet}`), true, "Ari Phaser room sprite sheet should exist");
 });

@@ -18,8 +18,10 @@ import {
 const TYPEWRITER_CHARACTER_MS = 34;
 const TYPEWRITER_PUNCTUATION_PAUSE_MS = 120;
 const TYPEWRITER_PUNCTUATION = new Set([".", "?", "!", ";", ":"]);
-const WORLD_ARI_SCALE = 0.46;
-const DEFAULT_ROOM_ARI_SCALE = 1.08;
+const ARI_WORLD_TEXTURE = "ari-teacher-world";
+const ARI_ROOM_TEXTURE = "ari-teacher-room";
+const WORLD_ARI_SCALE = GAMIFICATION_PHASER_ASSETS.ari.world.scale;
+const DEFAULT_ROOM_ARI_SCALE = GAMIFICATION_PHASER_ASSETS.ari.room.scale;
 let sharedGameAudioContext = null;
 let lastDialogueTickAt = 0;
 
@@ -177,9 +179,13 @@ function GamificationPhaserGame({
             this.load.image(`room:${key}`, src);
           }
           this.load.image("hotspot-glow", assets.hud.hotspotGlow);
-          this.load.spritesheet("ari-teacher", assets.ari.sheet, {
-            frameWidth: assets.ari.frame.width,
-            frameHeight: assets.ari.frame.height,
+          this.load.spritesheet(ARI_WORLD_TEXTURE, assets.ari.world.sheet, {
+            frameWidth: assets.ari.world.frame.width,
+            frameHeight: assets.ari.world.frame.height,
+          });
+          this.load.spritesheet(ARI_ROOM_TEXTURE, assets.ari.room.sheet, {
+            frameWidth: assets.ari.room.frame.width,
+            frameHeight: assets.ari.room.frame.height,
           });
         }
 
@@ -190,23 +196,31 @@ function GamificationPhaserGame({
           this.nodeGroup = this.add.container(0, 0).setDepth(6);
           this.floorShadow = this.add.ellipse(0, 0, 92, 18, 0x000000, 0.34).setDepth(7);
           this.hotspot = this.add.image(0, 0, "hotspot-glow").setDepth(5).setAlpha(0.72).setScale(0.42);
-          this.ari = this.add.sprite(this.currentRoom.ariStart.x, this.currentRoom.ariStart.y, "ari-teacher", 0)
+          this.ariAnimationPrefix = this.currentMode === "overworld" ? "ari-world" : "ari-room";
+          this.ari = this.add.sprite(
+            this.currentRoom.ariStart.x,
+            this.currentRoom.ariStart.y,
+            this.currentMode === "overworld" ? ARI_WORLD_TEXTURE : ARI_ROOM_TEXTURE,
+            0,
+          )
             .setOrigin(0.5, 1)
-            .setScale(DEFAULT_ROOM_ARI_SCALE)
+            .setScale(this.currentMode === "overworld" ? WORLD_ARI_SCALE : DEFAULT_ROOM_ARI_SCALE)
             .setDepth(10);
 
-          const frameAnim = (key, config) => {
-            if (this.anims.exists(key)) return;
+          const frameAnim = (texture, prefix, key, config) => {
+            const animationKey = `${prefix}:${key}`;
+            if (this.anims.exists(animationKey)) return;
             this.anims.create({
-              key,
-              frames: config.frames.map((frame) => ({ key: "ari-teacher", frame })),
+              key: animationKey,
+              frames: config.frames.map((frame) => ({ key: texture, frame })),
               frameRate: config.frameRate,
               repeat: config.repeat,
             });
           };
 
           for (const [key, config] of Object.entries(assets.ari.animations)) {
-            frameAnim(`ari:${key}`, config);
+            frameAnim(ARI_WORLD_TEXTURE, "ari-world", key, config);
+            frameAnim(ARI_ROOM_TEXTURE, "ari-room", key, config);
           }
 
 	          this.setGameState({
@@ -236,6 +250,17 @@ function GamificationPhaserGame({
         worldAriPosition(node) {
           const xOffset = node.kind === "home" ? 26 : -34;
           return { x: Phaser.Math.Clamp(node.x + xOffset, 58, 902), y: Math.min(520, node.y + 84) };
+        }
+
+        setAriSpriteMode(mode) {
+          const texture = mode === "world" ? ARI_WORLD_TEXTURE : ARI_ROOM_TEXTURE;
+          const prefix = mode === "world" ? "ari-world" : "ari-room";
+          if (this.ari?.texture?.key !== texture) this.ari?.setTexture(texture, 0);
+          this.ariAnimationPrefix = prefix;
+        }
+
+        playAriAnimation(name, ignoreIfPlaying = true) {
+          this.ari.play(`${this.ariAnimationPrefix}:${name}`, ignoreIfPlaying);
         }
 
 	        clearWorldNodes() {
@@ -316,9 +341,10 @@ function GamificationPhaserGame({
           const node = this.worldNodeById(progress.currentWorldNodeId || "home");
           const ariPosition = this.worldAriPosition(node);
           this.tweens.killTweensOf(this.ari);
+          this.setAriSpriteMode("world");
           this.ari.setScale(WORLD_ARI_SCALE).setFlipX(false).setPosition(ariPosition.x, ariPosition.y);
           this.floorShadow.setPosition(ariPosition.x, ariPosition.y - 4).setScale(0.7);
-          this.ari.play("ari:idle", true);
+          this.playAriAnimation("idle", true);
         }
 
         travelToNode(targetNodeId) {
@@ -334,13 +360,13 @@ function GamificationPhaserGame({
           this.traveling = true;
           callbacksRef.current.onSoundCue?.("path-travel");
           this.clearWorldNodes();
-          this.ari.play("ari:walk", true);
+          this.playAriAnimation("walk", true);
           const travelPoints = points.slice(1);
           const walkSegment = (index) => {
             const point = travelPoints[index];
             if (!point) {
               this.floorShadow.setPosition(this.ari.x, this.ari.y - 4);
-              this.ari.play("ari:idle", true);
+              this.playAriAnimation("idle", true);
               this.traveling = false;
               callbacksRef.current.onSoundCue?.("room-enter");
               callbacksRef.current.onTravelComplete?.(targetNodeId);
@@ -398,19 +424,20 @@ function GamificationPhaserGame({
           this.tweens.killTweensOf(this.ari);
           this.exitingRoomId = null;
           this.roomEntering = false;
+          this.setAriSpriteMode("room");
           this.ari.setScale(roomScale);
           this.ari.setFlipX(target.x < start.x);
 
 	          if (immediate || this.reducedMotion) {
             this.ari.setPosition(target.x, target.y);
-            this.ari.play(nextMode === "finale" ? "ari:celebrate" : "ari:idle", true);
+            this.playAriAnimation(nextMode === "finale" ? "celebrate" : "idle", true);
             this.floorShadow.setPosition(target.x, target.y - 4);
             return;
           }
 
           this.ari.setPosition(start.x, start.y);
           this.roomEntering = true;
-          this.ari.play("ari:walk", true);
+          this.playAriAnimation("walk", true);
           this.tweens.add({
             targets: this.ari,
             x: target.x,
@@ -421,8 +448,8 @@ function GamificationPhaserGame({
             onComplete: () => {
               this.floorShadow.setPosition(target.x, target.y - 4);
               this.roomEntering = false;
-              if (nextMode === "finale") this.ari.play("ari:celebrate", true);
-              else this.ari.play(this.talkingWanted ? "ari:talk" : "ari:idle", true);
+              if (nextMode === "finale") this.playAriAnimation("celebrate", true);
+              else this.playAriAnimation(this.talkingWanted ? "talk" : "idle", true);
             },
           });
         }
@@ -434,15 +461,16 @@ function GamificationPhaserGame({
           this.talkingWanted = false;
           this.tweens.killTweensOf(this.ari);
           const roomScale = nextRoom.ariScale || DEFAULT_ROOM_ARI_SCALE;
+          this.setAriSpriteMode("room");
           this.ari.setScale(roomScale).setFlipX(false);
           this.floorShadow.setScale(Math.max(1, roomScale));
-          this.ari.play("ari:walk", true);
+          this.playAriAnimation("walk", true);
           callbacksRef.current.onSoundCue?.("ari-exit");
 
 	          if (this.reducedMotion) {
             this.ari.setPosition(nextRoom.ariExitTarget.x, nextRoom.ariExitTarget.y);
             this.floorShadow.setPosition(this.ari.x, this.ari.y - 4);
-            this.ari.play("ari:idle", true);
+            this.playAriAnimation("idle", true);
             return;
           }
 
@@ -455,7 +483,7 @@ function GamificationPhaserGame({
             onUpdate: () => this.floorShadow.setPosition(this.ari.x, this.ari.y - 4),
             onComplete: () => {
               this.floorShadow.setPosition(this.ari.x, this.ari.y - 4);
-              this.ari.play("ari:idle", true);
+              this.playAriAnimation("idle", true);
             },
           });
         }
@@ -486,13 +514,14 @@ function GamificationPhaserGame({
           if (!this.ari) return;
           this.talkingWanted = talking;
           if (this.currentMode === "overworld" || this.currentMode === "reward" || this.traveling || this.roomEntering || this.exitingRoomId) return;
-          if (talking) this.ari.play("ari:talk", true);
-          else this.ari.play(this.currentMode === "finale" ? "ari:celebrate" : "ari:idle", true);
+          if (talking) this.playAriAnimation("talk", true);
+          else this.playAriAnimation(this.currentMode === "finale" ? "celebrate" : "idle", true);
         }
 
         celebrate() {
           if (!this.ari) return;
-          this.ari.play("ari:celebrate", true);
+          this.setAriSpriteMode("room");
+          this.playAriAnimation("celebrate", true);
           this.cameras.main.flash(260, 224, 184, 72, false);
         }
       }

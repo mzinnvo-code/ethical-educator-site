@@ -31,8 +31,16 @@ export const GAMIFICATION_PHASER_ASSETS = {
     },
   },
   ari: {
-    sheet: `${ROOT}/ari-teacher-sheet.png`,
-    frame: { width: 128, height: 192 },
+    world: {
+      sheet: `${ROOT}/ari-teacher-sheet.png`,
+      frame: { width: 128, height: 192 },
+      scale: 0.46,
+    },
+    room: {
+      sheet: `${ROOT}/ari-teacher-room-sheet.png`,
+      frame: { width: 192, height: 288 },
+      scale: 1.08,
+    },
     origin: { x: 0.5, y: 1 },
     animations: {
       idle: { frames: [0], frameRate: 1, repeat: -1 },
