@@ -240,10 +240,11 @@ export const GAMEFUL_CHARTER = [
 const option = (id, label, correct, feedback) => ({ id, label, correct, feedback });
 
 const roomBase = {
-  floorY: 444,
-  ariStart: { x: -84, y: 444 },
-  ariTarget: { x: 136, y: 444 },
-  ariExitTarget: { x: 1036, y: 444 },
+  floorY: 476,
+  ariScale: 1.08,
+  ariStart: { x: -118, y: 476 },
+  ariTarget: { x: 142, y: 476 },
+  ariExitTarget: { x: 1088, y: 476 },
 };
 
 export const GAMIFICATION_GAME_ROOMS = [
@@ -256,6 +257,7 @@ export const GAMIFICATION_GAME_ROOMS = [
     title: "Gameful Learning Lab Hub",
     accent: C.gold,
     floorY: 448,
+    ariScale: 1,
     ariStart: { x: 164, y: 448 },
     ariTarget: { x: 476, y: 448 },
     mapPosition: { left: 8, top: 74 },
@@ -560,8 +562,11 @@ export const GAMIFICATION_GAME_ROOMS = [
     label: "Finale",
     title: "Gameful Learning Charter",
     accent: C.gold,
-    ariStart: { x: -84, y: 448 },
-    ariTarget: { x: 480, y: 448 },
+    floorY: 468,
+    ariScale: 1.08,
+    ariStart: { x: -118, y: 468 },
+    ariTarget: { x: 480, y: 468 },
+    ariExitTarget: { x: 1088, y: 468 },
     mapPosition: { left: 89, top: 24 },
     hotspots: [{ id: "charter-pedestal", x: 560, y: 312, radius: 58, verb: "Claim charter" }],
     summary: "The final reward is a charter teachers can carry into their next lesson design.",

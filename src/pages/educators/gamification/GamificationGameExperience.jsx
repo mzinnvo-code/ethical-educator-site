@@ -18,6 +18,8 @@ import {
 const TYPEWRITER_CHARACTER_MS = 34;
 const TYPEWRITER_PUNCTUATION_PAUSE_MS = 120;
 const TYPEWRITER_PUNCTUATION = new Set([".", "?", "!", ";", ":"]);
+const WORLD_ARI_SCALE = 0.46;
+const DEFAULT_ROOM_ARI_SCALE = 1.08;
 let sharedGameAudioContext = null;
 let lastDialogueTickAt = 0;
 
@@ -190,7 +192,7 @@ function GamificationPhaserGame({
           this.hotspot = this.add.image(0, 0, "hotspot-glow").setDepth(5).setAlpha(0.72).setScale(0.42);
           this.ari = this.add.sprite(this.currentRoom.ariStart.x, this.currentRoom.ariStart.y, "ari-teacher", 0)
             .setOrigin(0.5, 1)
-            .setScale(0.78)
+            .setScale(DEFAULT_ROOM_ARI_SCALE)
             .setDepth(10);
 
           const frameAnim = (key, config) => {
@@ -314,7 +316,7 @@ function GamificationPhaserGame({
           const node = this.worldNodeById(progress.currentWorldNodeId || "home");
           const ariPosition = this.worldAriPosition(node);
           this.tweens.killTweensOf(this.ari);
-          this.ari.setScale(0.46).setFlipX(false).setPosition(ariPosition.x, ariPosition.y);
+          this.ari.setScale(WORLD_ARI_SCALE).setFlipX(false).setPosition(ariPosition.x, ariPosition.y);
           this.floorShadow.setPosition(ariPosition.x, ariPosition.y - 4).setScale(0.7);
           this.ari.play("ari:idle", true);
         }
@@ -390,12 +392,13 @@ function GamificationPhaserGame({
 
           const start = nextRoom.ariStart;
           const target = nextRoom.ariTarget;
+          const roomScale = nextRoom.ariScale || DEFAULT_ROOM_ARI_SCALE;
           this.floorShadow.setPosition(target.x, target.y - 4);
-          this.floorShadow.setScale(1);
+          this.floorShadow.setScale(Math.max(1, roomScale));
           this.tweens.killTweensOf(this.ari);
           this.exitingRoomId = null;
           this.roomEntering = false;
-          this.ari.setScale(0.78);
+          this.ari.setScale(roomScale);
           this.ari.setFlipX(target.x < start.x);
 
 	          if (immediate || this.reducedMotion) {
@@ -430,7 +433,9 @@ function GamificationPhaserGame({
           this.roomEntering = false;
           this.talkingWanted = false;
           this.tweens.killTweensOf(this.ari);
-          this.ari.setScale(0.78).setFlipX(false);
+          const roomScale = nextRoom.ariScale || DEFAULT_ROOM_ARI_SCALE;
+          this.ari.setScale(roomScale).setFlipX(false);
+          this.floorShadow.setScale(Math.max(1, roomScale));
           this.ari.play("ari:walk", true);
           callbacksRef.current.onSoundCue?.("ari-exit");
 

@@ -300,10 +300,14 @@ test("gamification v4 rooms expose a game-ready Phaser manifest", () => {
   for (const room of GAMIFICATION_GAME_ROOMS) {
     assert.ok(room.room, `${room.id} needs a room asset key`);
     assert.ok(room.floorY >= 360 && room.floorY <= 500, `${room.id} needs a walkable floor baseline`);
+    assert.equal(typeof room.ariScale, "number", `${room.id} needs an authored Ari room scale`);
+    assert.ok(room.ariScale >= 0.9 && room.ariScale <= 1.2, `${room.id} Ari room scale should match 16-bit room props`);
     assert.equal(typeof room.ariStart?.x, "number", `${room.id} needs ariStart.x`);
     assert.equal(typeof room.ariStart?.y, "number", `${room.id} needs ariStart.y`);
     assert.equal(typeof room.ariTarget?.x, "number", `${room.id} needs ariTarget.x`);
     assert.equal(typeof room.ariTarget?.y, "number", `${room.id} needs ariTarget.y`);
+    assert.equal(room.ariStart.y, room.floorY, `${room.id} Ari should enter on the room floor baseline`);
+    assert.equal(room.ariTarget.y, room.floorY, `${room.id} Ari should stop on the room floor baseline`);
     assert.ok(Array.isArray(room.hotspots), `${room.id} needs hotspots`);
     for (const hotspot of room.hotspots) {
       assert.ok(hotspot.id, `${room.id} hotspot needs an id`);
@@ -342,9 +346,19 @@ test("gamification rooms stage Ari with purposeful left-lane entry, exit, and ce
 
     assert.ok(room.ariStart.x < 0, `${room.id} Ari should enter from offscreen left`);
     assert.ok(room.ariTarget.x >= 88 && room.ariTarget.x <= 180, `${room.id} Ari should stop in the left floor lane`);
+    assert.ok(room.ariScale >= 1.02, `${room.id} Ari should be larger in authored rooms than on the overworld map`);
     assert.ok(room.ariExitTarget?.x >= 1000, `${room.id} needs an offscreen-right exit target`);
     assert.equal(room.ariExitTarget.y, room.ariTarget.y, `${room.id} exit should stay on the same floor lane`);
   }
+});
+
+test("gamification Phaser runtime keeps overworld Ari small but rooms use authored scale", () => {
+  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+
+  assert.match(game, /WORLD_ARI_SCALE = 0\.46/);
+  assert.match(game, /roomScale = nextRoom\.ariScale/);
+  assert.match(game, /this\.ari\.setScale\(roomScale\)/);
+  assert.doesNotMatch(game, /this\.ari\.setScale\(0\.78\)/);
 });
 
 test("gamification dialogue is deep enough for adult teacher learning", () => {
