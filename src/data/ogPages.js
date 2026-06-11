@@ -84,7 +84,7 @@ export const OG_PAGES = [
   { id: "audiences/student", title: "For Students", section: "Branching scenarios + AI dilemmas", accent: OG_ACCENTS.teal },
 
   // Educator resources
-  { id: "gamification-in-education", title: "Gamification in Education", section: "Student engagement without shallow rewards", accent: OG_ACCENTS.coral },
+  { id: "gamification-in-education", title: "Gamification in Education", section: "Playable student engagement", accent: OG_ACCENTS.coral },
 
   // Thought experiment hubs
   { id: "thought-experiments/educators", title: "Thought Experiments for Educators", section: "Adult dilemmas for staff PD", accent: OG_ACCENTS.gold },

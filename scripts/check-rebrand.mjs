@@ -19,7 +19,7 @@ const requiredFiles = [
   "src/siteConfig.js",
   "index.html",
   "src/App.jsx",
-  "src/pages/Home.jsx",
+  "src/pages/home/index.jsx",
   "src/pages/Terms.jsx",
   "src/pages/Privacy.jsx",
   "src/pages/Accessibility.jsx",

@@ -2059,11 +2059,11 @@ export const EXPERIMENTS = [
         ],
       },
       synthesis({ title: "Whatever you choose, the policy says something", positions: [
-        { name: "NYC DOE", school: "2023", view: "Adopted a traffic-light approach after initial ban — rolled back to nuanced guidance." },
+        { name: "NYC Public Schools", school: "2023–26", view: "Banned ChatGPT in January 2023, reversed course by May with nuanced guidance — and adopted a red/yellow/green framework in 2026." },
         { name: "Mollick & Mollick", school: "Wharton", view: "Argue AI policy should be use-case specific, not blanket — and should be revisited each term." },
       ]}),
     ],
-    reference: { text: "Adapted from NYC DOE traffic-light AI guidance and field practice" },
+    reference: { text: "Adapted from Garnet Valley School District's traffic-light AI protocol and post-ban NYC Public Schools practice", url: "https://www.ajjuliani.com/blog/the-traffic-light-protocol-a-simple-way-to-manage-the-ai-classroom" },
     emoji: "🚦", added: "2026-04-30", estimatedMinutes: 10,
   },
   {

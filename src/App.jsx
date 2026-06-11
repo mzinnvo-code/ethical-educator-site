@@ -10,7 +10,10 @@ import { buildRouteSchema, ogTypeFor } from "./lib/seoSchema.js";
 // Home is eager — it's the entry point for most visits and we want it to
 // render in the same paint as the chrome. Everything else is route-split
 // via React.lazy so a fresh visit only loads what it needs.
-import Home from "./pages/Home.jsx";
+// HomeLanding wraps the home page (./pages/home/) with the scroll-driven
+// landing cinematic; the GSAP/Three.js engine inside it stays lazy (loaded
+// on idle/first input).
+import HomeLanding from "./pages/landing/HomeLanding.jsx";
 
 // NewsletterSignup is used in the footer of every page — needs to be eager
 // so the footer doesn't pop in. Modal renders null until visit-count triggers
@@ -114,7 +117,7 @@ function NotFound({ navigate }) {
 }
 
 const PAGE_MAP = {
-  "home": Home,
+  "home": HomeLanding,
   "about": About,
   "moral-psych": MoralPsychology,
   "ai-ethics": AIEthics,
@@ -177,6 +180,8 @@ const PAGE_MAP = {
   "family-conversations": FamilyConversations,
   "tools": Tools,
 };
+
+const IMMERSIVE_PAGE_IDS = new Set(["gamification-in-education"]);
 
 const PAGE_META = {
   "home": {
@@ -400,9 +405,9 @@ const PAGE_META = {
   },
   "gamification-in-education": {
     title: "Gamification in Education - The Examined Classroom",
-    description: "A research-backed guide to gamification, attention-span myths, student engagement, mastery badges, and the browser-only Thought Experiments progress model.",
+    description: "A playable 16-bit teacher quest about contested attention, gameful lesson design, research-backed motivation, and responsible AI lesson loops.",
     datePublished: "2026-06-03",
-    dateModified: "2026-06-03",
+    dateModified: "2026-06-11",
   },
   "async-engagement": {
     title: "Asynchronous Learning Engagement — The Examined Classroom",
@@ -622,7 +627,9 @@ export default function App() {
   }, [currentPage]);
 
   const isNotFound = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
-  const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || Home);
+  const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || HomeLanding);
+  const isImmersivePage = IMMERSIVE_PAGE_IDS.has(currentPage);
+  const isFullBleedPage = currentPage === "home" || isImmersivePage;
 
   return (
     <>
@@ -641,7 +648,9 @@ export default function App() {
         .skip-link{position:absolute;left:12px;top:-44px;z-index:10000;padding:10px 16px;background:${C.gold};color:${C.midnight};font-weight:600;font-size:0.85rem;border-radius:6px;text-decoration:none;transition:top 0.2s}
         .skip-link:focus{top:12px;opacity:1}
         #main:focus{outline:none}
-        .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border}}
+        .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,22,34,0.92);backdrop-filter:blur(16px);border-bottom:1px solid ${C.border};transition:opacity 0.6s ease,transform 0.6s ease}
+        html[data-landing-intro] .topbar{opacity:0;pointer-events:none;transform:translateY(-10px)}
+        html[data-landing-intro] .section-stripe{opacity:0}
         .topbar-logo{font-family:'Source Serif 4',Georgia,serif;font-size:0.95rem;font-weight:700;color:${C.textPrimary};cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
         .brand-mark{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,${C.midnight},${C.ocean});border:1px solid rgba(224,220,208,0.12);box-shadow:0 8px 22px rgba(0,0,0,0.18)}
         .brand-mark img{width:20px;height:20px;display:block}
@@ -675,15 +684,17 @@ export default function App() {
           @keyframes newPulse{0%,100%{opacity:1}50%{opacity:1}}
         }
       `}</style>
-      <a href="#main" className="skip-link">Skip to content</a>
-      <div className="grain" />
-      <Suspense fallback={null}>
-        <NewsletterModal routeKey={currentPage} />
-      </Suspense>
-      <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />
+      {!isImmersivePage && <a href="#main" className="skip-link">Skip to content</a>}
+      {!isImmersivePage && <div className="grain" />}
+      {!isImmersivePage && (
+        <Suspense fallback={null}>
+          <NewsletterModal routeKey={currentPage} />
+        </Suspense>
+      )}
+      {!isImmersivePage && <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />}
 
       {/* NAV */}
-      <header className="topbar">
+      {!isImmersivePage && <header className="topbar">
         <div className="topbar-logo" onClick={() => navigate("home")}>
           <span className="brand-mark" aria-hidden="true">
             <img src="/favicon.svg" alt="" />
@@ -714,8 +725,8 @@ export default function App() {
           <kbd aria-hidden="true">⌘K</kbd>
         </button>
         <button className="hamburger" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
-      </header>
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      </header>}
+      {!isImmersivePage && <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {PAGES.map(p => (
           <a key={p.id}
             href={p.id === "home" ? "/" : `/${p.id}`}
@@ -726,12 +737,13 @@ export default function App() {
             {p.id === "thought-experiments" && hasNew && <NewBadge />}
           </a>
         ))}
-      </div>
+      </div>}
 
       {/* Section accent stripe — "you are here" signal, sits directly under
           the fixed topbar. Color shifts to match the current section. */}
-      <div
+      {!isImmersivePage && <div
         aria-hidden="true"
+        className="section-stripe"
         style={{
           position: "fixed",
           top: 56,
@@ -740,22 +752,31 @@ export default function App() {
           height: 3,
           background: getSectionAccent(currentPage),
           zIndex: 999,
-          transition: "background 0.4s ease",
+          transition: "background 0.4s ease, opacity 0.6s ease",
         }}
-      />
+      />}
 
       {/* PAGE CONTENT */}
-      <main id="main" tabIndex={-1} style={{ paddingTop: 59 }} className="page-enter" key={currentPage}>
+      {/* The home route hosts the landing cinematic: no top padding (scene 1
+          is full-bleed under the hidden TopBar) and no page-enter animation
+          (a transformed ancestor would break ScrollTrigger pinning). */}
+      <main
+        id="main"
+        tabIndex={-1}
+        style={{ paddingTop: isFullBleedPage ? 0 : 59 }}
+        className={isFullBleedPage ? undefined : "page-enter"}
+        key={currentPage}
+      >
         <Suspense fallback={null}>
           {isNotFound
             ? <NotFound navigate={navigate} />
             : <PageComponent navigate={navigate} />}
         </Suspense>
       </main>
-      <TeachingResourceRail currentPage={currentPage} navigate={navigate} />
+      {!isImmersivePage && <TeachingResourceRail currentPage={currentPage} navigate={navigate} />}
 
       {/* FOOTER */}
-      <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
+      {!isImmersivePage && <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div style={{
             display: "grid",
@@ -841,7 +862,7 @@ export default function App() {
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} {SITE.brandName} · {SITE.authorName} · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
           </div>
         </div>
-      </footer>
+      </footer>}
     </>
   );
 }

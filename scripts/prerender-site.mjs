@@ -4,7 +4,9 @@ import path from "node:path";
 import { SITE } from "../src/siteConfig.js";
 import { GROWTH_PAGE_META, SEARCH_LANDING_PAGE_BY_ROUTE, TEACHING_RESOURCE_PAGE_BY_ROUTE } from "../src/data/growthPages.js";
 import { OG_PAGES_BY_ID } from "../src/data/ogPages.js";
+import { GAMIFICATION_GAME_LEVELS, GAMIFICATION_QUEST_SOURCES } from "../src/data/gamificationQuest.js";
 import { buildRouteSchema, cleanTitle, ogTypeFor } from "../src/lib/seoSchema.js";
+import { LANDING_SEO_TEXT } from "../src/pages/landing/sceneCopy.js";
 
 const DIST = path.resolve("dist");
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
@@ -14,7 +16,13 @@ const STATIC_ROUTE_META = {
   home: {
     title: SITE.brandName,
     description: "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance for teachers and school leaders navigating AI in education.",
-    text: ["The Examined Classroom", "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance."],
+    // First two entries are load-bearing for test:crawlability; the rest is
+    // the landing cinematic's copy so "/" stays fully crawlable without JS.
+    text: [
+      "The Examined Classroom",
+      "Classroom-ready thought experiments, educator resources, and research-backed AI ethics guidance.",
+      ...LANDING_SEO_TEXT,
+    ],
     links: [
       { label: "Interactive Thought Experiments", href: "/thought-experiments" },
       { label: "AI Ethics Lesson Plans", href: "/ai-ethics-lesson-plans" },
@@ -45,6 +53,21 @@ const STATIC_ROUTE_META = {
     title: "AI Ethics in Education - The Examined Classroom",
     description: "Ethical frameworks for educators navigating AI, school policy, academic integrity, and classroom judgment.",
     text: ["AI Ethics in Education", "Frameworks for navigating AI in schools."],
+  },
+  "gamification-in-education": {
+    title: "Gamification in Education - The Examined Classroom",
+    description: "A playable, research-informed guide to gamification, contested attention, student engagement, mastery badges, and browser-only Thought Experiments progress.",
+    text: [
+      "Gamification in Education",
+      "Attention is now contested. Students have not simply lost attention biologically, but the learning environment now competes with faster rewards, constant novelty, notifications, and easier escape.",
+      "Good gameful design earns attention so students stay with slower, harder learning long enough to revise, explain, and transfer what they know.",
+      ...GAMIFICATION_GAME_LEVELS.flatMap((level) => [
+        level.title,
+        level.summary,
+        ...(level.dialogueBeats || []).slice(0, 2),
+      ]),
+    ],
+    links: GAMIFICATION_QUEST_SOURCES.map((item) => ({ label: `${item.label}: ${item.title}`, href: item.href })),
   },
   resources: {
     title: "Research Resources & Reading List - The Examined Classroom",
@@ -190,6 +213,14 @@ function renderRoute(template, route) {
     "</head>",
     `    <script id="route-schema" type="application/ld+json">${JSON.stringify(schema)}</script>\n  </head>`
   );
+  if (route === "/") {
+    // The hero illustration is the home page's LCP element; preload only there
+    // so other routes don't fetch an image they never show.
+    html = html.replace(
+      "</head>",
+      `    <link rel="preload" as="image" href="/illustrations/home-hero.webp" type="image/webp" fetchpriority="high" />\n  </head>`
+    );
+  }
   html = html.replace('<div id="root"></div>', `<div id="root">\n${staticFallback(pageId, meta)}\n    </div>`);
   return html;
 }

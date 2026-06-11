@@ -35,6 +35,9 @@ function incrementVisits() {
 function shouldShow() {
   if (typeof window === "undefined") return false;
   if (window.navigator?.userAgent === "ReactSnap") return false;
+  // Never pop over the landing cinematic; that pageview doesn't count as a
+  // visit either (the attribute clears when the intro hands off to Home).
+  if (document.documentElement.dataset.landingIntro) return false;
   if (safeGet("localStorage", DISMISSED_KEY)) return false;
   if (safeGet("localStorage", SUBSCRIBED_KEY)) return false;
   if (safeGet("sessionStorage", SHOWN_SESSION_KEY)) return false;
