@@ -23,6 +23,10 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:4173",
 ]);
 
+// Real event payloads are a few hundred bytes (name/properties/path/ts, all
+// clamped below anyway); anything bigger is junk or abuse.
+const MAX_BODY_BYTES = 2048;
+
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.has(origin) ? origin : "https://examinedclassroom.com";
   return {
@@ -42,6 +46,10 @@ function forbidden(origin) {
   return new Response("Forbidden", { status: 403, headers: corsHeaders(origin) });
 }
 
+function payloadTooLarge(origin) {
+  return new Response("Payload Too Large", { status: 413, headers: corsHeaders(origin) });
+}
+
 function badRequest(message, origin) {
   return new Response(JSON.stringify({ error: message }), {
     status: 400,
@@ -49,8 +57,11 @@ function badRequest(message, origin) {
   });
 }
 
+// Note: a non-browser client can still spoof an allowed Origin header; fully
+// preventing that would require a shared token. This check just stops the
+// drive-by case (curl/scripts with no Origin) from writing junk data points.
 function isAllowedOrigin(origin) {
-  return origin === "" || ALLOWED_ORIGINS.has(origin);
+  return ALLOWED_ORIGINS.has(origin);
 }
 
 function clampString(value, max = 256) {
@@ -74,9 +85,16 @@ export default {
       return new Response("Not Found", { status: 404, headers: corsHeaders(origin) });
     }
 
+    const contentLength = Number(request.headers.get("Content-Length") ?? "0");
+    if (!Number.isFinite(contentLength) || contentLength > MAX_BODY_BYTES) {
+      return payloadTooLarge(origin);
+    }
+
     let payload;
     try {
-      payload = await request.json();
+      const raw = await request.text();
+      if (raw.length > MAX_BODY_BYTES) return payloadTooLarge(origin);
+      payload = JSON.parse(raw);
     } catch {
       return badRequest("Invalid JSON", origin);
     }
