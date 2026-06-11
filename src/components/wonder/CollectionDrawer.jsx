@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { C } from "../../theme.js";
 import { PixelText, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
+import { TEAL_TEXT } from "./trackerThemes.js";
 
 // Tabbed collection shelf under the diorama: big, aligned cards for every
 // trophy and memento (no more cramped list + scroll-away detail strip), plus
@@ -18,7 +19,7 @@ function DrawerStat({ label, value, color, icon, statAssets }) {
         alignItems: "center",
         padding: "8px 9px",
         border: `2px solid ${color}38`,
-        borderRadius: 8,
+        clipPath: PIXEL_CLIP_SM,
         background: `linear-gradient(180deg, rgba(6,16,29,0.9), ${color}10)`,
         boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 14px ${color}10`,
       }}
@@ -30,10 +31,10 @@ function DrawerStat({ label, value, color, icon, statAssets }) {
         style={{ width: 34, height: 34, objectFit: "contain", imageRendering: "pixelated", filter: `drop-shadow(0 0 8px ${color}28)` }}
       />
       <div style={{ minWidth: 0 }}>
-        <p style={{ color, fontSize: "0.6rem", fontWeight: 900, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 2 }}>
+        <p style={{ color, fontFamily: PIXEL_FONT, fontSize: "0.66rem", fontWeight: 600, letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: 2 }}>
           {label}
         </p>
-        <p style={{ color: C.textPrimary, fontFamily: "'Source Serif 4', Georgia, serif", fontSize: "1.08rem", lineHeight: 1 }}>
+        <p style={{ color: C.textPrimary, fontFamily: PIXEL_FONT, fontSize: "1.08rem", lineHeight: 1 }}>
           {value}
         </p>
       </div>
@@ -84,7 +85,7 @@ export default function CollectionDrawer({
       <style>{`
         .wonder-drawer-tab {
           clip-path: ${PIXEL_CLIP_SM};
-          border: 2px solid ${C.border};
+          border: 2px solid rgba(255,255,255,0.22);
           background: rgba(255,255,255,0.035);
           color: ${C.textSecondary};
           padding: 8px 12px;
@@ -93,6 +94,19 @@ export default function CollectionDrawer({
           font-weight: 600;
           font-size: 0.78rem;
           transition: border-color 160ms steps(2, end), color 160ms steps(2, end);
+        }
+        .wonder-drawer-tab:hover {
+          border-color: ${C.gold}77;
+          color: ${C.textPrimary};
+          background: rgba(255,255,255,0.07);
+        }
+        .wonder-drawer-tab:focus-visible {
+          outline: 3px solid ${C.gold};
+          outline-offset: -3px;
+        }
+        .wonder-drawer-card:focus-visible {
+          outline: 3px solid ${C.gold};
+          outline-offset: -3px;
         }
         .wonder-drawer-tab[aria-selected="true"] {
           background: ${C.gold}1c;
@@ -183,7 +197,7 @@ export default function CollectionDrawer({
                 <span style={{ display: "block", color: badge.earned ? C.gold : C.textPrimary, fontWeight: 900, fontSize: "0.85rem", lineHeight: 1.25, marginBottom: 2 }}>
                   {badge.label}
                 </span>
-                <PixelText size="0.56rem" color={badge.isNew ? C.gold : badge.earned ? C.teal : C.textMuted} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                <PixelText size="0.66rem" color={badge.isNew ? C.gold : badge.earned ? TEAL_TEXT : C.textSecondary} style={{ textTransform: "uppercase", letterSpacing: "0.06em" }}>
                   {badge.isNew ? "New trophy" : badge.earned ? "Earned" : "How to earn"}
                 </PixelText>
               </span>
@@ -249,7 +263,7 @@ export default function CollectionDrawer({
                       <span style={{ display: "block", color: memento.completed ? C.textPrimary : C.textSecondary, fontWeight: 800, fontSize: "0.76rem", lineHeight: 1.3 }}>
                         {memento.item.title}
                       </span>
-                      <PixelText size="0.54rem" color={memento.completed ? C.gold : C.textMuted} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                      <PixelText size="0.66rem" color={memento.completed ? C.gold : C.textSecondary} style={{ textTransform: "uppercase", letterSpacing: "0.06em" }}>
                         {memento.completed ? "✓ On the shelf" : "Finish to earn"}
                       </PixelText>
                     </span>

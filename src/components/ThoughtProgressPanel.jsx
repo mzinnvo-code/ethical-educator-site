@@ -336,7 +336,7 @@ function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
         zIndex: 3,
         left: slot.left,
         top: slot.top,
-        width: "clamp(26px, 3.2vw, 42px)",
+        width: "clamp(30px, 3.2vw, 42px)",
         aspectRatio: "1 / 1",
         transform: "translate(-50%, -50%)",
         display: "grid",
@@ -372,7 +372,7 @@ function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
             clipPath: PIXEL_CLIP_SM,
             border: `2px dotted ${C.gold}55`,
             background: "rgba(10,22,38,0.85)",
-            color: C.teal,
+            color: "#2cd3c8",
             fontFamily: PIXEL_FONT,
             fontWeight: 600,
             fontSize: "clamp(11px, 1.3vw, 16px)",
@@ -934,6 +934,15 @@ function ProgressRoomModal({
         }
         .progress-room-tab {
           transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+        }
+        .progress-room-tab:hover {
+          border-color: ${C.gold}55 !important;
+          background: rgba(255,255,255,0.07) !important;
+          color: ${C.textPrimary} !important;
+        }
+        .progress-room-tab:focus-visible {
+          outline: 3px solid ${C.gold};
+          outline-offset: -3px;
         }
         .progress-room-tab[aria-selected="true"] {
           background: ${C.gold}18 !important;

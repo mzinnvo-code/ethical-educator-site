@@ -1,4 +1,5 @@
 import { C } from "../../theme.js";
+import { PIXEL_CLIP_SM } from "./PixelFrame.jsx";
 import { TRACKER_THEMES } from "./trackerThemes.js";
 import { PROGRESS_ROOM_DOOR_ASSETS } from "../../data/deepfakeGameAssets.js";
 
@@ -36,12 +37,13 @@ export function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES
         width: dims.width,
         minHeight: dims.minHeight,
         padding: "7px 8px 9px",
-        borderRadius: 8,
+        clipPath: PIXEL_CLIP_SM,
         border: `2px solid ${C.gold}88`,
         background: "linear-gradient(180deg, rgba(8,18,32,0.92), rgba(33,22,11,0.92))",
         color: C.textPrimary,
         cursor: opening ? "default" : "pointer",
-        boxShadow: `0 0 22px ${C.gold}24, inset 0 0 0 1px rgba(255,255,255,0.05)`,
+        boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.05)`,
+        filter: `drop-shadow(0 0 11px ${C.gold}24)`,
         overflow: "hidden",
       }}
     >
@@ -81,7 +83,7 @@ export function ProgressRoomDoorButton({ onOpen, opening, theme = TRACKER_THEMES
           />
         ))}
       </span>
-      <span style={{ color: C.midnight, background: C.gold, borderRadius: 5, padding: "5px 7px", fontSize: "0.68rem", fontWeight: 900, lineHeight: 1.05 }}>
+      <span style={{ color: C.midnight, background: C.gold, clipPath: PIXEL_CLIP_SM, padding: "5px 8px", fontSize: "0.68rem", fontWeight: 900, lineHeight: 1.05 }}>
         {theme.doorLabel || "Open Progress Room"}
       </span>
       <span

@@ -5,7 +5,7 @@ import { PixelFrame, PixelPill, PixelText, SegmentBar, PIXEL_CLIP_SM, PIXEL_FONT
 import AnimatedAriInvite from "./AriSprite.jsx";
 import { ProgressRoomDoorButton } from "./DoorButton.jsx";
 import useImagePreload from "./useImagePreload.js";
-import { getProgressRoomTier } from "./trackerThemes.js";
+import { getProgressRoomTier, TEAL_TEXT } from "./trackerThemes.js";
 
 // The intro-variant "game screen": one cohesive pixel-framed status panel in
 // place of the old three-box grid. Ari talks, the lights meter shows one cell
@@ -225,7 +225,7 @@ export default function WonderDashboard({
       <div className="wonder-dashboard-inner">
         <header className="wonder-dashboard-header">
           <div style={{ minWidth: 0 }}>
-            <PixelText as="p" size="0.6rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.14em", marginBottom: 4 }}>
+            <PixelText as="p" size="0.68rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
               {eyebrow}
             </PixelText>
             <h3 style={{ fontFamily: PIXEL_FONT, fontWeight: 400, letterSpacing: "0.05em", color: C.textPrimary, fontSize: "1.34rem", lineHeight: 1.2, margin: 0, textShadow: `0 0 18px ${accent}33` }}>
@@ -249,7 +249,7 @@ export default function WonderDashboard({
               <AnimatedAriInvite theme={theme} size={84} />
               <div className="wonder-dashboard-bubble" role="status">
                 <span className="wonder-dashboard-bubble-tail" aria-hidden="true" />
-                <PixelText as="p" size="0.62rem" color={allLit ? C.gold : C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 3 }}>
+                <PixelText as="p" size="0.68rem" color={allLit ? C.gold : TEAL_TEXT} style={{ textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>
                   {allLit ? "Workshop fully lit!" : theme.nextLabel}
                 </PixelText>
                 <p style={{ color: C.textPrimary, fontSize: "0.96rem", fontWeight: 800, lineHeight: 1.3, margin: 0 }}>
@@ -274,13 +274,13 @@ export default function WonderDashboard({
                     alt={`Ari's wonder brain, ${brain.completedGoals} of ${brain.totalGoals || 0} lights lit`}
                   />
                 </span>
-                <PixelText size="0.5rem" color={C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.12em", whiteSpace: "nowrap" }}>
+                <PixelText size="0.66rem" color={TEAL_TEXT} style={{ textTransform: "uppercase", letterSpacing: "0.08em", whiteSpace: "nowrap" }}>
                   Ari&apos;s brain
                 </PixelText>
               </span>
               <div className="wonder-dashboard-meter-readout">
                 <div className="wonder-dashboard-meter-labels">
-                  <PixelText size="0.64rem" color={C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  <PixelText size="0.68rem" color={TEAL_TEXT} style={{ textTransform: "uppercase", letterSpacing: "0.08em" }}>
                     {theme.meterLabel}
                   </PixelText>
                   <PixelText size="0.86rem" color={allLit ? C.gold : C.textPrimary}>
@@ -297,7 +297,7 @@ export default function WonderDashboard({
             </div>
           </div>
           <div className="wonder-dashboard-door" style={{ position: "relative" }} onPointerEnter={warmRest} onFocus={warmRest}>
-            <PixelText as="p" size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.12em", textAlign: "center", maxWidth: 140 }}>
+            <PixelText as="p" size="0.66rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.08em", textAlign: "center", maxWidth: 150 }}>
               {theme.invitationEyebrow}
             </PixelText>
             <ProgressRoomDoorButton onOpen={onOpenDoor} opening={doorOpening} theme={theme} size="large" buttonRef={doorAnchorRef} />

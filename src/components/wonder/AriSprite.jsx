@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { C } from "../../theme.js";
+import { PIXEL_CLIP_SM } from "./PixelFrame.jsx";
 import { TRACKER_THEMES } from "./trackerThemes.js";
 import {
   PROGRESS_ROOM_ARI_INVITE_ASSETS,
@@ -65,12 +66,13 @@ export default function AnimatedAriInvite({ theme = TRACKER_THEMES.middle, size 
         width: size,
         aspectRatio: "1 / 1",
         flexShrink: 0,
-        borderRadius: 8,
+        clipPath: PIXEL_CLIP_SM,
         border: `2px solid ${C.gold}66`,
         background: "radial-gradient(circle at 50% 30%, rgba(44,211,200,0.18), rgba(5,12,24,0.76) 60%), linear-gradient(180deg, rgba(13,28,45,0.9), rgba(4,11,22,0.96))",
         overflow: "hidden",
         display: "block",
-        boxShadow: `0 0 22px ${C.gold}20, inset 0 0 0 1px rgba(255,255,255,0.05)`,
+        boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.05)`,
+        filter: `drop-shadow(0 0 11px ${C.gold}20)`,
         position: "relative",
       }}
     >

@@ -68,7 +68,12 @@ export const WONDER_CORE_CSS = `
   .progress-room-door-button:hover,
   .progress-room-door-button:focus-visible {
     border-color: ${C.gold} !important;
-    box-shadow: 0 0 30px ${C.gold}42, inset 0 0 0 1px rgba(255,255,255,0.08) !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08) !important;
+    filter: drop-shadow(0 0 15px ${C.gold}42) !important;
+  }
+  .progress-room-door-button:focus-visible {
+    outline: 3px solid ${C.gold};
+    outline-offset: -4px;
   }
   .progress-room-door-button:hover .progress-room-door-glow,
   .progress-room-door-button:focus-visible .progress-room-door-glow {

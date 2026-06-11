@@ -101,21 +101,23 @@ function Overworld({ zones, navigate, celebrateExperimentId, progress }) {
         .wonder-island:hover,
         .wonder-island:focus-visible {
           transform: translateY(-3px);
-          border-color: var(--island-accent, ${C.gold});
+          border-color: ${C.gold};
         }
         .wonder-island:focus-visible {
           outline: 3px solid ${C.gold};
-          outline-offset: 3px;
+          outline-offset: -5px;
         }
         .wonder-island.is-complete {
           border-color: ${C.gold}aa;
-          box-shadow: 0 0 16px ${C.gold}33;
+        }
+        li:has(> .wonder-island.is-complete) {
+          filter: drop-shadow(0 0 10px ${C.gold}44);
         }
         @keyframes wonder-island-celebrate {
-          0%, 100% { box-shadow: 0 0 10px ${C.gold}33; }
-          50% { box-shadow: 0 0 26px ${C.gold}88; }
+          0%, 100% { filter: drop-shadow(0 0 8px ${C.gold}44); }
+          50% { filter: drop-shadow(0 0 22px ${C.gold}); }
         }
-        .wonder-island-celebrate {
+        li:has(> .wonder-island-celebrate) {
           animation: wonder-island-celebrate 1.2s steps(3, end) 4;
         }
         .wonder-island-art {
@@ -189,7 +191,7 @@ function Overworld({ zones, navigate, celebrateExperimentId, progress }) {
         @media (prefers-reduced-motion: reduce) {
           .wonder-island { transition: none; }
           .wonder-island:hover, .wonder-island:focus-visible { transform: none; }
-          .wonder-island-celebrate { animation: none; }
+          li:has(> .wonder-island-celebrate) { animation: none; }
         }
       `}</style>
       <SkipLink />
@@ -230,7 +232,7 @@ function Overworld({ zones, navigate, celebrateExperimentId, progress }) {
                   {art?.src && <img src={art.src} alt="" loading="lazy" />}
                 </span>
                 <span className="wonder-island-body">
-                  <span className="wonder-island-chip" style={{ background: zone.grade.accent }} aria-hidden="true">
+                  <span className="wonder-island-chip" style={{ background: zone.grade.accent, color: zone.grade.accent === C.ocean ? C.textPrimary : "#0b1622" }} aria-hidden="true">
                     {zone.grade.short}
                   </span>
                   <span style={{ minWidth: 0 }}>
@@ -285,9 +287,25 @@ function GradePath({ zone, navigate, onSelectExperiment, nextGrade, progress }) 
   return (
     <nav className="wonder-grade-path" aria-label={`${grade.label} story path`}>
       <style>{`
+        .wonder-grade-path {
+          position: relative;
+        }
         .wonder-grade-path-scroller {
           overflow-x: auto;
-          padding: 30px 4px 6px;
+          padding: 40px 4px 6px;
+          scrollbar-width: thin;
+        }
+        @media (max-width: 700px) {
+          .wonder-grade-path::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 34px;
+            background: linear-gradient(270deg, rgba(11,22,34,0.92), transparent);
+            pointer-events: none;
+          }
         }
         .wonder-grade-path ol {
           list-style: none;
@@ -380,7 +398,7 @@ function GradePath({ zone, navigate, onSelectExperiment, nextGrade, progress }) 
         .wonder-path-node.is-done .wonder-path-title { color: ${C.gold}; }
         .wonder-path-here {
           position: absolute;
-          top: -28px;
+          top: -36px;
           left: 50%;
           transform: translateX(-50%);
           display: grid;
@@ -456,7 +474,7 @@ function GradePath({ zone, navigate, onSelectExperiment, nextGrade, progress }) 
                 >
                   {experiment.id === hereId && (
                     <span className="wonder-path-here" aria-hidden="true">
-                      <PixelText size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                      <PixelText size="0.7rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.06em" }}>
                         You are here
                       </PixelText>
                       <span className="wonder-path-here-arrow" />
@@ -488,7 +506,7 @@ function GradePath({ zone, navigate, onSelectExperiment, nextGrade, progress }) 
             >
               {allDone && (
                 <span className="wonder-path-here" aria-hidden="true">
-                  <PixelText size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                  <PixelText size="0.7rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.06em" }}>
                     Next stop!
                   </PixelText>
                   <span className="wonder-path-here-arrow" />

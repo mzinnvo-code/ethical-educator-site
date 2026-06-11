@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { C } from "../../theme.js";
 import { PixelText, PIXEL_CLIP, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
 import { computeInspectorPlacement } from "./workshopLayout.js";
+import { TEAL_TEXT, textSafeAccent } from "./trackerThemes.js";
 
 export { computeInspectorPlacement };
 
@@ -30,7 +31,7 @@ export default function StageInspector({
   const earned = isBadge ? badge.earned : memento.completed;
 
   const positionStyle = placement.centered
-    ? { left: "50%", top: "50%", transform: "translate(-50%, -50%)" }
+    ? { left: "50%", top: "50%", transform: "translate(-50%, -50%)", maxHeight: "92%", overflowY: "auto" }
     : {
       left: `${placement.leftPct}%`,
       transform: "translateX(-50%)",
@@ -93,7 +94,7 @@ export default function StageInspector({
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: 8 }}>
-            <PixelText size="0.58rem" color={earned ? C.gold : C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.13em", paddingTop: 4 }}>
+            <PixelText size="0.66rem" color={earned ? C.gold : TEAL_TEXT} style={{ textTransform: "uppercase", letterSpacing: "0.07em", paddingTop: 4 }}>
               {isBadge ? (earned ? "Trophy earned" : "Trophy to earn") : earned ? "Workshop memento" : "Waiting on the shelf"}
             </PixelText>
             <button
@@ -104,7 +105,7 @@ export default function StageInspector({
                 width: 26,
                 height: 26,
                 clipPath: PIXEL_CLIP_SM,
-                border: `2px solid ${C.border}`,
+                border: `2px solid ${C.gold}55`,
                 background: "rgba(255,255,255,0.06)",
                 color: C.textPrimary,
                 cursor: "pointer",
@@ -170,7 +171,7 @@ export default function StageInspector({
                 </>
               ) : (
                 <>
-                  <PixelText size="0.58rem" color={memento.item.accent || C.teal} style={{ display: "inline-block", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 5 }}>
+                  <PixelText size="0.64rem" color={textSafeAccent(memento.item.accent) || TEAL_TEXT} style={{ display: "inline-block", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 5 }}>
                     {memento.item.gradeLabel}
                   </PixelText>
                   <p style={{ color: C.textSecondary, fontSize: "0.76rem", lineHeight: 1.5, margin: 0 }}>

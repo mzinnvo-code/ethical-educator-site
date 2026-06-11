@@ -22,6 +22,14 @@ import { C } from "../../theme.js";
 export const SFX_STORAGE_KEY = "thoughtProgressRoomSfxMuted";
 export const DOOR_OPEN_DELAY_MS = 560;
 
+// Text-safe color variants: C.teal (4.3:1) and C.ocean (2.5:1) fail contrast
+// as SMALL text on the dark background; use these for labels, keep the base
+// tokens for borders and fills.
+export const TEAL_TEXT = "#2cd3c8";
+export function textSafeAccent(accent) {
+  return accent === C.ocean ? C.sky : accent;
+}
+
 export const PIXEL_FRAME_RATIOS = {
   brain: "260 / 190",
   achievement: "16 / 9",
@@ -87,7 +95,7 @@ export const TRACKER_THEMES = {
       { label: "Done", value: summary.completedExperiments, color: C.teal, icon: "finished" },
       { label: "Trophies", value: earnedBadges.length, color: C.gold, icon: "badges" },
       { label: "Skills", value: `${earnedAchievements.length}/${achievements.length}`, color: C.coral, icon: "skills" },
-      { label: "Brain", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.ocean, icon: "brain" },
+      { label: "Brain", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.sky, icon: "brain" },
     ],
   },
   k5: {
@@ -126,7 +134,7 @@ export const TRACKER_THEMES = {
       { label: "Stories", value: summary.completedExperiments, color: C.teal, icon: "finished" },
       { label: "Trophies", value: earnedBadges.length, color: C.gold, icon: "badges" },
       { label: "Tries", value: summary.replayCount, color: C.coral, icon: "skills" },
-      { label: "Lights", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.ocean, icon: "brain" },
+      { label: "Lights", value: `${brain.completedGoals}/${brain.totalGoals || 0}`, color: C.sky, icon: "brain" },
     ],
   },
 };

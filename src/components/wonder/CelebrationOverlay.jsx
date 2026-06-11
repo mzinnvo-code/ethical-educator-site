@@ -121,6 +121,13 @@ export default function CelebrationOverlay({
         .wonder-celebrate-trophy {
           animation: wonder-trophy-stamp 420ms steps(4, end) 700ms both;
         }
+        .wonder-celebrate-card button:hover {
+          filter: brightness(1.18);
+        }
+        .wonder-celebrate-card button:focus-visible {
+          outline: 3px solid #ffe9a8;
+          outline-offset: -3px;
+        }
         @media (prefers-reduced-motion: reduce) {
           .wonder-confetti span,
           .wonder-celebrate-card,
@@ -169,9 +176,11 @@ export default function CelebrationOverlay({
             background: "linear-gradient(180deg, rgba(16,33,55,0.99), rgba(7,16,29,0.99))",
             padding: "22px 20px 18px",
             textAlign: "center",
+            maxHeight: "88vh",
+            overflowY: "auto",
           }}
         >
-          <PixelText as="p" size="0.62rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 10 }}>
+          <PixelText as="p" size="0.68rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
             {firstCompletion ? "Story complete" : "Story replayed"}
           </PixelText>
 
