@@ -83,14 +83,14 @@ export default function K5({ navigate }) {
         </Narrow>
 
         <div style={{ maxWidth: 1080, margin: "0 auto" }}>
-          <Divider label="Pick your next story" />
+          <Divider label="Choose your island" />
           <FadeIn>
             <BodyText>
-              Follow the trail! Every story you finish turns its tile gold and lights another wonder light. Start anywhere — younger grades begin with feelings and sharing, older grades wrestle with evidence, fairness, and tricky tools.
+              Every grade is an island on the trail. Travel to yours, play its stories from left to right, and the path lights up gold behind you — finish an island and the trail carries you to the next one.
             </BodyText>
           </FadeIn>
           <div style={{ marginTop: 18, marginBottom: 10 }}>
-            <AdventureMap zones={mapZones} variant="full" navigate={navigate} celebrateExperimentId={celebrateExperimentId} />
+            <AdventureMap zones={mapZones} variant="overworld" navigate={navigate} celebrateExperimentId={celebrateExperimentId} />
           </div>
           <p style={{ color: C.textMuted, fontSize: "0.8rem", lineHeight: 1.6, margin: "10px 0 28px" }}>
             Prefer a list? Jump straight to{" "}

@@ -110,24 +110,47 @@ export default function WonderDashboard({
           background: rgba(5,13,24,0.66);
           padding: 9px 12px;
         }
-        .wonder-brain-halo {
+        .wonder-brain-block {
           display: grid;
-          place-items: center;
+          justify-items: center;
+          gap: 4px;
           flex-shrink: 0;
-          clip-path: ${PIXEL_CLIP_SM};
-          padding: 6px 8px;
-          background:
-            radial-gradient(circle at 50% 45%, ${C.gold}38, rgba(44,211,200,0.16) 55%, transparent 78%),
-            linear-gradient(180deg, rgba(20,40,66,0.9), rgba(10,22,38,0.92));
-          border: 2px solid rgba(255,255,255,0.1);
+        }
+        .wonder-brain-monitor {
+          position: relative;
+          width: clamp(88px, 10vw, 116px);
+          aspect-ratio: 260 / 190;
+          border: 2px solid ${C.teal}77;
+          background: #081320;
+          overflow: hidden;
+          box-shadow: 0 0 0 2px rgba(5,12,24,0.85), 0 0 14px ${C.teal}26, inset 0 0 0 1px rgba(255,255,255,0.06);
+        }
+        .wonder-brain-monitor::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(transparent 50%, rgba(255,255,255,0.03) 50%);
+          background-size: 100% 4px;
+          pointer-events: none;
         }
         .wonder-dashboard-meter-brain {
-          width: clamp(54px, 6.5vw, 76px);
-          height: auto;
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: contain;
           image-rendering: pixelated;
+          animation: wonder-brain-glow 3.2s steps(2, end) infinite;
+        }
+        @keyframes wonder-brain-glow {
+          0%, 100% { filter: brightness(1); }
+          50% { filter: brightness(1.14) saturate(1.1); }
         }
         .wonder-dashboard-meter-brain.is-dim {
-          filter: brightness(1.55) contrast(1.05) drop-shadow(0 0 8px rgba(42,136,192,0.7));
+          animation: none;
+          filter: brightness(1.5) contrast(1.05);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wonder-dashboard-meter-brain { animation: none; }
         }
         .wonder-dashboard-meter-readout {
           flex: 1 1 auto;
@@ -205,7 +228,7 @@ export default function WonderDashboard({
             <PixelText as="p" size="0.6rem" color={accent} style={{ textTransform: "uppercase", letterSpacing: "0.14em", marginBottom: 4 }}>
               {eyebrow}
             </PixelText>
-            <h3 style={{ fontFamily: PIXEL_FONT, fontWeight: 600, color: C.textPrimary, fontSize: "1.34rem", lineHeight: 1.15, margin: 0, textShadow: `0 0 18px ${accent}33` }}>
+            <h3 style={{ fontFamily: PIXEL_FONT, fontWeight: 400, letterSpacing: "0.05em", color: C.textPrimary, fontSize: "1.34rem", lineHeight: 1.2, margin: 0, textShadow: `0 0 18px ${accent}33` }}>
               {panelTitle}
             </h3>
             <p style={{ color: C.textSecondary, fontSize: "0.8rem", lineHeight: 1.5, marginTop: 5, maxWidth: "58ch" }}>
@@ -240,12 +263,20 @@ export default function WonderDashboard({
               </div>
             </div>
             <div className="wonder-dashboard-meter">
-              <span className="thought-progress-brain-frame wonder-brain-halo">
-                <img
-                  className={`wonder-dashboard-meter-brain ${brain.level <= 1 ? "is-dim" : ""}`}
-                  src={theme.assets.brainProgress[Math.min(5, Math.max(0, brain.level ? brain.level - 1 : 0))]}
-                  alt={`Pixel brain progress ${brain.percent}% complete`}
-                />
+              <span className="wonder-brain-block">
+                <span
+                  className="wonder-brain-monitor"
+                  title="Ari's wonder brain lights up as you finish stories"
+                >
+                  <img
+                    className={`wonder-dashboard-meter-brain ${brain.level <= 1 ? "is-dim" : ""}`}
+                    src={theme.assets.brainProgress[Math.min(5, Math.max(0, brain.level ? brain.level - 1 : 0))]}
+                    alt={`Ari's wonder brain, ${brain.completedGoals} of ${brain.totalGoals || 0} lights lit`}
+                  />
+                </span>
+                <PixelText size="0.5rem" color={C.teal} style={{ textTransform: "uppercase", letterSpacing: "0.12em", whiteSpace: "nowrap" }}>
+                  Ari&apos;s brain
+                </PixelText>
               </span>
               <div className="wonder-dashboard-meter-readout">
                 <div className="wonder-dashboard-meter-labels">

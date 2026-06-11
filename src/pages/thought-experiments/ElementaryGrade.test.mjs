@@ -8,7 +8,7 @@ test("elementary story grids do not render Ari's Goal Tracker before the stories
   assert.doesNotMatch(source, /ThoughtProgressPanel/);
 
   const comicIndex = source.indexOf("<IntroComicStrip comic={getIntroComic(grade.route)} />");
-  const storiesIndex = source.indexOf("<Divider label={`${grade.label} stories`} />");
+  const storiesIndex = source.indexOf("<Divider label={`${grade.label} story path`} />");
 
   assert.notEqual(comicIndex, -1);
   assert.notEqual(storiesIndex, -1);

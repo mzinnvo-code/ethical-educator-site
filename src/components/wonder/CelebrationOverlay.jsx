@@ -209,7 +209,7 @@ export default function CelebrationOverlay({
             )}
           </div>
 
-          <h2 style={{ fontFamily: PIXEL_FONT, fontWeight: 600, color: C.textPrimary, fontSize: "1.3rem", lineHeight: 1.25, margin: "12px 0 6px", textShadow: `0 0 18px ${accent}44` }}>
+          <h2 style={{ fontFamily: PIXEL_FONT, fontWeight: 400, letterSpacing: "0.06em", wordSpacing: "0.08em", color: C.textPrimary, fontSize: "1.3rem", lineHeight: 1.3, margin: "12px 0 6px", textShadow: `0 0 18px ${accent}44` }}>
             {headline}
           </h2>
           {firstCompletion ? (

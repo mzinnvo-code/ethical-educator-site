@@ -177,13 +177,14 @@ export function ElementaryGradePage({ navigate, gradeId }) {
 
           {!active && (
             <>
-              <Divider label={`${grade.label} stories`} />
+              <Divider label={`${grade.label} story path`} />
               <div style={{ margin: "16px 0 22px" }}>
                 <AdventureMap
-                  variant="strip"
+                  variant="path"
                   zones={[{ grade, experiments: experiments.filter((experiment) => !experiment.customLayout) }]}
                   onSelectExperiment={openExperiment}
-                  showZoneHeaders={false}
+                  navigate={navigate}
+                  nextGrade={ELEMENTARY_GRADES[ELEMENTARY_GRADES.findIndex((item) => item.id === grade.id) + 1] || null}
                 />
               </div>
               <ExperimentGrid

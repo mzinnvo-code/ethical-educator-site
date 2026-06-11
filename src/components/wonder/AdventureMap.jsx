@@ -1,33 +1,276 @@
 import { C } from "../../theme.js";
 import useThoughtProgress from "../../hooks/useThoughtProgress.js";
+import { getSceneIllustration } from "../../data/sceneIllustrations.js";
 import { PixelText, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
-import { MAP_BAND, MAP_EDGE_X, getZoneNodePositions, nodeProgressState, zoneExitEdge } from "./mapLayout.js";
+import { firstIncompleteId, nodeProgressState, zoneCompletedCount } from "./mapLayout.js";
 
-// Level-select adventure map for the K-5 stories. Every story is a node on a
-// winding trail through six grade zones; finished stories light up gold and
-// the trail fills in behind them. Nothing is ever locked — the lights are a
-// record of where you've wondered, not a gate.
+// Two views of the same adventure, structured like a classic platformer:
 //
-// variant="full"  → six boustrophedon bands on the hub, zone headers link to
-//                   each grade page, nodes deep-link via ?experiment=.
-// variant="strip" → one band on a grade page; nodes call onSelectExperiment
-//                   to open the story inline (matching ExperimentGrid).
-export default function AdventureMap({
-  zones,
-  variant = "full",
-  navigate,
-  onSelectExperiment,
-  showZoneHeaders = variant === "full",
-  celebrateExperimentId = null,
-}) {
-  const { progress } = useThoughtProgress();
-  const band = MAP_BAND[variant] || MAP_BAND.full;
-  const isFull = variant === "full";
+// variant="overworld" (hub) — six grade islands on a winding trail, each
+// wearing its own story artwork. Click an island to travel to that grade.
+//
+// variant="path" (grade page) — that grade's lateral level path: the four
+// stories left to right as scene-art tiles, a "you are here" marker on the
+// next unfinished story, and an exit gate that leads to the next grade
+// (or back to the Wonder Workshop after Grade 5).
+//
+// Nothing is ever locked — the lights are a record of where you've
+// wondered, not a gate.
 
-  const zoneCompleted = (experiments) =>
-    experiments.filter((experiment) => progress.experiments[experiment.id]?.completed).length;
+function nodeArt(experiment) {
+  const firstStage = experiment.stages?.[0];
+  return getSceneIllustration(experiment, {
+    stageId: firstStage?.id,
+    stageTitle: firstStage?.title || firstStage?.kicker,
+    stageIndex: 0,
+    visualVariant: "k-5",
+  });
+}
 
-  const handleNodeClick = (event, zone, experiment) => {
+function SkipLink() {
+  return (
+    <>
+      <a className="wonder-map-skip" href="#wonder-map-end">Skip the adventure map</a>
+      <style>{`
+        .wonder-map-skip { position: absolute; left: -9999px; }
+        .wonder-map-skip:focus { position: static; display: inline-block; padding: 6px 10px; color: ${C.gold}; }
+      `}</style>
+    </>
+  );
+}
+
+// ──────────────── Overworld (hub) ────────────────
+
+function Overworld({ zones, navigate, celebrateExperimentId, progress }) {
+  return (
+    <nav className="wonder-overworld" aria-label="Adventure map: pick a grade island">
+      <style>{`
+        .wonder-overworld ol {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr);
+          grid-template-rows: auto 24px auto;
+          align-items: stretch;
+        }
+        /* Snake order: K, 1, 2 across the top; drop down on the right; 3, 4, 5 back across the bottom. */
+        .wonder-overworld ol > li:nth-child(1) { grid-area: 1 / 1; }
+        .wonder-overworld ol > li:nth-child(2) { grid-area: 1 / 2; }
+        .wonder-overworld ol > li:nth-child(3) { grid-area: 1 / 3; }
+        .wonder-overworld ol > li:nth-child(4) { grid-area: 1 / 4; }
+        .wonder-overworld ol > li:nth-child(5) { grid-area: 1 / 5; }
+        .wonder-overworld ol > li:nth-child(6) { grid-area: 2 / 5; }
+        .wonder-overworld ol > li:nth-child(7) { grid-area: 3 / 5; }
+        .wonder-overworld ol > li:nth-child(8) { grid-area: 3 / 4; }
+        .wonder-overworld ol > li:nth-child(9) { grid-area: 3 / 3; }
+        .wonder-overworld ol > li:nth-child(10) { grid-area: 3 / 2; }
+        .wonder-overworld ol > li:nth-child(11) { grid-area: 3 / 1; }
+        .wonder-overworld-connector {
+          display: grid;
+          place-items: center;
+        }
+        .wonder-overworld-connector span {
+          background: repeating-linear-gradient(90deg, rgba(224,220,208,0.28) 0 6px, transparent 6px 12px);
+          width: 100%;
+          height: 5px;
+          border-radius: 2px;
+        }
+        .wonder-overworld-connector.is-vertical span {
+          background: repeating-linear-gradient(180deg, rgba(224,220,208,0.28) 0 6px, transparent 6px 12px);
+          width: 5px;
+          height: 100%;
+        }
+        .wonder-overworld-connector.is-lit span {
+          background: linear-gradient(90deg, #ffe9a8, ${C.gold});
+          box-shadow: 0 0 10px ${C.gold}55;
+        }
+        .wonder-overworld-connector.is-vertical.is-lit span {
+          background: linear-gradient(180deg, #ffe9a8, ${C.gold});
+        }
+        .wonder-island {
+          position: relative;
+          display: block;
+          text-decoration: none;
+          clip-path: ${PIXEL_CLIP_SM};
+          border: 3px solid rgba(255,255,255,0.14);
+          background: rgba(8,18,32,0.92);
+          overflow: hidden;
+          transition: transform 140ms steps(2, end), border-color 140ms steps(2, end);
+        }
+        .wonder-island:hover,
+        .wonder-island:focus-visible {
+          transform: translateY(-3px);
+          border-color: var(--island-accent, ${C.gold});
+        }
+        .wonder-island:focus-visible {
+          outline: 3px solid ${C.gold};
+          outline-offset: 3px;
+        }
+        .wonder-island.is-complete {
+          border-color: ${C.gold}aa;
+          box-shadow: 0 0 16px ${C.gold}33;
+        }
+        @keyframes wonder-island-celebrate {
+          0%, 100% { box-shadow: 0 0 10px ${C.gold}33; }
+          50% { box-shadow: 0 0 26px ${C.gold}88; }
+        }
+        .wonder-island-celebrate {
+          animation: wonder-island-celebrate 1.2s steps(3, end) 4;
+        }
+        .wonder-island-art {
+          position: relative;
+          display: block;
+          aspect-ratio: 16 / 8.5;
+        }
+        .wonder-island-art img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+        }
+        .wonder-island-art::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, transparent 35%, rgba(8,18,32,0.92) 96%);
+        }
+        .wonder-island-body {
+          position: relative;
+          display: grid;
+          grid-template-columns: 30px minmax(0, 1fr) auto;
+          gap: 8px;
+          align-items: center;
+          padding: 8px 10px 10px;
+          margin-top: -26px;
+        }
+        .wonder-island-chip {
+          display: grid;
+          place-items: center;
+          width: 30px;
+          height: 30px;
+          clip-path: ${PIXEL_CLIP_SM};
+          color: #0b1622;
+          font-family: ${PIXEL_FONT};
+          font-size: 0.95rem;
+        }
+        .wonder-island-pips {
+          display: flex;
+          gap: 3px;
+          margin-top: 3px;
+        }
+        .wonder-island-pips span {
+          width: 9px;
+          height: 9px;
+          clip-path: ${PIXEL_CLIP_SM};
+          background: rgba(255,255,255,0.12);
+        }
+        .wonder-island-pips span.is-lit {
+          background: linear-gradient(180deg, #ffe9a8, ${C.gold});
+          box-shadow: 0 0 6px ${C.gold}66;
+        }
+        @media (max-width: 640px) {
+          .wonder-overworld ol {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: none;
+          }
+          .wonder-overworld ol > li { grid-area: auto !important; }
+          .wonder-overworld-connector { height: 22px; }
+          .wonder-overworld-connector span,
+          .wonder-overworld-connector.is-lit span {
+            width: 5px;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, rgba(224,220,208,0.28) 0 6px, transparent 6px 12px);
+          }
+          .wonder-overworld-connector.is-lit span {
+            background: linear-gradient(180deg, #ffe9a8, ${C.gold});
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wonder-island { transition: none; }
+          .wonder-island:hover, .wonder-island:focus-visible { transform: none; }
+          .wonder-island-celebrate { animation: none; }
+        }
+      `}</style>
+      <SkipLink />
+      <ol>
+        {zones.map((zone, index) => {
+          const done = zoneCompletedCount(zone.experiments, progress);
+          const total = zone.experiments.length;
+          const art = nodeArt(zone.experiments[0]);
+          const celebrate = zone.experiments.some((experiment) => experiment.id === celebrateExperimentId);
+          const prevZone = index > 0 ? zones[index - 1] : null;
+          const connectorLit = prevZone
+            ? zoneCompletedCount(prevZone.experiments, progress) === prevZone.experiments.length
+            : false;
+          const isVerticalConnector = index === 3; // the drop between Grade 2 and Grade 3
+          return [
+            index > 0 && (
+              <li
+                key={`conn-${zone.grade.id}`}
+                aria-hidden="true"
+                className={`wonder-overworld-connector ${isVerticalConnector ? "is-vertical" : ""} ${connectorLit ? "is-lit" : ""}`}
+              >
+                <span />
+              </li>
+            ),
+            <li key={zone.grade.id}>
+              <a
+                className={`wonder-island ${done === total ? "is-complete" : ""} ${celebrate ? "wonder-island-celebrate" : ""}`}
+                style={{ "--island-accent": zone.grade.accent }}
+                href={`/${zone.grade.route}`}
+                onClick={(event) => {
+                  if (!navigate) return;
+                  event.preventDefault();
+                  navigate(zone.grade.route);
+                }}
+                aria-label={`${zone.grade.label} island: ${done} of ${total} stories finished. ${zone.grade.title}`}
+              >
+                <span className="wonder-island-art" aria-hidden="true">
+                  {art?.src && <img src={art.src} alt="" loading="lazy" />}
+                </span>
+                <span className="wonder-island-body">
+                  <span className="wonder-island-chip" style={{ background: zone.grade.accent }} aria-hidden="true">
+                    {zone.grade.short}
+                  </span>
+                  <span style={{ minWidth: 0 }}>
+                    <span style={{ display: "block", color: C.textPrimary, fontWeight: 800, fontSize: "0.92rem", lineHeight: 1.2 }}>
+                      {zone.grade.label}
+                    </span>
+                    <span className="wonder-island-pips" aria-hidden="true">
+                      {zone.experiments.map((experiment) => (
+                        <span
+                          key={experiment.id}
+                          className={progress?.experiments?.[experiment.id]?.completed ? "is-lit" : ""}
+                        />
+                      ))}
+                    </span>
+                  </span>
+                  <PixelText size="0.8rem" color={done === total ? C.gold : C.textSecondary} style={{ whiteSpace: "nowrap" }}>
+                    {done}/{total}
+                  </PixelText>
+                </span>
+              </a>
+            </li>,
+          ];
+        })}
+      </ol>
+      <span id="wonder-map-end" />
+    </nav>
+  );
+}
+
+// ──────────────── Grade level path ────────────────
+
+function GradePath({ zone, navigate, onSelectExperiment, nextGrade, progress }) {
+  const experiments = zone.experiments;
+  const grade = zone.grade;
+  const hereId = firstIncompleteId(experiments, progress);
+  const allDone = hereId === null;
+  const gateRoute = nextGrade ? nextGrade.route : "thought-experiments/k-5";
+  const gateLabel = nextGrade ? `On to ${nextGrade.label}` : "Visit the Workshop";
+
+  const handleNode = (event, experiment) => {
     if (onSelectExperiment) {
       event.preventDefault();
       onSelectExperiment(experiment);
@@ -35,359 +278,261 @@ export default function AdventureMap({
     }
     if (navigate) {
       event.preventDefault();
-      navigate(`${zone.grade.route}?experiment=${experiment.id}`);
+      navigate(`${grade.route}?experiment=${experiment.id}`);
     }
   };
 
   return (
-    <nav className="wonder-map" aria-label="Adventure map: pick a story to play">
+    <nav className="wonder-grade-path" aria-label={`${grade.label} story path`}>
       <style>{`
-        .wonder-map ol {
+        .wonder-grade-path-scroller {
+          overflow-x: auto;
+          padding: 30px 4px 6px;
+        }
+        .wonder-grade-path ol {
           list-style: none;
           margin: 0;
           padding: 0;
+          display: grid;
+          grid-template-columns: repeat(${experiments.length}, minmax(132px, 1fr) 20px) minmax(108px, 0.8fr);
+          align-items: start;
+          min-width: ${experiments.length * 152 + 108}px;
         }
-        .wonder-map-zone {
-          position: relative;
-          margin: 0 0 14px;
-        }
-        .wonder-map-zone-header {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 6px 4px;
-          text-decoration: none;
-          color: inherit;
-        }
-        .wonder-map-zone-header:hover .wonder-map-zone-name,
-        .wonder-map-zone-header:focus-visible .wonder-map-zone-name {
-          text-decoration: underline;
-          text-underline-offset: 3px;
-        }
-        .wonder-map-zone-chip {
+        .wonder-path-seg {
           display: grid;
           place-items: center;
-          width: 34px;
-          height: 34px;
-          clip-path: ${PIXEL_CLIP_SM};
-          font-family: ${PIXEL_FONT};
-          font-weight: 600;
-          font-size: 1rem;
-          color: #0b1622;
-          flex-shrink: 0;
+          height: 96px;
         }
-        .wonder-map-band {
+        .wonder-path-seg span {
+          width: 100%;
+          height: 5px;
+          border-radius: 2px;
+          background: repeating-linear-gradient(90deg, rgba(224,220,208,0.28) 0 6px, transparent 6px 12px);
+        }
+        .wonder-path-seg.is-lit span {
+          background: linear-gradient(90deg, #ffe9a8, ${C.gold});
+          box-shadow: 0 0 10px ${C.gold}55;
+        }
+        .wonder-path-node {
           position: relative;
-          height: ${band.height}px;
-          clip-path: ${PIXEL_CLIP_SM};
-          border: 2px solid rgba(255,255,255,0.09);
-        }
-        .wonder-map-rail {
-          position: absolute;
-          left: ${MAP_EDGE_X}%;
-          right: ${MAP_EDGE_X}%;
-          top: ${band.railY}px;
-          height: 6px;
-          background: repeating-linear-gradient(90deg, rgba(224,220,208,0.22) 0 10px, transparent 10px 20px);
-          border-radius: 2px;
-        }
-        .wonder-map-rail-lit {
-          position: absolute;
-          top: ${band.railY}px;
-          height: 6px;
-          background: linear-gradient(180deg, #ffe9a8, ${C.gold});
-          box-shadow: 0 0 10px ${C.gold}50;
-          border-radius: 2px;
-          z-index: 1;
-        }
-        .wonder-map-connector {
-          position: absolute;
-          width: 6px;
-          background: repeating-linear-gradient(180deg, rgba(224,220,208,0.2) 0 10px, transparent 10px 20px);
-          border-radius: 2px;
-          z-index: 0;
-        }
-        .wonder-map-connector-exit {
-          top: ${band.railY}px;
-          height: calc(100% - ${band.railY}px);
-        }
-        .wonder-map-connector-entry {
-          top: 0;
-          height: ${band.railY + 6}px;
-        }
-        .wonder-map-connector.is-lit {
-          background: linear-gradient(180deg, ${C.gold}, ${C.gold}88);
-          box-shadow: 0 0 12px ${C.gold}44;
-        }
-        .wonder-map-node-stem {
-          position: absolute;
-          width: 4px;
-          background: rgba(224,220,208,0.16);
-          z-index: 1;
-        }
-        .wonder-map-node-stem.is-lit {
-          background: ${C.gold}aa;
-          box-shadow: 0 0 8px ${C.gold}44;
-        }
-        .wonder-map-node {
-          position: absolute;
-          transform: translateX(-50%);
           display: grid;
           justify-items: center;
-          gap: 5px;
-          width: 96px;
+          gap: 6px;
           text-decoration: none;
-          z-index: 2;
         }
-        .wonder-map-node.is-top {
-          transform: translate(-50%, -100%);
-        }
-        .wonder-map-node.is-top .wonder-map-caption {
-          order: -1;
-        }
-        .wonder-map-node:focus-visible {
+        .wonder-path-node:focus-visible {
           outline: 3px solid ${C.gold};
           outline-offset: 3px;
         }
-        .wonder-map-tile {
+        .wonder-path-art {
           position: relative;
-          display: grid;
-          place-items: center;
-          width: ${band.tile}px;
-          height: ${band.tile}px;
+          width: 100%;
+          aspect-ratio: 16 / 11;
           clip-path: ${PIXEL_CLIP_SM};
           border: 3px solid rgba(255,255,255,0.16);
-          background: linear-gradient(180deg, rgba(14,30,48,0.92), rgba(8,18,32,0.94));
-          transition: transform 140ms steps(2, end);
+          background: rgba(10,21,36,0.9);
+          overflow: hidden;
+          transition: transform 140ms steps(2, end), border-color 140ms steps(2, end);
         }
-        .wonder-map-node:hover .wonder-map-tile {
-          transform: scale(1.07);
-          border-color: rgba(255,255,255,0.4);
+        .wonder-path-art img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
         }
-        .wonder-map-node.is-done .wonder-map-tile {
+        .wonder-path-node:hover .wonder-path-art,
+        .wonder-path-node:focus-visible .wonder-path-art {
+          transform: scale(1.04);
+          border-color: ${grade.accent};
+        }
+        .wonder-path-node.is-done .wonder-path-art {
           border-color: ${C.gold};
-          background: linear-gradient(180deg, ${C.gold}26, rgba(10,20,34,0.95));
-          box-shadow: 0 0 14px ${C.gold}44, inset 0 0 0 1px ${C.gold}33;
-          animation: wonder-node-glow 2.6s steps(2, end) infinite;
+          box-shadow: 0 0 14px ${C.gold}44;
         }
-        @keyframes wonder-node-glow {
-          0%, 100% { box-shadow: 0 0 10px ${C.gold}33, inset 0 0 0 1px ${C.gold}22; }
-          50% { box-shadow: 0 0 20px ${C.gold}66, inset 0 0 0 1px ${C.gold}44; }
+        .wonder-path-node:not(.is-done) .wonder-path-art img {
+          filter: saturate(0.7) brightness(0.85);
         }
-        @keyframes wonder-node-celebrate-pop {
-          0% { transform: scale(1); }
-          30% { transform: scale(1.4); }
-          60% { transform: scale(0.94); }
-          100% { transform: scale(1); }
-        }
-        .wonder-map-node-celebrate .wonder-map-tile {
-          animation: wonder-node-celebrate-pop 950ms steps(5, end) 400ms 2, wonder-node-glow 2.6s steps(2, end) infinite;
-        }
-        .wonder-map-emoji {
-          font-size: ${Math.round(band.tile * 0.46)}px;
-          line-height: 1;
-          filter: saturate(1.1) drop-shadow(0 2px 0 rgba(0,0,0,0.35));
-        }
-        .wonder-map-node:not(.is-done) .wonder-map-emoji {
-          opacity: 0.82;
-        }
-        .wonder-map-pip {
+        .wonder-path-pip {
           position: absolute;
+          z-index: 2;
           display: grid;
           place-items: center;
-          width: 17px;
-          height: 17px;
-          font-size: 11px;
+          width: 20px;
+          height: 20px;
+          font-size: 13px;
           line-height: 1;
           clip-path: ${PIXEL_CLIP_SM};
         }
-        .wonder-map-pip-star {
-          top: -7px;
-          right: -7px;
-          background: ${C.gold};
-          color: #0b1622;
-        }
-        .wonder-map-pip-replay {
-          top: -7px;
-          left: -7px;
-          background: ${C.teal};
-          color: #0b1622;
-          font-size: 10px;
-        }
-        .wonder-map-caption {
-          font-size: 0.62rem;
+        .wonder-path-pip-star { top: -8px; right: -7px; background: ${C.gold}; color: #0b1622; }
+        .wonder-path-pip-replay { top: -8px; left: -7px; background: ${C.teal}; color: #0b1622; font-size: 12px; }
+        .wonder-path-title {
+          max-width: 140px;
+          font-size: 0.68rem;
           font-weight: 700;
-          line-height: 1.25;
+          line-height: 1.3;
           text-align: center;
           color: ${C.textSecondary};
-          max-width: 96px;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
-        .wonder-map-node.is-done .wonder-map-caption {
-          color: ${C.gold};
-        }
-        .wonder-map-skip {
+        .wonder-path-node.is-done .wonder-path-title { color: ${C.gold}; }
+        .wonder-path-here {
           position: absolute;
-          left: -9999px;
+          top: -28px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: grid;
+          justify-items: center;
+          gap: 1px;
+          white-space: nowrap;
+          z-index: 3;
         }
-        .wonder-map-skip:focus {
-          position: static;
-          display: inline-block;
-          padding: 6px 10px;
+        .wonder-path-here-arrow {
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 7px solid ${C.gold};
+        }
+        @keyframes wonder-path-here-bob {
+          0%, 100% { transform: translate(-50%, 0); }
+          50% { transform: translate(-50%, 3px); }
+        }
+        .wonder-path-here { animation: wonder-path-here-bob 1.4s steps(2, end) infinite; }
+        .wonder-path-gate {
+          display: grid;
+          justify-items: center;
+          gap: 6px;
+          text-decoration: none;
+          position: relative;
+        }
+        .wonder-path-gate-arch {
+          display: grid;
+          place-items: center;
+          width: 76px;
+          height: 84px;
+          clip-path: polygon(0 34%, 14% 14%, 32% 4%, 50% 0, 68% 4%, 86% 14%, 100% 34%, 100% 100%, 0 100%);
+          border: 3px solid ${C.gold}88;
+          background: linear-gradient(180deg, ${(nextGrade?.accent || C.gold)}33, rgba(8,18,32,0.95));
           color: ${C.gold};
+          font-family: ${PIXEL_FONT};
+          font-size: 1.5rem;
+          transition: transform 140ms steps(2, end);
         }
-        @media (max-width: 620px) {
-          .wonder-map-node { width: 78px; }
-          .wonder-map-caption { max-width: 78px; font-size: 0.56rem; }
-          .wonder-map-tile { width: ${Math.max(46, band.tile - 12)}px; height: ${Math.max(46, band.tile - 12)}px; }
-          .wonder-map-emoji { font-size: ${Math.round((band.tile - 12) * 0.46)}px; }
+        .wonder-path-gate:hover .wonder-path-gate-arch,
+        .wonder-path-gate:focus-visible .wonder-path-gate-arch {
+          transform: translateY(-3px);
         }
+        .wonder-path-gate:focus-visible { outline: 3px solid ${C.gold}; outline-offset: 3px; }
         @media (prefers-reduced-motion: reduce) {
-          .wonder-map-node.is-done .wonder-map-tile { animation: none; }
-          .wonder-map-node-celebrate .wonder-map-tile { animation: none; }
-          .wonder-map-tile { transition: none; }
-          .wonder-map-node:hover .wonder-map-tile { transform: none; }
+          .wonder-path-art, .wonder-path-gate-arch { transition: none; }
+          .wonder-path-node:hover .wonder-path-art { transform: none; }
+          .wonder-path-here { animation: none; }
         }
       `}</style>
-      <a className="wonder-map-skip" href="#wonder-map-end">Skip the adventure map</a>
-      <ol>
-        {zones.map((zone, zoneIndex) => {
-          const positions = getZoneNodePositions(zoneIndex, zone.experiments.length, variant);
-          const states = zone.experiments.map((experiment) => nodeProgressState(progress.experiments[experiment.id]));
-          const completedCount = zoneCompleted(zone.experiments);
-          const linkLit = (fromZone, toZone) => Boolean(
-            fromZone && toZone
-            && progress.experiments[fromZone.experiments[fromZone.experiments.length - 1]?.id]?.completed
-            && progress.experiments[toZone.experiments[0]?.id]?.completed,
-          );
-          const showExit = isFull && zoneIndex < zones.length - 1;
-          const showEntry = isFull && zoneIndex > 0;
-          const exitLit = showExit && linkLit(zone, zones[zoneIndex + 1]);
-          const entryLit = showEntry && linkLit(zones[zoneIndex - 1], zone);
-          const exitEdge = zoneExitEdge(zoneIndex);
-          const entryEdge = zoneExitEdge(zoneIndex - 1);
-          return (
-            <li key={zone.grade.id} className="wonder-map-zone">
-              {showZoneHeaders && (
+      <SkipLink />
+      <div className="wonder-grade-path-scroller">
+        <ol>
+          {experiments.map((experiment, index) => {
+            const state = nodeProgressState(progress?.experiments?.[experiment.id]);
+            const art = nodeArt(experiment);
+            const prevDone = index === 0
+              ? true
+              : Boolean(progress?.experiments?.[experiments[index - 1].id]?.completed);
+            return [
+              index > 0 && (
+                <li key={`seg-${experiment.id}`} aria-hidden="true" className={`wonder-path-seg ${prevDone && state.completed ? "is-lit" : ""}`}>
+                  <span />
+                </li>
+              ),
+              <li key={experiment.id}>
                 <a
-                  className="wonder-map-zone-header"
-                  href={`/${zone.grade.route}`}
-                  onClick={(event) => {
-                    if (!navigate) return;
-                    event.preventDefault();
-                    navigate(zone.grade.route);
-                  }}
+                  className={`wonder-path-node ${state.completed ? "is-done" : ""}`}
+                  href={`/${grade.route}?experiment=${experiment.id}`}
+                  onClick={(event) => handleNode(event, experiment)}
+                  aria-label={`${experiment.title}, story ${index + 1} of ${experiments.length}, ${state.completed ? "finished" : "not yet played"}${state.replayed ? ", played more than once" : ""}${experiment.id === hereId ? ". You are here" : ""}`}
                 >
-                  <span className="wonder-map-zone-chip" style={{ background: zone.grade.accent }}>
-                    {zone.grade.short}
-                  </span>
-                  <span style={{ minWidth: 0 }}>
-                    <span className="wonder-map-zone-name" style={{ display: "block", color: C.textPrimary, fontWeight: 800, fontSize: "0.92rem", lineHeight: 1.2 }}>
-                      {zone.grade.label}
+                  {experiment.id === hereId && (
+                    <span className="wonder-path-here" aria-hidden="true">
+                      <PixelText size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                        You are here
+                      </PixelText>
+                      <span className="wonder-path-here-arrow" />
                     </span>
-                    <span style={{ display: "block", color: C.textSecondary, fontSize: "0.72rem", lineHeight: 1.3 }}>
-                      {zone.grade.title}
-                    </span>
+                  )}
+                  <span className="wonder-path-art">
+                    {art?.src && <img src={art.src} alt="" loading="lazy" />}
+                    {state.completed && <span className="wonder-path-pip wonder-path-pip-star" aria-hidden="true">★</span>}
+                    {state.replayed && <span className="wonder-path-pip wonder-path-pip-replay" aria-hidden="true">↻</span>}
                   </span>
-                  <PixelText size="0.78rem" color={completedCount === zone.experiments.length ? C.gold : C.textSecondary} style={{ marginLeft: "auto", whiteSpace: "nowrap" }}>
-                    {completedCount}/{zone.experiments.length}
-                  </PixelText>
+                  <span className="wonder-path-title">{experiment.title}</span>
                 </a>
+              </li>,
+            ];
+          })}
+          <li key="seg-gate" aria-hidden="true" className={`wonder-path-seg ${allDone ? "is-lit" : ""}`}>
+            <span />
+          </li>
+          <li key="gate">
+            <a
+              className="wonder-path-gate"
+              href={`/${gateRoute}`}
+              onClick={(event) => {
+                if (!navigate) return;
+                event.preventDefault();
+                navigate(gateRoute);
+              }}
+              aria-label={allDone ? `All ${grade.label} stories finished! ${gateLabel}` : gateLabel}
+            >
+              {allDone && (
+                <span className="wonder-path-here" aria-hidden="true">
+                  <PixelText size="0.56rem" color={C.gold} style={{ textTransform: "uppercase", letterSpacing: "0.1em" }}>
+                    Next stop!
+                  </PixelText>
+                  <span className="wonder-path-here-arrow" />
+                </span>
               )}
-              <div
-                className="wonder-map-band"
-                style={{ background: `linear-gradient(180deg, ${zone.grade.accent}10, rgba(8,18,32,0.5) 70%)` }}
-              >
-                <span className="wonder-map-rail" aria-hidden="true" />
-                {positions.slice(0, -1).map((position, index) => {
-                  const next = positions[index + 1];
-                  if (!states[index]?.completed || !states[index + 1]?.completed) return null;
-                  const left = Math.min(position.x, next.x);
-                  const width = Math.abs(next.x - position.x);
-                  return (
-                    <span
-                      key={`lit-${index}`}
-                      className="wonder-map-rail-lit"
-                      aria-hidden="true"
-                      style={{ left: `${left}%`, width: `${width}%` }}
-                    />
-                  );
-                })}
-                {entryLit && (
-                  <span
-                    className="wonder-map-rail-lit"
-                    aria-hidden="true"
-                    style={entryEdge === "right"
-                      ? { left: `${positions[0].x}%`, width: `${100 - MAP_EDGE_X - positions[0].x}%` }
-                      : { left: `${MAP_EDGE_X}%`, width: `${positions[0].x - MAP_EDGE_X}%` }}
-                  />
-                )}
-                {exitLit && (
-                  <span
-                    className="wonder-map-rail-lit"
-                    aria-hidden="true"
-                    style={exitEdge === "right"
-                      ? { left: `${positions[positions.length - 1].x}%`, width: `${100 - MAP_EDGE_X - positions[positions.length - 1].x}%` }
-                      : { left: `${MAP_EDGE_X}%`, width: `${positions[positions.length - 1].x - MAP_EDGE_X}%` }}
-                  />
-                )}
-                {showEntry && (
-                  <span
-                    className={`wonder-map-connector wonder-map-connector-entry ${entryLit ? "is-lit" : ""}`}
-                    aria-hidden="true"
-                    style={entryEdge === "right" ? { right: `calc(${MAP_EDGE_X}% - 3px)` } : { left: `calc(${MAP_EDGE_X}% - 3px)` }}
-                  />
-                )}
-                {showExit && (
-                  <span
-                    className={`wonder-map-connector wonder-map-connector-exit ${exitLit ? "is-lit" : ""}`}
-                    aria-hidden="true"
-                    style={exitEdge === "right" ? { right: `calc(${MAP_EDGE_X}% - 3px)` } : { left: `calc(${MAP_EDGE_X}% - 3px)` }}
-                  />
-                )}
-                <ol aria-label={`${zone.grade.label} stories`}>
-                  {zone.experiments.map((experiment, index) => {
-                    const position = positions[index];
-                    const { completed, replayed } = states[index];
-                    const isTopRow = position.y === band.nodeYs[0];
-                    const tileTop = position.y;
-                    const tileCenter = tileTop + band.tile / 2;
-                    const stemTop = Math.min(band.railY + 3, tileCenter);
-                    const stemHeight = Math.abs(tileCenter - (band.railY + 3));
-                    return (
-                      <li key={experiment.id} style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-                        <span
-                          className={`wonder-map-node-stem ${completed ? "is-lit" : ""}`}
-                          aria-hidden="true"
-                          style={{ left: `calc(${position.x}% - 2px)`, top: stemTop, height: stemHeight }}
-                        />
-                        <a
-                          className={`wonder-map-node ${completed ? "is-done" : ""} ${isTopRow ? "is-top" : ""} ${celebrateExperimentId === experiment.id ? "wonder-map-node-celebrate" : ""}`}
-                          style={{ left: `${position.x}%`, top: isTopRow ? tileTop + band.tile : tileTop, pointerEvents: "auto" }}
-                          href={`/${zone.grade.route}?experiment=${experiment.id}`}
-                          onClick={(event) => handleNodeClick(event, zone, experiment)}
-                          aria-label={`${experiment.title}, ${zone.grade.label} story ${index + 1} of ${zone.experiments.length}, ${completed ? "finished" : "not yet played"}${replayed ? ", played more than once" : ""}`}
-                        >
-                          <span className="wonder-map-tile">
-                            <span className="wonder-map-emoji" aria-hidden="true">{experiment.emoji}</span>
-                            {completed && <span className="wonder-map-pip wonder-map-pip-star" aria-hidden="true">★</span>}
-                            {replayed && <span className="wonder-map-pip wonder-map-pip-replay" aria-hidden="true">↻</span>}
-                          </span>
-                          <span className="wonder-map-caption">{experiment.title}</span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+              <span className="wonder-path-gate-arch" aria-hidden="true">
+                {nextGrade ? nextGrade.short : "🚪"}
+              </span>
+              <span className="wonder-path-title" style={{ color: C.gold }}>{gateLabel} →</span>
+            </a>
+          </li>
+        </ol>
+      </div>
       <span id="wonder-map-end" />
     </nav>
+  );
+}
+
+export default function AdventureMap({
+  zones,
+  variant = "overworld",
+  navigate,
+  onSelectExperiment,
+  celebrateExperimentId = null,
+  nextGrade = null,
+}) {
+  const { progress } = useThoughtProgress();
+  if (variant === "path") {
+    return (
+      <GradePath
+        zone={zones[0]}
+        navigate={navigate}
+        onSelectExperiment={onSelectExperiment}
+        nextGrade={nextGrade}
+        progress={progress}
+      />
+    );
+  }
+  return (
+    <Overworld
+      zones={zones}
+      navigate={navigate}
+      celebrateExperimentId={celebrateExperimentId}
+      progress={progress}
+    />
   );
 }

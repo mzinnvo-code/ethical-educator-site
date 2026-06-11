@@ -291,9 +291,12 @@ test("Wonder dashboard intro variant lays out as one overflow-proof game screen"
   assert.doesNotMatch(source, /\.thought-progress-intro-stats/);
   assert.doesNotMatch(source, /minmax\(168px, 0\.62fr\) minmax\(334px, 1fr\) minmax\(300px, 1\.02fr\)/);
 
-  // The brain art scales fluidly (no fixed-width + aspect-ratio collision) and
-  // the percent label can no longer spill out of a fixed column.
-  assert.match(source, /\.wonder-dashboard-meter-brain \{[\s\S]{0,120}width: clamp\([\s\S]{0,80}height: auto;/);
+  // The brain renders as a framed monitor showing the FULL art (the source
+  // image is opaque and edge-to-edge, so any padding/clip crops it) with a
+  // purpose caption beneath.
+  assert.match(source, /\.wonder-brain-monitor \{[\s\S]{0,200}aspect-ratio: 260 \/ 190;/);
+  assert.match(source, /\.wonder-dashboard-meter-brain \{[\s\S]{0,160}object-fit: contain;/);
+  assert.match(source, /Ari&apos;s brain/);
 
   // The lights meter renders one cell per goal instead of four duplicate stat cards.
   assert.match(source, /function SegmentBar/);
@@ -384,7 +387,7 @@ test("K-5 stories celebrate completion and hand the +1 light back to the hub", (
   assert.match(wonderSource, /readAndClearCelebration/);
   assert.match(hubSource, /readAndClearCelebration\(\)/);
   assert.match(hubSource, /celebrateExperimentId=\{celebrateExperimentId\}/);
-  assert.match(wonderSource, /wonder-map-node-celebrate/);
+  assert.match(wonderSource, /wonder-island-celebrate/);
   assert.match(wonderSource, /wonder-cell-flash/);
 });
 
