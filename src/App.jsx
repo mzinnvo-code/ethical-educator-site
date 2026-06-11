@@ -181,6 +181,8 @@ const PAGE_MAP = {
   "tools": Tools,
 };
 
+const IMMERSIVE_PAGE_IDS = new Set(["gamification-in-education"]);
+
 const PAGE_META = {
   "home": {
     title: SITE.brandName,
@@ -403,9 +405,9 @@ const PAGE_META = {
   },
   "gamification-in-education": {
     title: "Gamification in Education - The Examined Classroom",
-    description: "A research-backed guide to gamification, attention-span myths, student engagement, mastery badges, and the browser-only Thought Experiments progress model.",
+    description: "A playable 16-bit teacher quest about contested attention, gameful lesson design, research-backed motivation, and responsible AI lesson loops.",
     datePublished: "2026-06-03",
-    dateModified: "2026-06-03",
+    dateModified: "2026-06-11",
   },
   "async-engagement": {
     title: "Asynchronous Learning Engagement — The Examined Classroom",
@@ -626,6 +628,8 @@ export default function App() {
 
   const isNotFound = currentPage && currentPage !== "home" && !PAGE_MAP[currentPage];
   const PageComponent = isNotFound ? null : (PAGE_MAP[currentPage] || HomeLanding);
+  const isImmersivePage = IMMERSIVE_PAGE_IDS.has(currentPage);
+  const isFullBleedPage = currentPage === "home" || isImmersivePage;
 
   return (
     <>
@@ -680,15 +684,17 @@ export default function App() {
           @keyframes newPulse{0%,100%{opacity:1}50%{opacity:1}}
         }
       `}</style>
-      <a href="#main" className="skip-link">Skip to content</a>
-      <div className="grain" />
-      <Suspense fallback={null}>
-        <NewsletterModal routeKey={currentPage} />
-      </Suspense>
-      <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />
+      {!isImmersivePage && <a href="#main" className="skip-link">Skip to content</a>}
+      {!isImmersivePage && <div className="grain" />}
+      {!isImmersivePage && (
+        <Suspense fallback={null}>
+          <NewsletterModal routeKey={currentPage} />
+        </Suspense>
+      )}
+      {!isImmersivePage && <SearchPalette pageMeta={PAGE_META} onNavigate={navigate} />}
 
       {/* NAV */}
-      <header className="topbar">
+      {!isImmersivePage && <header className="topbar">
         <div className="topbar-logo" onClick={() => navigate("home")}>
           <span className="brand-mark" aria-hidden="true">
             <img src="/favicon.svg" alt="" />
@@ -719,8 +725,8 @@ export default function App() {
           <kbd aria-hidden="true">⌘K</kbd>
         </button>
         <button className="hamburger" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
-      </header>
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      </header>}
+      {!isImmersivePage && <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {PAGES.map(p => (
           <a key={p.id}
             href={p.id === "home" ? "/" : `/${p.id}`}
@@ -731,11 +737,11 @@ export default function App() {
             {p.id === "thought-experiments" && hasNew && <NewBadge />}
           </a>
         ))}
-      </div>
+      </div>}
 
       {/* Section accent stripe — "you are here" signal, sits directly under
           the fixed topbar. Color shifts to match the current section. */}
-      <div
+      {!isImmersivePage && <div
         aria-hidden="true"
         className="section-stripe"
         style={{
@@ -748,7 +754,7 @@ export default function App() {
           zIndex: 999,
           transition: "background 0.4s ease, opacity 0.6s ease",
         }}
-      />
+      />}
 
       {/* PAGE CONTENT */}
       {/* The home route hosts the landing cinematic: no top padding (scene 1
@@ -757,8 +763,8 @@ export default function App() {
       <main
         id="main"
         tabIndex={-1}
-        style={{ paddingTop: currentPage === "home" ? 0 : 59 }}
-        className={currentPage === "home" ? undefined : "page-enter"}
+        style={{ paddingTop: isFullBleedPage ? 0 : 59 }}
+        className={isFullBleedPage ? undefined : "page-enter"}
         key={currentPage}
       >
         <Suspense fallback={null}>
@@ -767,10 +773,10 @@ export default function App() {
             : <PageComponent navigate={navigate} />}
         </Suspense>
       </main>
-      <TeachingResourceRail currentPage={currentPage} navigate={navigate} />
+      {!isImmersivePage && <TeachingResourceRail currentPage={currentPage} navigate={navigate} />}
 
       {/* FOOTER */}
-      <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
+      {!isImmersivePage && <footer style={{ padding: "48px 24px 32px", background: C.midnight, borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div style={{
             display: "grid",
@@ -856,7 +862,7 @@ export default function App() {
             <p style={{ color: C.textMuted, fontSize: "0.72rem", opacity: 0.4 }}>© {new Date().getFullYear()} {SITE.brandName} · {SITE.authorName} · Content licensed <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>CC BY-NC 4.0</a> except where noted</p>
           </div>
         </div>
-      </footer>
+      </footer>}
     </>
   );
 }

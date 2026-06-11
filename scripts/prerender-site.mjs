@@ -4,6 +4,7 @@ import path from "node:path";
 import { SITE } from "../src/siteConfig.js";
 import { GROWTH_PAGE_META, SEARCH_LANDING_PAGE_BY_ROUTE, TEACHING_RESOURCE_PAGE_BY_ROUTE } from "../src/data/growthPages.js";
 import { OG_PAGES_BY_ID } from "../src/data/ogPages.js";
+import { GAMIFICATION_GAME_LEVELS, GAMIFICATION_QUEST_SOURCES } from "../src/data/gamificationQuest.js";
 import { buildRouteSchema, cleanTitle, ogTypeFor } from "../src/lib/seoSchema.js";
 import { LANDING_SEO_TEXT } from "../src/pages/landing/sceneCopy.js";
 
@@ -52,6 +53,21 @@ const STATIC_ROUTE_META = {
     title: "AI Ethics in Education - The Examined Classroom",
     description: "Ethical frameworks for educators navigating AI, school policy, academic integrity, and classroom judgment.",
     text: ["AI Ethics in Education", "Frameworks for navigating AI in schools."],
+  },
+  "gamification-in-education": {
+    title: "Gamification in Education - The Examined Classroom",
+    description: "A playable, research-informed guide to gamification, contested attention, student engagement, mastery badges, and browser-only Thought Experiments progress.",
+    text: [
+      "Gamification in Education",
+      "Attention is now contested. Students have not simply lost attention biologically, but the learning environment now competes with faster rewards, constant novelty, notifications, and easier escape.",
+      "Good gameful design earns attention so students stay with slower, harder learning long enough to revise, explain, and transfer what they know.",
+      ...GAMIFICATION_GAME_LEVELS.flatMap((level) => [
+        level.title,
+        level.summary,
+        ...(level.dialogueBeats || []).slice(0, 2),
+      ]),
+    ],
+    links: GAMIFICATION_QUEST_SOURCES.map((item) => ({ label: `${item.label}: ${item.title}`, href: item.href })),
   },
   resources: {
     title: "Research Resources & Reading List - The Examined Classroom",
