@@ -20,7 +20,10 @@ export const K5_MEMENTO_SLOTS = [
 // 48% of the stage height open the card below themselves; lower slots open
 // it above. The card clamps inside the stage while the caret keeps pointing
 // at the true anchor. Stages narrower than 520px get a centered card.
-export function computeInspectorPlacement(slot, stageWidth) {
+// anchorHalf = half the rendered size of the clicked slot, so the caret tip
+// always sits a constant gap off the slot edge whether the anchor is a small
+// memento or a large trophy mount.
+export function computeInspectorPlacement(slot, stageWidth, anchorHalf = 26) {
   const top = Number.parseFloat(slot.top);
   const left = Number.parseFloat(slot.left);
   if (!stageWidth || stageWidth < 520) {
@@ -31,7 +34,17 @@ export function computeInspectorPlacement(slot, stageWidth) {
   const clampedLeft = Math.min(98 - halfPct, Math.max(2 + halfPct, left));
   const caretLeftPct = Math.min(94, Math.max(6, ((left - (clampedLeft - halfPct)) / (halfPct * 2)) * 100));
   const opensBelow = top < 48;
-  return { centered: false, width, leftPct: clampedLeft, caretLeftPct, opensBelow, slotTopPct: top };
+  const offsetPx = Math.round(anchorHalf + 14); // caret (8px) + 6px breathing room
+  return { centered: false, width, leftPct: clampedLeft, caretLeftPct, opensBelow, slotTopPct: top, offsetPx };
+}
+
+// Rendered slot sizes are proportional to the stage so fixed pixel minimums
+// can never collide on the %-spaced shelves; these mirror the CSS clamps.
+export function slotHalfSize(type, stageWidth) {
+  const width = stageWidth || 1000;
+  return type === "badge"
+    ? Math.min(92, Math.max(44, width * 0.088)) / 2
+    : Math.min(42, Math.max(22, width * 0.062)) / 2;
 }
 
 export const ROOM_SEEN_KEY = "ee:wonder-room-seen:v1";

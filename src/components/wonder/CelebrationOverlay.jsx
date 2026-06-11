@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { C } from "../../theme.js";
 import { K5_BRAIN_PROGRESS_ASSETS, K5_MASTERY_BADGE_ASSETS } from "../../data/deepfakeGameAssets.js";
 import { PixelText, PIXEL_CLIP, PIXEL_CLIP_SM, PIXEL_FONT } from "./PixelFrame.jsx";
@@ -50,7 +51,11 @@ export default function CelebrationOverlay({
     ? `You finished ${experiment.title}!`
     : "Another path explored!";
 
-  return (
+  // Portal to <body>: the story card's ancestors carry CSS transforms (the
+  // Shell scale, the stage-enter dissolve), which would re-anchor this
+  // position:fixed layer to the card instead of the viewport.
+  if (typeof document === "undefined") return null;
+  return createPortal(
     <div
       data-testid="wonder-celebration"
       role="dialog"
@@ -331,6 +336,7 @@ export default function CelebrationOverlay({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

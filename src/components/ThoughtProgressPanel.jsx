@@ -17,7 +17,7 @@ import {
   roomSlots,
 } from "./wonder/trackerThemes.js";
 import { hudNextGoalText, nextGoalText } from "./wonder/progressText.js";
-import { K5_MEMENTO_SLOTS, diffRoomEntrance, readRoomSeen, writeRoomSeen } from "./wonder/workshopLayout.js";
+import { K5_MEMENTO_SLOTS, diffRoomEntrance, readRoomSeen, slotHalfSize, writeRoomSeen } from "./wonder/workshopLayout.js";
 import useProgressRoomSfx from "./wonder/useProgressRoomSfx.js";
 import { wonderMusic } from "../lib/wonderAudio.js";
 import { PIXEL_CLIP_SM, PIXEL_FONT } from "./wonder/PixelFrame.jsx";
@@ -336,7 +336,7 @@ function MementoSlot({ slot, item, completed, isNew, popIndex, onOpen, sfx }) {
         zIndex: 3,
         left: slot.left,
         top: slot.top,
-        width: "clamp(30px, 3.2vw, 42px)",
+        width: "clamp(22px, calc(var(--stage-w, 1000px) * 0.062), 42px)",
         aspectRatio: "1 / 1",
         transform: "translate(-50%, -50%)",
         display: "grid",
@@ -478,7 +478,7 @@ function TrophyRoomStage({ badges, roomTier, onOpenBadge, sfx, theme = TRACKER_T
               zIndex: 3,
               left: slot.left,
               top: slot.top,
-              width: "clamp(54px, 7.4vw, 92px)",
+              width: "clamp(44px, calc(var(--stage-w, 1000px) * 0.088), 92px)",
               aspectRatio: "1 / 1",
               transform: "translate(-50%, -50%)",
               padding: 5,
@@ -577,6 +577,15 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
         }
         .wonder-memento {
           transition: transform 140ms steps(2, end);
+        }
+        .wonder-memento::before {
+          content: "";
+          position: absolute;
+          inset: -9px;
+        }
+        .wonder-stage-inspector button:focus-visible {
+          outline: 3px solid ${C.gold};
+          outline-offset: -3px;
         }
         .wonder-memento:hover,
         .wonder-memento:focus-visible {
@@ -695,13 +704,14 @@ function MasteryBadgeTrophyRoom({ badges, accent, onOpenBadge, selectedBadge, ro
           </span>
         </span>
       </div>
-      <div ref={stageWrapRef} style={{ position: "relative" }}>
+      <div ref={stageWrapRef} style={{ position: "relative", "--stage-w": `${stageWidth || 1000}px` }}>
         <TrophyRoomStage badges={badges} roomTier={roomTier} onOpenBadge={onOpenBadge} sfx={sfx} theme={theme} mementos={mementos} onOpenMemento={onOpenMemento} entrance={entrance} />
         {inspected && inspectedSlot && (
           <StageInspector
             inspected={inspected}
             slot={inspectedSlot}
             stageWidth={stageWidth}
+            anchorHalf={slotHalfSize(inspected.type, stageWidth)}
             accent={accent}
             theme={theme}
             onClose={onClearSelection}

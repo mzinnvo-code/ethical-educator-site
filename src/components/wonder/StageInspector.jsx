@@ -12,6 +12,7 @@ export default function StageInspector({
   inspected,
   slot,
   stageWidth,
+  anchorHalf = 26,
   accent = C.gold,
   theme,
   onClose,
@@ -24,7 +25,7 @@ export default function StageInspector({
   }, [inspected?.id]);
 
   if (!inspected || !slot) return null;
-  const placement = computeInspectorPlacement(slot, stageWidth);
+  const placement = computeInspectorPlacement(slot, stageWidth, anchorHalf);
   const isBadge = inspected.type === "badge";
   const badge = isBadge ? inspected.badge : null;
   const memento = !isBadge ? inspected.memento : null;
@@ -36,8 +37,8 @@ export default function StageInspector({
       left: `${placement.leftPct}%`,
       transform: "translateX(-50%)",
       ...(placement.opensBelow
-        ? { top: `calc(${placement.slotTopPct}% + 52px)` }
-        : { bottom: `calc(${100 - placement.slotTopPct}% + 52px)` }),
+        ? { top: `calc(${placement.slotTopPct}% + ${placement.offsetPx}px)` }
+        : { bottom: `calc(${100 - placement.slotTopPct}% + ${placement.offsetPx}px)` }),
     };
 
   return (

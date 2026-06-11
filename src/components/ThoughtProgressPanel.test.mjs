@@ -446,9 +446,20 @@ test("Trophy room inspects items in place with an anchored popover and collectio
   assert.doesNotMatch(source, /function TrophyBadgeCard/);
 
   // Placement math is pure and node-testable.
-  const { computeInspectorPlacement } = await import("./wonder/workshopLayout.js");
+  const { computeInspectorPlacement, slotHalfSize } = await import("./wonder/workshopLayout.js");
   const below = computeInspectorPlacement({ left: "18%", top: "11.5%" }, 1000);
   assert.equal(below.opensBelow, true, "top-shelf slots open below");
+
+  // The card offset tracks the clicked anchor's size: a large trophy mount
+  // pushes the card further out than a small memento, keeping the caret tip
+  // a constant gap off the slot edge.
+  const badgeHalf = slotHalfSize("badge", 1000);
+  const mementoHalf = slotHalfSize("memento", 1000);
+  assert.ok(badgeHalf > mementoHalf, "badges are larger anchors than mementos");
+  const offBadge = computeInspectorPlacement({ left: "50%", top: "31%" }, 1000, badgeHalf);
+  const offMemento = computeInspectorPlacement({ left: "50%", top: "11.5%" }, 1000, mementoHalf);
+  assert.equal(offBadge.offsetPx, Math.round(badgeHalf + 14));
+  assert.ok(offBadge.offsetPx > offMemento.offsetPx);
   const above = computeInspectorPlacement({ left: "50%", top: "85%" }, 1000);
   assert.equal(above.opensBelow, false, "floor slots open above");
   const clamped = computeInspectorPlacement({ left: "4%", top: "60%" }, 1000);
