@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import Home from "../home/index.jsx";
 import { track } from "../../lib/analytics.js";
 import { useMotionTier } from "./useMotionTier.js";
@@ -46,6 +47,10 @@ export default function HomeLanding({ navigate }) {
     return "cinematic";
   });
   const [chosen, setChosen] = useState(null);
+  // The dilemma gallery's images stay unmounted until the engine module has
+  // loaded — lazy `loading` attributes don't stop Chrome from fetching
+  // boxless (display:none) images, so deferral has to happen in React.
+  const [wallReady, setWallReady] = useState(false);
 
   const rootRef = useRef(null);
   const canvasRef = useRef(null);
@@ -112,6 +117,9 @@ export default function HomeLanding({ navigate }) {
             bailToStatic();
             return;
           }
+          // Commit the gallery wall NOW so the engine's [data-gcol] queries
+          // see it when the timeline is built one line below.
+          flushSync(() => setWallReady(true));
           engineRef.current = m.initLandingEngine({
             root: rootRef.current,
             canvas: canvasRef.current,
@@ -207,7 +215,7 @@ export default function HomeLanding({ navigate }) {
       <div className="landing-scroll">
         <div className="landing-stage">
           <SceneVoid mode="cinematic" />
-          <SceneDilemma />
+          <SceneDilemma wall={wallReady} />
           <SceneChoice chosen={chosen} onChoose={handleChoose} onHoverChoice={handleHoverChoice} />
           <SceneLibrary mode="cinematic" />
           <SceneDoorways />

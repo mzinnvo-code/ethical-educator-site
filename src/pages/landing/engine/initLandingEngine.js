@@ -193,7 +193,7 @@ export function initLandingEngine({ root, canvas, tier, onSceneEnter, onComplete
         // Handoff never fades — it rides up with the pin release into Home.
       }
 
-      // Parallax depth layers (dilemma cards).
+      // Parallax depth layers (any [data-depth] elements in a scene).
       scene.querySelectorAll("[data-depth]").forEach((el) => {
         const depth = parseFloat(el.dataset.depth) || 1;
         tl.fromTo(
@@ -203,6 +203,33 @@ export function initLandingEngine({ root, canvas, tier, onSceneEnter, onComplete
           win.in - FADE
         );
       });
+
+      // The dilemma gallery wall: columns fly in from depth (center first,
+      // outer columns trailing), then counter-drift vertically while the
+      // window scrubs. The resting pose — per-column rotateY toward center
+      // with outer columns pushed back — is what makes the wall read as a
+      // faceted concave curve under the container's CSS perspective.
+      if (win.name === "dilemma") {
+        scene.querySelectorAll("[data-gcol]").forEach((col) => {
+          const c = parseFloat(col.dataset.gcol) || 0; // -2..2, 0 = center
+          const drift = parseFloat(col.dataset.gdrift) || 0;
+          gsap.set(col, { rotateY: -c * 9 });
+          // The fly-in owns z/opacity; the drift tween owns y. GSAP merges
+          // transform channels per target, so the two compose cleanly.
+          tl.fromTo(
+            col,
+            { z: -Math.abs(c) * 90 - 1100, opacity: 0 },
+            { z: -Math.abs(c) * 90, opacity: 1, duration: 0.07, ease: "power2.out" },
+            win.in + Math.abs(c) * 0.01
+          );
+          tl.fromTo(
+            col,
+            { y: drift },
+            { y: -drift, duration: win.out - win.in + FADE * 2 },
+            win.in - FADE
+          );
+        });
+      }
 
       // Library stat counters, scrubbed so they run in both directions.
       if (win.name === "library") {

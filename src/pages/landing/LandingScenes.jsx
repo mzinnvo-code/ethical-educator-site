@@ -55,13 +55,23 @@ export function LandingStyles() {
       .void-hint::after{content:"";width:1px;height:42px;background:linear-gradient(${C.gold},transparent);animation:voidDrip 2.2s ease-in-out infinite}
       @keyframes voidDrip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(1);opacity:0}}
 
-      /* Scene 2 — dilemma cards */
-      .dilemma-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:34px auto 0;max-width:880px}
-      .dilemma-card{background:${C.surface};border:1px solid ${C.border};border-radius:14px;overflow:hidden;text-align:left;box-shadow:0 18px 56px rgba(0,0,0,0.34)}
-      .dilemma-card picture,.dilemma-card img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
-      .dilemma-card figcaption{padding:12px 14px 14px}
-      .dilemma-card .dc-title{font-family:'Source Serif 4',Georgia,serif;color:${C.textPrimary};font-size:0.98rem;font-weight:600;margin:0 0 4px}
-      .dilemma-card .dc-grades{font-family:'JetBrains Mono',monospace;color:${C.textMuted};font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase}
+      /* Scene 2 — dilemma gallery wall (Phantom-style faceted 3D grid).
+         The text stack sits above; the wall and its scrims sit behind it. */
+      .lscene-dilemma .lscene-inner{position:relative;z-index:2}
+      .dilemma-gallery{position:absolute;inset:-14%;z-index:0;perspective:1200px;pointer-events:none;overflow:hidden}
+      .dgallery-plane{display:flex;justify-content:center;align-items:center;gap:clamp(14px,1.9vw,30px);height:100%;transform-style:preserve-3d}
+      .dgallery-col{display:flex;flex-direction:column;gap:clamp(16px,2.1vw,32px);flex:none;width:clamp(150px,16.5vw,250px);transform-style:preserve-3d;will-change:transform}
+      .dgallery-col:nth-child(odd){margin-top:-7vh}
+      .dgallery-col:nth-child(2){margin-top:9vh}
+      .dgallery-col:nth-child(4){margin-top:4vh}
+      .dgallery-tile{margin:0}
+      .dgallery-tile picture{display:block}
+      .dgallery-tile img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid ${C.border};background:${C.surface};filter:brightness(0.8) saturate(0.92)}
+      .dgallery-tile figcaption{display:flex;justify-content:space-between;gap:10px;padding:7px 2px 0;font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:${C.textMuted}}
+      .dgallery-tile .dg-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      .dgallery-tile .dg-grades{flex:none;color:rgba(224,220,208,0.42)}
+      .dgallery-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 72% 64% at 50% 46%,transparent 50%,rgba(11,22,34,0.9) 97%)}
+      .dilemma-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 56% 46% at 50% 44%,rgba(11,22,34,0.93) 0%,rgba(11,22,34,0.5) 58%,transparent 100%)}
 
       /* Scene 3 — the choice */
       .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:30px auto 0;max-width:720px}
@@ -119,16 +129,29 @@ export function LandingStyles() {
       .static-mark{font-family:'Source Serif 4',Georgia,serif;color:rgba(224,184,72,0.16);font-size:clamp(7rem,18vw,13rem);line-height:0.8;user-select:none;margin-bottom:-0.35em}
       .landing[data-mode="static"] .void-spark{animation:none}
       .landing[data-mode="static"] .void-hint{display:none}
+      /* Static dilemma: the wall flattens to a 3x2 grid below the text. */
+      .landing[data-mode="static"] .lscene-dilemma{flex-direction:column}
+      .landing[data-mode="static"] .lscene-dilemma .lscene-inner{z-index:auto}
+      .landing[data-mode="static"] .dilemma-gallery{position:static;inset:auto;perspective:none;overflow:visible;margin:34px auto 0;max-width:880px}
+      .landing[data-mode="static"] .dgallery-plane{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start;height:auto}
+      .landing[data-mode="static"] .dgallery-col{width:auto;margin-top:0;gap:18px;will-change:auto}
+      .landing[data-mode="static"] .dgallery-col:nth-child(n+4){display:none}
+      .landing[data-mode="static"] .dgallery-col > .dgallery-tile:nth-child(n+3){display:none}
+      .landing[data-mode="static"] .dgallery-tile img{filter:none}
+      .landing[data-mode="static"] .dgallery-vignette,.landing[data-mode="static"] .dilemma-scrim{display:none}
 
       @media(max-width:680px){
         .lscene{padding:76px 18px 56px}
         .lscene-headline{font-size:clamp(1.7rem,7.4vw,2.4rem)}
         .lscene-void .lscene-headline{font-size:clamp(2.1rem,9.6vw,3rem)}
         .lscene-body{font-size:0.92rem;line-height:1.66}
-        .dilemma-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-        .dilemma-card figcaption{padding:8px 10px 10px}
-        .dilemma-card .dc-title{font-size:0.78rem}
-        .dilemma-card .dc-grades{font-size:0.56rem}
+        .dilemma-gallery{inset:-10%}
+        .dgallery-col{width:31vw}
+        .landing[data-mode="cinematic"] .dgallery-col:nth-child(1),.landing[data-mode="cinematic"] .dgallery-col:nth-child(5){display:none}
+        .dgallery-tile figcaption{font-size:0.47rem;letter-spacing:0.08em}
+        .landing[data-mode="static"] .dgallery-plane{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+        .landing[data-mode="static"] .dgallery-col:nth-child(n+3){display:none}
+        .landing[data-mode="static"] .dgallery-col{width:auto}
         .choice-grid{grid-template-columns:1fr;gap:12px;margin-top:22px}
         .choice-card{padding:14px 16px}
         .choice-card .cc-label{font-size:1.02rem}
@@ -157,25 +180,54 @@ export function SceneVoid({ mode }) {
   );
 }
 
-export function SceneDilemma() {
+// The gallery wall: SCENE_DILEMMA.gallery dealt round-robin into columns so
+// marquee titles (trolley, Mary's Room, paperclip…) land on the top row.
+const GALLERY_COLS = 5;
+const GALLERY_COLUMNS = Array.from({ length: GALLERY_COLS }, (_, c) =>
+  SCENE_DILEMMA.gallery.filter((_, i) => i % GALLERY_COLS === c)
+);
+// Per-column scrub drift (px): alternating directions, outer columns travel
+// farther — the counter-scrolling-columns effect. Read by the engine.
+const GALLERY_DRIFT = [120, -85, 60, -85, 120];
+
+// `wall` gates the gallery markup itself: in cinematic mode HomeLanding flips
+// it on only once the engine module has loaded, deferring the image fetches
+// past first paint (a CSS display:none gate would NOT stop Chrome from
+// fetching boxless lazy images). Static mode renders it from the start.
+export function SceneDilemma({ wall = true }) {
   return (
     <section className="lscene lscene-dilemma" data-scene={SCENE_DILEMMA.id}>
       <div className="lscene-inner">
         <p className="lscene-kicker lreveal">{SCENE_DILEMMA.kicker}</p>
         <h2 className="lscene-headline lreveal">{SCENE_DILEMMA.headline}</h2>
         <p className="lscene-body lreveal">{SCENE_DILEMMA.body}</p>
-        <div className="dilemma-cards">
-          {SCENE_DILEMMA.cards.map((card, i) => (
-            <figure key={card.title} className="dilemma-card lreveal" data-depth={0.7 + i * 0.45}>
-              <Image src={card.image} alt="" loading="lazy" />
-              <figcaption>
-                <p className="dc-title">{card.title}</p>
-                <p className="dc-grades">{card.grades}</p>
-              </figcaption>
-            </figure>
+      </div>
+      {wall && (
+      <div className="dilemma-gallery" aria-hidden="true">
+        <div className="dgallery-plane">
+          {GALLERY_COLUMNS.map((items, c) => (
+            <div
+              key={c}
+              className="dgallery-col"
+              data-gcol={c - (GALLERY_COLS - 1) / 2}
+              data-gdrift={GALLERY_DRIFT[c]}
+            >
+              {items.map((item) => (
+                <figure key={item.slug} className="dgallery-tile">
+                  <Image src={item.image} alt="" loading="lazy" />
+                  <figcaption>
+                    <span className="dg-title">{item.title}</span>
+                    <span className="dg-grades">{item.grades}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           ))}
         </div>
+        <span className="dgallery-vignette" />
       </div>
+      )}
+      <div className="dilemma-scrim" aria-hidden="true" />
     </section>
   );
 }

@@ -33,6 +33,8 @@ Everything else — 50+ page components, the experiment scenes, the scenario cop
 
 The landing engine chunks are dynamic-imported from `HomeLanding.jsx` after first paint (requestIdleCallback raced against first scroll/input), so "/"'s LCP — now the scene-1 headline text — never waits on them. `vite.config.js` pins gsap/three into named `vendor-*` chunks via `manualChunks`.
 
+The dilemma scene's gallery wall lazy-loads up to 20 illustration webps (~0.5–1MB; 12 on mobile, 6 in static mode) — zero JS bytes. The wall is `display:none` until the engine goes live, so the tile fetches never compete with first paint.
+
 Vite emits a warning that `experiments.*.js` is over 500KB — that's intentional. It's the consolidated scenes + scenario-copy bundle, only loaded when someone actually navigates to a thought experiment page. Splitting it further would require carving up `src/data/experiments.js`, which is the source-of-truth file for the whole experiment library. Not worth doing for marginal gains.
 
 ### Trade-offs
