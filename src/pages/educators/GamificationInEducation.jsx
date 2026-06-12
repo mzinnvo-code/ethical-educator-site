@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 
 import { C } from "../../theme.js";
 import {
+  GAMEFUL_CHARTER,
   GAMIFICATION_GAME_LEVELS,
   GAMIFICATION_QUEST_SOURCES,
   GAMIFICATION_QUEST_STORAGE_KEY,
@@ -50,6 +51,10 @@ function CrawlableQuestFallback() {
           {stage.dialogueBeats.map((line) => <p key={line}>{line}</p>)}
         </article>
       ))}
+      <h2>Gameful Learning Charter</h2>
+      <ul>
+        {GAMEFUL_CHARTER.map((line) => <li key={line}>{line}</li>)}
+      </ul>
       <h2>Sources</h2>
       <ul>
         {GAMIFICATION_QUEST_SOURCES.map((item) => (

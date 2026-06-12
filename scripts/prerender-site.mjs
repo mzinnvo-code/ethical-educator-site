@@ -5,7 +5,7 @@ import path from "node:path";
 import { SITE } from "../src/siteConfig.js";
 import { GROWTH_PAGE_META, SEARCH_LANDING_PAGE_BY_ROUTE, TEACHING_RESOURCE_PAGE_BY_ROUTE } from "../src/data/growthPages.js";
 import { OG_PAGES_BY_ID } from "../src/data/ogPages.js";
-import { GAMIFICATION_GAME_LEVELS, GAMIFICATION_QUEST_SOURCES } from "../src/data/gamificationQuest.js";
+import { GAMEFUL_CHARTER, GAMIFICATION_GAME_LEVELS, GAMIFICATION_QUEST_SOURCES } from "../src/data/gamificationQuest.js";
 import { buildRouteSchema, cleanTitle, ogTypeFor } from "../src/lib/seoSchema.js";
 import { LANDING_SEO_TEXT } from "../src/pages/landing/sceneCopy.js";
 
@@ -67,6 +67,8 @@ const STATIC_ROUTE_META = {
         level.summary,
         ...(level.dialogueBeats || []).slice(0, 2),
       ]),
+      "The Gameful Learning Charter is the quest in teacher language:",
+      ...GAMEFUL_CHARTER,
     ],
     links: GAMIFICATION_QUEST_SOURCES.map((item) => ({ label: `${item.label}: ${item.title}`, href: item.href })),
   },

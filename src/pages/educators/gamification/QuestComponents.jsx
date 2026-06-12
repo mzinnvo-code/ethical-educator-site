@@ -5,6 +5,7 @@ import {
   GAMIFICATION_GAME_ROOMS,
   GAMIFICATION_PHASER_ASSETS,
   GAMIFICATION_QUEST_ASSETS,
+  GAMIFICATION_WORLD_MAP,
 } from "../../../data/gamificationQuest.js";
 import useImagePreload from "../../../components/wonder/useImagePreload.js";
 import { playQuestSound } from "./questAudio.js";
@@ -304,6 +305,16 @@ export function QuestStyles() {
   );
 }
 
+function resumeStopText(progress) {
+  const completed = new Set(progress.completedRoomIds || []);
+  const nextRoom = GAMIFICATION_GAME_ROOMS.find(
+    (room) => room.kind !== "home" && (progress.unlockedRoomIds || []).includes(room.id) && !completed.has(room.id),
+  );
+  if (!nextRoom) return "Every stop is complete — the Charter is yours.";
+  const node = GAMIFICATION_WORLD_MAP.nodes.find((item) => item.id === nextRoom.id);
+  return `Ari is waiting at ${node?.label || nextRoom.label}.`;
+}
+
 export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
   const [animationBeat, setAnimationBeat] = useState(0);
   const [isEntering, setIsEntering] = useState(false);
@@ -430,6 +441,69 @@ export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
           }}>
             Ari is turning this article into a small quest. Open the door to begin.
           </p>
+          <div
+            aria-label="What this quest includes"
+            style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "18px 0 14px" }}
+          >
+            {[
+              "9 stops · about 30 minutes",
+              "Earn 9 badges that name thinking habits",
+              "No sign-in — progress stays in this browser",
+            ].map((item) => (
+              <span
+                key={item}
+                style={{
+                  padding: "6px 11px",
+                  border: `1px solid ${C.teal}55`,
+                  background: "rgba(15,32,52,0.7)",
+                  color: C.textPrimary,
+                  fontSize: "0.76rem",
+                  fontWeight: 850,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <ul
+            aria-label="What you will learn"
+            style={{
+              margin: 0,
+              paddingLeft: 18,
+              maxWidth: 640,
+              display: "grid",
+              gap: 4,
+            }}
+          >
+            {[
+              "Why attention is a design condition, not a student defect",
+              "How to tune rewards so they feed motivation instead of replacing it",
+              "How to turn one existing lesson into a hook-choice-feedback loop",
+            ].map((item) => (
+              <li key={item} style={{ color: C.textSecondary, fontSize: "0.88rem", lineHeight: 1.6 }}>
+                {item}
+              </li>
+            ))}
+          </ul>
+          {(progress.completedRoomIds?.length || 0) > 0 && (
+            <p
+              data-testid="gamification-resume-chip"
+              style={{
+                display: "inline-block",
+                marginTop: 16,
+                padding: "8px 12px",
+                border: `1px solid ${C.gold}77`,
+                background: "rgba(224,184,72,0.1)",
+                color: C.goldLight,
+                fontSize: "0.82rem",
+                fontWeight: 850,
+                lineHeight: 1.5,
+              }}
+            >
+              {`Welcome back — ${progress.completedRoomIds.length}/9 badges earned. ${resumeStopText(progress)}`}
+            </p>
+          )}
         </div>
 
         <button

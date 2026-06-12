@@ -910,6 +910,26 @@ export const gameStyles = `
     line-height: 1.45;
   }
 
+  .gamification-save-toast {
+    position: absolute;
+    z-index: 24;
+    right: 14px;
+    bottom: 14px;
+    margin: 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(42,189,193,0.55);
+    background: rgba(7,17,31,0.95);
+    color: ${C.tealText};
+    font-size: 0.74rem;
+    font-weight: 850;
+    animation: gamificationToastIn 220ms steps(4, end) both;
+  }
+
+  @keyframes gamificationToastIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .gamification-teacher-transcript {
     position: absolute;
     z-index: 25;
@@ -942,6 +962,7 @@ export const gameStyles = `
     .gamification-loading-inner img,
     .gamification-ticker-ari,
     .gamification-hud-cells span.is-newest,
+    .gamification-save-toast,
     .gamification-return-gate {
       animation: none;
     }
