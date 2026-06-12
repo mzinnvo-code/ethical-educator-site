@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { SITE } from "../src/siteConfig.js";
 import { GROWTH_PAGE_META, SEARCH_LANDING_PAGE_BY_ROUTE, TEACHING_RESOURCE_PAGE_BY_ROUTE } from "../src/data/growthPages.js";
@@ -236,7 +237,53 @@ async function writeRoute(route, html) {
   await writeFile(path.join(dir, "index.html"), html);
 }
 
-const template = await readFile(path.join(DIST, "index.html"), "utf8");
+// Content-Security-Policy is injected here (not in source index.html) because
+// GitHub Pages can't set HTTP headers, and a static meta CSP in the source
+// template would block the inline React Refresh preamble Vite injects during
+// `npm run dev`. Prerendered pages are what production serves, so they all get
+// the policy. Hashes for executable inline scripts are computed from the built
+// template so they never go stale. `frame-ancestors` is unsupported in meta
+// CSP and omitted. style-src needs 'unsafe-inline' for React style={{}} attrs
+// and the global <style> element in App.jsx. JSON-LD scripts are data blocks
+// and are not governed by script-src.
+function buildCsp(html) {
+  const hashes = [];
+  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+    const [, attrs, body] = match;
+    if (/\bsrc\s*=/.test(attrs) || /application\/ld\+json/.test(attrs) || !body.trim()) continue;
+    hashes.push(`'sha256-${createHash("sha256").update(body, "utf8").digest("base64")}'`);
+  }
+  return [
+    "default-src 'self'",
+    `script-src 'self' https://static.cloudflareinsights.com${hashes.length ? " " + hashes.join(" ") : ""}`,
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    // External covers on /resources; data: for the grain overlay + Phaser textures.
+    // archive.org + ia*.us.archive.org are the redirect chain behind
+    // covers.openlibrary.org (CSP checks every hop of a redirect).
+    "img-src 'self' data: https://covers.openlibrary.org https://archive.org https://*.us.archive.org https://images1.penguinrandomhouse.com https://application.wiley-vch.de",
+    "media-src 'self' blob: data:",
+    // cloudflareinsights.com receives the Web Analytics RUM beacon POSTs;
+    // the workers.dev endpoint receives custom events (src/lib/analytics.js).
+    "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://examined-classroom-events.theethicaleducator.workers.dev",
+    // 'self' covers the Mary's Room animation iframe; YouTube embeds on /ai-consciousness.
+    "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
+    "worker-src 'self' blob:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    // Newsletter form posts to Buttondown once enabled.
+    "form-action 'self' https://buttondown.com",
+  ].join("; ");
+}
+
+function injectCsp(html) {
+  // Drop any existing tag first so re-running prerender stays idempotent.
+  const stripped = html.replace(/\n?\s*<meta http-equiv="Content-Security-Policy"[^>]*>/g, "");
+  const tag = `<meta http-equiv="Content-Security-Policy" content="${buildCsp(stripped)}" />`;
+  return stripped.replace(/<meta name="viewport"[^>]*>/, (viewport) => `${viewport}\n    ${tag}`);
+}
+
+const template = injectCsp(await readFile(path.join(DIST, "index.html"), "utf8"));
 for (const route of routes) {
   await writeRoute(route, renderRoute(template, route));
 }
