@@ -258,10 +258,10 @@ function buildCsp(html) {
     `script-src 'self' https://static.cloudflareinsights.com${hashes.length ? " " + hashes.join(" ") : ""}`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
-    // External covers on /resources; data: for the grain overlay + Phaser textures.
+    // External covers on /resources; data: for the grain overlay; blob: for Phaser texture URLs.
     // archive.org + ia*.us.archive.org are the redirect chain behind
     // covers.openlibrary.org (CSP checks every hop of a redirect).
-    "img-src 'self' data: https://covers.openlibrary.org https://archive.org https://*.us.archive.org https://images1.penguinrandomhouse.com https://application.wiley-vch.de",
+    "img-src 'self' data: blob: https://covers.openlibrary.org https://archive.org https://*.us.archive.org https://images1.penguinrandomhouse.com https://application.wiley-vch.de",
     "media-src 'self' blob: data:",
     // cloudflareinsights.com receives the Web Analytics RUM beacon POSTs;
     // the workers.dev endpoint receives custom events (src/lib/analytics.js).

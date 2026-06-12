@@ -36,6 +36,12 @@ test("gamification article route is wired for rendering, metadata, search, prere
   assert.match(prerender, /GAMIFICATION_QUEST_SOURCES/);
 });
 
+test("production CSP allows Phaser image blobs for gamification textures", () => {
+  const prerender = readFileSync("scripts/prerender-site.mjs", "utf8");
+
+  assert.match(prerender, /img-src 'self' data: blob:/);
+});
+
 test("gamification article is a playable quest with local browser-only progress", () => {
   const page = [
     readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8"),
