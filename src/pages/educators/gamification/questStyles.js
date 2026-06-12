@@ -666,6 +666,243 @@ export const gameStyles = `
     background: rgba(7,17,31,0.86);
   }
 
+  .gamification-rail-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+
+  .gamification-rail-tabs button {
+    padding: 8px 4px;
+    border: 1px solid rgba(95,113,136,0.6);
+    background: rgba(8,18,32,0.9);
+    color: ${C.textMuted};
+    cursor: pointer;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .gamification-rail-tabs button[aria-selected="true"] {
+    border-color: ${C.gold};
+    color: ${C.gold};
+    background: rgba(224,184,72,0.1);
+  }
+
+  .gamification-rail-tabs button:focus-visible {
+    outline: 3px solid rgba(42,189,193,0.72);
+    outline-offset: 2px;
+  }
+
+  .gamification-rail-panel {
+    display: grid;
+    gap: 10px;
+  }
+
+  .gamification-rail-label {
+    margin: 0 0 8px;
+    color: ${C.tealText};
+    font-size: 0.66rem;
+    font-weight: 950;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .gamification-rail-empty {
+    margin: 0;
+    color: ${C.textMuted};
+    font-size: 0.82rem;
+  }
+
+  .gamification-classroom-panel {
+    display: grid;
+    gap: 10px;
+  }
+
+  .gamification-meta-callout,
+  .gamification-gradeband-card,
+  .gamification-transfer-card,
+  .gamification-distinction-card,
+  .gamification-evidence-card,
+  .gamification-scorecard,
+  .gamification-blueprint,
+  .gamification-te-link {
+    border: 1px solid rgba(42,189,193,0.34);
+    background: rgba(15,32,52,0.78);
+    padding: 10px;
+  }
+
+  .gamification-meta-callout {
+    border-color: rgba(42,189,193,0.55);
+    background:
+      radial-gradient(circle at 12% 30%, rgba(42,189,193,0.14), transparent 42%),
+      rgba(15,32,52,0.82);
+  }
+
+  .gamification-meta-callout p:last-child,
+  .gamification-transfer-card p:last-child,
+  .gamification-gradeband-text,
+  .gamification-distinction-card p,
+  .gamification-caution-card p,
+  .gamification-evidence-card p,
+  .gamification-te-link p {
+    margin: 0;
+    color: ${C.textSecondary};
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .gamification-distinction-card p,
+  .gamification-caution-card p,
+  .gamification-evidence-card p {
+    margin-top: 7px;
+  }
+
+  .gamification-distinction-card p:first-of-type,
+  .gamification-caution-card p:first-of-type,
+  .gamification-evidence-card p:first-of-type {
+    margin-top: 0;
+  }
+
+  .gamification-distinction-card strong,
+  .gamification-caution-card strong,
+  .gamification-evidence-card strong,
+  .gamification-scorecard strong {
+    color: ${C.textPrimary};
+  }
+
+  .gamification-distinction-note {
+    font-style: italic;
+  }
+
+  .gamification-caution-card {
+    border: 1px solid rgba(208,138,88,0.5);
+    background:
+      radial-gradient(circle at 14% 24%, rgba(192,112,64,0.14), transparent 40%),
+      rgba(15,32,52,0.82);
+    padding: 10px;
+  }
+
+  .gamification-evidence-card a {
+    color: ${C.gold};
+  }
+
+  .gamification-gradeband-switch {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin-bottom: 9px;
+  }
+
+  .gamification-gradeband-switch button {
+    padding: 7px 4px;
+    border: 1px solid rgba(95,113,136,0.6);
+    background: rgba(8,18,32,0.9);
+    color: ${C.textMuted};
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .gamification-gradeband-switch button[aria-pressed="true"] {
+    border-color: ${C.teal};
+    color: ${C.tealText};
+    background: rgba(42,189,193,0.1);
+  }
+
+  .gamification-gradeband-switch button:focus-visible {
+    outline: 3px solid rgba(42,189,193,0.72);
+    outline-offset: 2px;
+  }
+
+  .gamification-scorecard-row {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(95,113,136,0.3);
+  }
+
+  .gamification-scorecard-row:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .gamification-scorecard-row p {
+    margin: 3px 0 0;
+    color: ${C.textSecondary};
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .gamification-scorecard-row .is-correct {
+    color: ${C.tealText};
+    font-weight: 900;
+  }
+
+  .gamification-scorecard-row .is-wrong {
+    color: ${C.coralText};
+    font-weight: 900;
+  }
+
+  .gamification-blueprint-intro {
+    margin: 0 0 8px;
+    color: ${C.textSecondary};
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .gamification-blueprint ol {
+    margin: 0 0 10px;
+    padding-left: 18px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .gamification-blueprint li strong {
+    display: block;
+    color: ${C.textPrimary};
+    font-size: 0.84rem;
+  }
+
+  .gamification-blueprint li > span {
+    display: block;
+    color: ${C.textSecondary};
+    font-size: 0.78rem;
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+
+  .gamification-blueprint-example {
+    margin-top: 6px;
+    padding: 7px 9px;
+    border: 1px solid rgba(95,113,136,0.35);
+    background: rgba(8,18,32,0.6);
+  }
+
+  .gamification-blueprint-example em {
+    color: ${C.gold};
+    font-size: 0.66rem;
+    font-style: normal;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+  }
+
+  .gamification-blueprint-example p {
+    margin: 3px 0 0;
+    color: ${C.textSecondary};
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .gamification-blueprint-example s {
+    color: ${C.textMuted};
+  }
+
+  .gamification-bonus-check {
+    border-color: rgba(208,138,88,0.45) !important;
+  }
+
   .gamification-challenge-card,
   .gamification-prompt-recipe,
   .gamification-charter-card,

@@ -3,6 +3,7 @@ const HOME_ROOM_ID = "home";
 const FIRST_ROOM_ID = "upshot";
 const VALID_MODES = new Set(["door", "door-transition", "overworld", "room", "reward", "finale"]);
 const VALID_TEXT_SPEEDS = new Set(["slow", "normal", "instant"]);
+const VALID_GRADE_BANDS = new Set(["k-2", "3-5", "6-8", "9-12"]);
 
 function uniqueStrings(value) {
   return Array.isArray(value)
@@ -42,6 +43,7 @@ export function createInitialGamificationGameState() {
     soundMuted: false,
     reducedMotion: false,
     textSpeed: "normal",
+    gradeBand: "6-8",
     finaleSeen: false,
   };
 }
@@ -104,6 +106,7 @@ export function normalizeGamificationGameState(value, rooms) {
     soundMuted: input.soundMuted === true,
     reducedMotion: input.reducedMotion === true,
     textSpeed: VALID_TEXT_SPEEDS.has(input.textSpeed) ? input.textSpeed : "normal",
+    gradeBand: VALID_GRADE_BANDS.has(input.gradeBand) ? input.gradeBand : "6-8",
     finaleSeen: input.finaleSeen === true || mode === "finale",
   };
 }

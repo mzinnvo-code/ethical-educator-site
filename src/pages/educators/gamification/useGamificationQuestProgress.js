@@ -123,6 +123,13 @@ export default function useGamificationQuestProgress() {
     }));
   }, [updateProgress]);
 
+  const setGradeBand = useCallback((gradeBand) => {
+    updateProgress((current) => ({
+      ...current,
+      gradeBand,
+    }));
+  }, [updateProgress]);
+
   const resetQuest = useCallback(() => {
     const next = emptyProgress();
     progressRef.current = next;
@@ -179,6 +186,7 @@ export default function useGamificationQuestProgress() {
       toggleSound,
       setReducedMotion,
       setTextSpeed,
+      setGradeBand,
       resetQuest,
     };
   }, [
@@ -189,6 +197,7 @@ export default function useGamificationQuestProgress() {
     progressNotSaved,
     resetQuest,
     returnToJourneyPath,
+    setGradeBand,
     setReducedMotion,
     setTextSpeed,
     startRoom,
