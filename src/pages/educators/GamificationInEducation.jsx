@@ -80,6 +80,8 @@ export default function GamificationInEducation({ navigate }) {
     returnToMap,
     completeLevel,
     toggleSound,
+    setTextSpeed,
+    setReducedMotion,
     resetQuest,
   } = useGamificationQuestProgress();
 
@@ -90,6 +92,8 @@ export default function GamificationInEducation({ navigate }) {
     }
     if (typeof window !== "undefined") window.location.assign("/for-educators");
   };
+
+  const isDoorPhase = !doorOpen || progress.mode === "door" || progress.mode === "door-transition";
 
   useEffect(() => {
     if (typeof document === "undefined") return undefined;
@@ -119,6 +123,7 @@ export default function GamificationInEducation({ navigate }) {
       }}
     >
       <QuestStyles />
+      {isDoorPhase && (
       <button
         type="button"
         className="gamification-exit-quest"
@@ -144,7 +149,8 @@ export default function GamificationInEducation({ navigate }) {
       >
         Back to Educator Resources
       </button>
-      {!doorOpen || progress.mode === "door" || progress.mode === "door-transition" ? (
+      )}
+      {isDoorPhase ? (
         <DoorScene
           progress={progress}
           progressNotSaved={progressNotSaved}
@@ -166,7 +172,10 @@ export default function GamificationInEducation({ navigate }) {
           returnToMap={returnToMap}
           completeLevel={completeLevel}
           toggleSound={toggleSound}
+          setTextSpeed={setTextSpeed}
+          setReducedMotion={setReducedMotion}
           resetQuest={resetQuest}
+          onExit={leaveQuest}
           navigate={navigate}
         />
       )}

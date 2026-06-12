@@ -386,7 +386,7 @@ test("gamification rooms stage Ari with purposeful left-lane entry, exit, and ce
 });
 
 test("gamification Phaser runtime keeps overworld Ari small but swaps to the room sprite sheet in rooms", () => {
-  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+  const game = readFileSync("src/pages/educators/gamification/phaser/GamefulLearningScene.js", "utf8");
 
   assert.match(game, /ARI_WORLD_TEXTURE = "ari-teacher-world"/);
   assert.match(game, /ARI_ROOM_TEXTURE = "ari-teacher-room"/);
