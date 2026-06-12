@@ -47,7 +47,7 @@ export const EDUCATOR_RESOURCES = {
     id: "gamification-in-education",
     title: "Gamification in Education",
     sectionLabel: "For Educators · Student Engagement",
-    desc: "A playable, research-informed teacher quest about gamification, contested attention, student engagement, and how gameful design can reward the thinking move while connecting naturally to Thought Experiments progress.",
+    desc: "A playable, research-informed teacher quest about gamification, contested attention, student engagement, and how gameful design can reward the thinking move while connecting naturally to Thought Experiments progress. Finishing it earns a printable Teacher Kit.",
     shortDesc: "A 16-bit teacher quest on contested attention, motivation research, mastery badges, and browser-only Thought Experiments progress.",
     image: `${base}/enhancing-student-engagement.webp`,
     imageAlt: "Educators' and students' hands arranging discussion cards and puzzle pieces around a glowing learning idea.",
