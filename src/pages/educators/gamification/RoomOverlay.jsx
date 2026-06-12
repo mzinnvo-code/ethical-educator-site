@@ -156,7 +156,7 @@ function MissionLog({ room }) {
   );
 }
 
-function RoomChallenge({ room, complete, muted, onComplete, onNavigateDeepfake }) {
+function RoomChallenge({ room, complete, muted, onComplete, onWrongAnswer, onNavigateDeepfake }) {
   const [selectedId, setSelectedId] = useState(null);
   const selected = room.challenge?.options?.find((item) => item.id === selectedId);
 
@@ -173,6 +173,7 @@ function RoomChallenge({ room, complete, muted, onComplete, onNavigateDeepfake }
       onComplete(room.id);
       return;
     }
+    onWrongAnswer?.();
     playQuestSound("error", muted);
   };
 
@@ -388,6 +389,19 @@ function ClassroomPanel({ room, gradeBand, onSetGradeBand, navigate }) {
         </div>
       )}
       {room.lessonBlueprint && <LessonBlueprint blueprint={room.lessonBlueprint} />}
+      {room.lessonBlueprint && (
+        <div className="gamification-te-link">
+          <p className="gamification-rail-label">Printable companion</p>
+          <p>The Teacher Kit collects the charter, design cards, blueprint, and scorecard on one printable page.</p>
+          <button
+            type="button"
+            className="gamification-primary-action"
+            onClick={() => navigate?.("gamification-teacher-kit")}
+          >
+            Open the printable Teacher Kit
+          </button>
+        </div>
+      )}
       {room.thoughtExperimentsLink && (
         <div className="gamification-te-link" data-testid="gamification-te-link">
           <p className="gamification-rail-label">{room.thoughtExperimentsLink.label}</p>
@@ -430,6 +444,7 @@ export default function RoomOverlay({
   onPreviousDialogue,
   onReplay,
   onComplete,
+  onWrongAnswer,
   onReturnToHub,
   onSetGradeBand,
   onNavigateDeepfake,
@@ -453,7 +468,7 @@ export default function RoomOverlay({
 
   const switchTab = (tabId) => {
     setActiveTab(tabId);
-    playQuestSound("node-select", muted);
+    playQuestSound("ui-tap", muted);
   };
 
   return (
@@ -548,6 +563,7 @@ export default function RoomOverlay({
                 complete={complete}
                 muted={muted}
                 onComplete={onComplete}
+                onWrongAnswer={onWrongAnswer}
                 onNavigateDeepfake={onNavigateDeepfake}
               />
             ) : (

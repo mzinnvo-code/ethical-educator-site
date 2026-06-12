@@ -9,7 +9,8 @@ import {
 import useIrisTransition, { IrisOverlay } from "../../../components/wonder/useIrisTransition.jsx";
 import { createGamefulLearningScene } from "./phaser/GamefulLearningScene.js";
 import { gameStyles } from "./questStyles.js";
-import { playQuestSound } from "./questAudio.js";
+import { playQuestSound, questMusic } from "./questAudio.js";
+import { trackQuestEvent } from "./questAnalytics.js";
 import useQuestReducedMotion from "./useQuestReducedMotion.js";
 import QuestCelebrationOverlay from "./QuestCelebrationOverlay.jsx";
 import QuestHud from "./QuestHud.jsx";
@@ -286,6 +287,7 @@ export default function GamificationGameExperience({
   returnToMap,
   completeLevel,
   toggleSound,
+  toggleMusic,
   setTextSpeed,
   setReducedMotion,
   setGradeBand,
@@ -315,6 +317,7 @@ export default function GamificationGameExperience({
   const prevCompletedCountRef = useRef(progress.completedRoomIds?.length ?? 0);
   const celebrationTimerRef = useRef(null);
   const toastTimerRef = useRef(null);
+  const wrongAttemptsRef = useRef(0);
   const { iris, run: runIris } = useIrisTransition();
   const room = useMemo(() => {
     if (progress.mode === "overworld") return stages.find((item) => item.id === "home") || stages[0];
@@ -325,7 +328,31 @@ export default function GamificationGameExperience({
 
   useEffect(() => {
     setDialogueIndex(0);
+    wrongAttemptsRef.current = 0;
   }, [room?.id]);
+
+  // Ambient music: the overworld and rooms carry different loops, the volume
+  // ducks while Ari talks, and an autoplay block quietly retries on the next
+  // user gesture. Stops entirely when the quest unmounts.
+  const musicOn = !progress.musicMuted && questMusic.available();
+  const inOverworld = progress.mode === "overworld";
+  useEffect(() => {
+    if (!musicOn) {
+      questMusic.stop();
+      return undefined;
+    }
+    const track = inOverworld ? "quest-theme" : "room-theme";
+    const start = () => questMusic.play(track, { volume: 0.18 });
+    start();
+    window.addEventListener("pointerdown", start, { once: true });
+    return () => window.removeEventListener("pointerdown", start);
+  }, [inOverworld, musicOn]);
+
+  useEffect(() => {
+    if (musicOn) questMusic.setVolume(ariTalking ? 0.07 : 0.18);
+  }, [ariTalking, musicOn]);
+
+  useEffect(() => () => questMusic.stop(), []);
 
   useEffect(() => {
     setDialogueComplete(false);
@@ -397,13 +424,26 @@ export default function GamificationGameExperience({
   const handleTravelComplete = useCallback((roomId) => {
     clearTravelFallback();
     setTravelTargetNodeId(null);
+    trackQuestEvent("quest_room_start", { placement: "travel", slug: roomId });
     runIris(stageWrapRef.current, () => startLevel(roomId));
   }, [clearTravelFallback, runIris, startLevel]);
 
   const handleComplete = useCallback((roomId) => {
     completeLevel(roomId);
     playQuestSound(roomId === "finale" ? "finale" : "badge-collect", progress.soundMuted);
+    if (roomId === "finale") {
+      trackQuestEvent("quest_finale_complete", { slug: "finale" });
+    } else {
+      trackQuestEvent("quest_room_complete", {
+        slug: roomId,
+        placement: wrongAttemptsRef.current > 0 ? "retry" : "first-try",
+      });
+    }
   }, [completeLevel, progress.soundMuted]);
+
+  const handleWrongAnswer = useCallback(() => {
+    wrongAttemptsRef.current += 1;
+  }, []);
 
   const handleReturnToJourneyPath = useCallback(() => {
     playQuestSound("return-gate", progress.soundMuted);
@@ -516,6 +556,7 @@ export default function GamificationGameExperience({
           completedCount={completedCount}
           locationLabel={locationLabel}
           onToggleSound={toggleSound}
+          onToggleMusic={toggleMusic}
           onSetTextSpeed={setTextSpeed}
           onToggleCalmMode={() => setReducedMotion?.(!progress.reducedMotion)}
           onReset={resetQuest}
@@ -551,6 +592,7 @@ export default function GamificationGameExperience({
             onPreviousDialogue={previousDialogue}
             onReplay={replayDialogue}
             onComplete={handleComplete}
+            onWrongAnswer={handleWrongAnswer}
             onReturnToHub={handleReturnToJourneyPath}
             onSetGradeBand={setGradeBand}
             onNavigateDeepfake={handleNavigateDeepfake}
@@ -588,6 +630,11 @@ export default function GamificationGameExperience({
           onNavigateDeepfake={() => {
             closeCelebration();
             handleNavigateDeepfake();
+          }}
+          onOpenKit={() => {
+            closeCelebration();
+            trackQuestEvent("quest_kit_open", { placement: "finale" });
+            navigate?.("gamification-teacher-kit");
           }}
           onExit={() => {
             closeCelebration();

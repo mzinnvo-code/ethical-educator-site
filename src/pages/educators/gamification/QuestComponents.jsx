@@ -8,7 +8,7 @@ import {
   GAMIFICATION_WORLD_MAP,
 } from "../../../data/gamificationQuest.js";
 import useImagePreload from "../../../components/wonder/useImagePreload.js";
-import { playQuestSound } from "./questAudio.js";
+import { playQuestSound, primeQuestAudio } from "./questAudio.js";
 
 const DOOR_TRANSITION_MS = 1280;
 
@@ -375,6 +375,7 @@ export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
     if (!warmedRef.current) {
       warmedRef.current = true;
       warmGameAssets();
+      primeQuestAudio();
       import("phaser").catch(() => {});
     }
     const nextClicks = Math.min(3, progress.doorClicks + 1);

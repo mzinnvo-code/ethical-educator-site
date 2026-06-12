@@ -84,6 +84,7 @@ const TeachingFeedback = lazy(() => import("./pages/educators/TeachingFeedback.j
 const EnhancingFeedback = lazy(() => import("./pages/educators/EnhancingFeedback.jsx"));
 const EnhancingEngagement = lazy(() => import("./pages/educators/EnhancingEngagement.jsx"));
 const GamificationInEducation = lazy(() => import("./pages/educators/GamificationInEducation.jsx"));
+const GamificationTeacherKit = lazy(() => import("./pages/educators/GamificationTeacherKit.jsx"));
 const AsyncEngagement = lazy(() => import("./pages/educators/AsyncEngagement.jsx"));
 const AVResources = lazy(() => import("./pages/educators/AVResources.jsx"));
 const QualityLeadership = lazy(() => import("./pages/educators/QualityLeadership.jsx"));
@@ -166,6 +167,7 @@ const PAGE_MAP = {
   "enhancing-feedback": EnhancingFeedback,
   "enhancing-engagement": EnhancingEngagement,
   "gamification-in-education": GamificationInEducation,
+  "gamification-teacher-kit": GamificationTeacherKit,
   "async-engagement": AsyncEngagement,
   "av-resources": AVResources,
   "quality-leadership": QualityLeadership,
@@ -408,6 +410,12 @@ const PAGE_META = {
     description: "A playable 16-bit teacher quest about contested attention, gameful lesson design, research-backed motivation, and responsible AI lesson loops.",
     datePublished: "2026-06-03",
     dateModified: "2026-06-11",
+  },
+  "gamification-teacher-kit": {
+    title: "Gameful Learning Teacher Kit - The Examined Classroom",
+    description: "Printable companion to the Gameful Learning Lab quest: the charter, six design cards, a five-step lesson blueprint, a pilot scorecard, and the AI prompt recipe.",
+    datePublished: "2026-06-12",
+    dateModified: "2026-06-12",
   },
   "async-engagement": {
     title: "Asynchronous Learning Engagement — The Examined Classroom",

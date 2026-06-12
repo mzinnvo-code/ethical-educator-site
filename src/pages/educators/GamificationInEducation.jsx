@@ -11,6 +11,7 @@ import {
 import { DoorScene, QuestStyles } from "./gamification/QuestComponents.jsx";
 import GamificationGameExperience from "./gamification/GamificationGameExperience.jsx";
 import useGamificationQuestProgress from "./gamification/useGamificationQuestProgress.js";
+import { trackQuestEvent } from "./gamification/questAnalytics.js";
 
 function CrawlableQuestFallback() {
   return (
@@ -135,11 +136,32 @@ export default function GamificationInEducation({ navigate }) {
     returnToMap,
     completeLevel,
     toggleSound,
+    toggleMusic,
     setTextSpeed,
     setReducedMotion,
     setGradeBand,
     resetQuest,
   } = useGamificationQuestProgress();
+
+  // Anonymous funnel beacons (same no-ids stance as the rest of the site):
+  // arriving with prior progress counts as a resume; opening the door once
+  // per session marks the top of the funnel.
+  useEffect(() => {
+    if ((progress.completedRoomIds?.length || 0) > 0) {
+      trackQuestEvent("quest_resume", { slug: progress.currentWorldNodeId || "home" });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleEnterGame = () => {
+    trackQuestEvent("quest_door_opened", { placement: "door" });
+    enterGame();
+  };
+
+  const handleResetQuest = () => {
+    trackQuestEvent("quest_reset", { slug: progress.currentRoomId || "home", once: false });
+    resetQuest();
+  };
 
   const leaveQuest = () => {
     if (navigate) {
@@ -212,7 +234,7 @@ export default function GamificationInEducation({ navigate }) {
           progressNotSaved={progressNotSaved}
           doorOpen={doorOpen}
           onStep={openDoorStep}
-          onEnter={enterGame}
+          onEnter={handleEnterGame}
         />
       ) : (
         <GamificationGameExperience
@@ -228,10 +250,11 @@ export default function GamificationInEducation({ navigate }) {
           returnToMap={returnToMap}
           completeLevel={completeLevel}
           toggleSound={toggleSound}
+          toggleMusic={toggleMusic}
           setTextSpeed={setTextSpeed}
           setReducedMotion={setReducedMotion}
           setGradeBand={setGradeBand}
-          resetQuest={resetQuest}
+          resetQuest={handleResetQuest}
           onExit={leaveQuest}
           navigate={navigate}
         />
