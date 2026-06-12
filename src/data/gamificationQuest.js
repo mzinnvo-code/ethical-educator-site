@@ -70,6 +70,18 @@ export const GAMIFICATION_PHASER_ASSETS = {
     hotspotGlow: `${ROOT}/hotspot-glow.webp`,
     returnGate: `${ROOT}/return-journey-gate.webp`,
   },
+  // Earned badges materialize in the finale hall as a trophy arc.
+  badgeIcons: {
+    upshot: `${ROOT}/badge-icon-upshot.webp`,
+    "attention-environment": `${ROOT}/badge-icon-attention-environment.webp`,
+    "curiosity-hook": `${ROOT}/badge-icon-curiosity-hook.webp`,
+    "motivation-engine": `${ROOT}/badge-icon-motivation-engine.webp`,
+    "evidence-lab": `${ROOT}/badge-icon-evidence-lab.webp`,
+    "ai-lesson-forge": `${ROOT}/badge-icon-ai-lesson-forge.webp`,
+    "teacher-workshop": `${ROOT}/badge-icon-teacher-workshop.webp`,
+    "examined-model": `${ROOT}/badge-icon-examined-model.webp`,
+    finale: `${ROOT}/badge-icon-finale.webp`,
+  },
 };
 
 export const GAMIFICATION_SOUND_CUES = [
@@ -89,28 +101,31 @@ export const GAMIFICATION_SOUND_CUES = [
 
 export const GAMIFICATION_WORLD_MAP = {
   background: GAMIFICATION_PHASER_ASSETS.worldMap.background,
+  // Node coordinates sit on the painted trail of overworld-map-v4-clean.webp:
+  // 1 at the crossroads in front of the house, 4-7 on the road bends, 8 at
+  // the stair base, 9 in the temple doorway. Verified against 4x map crops.
   nodes: [
     { id: "home", kind: "home", label: "Home", x: 210, y: 388, roomId: null },
-    { id: "upshot", label: "1. Upshot", x: 300, y: 390, roomId: "upshot" },
+    { id: "upshot", label: "1. Upshot", x: 306, y: 434, roomId: "upshot" },
     { id: "attention-environment", label: "2. Attention Environment", x: 500, y: 468, roomId: "attention-environment" },
     { id: "curiosity-hook", label: "3. Curiosity Hook", x: 620, y: 438, roomId: "curiosity-hook" },
-    { id: "motivation-engine", label: "4. Motivation Engine", x: 665, y: 390, roomId: "motivation-engine" },
-    { id: "evidence-lab", label: "5. Evidence Lab", x: 588, y: 337, roomId: "evidence-lab" },
-    { id: "ai-lesson-forge", label: "6. AI Lesson Forge", x: 600, y: 282, roomId: "ai-lesson-forge" },
-    { id: "teacher-workshop", label: "7. Teacher Workshop", x: 657, y: 229, roomId: "teacher-workshop" },
-    { id: "examined-model", label: "8. Examined Model", x: 705, y: 166, roomId: "examined-model" },
-    { id: "finale", label: "9. Finale", x: 710, y: 106, roomId: "finale" },
+    { id: "motivation-engine", label: "4. Motivation Engine", x: 636, y: 363, roomId: "motivation-engine" },
+    { id: "evidence-lab", label: "5. Evidence Lab", x: 576, y: 322, roomId: "evidence-lab" },
+    { id: "ai-lesson-forge", label: "6. AI Lesson Forge", x: 548, y: 244, roomId: "ai-lesson-forge" },
+    { id: "teacher-workshop", label: "7. Teacher Workshop", x: 608, y: 186, roomId: "teacher-workshop" },
+    { id: "examined-model", label: "8. Examined Model", x: 650, y: 160, roomId: "examined-model" },
+    { id: "finale", label: "9. Finale", x: 681, y: 108, roomId: "finale" },
   ],
   edges: [
-    { from: "home", to: "upshot", points: [{ x: 210, y: 388 }, { x: 248, y: 390 }, { x: 274, y: 395 }, { x: 300, y: 390 }] },
-    { from: "upshot", to: "attention-environment", points: [{ x: 300, y: 390 }, { x: 340, y: 414 }, { x: 382, y: 446 }, { x: 438, y: 462 }, { x: 500, y: 468 }] },
+    { from: "home", to: "upshot", points: [{ x: 210, y: 388 }, { x: 244, y: 404 }, { x: 275, y: 420 }, { x: 306, y: 434 }] },
+    { from: "upshot", to: "attention-environment", points: [{ x: 306, y: 434 }, { x: 352, y: 452 }, { x: 396, y: 462 }, { x: 448, y: 466 }, { x: 500, y: 468 }] },
     { from: "attention-environment", to: "curiosity-hook", points: [{ x: 500, y: 468 }, { x: 540, y: 468 }, { x: 586, y: 454 }, { x: 620, y: 438 }] },
-    { from: "curiosity-hook", to: "motivation-engine", points: [{ x: 620, y: 438 }, { x: 646, y: 418 }, { x: 665, y: 390 }] },
-    { from: "motivation-engine", to: "evidence-lab", points: [{ x: 665, y: 390 }, { x: 640, y: 370 }, { x: 610, y: 350 }, { x: 588, y: 337 }] },
-    { from: "evidence-lab", to: "ai-lesson-forge", points: [{ x: 588, y: 337 }, { x: 578, y: 318 }, { x: 584, y: 300 }, { x: 600, y: 282 }] },
-    { from: "ai-lesson-forge", to: "teacher-workshop", points: [{ x: 600, y: 282 }, { x: 612, y: 260 }, { x: 635, y: 242 }, { x: 657, y: 229 }] },
-    { from: "teacher-workshop", to: "examined-model", points: [{ x: 657, y: 229 }, { x: 676, y: 206 }, { x: 694, y: 185 }, { x: 705, y: 166 }] },
-    { from: "examined-model", to: "finale", points: [{ x: 705, y: 166 }, { x: 712, y: 146 }, { x: 710, y: 126 }, { x: 710, y: 106 }] },
+    { from: "curiosity-hook", to: "motivation-engine", points: [{ x: 620, y: 438 }, { x: 634, y: 412 }, { x: 640, y: 388 }, { x: 636, y: 363 }] },
+    { from: "motivation-engine", to: "evidence-lab", points: [{ x: 636, y: 363 }, { x: 615, y: 345 }, { x: 595, y: 332 }, { x: 576, y: 322 }] },
+    { from: "evidence-lab", to: "ai-lesson-forge", points: [{ x: 576, y: 322 }, { x: 556, y: 295 }, { x: 545, y: 268 }, { x: 548, y: 244 }] },
+    { from: "ai-lesson-forge", to: "teacher-workshop", points: [{ x: 548, y: 244 }, { x: 566, y: 222 }, { x: 586, y: 202 }, { x: 608, y: 186 }] },
+    { from: "teacher-workshop", to: "examined-model", points: [{ x: 608, y: 186 }, { x: 622, y: 176 }, { x: 636, y: 167 }, { x: 650, y: 160 }] },
+    { from: "examined-model", to: "finale", points: [{ x: 650, y: 160 }, { x: 662, y: 142 }, { x: 672, y: 124 }, { x: 681, y: 108 }] },
   ],
 };
 

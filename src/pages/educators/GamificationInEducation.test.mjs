@@ -240,6 +240,20 @@ test("gamification quest is cross-linked from the engagement resource", () => {
   assert.match(engagement, /gamification-in-education/);
 });
 
+test("gamification finale doubles as a persistent trophy room", () => {
+  const game = readGameSources();
+  const celebration = readFileSync("src/pages/educators/gamification/QuestCelebrationOverlay.jsx", "utf8");
+
+  assert.match(game, /renderTrophies/);
+  assert.match(game, /badge:\$\{/);
+  assert.match(game, /gamification-trophy-case/);
+  assert.match(game, /Replay the finale celebration/);
+  assert.match(game, /Open the printable Teacher Kit/);
+  // Celebrations center the uniform badge icons, not the variably-composed card art.
+  assert.match(celebration, /badge\?\.icon/);
+  assert.doesNotMatch(celebration, /GAMIFICATION_REWARD_CARD_ASSETS/);
+});
+
 test("gamification quest hardens touch, crispness, and chunk loading", () => {
   const game = readGameSources();
   const prerender = readFileSync("scripts/prerender-site.mjs", "utf8");

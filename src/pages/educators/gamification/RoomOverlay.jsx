@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { C } from "../../../theme.js";
 import {
   GAMEFUL_CHARTER,
+  GAMIFICATION_GAME_ROOMS,
   GAMIFICATION_PHASER_ASSETS,
   GAMIFICATION_REWARD_CARD_ASSETS,
   source,
@@ -419,6 +420,38 @@ function ClassroomPanel({ room, gradeBand, onSetGradeBand, navigate }) {
   );
 }
 
+// Everything from the finale pop-up, permanently reachable in the trophy
+// room: the badge collection, a celebration replay, and the Teacher Kit.
+function TrophyCase({ onReplayCelebration, navigate }) {
+  const playableRooms = GAMIFICATION_GAME_ROOMS.filter((item) => item.kind !== "home");
+  return (
+    <div className="gamification-trophy-case" data-testid="gamification-trophy-case">
+      <p className="gamification-rail-label">Your trophy case</p>
+      <ul className="gamification-trophy-list">
+        {playableRooms.map((item) => (
+          <li key={item.id} title={item.badge?.habit}>
+            <img src={item.badge?.icon} alt="" aria-hidden="true" />
+            <span>
+              <strong>{item.badge?.label}</strong>
+              <em>{item.badge?.habit}</em>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="gamification-primary-action" onClick={onReplayCelebration}>
+        Replay the finale celebration
+      </button>
+      <button
+        type="button"
+        className="gamification-primary-action"
+        onClick={() => navigate?.("gamification-teacher-kit")}
+      >
+        Open the printable Teacher Kit
+      </button>
+    </div>
+  );
+}
+
 const RAIL_TABS = [
   { id: "challenge", label: "Challenge" },
   { id: "classroom", label: "Classroom" },
@@ -448,6 +481,7 @@ export default function RoomOverlay({
   onReturnToHub,
   onSetGradeBand,
   onNavigateDeepfake,
+  onReplayCelebration,
   navigate,
 }) {
   const dialogue = room.dialogueBeats || [];
@@ -548,6 +582,9 @@ export default function RoomOverlay({
                   </span>
                 </button>
               </div>
+            )}
+            {room.id === "finale" && complete && (
+              <TrophyCase onReplayCelebration={onReplayCelebration} navigate={navigate} />
             )}
             {room.charter && complete && (
               <div className="gamification-charter-card">

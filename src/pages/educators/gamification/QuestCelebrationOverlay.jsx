@@ -4,11 +4,14 @@ import { createPortal } from "react-dom";
 import { C } from "../../../theme.js";
 import {
   GAMEFUL_CHARTER,
-  GAMIFICATION_REWARD_CARD_ASSETS,
 } from "../../../data/gamificationQuest.js";
 import { PixelText, PIXEL_CLIP, PIXEL_CLIP_SM, PIXEL_FONT } from "../../../components/wonder/PixelFrame.jsx";
 
 const CONFETTI_COLORS = [C.gold, C.coral, C.teal, C.sky, "#ffe9a8"];
+
+function badgeIconFor(rooms, roomId) {
+  return rooms.find((item) => item.id === roomId)?.badge?.icon;
+}
 
 // The reward moment is the lesson: a course about reward design has to make
 // earning a badge feel designed. Portal to <body> (the quest shell is a fixed
@@ -64,7 +67,9 @@ export default function QuestCelebrationOverlay({
       aria-modal="true"
       aria-label={headline}
       onKeyDown={(event) => {
-        if (event.key === "Escape") (finale ? onExit : onStay)?.();
+        // Escape only dismisses the overlay; leaving the quest stays a
+        // deliberate button press.
+        if (event.key === "Escape") onStay?.();
       }}
       style={{
         position: "fixed",
@@ -207,12 +212,27 @@ export default function QuestCelebrationOverlay({
             </div>
           ) : null}
 
-          <div className="quest-celebrate-art" style={{ display: "inline-block", clipPath: PIXEL_CLIP_SM, border: `2px solid ${C.gold}88`, padding: 3, background: `${C.gold}14` }}>
+          {/* The badge icon is the hero: the icon set has uniform, centered
+              margins (unlike the decorative card art, whose emblem position
+              varies per card), so every room's moment reads identically. */}
+          <div
+            className="quest-celebrate-art"
+            style={{
+              display: "grid",
+              placeItems: "center",
+              width: finale ? 168 : 152,
+              height: finale ? 168 : 152,
+              margin: "0 auto",
+              clipPath: PIXEL_CLIP_SM,
+              border: `2px solid ${C.gold}88`,
+              background: `radial-gradient(circle at 50% 42%, ${C.gold}26, transparent 68%), ${C.gold}10`,
+            }}
+          >
             <img
-              src={GAMIFICATION_REWARD_CARD_ASSETS[finale ? "finale" : room?.id]}
+              src={finale ? badgeIconFor(rooms, "finale") : room?.badge?.icon}
               alt=""
               aria-hidden="true"
-              style={{ display: "block", width: "min(300px, 70vw)", height: "auto", imageRendering: "pixelated" }}
+              style={{ display: "block", width: finale ? 132 : 118, height: finale ? 132 : 118, imageRendering: "pixelated" }}
             />
           </div>
 

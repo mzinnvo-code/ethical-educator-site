@@ -30,6 +30,7 @@ export function createGamefulLearningScene(Phaser, {
       this.roomEntering = false;
       this.exitingRoomId = null;
       this.talkingWanted = false;
+      this.trophyGroup = null;
       this.reducedMotion = initial.reducedMotion === true;
     }
 
@@ -45,6 +46,9 @@ export function createGamefulLearningScene(Phaser, {
         this.load.image(`room:${key}`, src);
       }
       this.load.image("hotspot-glow", assets.hud.hotspotGlow);
+      for (const [key, src] of Object.entries(assets.badgeIcons || {})) {
+        this.load.image(`badge:${key}`, src);
+      }
       this.load.spritesheet(ARI_WORLD_TEXTURE, assets.ari.world.sheet, {
         frameWidth: assets.ari.world.frame.width,
         frameHeight: assets.ari.world.frame.height,
@@ -102,6 +106,7 @@ export function createGamefulLearningScene(Phaser, {
           this.floorShadow,
           this.hotspot,
           ...(this.nodeGroup?.list || []),
+          ...(this.trophyGroup?.list || []),
         ].filter(Boolean));
       });
       onSceneReady?.(this);
@@ -157,6 +162,7 @@ export function createGamefulLearningScene(Phaser, {
       this.background.setTexture("world-map").setDisplaySize(960, 540);
       this.tweens.killTweensOf(this.hotspot);
       this.hotspot.setVisible(false);
+      this.renderTrophies(progress);
       this.clearWorldNodes();
       this.drawWorldPath(progress, clickableIds);
 
@@ -280,6 +286,8 @@ export function createGamefulLearningScene(Phaser, {
         this.hotspot.setVisible(false);
       }
 
+      this.renderTrophies(this.currentProgress);
+
       const start = nextRoom.ariStart;
       const target = nextRoom.ariTarget;
       const roomScale = nextRoom.ariScale || DEFAULT_ROOM_ARI_SCALE;
@@ -315,6 +323,50 @@ export function createGamefulLearningScene(Phaser, {
           if (nextMode === "finale") this.playAriAnimation("celebrate", true);
           else this.playAriAnimation(this.talkingWanted ? "talk" : "idle", true);
         },
+      });
+    }
+
+    // After the finale is complete, the reward hall doubles as a trophy
+    // room: every earned badge materializes in an arc above the monolith.
+    // Self-guarding — clears itself in any non-finale room.
+    renderTrophies(progress) {
+      this.tweens.killTweensOf(this.trophyGroup?.list || []);
+      this.trophyGroup?.removeAll(true);
+      if (this.currentRoom?.id !== "finale") return;
+      const completed = new Set(progress?.completedRoomIds || []);
+      if (!completed.has("finale")) return;
+      if (!this.trophyGroup) this.trophyGroup = this.add.container(0, 0).setDepth(9);
+
+      const order = Object.keys(assets.badgeIcons || {});
+      const ids = (progress.collectedBadgeIds || [])
+        .filter((id) => assets.badgeIcons?.[id])
+        .sort((a, b) => order.indexOf(a) - order.indexOf(b));
+      ids.forEach((id, index) => {
+        const t = ids.length > 1 ? index / (ids.length - 1) : 0.5;
+        const x = 480 + (t - 0.5) * 580;
+        const y = 168 - Math.sin(t * Math.PI) * 56;
+        const icon = this.add.image(x, y, `badge:${id}`).setDepth(9).setScale(0.5);
+        const glow = this.add.image(x, y, "hotspot-glow").setDepth(8).setScale(0.3).setAlpha(0.4);
+        this.trophyGroup.add([glow, icon]);
+        if (this.reducedMotion) return;
+        icon.setScale(0).setAlpha(0);
+        this.tweens.add({
+          targets: icon,
+          scale: 0.5,
+          alpha: 1,
+          duration: 320,
+          delay: 140 * index,
+          ease: "Back.easeOut",
+        });
+        this.tweens.add({
+          targets: icon,
+          y: y - 4,
+          duration: 1600 + index * 90,
+          delay: 140 * index + 360,
+          yoyo: true,
+          repeat: -1,
+          ease: "Sine.easeInOut",
+        });
       });
     }
 
