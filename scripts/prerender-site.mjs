@@ -76,6 +76,16 @@ const STATIC_ROUTE_META = {
     ],
     links: GAMIFICATION_QUEST_SOURCES.map((item) => ({ label: `${item.label}: ${item.title}`, href: item.href })),
   },
+  "gamification-teacher-kit": {
+    title: "Gameful Learning Teacher Kit - The Examined Classroom",
+    description: "Printable companion to the Gameful Learning Lab quest: the charter, six design cards, a five-step lesson blueprint, a pilot scorecard, and the AI prompt recipe.",
+    text: [
+      "Gameful Learning Teacher Kit",
+      "The charter, six design cards, the five-step lesson blueprint, the pilot scorecard, and the AI prompt recipe in printable form.",
+      ...GAMEFUL_CHARTER,
+    ],
+    links: [{ label: "Play the Gameful Learning Lab quest", href: "/gamification-in-education" }],
+  },
   resources: {
     title: "Research Resources & Reading List - The Examined Classroom",
     description: "Curated books, academic papers, policy documents, organizations, and podcasts on moral psychology, AI ethics, and philosophy of education.",

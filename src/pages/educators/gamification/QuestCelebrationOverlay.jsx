@@ -24,6 +24,7 @@ export default function QuestCelebrationOverlay({
   onStay,
   onReplayQuest,
   onNavigateDeepfake,
+  onOpenKit,
   onExit,
 }) {
   const primaryRef = useRef(null);
@@ -255,7 +256,10 @@ export default function QuestCelebrationOverlay({
           <div style={{ display: "flex", gap: 9, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
             {finale ? (
               <>
-                <button ref={primaryRef} type="button" onClick={onNavigateDeepfake} style={primaryButtonStyle()}>
+                <button ref={primaryRef} type="button" onClick={onOpenKit} style={primaryButtonStyle()}>
+                  Get the printable Teacher Kit
+                </button>
+                <button type="button" onClick={onNavigateDeepfake} style={secondaryButtonStyle(C.sky)}>
                   Try the Deepfake Dilemma
                 </button>
                 <button type="button" onClick={onExit} style={secondaryButtonStyle(C.teal)}>

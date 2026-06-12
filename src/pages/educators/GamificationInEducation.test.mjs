@@ -240,6 +240,71 @@ test("gamification quest is cross-linked from the engagement resource", () => {
   assert.match(engagement, /gamification-in-education/);
 });
 
+test("gamification teacher kit route is registered and single-sourced from quest data", () => {
+  const app = readFileSync("src/App.jsx", "utf8");
+  const searchDocs = readFileSync("src/lib/searchDocs.js", "utf8");
+  const sitemap = readFileSync("public/sitemap.xml", "utf8");
+  const prerender = readFileSync("scripts/prerender-site.mjs", "utf8");
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+  const kit = readFileSync("src/pages/educators/GamificationTeacherKit.jsx", "utf8");
+  const game = readGameSources();
+
+  assert.match(app, /"gamification-teacher-kit": GamificationTeacherKit/);
+  assert.match(searchDocs, /"gamification-teacher-kit": "For Educators"/);
+  assert.ok(pkg.prerender.include.includes("/gamification-teacher-kit"));
+  assert.match(sitemap, /https:\/\/examinedclassroom\.com\/gamification-teacher-kit/);
+  assert.equal(OG_PAGES_BY_ID["gamification-teacher-kit"].title, "Gameful Learning Teacher Kit");
+  assert.match(prerender, /"gamification-teacher-kit": \{/);
+  assert.match(kit, /GAMEFUL_CHARTER/);
+  assert.match(kit, /GAMEFUL_RULES/);
+  assert.match(kit, /lessonBlueprint/);
+  assert.match(kit, /pilotScorecard/);
+  assert.match(kit, /promptRecipe/);
+  assert.match(kit, /window\.print\(\)/);
+  assert.match(kit, /no-print/);
+  assert.match(kit, /quest_kit_open/);
+  assert.match(kit, /quest_kit_print/);
+  assert.match(game, /gamification-teacher-kit/);
+});
+
+test("gamification quest reports anonymous funnel events with session dedupe", () => {
+  const game = readGameSources();
+  const page = readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8");
+  const analytics = readFileSync("src/pages/educators/gamification/questAnalytics.js", "utf8");
+
+  assert.match(analytics, /sentEvents/);
+  assert.doesNotMatch(analytics, /userId|sessionId|email|localStorage|Date\.now/);
+  assert.match(game, /quest_room_start/);
+  assert.match(game, /quest_room_complete/);
+  assert.match(game, /quest_finale_complete/);
+  assert.match(game, /first-try/);
+  assert.match(page, /quest_door_opened/);
+  assert.match(page, /quest_resume/);
+  assert.match(page, /quest_reset/);
+});
+
+test("gamification quest layers sampled audio over synth fallbacks with ambient music", () => {
+  const audio = readFileSync("src/pages/educators/gamification/questAudio.js", "utf8");
+  const game = readGameSources();
+  const hud = readFileSync("src/pages/educators/gamification/QuestHud.jsx", "utf8");
+  const manifest = JSON.parse(readFileSync("src/data/gamificationAudioManifest.json", "utf8"));
+  const script = readFileSync("scripts/generate-gamification-audio.mjs", "utf8");
+  const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+
+  assert.match(audio, /SAMPLE_BY_CUE/);
+  assert.match(audio, /playSample/);
+  assert.match(audio, /questMusic/);
+  assert.match(audio, /primeQuestAudio/);
+  assert.match(game, /quest-theme/);
+  assert.match(game, /room-theme/);
+  assert.match(game, /musicMuted/);
+  assert.match(hud, /Ambient music/);
+  assert.ok(typeof manifest.items === "object");
+  assert.match(script, /GAMIFICATION_AUDIO_CATALOG/);
+  assert.match(script, /public\/audio\/gamification/);
+  assert.equal(pkg.scripts["audio:gamification"], "node --env-file=.env.local scripts/generate-gamification-audio.mjs");
+});
+
 test("gamification article keeps attention claims careful and source-linked", () => {
   const page = [
     readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8"),

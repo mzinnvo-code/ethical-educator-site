@@ -109,6 +109,13 @@ export default function useGamificationQuestProgress() {
     }));
   }, [updateProgress]);
 
+  const toggleMusic = useCallback(() => {
+    updateProgress((current) => ({
+      ...current,
+      musicMuted: !current.musicMuted,
+    }));
+  }, [updateProgress]);
+
   const setReducedMotion = useCallback((reducedMotion) => {
     updateProgress((current) => ({
       ...current,
@@ -184,6 +191,7 @@ export default function useGamificationQuestProgress() {
       completeNode: completeRoom,
       setCurrentNode: startRoom,
       toggleSound,
+      toggleMusic,
       setReducedMotion,
       setTextSpeed,
       setGradeBand,
@@ -201,6 +209,7 @@ export default function useGamificationQuestProgress() {
     setReducedMotion,
     setTextSpeed,
     startRoom,
+    toggleMusic,
     toggleSound,
   ]);
 }

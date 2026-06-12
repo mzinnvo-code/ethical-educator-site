@@ -456,6 +456,7 @@ test("gamification declares the sound cues used by the polished game loop", () =
   assert.deepEqual(
     GAMIFICATION_SOUND_CUES,
     [
+      "ui-tap",
       "node-select",
       "path-step",
       "path-travel",

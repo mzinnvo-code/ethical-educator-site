@@ -11,6 +11,7 @@ export default function QuestHud({
   completedCount,
   locationLabel,
   onToggleSound,
+  onToggleMusic,
   onSetTextSpeed,
   onToggleCalmMode,
   onReset,
@@ -137,6 +138,16 @@ export default function QuestHud({
                 onClick={() => onToggleCalmMode?.()}
               >
                 Calm mode (less motion)
+              </button>
+            </div>
+            <div className="gamification-menu-row">
+              <h2>Music</h2>
+              <button
+                type="button"
+                aria-pressed={progress.musicMuted !== true}
+                onClick={() => onToggleMusic?.()}
+              >
+                {progress.musicMuted ? "Ambient music: off" : "Ambient music: on"}
               </button>
             </div>
             <div className="gamification-menu-row">

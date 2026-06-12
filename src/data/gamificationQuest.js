@@ -73,6 +73,7 @@ export const GAMIFICATION_PHASER_ASSETS = {
 };
 
 export const GAMIFICATION_SOUND_CUES = [
+  "ui-tap",
   "node-select",
   "path-step",
   "path-travel",
