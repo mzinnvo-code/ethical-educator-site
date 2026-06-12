@@ -222,6 +222,19 @@ function renderRoute(template, route) {
       `    <link rel="preload" as="image" href="/illustrations/home-hero.webp" type="image/webp" fetchpriority="high" />\n  </head>`
     );
   }
+  if (route === "/gamification-in-education") {
+    // The Phaser stage requests these in its preload step; prefetching them
+    // during the door scene removes the blank-canvas wait after the door opens.
+    html = html.replace(
+      "</head>",
+      [
+        '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/overworld-map-v4-clean.webp" />',
+        '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/ari-teacher-sheet.png" />',
+        '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/ari-teacher-room-sheet.png" />',
+        "  </head>",
+      ].join("\n")
+    );
+  }
   html = html.replace('<div id="root"></div>', `<div id="root">\n${staticFallback(pageId, meta)}\n    </div>`);
   return html;
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run prerender && cp dist/index.html dist/404.html && node scripts/generate-feeds.mjs && node scripts/generate-og-images.mjs",
-    "test": "node --test src/data/*.test.mjs src/pages/home/*.test.mjs",
+    "test": "node --test src/data/*.test.mjs src/pages/home/*.test.mjs src/pages/educators/*.test.mjs src/pages/educators/gamification/*.test.mjs",
     "test:rebrand": "node scripts/check-rebrand.mjs",
     "test:crawlability": "node scripts/check-crawlability.mjs",
     "og:generate": "node scripts/generate-og-images.mjs",

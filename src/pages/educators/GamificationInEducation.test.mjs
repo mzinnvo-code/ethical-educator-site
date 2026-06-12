@@ -5,6 +5,24 @@ import test from "node:test";
 import { EDUCATOR_RESOURCE_GROUPS, EDUCATOR_RESOURCES } from "../../data/educatorResources.js";
 import { OG_PAGES_BY_ID } from "../../data/ogPages.js";
 
+// The game experience is split across focused modules; string-coupled
+// assertions read the joined sources so refactors inside the directory
+// don't silently drop load-bearing markup.
+const GAME_SOURCE_FILES = [
+  "src/pages/educators/gamification/GamificationGameExperience.jsx",
+  "src/pages/educators/gamification/QuestHud.jsx",
+  "src/pages/educators/gamification/RoomOverlay.jsx",
+  "src/pages/educators/gamification/QuestLoadingScreen.jsx",
+  "src/pages/educators/gamification/questStyles.js",
+  "src/pages/educators/gamification/questAudio.js",
+  "src/pages/educators/gamification/useQuestReducedMotion.js",
+  "src/pages/educators/gamification/phaser/GamefulLearningScene.js",
+];
+
+function readGameSources() {
+  return GAME_SOURCE_FILES.map((file) => readFileSync(file, "utf8")).join("\n");
+}
+
 test("gamification article is registered in the educator engagement pathway", () => {
   const resource = EDUCATOR_RESOURCES["gamification-in-education"];
   const engagementGroup = EDUCATOR_RESOURCE_GROUPS.find((group) => group.label === "Student Engagement");
@@ -46,7 +64,7 @@ test("gamification article is a playable quest with local browser-only progress"
   const page = [
     readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8"),
     readFileSync("src/pages/educators/gamification/QuestComponents.jsx", "utf8"),
-    readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8"),
+    readGameSources(),
   ].join("\n");
 
   assert.match(page, /Gameful Learning Lab/);
@@ -60,7 +78,7 @@ test("gamification article is a playable quest with local browser-only progress"
 test("gamification page uses a locked fullscreen game shell instead of a scroll article", () => {
   const app = readFileSync("src/App.jsx", "utf8");
   const page = readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8");
-  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+  const game = readGameSources();
 
   assert.match(app, /IMMERSIVE_PAGE_IDS/);
   assert.match(app, /isImmersivePage/);
@@ -143,7 +161,7 @@ test("gamification article door scene is animated instead of an enter-article bu
 });
 
 test("gamification game has explicit map and level modes with a home start", () => {
-  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+  const game = readGameSources();
   const hook = readFileSync("src/pages/educators/gamification/useGamificationQuestProgress.js", "utf8");
 
   assert.match(hook, /mode: "door"/);
@@ -153,12 +171,12 @@ test("gamification game has explicit map and level modes with a home start", () 
   assert.match(hook, /currentWorldNodeId: "home"/);
   assert.match(game, /mode === "overworld"/);
   assert.match(game, /mode === "room"/);
-  assert.match(game, /returnGamificationToJourneyPath/);
-  assert.match(game, /enterGamificationRoom/);
+  assert.match(hook, /returnGamificationToJourneyPath/);
+  assert.match(hook, /enterGamificationRoom/);
 });
 
 test("gamification typewriter and Ari choreography are stable game-state bridges", () => {
-  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+  const game = readGameSources();
 
   assert.match(game, /onDoneRef/);
   assert.match(game, /onTalkingChangeRef/);

@@ -2,72 +2,27 @@ import { useEffect, useRef, useState } from "react";
 
 import { C } from "../../../theme.js";
 import {
+  GAMIFICATION_GAME_ROOMS,
+  GAMIFICATION_PHASER_ASSETS,
   GAMIFICATION_QUEST_ASSETS,
 } from "../../../data/gamificationQuest.js";
+import useImagePreload from "../../../components/wonder/useImagePreload.js";
+import { playQuestSound } from "./questAudio.js";
 
 const DOOR_TRANSITION_MS = 1280;
 
-function playQuestSound(kind, muted = false) {
-  if (muted || typeof window === "undefined") return;
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContext) return;
-
-  try {
-    const context = new AudioContext();
-    const now = context.currentTime;
-    const gain = context.createGain();
-    gain.connect(context.destination);
-
-    if (kind === "open") {
-      const low = context.createOscillator();
-      const shimmer = context.createOscillator();
-      low.type = "triangle";
-      shimmer.type = "sine";
-      low.frequency.setValueAtTime(122, now);
-      low.frequency.exponentialRampToValueAtTime(58, now + 0.52);
-      shimmer.frequency.setValueAtTime(512, now);
-      shimmer.frequency.exponentialRampToValueAtTime(760, now + 0.5);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.17, now + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.68);
-      low.connect(gain);
-      shimmer.connect(gain);
-      low.start(now);
-      shimmer.start(now + 0.08);
-      low.stop(now + 0.72);
-      shimmer.stop(now + 0.58);
-      window.setTimeout(() => context.close?.(), 850);
-      return;
-    }
-
-    const knock = (frequency, start, volume) => {
-      const oscillator = context.createOscillator();
-      oscillator.type = "square";
-      oscillator.frequency.setValueAtTime(frequency, now + start);
-      oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.58, now + start + 0.08);
-      const localGain = context.createGain();
-      localGain.gain.setValueAtTime(0.0001, now + start);
-      localGain.gain.exponentialRampToValueAtTime(volume, now + start + 0.008);
-      localGain.gain.exponentialRampToValueAtTime(0.0001, now + start + 0.12);
-      oscillator.connect(localGain);
-      localGain.connect(context.destination);
-      oscillator.start(now + start);
-      oscillator.stop(now + start + 0.14);
-    };
-
-    if (kind === "strong-knock") {
-      knock(184, 0, 0.23);
-      knock(148, 0.16, 0.2);
-      window.setTimeout(() => context.close?.(), 420);
-      return;
-    }
-
-    knock(170, 0, 0.22);
-    window.setTimeout(() => context.close?.(), 240);
-  } catch {
-    // Sound is optional; the scene remains playable if the browser blocks audio.
-  }
-}
+// Everything the Phaser stage will request in its preload step. Warming these
+// during the door scene (the player spends seconds knocking) means the
+// overworld appears the moment the door finishes opening — no black frame.
+const PHASER_WARM_LIST = [
+  GAMIFICATION_PHASER_ASSETS.worldMap.background,
+  ...Object.values(GAMIFICATION_PHASER_ASSETS.worldMap.nodes),
+  ...Object.values(GAMIFICATION_PHASER_ASSETS.rooms),
+  ...Object.values(GAMIFICATION_PHASER_ASSETS.hud),
+  GAMIFICATION_PHASER_ASSETS.ari.world.sheet,
+  GAMIFICATION_PHASER_ASSETS.ari.room.sheet,
+  ...GAMIFICATION_GAME_ROOMS.map((room) => room.badge?.icon).filter(Boolean),
+];
 
 export function QuestStyles() {
   return (
@@ -353,6 +308,11 @@ export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
   const [animationBeat, setAnimationBeat] = useState(0);
   const [isEntering, setIsEntering] = useState(false);
   const transitionTimerRef = useRef(null);
+  const warmedRef = useRef(false);
+  const warmGameAssets = useImagePreload(
+    Object.values(GAMIFICATION_QUEST_ASSETS.door).concat(Object.values(GAMIFICATION_QUEST_ASSETS.ari)),
+    PHASER_WARM_LIST,
+  );
   const doorAsset = doorOpen
     ? GAMIFICATION_QUEST_ASSETS.door.open
     : progress.doorClicks === 0
@@ -399,6 +359,13 @@ export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
 
   const handleDoorClick = () => {
     if (isEntering) return;
+    // First knock doubles as the warm-up signal: pull the Phaser chunk and
+    // every stage texture into the HTTP cache while the player knocks.
+    if (!warmedRef.current) {
+      warmedRef.current = true;
+      warmGameAssets();
+      import("phaser").catch(() => {});
+    }
     const nextClicks = Math.min(3, progress.doorClicks + 1);
     const finalClick = nextClicks >= 3;
     const secondClick = nextClicks === 2;
@@ -406,7 +373,6 @@ export function DoorScene({ progress, doorOpen, onStep, onEnter }) {
     if (finalClick) setIsEntering(true);
     playQuestSound(finalClick ? "open" : secondClick ? "strong-knock" : "knock", progress.soundMuted);
     onStep();
-
   };
 
   return (

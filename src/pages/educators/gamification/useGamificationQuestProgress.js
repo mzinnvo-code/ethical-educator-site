@@ -116,6 +116,13 @@ export default function useGamificationQuestProgress() {
     }));
   }, [updateProgress]);
 
+  const setTextSpeed = useCallback((textSpeed) => {
+    updateProgress((current) => ({
+      ...current,
+      textSpeed,
+    }));
+  }, [updateProgress]);
+
   const resetQuest = useCallback(() => {
     const next = emptyProgress();
     progressRef.current = next;
@@ -171,6 +178,7 @@ export default function useGamificationQuestProgress() {
       setCurrentNode: startRoom,
       toggleSound,
       setReducedMotion,
+      setTextSpeed,
       resetQuest,
     };
   }, [
@@ -182,6 +190,7 @@ export default function useGamificationQuestProgress() {
     resetQuest,
     returnToJourneyPath,
     setReducedMotion,
+    setTextSpeed,
     startRoom,
     toggleSound,
   ]);
