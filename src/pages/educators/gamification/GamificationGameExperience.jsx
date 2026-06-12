@@ -11,6 +11,7 @@ import { createGamefulLearningScene } from "./phaser/GamefulLearningScene.js";
 import { gameStyles } from "./questStyles.js";
 import { playQuestSound } from "./questAudio.js";
 import useQuestReducedMotion from "./useQuestReducedMotion.js";
+import QuestCelebrationOverlay from "./QuestCelebrationOverlay.jsx";
 import QuestHud from "./QuestHud.jsx";
 import QuestLoadingScreen from "./QuestLoadingScreen.jsx";
 import RoomOverlay from "./RoomOverlay.jsx";
@@ -300,12 +301,19 @@ export default function GamificationGameExperience({
   const [travelTargetNodeId, setTravelTargetNodeId] = useState(null);
   const [ariTalking, setAriTalking] = useState(false);
   const [tickerDimmed, setTickerDimmed] = useState(false);
+  const [celebration, setCelebration] = useState(null);
+  const [saveToast, setSaveToast] = useState(false);
   const travelFallbackRef = useRef(null);
   const tickerDimTimerRef = useRef(null);
   const stageWrapRef = useRef(null);
   const dialogueCompleteRef = useRef(false);
   const roomRef = useRef(null);
   const progressModeRef = useRef(progress.mode);
+  // Celebrations fire only on a genuine completion-count increase, never on
+  // mount, resume, or StrictMode replays (the same guard useCelebration uses).
+  const prevCompletedCountRef = useRef(progress.completedRoomIds?.length ?? 0);
+  const celebrationTimerRef = useRef(null);
+  const toastTimerRef = useRef(null);
   const { iris, run: runIris } = useIrisTransition();
   const room = useMemo(() => {
     if (progress.mode === "overworld") return stages.find((item) => item.id === "home") || stages[0];
@@ -338,7 +346,35 @@ export default function GamificationGameExperience({
   useEffect(() => () => {
     clearTravelFallback();
     if (tickerDimTimerRef.current) window.clearTimeout(tickerDimTimerRef.current);
+    if (celebrationTimerRef.current) window.clearTimeout(celebrationTimerRef.current);
+    if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
   }, [clearTravelFallback]);
+
+  useEffect(() => {
+    const count = progress.completedRoomIds?.length || 0;
+    const previous = prevCompletedCountRef.current;
+    prevCompletedCountRef.current = count;
+    if (count <= previous) return;
+    const completedId = progress.activeRoomId || progress.currentRoomId;
+    const completedRoom = stages.find((item) => item.id === completedId);
+    if (!completedRoom || completedRoom.kind === "home") return;
+    const payload = completedRoom.id === "finale"
+      ? { variant: "finale" }
+      : { variant: "badge", roomId: completedRoom.id };
+    if (celebrationTimerRef.current) window.clearTimeout(celebrationTimerRef.current);
+    // Give the badge-collect jingle and the camera beat a moment to land first.
+    celebrationTimerRef.current = window.setTimeout(
+      () => setCelebration(payload),
+      reduced ? 0 : 380,
+    );
+  }, [progress.activeRoomId, progress.completedRoomIds?.length, progress.currentRoomId, reduced, stages]);
+
+  const closeCelebration = useCallback(() => {
+    setCelebration(null);
+    setSaveToast(true);
+    if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
+    toastTimerRef.current = window.setTimeout(() => setSaveToast(false), 1800);
+  }, []);
 
   const handleStartRoom = useCallback((roomId) => {
     const clickable = typeof isWorldNodeClickable === "function"
@@ -518,8 +554,43 @@ export default function GamificationGameExperience({
           />
         )}
         <TeacherTranscript rooms={stages} show={progress.finaleSeen} />
+        {saveToast && (
+          <p className="gamification-save-toast" role="status">
+            Progress saved — feedback you can trust, just like a good loop.
+          </p>
+        )}
       </div>
       <IrisOverlay iris={iris} />
+      {celebration && (
+        <QuestCelebrationOverlay
+          variant={celebration.variant}
+          room={celebration.variant === "badge" ? stages.find((item) => item.id === celebration.roomId) : null}
+          rooms={stages}
+          reducedMotion={reduced}
+          metacognition={
+            celebration.variant === "badge"
+              ? stages.find((item) => item.id === celebration.roomId)?.metacognition?.badgeMoment
+              : stages.find((item) => item.id === "finale")?.metacognition?.badgeMoment
+          }
+          onContinue={() => {
+            closeCelebration();
+            handleReturnToJourneyPath();
+          }}
+          onStay={closeCelebration}
+          onReplayQuest={() => {
+            closeCelebration();
+            resetQuest();
+          }}
+          onNavigateDeepfake={() => {
+            closeCelebration();
+            handleNavigateDeepfake();
+          }}
+          onExit={() => {
+            closeCelebration();
+            onExit?.();
+          }}
+        />
+      )}
     </section>
   );
 }

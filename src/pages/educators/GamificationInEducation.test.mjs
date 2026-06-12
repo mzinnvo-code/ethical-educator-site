@@ -13,6 +13,7 @@ const GAME_SOURCE_FILES = [
   "src/pages/educators/gamification/QuestHud.jsx",
   "src/pages/educators/gamification/RoomOverlay.jsx",
   "src/pages/educators/gamification/QuestLoadingScreen.jsx",
+  "src/pages/educators/gamification/QuestCelebrationOverlay.jsx",
   "src/pages/educators/gamification/questStyles.js",
   "src/pages/educators/gamification/questAudio.js",
   "src/pages/educators/gamification/useQuestReducedMotion.js",
@@ -189,6 +190,33 @@ test("gamification typewriter and Ari choreography are stable game-state bridges
   assert.match(game, /this\.traveling = false/);
   assert.doesNotMatch(game, /\[forceRevealed,\s*muted,\s*onDone,\s*reduced,\s*replayToken,\s*text\]/);
   assert.doesNotMatch(game, /onTalkingChange=\{\(\) => \{\}\}/);
+});
+
+test("gamification badge and finale completions trigger guarded celebrations", () => {
+  const game = readGameSources();
+
+  assert.match(game, /data-testid=\{finale \? "gamification-finale-celebration" : "gamification-celebration"\}/);
+  assert.match(game, /QuestCelebrationOverlay/);
+  assert.match(game, /prevCompletedCountRef/);
+  assert.match(game, /GAMEFUL_CHARTER/);
+  assert.match(game, /gamification-finale-charter/);
+  assert.match(game, /Continue the journey/);
+  assert.match(game, /Stay in this room/);
+  assert.match(game, /Replay the quest/);
+  assert.match(game, /gamification-save-toast/);
+});
+
+test("gamification door scene sells the quest and offers resume", () => {
+  const components = readFileSync("src/pages/educators/gamification/QuestComponents.jsx", "utf8");
+  const page = readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8");
+
+  assert.match(components, /9 stops · about 30 minutes/);
+  assert.match(components, /No sign-in — progress stays in this browser/);
+  assert.match(components, /What you will learn/);
+  assert.match(components, /gamification-resume-chip/);
+  assert.match(components, /Welcome back/);
+  assert.match(page, /Gameful Learning Charter/);
+  assert.match(page, /GAMEFUL_CHARTER/);
 });
 
 test("gamification article keeps attention claims careful and source-linked", () => {
