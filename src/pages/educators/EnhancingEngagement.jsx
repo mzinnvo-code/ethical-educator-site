@@ -203,6 +203,7 @@ export default function EnhancingEngagement({ navigate }) {
 
             <FadeIn delay={0.1}>
               <ContinueExploring navigate={navigate} links={[
+                educatorLink("gamification-in-education", { desc: "Play the Gameful Learning Lab — a quest that teaches engagement loops by being one" }),
                 educatorLink("async-engagement", { desc: "Engagement strategies for online and async contexts" }),
                 educatorLink("av-resources", { desc: "Audio/video tools that support engagement" }),
                 educatorLink("for-educators", { desc: "All professional development resources" }),

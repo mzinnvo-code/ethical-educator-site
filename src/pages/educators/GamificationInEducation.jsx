@@ -49,6 +49,56 @@ function CrawlableQuestFallback() {
         <article key={stage.id}>
           <h2>{stage.title}</h2>
           {stage.dialogueBeats.map((line) => <p key={line}>{line}</p>)}
+          {stage.keyDistinction && (
+            <>
+              <h3>{stage.keyDistinction.title}</h3>
+              {stage.keyDistinction.items.map((item) => (
+                <p key={item.term}>{item.term}: {item.definition}</p>
+              ))}
+              <p>{stage.keyDistinction.note}</p>
+            </>
+          )}
+          {stage.cautionCard && (
+            <>
+              <h3>{stage.cautionCard.title}</h3>
+              {stage.cautionCard.items.map((item) => (
+                <p key={item.id}>{item.risk}: {item.text}</p>
+              ))}
+            </>
+          )}
+          {stage.evidenceSnapshot && (
+            <>
+              <h3>Evidence snapshot</h3>
+              {stage.evidenceSnapshot.map((item) => (
+                <p key={item.id}>{item.stat}. {item.caveat}</p>
+              ))}
+            </>
+          )}
+          {stage.pilotScorecard && (
+            <>
+              <h3>Did your pilot work?</h3>
+              {stage.pilotScorecard.map((row) => (
+                <p key={row.id}>{row.signal}. Look for: {row.lookFor} Red flag: {row.redFlag}</p>
+              ))}
+            </>
+          )}
+          {stage.lessonBlueprint && (
+            <>
+              <h3>{stage.lessonBlueprint.title}</h3>
+              <p>{stage.lessonBlueprint.intro}</p>
+              {stage.lessonBlueprint.steps.map((step) => (
+                <p key={step.id}>{step.label}: {step.prompt}</p>
+              ))}
+            </>
+          )}
+          {stage.gradeBands && (
+            <>
+              <h3>In your classroom</h3>
+              {Object.entries(stage.gradeBands).map(([band, text]) => (
+                <p key={band}>Grades {band}: {text}</p>
+              ))}
+            </>
+          )}
         </article>
       ))}
       <h2>Gameful Learning Charter</h2>
@@ -87,6 +137,7 @@ export default function GamificationInEducation({ navigate }) {
     toggleSound,
     setTextSpeed,
     setReducedMotion,
+    setGradeBand,
     resetQuest,
   } = useGamificationQuestProgress();
 
@@ -179,6 +230,7 @@ export default function GamificationInEducation({ navigate }) {
           toggleSound={toggleSound}
           setTextSpeed={setTextSpeed}
           setReducedMotion={setReducedMotion}
+          setGradeBand={setGradeBand}
           resetQuest={resetQuest}
           onExit={leaveQuest}
           navigate={navigate}

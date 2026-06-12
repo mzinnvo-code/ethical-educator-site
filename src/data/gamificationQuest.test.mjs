@@ -409,6 +409,49 @@ test("gamification dialogue is deep enough for adult teacher learning", () => {
   }
 });
 
+test("gamification rooms carry grade-band examples and metacognitive callouts", () => {
+  for (const room of GAMIFICATION_GAME_ROOMS) {
+    if (room.kind === "home") continue;
+    for (const band of ["k-2", "3-5", "6-8", "9-12"]) {
+      assert.ok(room.gradeBands?.[band]?.length > 40, `${room.id} needs a ${band} classroom example`);
+    }
+    assert.ok(room.metacognition?.roomMoment?.length > 40, `${room.id} needs a roomMoment callout`);
+    assert.ok(room.metacognition?.badgeMoment?.length > 40, `${room.id} needs a badgeMoment callout`);
+  }
+});
+
+test("gamification curriculum covers distinctions, pitfalls, evidence, and a blueprint", () => {
+  const upshot = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "upshot");
+  assert.match(JSON.stringify(upshot.keyDistinction), /game-based learning/i);
+  assert.match(upshot.dialogueBeats.join(" "), /game-based learning/i);
+
+  const motivation = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "motivation-engine");
+  assert.match(JSON.stringify(motivation), /overjustification/i);
+  assert.equal(motivation.cautionCard.items.length, 4);
+  assert.ok(motivation.bonusCheck.options.some((option) => option.correct), "bonus check needs a correct option");
+
+  const evidence = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "evidence-lab");
+  assert.equal(evidence.evidenceSnapshot.length, 2);
+  for (const item of evidence.evidenceSnapshot) {
+    assert.ok(GAMIFICATION_QUEST_SOURCES.some((entry) => entry.id === item.sourceId), `${item.id} cites a known source`);
+  }
+  assert.equal(evidence.pilotScorecard.length, 4);
+  assert.match(JSON.stringify(evidence.evidenceSnapshot), /standard deviation/i);
+
+  const workshop = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "teacher-workshop");
+  assert.equal(workshop.lessonBlueprint.steps.length, 5);
+  for (const step of workshop.lessonBlueprint.steps) {
+    assert.ok(step.examples.length >= 2, `${step.id} needs at least two worked examples`);
+    for (const example of step.examples) {
+      assert.ok(["k-2", "3-5", "6-8", "9-12"].includes(example.gradeBand), `${step.id} example uses a known grade band`);
+      assert.ok(example.before && example.after, `${step.id} example needs before and after`);
+    }
+  }
+
+  const examined = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "examined-model");
+  assert.equal(examined.thoughtExperimentsLink.route, "thought-experiments");
+});
+
 test("gamification declares the sound cues used by the polished game loop", () => {
   assert.deepEqual(
     GAMIFICATION_SOUND_CUES,

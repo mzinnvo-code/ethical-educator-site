@@ -15,6 +15,13 @@ export const TYPEWRITER_CHARACTER_MS = { slow: 45, normal: 24, instant: 0 };
 const TYPEWRITER_PUNCTUATION_PAUSE_MS = 90;
 const TYPEWRITER_PUNCTUATION = new Set([".", "?", "!", ";", ":"]);
 
+const GRADE_BANDS = [
+  { id: "k-2", label: "K–2" },
+  { id: "3-5", label: "3–5" },
+  { id: "6-8", label: "6–8" },
+  { id: "9-12", label: "9–12" },
+];
+
 export function TypewriterText({ text, reduced, muted, speed = "normal", forceReveal = false, replayToken = 0, onDone, onTalkingChange }) {
   const characterMs = TYPEWRITER_CHARACTER_MS[speed] ?? TYPEWRITER_CHARACTER_MS.normal;
   const instant = reduced || characterMs <= 0;
@@ -119,39 +126,33 @@ export function TypewriterText({ text, reduced, muted, speed = "normal", forceRe
   );
 }
 
-function SourceDrawer({ room }) {
+function SourcesPanel({ room }) {
   const sources = (room.sourceIds || []).map(source).filter(Boolean);
-  if (!sources.length) return null;
+  if (!sources.length) return <p className="gamification-rail-empty">This stop has no external sources.</p>;
 
   return (
-    <details className="gamification-source-drawer">
-      <summary>Sources</summary>
-      <div>
-        {sources.map((item) => (
-          <a key={item.id} href={item.href} target="_blank" rel="noreferrer">
-            <span>{item.label}</span>
-            {item.title}
-          </a>
-        ))}
-      </div>
-    </details>
+    <div className="gamification-source-drawer">
+      {sources.map((item) => (
+        <a key={item.id} href={item.href} target="_blank" rel="noreferrer">
+          <span>{item.label}</span>
+          {item.title}
+        </a>
+      ))}
+    </div>
   );
 }
 
-function MissionLog({ room, show }) {
-  if (!show) return null;
+function MissionLog({ room }) {
   return (
-    <details data-testid="gamification-mission-log" className="gamification-mission-log">
-      <summary>Ari's full briefing</summary>
-      <div>
-        {(room.dialogueBeats || []).map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-        {room.teacherTransfer && (
-          <p><strong>Teacher transfer:</strong> {room.teacherTransfer}</p>
-        )}
-      </div>
-    </details>
+    <div data-testid="gamification-mission-log" className="gamification-mission-log">
+      <p className="gamification-rail-label">Ari's full briefing</p>
+      {(room.dialogueBeats || []).map((line) => (
+        <p key={line}>{line}</p>
+      ))}
+      {room.teacherTransfer && (
+        <p><strong>Teacher transfer:</strong> {room.teacherTransfer}</p>
+      )}
+    </div>
   );
 }
 
@@ -211,6 +212,206 @@ function RoomChallenge({ room, complete, muted, onComplete, onNavigateDeepfake }
   );
 }
 
+// Non-gating follow-up question: a pressure test, not a gate. Wrong answers
+// teach; nothing is locked behind it.
+function BonusCheck({ check, muted }) {
+  const [selectedId, setSelectedId] = useState(null);
+  const selected = check.options.find((item) => item.id === selectedId);
+
+  return (
+    <div className="gamification-challenge-card gamification-bonus-check" data-testid="gamification-bonus-check">
+      <p>{check.title} · optional</p>
+      <h3>{check.prompt}</h3>
+      <div className="gamification-answer-grid">
+        {check.options.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            onClick={() => {
+              setSelectedId(option.id);
+              if (!option.correct) playQuestSound("error", muted);
+            }}
+            className={`${selectedId === option.id ? "is-picked" : ""} ${selectedId === option.id && !option.correct ? "is-wrong" : ""}`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+      {selected && <p className={selected.correct ? "is-correct" : "is-wrong"}>{selected.feedback}</p>}
+    </div>
+  );
+}
+
+function LessonBlueprint({ blueprint }) {
+  const [copied, setCopied] = useState(false);
+
+  const copyDraft = () => {
+    const draft = [
+      `Lesson loop draft — ${blueprint.title}`,
+      "",
+      ...blueprint.steps.map((step, index) => `${index + 1}. ${step.label}\n   ${step.prompt}\n   My answer: ____________`),
+      "",
+      "Audit: does the reward name the thinking move?",
+    ].join("\n");
+    const finish = () => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    };
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(draft).then(finish, finish);
+      return;
+    }
+    finish();
+  };
+
+  return (
+    <div className="gamification-blueprint" data-testid="gamification-lesson-blueprint">
+      <p className="gamification-rail-label">{blueprint.title}</p>
+      <p className="gamification-blueprint-intro">{blueprint.intro}</p>
+      <ol>
+        {blueprint.steps.map((step) => (
+          <li key={step.id}>
+            <strong>{step.label}</strong>
+            <span>{step.prompt}</span>
+            {step.examples.map((example) => (
+              <div key={`${step.id}-${example.gradeBand}`} className="gamification-blueprint-example">
+                <em>{GRADE_BANDS.find((band) => band.id === example.gradeBand)?.label || example.gradeBand}</em>
+                <p><s>{example.before}</s></p>
+                <p>{example.after}</p>
+              </div>
+            ))}
+          </li>
+        ))}
+      </ol>
+      <button type="button" className="gamification-primary-action" onClick={copyDraft}>
+        {copied ? "Copied — paste it into your planner" : "Copy my loop draft"}
+      </button>
+    </div>
+  );
+}
+
+function ClassroomPanel({ room, gradeBand, onSetGradeBand, navigate }) {
+  const bandText = room.gradeBands?.[gradeBand];
+
+  return (
+    <div className="gamification-classroom-panel">
+      {room.metacognition?.roomMoment && (
+        <div className="gamification-meta-callout" data-testid="gamification-meta-callout">
+          <p className="gamification-rail-label">Notice the design</p>
+          <p>{room.metacognition.roomMoment}</p>
+        </div>
+      )}
+      {room.gradeBands && (
+        <div className="gamification-gradeband-card" data-testid="gamification-gradeband-card">
+          <p className="gamification-rail-label">In your classroom</p>
+          <div className="gamification-gradeband-switch" role="group" aria-label="Choose a grade band">
+            {GRADE_BANDS.map((band) => (
+              <button
+                key={band.id}
+                type="button"
+                aria-pressed={gradeBand === band.id}
+                onClick={() => onSetGradeBand?.(band.id)}
+              >
+                {band.label}
+              </button>
+            ))}
+          </div>
+          {bandText && <p className="gamification-gradeband-text">{bandText}</p>}
+        </div>
+      )}
+      {room.teacherTransfer && (
+        <div className="gamification-transfer-card">
+          <p className="gamification-rail-label">This week's move</p>
+          <p>{room.teacherTransfer}</p>
+        </div>
+      )}
+      {room.keyDistinction && (
+        <div className="gamification-distinction-card" data-testid="gamification-distinction-card">
+          <p className="gamification-rail-label">{room.keyDistinction.title}</p>
+          {room.keyDistinction.items.map((item) => (
+            <p key={item.term}><strong>{item.term}:</strong> {item.definition}</p>
+          ))}
+          <p className="gamification-distinction-note">{room.keyDistinction.note}</p>
+        </div>
+      )}
+      {room.cautionCard && (
+        <div className="gamification-caution-card" data-testid="gamification-caution-card">
+          <p className="gamification-rail-label">{room.cautionCard.title}</p>
+          {room.cautionCard.items.map((item) => (
+            <p key={item.id}><strong>{item.risk}:</strong> {item.text}</p>
+          ))}
+        </div>
+      )}
+      {room.evidenceSnapshot && (
+        <div className="gamification-evidence-card" data-testid="gamification-evidence-card">
+          <p className="gamification-rail-label">Evidence snapshot</p>
+          {room.evidenceSnapshot.map((item) => {
+            const linked = source(item.sourceId);
+            return (
+              <p key={item.id}>
+                <strong>{item.stat}.</strong> {item.caveat}{" "}
+                {linked && <a href={linked.href} target="_blank" rel="noreferrer">({linked.label})</a>}
+              </p>
+            );
+          })}
+        </div>
+      )}
+      {room.pilotScorecard && (
+        <div className="gamification-scorecard" data-testid="gamification-pilot-scorecard">
+          <p className="gamification-rail-label">Did your pilot work?</p>
+          {room.pilotScorecard.map((row) => (
+            <div key={row.id} className="gamification-scorecard-row">
+              <strong>{row.signal}</strong>
+              <p><span className="is-correct">Look for:</span> {row.lookFor}</p>
+              <p><span className="is-wrong">Red flag:</span> {row.redFlag}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {room.promptRecipe && (
+        <div className="gamification-prompt-recipe">
+          <p>AI Lesson Forge Prompt</p>
+          <ol>
+            {room.promptRecipe.map((item) => <li key={item}>{item}</li>)}
+          </ol>
+        </div>
+      )}
+      {room.workshopCards && (
+        <div className="gamification-workshop-cards">
+          <p className="gamification-rail-label">The six design cards</p>
+          {room.workshopCards.map((card) => (
+            <article key={card.id}>
+              <strong>{card.title}</strong>
+              <span>{card.text}</span>
+            </article>
+          ))}
+        </div>
+      )}
+      {room.lessonBlueprint && <LessonBlueprint blueprint={room.lessonBlueprint} />}
+      {room.thoughtExperimentsLink && (
+        <div className="gamification-te-link" data-testid="gamification-te-link">
+          <p className="gamification-rail-label">{room.thoughtExperimentsLink.label}</p>
+          <p>{room.thoughtExperimentsLink.text}</p>
+          <button
+            type="button"
+            className="gamification-primary-action"
+            onClick={() => navigate?.(room.thoughtExperimentsLink.route)}
+          >
+            Open the Thought Experiments hub
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const RAIL_TABS = [
+  { id: "challenge", label: "Challenge" },
+  { id: "classroom", label: "Classroom" },
+  { id: "sources", label: "Sources" },
+  { id: "transcript", label: "Transcript" },
+];
+
 export default function RoomOverlay({
   room,
   mode,
@@ -219,6 +420,7 @@ export default function RoomOverlay({
   forceReveal,
   replayToken,
   textSpeed,
+  gradeBand = "6-8",
   reduced,
   muted,
   complete,
@@ -229,17 +431,29 @@ export default function RoomOverlay({
   onReplay,
   onComplete,
   onReturnToHub,
+  onSetGradeBand,
   onNavigateDeepfake,
+  navigate,
 }) {
   const dialogue = room.dialogueBeats || [];
   const activeText = dialogue[dialogueIndex] || dialogue[0] || "";
   const isLastDialogue = dialogueIndex >= dialogue.length - 1;
   const showChallenge = reduced || complete || (dialogueComplete && isLastDialogue);
   const typing = !dialogueComplete;
+  const [activeTab, setActiveTab] = useState("challenge");
+
+  useEffect(() => {
+    setActiveTab("challenge");
+  }, [room.id]);
 
   const handlePanelClick = (event) => {
     if (event.target.closest?.("button, a, summary, input, select, textarea")) return;
     onAdvance?.();
+  };
+
+  const switchTab = (tabId) => {
+    setActiveTab(tabId);
+    playQuestSound("node-select", muted);
   };
 
   return (
@@ -291,58 +505,80 @@ export default function RoomOverlay({
       </div>
 
       <div className="gamification-room-side">
-        {complete && mode !== "finale" && (
-          <div className="gamification-return-gate-card">
-            <strong>Ready to continue your journey?</strong>
-            <span>Badge earned. Return to the Journey Path; the next stop is lit and ready.</span>
-            <button type="button" className="gamification-return-gate" onClick={onReturnToHub}>
-              <img src={GAMIFICATION_PHASER_ASSETS.hud.returnGate} alt="" aria-hidden="true" />
-              <span>
-                <strong>Return to Journey Path</strong>
-                <em>Open the gate and choose the glowing stop.</em>
-              </span>
+        <div className="gamification-rail-tabs" role="tablist" aria-label="Room resources">
+          {RAIL_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              onClick={() => switchTab(tab.id)}
+            >
+              {tab.label}
             </button>
+          ))}
+        </div>
+
+        {activeTab === "challenge" && (
+          <div role="tabpanel" className="gamification-rail-panel">
+            {complete && mode !== "finale" && (
+              <div className="gamification-return-gate-card">
+                <strong>Ready to continue your journey?</strong>
+                <span>Badge earned. Return to the Journey Path; the next stop is lit and ready.</span>
+                <button type="button" className="gamification-return-gate" onClick={onReturnToHub}>
+                  <img src={GAMIFICATION_PHASER_ASSETS.hud.returnGate} alt="" aria-hidden="true" />
+                  <span>
+                    <strong>Return to Journey Path</strong>
+                    <em>Open the gate and choose the glowing stop.</em>
+                  </span>
+                </button>
+              </div>
+            )}
+            {room.charter && complete && (
+              <div className="gamification-charter-card">
+                <p>Gameful Learning Charter</p>
+                <ul>
+                  {GAMEFUL_CHARTER.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </div>
+            )}
+            {showChallenge ? (
+              <RoomChallenge
+                room={room}
+                complete={complete}
+                muted={muted}
+                onComplete={onComplete}
+                onNavigateDeepfake={onNavigateDeepfake}
+              />
+            ) : (
+              <div className="gamification-locked-activity">Finish Ari's briefing to unlock the classroom move.</div>
+            )}
+            {room.bonusCheck && complete && <BonusCheck check={room.bonusCheck} muted={muted} />}
           </div>
         )}
-        {room.promptRecipe && (
-          <div className="gamification-prompt-recipe">
-            <p>AI Lesson Forge Prompt</p>
-            <ol>
-              {room.promptRecipe.map((item) => <li key={item}>{item}</li>)}
-            </ol>
+
+        {activeTab === "classroom" && (
+          <div role="tabpanel" className="gamification-rail-panel">
+            <ClassroomPanel
+              room={room}
+              gradeBand={gradeBand}
+              onSetGradeBand={onSetGradeBand}
+              navigate={navigate}
+            />
           </div>
         )}
-        {room.workshopCards && (
-          <div className="gamification-workshop-cards">
-            {room.workshopCards.map((card) => (
-              <article key={card.id}>
-                <strong>{card.title}</strong>
-                <span>{card.text}</span>
-              </article>
-            ))}
+
+        {activeTab === "sources" && (
+          <div role="tabpanel" className="gamification-rail-panel">
+            <SourcesPanel room={room} />
           </div>
         )}
-        {room.charter && complete && (
-          <div className="gamification-charter-card">
-            <p>Gameful Learning Charter</p>
-            <ul>
-              {GAMEFUL_CHARTER.map((item) => <li key={item}>{item}</li>)}
-            </ul>
+
+        {activeTab === "transcript" && (
+          <div role="tabpanel" className="gamification-rail-panel">
+            <MissionLog room={room} />
           </div>
         )}
-        {showChallenge ? (
-          <RoomChallenge
-            room={room}
-            complete={complete}
-            muted={muted}
-            onComplete={onComplete}
-            onNavigateDeepfake={onNavigateDeepfake}
-          />
-        ) : (
-          <div className="gamification-locked-activity">Finish Ari's briefing to unlock the classroom move.</div>
-        )}
-        <SourceDrawer room={room} />
-        <MissionLog room={room} show={showChallenge || complete} />
       </div>
     </div>
   );

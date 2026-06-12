@@ -219,6 +219,27 @@ test("gamification door scene sells the quest and offers resume", () => {
   assert.match(page, /GAMEFUL_CHARTER/);
 });
 
+test("gamification room rail is tabbed with classroom guidance", () => {
+  const game = readGameSources();
+
+  assert.match(game, /gamification-rail-tabs/);
+  assert.match(game, /role="tablist"/);
+  assert.match(game, /gamification-gradeband-card/);
+  assert.match(game, /gamification-meta-callout/);
+  assert.match(game, /gamification-caution-card/);
+  assert.match(game, /gamification-pilot-scorecard/);
+  assert.match(game, /gamification-lesson-blueprint/);
+  assert.match(game, /Copy my loop draft/);
+  assert.match(game, /gamification-te-link/);
+  assert.match(game, /gamification-bonus-check/);
+});
+
+test("gamification quest is cross-linked from the engagement resource", () => {
+  const engagement = readFileSync("src/pages/educators/EnhancingEngagement.jsx", "utf8");
+
+  assert.match(engagement, /gamification-in-education/);
+});
+
 test("gamification article keeps attention claims careful and source-linked", () => {
   const page = [
     readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8"),

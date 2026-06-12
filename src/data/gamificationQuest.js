@@ -289,6 +289,7 @@ export const GAMIFICATION_GAME_ROOMS = [
     summary: "Gamification matters because attention is now contested, and slower learning needs a reason to stay worth the effort.",
     dialogueBeats: [
       "The practical claim is simple: gamification belongs in serious teaching when it helps students stay with demanding thinking long enough to improve it.",
+      "Two terms keep this precise. Game-based learning makes a game itself the curriculum. Gamification adds game elements — badges, loops, real choices — to work you already teach. This quest is gamification about gamification: an article wearing a learning loop.",
       "Students have not simply lost attention biologically. The environment around attention has changed, and the learning environment now competes with faster rewards, constant novelty, notifications, and easier escape.",
       "That matters because school often asks students to stay with slower payoffs: rereading a source, revising a claim, testing an assumption, or sitting with an uncomfortable dilemma.",
       "The classroom response should not be panic or pure entertainment. It should be design: give effort a visible loop so students can feel progress while the thinking is still hard.",
@@ -310,6 +311,24 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "upshot", label: "Upshot Lens", habit: "Frame attention as a design condition.", icon: `${ROOT}/badge-icon-upshot.webp` },
     teacherTransfer: "Name one difficult thinking move in tomorrow's lesson and design a reason to stay with it.",
     completionAction: "Return to the Journey Path and unlock the Attention Environment.",
+    keyDistinction: {
+      title: "Gamification vs. game-based learning",
+      items: [
+        { term: "Gamification", definition: "Adds game elements — badges, progress, replays, choices — to an existing lesson. You keep your curriculum." },
+        { term: "Game-based learning", definition: "Uses a full game as the curriculum itself, like a simulation or strategy game that carries the content." },
+      ],
+      note: "This course is gamification about gamification: the same article you could read straight, wearing a learning loop.",
+    },
+    gradeBands: {
+      "k-2": "Make the loop physical and immediate: a sticker chart can become a brave-reader map where each move names what the reader tried, not how fast they finished.",
+      "3-5": "Name the thinking move out loud before the activity — today the badge is for catching a detail that changes the prediction — then let students catch you missing one.",
+      "6-8": "Attach the loop to revision: a draft only levels up when a claim cites a checked source, and students can see their own streak of supported claims.",
+      "9-12": "Frame it as craft, not candy: seminar credit goes to naming a counterargument fairly, and the visible loop tracks argument quality across the term.",
+    },
+    metacognition: {
+      roomMoment: "Notice how this quest opened: a locked door you had to knock on. That was a hook earning the first minute before any definitions arrived — the exact move this stop teaches.",
+      badgeMoment: "The badge you just earned names a lens, not a completion. That wording choice is the lesson: rewards teach students what a classroom values.",
+    },
   },
   {
     ...roomBase,
@@ -345,6 +364,16 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "attention-environment", label: "Attention Cartographer", habit: "Design for the actual attention environment.", icon: `${ROOT}/badge-icon-attention-environment.webp` },
     teacherTransfer: "Rewrite one complaint about attention as a design question you can test.",
     completionAction: "Return to the Journey Path and unlock the Curiosity Stage.",
+    gradeBands: {
+      "k-2": "Shrink the escape routes: short, visible turn-taking loops at centers beat long worksheets when attention wanders, and a try-again chair makes returning to a task normal.",
+      "3-5": "Give slow tasks a visible middle: a three-step progress strip on the desk shows read, mark, explain — so re-reading feels like motion instead of being stuck.",
+      "6-8": "Audit one assignment for exits: where can a distracted student silently bail? Add a checkpoint with quick feedback at exactly that point.",
+      "9-12": "Be honest with students about the attention economy itself; analyzing how an app earns their attention is a strong doorway into how a seminar earns it.",
+    },
+    metacognition: {
+      roomMoment: "This stop did not lecture you about phones — it handed you a design question. Reframing complaint into design is what kept you reading, and it works the same way on students.",
+      badgeMoment: "Attention Cartographer was earned by choosing the stronger framing — feedback on a thinking move you can repeat. That is what competence support feels like.",
+    },
   },
   {
     ...roomBase,
@@ -380,6 +409,16 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "curiosity-hook", label: "Hook Builder", habit: "Use curiosity as the doorway to the concept.", icon: `${ROOT}/badge-icon-curiosity-hook.webp` },
     teacherTransfer: "Add one mystery, prediction, or reveal to a lesson opening without watering down the target.",
     completionAction: "Return to the Journey Path and unlock the Motivation Engine.",
+    gradeBands: {
+      "k-2": "Use a mystery box or a wordless picture walk: let students guess before the story confirms, then name the guessing as making predictions like readers do.",
+      "3-5": "Open math with a wrong answer already on the board and ask what went sideways; the error is a reveal that makes the procedure feel necessary.",
+      "6-8": "Start a history block with two primary sources that disagree: the contradiction is the hook, and the lesson resolves it with sourcing skills.",
+      "9-12": "Lead with a live demo, dataset, or case verdict and have students commit to a position before the framework arrives; the framework then settles a bet they already placed.",
+    },
+    metacognition: {
+      roomMoment: "You traveled a map to reach this room instead of scrolling to a heading. The journey is a hook: it costs a few seconds and buys a sense of arrival.",
+      badgeMoment: "Hook Builder rewards an opening move you chose, not time you spent — autonomy plus competence, the pair this quest keeps returning to.",
+    },
   },
   {
     ...roomBase,
@@ -398,9 +437,13 @@ export const GAMIFICATION_GAME_ROOMS = [
       "Autonomy asks whether students still have meaningful choice. Competence asks whether feedback shows growth. Relatedness asks whether the move matters inside the classroom community.",
       "A badge can support motivation when it names a habit worth keeping: checked evidence, revised a claim, tried a new lens, or explained a fair objection.",
       "The same badge can also flatten motivation if it feels controlling, arbitrary, or disconnected from the work students actually did.",
+      "Now the caution, because rewards genuinely can backfire. Motivation research describes an overjustification effect: rewarding something students already love can quietly replace the love with the price.",
+      "Public competition has its own risks. A class-visible ranking can light up the top five and teach everyone else that effort is hopeless; the same data kept private reads as a personal growth map.",
+      "Watch for badge inflation and system-gaming too. When everything earns a token, tokens stop meaning anything, and clever students will optimize for the reward instead of the thinking it was meant to honor.",
+      "None of this argues against rewards. It argues for tuned ones: tied to a habit, rare enough to mean something, private by default, and always traceable back to the work.",
       "Design the reward backward from the intellectual habit. If the habit is not visible in the badge language, the badge is probably managing behavior instead of strengthening learning.",
     ],
-    sourceIds: ["self-determination-theory"],
+    sourceIds: ["self-determination-theory", "springer-motivation-2024"],
     challenge: {
       id: "badge-tuning",
       title: "Tune the Badge",
@@ -415,6 +458,34 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "motivation-engine", label: "Motivation Tuner", habit: "Use rewards as feedback for growth.", icon: `${ROOT}/badge-icon-motivation-engine.webp` },
     teacherTransfer: "Before awarding anything, ask whether the reward supports autonomy, competence, or relatedness.",
     completionAction: "Return to the Journey Path and unlock the Evidence Archive.",
+    cautionCard: {
+      title: "When rewards backfire",
+      items: [
+        { id: "overjustification", risk: "Overjustification", text: "Rewarding an activity students already enjoy can replace intrinsic interest with the reward itself. Reserve badges for effortful habits, not for joy that was already free." },
+        { id: "public-ranking", risk: "Public ranking harm", text: "Class-visible standings motivate the top and quietly defeat the middle and bottom. Keep progress private by default." },
+        { id: "badge-inflation", risk: "Badge inflation", text: "If every action earns a token, no token means anything. Scarcity is part of the signal." },
+        { id: "gaming-the-system", risk: "Gaming the system", text: "Students optimize what you measure. If the badge counts clicks, you will get clicks; make the measured thing the thinking move itself." },
+      ],
+    },
+    bonusCheck: {
+      id: "backfire-check",
+      title: "Pressure-Test the Reward",
+      prompt: "A student already loves free reading. What does the research suggest about paying them per book?",
+      options: [
+        option("crowd-out", "It risks replacing the existing love of reading with the payment.", true, "That is the overjustification effect. Protect intrinsic motivation where it already exists."),
+        option("more-better", "More reward always means more reading, so pay per book.", false, "Short-term volume, maybe. The long-term risk is that reading becomes work that stops when the pay stops."),
+      ],
+    },
+    gradeBands: {
+      "k-2": "Favor immediate, named feedback over token economies: you checked the picture before guessing — that is what careful readers do — lands better than a prize bin.",
+      "3-5": "Let students choose which habit badge to chase this week; the choosing is the autonomy support.",
+      "6-8": "Replace the public points wall with private progress conferences; the same data, delivered privately, changes its meaning.",
+      "9-12": "Tie recognition to disciplinary habits — sourcing, steelmanning, revision — and let students nominate evidence of their own habit use.",
+    },
+    metacognition: {
+      roomMoment: "Check your own pull right now: is it the badge art, or the satisfaction of choosing well? Both are fine — the design question is which one the classroom version would feed.",
+      badgeMoment: "Motivation Tuner arrived after a real choice with real feedback — autonomy and competence in one move. A seat-time badge could never feel like this.",
+    },
   },
   {
     ...roomBase,
@@ -450,6 +521,36 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "evidence-lab", label: "Evidence Sorter", habit: "Make claims cautious enough to teach from.", icon: `${ROOT}/badge-icon-evidence-lab.webp` },
     teacherTransfer: "Pilot a mechanic with one evidence of learning you can actually observe.",
     completionAction: "Return to the Journey Path and unlock the AI Lesson Forge.",
+    evidenceSnapshot: [
+      {
+        id: "frontiers-effect",
+        stat: "Positive but modest average effects",
+        caveat: "A 2023 meta-analysis in Frontiers in Psychology reports learning gains of roughly a third of a standard deviation, with wide variation across designs, subjects, and outcome measures.",
+        sourceId: "frontiers-gamification-2023",
+      },
+      {
+        id: "springer-moderation",
+        stat: "Autonomy support changes the outcome",
+        caveat: "A 2024 review in Educational Technology Research and Development finds motivation gains hinge on autonomy and relatedness support — controlling designs can erase the benefit.",
+        sourceId: "springer-motivation-2024",
+      },
+    ],
+    pilotScorecard: [
+      { id: "reasoning-language", signal: "Reasoning language", lookFor: "Students use claim, evidence, because, and revise when they talk about the task.", redFlag: "Talk is all about points, streaks, or who finished first." },
+      { id: "revision-rate", signal: "Revision with evidence", lookFor: "More students change an answer after checking a source.", redFlag: "Answers change randomly to chase the reward." },
+      { id: "persistence", signal: "Persistence at the hard part", lookFor: "Students stay with the step where they used to stop.", redFlag: "Speed goes up while care goes down." },
+      { id: "transfer-talk", signal: "Habit transfer", lookFor: "Students name the habit unprompted in a different task.", redFlag: "The habit disappears the moment the badge does." },
+    ],
+    gradeBands: {
+      "k-2": "Your pilot evidence is talk: listen for I checked and I tried again during centers in week one versus week three.",
+      "3-5": "Count one thing only, like how many drafts cite a checked fact, so the pilot stays honest and light.",
+      "6-8": "Run the loop in one class period and not another for two weeks; compare exit-ticket explanations, not completion rates.",
+      "9-12": "Have students co-analyze the pilot: did the mechanic change their preparation, or only their clicking? Their audit is itself the transfer evidence.",
+    },
+    metacognition: {
+      roomMoment: "This room handed you effect sizes with caveats attached. Modeling calibrated claims is itself a gameful move — credibility is what lets a reward mean something.",
+      badgeMoment: "Evidence Sorter certifies a sentence you could defend in a faculty meeting. Useful rewards certify something the owner can actually do.",
+    },
   },
   {
     ...roomBase,
@@ -493,6 +594,16 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "ai-lesson-forge", label: "AI Lesson Forger", habit: "Prototype with privacy, then audit the learning.", icon: `${ROOT}/badge-icon-ai-lesson-forge.webp` },
     teacherTransfer: "Use AI for a de-identified first draft of one loop, then revise it against privacy, policy, and the learning target.",
     completionAction: "Return to the Journey Path and unlock the Teacher Workshop.",
+    gradeBands: {
+      "k-2": "Ask the tool for physical, low-reading loops — sorting mats, act-it-out choices — and check every word for read-aloud fit.",
+      "3-5": "Request two versions of the same loop, one scaffolded and one open, so your differentiation is built in from the first draft.",
+      "6-8": "Have the tool draft the feedback lines students will see, then rewrite them in your own voice; canned praise reads as canned to middle schoolers.",
+      "9-12": "Ask for the rubric language alongside the loop so the reward criteria are transparent enough for students to audit.",
+    },
+    metacognition: {
+      roomMoment: "The prompt recipe in this room is itself a loop: constraints in, draft out, audit, revise. You are practicing on the tool what students will practice on the task.",
+      badgeMoment: "AI Lesson Forger required judgment, not acceptance — the badge marks the audit, because the audit is the teaching skill.",
+    },
   },
   {
     ...roomBase,
@@ -526,6 +637,67 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "teacher-workshop", label: "Workshop Designer", habit: "Turn a lesson into a repeatable loop.", icon: `${ROOT}/badge-icon-teacher-workshop.webp` },
     teacherTransfer: "Pick one existing lesson and add hook, choice, feedback, replay, and reflection.",
     completionAction: "Return to the Journey Path and unlock the Examined Classroom model room.",
+    lessonBlueprint: {
+      title: "Gamify one lesson — five steps",
+      intro: "Work with a lesson you already teach. Each step is one decision; the worked examples show the same step landing in different classrooms.",
+      steps: [
+        {
+          id: "drift-moment",
+          label: "Find the drift moment",
+          prompt: "Where do students rush, stall, or quietly give up?",
+          examples: [
+            { gradeBand: "3-5", before: "Fraction practice page, problem four: half the class starts guessing.", after: "Problem four becomes the boss problem, with one free hint token and a visible second try." },
+            { gradeBand: "9-12", before: "Essay revision day: students re-read their drafts and change commas.", after: "Revision day opens with a find-the-weakest-claim challenge before anyone may edit a sentence." },
+          ],
+        },
+        {
+          id: "hook",
+          label: "Choose the hook",
+          prompt: "What prediction, reveal, contradiction, or build makes the explanation feel necessary?",
+          examples: [
+            { gradeBand: "k-2", before: "Today we will learn about floating and sinking.", after: "Two sealed cans, one floats: vote first, then test, then ask why the votes split." },
+            { gradeBand: "6-8", before: "Read the chapter on supply and demand.", after: "Auction three pencils to the class first; the chapter explains what just happened to the price." },
+          ],
+        },
+        {
+          id: "real-choice",
+          label: "Add a real choice",
+          prompt: "What decision do students own — path, strategy, or evidence?",
+          examples: [
+            { gradeBand: "3-5", before: "Everyone writes the same book summary.", after: "Choose your move: defend the hero, prosecute the villain, or interview a side character — each requires the same text evidence." },
+            { gradeBand: "9-12", before: "Answer the assigned document questions.", after: "Pick two of five sources to build your case, knowing the opposition saw all five." },
+          ],
+        },
+        {
+          id: "feedback-replay",
+          label: "Wire feedback and replay",
+          prompt: "How does a student see the next better move quickly, and retry without penalty?",
+          examples: [
+            { gradeBand: "k-2", before: "Worksheets come back two days later with checkmarks.", after: "An answer-key station stamps a second-look icon; fixing a miss earns more than avoiding one." },
+            { gradeBand: "6-8", before: "One quiz, one grade, move on.", after: "The quiz unlocks a retake with a twist: explain what changed between attempts in one sentence." },
+          ],
+        },
+        {
+          id: "name-the-habit",
+          label: "Name the reflection and reward",
+          prompt: "What habit will students be able to name, and what recognizes it?",
+          examples: [
+            { gradeBand: "3-5", before: "Good job, team three!", after: "Exit ticket: which move helped — re-reading, asking, or trying a smaller case? The named move goes on the class habit wall." },
+            { gradeBand: "9-12", before: "Participation points for discussion.", after: "Seminar credit names the move: posed a testable question, conceded a fair point, or connected two speakers." },
+          ],
+        },
+      ],
+    },
+    gradeBands: {
+      "k-2": "Your loop can be a routine, not a unit: one center with choice, instant feedback, and a habit name takes ten minutes to set up.",
+      "3-5": "Pilot with your most reluctant subject, not your favorite one; the drift moment is easier to find where energy is lowest.",
+      "6-8": "Recruit two students as loop testers before launch; they will find the exploit faster than you will.",
+      "9-12": "Show the class the design itself afterward: deconstructing why the loop worked is a transferable lesson in metacognition.",
+    },
+    metacognition: {
+      roomMoment: "You are most of the way through a nine-stop loop right now. The structure you have been moving through is the same blueprint this room hands you.",
+      badgeMoment: "Workshop Designer marks a plan, not a purchase. Notice that the quest never asked you to buy anything — design was the whole price.",
+    },
   },
   {
     ...roomBase,
@@ -561,6 +733,21 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "examined-model", label: "Progress Cartographer", habit: "Make progress a private map of thinking habits.", icon: `${ROOT}/badge-icon-examined-model.webp` },
     teacherTransfer: "Name the habits your class should recognize before you count anything.",
     completionAction: "Return to the Journey Path and unlock the Finale Hall.",
+    thoughtExperimentsLink: {
+      label: "See the gameful structure live",
+      text: "The Thought Experiments hub runs these exact principles with students: dilemmas, branching choices, evidence checks, ethical lenses, replay, and a private tracker.",
+      route: "thought-experiments",
+    },
+    gradeBands: {
+      "k-2": "A private progress map can be a folder of thinking-moves-I-tried cards; the student narrates it at conferences.",
+      "3-5": "Let students keep their own habit tally and compare only against last month's self.",
+      "6-8": "Progress conversations beat progress dashboards: two minutes naming a habit aloud cements more than any chart.",
+      "9-12": "Invite students to design the habit categories for the next unit; ownership of the map is the deepest autonomy support.",
+    },
+    metacognition: {
+      roomMoment: "Your badge collection on this site lives only in this browser — private by design. You have been experiencing the dignity argument this room makes.",
+      badgeMoment: "Progress Cartographer is the quiet badge: it names the difference between a map you own and a ranking you are subjected to.",
+    },
   },
   {
     ...roomBase,
@@ -602,6 +789,16 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "finale", label: "Charter Keeper", habit: "Carry the full loop into practice.", icon: `${ROOT}/badge-icon-finale.webp` },
     teacherTransfer: "Build one lesson loop this week: hook, choice, feedback, replay, reflection.",
     completionAction: "Complete the Journey Path, open the transcript, and try the Deepfake Dilemma pilot.",
+    gradeBands: {
+      "k-2": "Start Monday with one physical loop at one center, and name one habit out loud at closing circle.",
+      "3-5": "Start with one lesson's drift moment and a single badge that names a thinking habit.",
+      "6-8": "Start with a two-week pilot in one section, with private progress and a revision-linked reward.",
+      "9-12": "Start by co-designing the loop with students; the design conversation is the first lesson.",
+    },
+    metacognition: {
+      roomMoment: "The reward hall is gold because endings deserve staging — and because you walked nine stops to reach it. Earned arrival is a feeling worth designing for students.",
+      badgeMoment: "Charter Keeper is the only badge that points forward: it certifies a commitment, not a memory. Build the loop this week while the feeling is warm.",
+    },
   },
 ];
 

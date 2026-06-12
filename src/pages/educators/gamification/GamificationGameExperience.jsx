@@ -288,6 +288,7 @@ export default function GamificationGameExperience({
   toggleSound,
   setTextSpeed,
   setReducedMotion,
+  setGradeBand,
   resetQuest,
   onExit,
   navigate,
@@ -540,6 +541,7 @@ export default function GamificationGameExperience({
             forceReveal={forceReveal}
             replayToken={replayToken}
             textSpeed={progress.textSpeed || "normal"}
+            gradeBand={progress.gradeBand || "6-8"}
             reduced={reduced}
             muted={progress.soundMuted}
             complete={complete || progress.mode === "finale"}
@@ -550,7 +552,9 @@ export default function GamificationGameExperience({
             onReplay={replayDialogue}
             onComplete={handleComplete}
             onReturnToHub={handleReturnToJourneyPath}
+            onSetGradeBand={setGradeBand}
             onNavigateDeepfake={handleNavigateDeepfake}
+            navigate={navigate}
           />
         )}
         <TeacherTranscript rooms={stages} show={progress.finaleSeen} />
