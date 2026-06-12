@@ -17,7 +17,10 @@ import { buildTargets } from "./targets.js";
 const SEGMENTS = [
   { at: 0.0, shape: "scatter" },
   { at: 0.115, shape: "question" },
-  { at: 0.175, shape: "question" },
+  // Disperse to the edge curtain as the dilemma gallery wall assembles
+  // (0.165–0.30) so the field frames the wall instead of hiding behind it.
+  { at: 0.16, shape: "question" },
+  { at: 0.22, shape: "vignette" },
   { at: 0.275, shape: "vignette" },
   { at: 0.365, shape: "fork" },
   { at: 0.5, shape: "fork" },

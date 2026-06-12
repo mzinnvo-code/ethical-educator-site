@@ -19,16 +19,44 @@ export const SCENE_VOID = {
   hint: "Scroll to consider it",
 };
 
+// Gallery wall behind the dilemma headline — a curated sweep of the library.
+// Titles and grade labels mirror src/data/experiments.js; images are the
+// existing experiment illustrations (defined here, not imported from
+// experiments.js, which pulls JSX scene components and can't run in Node).
+const galleryItem = (slug, title, grades) => ({
+  slug,
+  title,
+  grades,
+  image: `/illustrations/${slug}.png`,
+});
+
 export const SCENE_DILEMMA = {
   id: "dilemma",
   kicker: "The dilemma",
   headline: "AI can write the essay. Should it?",
   body:
     "The oldest questions in philosophy just walked into your classroom wearing new clothes. The trolley problem drives a car now. Mary's Room has a chatbot. And your students are already living inside the experiment.",
-  cards: [
-    { title: "The Trolley Problem", grades: "Grades 9–12", image: "/illustrations/trolley.png" },
-    { title: "Mary's Room", grades: "Grades 9–12", image: "/illustrations/marys-room.png" },
-    { title: "The Paperclip Maximizer", grades: "Grades 6–12", image: "/illustrations/paperclip.png" },
+  gallery: [
+    galleryItem("trolley", "The Self-Driving Trolley", "Grades 6–8"),
+    galleryItem("marys-room", "Mary's Room", "Grades 9–12"),
+    galleryItem("paperclip", "The Paperclip Maximizer", "Grades 9–12"),
+    galleryItem("cave", "Plato's Cave", "Grades 9–12"),
+    galleryItem("ship-of-theseus", "Robot Replacement Parts", "Grades 6–8"),
+    galleryItem("chinese-room", "The Chinese Room", "Grades 9–12"),
+    galleryItem("experience-machine", "The Experience Machine", "Grades 9–12"),
+    galleryItem("simulation", "Are We in a Simulation?", "Grades 9–12"),
+    galleryItem("magic-toy", "The Magic Toy", "Grades K–5"),
+    galleryItem("deepfake", "The Deepfake Dilemma", "Grades 6–12"),
+    galleryItem("gyges", "The Ring of Gyges", "Grades 9–12"),
+    galleryItem("omelas", "The Ones Who Walk Away from Omelas", "Grades 9–12"),
+    galleryItem("drowning-child", "The Drowning Child", "Grades 9–12"),
+    galleryItem("brain-in-vat", "Are You Sure You're Real?", "Grades 6–8"),
+    galleryItem("veil", "The Veil of Ignorance", "Grades 6–12"),
+    galleryItem("autonomous-car", "Your Self-Driving Car", "Grades 6–12"),
+    galleryItem("robot-pet", "Goodbye, Robot Pet", "Grades K–5"),
+    galleryItem("liar", "This Sentence Is False", "Grades 6–8"),
+    galleryItem("sorites", "When Does a Heap Stop Being a Heap?", "Grades 6–8"),
+    galleryItem("surveillance", "Surveillance vs. Privacy", "Educator PD"),
   ],
 };
 
@@ -150,6 +178,7 @@ export const LANDING_SEO_TEXT = [
   SCENE_VOID.headline,
   SCENE_DILEMMA.headline,
   SCENE_DILEMMA.body,
+  "A gallery of thought experiments: The Trolley Problem, Mary's Room, the Paperclip Maximizer, Plato's Cave, the Ship of Theseus, and more.",
   SCENE_LIBRARY.headline,
   SCENE_LIBRARY.body,
   `${EXPERIMENT_COUNT} interactive thought experiments. ${TEACHER_KIT_COUNT} printable teacher kits. ${PROTOCOL_COUNT} discussion protocols. ${CURATED_RESOURCE_COUNT} curated books and resources. A path for every grade band, K–12.`,
