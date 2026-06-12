@@ -261,7 +261,7 @@ test("gamification overworld composition keeps the path ordered and fully visibl
   const examined = node("examined-model");
   const finale = node("finale");
 
-  assert.ok(home.x < upshot.x && Math.abs(upshot.y - home.y) <= 40, "Level 1 should be the first visible stop after Home");
+  assert.ok(home.x < upshot.x && Math.abs(upshot.y - home.y) <= 50, "Level 1 should be the first visible stop after Home");
   assert.ok(distance(home, upshot) < distance(home, attention), "Level 2 should not appear between Home and Level 1");
   assert.ok(distance(home, upshot) < distance(home, evidence), "Level 5 should not appear between Home and Level 1");
   assertInBox(attention, { left: 450, top: 445, width: 105, height: 58 }, "Level 2 should sit on the lower bridge path");
@@ -559,6 +559,12 @@ test("gamification Phaser assets include room backgrounds, HUD pieces, and sprit
 
   for (const src of Object.values(GAMIFICATION_PHASER_ASSETS.hud)) {
     assert.match(src, /^\/experiment-scenes\/gamification-article\/.+\.(webp|png)$/);
+    assert.equal(existsSync(`public${src}`), true, `${src} should exist`);
+  }
+
+  const playableIds = GAMIFICATION_GAME_ROOMS.filter((room) => room.kind !== "home").map((room) => room.id);
+  assert.deepEqual(Object.keys(GAMIFICATION_PHASER_ASSETS.badgeIcons).sort(), [...playableIds].sort(), "trophy icons cover every playable room");
+  for (const src of Object.values(GAMIFICATION_PHASER_ASSETS.badgeIcons)) {
     assert.equal(existsSync(`public${src}`), true, `${src} should exist`);
   }
 

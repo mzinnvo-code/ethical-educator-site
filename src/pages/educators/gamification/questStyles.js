@@ -911,6 +911,53 @@ export const gameStyles = `
     border-color: rgba(208,138,88,0.45) !important;
   }
 
+  .gamification-trophy-case {
+    border: 1px solid rgba(224,184,72,0.55);
+    background:
+      radial-gradient(circle at 50% 14%, rgba(224,184,72,0.14), transparent 46%),
+      rgba(15,32,52,0.82);
+    padding: 10px;
+    display: grid;
+    gap: 9px;
+  }
+
+  .gamification-trophy-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 7px;
+  }
+
+  .gamification-trophy-list li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 9px;
+    align-items: center;
+  }
+
+  .gamification-trophy-list img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 6px rgba(224,184,72,0.3));
+  }
+
+  .gamification-trophy-list strong {
+    display: block;
+    color: ${C.textPrimary};
+    font-size: 0.8rem;
+  }
+
+  .gamification-trophy-list em {
+    display: block;
+    color: ${C.textMuted};
+    font-size: 0.7rem;
+    font-style: normal;
+    line-height: 1.3;
+  }
+
   .gamification-challenge-card,
   .gamification-prompt-recipe,
   .gamification-charter-card,

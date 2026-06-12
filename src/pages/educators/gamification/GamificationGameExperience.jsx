@@ -396,8 +396,8 @@ export default function GamificationGameExperience({
     const completedRoom = stages.find((item) => item.id === completedId);
     if (!completedRoom || completedRoom.kind === "home") return;
     const payload = completedRoom.id === "finale"
-      ? { variant: "finale" }
-      : { variant: "badge", roomId: completedRoom.id };
+      ? { variant: "finale", fresh: true }
+      : { variant: "badge", roomId: completedRoom.id, fresh: true };
     if (celebrationTimerRef.current) window.clearTimeout(celebrationTimerRef.current);
     // Give the badge-collect jingle and the camera beat a moment to land first.
     celebrationTimerRef.current = window.setTimeout(
@@ -406,8 +406,14 @@ export default function GamificationGameExperience({
     );
   }, [progress.activeRoomId, progress.completedRoomIds?.length, progress.currentRoomId, reduced, stages]);
 
+  const celebrationRef = useRef(null);
+  celebrationRef.current = celebration;
+
   const closeCelebration = useCallback(() => {
+    const wasFresh = celebrationRef.current?.fresh;
     setCelebration(null);
+    // The save toast belongs to a genuine completion, not a replayed celebration.
+    if (!wasFresh) return;
     setSaveToast(true);
     if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
     toastTimerRef.current = window.setTimeout(() => setSaveToast(false), 1800);
@@ -606,6 +612,7 @@ export default function GamificationGameExperience({
             onReturnToHub={handleReturnToJourneyPath}
             onSetGradeBand={setGradeBand}
             onNavigateDeepfake={handleNavigateDeepfake}
+            onReplayCelebration={() => setCelebration({ variant: "finale", fresh: false })}
             navigate={navigate}
           />
         )}
