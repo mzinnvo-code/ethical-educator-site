@@ -101,6 +101,8 @@ function GamificationPhaserGame({
         scale: {
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.NO_CENTER,
+          // Integer-rounded scale dimensions keep pixel art crisp on 2x displays.
+          autoRound: true,
         },
         scene: SceneClass,
       });
@@ -248,11 +250,18 @@ function OverworldTicker({
 }
 
 function TeacherTranscript({ rooms, show }) {
+  const [open, setOpen] = useState(false);
   if (!show) return null;
+  // Lazy-mount the (large) transcript body: nine rooms of beats only enter
+  // the DOM once the drawer is actually opened.
   return (
-    <details className="gamification-teacher-transcript">
+    <details
+      className="gamification-teacher-transcript"
+      open={open}
+      onToggle={(event) => setOpen(event.target.open)}
+    >
       <summary>Teacher transcript and sources</summary>
-      {rooms.filter((room) => room.kind !== "home").map((room) => (
+      {open && rooms.filter((room) => room.kind !== "home").map((room) => (
         <article key={room.id}>
           <h2>{room.title}</h2>
           {(room.dialogueBeats || []).map((line) => <p key={line}>{line}</p>)}
@@ -417,6 +426,7 @@ export default function GamificationGameExperience({
     setTravelTargetNodeId(roomId);
     travelFallbackRef.current = window.setTimeout(() => {
       setTravelTargetNodeId(null);
+      trackQuestEvent("quest_room_start", { placement: "travel-fallback", slug: roomId });
       startLevel(roomId);
     }, reduced ? 450 : 5400);
   }, [clearTravelFallback, clickableWorldNodeIds, isWorldNodeClickable, progress.soundMuted, reduced, startLevel]);

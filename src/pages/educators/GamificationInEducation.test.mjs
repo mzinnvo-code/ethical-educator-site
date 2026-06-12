@@ -240,6 +240,16 @@ test("gamification quest is cross-linked from the engagement resource", () => {
   assert.match(engagement, /gamification-in-education/);
 });
 
+test("gamification quest hardens touch, crispness, and chunk loading", () => {
+  const game = readGameSources();
+  const prerender = readFileSync("scripts/prerender-site.mjs", "utf8");
+
+  assert.match(game, /autoRound: true/);
+  assert.match(game, /overscroll-behavior: none/);
+  assert.match(game, /touch-action: manipulation/);
+  assert.match(prerender, /modulepreload/);
+});
+
 test("gamification teacher kit route is registered and single-sourced from quest data", () => {
   const app = readFileSync("src/App.jsx", "utf8");
   const searchDocs = readFileSync("src/lib/searchDocs.js", "utf8");

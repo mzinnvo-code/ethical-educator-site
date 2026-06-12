@@ -39,7 +39,7 @@ export const GAMIFICATION_AUDIO_CATALOG = [
   { id: "door-knock", kind: "sfx", seconds: 0.6, prompt: "Single soft knuckle knock on a heavy wooden door, warm and woody, cozy retro game foley, no reverb tail" },
   { id: "door-strong-knock", kind: "sfx", seconds: 0.9, prompt: "Two firm knuckle knocks on a heavy wooden door, slightly urgent but friendly, warm woody retro game foley" },
   { id: "door-open", kind: "sfx", seconds: 1.8, prompt: "Heavy wooden study door creaking open slowly, then a soft warm magical chime as light spills out, cozy retro game" },
-  { id: "ui-tap", kind: "sfx", seconds: 0.4, prompt: "Very short quiet 8-bit tick, subtle interface select blip, minimal, clean, single note" },
+  { id: "ui-tap", kind: "sfx", seconds: 0.5, prompt: "Very short quiet 8-bit tick, subtle interface select blip, minimal, clean, single note" },
   { id: "node-select", kind: "sfx", seconds: 0.6, prompt: "Bright cheerful 8-bit confirm blip, two quick rising square-wave notes, retro adventure map stop selected, clean" },
   { id: "path-travel", kind: "sfx", seconds: 2.5, prompt: "Soft rhythmic chiptune walking footsteps on a dirt path, gentle bouncy 8-bit travel pattern, cozy overworld journey, even loopable rhythm" },
   { id: "room-enter", kind: "sfx", seconds: 1.2, prompt: "Warm welcoming chiptune arrival arpeggio, door swing plus a soft sparkle, entering a cozy study room in a retro game" },

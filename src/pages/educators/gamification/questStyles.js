@@ -19,9 +19,16 @@ export const gameStyles = `
     width: 100vw;
     height: 100dvh;
     overflow: hidden;
+    /* iOS: stop rubber-band scroll from peeking behind the fixed shell. */
+    overscroll-behavior: none;
     background: #07111f;
     color: ${C.textPrimary};
     font-family: inherit;
+  }
+
+  .gamification-phaser-shell button {
+    /* Kill the 300ms double-tap-zoom delay on touch devices. */
+    touch-action: manipulation;
   }
 
   .gamification-stage-wrap {
@@ -698,6 +705,7 @@ export const gameStyles = `
   .gamification-rail-panel {
     display: grid;
     gap: 10px;
+    content-visibility: auto;
   }
 
   .gamification-rail-label {

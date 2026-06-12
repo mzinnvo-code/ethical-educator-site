@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { SITE } from "../src/siteConfig.js";
@@ -244,6 +244,7 @@ function renderRoute(template, route) {
     html = html.replace(
       "</head>",
       [
+        ...(PHASER_CHUNK ? [`    <link rel="modulepreload" href="${PHASER_CHUNK}" />`] : []),
         '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/overworld-map-v4-clean.webp" />',
         '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/ari-teacher-sheet.png" />',
         '    <link rel="prefetch" as="image" href="/experiment-scenes/gamification-article/ari-teacher-room-sheet.png" />',
@@ -311,6 +312,18 @@ function injectCsp(html) {
   const tag = `<meta http-equiv="Content-Security-Policy" content="${buildCsp(stripped)}" />`;
   return stripped.replace(/<meta name="viewport"[^>]*>/, (viewport) => `${viewport}\n    ${tag}`);
 }
+
+// The Phaser engine chunk is route-split; hint the browser to start fetching
+// it while the visitor is still on the door scene of the quest page.
+const PHASER_CHUNK = await (async () => {
+  try {
+    const assets = await readdir(path.join(DIST, "assets"));
+    const chunk = assets.find((file) => /^phaser/.test(file) && file.endsWith(".js"));
+    return chunk ? `/assets/${chunk}` : null;
+  } catch {
+    return null;
+  }
+})();
 
 const template = injectCsp(await readFile(path.join(DIST, "index.html"), "utf8"));
 for (const route of routes) {
