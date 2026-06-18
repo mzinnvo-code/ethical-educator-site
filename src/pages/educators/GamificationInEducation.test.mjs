@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 import { EDUCATOR_RESOURCE_GROUPS, EDUCATOR_RESOURCES } from "../../data/educatorResources.js";
@@ -24,6 +24,45 @@ function readGameSources() {
   return GAME_SOURCE_FILES.map((file) => readFileSync(file, "utf8")).join("\n");
 }
 
+function webpDimensions(path) {
+  const buffer = readFileSync(path);
+  assert.equal(buffer.toString("ascii", 0, 4), "RIFF", `${path} should be a RIFF container`);
+  assert.equal(buffer.toString("ascii", 8, 12), "WEBP", `${path} should be a WebP file`);
+
+  let offset = 12;
+  while (offset + 8 <= buffer.length) {
+    const chunkType = buffer.toString("ascii", offset, offset + 4);
+    const chunkSize = buffer.readUInt32LE(offset + 4);
+    const dataOffset = offset + 8;
+
+    if (chunkType === "VP8X") {
+      return {
+        width: 1 + buffer.readUIntLE(dataOffset + 4, 3),
+        height: 1 + buffer.readUIntLE(dataOffset + 7, 3),
+      };
+    }
+
+    if (chunkType === "VP8 ") {
+      return {
+        width: buffer.readUInt16LE(dataOffset + 6) & 0x3fff,
+        height: buffer.readUInt16LE(dataOffset + 8) & 0x3fff,
+      };
+    }
+
+    if (chunkType === "VP8L") {
+      const bits = buffer.readUInt32LE(dataOffset + 1);
+      return {
+        width: (bits & 0x3fff) + 1,
+        height: ((bits >> 14) & 0x3fff) + 1,
+      };
+    }
+
+    offset = dataOffset + chunkSize + (chunkSize % 2);
+  }
+
+  throw new Error(`Unable to read WebP dimensions for ${path}`);
+}
+
 test("gamification article is registered in the educator engagement pathway", () => {
   const resource = EDUCATOR_RESOURCES["gamification-in-education"];
   const engagementGroup = EDUCATOR_RESOURCE_GROUPS.find((group) => group.label === "Student Engagement");
@@ -33,6 +72,23 @@ test("gamification article is registered in the educator engagement pathway", ()
   assert.doesNotMatch(resource.desc, /attention spans/i);
   assert.match(resource.desc, /Thought Experiments/i);
   assert.ok(engagementGroup.ids.includes("gamification-in-education"));
+});
+
+test("gamification educator thumbnail uses a distinct Ari gameful-learning icon", () => {
+  const resource = EDUCATOR_RESOURCES["gamification-in-education"];
+  const assetPath = `public${resource.image}`;
+  const readme = readFileSync("public/illustrations/README.md", "utf8");
+
+  assert.equal(resource.image, "/illustrations/educators/gamification-in-education.webp");
+  assert.notEqual(resource.image, EDUCATOR_RESOURCES["enhancing-engagement"].image);
+  assert.doesNotMatch(resource.image, /enhancing-student-engagement\.webp/);
+  assert.equal(existsSync(assetPath), true, "gamification educator thumbnail should exist");
+  assert.deepEqual(webpDimensions(assetPath), { width: 1000, height: 1000 });
+  assert.match(resource.imageAlt, /Ari/i);
+  assert.match(resource.imageAlt, /gameful learning/i);
+  assert.match(resource.imageAlt, /mastery badge/i);
+  assert.match(resource.imageAlt, /progress/i);
+  assert.match(readme, /gamification-in-education\.webp.+quest assets/i);
 });
 
 test("gamification article route is wired for rendering, metadata, search, prerendering, and crawlability", () => {
