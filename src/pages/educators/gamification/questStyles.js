@@ -6,6 +6,7 @@ import { C } from "../../../theme.js";
 //   HUD menu 22, transcript 25
 //   iris wipe (wonder IrisOverlay)               z 10500
 //   celebration overlays (portal to body)        z 11000
+//   bonus mission overlay (portal to body)       z 11500
 export const gameStyles = `
   .gamification-phaser-shell,
   .gamification-phaser-shell * {
@@ -739,6 +740,24 @@ export const gameStyles = `
     border: 1px solid rgba(42,189,193,0.34);
     background: rgba(15,32,52,0.78);
     padding: 10px;
+  }
+
+  .gamification-bonus-cta {
+    border: 1px solid rgba(224,184,72,0.55);
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at 14% 30%, rgba(224,184,72,0.16), transparent 44%),
+      rgba(15,32,52,0.82);
+    padding: 11px 12px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .gamification-bonus-cta p {
+    margin: 0;
+    color: ${C.textSecondary};
+    font-size: 0.82rem;
+    line-height: 1.55;
   }
 
   .gamification-meta-callout {

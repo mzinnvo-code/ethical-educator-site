@@ -4,6 +4,11 @@ import test from "node:test";
 import sharp from "sharp";
 
 import {
+  GAMEFUL_BONUS_VIDEO,
+  GAMEFUL_DO_TOMORROW,
+  GAMEFUL_REFLECTION_PROMPTS,
+  GAMEFUL_RESOURCE_GROUPS,
+  GAMEFUL_TAKEAWAYS,
   GAMIFICATION_GAME_ROOMS,
   GAMIFICATION_GAME_STAGES,
   GAMIFICATION_PHASER_ASSETS,
@@ -150,6 +155,7 @@ test("gamification quest includes every planned source as an https citation", ()
     "willingham-attention",
     "kcl-attention",
     "anxious-generation",
+    "haidt-screens-childhood-2026",
     "odgers-nature",
     "self-determination-theory",
     "frontiers-gamification-2023",
@@ -162,6 +168,37 @@ test("gamification quest includes every planned source as an https citation", ()
     assert.ok(source, `Missing source ${id}`);
     assert.match(source.href, /^https:\/\//, `${id} should use an https URL`);
   }
+});
+
+test("gamification bonus mission cites and embeds the Haidt TED2026 talk with a debrief", () => {
+  const sourceIds = new Set(GAMIFICATION_QUEST_SOURCES.map((item) => item.id));
+
+  // The cited talk is the watch-and-reflect bonus, embedded by YouTube id.
+  assert.equal(GAMEFUL_BONUS_VIDEO.id, "DH9L7vJ03DE");
+  assert.ok(sourceIds.has(GAMEFUL_BONUS_VIDEO.sourceId), "bonus video links a known citation");
+  assert.equal(GAMEFUL_BONUS_VIDEO.sourceId, "haidt-screens-childhood-2026");
+  assert.match(GAMEFUL_BONUS_VIDEO.framing, /people and books|analog|evidence/i);
+
+  // The "left a real PD" debrief: takeaways, do-tomorrow moves, reflection.
+  assert.ok(GAMEFUL_TAKEAWAYS.length >= 6, "debrief needs a full set of takeaways");
+  for (const item of GAMEFUL_TAKEAWAYS) {
+    assert.ok(item.title?.length > 8 && item.text?.length > 30, "each takeaway needs a title and substance");
+  }
+  assert.ok(GAMEFUL_DO_TOMORROW.length >= 5, "debrief needs concrete do-tomorrow moves");
+  assert.ok(GAMEFUL_REFLECTION_PROMPTS.length >= 3, "bonus mission needs reflection prompts");
+  // The "not a panacea" takeaway must carry all three of Haidt's technoskepticism
+  // principles, not merely the word "technoskepticism".
+  const haidtTakeaway = JSON.stringify(GAMEFUL_TAKEAWAYS.find((t) => /screens/i.test(t.title)));
+  assert.match(haidtTakeaway, /people and books/i);
+  assert.match(haidtTakeaway, /developing brains|brain development/i);
+  assert.match(haidtTakeaway, /artificial relationships/i);
+
+  // Every grouped resource resolves, and the Haidt talk is in the library.
+  const groupedIds = GAMEFUL_RESOURCE_GROUPS.flatMap((group) => group.sourceIds);
+  for (const id of groupedIds) {
+    assert.ok(sourceIds.has(id), `resource group references known source ${id}`);
+  }
+  assert.ok(groupedIds.includes("haidt-screens-childhood-2026"), "resource library includes the Haidt talk");
 });
 
 test("every claim-bearing gamification room exposes linked sources", () => {

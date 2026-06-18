@@ -53,6 +53,11 @@ test("gamification article route is wired for rendering, metadata, search, prere
   assert.match(prerender, /Attention is now contested/);
   assert.match(prerender, /GAMIFICATION_GAME_LEVELS/);
   assert.match(prerender, /GAMIFICATION_QUEST_SOURCES/);
+  // The Haidt bonus + the PD takeaways/do-tomorrow are baked into the static
+  // (crawler / no-JS) HTML, not just the client overlay.
+  assert.match(prerender, /GAMEFUL_BONUS_VIDEO/);
+  assert.match(prerender, /GAMEFUL_TAKEAWAYS/);
+  assert.match(prerender, /GAMEFUL_DO_TOMORROW/);
 });
 
 test("production CSP allows Phaser image blobs for gamification textures", () => {
@@ -232,6 +237,66 @@ test("gamification room rail is tabbed with classroom guidance", () => {
   assert.match(game, /Copy my loop draft/);
   assert.match(game, /gamification-te-link/);
   assert.match(game, /gamification-bonus-check/);
+});
+
+test("gamification finale unlocks the Haidt watch-and-reflect bonus mission", () => {
+  const overlay = readFileSync("src/pages/educators/gamification/BonusMissionOverlay.jsx", "utf8");
+  const game = readFileSync("src/pages/educators/gamification/GamificationGameExperience.jsx", "utf8");
+  const room = readFileSync("src/pages/educators/gamification/RoomOverlay.jsx", "utf8");
+  const celebration = readFileSync("src/pages/educators/gamification/QuestCelebrationOverlay.jsx", "utf8");
+
+  // The overlay embeds the cited talk by its real id, behind a click-to-load
+  // facade (nothing loads from youtube.com until the user presses play).
+  assert.match(overlay, /GAMEFUL_BONUS_VIDEO/);
+  assert.match(overlay, /<VideoEmbed\s+id=\{video\.id\}/);
+  assert.match(overlay, /className="gamification-bonus-facade"/);
+  assert.match(overlay, /Start the talk/);
+  assert.match(overlay, /playing \? \(\s*<VideoEmbed/);
+
+  // ...and renders the consolidated debrief.
+  assert.match(overlay, /GAMEFUL_TAKEAWAYS/);
+  assert.match(overlay, /GAMEFUL_DO_TOMORROW/);
+  assert.match(overlay, /GAMEFUL_REFLECTION_PROMPTS/);
+  assert.match(overlay, /GAMEFUL_RESOURCE_GROUPS/);
+  assert.match(overlay, /data-testid="gamification-bonus-mission"/);
+
+  // It is a real modal: labelled, escapable, backdrop-dismissable, focus-trapped,
+  // and it restores focus on close.
+  assert.match(overlay, /role="dialog"/);
+  assert.match(overlay, /aria-modal="true"/);
+  assert.match(overlay, /event\.key === "Escape"/);
+  assert.match(overlay, /event\.key !== "Tab"/);
+  assert.match(overlay, /event\.target === event\.currentTarget/);
+  assert.match(overlay, /aria-label="Close the bonus mission"/);
+  assert.match(overlay, /previousFocusRef/);
+
+  // The finale is the unlock point: the room CTA and the finale celebration both
+  // wire their button straight to onOpenBonus, and the background is made inert.
+  assert.match(game, /BonusMissionOverlay/);
+  assert.match(game, /bonusOpen \? \{ inert/);
+  assert.match(room, /gamification-bonus-cta[\s\S]*?onClick=\{onOpenBonus\}/);
+  assert.match(celebration, /onClick=\{onOpenBonus\}[^>]*>\s*Bonus Mission: Watch/);
+});
+
+test("gamification crawlable fallback carries the bonus mission debrief for SEO/no-JS", () => {
+  const page = readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8");
+
+  assert.match(page, /Bonus Mission: Watch and Reflect/);
+  assert.match(page, /GAMEFUL_BONUS_VIDEO/);
+  assert.match(page, /GAMEFUL_TAKEAWAYS/);
+  assert.match(page, /GAMEFUL_DO_TOMORROW/);
+  assert.match(page, /mostly human and\s+analog/);
+  assert.match(page, /counterweight/);
+});
+
+test("gamification teacher kit carries the durable bonus watch-and-reflect debrief", () => {
+  const kit = readFileSync("src/pages/educators/GamificationTeacherKit.jsx", "utf8");
+
+  assert.match(kit, /Bonus: Watch/);
+  assert.match(kit, /GAMEFUL_BONUS_VIDEO/);
+  assert.match(kit, /GAMEFUL_REFLECTION_PROMPTS/);
+  assert.match(kit, /GAMEFUL_TAKEAWAYS/);
+  assert.match(kit, /GAMEFUL_DO_TOMORROW/);
 });
 
 test("gamification quest is cross-linked from the engagement resource", () => {

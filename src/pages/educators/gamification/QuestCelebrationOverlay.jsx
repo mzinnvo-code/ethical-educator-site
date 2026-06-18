@@ -28,6 +28,7 @@ export default function QuestCelebrationOverlay({
   onReplayQuest,
   onNavigateDeepfake,
   onOpenKit,
+  onOpenBonus,
   onExit,
 }) {
   const primaryRef = useRef(null);
@@ -48,7 +49,12 @@ export default function QuestCelebrationOverlay({
     previousFocusRef.current = typeof document !== "undefined" ? document.activeElement : null;
     window.setTimeout(() => primaryRef.current?.focus(), 0);
     return () => {
-      window.setTimeout(() => previousFocusRef.current?.focus?.(), 0);
+      window.setTimeout(() => {
+        // If this overlay is closing to hand off to the bonus mission, let that
+        // modal own focus instead of yanking it back to the prior element.
+        if (typeof document !== "undefined" && document.querySelector('[data-testid="gamification-bonus-mission"]')) return;
+        previousFocusRef.current?.focus?.();
+      }, 0);
     };
   }, []);
 
@@ -276,7 +282,10 @@ export default function QuestCelebrationOverlay({
           <div style={{ display: "flex", gap: 9, justifyContent: "center", flexWrap: "wrap", marginTop: 16 }}>
             {finale ? (
               <>
-                <button ref={primaryRef} type="button" onClick={onOpenKit} style={primaryButtonStyle()}>
+                <button ref={primaryRef} type="button" onClick={onOpenBonus} style={primaryButtonStyle()}>
+                  Bonus Mission: Watch &amp; Reflect
+                </button>
+                <button type="button" onClick={onOpenKit} style={secondaryButtonStyle(C.gold)}>
                   Get the printable Teacher Kit
                 </button>
                 <button type="button" onClick={onNavigateDeepfake} style={secondaryButtonStyle(C.sky)}>

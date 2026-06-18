@@ -3,7 +3,10 @@ import { createPortal } from "react-dom";
 
 import { C } from "../../theme.js";
 import {
+  GAMEFUL_BONUS_VIDEO,
   GAMEFUL_CHARTER,
+  GAMEFUL_DO_TOMORROW,
+  GAMEFUL_TAKEAWAYS,
   GAMIFICATION_GAME_LEVELS,
   GAMIFICATION_QUEST_SOURCES,
   GAMIFICATION_QUEST_STORAGE_KEY,
@@ -105,6 +108,21 @@ function CrawlableQuestFallback() {
       <h2>Gameful Learning Charter</h2>
       <ul>
         {GAMEFUL_CHARTER.map((line) => <li key={line}>{line}</li>)}
+      </ul>
+      <h2>Bonus Mission: Watch and Reflect</h2>
+      <p>
+        After the charter, a bonus mission embeds {GAMEFUL_BONUS_VIDEO.speaker}'s
+        {" "}{GAMEFUL_BONUS_VIDEO.event} talk, "{GAMEFUL_BONUS_VIDEO.title},"
+        as the honest counterweight: gamification done well is mostly human and
+        analog, and a screen should earn its place with evidence.
+      </p>
+      <h2>What you learned</h2>
+      <ul>
+        {GAMEFUL_TAKEAWAYS.map((item) => <li key={item.title}>{item.title}: {item.text}</li>)}
+      </ul>
+      <h2>Do this tomorrow</h2>
+      <ul>
+        {GAMEFUL_DO_TOMORROW.map((line) => <li key={line}>{line}</li>)}
       </ul>
       <h2>Sources</h2>
       <ul>

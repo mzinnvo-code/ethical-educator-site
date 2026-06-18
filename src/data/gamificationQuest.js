@@ -179,6 +179,12 @@ export const GAMIFICATION_QUEST_SOURCES = [
     href: "https://www.theanxiousgeneration.com/",
   },
   {
+    id: "haidt-screens-childhood-2026",
+    label: "TED2026 / Haidt",
+    title: "Jonathan Haidt: How Screens Stole Childhood - and How to Get It Back (three principles of technoskepticism)",
+    href: "https://www.ted.com/talks/jonathan_haidt_how_screens_stole_childhood_and_how_to_get_it_back",
+  },
+  {
     id: "odgers-nature",
     label: "Nature",
     title: "Candice Odgers on evidence limits in youth-tech claims",
@@ -259,6 +265,85 @@ export const GAMEFUL_CHARTER = [
   "Reflection: ask students to name the habit they just practiced.",
   "Reward: recognize the learning move, not mere completion.",
   "AI assist: draft the loop faster, then audit the pedagogy, sources, age fit, and depth.",
+];
+
+// Bonus Mission: a Jonathan Haidt TED2026 talk the educator watches and reflects
+// on after the charter, plus the consolidated "left a real PD" debrief. The talk
+// is the honest counterweight — gamification done well is mostly human and analog,
+// not a reason to add screens.
+export const GAMEFUL_BONUS_VIDEO = {
+  id: "DH9L7vJ03DE",
+  title: "How Screens Stole Childhood - and How to Get It Back",
+  speaker: "Jonathan Haidt",
+  event: "TED2026",
+  durationLabel: "a short talk",
+  sourceId: "haidt-screens-childhood-2026",
+  framing:
+    "You just learned to design screen-light, thinking-centered learning loops. Jonathan Haidt argues schools should prioritize people and books over screens. Watch the talk, then reconcile the two: the strongest gameful design is mostly human and analog, and a screen should earn its place with evidence.",
+};
+
+export const GAMEFUL_REFLECTION_PROMPTS = [
+  "Where does \"reward the cognitive move\" agree with Haidt's call to prioritize people and books?",
+  "Name one screen-based activity in your week. Would a person, a book, or a paper loop teach it better?",
+  "When is a gamified screen the wrong tool - and what would you reach for instead?",
+];
+
+// The "What you learned" synthesis: one crisp claim per idea the quest taught,
+// each carrying the good, the caution, and the not-a-panacea honesty.
+export const GAMEFUL_TAKEAWAYS = [
+  {
+    title: "Gamification is a loop, not a points system",
+    text: "The real unit is a learning loop - hook, choice, feedback, replay, reflection - that protects hard thinking. Points and badges are optional surface, not the substance.",
+  },
+  {
+    title: "The problem is the attention environment, not broken brains",
+    text: "Students can still focus. Faster rewards, constant novelty, and easy escape make slow work easier to abandon, so design for those conditions instead of blaming a generation.",
+  },
+  {
+    title: "Curiosity first, concept second",
+    text: "Earn the first look with a prediction, puzzle, or reveal, then attach the rigorous idea while the mind is already leaning forward.",
+  },
+  {
+    title: "Reward the cognitive move, never compliance",
+    text: "Tune every reward against autonomy, competence, and relatedness (Self-Determination Theory). Recognize verifying, revising, and steelmanning - not seat time or speed.",
+  },
+  {
+    title: "The evidence is promising but conditional",
+    text: "Meta-analyses show positive but modest average effects with wide variation. Design quality decides whether a mechanic deepens learning, so pilot one move and watch for real reasoning.",
+  },
+  {
+    title: "Know the failure modes",
+    text: "Beware the over-justification effect (paying for what students already love), public leaderboards that demoralize, badge inflation, and manipulative dark patterns. Keep progress private.",
+  },
+  {
+    title: "Gamification is not a reason to add screens",
+    text: "Haidt's technoskepticism: prioritize people and books, protect developing brains, and beware artificial relationships for minors. The strongest gameful design is mostly analog - add a screen only with evidence.",
+  },
+  {
+    title: "AI can help - with guardrails",
+    text: "Use a district-approved tool to draft a loop faster from de-identified materials, then audit pedagogy, sources, age fit, privacy, and depth before it reaches students.",
+  },
+];
+
+// "Do this tomorrow": concrete moves a teacher can run in their next class.
+export const GAMEFUL_DO_TOMORROW = [
+  "Pick one lesson and find the moment students drift, rush, or give up. Build a ten-minute loop around it.",
+  "Open with a prediction, puzzle, or reveal before you give the definition.",
+  "Replace one compliance reward with one that names a thinking habit - Source Checker, Steelman, Revised-with-Evidence.",
+  "Make progress visible but private. Drop any public ranking.",
+  "Pilot one mechanic and choose one observable evidence of learning to watch for.",
+  "Audit your mechanics: if one does not make reasoning, revision, evidence use, or transfer more visible, cut it.",
+  "Choose one screen-based activity and decide whether a person, a book, or an analog loop would teach it better.",
+];
+
+// "Keep learning": the full source library, grouped so an educator knows where
+// to go next on each thread.
+export const GAMEFUL_RESOURCE_GROUPS = [
+  { label: "Attention & the science of focus", sourceIds: ["willingham-attention", "kcl-attention", "anxious-generation", "haidt-screens-childhood-2026", "odgers-nature"] },
+  { label: "Motivation that lasts", sourceIds: ["self-determination-theory"] },
+  { label: "What the gamification research shows", sourceIds: ["frontiers-gamification-2023", "springer-motivation-2024"] },
+  { label: "Curiosity in practice", sourceIds: ["ted-rober-2026", "nsta-rober-2026", "class-crunchlabs"] },
+  { label: "Using AI responsibly", sourceIds: ["teachai-guidance-toolkit"] },
 ];
 
 const option = (id, label, correct, feedback) => ({ id, label, correct, feedback });
@@ -365,7 +450,7 @@ export const GAMIFICATION_GAME_ROOMS = [
       "Teachers can work inside that tension. We do not have to settle the entire youth-technology debate before improving the conditions for attention in one lesson.",
       "Gameful design is one lever teachers control. It gives the academic task a reason to continue, especially when the reward is attached to evidence checking, revision, or better explanation.",
     ],
-    sourceIds: ["willingham-attention", "kcl-attention", "anxious-generation", "odgers-nature"],
+    sourceIds: ["willingham-attention", "kcl-attention", "anxious-generation", "haidt-screens-childhood-2026", "odgers-nature"],
     challenge: {
       id: "attention-reframe",
       title: "Reframe the Claim",
