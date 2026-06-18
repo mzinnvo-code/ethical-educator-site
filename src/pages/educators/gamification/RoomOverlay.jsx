@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { C } from "../../../theme.js";
 import {
+  GAMEFUL_BONUS_VIDEO,
   GAMEFUL_CHARTER,
   GAMIFICATION_GAME_ROOMS,
   GAMIFICATION_PHASER_ASSETS,
@@ -482,6 +483,7 @@ export default function RoomOverlay({
   onSetGradeBand,
   onNavigateDeepfake,
   onReplayCelebration,
+  onOpenBonus,
   navigate,
 }) {
   const dialogue = room.dialogueBeats || [];
@@ -585,6 +587,15 @@ export default function RoomOverlay({
             )}
             {room.id === "finale" && complete && (
               <TrophyCase onReplayCelebration={onReplayCelebration} navigate={navigate} />
+            )}
+            {room.id === "finale" && complete && (
+              <div className="gamification-bonus-cta" data-testid="gamification-bonus-cta">
+                <p className="gamification-rail-label">Bonus Mission</p>
+                <p>One honest counterweight before you go: watch {GAMEFUL_BONUS_VIDEO.speaker}&apos;s TED talk, then collect your takeaways, do-tomorrow moves, and the full resource list.</p>
+                <button type="button" className="gamification-primary-action" onClick={onOpenBonus}>
+                  Watch &amp; Reflect — open the debrief
+                </button>
+              </div>
             )}
             {room.charter && complete && (
               <div className="gamification-charter-card">

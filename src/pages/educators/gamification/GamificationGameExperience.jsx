@@ -16,6 +16,7 @@ import QuestCelebrationOverlay from "./QuestCelebrationOverlay.jsx";
 import QuestHud from "./QuestHud.jsx";
 import QuestLoadingScreen from "./QuestLoadingScreen.jsx";
 import RoomOverlay from "./RoomOverlay.jsx";
+import BonusMissionOverlay from "./BonusMissionOverlay.jsx";
 
 const LOADER_MIN_VISIBLE_MS = 400;
 const LOADER_FADE_MS = 280;
@@ -314,6 +315,7 @@ export default function GamificationGameExperience({
   const [ariTalking, setAriTalking] = useState(false);
   const [tickerDimmed, setTickerDimmed] = useState(false);
   const [celebration, setCelebration] = useState(null);
+  const [bonusOpen, setBonusOpen] = useState(false);
   const [saveToast, setSaveToast] = useState(false);
   const travelFallbackRef = useRef(null);
   const tickerDimTimerRef = useRef(null);
@@ -477,6 +479,12 @@ export default function GamificationGameExperience({
     navigate?.("thought-experiments/6-8?experiment=deepfake-election");
   };
 
+  const handleOpenBonus = useCallback(() => {
+    trackQuestEvent("quest_bonus_open", { placement: "finale" });
+    playQuestSound("unlock", progress.soundMuted);
+    setBonusOpen(true);
+  }, [progress.soundMuted]);
+
   const advanceDialogue = useCallback(() => {
     if (!dialogueCompleteRef.current) {
       setForceReveal(true);
@@ -549,6 +557,7 @@ export default function GamificationGameExperience({
         ref={stageWrapRef}
         className="gamification-stage-wrap"
         onPointerDownCapture={handleStagePointerDown}
+        {...(bonusOpen ? { inert: "" } : {})}
       >
         <GamificationPhaserGame
           room={room}
@@ -613,6 +622,7 @@ export default function GamificationGameExperience({
             onSetGradeBand={setGradeBand}
             onNavigateDeepfake={handleNavigateDeepfake}
             onReplayCelebration={() => setCelebration({ variant: "finale", fresh: false })}
+            onOpenBonus={handleOpenBonus}
             navigate={navigate}
           />
         )}
@@ -653,12 +663,21 @@ export default function GamificationGameExperience({
             trackQuestEvent("quest_kit_open", { placement: "finale" });
             navigate?.("gamification-teacher-kit");
           }}
+          onOpenBonus={() => {
+            closeCelebration();
+            handleOpenBonus();
+          }}
           onExit={() => {
             closeCelebration();
             onExit?.();
           }}
         />
       )}
+      <BonusMissionOverlay
+        open={bonusOpen}
+        muted={progress.soundMuted}
+        onClose={() => setBonusOpen(false)}
+      />
     </section>
   );
 }

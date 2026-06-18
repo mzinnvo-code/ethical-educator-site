@@ -3,16 +3,22 @@ import { useEffect } from "react";
 import { C } from "../../theme.js";
 import { PageContainer, Narrow } from "../../components/shared.jsx";
 import {
+  GAMEFUL_BONUS_VIDEO,
   GAMEFUL_CHARTER,
+  GAMEFUL_DO_TOMORROW,
+  GAMEFUL_REFLECTION_PROMPTS,
   GAMEFUL_RULES,
+  GAMEFUL_TAKEAWAYS,
   GAMIFICATION_GAME_ROOMS,
   GAMIFICATION_QUEST_SOURCES,
+  source,
 } from "../../data/gamificationQuest.js";
 import { trackQuestEvent } from "./gamification/questAnalytics.js";
 
 const aiRoom = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "ai-lesson-forge");
 const evidenceRoom = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "evidence-lab");
 const workshopRoom = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "teacher-workshop");
+const bonusSource = source(GAMEFUL_BONUS_VIDEO.sourceId);
 
 const GRADE_BAND_LABELS = { "k-2": "K–2", "3-5": "3–5", "6-8": "6–8", "9-12": "9–12" };
 
@@ -104,6 +110,34 @@ export default function GamificationTeacherKit({ navigate }) {
           <KitCard eyebrow="The whole course on one card" title="Gameful Learning Charter">
             <ol style={{ ...bodyStyle, margin: 0, paddingLeft: 20, display: "grid", gap: 6 }}>
               {GAMEFUL_CHARTER.map((line) => <li key={line}>{line}</li>)}
+            </ol>
+          </KitCard>
+
+          <KitCard eyebrow="The honest counterweight" title="Bonus: Watch &amp; Reflect" accent={C.teal}>
+            <p style={{ ...bodyStyle, marginTop: 0 }}>{GAMEFUL_BONUS_VIDEO.framing}</p>
+            <p style={bodyStyle}>
+              <strong style={{ color: C.textPrimary }}>Watch:</strong>{" "}
+              {bonusSource ? (
+                <a href={bonusSource.href} target="_blank" rel="noreferrer" style={{ color: C.gold }}>
+                  {GAMEFUL_BONUS_VIDEO.speaker}: {GAMEFUL_BONUS_VIDEO.title} ({GAMEFUL_BONUS_VIDEO.event})
+                </a>
+              ) : (
+                `${GAMEFUL_BONUS_VIDEO.speaker}: ${GAMEFUL_BONUS_VIDEO.title}`
+              )}
+            </p>
+            <p style={{ ...bodyStyle, color: C.textPrimary, fontWeight: 800, margin: "10px 0 4px" }}>Reflect</p>
+            <ol style={{ ...bodyStyle, margin: 0, paddingLeft: 20, display: "grid", gap: 5, fontSize: "0.86rem" }}>
+              {GAMEFUL_REFLECTION_PROMPTS.map((line) => <li key={line}>{line}</li>)}
+            </ol>
+            <p style={{ ...bodyStyle, color: C.textPrimary, fontWeight: 800, margin: "12px 0 4px" }}>What you learned</p>
+            <ul style={{ ...bodyStyle, margin: 0, paddingLeft: 20, display: "grid", gap: 5, fontSize: "0.84rem" }}>
+              {GAMEFUL_TAKEAWAYS.map((item) => (
+                <li key={item.title}><strong style={{ color: C.textPrimary }}>{item.title}.</strong> {item.text}</li>
+              ))}
+            </ul>
+            <p style={{ ...bodyStyle, color: C.textPrimary, fontWeight: 800, margin: "12px 0 4px" }}>Do this tomorrow</p>
+            <ol style={{ ...bodyStyle, margin: 0, paddingLeft: 20, display: "grid", gap: 5, fontSize: "0.86rem" }}>
+              {GAMEFUL_DO_TOMORROW.map((line) => <li key={line}>{line}</li>)}
             </ol>
           </KitCard>
 
