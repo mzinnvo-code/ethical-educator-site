@@ -214,6 +214,24 @@ export const GAMIFICATION_QUEST_SOURCES = [
     title: "Guidance for schools using AI responsibly",
     href: "https://www.teachai.org/toolkit",
   },
+  {
+    id: "bigthink-brain-games",
+    label: "Big Think / Le Cunff",
+    title: "Anne-Laure Le Cunff: Why your brain loves games - and how to use that to your advantage",
+    href: "https://bigthink.com/mind-behavior/why-your-brain-loves-games-and-how-to-use-that-to-your-advantage/",
+  },
+  {
+    id: "goal-gradient-kivetz",
+    label: "Goal-gradient (Kivetz 2006)",
+    title: "The goal-gradient hypothesis: people push harder as a reward looks closer (Hull 1932; Kivetz, Urminsky & Zheng 2006)",
+    href: "https://journals.sagepub.com/doi/abs/10.1509/jmkr.43.1.39",
+  },
+  {
+    id: "dopamine-reward-prediction",
+    label: "PNAS / dopamine",
+    title: "Understanding dopamine and reinforcement learning: the dopamine reward-prediction-error hypothesis (Schultz; cf. Berridge on wanting vs. liking)",
+    href: "https://www.pnas.org/doi/10.1073/pnas.1014269108",
+  },
 ];
 
 export const source = (id) => GAMIFICATION_QUEST_SOURCES.find((item) => item.id === id);
@@ -304,6 +322,10 @@ export const GAMEFUL_TAKEAWAYS = [
     text: "Earn the first look with a prediction, puzzle, or reveal, then attach the rigorous idea while the mind is already leaning forward.",
   },
   {
+    title: "Games tap the brain's seeking system",
+    text: "Dopamine signals anticipation and wanting, not pleasure itself (Schultz; Berridge); visible progress works through the goal-gradient effect; and safe failure quiets avoidance. The same machinery runs slot machines, so use it to deepen thinking - never to manufacture compulsion.",
+  },
+  {
     title: "Reward the cognitive move, never compliance",
     text: "Tune every reward against autonomy, competence, and relatedness (Self-Determination Theory). Recognize verifying, revising, and steelmanning - not seat time or speed.",
   },
@@ -331,6 +353,7 @@ export const GAMEFUL_DO_TOMORROW = [
   "Open with a prediction, puzzle, or reveal before you give the definition.",
   "Replace one compliance reward with one that names a thinking habit - Source Checker, Steelman, Revised-with-Evidence.",
   "Make progress visible but private. Drop any public ranking.",
+  "Make the next step feel close, not just visible (the goal-gradient effect): surface one small milestone at a time, and keep any social or competitive layer opt-in.",
   "Pilot one mechanic and choose one observable evidence of learning to watch for.",
   "Audit your mechanics: if one does not make reasoning, revision, evidence use, or transfer more visible, cut it.",
   "Choose one screen-based activity and decide whether a person, a book, or an analog loop would teach it better.",
@@ -340,6 +363,7 @@ export const GAMEFUL_DO_TOMORROW = [
 // to go next on each thread.
 export const GAMEFUL_RESOURCE_GROUPS = [
   { label: "Attention & the science of focus", sourceIds: ["willingham-attention", "kcl-attention", "anxious-generation", "haidt-screens-childhood-2026", "odgers-nature"] },
+  { label: "Why the brain loves games", sourceIds: ["bigthink-brain-games", "goal-gradient-kivetz", "dopamine-reward-prediction", "self-determination-theory"] },
   { label: "Motivation that lasts", sourceIds: ["self-determination-theory"] },
   { label: "What the gamification research shows", sourceIds: ["frontiers-gamification-2023", "springer-motivation-2024"] },
   { label: "Curiosity in practice", sourceIds: ["ted-rober-2026", "nsta-rober-2026", "class-crunchlabs"] },
@@ -394,10 +418,11 @@ export const GAMIFICATION_GAME_ROOMS = [
       "Students have not simply lost attention biologically. The environment around attention has changed, and the learning environment now competes with faster rewards, constant novelty, notifications, and easier escape.",
       "That matters because school often asks students to stay with slower payoffs: rereading a source, revising a claim, testing an assumption, or sitting with an uncomfortable dilemma.",
       "The classroom response should not be panic or pure entertainment. It should be design: give effort a visible loop so students can feel progress while the thinking is still hard.",
+      "There is a name for why a visible loop helps: the goal-gradient effect. People push harder as a goal looks closer - first shown in Clark Hull's 1932 rats, confirmed in humans by Kivetz's 2006 reward-card studies. A visible loop turns a far, vague task into a near, concrete one.",
       "A strong learning loop has a rhythm teachers can build: try a move, get feedback, revise the move, and name the habit that made the work stronger.",
       "Before adding points or badges, name the thinking move students should persist through. The game layer should protect that move, not distract from it.",
     ],
-    sourceIds: ["willingham-attention", "kcl-attention", "self-determination-theory"],
+    sourceIds: ["willingham-attention", "kcl-attention", "self-determination-theory", "goal-gradient-kivetz"],
     challenge: {
       id: "upshot-name",
       title: "Name the Stakes",
@@ -428,7 +453,7 @@ export const GAMIFICATION_GAME_ROOMS = [
     },
     metacognition: {
       roomMoment: "Notice how this quest opened: a locked door you had to knock on. That was a hook earning the first minute before any definitions arrived — the exact move this stop teaches.",
-      badgeMoment: "The badge you just earned names a lens, not a completion. That wording choice is the lesson: rewards teach students what a classroom values.",
+      badgeMoment: "The badge you just earned names a lens, not a completion. That wording choice is the lesson: rewards teach students what a classroom values. And watch the progress bar in your own HUD - feeling the finish get closer is the goal-gradient effect working on you right now.",
     },
   },
   {
@@ -489,13 +514,14 @@ export const GAMIFICATION_GAME_ROOMS = [
     summary: "The hook is not the lesson. The hook is the door that makes the lesson feel worth entering.",
     dialogueBeats: [
       "A hook should create a need to know, not a detour. Start with a prediction, puzzle, build, dilemma, or reveal that makes the formal idea feel necessary.",
+      "Underneath, a hook is neuroscience. Curiosity runs on the brain's seeking system, and dopamine is its signal - less the chemistry of pleasure than of anticipation and wanting (Wolfram Schultz on reward prediction; Kent Berridge separated wanting from liking). A good hook opens a gap between what students expect and what they meet, and the brain leans in to close it.",
       "A Mark Rober-style reveal is useful here as one example: spectacle earns the first look, but the teaching move is attaching the concept before the spark fades.",
       "That is the classroom version of hiding the vegetables. The learning is still there; it arrives while the mind is already leaning forward.",
       "For teachers, the key question is not whether the opening is flashy. The question is whether the opening creates a genuine reason to ask for the explanation.",
       "A curiosity hook buys the first minute. The lesson earns the next ten by making the vocabulary, model, source, or procedure answer something students now care about.",
       "Use the hook as a doorway. Once students step through it, bring them quickly to the idea, evidence, and practice that make the lesson worth the attention it just earned.",
     ],
-    sourceIds: ["ted-rober-2026", "nsta-rober-2026", "class-crunchlabs", "self-determination-theory"],
+    sourceIds: ["ted-rober-2026", "nsta-rober-2026", "class-crunchlabs", "self-determination-theory", "dopamine-reward-prediction", "bigthink-brain-games"],
     challenge: {
       id: "curiosity-hook-build",
       title: "Build the Hook",
@@ -510,6 +536,14 @@ export const GAMIFICATION_GAME_ROOMS = [
     badge: { id: "curiosity-hook", label: "Hook Builder", habit: "Use curiosity as the doorway to the concept.", icon: `${ROOT}/badge-icon-curiosity-hook.webp` },
     teacherTransfer: "Add one mystery, prediction, or reveal to a lesson opening without watering down the target.",
     completionAction: "Return to the Journey Path and unlock the Motivation Engine.",
+    keyDistinction: {
+      title: "Wanting vs. liking - the dopamine a hook taps",
+      items: [
+        { term: "Wanting (dopamine)", definition: "The seeking, anticipating, leaning-in drive. A hook spikes it by opening a gap between what a student expects and what they see - a reward-prediction error." },
+        { term: "Liking (pleasure)", definition: "The satisfaction of the payoff itself, carried by different circuitry. Dopamine fuels the chase more than the enjoyment." },
+      ],
+      note: "Popular write-ups (e.g. Big Think's \"why your brain loves games\") flatten this to \"dopamine isn't pleasure\" - a useful correction that overshoots. The honest version: dopamine is mostly about anticipation and learning, and a hook works by making something worth anticipating.",
+    },
     gradeBands: {
       "k-2": "Use a mystery box or a wordless picture walk: let students guess before the story confirms, then name the guessing as making predictions like readers do.",
       "3-5": "Open math with a wrong answer already on the board and ask what went sideways; the error is a reveal that makes the procedure feel necessary.",
@@ -517,7 +551,7 @@ export const GAMIFICATION_GAME_ROOMS = [
       "9-12": "Lead with a live demo, dataset, or case verdict and have students commit to a position before the framework arrives; the framework then settles a bet they already placed.",
     },
     metacognition: {
-      roomMoment: "You traveled a map to reach this room instead of scrolling to a heading. The journey is a hook: it costs a few seconds and buys a sense of arrival.",
+      roomMoment: "You traveled a map and knocked to reach this room instead of scrolling to a heading. That small delay opened a gap your brain wanted to close - the seeking system this stop teaches, used on you.",
       badgeMoment: "Hook Builder rewards an opening move you chose, not time you spent — autonomy plus competence, the pair this quest keeps returning to.",
     },
   },
@@ -541,10 +575,11 @@ export const GAMIFICATION_GAME_ROOMS = [
       "Now the caution, because rewards genuinely can backfire. Motivation research describes an overjustification effect: rewarding something students already love can quietly replace the love with the price.",
       "Public competition has its own risks. A class-visible ranking can light up the top five and teach everyone else that effort is hopeless; the same data kept private reads as a personal growth map.",
       "Watch for badge inflation and system-gaming too. When everything earns a token, tokens stop meaning anything, and clever students will optimize for the reward instead of the thinking it was meant to honor.",
+      "The most powerful and most dangerous pattern is the variable one. Unpredictable, intermittent rewards - the slot-machine schedule B.F. Skinner mapped - are the most habit-forming because they keep dopamine guessing. Popular advice says \"add randomness\" to motivate; that is exactly the lever loot boxes and infinite feeds pull, so reach for it rarely and never to manufacture compulsion.",
       "None of this argues against rewards. It argues for tuned ones: tied to a habit, rare enough to mean something, private by default, and always traceable back to the work.",
       "Design the reward backward from the intellectual habit. If the habit is not visible in the badge language, the badge is probably managing behavior instead of strengthening learning.",
     ],
-    sourceIds: ["self-determination-theory", "springer-motivation-2024"],
+    sourceIds: ["self-determination-theory", "springer-motivation-2024", "dopamine-reward-prediction", "bigthink-brain-games"],
     challenge: {
       id: "badge-tuning",
       title: "Tune the Badge",
@@ -566,6 +601,7 @@ export const GAMIFICATION_GAME_ROOMS = [
         { id: "public-ranking", risk: "Public ranking harm", text: "Class-visible standings motivate the top and quietly defeat the middle and bottom. Keep progress private by default." },
         { id: "badge-inflation", risk: "Badge inflation", text: "If every action earns a token, no token means anything. Scarcity is part of the signal." },
         { id: "gaming-the-system", risk: "Gaming the system", text: "Students optimize what you measure. If the badge counts clicks, you will get clicks; make the measured thing the thinking move itself." },
+        { id: "variable-reward", risk: "Variable-reward (slot-machine) design", text: "Random, unpredictable rewards are the most habit-forming - the engine behind loot boxes and infinite feeds. Keep classroom rewards predictable and tied to the thinking, not surprise drops engineered for compulsion." },
       ],
     },
     bonusCheck: {
@@ -585,7 +621,7 @@ export const GAMIFICATION_GAME_ROOMS = [
     },
     metacognition: {
       roomMoment: "Check your own pull right now: is it the badge art, or the satisfaction of choosing well? Both are fine — the design question is which one the classroom version would feed.",
-      badgeMoment: "Motivation Tuner arrived after a real choice with real feedback — autonomy and competence in one move. A seat-time badge could never feel like this.",
+      badgeMoment: "Motivation Tuner arrived after a real choice with real feedback — autonomy and competence in one move. A seat-time badge could never feel like this. Notice, too, what this quest refuses to use: no loot boxes, no random drops, no public ranking — the variable-reward levers it just warned you about.",
     },
   },
   {
@@ -720,12 +756,13 @@ export const GAMIFICATION_GAME_ROOMS = [
     dialogueBeats: [
       "You do not need a full game to teach gamefully. Choose one lesson you already teach and find the moment where students usually drift, rush, or give up.",
       "Build a small loop around that moment: a hook that earns attention, a real choice, quick feedback, a replay chance, and a reflection that names the skill.",
+      "The replay is the part that changes behavior, and the reason is psychological: replay makes failure safe enough to re-enter, so the brain stops treating the task as a threat to avoid. But \"safe\" is individual - failing in front of the class is not safe for everyone, so make replay private and low-stakes by default.",
       "The loop should be small enough to run tomorrow. A ten-minute redesign is often better than a huge unit game that never leaves the planning folder.",
       "Use the six design cards as an audit. If a mechanic does not make reasoning, revision, evidence use, or transfer more visible, it is decoration.",
       "Teachers can also make progress private by default. Students need to see their own growth without being turned into a public ranking.",
       "The workshop move is practical: edit one lesson, test one loop, and listen for whether students can describe the habit they practiced.",
     ],
-    sourceIds: ["self-determination-theory", "frontiers-gamification-2023"],
+    sourceIds: ["self-determination-theory", "frontiers-gamification-2023", "bigthink-brain-games"],
     workshopCards: GAMEFUL_RULES,
     challenge: {
       id: "workshop-card",
@@ -817,9 +854,10 @@ export const GAMIFICATION_GAME_ROOMS = [
       "Ari's Goal Tracker can reward habits that belong in a classroom: finish the dilemma, verify before choosing, try another lens, save a reflection, or write a steelman.",
       "That kind of progress changes the meaning of a badge. The reward is not status; the reward is language for thinking students are learning to recognize.",
       "A private tracker also protects autonomy and dignity. Students can see growth without the class becoming a ranking system.",
+      "Popular gamification advice says the opposite - make progress public, post a class ranking, turn it social to drive motivation (Big Think's \"why your brain loves games\" lists going social as a top move). That lifts the students already winning and quietly defeats the ones who most need to stay in. The article skips equity; we put it first. Default to private, and make any social or competitive layer opt-in.",
       "Before counting anything, name the habits. If students can say what they practiced, the progress map is doing real instructional work.",
     ],
-    sourceIds: ["self-determination-theory", "springer-motivation-2024"],
+    sourceIds: ["self-determination-theory", "springer-motivation-2024", "bigthink-brain-games"],
     challenge: {
       id: "progress-map",
       title: "Name the Habit",
@@ -846,7 +884,7 @@ export const GAMIFICATION_GAME_ROOMS = [
       "9-12": "Invite students to design the habit categories for the next unit; ownership of the map is the deepest autonomy support.",
     },
     metacognition: {
-      roomMoment: "Your badge collection on this site lives only in this browser — private by design. You have been experiencing the dignity argument this room makes.",
+      roomMoment: "Your badge collection on this site lives only in this browser — private by design, the opposite of the \"make it public\" advice. You have been experiencing the dignity argument this room makes.",
       badgeMoment: "Progress Cartographer is the quiet badge: it names the difference between a map you own and a ranking you are subjected to.",
     },
   },

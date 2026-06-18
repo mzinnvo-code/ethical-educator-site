@@ -161,6 +161,9 @@ test("gamification quest includes every planned source as an https citation", ()
     "frontiers-gamification-2023",
     "springer-motivation-2024",
     "teachai-guidance-toolkit",
+    "bigthink-brain-games",
+    "goal-gradient-kivetz",
+    "dopamine-reward-prediction",
   ];
 
   for (const id of expectedSourceIds) {
@@ -464,7 +467,7 @@ test("gamification curriculum covers distinctions, pitfalls, evidence, and a blu
 
   const motivation = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "motivation-engine");
   assert.match(JSON.stringify(motivation), /overjustification/i);
-  assert.equal(motivation.cautionCard.items.length, 4);
+  assert.equal(motivation.cautionCard.items.length, 5);
   assert.ok(motivation.bonusCheck.options.some((option) => option.correct), "bonus check needs a correct option");
 
   const evidence = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "evidence-lab");
@@ -487,6 +490,41 @@ test("gamification curriculum covers distinctions, pitfalls, evidence, and a blu
 
   const examined = GAMIFICATION_GAME_ROOMS.find((room) => room.id === "examined-model");
   assert.equal(examined.thoughtExperimentsLink.route, "thought-experiments");
+});
+
+test("gamification quest integrates the brain-science of motivation", () => {
+  const room = (id) => GAMIFICATION_GAME_ROOMS.find((item) => item.id === id);
+
+  // Visible progress is named as the goal-gradient effect and cited.
+  const upshot = room("upshot");
+  assert.match(upshot.dialogueBeats.join(" "), /goal-gradient/i);
+  assert.ok(upshot.sourceIds.includes("goal-gradient-kivetz"), "upshot cites the goal-gradient research");
+
+  // The hook is grounded in dopamine/seeking with the wanting-vs-liking nuance.
+  const curiosity = room("curiosity-hook");
+  assert.match(JSON.stringify(curiosity), /seeking system/i);
+  assert.match(JSON.stringify(curiosity.keyDistinction), /wanting/i);
+  assert.match(JSON.stringify(curiosity.keyDistinction), /liking/i);
+  assert.ok(curiosity.sourceIds.includes("dopamine-reward-prediction"), "curiosity cites the dopamine research");
+
+  // Variable-ratio reinforcement is the named dual-use dark pattern.
+  const motivation = room("motivation-engine");
+  assert.match(JSON.stringify(motivation), /variable-reward|slot-machine|intermittent/i);
+  assert.ok(motivation.cautionCard.items.some((item) => /variable/i.test(item.risk)), "caution card names the variable-reward pattern");
+
+  // The popular "make it public" advice is engaged as an equity tension.
+  const examined = room("examined-model");
+  assert.match(examined.dialogueBeats.join(" "), /make progress public/i);
+  assert.match(examined.dialogueBeats.join(" "), /equity/i);
+
+  // The Big Think article is cited and lives in the bonus resource library.
+  assert.ok(GAMIFICATION_QUEST_SOURCES.some((s) => s.id === "bigthink-brain-games"), "the article is a cited source");
+  const groupedIds = GAMEFUL_RESOURCE_GROUPS.flatMap((g) => g.sourceIds);
+  assert.ok(groupedIds.includes("bigthink-brain-games"), "the article is in the resource library");
+  assert.ok(
+    groupedIds.includes("goal-gradient-kivetz") && groupedIds.includes("dopamine-reward-prediction"),
+    "brain-science sources are grouped",
+  );
 });
 
 test("gamification declares the sound cues used by the polished game loop", () => {
