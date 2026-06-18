@@ -22,6 +22,8 @@ import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
+import { GAMIFICATION_GAME_ROOMS } from "../src/data/gamificationQuest.js";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(__dirname, "..");
 const MANIFEST_PATH = resolve(REPO, "src/data/gamificationAudioManifest.json");
@@ -30,6 +32,32 @@ const PUBLIC_PREFIX = "/audio/gamification";
 
 const SFX_URL = "https://api.elevenlabs.io/v1/sound-generation";
 const MUSIC_URL = "https://api.elevenlabs.io/v1/music";
+
+// Ari voiceover narration (text-to-speech). One clip per dialogue beat, derived
+// from GAMIFICATION_GAME_ROOMS so the audio can never drift from the copy.
+// Voice "Sarah" (warm, clear, upbeat teacher); resolved by name at runtime with
+// a premade-id fallback so a renamed/missing voice never silently picks wrong.
+const TTS_BASE = "https://api.elevenlabs.io/v1/text-to-speech";
+const VOICES_URL = "https://api.elevenlabs.io/v1/voices";
+const NARRATION_VOICE_NAME = "Sarah";
+const NARRATION_FALLBACK_VOICE_ID = "EXAVITQu4vr4xnSDxMaL"; // ElevenLabs premade "Sarah"
+const NARRATION_MODEL_ID = "eleven_multilingual_v2";
+const NARRATION_OUTPUT_FORMAT = "mp3_44100_128";
+const NARRATION_VOICE_SETTINGS = { stability: 0.45, similarity_boost: 0.8, style: 0.3, use_speaker_boost: true };
+// Folded into the cache hash so changing the voice/model/settings re-renders.
+const NARRATION_FINGERPRINT = `${NARRATION_VOICE_NAME}:${NARRATION_MODEL_ID}:${NARRATION_OUTPUT_FORMAT}:${JSON.stringify(NARRATION_VOICE_SETTINGS)}`;
+
+// One TTS clip per dialogue beat of every playable room.
+export function narrationCatalog() {
+  const items = [];
+  for (const room of GAMIFICATION_GAME_ROOMS) {
+    if (room.kind === "home") continue;
+    (room.dialogueBeats || []).forEach((text, index) => {
+      items.push({ id: `narration-${room.id}-${index}`, kind: "narration", text });
+    });
+  }
+  return items;
+}
 
 // One entry per sampled cue. Keep ids in sync with SAMPLE_BY_CUE in
 // src/pages/educators/gamification/questAudio.js. dialogue-tick and
@@ -54,10 +82,35 @@ export const GAMIFICATION_AUDIO_CATALOG = [
 ];
 
 export function catalogHash(entry) {
+  const payload = entry.kind === "narration"
+    ? { id: entry.id, kind: entry.kind, text: entry.text, voice: NARRATION_FINGERPRINT }
+    : { id: entry.id, prompt: entry.prompt, seconds: entry.seconds, kind: entry.kind };
   return createHash("sha256")
-    .update(JSON.stringify({ id: entry.id, prompt: entry.prompt, seconds: entry.seconds, kind: entry.kind }))
+    .update(JSON.stringify(payload))
     .digest("hex")
     .slice(0, 16);
+}
+
+// Resolve the narration voice id by name (handles premade + custom voices on the
+// account); fall back to the known premade id so we never generate with the wrong voice.
+async function resolveVoiceId(apiKey) {
+  try {
+    const res = await fetch(VOICES_URL, { headers: { "xi-api-key": apiKey, Accept: "application/json" } });
+    if (res.ok) {
+      const data = await res.json();
+      const match = (data.voices || []).find((v) => (v.name || "").toLowerCase() === NARRATION_VOICE_NAME.toLowerCase());
+      if (match?.voice_id) {
+        console.log(`  resolved narration voice "${NARRATION_VOICE_NAME}" -> ${match.voice_id}`);
+        return match.voice_id;
+      }
+      console.warn(`  voice "${NARRATION_VOICE_NAME}" not found on account; using fallback id ${NARRATION_FALLBACK_VOICE_ID}`);
+    } else {
+      console.warn(`  /v1/voices returned ${res.status}; using fallback voice id`);
+    }
+  } catch (err) {
+    console.warn(`  voice lookup failed (${err.message}); using fallback voice id`);
+  }
+  return NARRATION_FALLBACK_VOICE_ID;
 }
 
 function parseArgs(argv) {
@@ -78,12 +131,19 @@ async function readManifest() {
   }
 }
 
-async function requestAudio(entry, apiKey) {
-  const isMusic = entry.kind === "music";
-  const url = isMusic ? MUSIC_URL : SFX_URL;
-  const body = isMusic
-    ? JSON.stringify({ prompt: entry.prompt, music_length_ms: Math.round(entry.seconds * 1000) })
-    : JSON.stringify({ text: entry.prompt, duration_seconds: entry.seconds, prompt_influence: 0.35 });
+async function requestAudio(entry, apiKey, voiceId) {
+  let url;
+  let body;
+  if (entry.kind === "narration") {
+    url = `${TTS_BASE}/${voiceId}?output_format=${NARRATION_OUTPUT_FORMAT}`;
+    body = JSON.stringify({ text: entry.text, model_id: NARRATION_MODEL_ID, voice_settings: NARRATION_VOICE_SETTINGS });
+  } else if (entry.kind === "music") {
+    url = MUSIC_URL;
+    body = JSON.stringify({ prompt: entry.prompt, music_length_ms: Math.round(entry.seconds * 1000) });
+  } else {
+    url = SFX_URL;
+    body = JSON.stringify({ text: entry.prompt, duration_seconds: entry.seconds, prompt_influence: 0.35 });
+  }
 
   const delays = [2000, 4000, 8000];
   for (let attempt = 0; attempt <= delays.length; attempt++) {
@@ -130,10 +190,12 @@ async function requestAudio(entry, apiKey) {
 async function main() {
   const args = parseArgs(process.argv);
   const manifest = await readManifest();
-  const entries = GAMIFICATION_AUDIO_CATALOG.filter((entry) => !args.only || args.only.includes(entry.id));
+  const entries = [...GAMIFICATION_AUDIO_CATALOG, ...narrationCatalog()]
+    .filter((entry) => !args.only || args.only.includes(entry.id));
 
   let generated = 0;
   let skipped = 0;
+  let voiceId = null; // resolved lazily on the first narration clip actually generated
 
   for (const entry of entries) {
     const hash = catalogHash(entry);
@@ -147,22 +209,27 @@ async function main() {
       continue;
     }
     if (args.dryRun) {
-      console.log(`[plan] ${entry.id} <- ${entry.kind} ${entry.seconds}s "${entry.prompt.slice(0, 60)}..."`);
+      const desc = entry.kind === "narration" ? entry.text : entry.prompt;
+      console.log(`[plan] ${entry.id} <- ${entry.kind} "${desc.slice(0, 70)}..."`);
       continue;
     }
 
     const apiKey = process.env.ELEVENLABS_API_KEY;
     if (!apiKey) throw new Error("ELEVENLABS_API_KEY is not set. Add it to .env.local.");
 
-    console.log(`[gen ] ${entry.id} (${entry.kind}, ${entry.seconds}s)`);
-    const buffer = await requestAudio(entry, apiKey);
+    if (entry.kind === "narration" && !voiceId) voiceId = await resolveVoiceId(apiKey);
+
+    console.log(`[gen ] ${entry.id} (${entry.kind})`);
+    const buffer = await requestAudio(entry, apiKey, voiceId);
     await mkdir(OUTPUT_DIR, { recursive: true });
     await writeFile(target, buffer);
     manifest.items[entry.id] = { file, hash, bytes: buffer.length, kind: entry.kind };
     generated += 1;
   }
 
-  if (!args.dryRun) {
+  if (args.dryRun) {
+    console.log(`\n[plan] narration voice "${NARRATION_VOICE_NAME}" via ${NARRATION_MODEL_ID}; ${narrationCatalog().length} narration clips; fallback id ${NARRATION_FALLBACK_VOICE_ID}`);
+  } else {
     await writeFile(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   }
   console.log(`\nDone. generated=${generated} skipped=${skipped} total=${entries.length}`);

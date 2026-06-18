@@ -472,6 +472,9 @@ export default function RoomOverlay({
   reduced,
   muted,
   complete,
+  narrationOn = false,
+  narrationMuted = false,
+  onToggleNarration,
   onDialogueDone,
   onTalkingChange,
   onAdvance,
@@ -531,7 +534,7 @@ export default function RoomOverlay({
           text={activeText}
           reduced={reduced}
           muted={muted}
-          speed={textSpeed}
+          speed={narrationOn ? "instant" : textSpeed}
           forceReveal={forceReveal}
           replayToken={replayToken}
           onDone={onDialogueDone}
@@ -548,6 +551,16 @@ export default function RoomOverlay({
           )}
           <button type="button" onClick={onReplay} aria-label="Replay text">
             {"↺ Replay"}
+          </button>
+          <button
+            type="button"
+            className="gamification-narration-toggle"
+            onClick={onToggleNarration}
+            aria-pressed={!narrationMuted}
+            aria-label={narrationMuted ? "Turn Ari's narration on" : "Turn Ari's narration off"}
+            title={narrationMuted ? "Narration is off" : "Narration is on"}
+          >
+            {narrationMuted ? "🔇 Narration off" : "🔊 Narration on"}
           </button>
           <span className="gamification-dialogue-hint" aria-hidden="true">
             Space or click to continue

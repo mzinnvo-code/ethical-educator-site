@@ -450,6 +450,31 @@ test("gamification quest layers sampled audio over synth fallbacks with ambient 
   assert.equal(pkg.scripts["audio:gamification"], "node --env-file=.env.local scripts/generate-gamification-audio.mjs");
 });
 
+test("gamification narration: TTS generation, autoplay, and one off switch", () => {
+  const script = readFileSync("scripts/generate-gamification-audio.mjs", "utf8");
+  const game = readGameSources();
+  const state = readFileSync("src/pages/educators/gamification/gamificationGameState.js", "utf8");
+
+  // Generation derives one TTS clip per beat and resolves the voice by name.
+  assert.match(script, /narrationCatalog/);
+  assert.match(script, /text-to-speech/);
+  assert.match(script, /eleven_multilingual_v2/);
+  assert.match(script, /voice_settings/);
+  assert.match(script, /resolveVoiceId/);
+  assert.match(script, /NARRATION_VOICE_NAME = "Sarah"/);
+
+  // Runtime: a dedicated narration bus, autoplay per active beat, and stop.
+  assert.match(game, /questNarration/);
+  assert.match(game, /questNarration\.play\(room\.id, dialogueIndex\)/);
+  assert.match(game, /questNarration\.stop\(\)/);
+
+  // Exactly one off switch, persisted alongside the other mute toggles.
+  assert.match(state, /narrationMuted/);
+  assert.match(game, /gamification-narration-toggle/);
+  assert.match(game, /onToggleNarration/);
+  assert.match(game, /Narration off/);
+});
+
 test("gamification article keeps attention claims careful and source-linked", () => {
   const page = [
     readFileSync("src/pages/educators/GamificationInEducation.jsx", "utf8"),
