@@ -155,6 +155,7 @@ export default function GamificationInEducation({ navigate }) {
     completeLevel,
     toggleSound,
     toggleMusic,
+    toggleNarration,
     setTextSpeed,
     setReducedMotion,
     setGradeBand,
@@ -269,6 +270,7 @@ export default function GamificationInEducation({ navigate }) {
           completeLevel={completeLevel}
           toggleSound={toggleSound}
           toggleMusic={toggleMusic}
+          toggleNarration={toggleNarration}
           setTextSpeed={setTextSpeed}
           setReducedMotion={setReducedMotion}
           setGradeBand={setGradeBand}

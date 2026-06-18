@@ -90,6 +90,396 @@
       "hash": "e549b643dbe8e097",
       "bytes": 960515,
       "kind": "music"
+    },
+    "narration-upshot-0": {
+      "file": "/audio/gamification/narration-upshot-0.mp3",
+      "hash": "cacb487325c4defb",
+      "bytes": 145075,
+      "kind": "narration"
+    },
+    "narration-upshot-1": {
+      "file": "/audio/gamification/narration-upshot-1.mp3",
+      "hash": "e95f59b1991ead6d",
+      "bytes": 303482,
+      "kind": "narration"
+    },
+    "narration-upshot-2": {
+      "file": "/audio/gamification/narration-upshot-2.mp3",
+      "hash": "333c0b8d666f649b",
+      "bytes": 221562,
+      "kind": "narration"
+    },
+    "narration-upshot-3": {
+      "file": "/audio/gamification/narration-upshot-3.mp3",
+      "hash": "2df27d62b3d80f08",
+      "bytes": 182274,
+      "kind": "narration"
+    },
+    "narration-upshot-4": {
+      "file": "/audio/gamification/narration-upshot-4.mp3",
+      "hash": "c6b67d94e492569c",
+      "bytes": 171825,
+      "kind": "narration"
+    },
+    "narration-upshot-5": {
+      "file": "/audio/gamification/narration-upshot-5.mp3",
+      "hash": "d74dca526b8ae489",
+      "bytes": 274643,
+      "kind": "narration"
+    },
+    "narration-upshot-6": {
+      "file": "/audio/gamification/narration-upshot-6.mp3",
+      "hash": "4ca74c866b0fd8a4",
+      "bytes": 150509,
+      "kind": "narration"
+    },
+    "narration-upshot-7": {
+      "file": "/audio/gamification/narration-upshot-7.mp3",
+      "hash": "fa6cd8922d5271eb",
+      "bytes": 154271,
+      "kind": "narration"
+    },
+    "narration-attention-environment-0": {
+      "file": "/audio/gamification/narration-attention-environment-0.mp3",
+      "hash": "2e9d1290b4234380",
+      "bytes": 156360,
+      "kind": "narration"
+    },
+    "narration-attention-environment-1": {
+      "file": "/audio/gamification/narration-attention-environment-1.mp3",
+      "hash": "e26ffaf1f637e4ca",
+      "bytes": 141314,
+      "kind": "narration"
+    },
+    "narration-attention-environment-2": {
+      "file": "/audio/gamification/narration-attention-environment-2.mp3",
+      "hash": "f848c833b8176110",
+      "bytes": 168063,
+      "kind": "narration"
+    },
+    "narration-attention-environment-3": {
+      "file": "/audio/gamification/narration-attention-environment-3.mp3",
+      "hash": "7cf978a2422983e3",
+      "bytes": 176422,
+      "kind": "narration"
+    },
+    "narration-attention-environment-4": {
+      "file": "/audio/gamification/narration-attention-environment-4.mp3",
+      "hash": "3f6753d394feaffa",
+      "bytes": 153435,
+      "kind": "narration"
+    },
+    "narration-attention-environment-5": {
+      "file": "/audio/gamification/narration-attention-environment-5.mp3",
+      "hash": "99d9368726cc834b",
+      "bytes": 189797,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-0": {
+      "file": "/audio/gamification/narration-curiosity-hook-0.mp3",
+      "hash": "c9f69afba4873192",
+      "bytes": 163884,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-1": {
+      "file": "/audio/gamification/narration-curiosity-hook-1.mp3",
+      "hash": "b2fffe8a55e2c85a",
+      "bytes": 306408,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-2": {
+      "file": "/audio/gamification/narration-curiosity-hook-2.mp3",
+      "hash": "8450cb8359895aab",
+      "bytes": 163048,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-3": {
+      "file": "/audio/gamification/narration-curiosity-hook-3.mp3",
+      "hash": "6c3d4e157011f237",
+      "bytes": 123759,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-4": {
+      "file": "/audio/gamification/narration-curiosity-hook-4.mp3",
+      "hash": "cc94110c368bfd98",
+      "bytes": 151763,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-5": {
+      "file": "/audio/gamification/narration-curiosity-hook-5.mp3",
+      "hash": "72be711107035af7",
+      "bytes": 178094,
+      "kind": "narration"
+    },
+    "narration-curiosity-hook-6": {
+      "file": "/audio/gamification/narration-curiosity-hook-6.mp3",
+      "hash": "e98c40f5c5d40523",
+      "bytes": 158032,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-0": {
+      "file": "/audio/gamification/narration-motivation-engine-0.mp3",
+      "hash": "e2df432201755387",
+      "bytes": 117072,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-1": {
+      "file": "/audio/gamification/narration-motivation-engine-1.mp3",
+      "hash": "e404a8e3231fbbf3",
+      "bytes": 106623,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-2": {
+      "file": "/audio/gamification/narration-motivation-engine-2.mp3",
+      "hash": "20b3d06d99e8d932",
+      "bytes": 176422,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-3": {
+      "file": "/audio/gamification/narration-motivation-engine-3.mp3",
+      "hash": "a2979b1460c51300",
+      "bytes": 154688,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-4": {
+      "file": "/audio/gamification/narration-motivation-engine-4.mp3",
+      "hash": "91458e3a5ae247ed",
+      "bytes": 132537,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-5": {
+      "file": "/audio/gamification/narration-motivation-engine-5.mp3",
+      "hash": "f9fd3b41d5891373",
+      "bytes": 241206,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-6": {
+      "file": "/audio/gamification/narration-motivation-engine-6.mp3",
+      "hash": "ddd225821a265099",
+      "bytes": 187707,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-7": {
+      "file": "/audio/gamification/narration-motivation-engine-7.mp3",
+      "hash": "783f3f79816ab2a4",
+      "bytes": 213621,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-8": {
+      "file": "/audio/gamification/narration-motivation-engine-8.mp3",
+      "hash": "0c9418ebf075a78c",
+      "bytes": 380804,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-9": {
+      "file": "/audio/gamification/narration-motivation-engine-9.mp3",
+      "hash": "4f6563305a8be265",
+      "bytes": 183110,
+      "kind": "narration"
+    },
+    "narration-motivation-engine-10": {
+      "file": "/audio/gamification/narration-motivation-engine-10.mp3",
+      "hash": "c0a346d74950686d",
+      "bytes": 169735,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-0": {
+      "file": "/audio/gamification/narration-evidence-lab-0.mp3",
+      "hash": "e5c92e497e539551",
+      "bytes": 145075,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-1": {
+      "file": "/audio/gamification/narration-evidence-lab-1.mp3",
+      "hash": "2a3388e604ec319b",
+      "bytes": 153435,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-2": {
+      "file": "/audio/gamification/narration-evidence-lab-2.mp3",
+      "hash": "af62f1064bdc5513",
+      "bytes": 125849,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-3": {
+      "file": "/audio/gamification/narration-evidence-lab-3.mp3",
+      "hash": "692e067ec613c422",
+      "bytes": 156360,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-4": {
+      "file": "/audio/gamification/narration-evidence-lab-4.mp3",
+      "hash": "ff6f7b1d44975e10",
+      "bytes": 148001,
+      "kind": "narration"
+    },
+    "narration-evidence-lab-5": {
+      "file": "/audio/gamification/narration-evidence-lab-5.mp3",
+      "hash": "f9ce23e7f28dbec9",
+      "bytes": 181438,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-0": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-0.mp3",
+      "hash": "7854c4b08eb9155b",
+      "bytes": 108713,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-1": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-1.mp3",
+      "hash": "1ea17cb80a1298df",
+      "bytes": 167645,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-2": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-2.mp3",
+      "hash": "ed0f0b079d73a575",
+      "bytes": 232847,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-3": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-3.mp3",
+      "hash": "61be063d036658e1",
+      "bytes": 131283,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-4": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-4.mp3",
+      "hash": "de98bb316062eac5",
+      "bytes": 192723,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-5": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-5.mp3",
+      "hash": "ddce54143145e211",
+      "bytes": 177258,
+      "kind": "narration"
+    },
+    "narration-ai-lesson-forge-6": {
+      "file": "/audio/gamification/narration-ai-lesson-forge-6.mp3",
+      "hash": "5a0f757e4eec0919",
+      "bytes": 194395,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-0": {
+      "file": "/audio/gamification/narration-teacher-workshop-0.mp3",
+      "hash": "92f2b16b56cb92b5",
+      "bytes": 147583,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-1": {
+      "file": "/audio/gamification/narration-teacher-workshop-1.mp3",
+      "hash": "82b4866b8fbdfdc6",
+      "bytes": 153435,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-2": {
+      "file": "/audio/gamification/narration-teacher-workshop-2.mp3",
+      "hash": "9aa41dcb7b09cf30",
+      "bytes": 350293,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-3": {
+      "file": "/audio/gamification/narration-teacher-workshop-3.mp3",
+      "hash": "719e0bf74568d2f0",
+      "bytes": 125849,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-4": {
+      "file": "/audio/gamification/narration-teacher-workshop-4.mp3",
+      "hash": "9aa7a475b45c3c98",
+      "bytes": 151763,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-5": {
+      "file": "/audio/gamification/narration-teacher-workshop-5.mp3",
+      "hash": "6766f8039b6c6bf0",
+      "bytes": 122924,
+      "kind": "narration"
+    },
+    "narration-teacher-workshop-6": {
+      "file": "/audio/gamification/narration-teacher-workshop-6.mp3",
+      "hash": "fd74ff05587c9819",
+      "bytes": 128775,
+      "kind": "narration"
+    },
+    "narration-examined-model-0": {
+      "file": "/audio/gamification/narration-examined-model-0.mp3",
+      "hash": "82f943a331f23e1a",
+      "bytes": 109549,
+      "kind": "narration"
+    },
+    "narration-examined-model-1": {
+      "file": "/audio/gamification/narration-examined-model-1.mp3",
+      "hash": "0a77b6d8c8c882ed",
+      "bytes": 165973,
+      "kind": "narration"
+    },
+    "narration-examined-model-2": {
+      "file": "/audio/gamification/narration-examined-model-2.mp3",
+      "hash": "2b63bb9d472380eb",
+      "bytes": 178512,
+      "kind": "narration"
+    },
+    "narration-examined-model-3": {
+      "file": "/audio/gamification/narration-examined-model-3.mp3",
+      "hash": "95d0541e780afec8",
+      "bytes": 153435,
+      "kind": "narration"
+    },
+    "narration-examined-model-4": {
+      "file": "/audio/gamification/narration-examined-model-4.mp3",
+      "hash": "e61d16e85a5fb9a9",
+      "bytes": 118326,
+      "kind": "narration"
+    },
+    "narration-examined-model-5": {
+      "file": "/audio/gamification/narration-examined-model-5.mp3",
+      "hash": "a4afc2f64b1884d7",
+      "bytes": 337755,
+      "kind": "narration"
+    },
+    "narration-examined-model-6": {
+      "file": "/audio/gamification/narration-examined-model-6.mp3",
+      "hash": "d9079c7641c09367",
+      "bytes": 129611,
+      "kind": "narration"
+    },
+    "narration-finale-0": {
+      "file": "/audio/gamification/narration-finale-0.mp3",
+      "hash": "1cb764dedf9c4f5d",
+      "bytes": 115400,
+      "kind": "narration"
+    },
+    "narration-finale-1": {
+      "file": "/audio/gamification/narration-finale-1.mp3",
+      "hash": "e7d568c85251f4e7",
+      "bytes": 105787,
+      "kind": "narration"
+    },
+    "narration-finale-2": {
+      "file": "/audio/gamification/narration-finale-2.mp3",
+      "hash": "ab826986a173c682",
+      "bytes": 179348,
+      "kind": "narration"
+    },
+    "narration-finale-3": {
+      "file": "/audio/gamification/narration-finale-3.mp3",
+      "hash": "17bd805bbf451928",
+      "bytes": 112475,
+      "kind": "narration"
+    },
+    "narration-finale-4": {
+      "file": "/audio/gamification/narration-finale-4.mp3",
+      "hash": "4ae46b9b4a542704",
+      "bytes": 89487,
+      "kind": "narration"
+    },
+    "narration-finale-5": {
+      "file": "/audio/gamification/narration-finale-5.mp3",
+      "hash": "8fb981c4089d4a30",
+      "bytes": 154688,
+      "kind": "narration"
     }
   }
 }

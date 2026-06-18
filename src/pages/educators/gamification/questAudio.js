@@ -113,6 +113,51 @@ export const questMusic = {
   },
 };
 
+// Narration bus: Ari's voiceover, one generated clip per dialogue beat
+// (id `narration-<roomId>-<index>`). One element, src swapped per beat; the
+// user advances with Next, so there is no auto-advance on end. Clips load on
+// demand (not preloaded) so the 65 files never block the first paint.
+let narrationElement = null;
+let narrationClipId = null;
+
+export function narrationId(roomId, index) {
+  return `narration-${roomId}-${index}`;
+}
+
+export const questNarration = {
+  available(roomId, index) {
+    return Boolean(sampleUrl(narrationId(roomId, index))) && typeof Audio !== "undefined";
+  },
+  play(roomId, index, { volume = 1 } = {}) {
+    const id = narrationId(roomId, index);
+    const url = sampleUrl(id);
+    if (!url || typeof Audio === "undefined") return false;
+    if (!narrationElement) {
+      narrationElement = new Audio();
+      narrationElement.preload = "auto";
+    }
+    try { narrationElement.pause(); } catch { /* not yet playing */ }
+    if (narrationClipId !== id) {
+      narrationElement.src = url;
+      narrationClipId = id;
+    }
+    try { narrationElement.currentTime = 0; } catch { /* before metadata */ }
+    narrationElement.volume = volume;
+    const result = narrationElement.play();
+    if (result?.catch) result.catch(() => {});
+    return true;
+  },
+  stop() {
+    if (!narrationElement) return;
+    try {
+      narrationElement.pause();
+      narrationElement.currentTime = 0;
+    } catch {
+      // Some browsers throw before metadata loads; pausing is enough.
+    }
+  },
+};
+
 function getContext() {
   if (typeof window === "undefined") return null;
   const AudioContext = window.AudioContext || window.webkitAudioContext;

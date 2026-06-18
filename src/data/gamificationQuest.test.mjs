@@ -527,6 +527,30 @@ test("gamification quest integrates the brain-science of motivation", () => {
   );
 });
 
+test("gamification narration has one voiceover clip per dialogue beat", () => {
+  const manifest = JSON.parse(readFileSync("src/data/gamificationAudioManifest.json", "utf8"));
+  const items = manifest.items || {};
+  let beats = 0;
+
+  for (const room of GAMIFICATION_GAME_ROOMS) {
+    if (room.kind === "home") continue;
+    room.dialogueBeats.forEach((_, index) => {
+      beats += 1;
+      const id = `narration-${room.id}-${index}`;
+      const entry = items[id];
+      assert.ok(entry, `missing narration clip ${id}`);
+      assert.equal(entry.kind, "narration");
+      assert.match(entry.file, /^\/audio\/gamification\/narration-.+\.mp3$/);
+      assert.equal(existsSync(`public${entry.file}`), true, `${id} mp3 should exist`);
+      assert.ok(entry.bytes > 1000, `${id} should be real audio, not an empty file`);
+    });
+  }
+
+  assert.equal(beats, 65, "the quest has 65 voiced dialogue beats");
+  const narrationCount = Object.values(items).filter((entry) => entry.kind === "narration").length;
+  assert.equal(narrationCount, 65, "exactly one narration clip per beat, no orphans");
+});
+
 test("gamification declares the sound cues used by the polished game loop", () => {
   assert.deepEqual(
     GAMIFICATION_SOUND_CUES,

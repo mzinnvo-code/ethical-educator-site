@@ -9,7 +9,7 @@ import {
 import useIrisTransition, { IrisOverlay } from "../../../components/wonder/useIrisTransition.jsx";
 import { createGamefulLearningScene } from "./phaser/GamefulLearningScene.js";
 import { gameStyles } from "./questStyles.js";
-import { playQuestSound, questMusic } from "./questAudio.js";
+import { playQuestSound, questMusic, questNarration } from "./questAudio.js";
 import { trackQuestEvent } from "./questAnalytics.js";
 import useQuestReducedMotion from "./useQuestReducedMotion.js";
 import QuestCelebrationOverlay from "./QuestCelebrationOverlay.jsx";
@@ -298,6 +298,7 @@ export default function GamificationGameExperience({
   completeLevel,
   toggleSound,
   toggleMusic,
+  toggleNarration,
   setTextSpeed,
   setReducedMotion,
   setGradeBand,
@@ -364,6 +365,22 @@ export default function GamificationGameExperience({
   }, [ariTalking, musicOn]);
 
   useEffect(() => () => questMusic.stop(), []);
+
+  // Ari's voiceover: autoplays the active beat in room mode, and re-fires when
+  // the user clicks Next (dialogueIndex) or Replay (replayToken). One off-switch
+  // (narrationMuted); clips load on demand. When narration is on, the beat text
+  // is revealed instantly so the reader follows the voice.
+  const narrationOn = !progress.narrationMuted && questNarration.available(room.id, dialogueIndex);
+  useEffect(() => {
+    if (!inRoomMode || progress.narrationMuted) {
+      questNarration.stop();
+      return undefined;
+    }
+    questNarration.play(room.id, dialogueIndex);
+    return () => questNarration.stop();
+  }, [inRoomMode, progress.narrationMuted, room.id, dialogueIndex, replayToken]);
+
+  useEffect(() => () => questNarration.stop(), []);
 
   useEffect(() => {
     setDialogueComplete(false);
@@ -611,6 +628,9 @@ export default function GamificationGameExperience({
             reduced={reduced}
             muted={progress.soundMuted}
             complete={complete || progress.mode === "finale"}
+            narrationOn={narrationOn}
+            narrationMuted={progress.narrationMuted}
+            onToggleNarration={toggleNarration}
             onDialogueDone={() => setDialogueComplete(true)}
             onTalkingChange={setAriTalking}
             onAdvance={advanceDialogue}
